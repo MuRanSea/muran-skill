@@ -133,12 +133,22 @@
     ]
   },
   "volcengine": {
-    "name": "volcengine-docs",
+    "name": "ai-platform-docs",
     "origin": "Local volcengine_doc_skill documentation builder",
     "official_libraries": [
       6349,
       6448,
       82379
+    ],
+    "generated_content_committed": false
+  },
+  "platform_documents": {
+    "name": "ai-platform-docs",
+    "previous_name": "volcengine-docs",
+    "provider_registry": "skills/ai-platform-docs/providers.json",
+    "official_markdown_indexes": [
+      "https://klingai.com/document-api/llms.txt",
+      "https://platform.minimax.cn/docs/llms.txt"
     ],
     "generated_content_committed": false
   }

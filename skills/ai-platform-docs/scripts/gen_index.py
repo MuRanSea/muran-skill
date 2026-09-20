@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the volcengine-docs skill index files from the build manifests.
+"""Write the ai-platform-docs skill index files from the build manifests.
 
 Reads build/<product>.json (written by build_volc_doc_skill.py --manifest) and
 writes, into the skill root:
@@ -9,7 +9,7 @@ writes, into the skill root:
   INDEX-<zone>.md   every chapter file of that zone with page + source line range.
                     Meant to be grepped, not read whole (TOS alone is ~1350 rows).
 
-Usage: python tools/gen_index.py
+From the repository: uv run --locked skills/ai-platform-docs/scripts/gen_index.py
 """
 
 import json
@@ -73,7 +73,7 @@ def write_zone_index(p, meta):
         end = r.get("page_end", r["page"])
         pages = r["page"] if end == r["page"] else f"{r['page']}-{end}"
         lines.append(f"| {num} | {rest} | {pages} | {r['start']}-{r['end']} | "
-                     f"{r['lines']} | `chapters/{key}/{r['file'].replace('|', chr(92) + '|')}` |")
+                     f"{r['lines']} | `chapters/volcengine/{key}/{r['file'].replace('|', chr(92) + '|')}` |")
     out = SKILL / f"INDEX-{key}.md"
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return out
@@ -83,13 +83,13 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8")
     metas = [(p, load(p["key"])) for p in PRODUCTS]
 
-    lines = [f"# 火山引擎开发文档 - 总索引", "",
+    lines = [f"# 火山引擎 - 产品文档索引", "",
              f"{len(metas)} 个产品区，每区一张章节表。本文件只列各区的一级章节用于选区；"
              "选定区后到 `INDEX-<区>.md` 里 grep 具体章节。", "",
              "| 区 | 目录 | 源文档 | 页数 | 章节文件 | 章节表 |",
              "|----|------|-------|------|---------|-------|"]
     for p, m in metas:
-        lines.append(f"| {p['label']} | `chapters/{p['key']}/` | {p['doc_title']} | "
+        lines.append(f"| {p['label']} | `chapters/volcengine/{p['key']}/` | {p['doc_title']} | "
                      f"{m['pages']} | {m['files']} | `INDEX-{p['key']}.md` |")
     lines += ["", HEADER_NOTE, ""]
 
@@ -98,8 +98,8 @@ def main():
                   f"全部 {m['files']} 个章节文件见 `INDEX-{p['key']}.md`。", "",
                   *zone_summary(m), ""]
 
-    (SKILL / "INDEX.md").write_text("\n".join(lines), encoding="utf-8")
-    print(f"INDEX.md: {len(lines)} lines")
+    (SKILL / "INDEX-volcengine.md").write_text("\n".join(lines), encoding="utf-8")
+    print(f"INDEX-volcengine.md: {len(lines)} lines")
     for p, m in metas:
         out = write_zone_index(p, m)
         print(f"{out.name}: {m['files']} rows")

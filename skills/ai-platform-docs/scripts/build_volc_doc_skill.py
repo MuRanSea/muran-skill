@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Build volcengine-docs skill chapter files from an intermediate Markdown.
+"""Build ai-platform-docs skill chapter files from an intermediate Markdown.
 
 Usage:
-  python tools/build_volc_doc_skill.py --md <intermediate.md> --product <name> \
+  uv run --locked skills/ai-platform-docs/scripts/build_volc_doc_skill.py --md <intermediate.md> --product <name> \
       --out-dir <skill>/chapters/<product> [--oversize N] [--manifest out.json]
 
 Pipeline (see CONTEXT.md): 原始文档(PDF) -> 中间 MD -> 接口级切分章节文件.

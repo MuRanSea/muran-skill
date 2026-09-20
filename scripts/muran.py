@@ -20,6 +20,7 @@ from validation import NAME, documentation_status, forbidden_public_paths, valid
 ROOT = Path(__file__).resolve().parent.parent
 AGENTS = {'codex': 'codex', 'claude-code': 'claude', 'pi': 'pi', 'opencode': 'opencode', 'grok': 'grok'}
 TASK_NAME = 'MuranSkill-DailyUpdate'
+DOCS_TASK_NAME = 'MuranSkill-DocsUpdate'
 
 
 def now():
@@ -61,6 +62,26 @@ def run(command, *, cwd=None, timeout=60, env=None, binary=False):
 
 def git(root, *args, **kwargs):
     return run(['git', '-c', 'credential.interactive=false', '-C', str(root), *args], **kwargs)
+
+
+def uv_executable():
+    executable = shutil.which(os.environ.get('MURAN_UV') or 'uv')
+    if not executable:
+        raise RuntimeError('uv is required; install uv and reopen PowerShell')
+    return str(Path(executable).resolve())
+
+
+def check_uv_locks(root):
+    """Check metadata without executing candidate code or changing its locks."""
+    for required in ('pyproject.toml', 'uv.lock', '.python-version'):
+        if not (root / required).is_file():
+            raise ValueError(f'Missing uv project file: {required}')
+    command = [uv_executable(), 'lock', '--check', '--offline', '--no-build',
+               '--no-python-downloads', '--python', sys.executable, '--directory', str(root)]
+    run(command)
+    builder = root / 'skills/ai-platform-docs/scripts/build_all.py'
+    if builder.exists():
+        run([*command, '--script', str(builder)])
 
 
 @contextmanager
@@ -151,6 +172,7 @@ class Manager:
             raise RuntimeError(f'Junction verification failed: {destination}')
 
     def sync(self, agents=None):
+        self.migrate_document_skill()
         skills, errors = validate(self.root)
         if errors:
             return {'command': 'sync', 'ok': False, 'errors': errors}
@@ -204,6 +226,35 @@ class Manager:
         return {'command': 'sync', 'ok': not conflicts, 'skills': len(skills), 'agents': selected,
                 'created': created, 'reused': reused, 'removed': removed, 'conflicts': conflicts}
 
+    def migrate_document_skill(self):
+        """Retain ignored snapshots when Git replaces the old skill entrypoint."""
+        current = self.root / 'skills/ai-platform-docs'
+        legacy = self.root / 'skills/volcengine-docs'
+        if not (current / 'SKILL.md').is_file() or (legacy / 'SKILL.md').exists():
+            return
+        if legacy.exists():
+            if legacy.is_junction() or legacy.is_symlink():
+                raise ValueError('Legacy source directory is a link; migration stopped')
+            for name in ('generated', '.cache'):
+                source, destination = legacy / name, current / name
+                if source.exists():
+                    if source.is_junction() or source.is_symlink() or source.resolve().parent != legacy.resolve():
+                        raise ValueError('Unexpected legacy documentation target')
+                    if destination.exists():
+                        raise ValueError(f'Both old and new documentation caches exist: {name}; reconcile them before sync')
+                    os.replace(source, destination)
+            if not any(legacy.iterdir()):
+                legacy.rmdir()
+        state = self.load_state()
+        aliases = {normalized(legacy)} | {normalized(p / 'volcengine-docs') for p in (self.shared, self.claude, self.grok)}
+        for record in state['links']:
+            # The explicit rename also retires adopted aliases that still point
+            # into this old skill. Unrelated or retargeted links are preserved.
+            if record.get('name') == 'volcengine-docs' and not record.get('owned') and self.safe_record(record):
+                path = Path(record['path'])
+                if link_target(path) in aliases:
+                    os.rmdir(path)
+
     def validate_candidate(self, ref):
         names = git(self.root, 'ls-tree', '-r', '--name-only', ref).splitlines()
         forbidden = forbidden_public_paths(names)
@@ -219,11 +270,12 @@ class Manager:
                         raise ValueError('Candidate contains unsafe archive entry')
                 bundle.extractall(target, filter='data')
             _, errors = validate(target)
-            for required in ('muran.ps1', 'scripts/muran.py', 'scripts/validation.py', 'scripts/scheduled-task.ps1', 'scripts/run-update.ps1'):
+            for required in ('muran.ps1', 'scripts/muran.py', 'scripts/upstream.py', 'scripts/validation.py', 'scripts/scheduled-task.ps1', 'scripts/run-update.ps1', 'scripts/run-docs-update.ps1', 'scripts/task-action.ps1'):
                 if not (target / required).is_file():
                     errors.append(f'Missing manager file: {required}')
             if errors:
                 raise ValueError('Candidate validation failed: ' + '; '.join(errors[:10]))
+            check_uv_locks(target)
             run(['powershell.exe', '-NoProfile', '-NonInteractive', '-Command',
                  "$ErrorActionPreference='Stop'; Get-ChildItem -LiteralPath $env:MURAN_CANDIDATE -Filter *.ps1 -Recurse | ForEach-Object { $tokens=$null; $parseErrors=$null; [void][System.Management.Automation.Language.Parser]::ParseFile($_.FullName,[ref]$tokens,[ref]$parseErrors); if ($parseErrors) { throw ($parseErrors | Out-String) } }"],
                 env={'MURAN_CANDIDATE': str(target)})
@@ -268,11 +320,17 @@ class Manager:
         self.save(state)
         return result
 
-    def task(self, action, task_name=TASK_NAME):
-        runner = self.root / 'scripts' / 'run-update.ps1'
-        arguments = subprocess.list2cmdline(['-NoProfile', '-NonInteractive', '-WindowStyle', 'Hidden', '-ExecutionPolicy', 'Bypass',
-                                            '-File', str(runner), '-Python', sys.executable, '-Repo', str(self.root), '-StateDir', str(self.state_dir)])
+    def task(self, action, task_name=TASK_NAME, *, documents=False):
+        if documents and task_name == TASK_NAME:
+            task_name = DOCS_TASK_NAME
+        runner = self.root / 'scripts' / ('run-docs-update.ps1' if documents else 'run-update.ps1')
+        prefix = ['-NoProfile', '-NonInteractive', '-WindowStyle', 'Hidden', '-ExecutionPolicy', 'Bypass', '-File', str(runner)]
+        suffix = ['-Repo', str(self.root), '-StateDir', str(self.state_dir)]
+        arguments = subprocess.list2cmdline([*prefix, '-Uv', uv_executable(), *suffix])
         env = {'MURAN_TASK_ACTION': action, 'MURAN_TASK_NAME': task_name, 'MURAN_TASK_ARGUMENTS': arguments,
+               'MURAN_TASK_PREFIX': subprocess.list2cmdline(prefix), 'MURAN_TASK_SUFFIX': subprocess.list2cmdline(suffix),
+               'MURAN_TASK_TIME': '09:30' if documents else '09:00',
+               'MURAN_TASK_TIMEOUT': '120' if documents else '10',
                'MURAN_TASK_EXECUTABLE': str(Path(os.environ['SystemRoot']) / 'System32/WindowsPowerShell/v1.0/powershell.exe')}
         raw = run(['powershell.exe', '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', str(self.root / 'scripts' / 'scheduled-task.ps1')], env=env)
         return json.loads(raw)
@@ -282,6 +340,7 @@ class Manager:
         removed, retained, remaining = [], [], []
         # Only remove the default task if the action still belongs to this checkout.
         task = self.task('disable')
+        docs_task = self.task('disable', documents=True)
         for record in state['links']:
             if self.remove_owned_link(record):
                 removed.append(record['path'])
@@ -290,7 +349,32 @@ class Manager:
                 remaining.append(record)
         state['links'], state['agents'] = remaining, []
         self.save(state)
-        return {'command': 'uninstall', 'ok': not retained, 'removed': removed, 'retained': retained, 'task': task}
+        return {'command': 'uninstall', 'ok': not retained, 'removed': removed, 'retained': retained, 'task': task, 'docs_task': docs_task}
+
+    def build_docs(self, action, source=None, fetch=False):
+        self.migrate_document_skill()
+        builder = self.root / 'skills/ai-platform-docs/scripts/build_all.py'
+        command = [sys.executable, '-B', '-X', 'utf8', str(builder)]
+        if action == 'import':
+            if not source:
+                raise ValueError('docs import requires a source directory')
+            command += ['--import-from', str(source)]
+        if fetch or action == 'update':
+            command += ['--fetch']
+        if action == 'update':
+            command += ['--if-changed']
+        try:
+            output = run(command, timeout=7100)
+            (self.state_dir / 'docs-build.log').write_text(output[-64000:], encoding='utf-8')
+            build_result = json.loads(output.strip().splitlines()[-1])
+            docs = documentation_status(self.root)
+            result = {'command': 'docs', 'action': action, 'ok': docs['ready'], **build_result, **docs}
+        except (RuntimeError, OSError, ValueError, subprocess.TimeoutExpired) as exc:
+            result = {'command': 'docs', 'action': action, 'ok': False, 'status': 'failed', 'error': str(exc)[-8000:]}
+        state = self.load_state()
+        state['last_docs_update'] = {'time': now(), **result}
+        self.save(state)
+        return result
 
     def doctor(self):
         skills, errors = validate(self.root)
@@ -305,21 +389,34 @@ class Manager:
                     errors.append(f'Missing or conflicting link: {path}')
         if not state['agents']:
             errors.append('No agents registered; run install')
-        docs = documentation_status(self.root) if any(s['name'] == 'volcengine-docs' for s in skills) else None
+        docs = documentation_status(self.root) if any(s['name'] == 'ai-platform-docs' for s in skills) else None
         if docs and not docs['ready']:
-            errors.append('Volcengine documentation missing or invalid; run docs build --fetch')
-        dependencies = {name: bool(shutil.which(name)) for name in ('git', 'python', 'powershell.exe')}
-        dependencies['python_3_12_or_newer'] = sys.version_info >= (3, 12)
+            errors.append('AI platform documentation missing or invalid; run docs update')
+        if state.get('last_docs_update', {}).get('ok') is False:
+            errors.append('Last document rebuild failed; the previous snapshot may still be usable')
+        if state.get('last_upstream_update', {}).get('status') == 'failed':
+            errors.append('Last Matt upstream update failed; inspect last_upstream_update')
+        dependencies = {name: bool(shutil.which(name)) for name in ('git', 'powershell.exe')}
+        dependencies['uv'] = bool(shutil.which(os.environ.get('MURAN_UV') or 'uv'))
+        dependencies['runtime_3_12'] = sys.version_info[:2] == (3, 12)
         dependencies['pypdfium2'] = importlib.util.find_spec('pypdfium2') is not None
         if not all(dependencies.values()):
-            errors.append('A required executable is missing')
+            errors.append('A required executable or uv runtime dependency is missing')
+        try:
+            check_uv_locks(self.root)
+            dependencies['uv_locks_current'] = True
+        except (RuntimeError, ValueError, OSError, subprocess.TimeoutExpired) as exc:
+            dependencies['uv_locks_current'] = False
+            errors.append(f'uv lock validation failed: {exc}')
         return {'command': 'doctor', 'ok': not errors, 'skills': len(skills), 'agents': state['agents'], 'links': links,
-                'documentation': docs, 'dependencies': dependencies, 'last_update': state.get('last_update'), 'errors': errors}
+                'documentation': docs, 'dependencies': dependencies, 'last_update': state.get('last_update'),
+                'last_docs_update': state.get('last_docs_update'),
+                'last_upstream_update': state.get('last_upstream_update'), 'errors': errors}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['install', 'sync', 'update', 'doctor', 'auto-update', 'uninstall', 'docs'])
+    parser.add_argument('command', choices=['install', 'sync', 'update', 'daily-update', 'doctor', 'auto-update', 'uninstall', 'docs'])
     parser.add_argument('action', nargs='?')
     parser.add_argument('source', nargs='?')
     parser.add_argument('--agents', nargs='+', choices=list(AGENTS))
@@ -340,10 +437,17 @@ def main():
                 result['command'] = args.command
             elif args.command == 'update':
                 result = manager.update()
+            elif args.command == 'daily-update':
+                from upstream import daily
+                result = daily(manager)
             elif args.command == 'doctor':
                 result = manager.doctor()
                 try:
                     result['task'] = manager.task('status')
+                    result['docs_task'] = manager.task('status', documents=True)
+                    if not result['docs_task'].get('ok', True):
+                        result['ok'] = False
+                        result['errors'].append('Documentation scheduled task action does not belong to this checkout')
                     if not result['task'].get('ok', True):
                         result['ok'] = False
                         result['errors'].append('Scheduled task action does not belong to this checkout')
@@ -358,22 +462,17 @@ def main():
                     parser.error('auto-update requires enable, disable or status')
                 result = manager.task(args.action, args.task_name)
             else:
-                builder = ROOT / 'skills/volcengine-docs/scripts/build_all.py'
                 if args.action == 'status':
                     result = documentation_status(ROOT)
                     result['ok'] = result['ready']
-                elif args.action in ('build', 'import'):
-                    command = [sys.executable, '-B', '-X', 'utf8', str(builder)]
-                    if args.action == 'import':
-                        if not args.source:
-                            parser.error('docs import requires a source directory')
-                        command += ['--import-from', args.source]
-                    elif args.fetch:
-                        command += ['--fetch']
-                    subprocess.run(command, check=True)
-                    result = {'command': 'docs', 'ok': True, **documentation_status(ROOT)}
+                elif args.action in ('build', 'import', 'update'):
+                    result = manager.build_docs(args.action, args.source, args.fetch)
+                elif args.action == 'auto-update':
+                    if args.source not in ('enable', 'disable', 'status'):
+                        parser.error('docs auto-update requires enable, disable or status')
+                    result = manager.task(args.source, args.task_name, documents=True)
                 else:
-                    parser.error('docs requires build [--fetch], import PATH or status')
+                    parser.error('docs requires update, build [--fetch], import PATH [--fetch], status or auto-update enable/disable/status')
             manager.log(result)
     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as exc:
         result = {'command': args.command, 'ok': False, 'error': str(exc)}

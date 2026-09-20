@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sanity-check a volcengine-docs build.
+"""Sanity-check a ai-platform-docs build.
 
 Verifies, per product: every manifest row has a file on disk and vice versa; the
 row line-ranges cover the source MD from its first heading to the end without
@@ -7,7 +7,8 @@ gaps; and no chapter file is empty. Also re-checks CJK extraction against the
 PDF, which is how the 火山方舟_文档指南 markitdown failure (13% of the Chinese
 text) was caught.
 
-Usage: python tools/check_build.py [--pdf]   (--pdf adds the slow PDF re-check)
+From the repository: uv run --locked skills/ai-platform-docs/scripts/check_build.py [--pdf]
+(--pdf adds the slow PDF re-check)
 """
 
 import argparse
@@ -53,7 +54,7 @@ def check_lossless(meta, src_lines, chapters, rows):
 def check_product(key, pdf_check):
     meta = json.loads((BUILD / f"{key}.json").read_text(encoding="utf-8"))
     rows, problems = meta["rows"], []
-    chapters = SKILL / "chapters" / key
+    chapters = SKILL / "chapters" / "volcengine" / key
 
     on_disk = {p.name for p in chapters.iterdir()}
     in_index = {r["file"] for r in rows}

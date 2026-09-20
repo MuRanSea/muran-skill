@@ -2,16 +2,21 @@
 
 个人技能库：在一处维护技能，Codex、Claude Code、Pi、OpenCode、Grok Build 共用同一份文件。
 
-第一版面向 **Windows 当前用户**。包含 Matt Pocock 的 25 个正式技能，以及火山引擎文档技能。技能来源与许可见 [NOTICE.md](NOTICE.md)。
+第一版面向 **Windows 当前用户**。首批包含 Matt Pocock 的 25 个正式技能（后续随正式发布清单更新），以及 `ai-platform-docs`：火山引擎、可灵和 MiniMax 的官方 API 与开发文档快照。技能来源与许可见 [NOTICE.md](NOTICE.md)。
 
 ## 安装
 
-需要 Git、Python 3.12+ 和 Windows PowerShell 5.1。先安装你需要使用的智能体；本工具只安装技能。部分 Matt 工作流另需 Git Bash、`gh` 等工具，在使用相应技能时按其要求准备。
+需要 Git、[uv](https://docs.astral.sh/uv/getting-started/installation/) 和 Windows PowerShell 5.1。运行环境与依赖由 uv 自动准备。先安装你需要使用的智能体；本工具只安装技能。部分 Matt 工作流另需 Git Bash、`gh` 等工具，在使用相应技能时按其要求准备。
+
+首次安装 uv 后重新打开 PowerShell：
+
+```powershell
+winget install --id astral-sh.uv -e
+```
 
 ```powershell
 git clone https://github.com/MuRanSea/muran-skill.git
 cd muran-skill
-python -m pip install -r requirements.txt
 .\muran.ps1 install
 .\muran.ps1 doctor
 ```
@@ -22,20 +27,23 @@ python -m pip install -r requirements.txt
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 ```
 
-可以使用 `.venv`，入口会优先寻找 `.venv\Scripts\python.exe`；也可用环境变量 `MURAN_PYTHON` 指定解释器。`CLAUDE_CONFIG_DIR` 会影响 Claude 技能目录。
+入口使用 `uv run --locked`，项目配置使用 uv 管理的运行时，首次运行自动下载所需运行时和锁定的依赖，以后复用本地缓存。`pyproject.toml` 声明依赖，`uv.lock` 固定版本；环境由 uv 管理，无需激活。可用 `MURAN_UV` 指定 `uv.exe` 的绝对路径。`CLAUDE_CONFIG_DIR` 会影响 Claude 技能目录。
 
-首次准备火山文档：
+首次准备平台文档：
 
 ```powershell
-# 已有旧项目时直接导入，原项目不会被修改
+# 已有旧火山项目时导入；同时补齐尚未缓存的可灵和 MiniMax 文档
 .\muran.ps1 docs import D:\Work\volcengine_doc_skill
 
-# 新机器从官方 PDF 构建；会下载文档，耗时取决于网络和 CPU
-.\muran.ps1 docs build --fetch
+# 新机器直接同步全部官方来源；首次下载和提取 PDF 可能较慢
+.\muran.ps1 docs update
+.\muran.ps1 docs auto-update enable
 .\muran.ps1 doctor
 ```
 
-公开仓库只包含入口、脚本和来源说明。`generated/` 正文与 `.cache/` 源资料都不进 Git；没有本地正文时，doctor 会报告火山技能尚未就绪，并给出构建命令。
+公开仓库只包含入口、脚本和来源说明。`generated/` 正文与 `.cache/` 源资料都不进 Git；没有本地正文或平台内容不完整时，doctor 会报告并给出构建命令。
+
+旧版 `volcengine-docs` 安装更新仓库后执行一次 `sync`：保留本地快照和缓存，迁移到新名称，并退役指向本库旧入口的链接及已复用别名。随后执行 `docs update` 和 `docs auto-update enable`，补齐平台文档并启用新任务。
 
 ## 常用命令
 
@@ -46,15 +54,20 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 | `.\muran.ps1 sync` | 补齐新增技能、修复缺失链接、清理已删除技能的受管链接 |
 | `.\muran.ps1 update` | 校验远端候选版本、快进本库 main，再同步链接 |
 | `.\muran.ps1 doctor` | 检查格式、依赖、链接、文档哈希、任务及最近更新状态 |
+| `.\muran.ps1 daily-update` | 拉取本库，三方合并 Matt 正式技能，校验后自动提交推送 |
 | `.\muran.ps1 auto-update enable` | 开启每天北京时间 09:00 的自动更新 |
 | `.\muran.ps1 auto-update status` | 查看任务状态、执行结果和下次运行时间 |
 | `.\muran.ps1 auto-update disable` | 关闭本工具的每日任务 |
-| `.\muran.ps1 docs build` | 用缓存源文本重建火山文档 |
-| `.\muran.ps1 docs build --fetch` | 主动拉取官方 PDF 并重建 |
+| `.\muran.ps1 docs update` | 检查火山 PDF 和可灵/MiniMax Markdown；内容或构建脚本变化时重建 |
+| `.\muran.ps1 docs build` | 使用缓存源资料强制重建全部平台文档 |
+| `.\muran.ps1 docs build --fetch` | 拉取官方来源并强制重建 |
 | `.\muran.ps1 docs status` | 检查本地文档快照完整性 |
-| `.\muran.ps1 uninstall` | 关闭任务并删除本工具创建的链接，保留技能源文件 |
+| `.\muran.ps1 docs auto-update enable` | 开启每天北京时间 09:30 的文档检查与重建 |
+| `.\muran.ps1 docs auto-update status` | 查看文档任务状态、执行结果和下次运行时间 |
+| `.\muran.ps1 docs auto-update disable` | 关闭文档任务 |
+| `.\muran.ps1 uninstall` | 关闭两类任务并删除本工具创建的链接，保留技能源文件和文档 |
 
-命令输出 JSON，成功退出码为 0，错误或冲突为 1。`--quiet` 只输出失败；`--json` 可显式标注自动化用途。机器状态和滚动日志位于 `%LOCALAPPDATA%\muran-skill\`，不进入仓库。
+命令输出 JSON，成功退出码为 0，错误或冲突为 1。`--quiet` 只输出失败；`--json` 可显式标注自动化用途。机器状态和滚动日志位于 `%LOCALAPPDATA%\muran-skill\`，不进入仓库。`operations.jsonl` 记录更新结果，`state.json` 保存最近一次文档检查，`docs-build.log` 保存最近成功运行的构建输出。
 
 ## 一处维护如何生效
 
@@ -72,11 +85,19 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 
 ## 更新规则
 
-任务名为 `MuranSkill-DailyUpdate`，每天北京时间 09:00 执行，开启 `StartWhenAvailable`。任务使用当前用户交互登录身份，不保存密码；电脑关机或用户未登录时不会运行，错过后在下次可运行时补跑。后台窗口隐藏，并发运行会被锁阻止。
+任务名为 `MuranSkill-DailyUpdate`，每天北京时间 09:00 执行 `daily-update`，开启 `StartWhenAvailable`。任务使用当前用户交互登录身份，不保存密码；电脑关机或用户未登录时不会运行，错过后在下次可运行时补跑。后台窗口隐藏，并发运行会被锁阻止。
 
-自动更新只跟随本库 `origin/main`。其他分支、未提交修改、分叉均跳过拉取并记录原因；断网或候选校验失败保留当前工作树。不会自动 stash、reset、合并冲突、提交或推送。可校验的本地技能仍会同步链接。
+文档任务为 `MuranSkill-DocsUpdate`，每天北京时间 09:30 运行 `docs update`，同样支持错过补跑、隐藏运行和并发保护。火山以官方 PDF 导出版本判断是否重新提取；可灵和 MiniMax 每次读取官方目录与所收录页面，比较内容哈希。来源与构建脚本都未变化、现有快照完整时返回 `unchanged`。任一来源下载或校验失败，保留上一份完整快照并记录失败原因；下次按计划重试。
 
-你在本库修改、验证后正常提交并推送即可供其他机器更新。Matt 上游的新版本需要维护者审阅并迁入，更新 `sources.json`；火山文档只有显式运行构建命令才刷新。
+任务记录 `uv.exe` 的绝对路径，运行时按仓库锁文件准备环境。升级旧版安装或移动 uv 后，分别执行 `auto-update enable` 和 `docs auto-update enable` 更新两个任务；对应 `status` 的 `runtime_current` 表示入口是否已更新。
+
+`update` 只拉取本库 `origin/main` 并同步链接。`daily-update` 在此基础上检查 Matt 官方仓库 HEAD，按正式插件发布清单导入新增、修改和删除的技能。以记录的旧上游版本、本库已提交版本、新上游版本做三方合并，保留本地兼容性适配；同处修改、删除已定制技能、名称冲突或校验失败均停止，保留已安装内容。
+
+自动导入在独立临时 Git 克隆中完成，仅提交对应技能资源、Matt MIT 许可和 `sources.json`。校验技能、依赖、资源路径、脚本语法、公开文件排除规则与 uv 锁文件后，用当前 Git 用户身份提交并正常推送到本库 `origin/main`，然后拉取到本机、同步技能链接。没有上游变化不创建提交；使用当前用户的 Git 凭据，不保存额外令牌。推送失败下次重试，不强推。
+
+本地分支不是 `main`、有未提交修改、与远程分叉时跳过；不会自动提交你的手动编辑，也不会自动 stash、reset 或解决冲突。推送期间远程出现新提交会拒绝推送。运行记录见本地管理状态中的 `last_upstream_update`；手动修改仍由你验证后提交。定时任务调用固定脚本，更新脚本后新逻辑即生效。
+
+官方文档通过独立任务或手动 `docs update` 刷新，正文、PDF、索引和缓存均不提交或推送；平台来源和覆盖范围见 [文档维护说明](skills/ai-platform-docs/MAINTENANCE.md)。文档最近一次重建失败时，`doctor` 会报告失败，即使上一份快照仍可读取。
 
 ## 技能兼容性
 
@@ -89,9 +110,11 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 ## 开发与验证
 
 ```powershell
-python -B -m unittest discover -s tests -v
+uv run --locked -m unittest discover -s tests -v
 .\muran.ps1 doctor
 git diff --check
 ```
 
 测试使用独立临时用户目录和本地 Git 远端，验证目录联接、内容共享、增删、冲突、更新保护和文档回滚。文件校验不代表客户端已实际加载；客户端发现结果应通过各自原生接口单独验证。
+
+主动升级依赖时运行 `uv lock --upgrade`，验证后将 `pyproject.toml` 与 `uv.lock` 一并提交。文档技能独立运行所需的脚本锁文件维护方式见其 [维护说明](skills/ai-platform-docs/MAINTENANCE.md)。日常命令和 CI 均使用锁定模式。

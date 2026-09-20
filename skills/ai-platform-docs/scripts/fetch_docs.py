@@ -2,7 +2,7 @@
 """Fetch the latest official PDF documentation from Volcengine Doc Center.
 
 Queries Volcengine's getLibList API to find the newest PDF export URLs for
-all configured products in tools/products.py (or any Library ID), compares
+all configured products and Library IDs in providers.json, compares
 timestamps against local doc/ files, and downloads updated PDFs.
 """
 
@@ -16,7 +16,7 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
-from products import DOC as DOC_DIR
+from products import DOC as DOC_DIR, PRODUCTS, LIBRARY_IDS
 
 # Use the platform certificate store; never silently disable TLS verification.
 SSL_CTX = ssl.create_default_context()
@@ -34,17 +34,6 @@ def get_lib_list(lib_id: int | str) -> list[dict]:
     with urllib.request.urlopen(req, context=SSL_CTX, timeout=15) as resp:
         data = json.loads(resp.read().decode("utf-8"))
         return data.get("Result", [])
-
-
-def extract_lib_ids_from_readme(readme_path: Path = DOC_DIR / "readme.md") -> list[int]:
-    """Parse doc/readme.md to extract all doc Library IDs."""
-    if not readme_path.exists():
-        return [6349, 6448, 82379]
-    content = readme_path.read_text(encoding="utf-8")
-    ids = set()
-    for m in re.finditer(r"/docs/(\d+)", content):
-        ids.add(int(m.group(1)))
-    return sorted(ids)
 
 
 def get_local_pdf(source_name: str) -> tuple[Path | None, int]:
@@ -144,20 +133,8 @@ def main():
     parser.add_argument("--clean-old", action="store_true", help="Remove older versions of downloaded PDFs")
     args = parser.parse_args()
 
-    # Try to import configured product sources
-    try:
-        from products import PRODUCTS
-        target_sources = {p["source"] for p in PRODUCTS}
-    except ImportError:
-        target_sources = {
-            "对象存储_文档指南",
-            "火山方舟_API参考",
-            "火山方舟_文档指南",
-            "AI MediaKit_API 参考",
-            "AI MediaKit_文档指南",
-        }
-
-    lib_ids = extract_lib_ids_from_readme()
+    target_sources = {p["source"] for p in PRODUCTS}
+    lib_ids = LIBRARY_IDS
     print(f"Checking Volcengine doc libraries: {lib_ids} ...\n")
 
     items = discover_available_pdfs(lib_ids)
@@ -221,7 +198,7 @@ def main():
                 p.unlink(missing_ok=True)
 
     print("\nDownload finished! You can now run:")
-    print("  python tools/build_all.py --convert")
+    print('  uv run --locked --script "' + str(Path(__file__).with_name('build_all.py')) + '" --convert')
 
 
 if __name__ == "__main__":

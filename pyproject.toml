@@ -1,0 +1,18 @@
+[project]
+name = "muran-skill"
+version = "0.1.0"
+description = "Shared agent skills and Windows junction management"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "PyYAML>=6.0.2,<7",
+    "pypdfium2>=4.30,<6",
+]
+
+[tool.uv]
+package = false
+python-preference = "only-managed"
+link-mode = "copy"
+
+# Keep this checkout independent of projects in ancestor directories.
+[tool.uv.workspace]
+members = []

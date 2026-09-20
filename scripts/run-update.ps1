@@ -1,5 +1,6 @@
-param([string]$Python, [string]$Repo, [string]$StateDir)
+# Python is accepted only so existing scheduled tasks survive the uv migration.
+param([string]$Uv, [string]$Repo, [string]$StateDir, [string]$Python)
 $ErrorActionPreference = 'Stop'
-$env:MURAN_PYTHON = $Python
-& (Join-Path $Repo 'muran.ps1') update --quiet --state-dir $StateDir
+if ($Uv) { $env:MURAN_UV = $Uv }
+& (Join-Path $Repo 'muran.ps1') daily-update --quiet --state-dir $StateDir
 exit $LASTEXITCODE

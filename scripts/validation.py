@@ -42,6 +42,30 @@ def validate(root: Path) -> tuple[list[dict], list[str]]:
                 if 'Skill tool' in line:
                     dependencies.update(re.findall(r'"([a-z][a-z0-9-]+)"', line))
             skills.append({'name': name, 'path': str(folder), 'dependencies': sorted(dependencies)})
+            if name == 'ai-platform-docs':
+                config = json.loads((folder / 'providers.json').read_text(encoding='utf-8'))
+                keys = [p['key'] for p in config['providers']]
+                if not keys or len(keys) != len(set(keys)) or not all(NAME.fullmatch(k) for k in keys):
+                    raise ValueError('Invalid document provider registry')
+                zone_keys = []
+                for provider in config['providers']:
+                    if provider['type'] == 'volcengine-pdf':
+                        if provider['key'] != 'volcengine' or not provider['library_ids'] or not all(type(i) is int and i > 0 for i in provider['library_ids']):
+                            raise ValueError('Invalid Volcengine library IDs')
+                        if not provider['products']:
+                            raise ValueError('Missing Volcengine products')
+                        for product in provider['products']:
+                            if not all(isinstance(product[f], str) and product[f].strip() for f in ('key', 'label', 'source', 'doc_title', 'blurb')):
+                                raise ValueError('Invalid Volcengine product')
+                            if any(c in product['source'] for c in '/\\:') or product['source'] in ('.', '..'):
+                                raise ValueError('Unsafe Volcengine source filename')
+                            zone_keys.append(product['key'])
+                    elif provider['type'] == 'markdown':
+                        zone_keys.append(provider['key'])
+                    else:
+                        raise ValueError('Unsupported document provider type')
+                if len(zone_keys) != len(set(zone_keys)) or not all(NAME.fullmatch(k) for k in zone_keys):
+                    raise ValueError('Invalid or duplicate document zones')
             policy_file = folder / 'agents' / 'openai.yaml'
             if meta.get('disable-model-invocation') is True:
                 if not policy_file.is_file() or yaml.safe_load(policy_file.read_text(encoding='utf-8')).get('policy', {}).get('allow_implicit_invocation') is not False:
@@ -63,13 +87,13 @@ def validate(root: Path) -> tuple[list[dict], list[str]]:
                     if not path:
                         continue
                     destination = (resource.parent / path).resolve()
-                    if name == 'volcengine-docs' and destination.is_relative_to(folder.resolve() / 'generated'):
+                    if name == 'ai-platform-docs' and destination.is_relative_to(folder.resolve() / 'generated'):
                         continue
                     if not destination.is_relative_to(root.resolve()):
                         errors.append(f'{name}: resource escapes repository: {target}')
                     elif not destination.exists():
                         errors.append(f'{name}/{rel}: missing resource {target}')
-        except (OSError, ValueError, TypeError, AttributeError, yaml.YAMLError) as exc:
+        except (OSError, ValueError, KeyError, TypeError, AttributeError, yaml.YAMLError) as exc:
             errors.append(f'{folder.name}: {exc}')
     names = {s['name'] for s in skills}
     if not names:
@@ -78,7 +102,7 @@ def validate(root: Path) -> tuple[list[dict], list[str]]:
         for dependency in skill['dependencies']:
             if dependency not in names:
                 errors.append(f"{skill['name']}: missing skill dependency {dependency}")
-    for source in list((root / 'scripts').glob('*.py')) + list((skills_root / 'volcengine-docs' / 'scripts').glob('*.py')):
+    for source in list((root / 'scripts').glob('*.py')) + list((skills_root / 'ai-platform-docs' / 'scripts').glob('*.py')):
         try:
             ast.parse(source.read_text(encoding='utf-8'), filename=str(source))
         except (SyntaxError, UnicodeError) as exc:
@@ -87,7 +111,7 @@ def validate(root: Path) -> tuple[list[dict], list[str]]:
 
 
 def documentation_status(root: Path) -> dict:
-    folder = root / 'skills' / 'volcengine-docs' / 'generated'
+    folder = root / 'skills' / 'ai-platform-docs' / 'generated'
     try:
         manifest = json.loads((folder / 'snapshot.json').read_text(encoding='utf-8'))
         files = manifest['files']
@@ -100,7 +124,25 @@ def documentation_status(root: Path) -> dict:
             path = (folder / name).resolve()
             if not path.is_relative_to(folder.resolve()) or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
                 raise ValueError(f'Document missing or modified: {name}')
-        return {'ready': True, 'files': len(files), 'built_at': manifest['built_at'], 'origin': manifest['origin']}
+        config_path = folder.parent / 'providers.json'
+        sources = manifest.get('sources', {})
+        if config_path.exists():
+            for provider in json.loads(config_path.read_text(encoding='utf-8'))['providers']:
+                key = provider['key']
+                if provider['type'] == 'volcengine-pdf':
+                    zones = provider['products']
+                    if sources.get(key, {}).get('zones') != len(zones):
+                        raise ValueError(f'Missing or incomplete documentation provider: {key}')
+                    for zone in zones:
+                        zone_key = zone['key']
+                        prefix = f'chapters/volcengine/{zone_key}/' if manifest.get('layout_version', 1) >= 2 else f'chapters/{zone_key}/'
+                        if f'INDEX-{zone_key}.md' not in files or not any(name.startswith(prefix) for name in files):
+                            raise ValueError(f'Missing documentation zone: {key}/{zone_key}')
+                    continue
+                pages = sum(name.startswith(f'chapters/{key}/') for name in files)
+                if not pages or sources.get(key, {}).get('pages') != pages or f'INDEX-{key}.md' not in files:
+                    raise ValueError(f'Missing or incomplete documentation provider: {key}')
+        return {'ready': True, 'files': len(files), 'built_at': manifest['built_at'], 'origin': manifest['origin'], 'sources': sources}
     except (OSError, KeyError, ValueError, TypeError) as exc:
         return {'ready': False, 'reason': str(exc), 'command': '.\\muran.ps1 docs build --fetch'}
 
@@ -112,7 +154,7 @@ def forbidden_public_paths(paths: list[str]) -> list[str]:
         parts = Path(path).parts
         base = Path(path).name.lower()
         if (any(p in ('.cache', '.venv', '__pycache__') for p in parts)
-                or path.startswith('skills/volcengine-docs/generated/')
+                or path.startswith(('skills/ai-platform-docs/generated/', 'skills/volcengine-docs/generated/'))
                 or base.endswith(('.pdf', '.zip', '.pyc'))
                 or base == '.env' or (base.startswith('.env.') and base != '.env.example')):
             bad.append(path)

@@ -11,3 +11,6 @@ __pycache__/
 .env.*
 !.env.example
 output/
+
+skills/ai-platform-docs/generated/
+skills/ai-platform-docs/.cache/

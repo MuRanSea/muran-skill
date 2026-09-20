@@ -7,7 +7,7 @@ pypdfium2 reads those fonts correctly, so use this script whenever
 `tools/check_extraction.py` reports a low ratio for a markitdown output.
 
 Usage:
-  python tools/pdf_to_md.py --pdf doc/<name>.pdf --out doc/<name>.md
+  uv run --locked skills/ai-platform-docs/scripts/pdf_to_md.py --pdf <source.pdf> --out <text.md>
 """
 
 import argparse

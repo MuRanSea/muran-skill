@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "providers": [
+    {
+      "key": "volcengine",
+      "label": "火山引擎",
+      "type": "volcengine-pdf",
+      "library_ids": [
+        6349,
+        6448,
+        82379
+      ],
+      "products": [
+        {
+          "key": "tos",
+          "label": "TOS 区",
+          "source": "对象存储_文档指南",
+          "doc_title": "《对象存储 文档指南》",
+          "blurb": "对象存储：存储桶/对象操作、生命周期、回源、镜像、事件通知、tosutil、SDK、API 签名、错误码、计费"
+        },
+        {
+          "key": "ark",
+          "label": "方舟 API 区",
+          "source": "火山方舟_API参考",
+          "doc_title": "《火山方舟 API 参考》",
+          "blurb": "方舟接口契约：Chat/Responses/Files、视频·图片·3D 生成、向量化、上下文缓存、批量推理、Managed Agents、接入点与 API Key 管理、分词"
+        },
+        {
+          "key": "ark-guide",
+          "label": "方舟指南区",
+          "source": "火山方舟_文档指南",
+          "doc_title": "《火山方舟 文档指南》",
+          "blurb": "方舟使用指南：模型列表与价格、多模态理解、视频·图片生成教程、Function Calling、深度思考、模型精调与评测、Agent 开发、订阅与配额"
+        },
+        {
+          "key": "mediakit",
+          "label": "AI MediaKit API 区",
+          "source": "AI MediaKit_API 参考",
+          "doc_title": "《AI MediaKit API 参考》",
+          "blurb": "智能处理接口契约：视频/图像/剪辑/音频/大模型工具提交任务 API、查询任务、获取媒体上传地址、事件回调、错误码"
+        },
+        {
+          "key": "mediakit-guide",
+          "label": "AI MediaKit 指南区",
+          "source": "AI MediaKit_文档指南",
+          "doc_title": "《AI MediaKit 文档指南》",
+          "blurb": "智能处理使用指南：画质增强、字幕擦除、转码、极智超清、暗水印、场景切分、高光智剪、剧本还原、解说视频、OCR·翻译、智能剪辑、音频工具、CLI/Skill/MCP、计费说明"
+        }
+      ]
+    },
+    {
+      "key": "kling",
+      "label": "可灵 API（中国区）",
+      "index_url": "https://klingai.com/document-api/llms.txt",
+      "hosts": [
+        "klingai.com"
+      ],
+      "include_paths": [
+        "/document-api/api/",
+        "/document-api/guides/get-started/",
+        "/document-api/guides/capability-map/"
+      ],
+      "required_paths": [
+        "/document-api/api/get-started/authentication.md"
+      ],
+      "region": "中国区；国际区调用前核对 kling.ai 的文档",
+      "type": "markdown"
+    },
+    {
+      "key": "minimax",
+      "label": "MiniMax API（中文）",
+      "index_url": "https://platform.minimax.cn/docs/llms.txt",
+      "hosts": [
+        "platform.minimax.cn",
+        "platform.minimaxi.com"
+      ],
+      "canonical_host": "platform.minimax.cn",
+      "include_paths": [
+        "/docs/api-reference/",
+        "/docs/guides/quickstart-",
+        "/docs/guides/models-intro.md",
+        "/docs/guides/text-generation.md",
+        "/docs/guides/text-m3-function-call.md",
+        "/docs/guides/server-tools.md",
+        "/docs/guides/video-generation.md",
+        "/docs/guides/video-prompt.md",
+        "/docs/guides/image-generation.md",
+        "/docs/guides/speech-",
+        "/docs/guides/rate-limits.md",
+        "/docs/faq/"
+      ],
+      "required_paths": [
+        "/docs/guides/quickstart-preparation.md"
+      ],
+      "region": "中文文档；以各页面标注的国内/国际域名为准",
+      "type": "markdown"
+    }
+  ]
+}
