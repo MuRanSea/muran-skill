@@ -257,7 +257,9 @@ class ManagerTests(unittest.TestCase):
         self.publish()
         result = self.manager.update()
         self.assertFalse(result['ok'])
-        self.assertIn('lockfile', result['error'])
+        # With a cold registry cache, offline uv can reject stale metadata while
+        # resolving dependencies, before emitting its more specific lock message.
+        self.assertRegex(result['error'], r'lockfile|No solution found when resolving dependencies')
         self.assertEqual(git(self.repo, 'rev-parse', 'HEAD').strip(), before)
         self.assertTrue((self.manager.shared / 'example').is_junction())
 
@@ -323,7 +325,7 @@ class UvRuntimeTests(unittest.TestCase):
         project.write_text(project.read_text().replace('PyYAML>=6.0.2', 'PyYAML>=6.0.3'))
         result = self.launcher()
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn('lockfile', result.stderr)
+        self.assertRegex(result.stderr, r'lockfile|No solution found when resolving dependencies')
         self.assertFalse(self.state.exists())
         self.assertEqual(lock.read_bytes(), before)
 
