@@ -140,7 +140,7 @@
       6448,
       82379
     ],
-    "generated_content_committed": false
+    "generated_content_committed": true
   },
   "platform_documents": {
     "name": "ai-platform-docs",
@@ -150,6 +150,6 @@
       "https://klingai.com/document-api/llms.txt",
       "https://platform.minimax.cn/docs/llms.txt"
     ],
-    "generated_content_committed": false
+    "generated_content_committed": true
   }
 }

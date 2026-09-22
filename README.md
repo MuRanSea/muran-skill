@@ -35,13 +35,15 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 # 已有旧火山项目时导入；同时补齐尚未缓存的可灵和 MiniMax 文档
 .\muran.ps1 docs import D:\Work\volcengine_doc_skill
 
-# 新机器直接同步全部官方来源；首次下载和提取 PDF 可能较慢
+# 可选：维护文档的机器刷新官方来源并上传；首次下载和提取 PDF 可能较慢
 .\muran.ps1 docs update
 .\muran.ps1 docs auto-update enable
 .\muran.ps1 doctor
 ```
 
-公开仓库只包含入口、脚本和来源说明。`generated/` 正文与 `.cache/` 源资料都不进 Git；没有本地正文或平台内容不完整时，doctor 会报告并给出构建命令。
+旧版管理器会拒绝含文档正文的候选版本。已安装旧版的其他机器需在工作区干净时先执行一次 `git pull --ff-only origin main` 升级发布规则，之后恢复正常自动更新。
+
+公开仓库包含技能入口、脚本、来源说明，以及 `generated/` 下构建好的正文、索引和快照清单。其他机器拉取即可检索，无需首次下载 PDF。`.cache/` 源资料、PDF 和中间文件仍不进 Git。
 
 旧版 `volcengine-docs` 安装更新仓库后执行一次 `sync`：保留本地快照和缓存，迁移到新名称，并退役指向本库旧入口的链接及已复用别名。随后执行 `docs update` 和 `docs auto-update enable`，补齐平台文档并启用新任务。
 
@@ -97,7 +99,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 
 本地分支不是 `main`、有未提交修改、与远程分叉时跳过；不会自动提交你的手动编辑，也不会自动 stash、reset 或解决冲突。推送期间远程出现新提交会拒绝推送。运行记录见本地管理状态中的 `last_upstream_update`；手动修改仍由你验证后提交。定时任务调用固定脚本，更新脚本后新逻辑即生效。
 
-官方文档通过独立任务或手动 `docs update` 刷新，正文、PDF、索引和缓存均不提交或推送；平台来源和覆盖范围见 [文档维护说明](skills/ai-platform-docs/MAINTENANCE.md)。文档最近一次重建失败时，`doctor` 会报告失败，即使上一份快照仍可读取。
+官方文档通过独立任务或手动 `docs update` 刷新，校验成功后自动提交并推送 `generated/` 正文、索引和快照清单；PDF、缓存与中间文件仍不上传。任务开始时要求 main 分支且工作区干净；推送失败保留待推送提交，下次重试；远程分叉停止，不强推。`docs build` 和 `docs import` 仅本地构建，手动构建后需要自行检查提交。平台来源和覆盖范围见 [文档维护说明](skills/ai-platform-docs/MAINTENANCE.md)。文档最近一次重建失败时，`doctor` 会报告失败，即使上一份快照仍可读取。
 
 ## 技能兼容性
 
@@ -118,3 +120,5 @@ git diff --check
 测试使用独立临时用户目录和本地 Git 远端，验证目录联接、内容共享、增删、冲突、更新保护和文档回滚。文件校验不代表客户端已实际加载；客户端发现结果应通过各自原生接口单独验证。
 
 主动升级依赖时运行 `uv lock --upgrade`，验证后将 `pyproject.toml` 与 `uv.lock` 一并提交。文档技能独立运行所需的脚本锁文件维护方式见其 [维护说明](skills/ai-platform-docs/MAINTENANCE.md)。日常命令和 CI 均使用锁定模式。
+
+发布前会将官方示例中形似访问密钥、API Token、JWT 和私钥的值替换成占位符，再生成快照哈希。源文档仍保存在被忽略的缓存中；接口参数、说明与其余示例保持原内容。GitHub 拒绝密钥推送时停止发布，不绕过扫描。

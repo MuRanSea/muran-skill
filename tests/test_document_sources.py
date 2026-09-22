@@ -15,6 +15,21 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / 'skills/ai-platform-docs/scripts'
 sys.path.insert(0, str(SCRIPTS))
 import markdown_sources as sources
+from redact_docs import redact
+
+
+class RedactionTests(unittest.TestCase):
+    def test_credential_examples_are_redacted_without_changing_other_bytes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            path = folder / 'example.md'
+            key = 'AKTP' + 'a' * 43
+            original = ('# API\r\n```json\r\n{"key":"' + key + '","model":"example"}\r\n```\r\n').encode()
+            path.write_bytes(original)
+            result = redact(folder)
+            self.assertEqual(result['replacements'], 1)
+            self.assertEqual(path.read_bytes(), original.replace(key.encode(), b'<VOLCENGINE_ACCESS_KEY_ID>'))
+            self.assertEqual(redact(folder)['replacements'], 0)
 
 
 class ProviderRegistryTests(unittest.TestCase):

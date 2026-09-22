@@ -270,11 +270,15 @@ class Manager:
                         raise ValueError('Candidate contains unsafe archive entry')
                 bundle.extractall(target, filter='data')
             _, errors = validate(target)
-            for required in ('muran.ps1', 'scripts/muran.py', 'scripts/upstream.py', 'scripts/validation.py', 'scripts/scheduled-task.ps1', 'scripts/run-update.ps1', 'scripts/run-docs-update.ps1', 'scripts/task-action.ps1'):
+            for required in ('muran.ps1', 'scripts/muran.py', 'scripts/upstream.py', 'scripts/document_publish.py', 'scripts/validation.py', 'scripts/scheduled-task.ps1', 'scripts/run-update.ps1', 'scripts/run-docs-update.ps1', 'scripts/task-action.ps1'):
                 if not (target / required).is_file():
                     errors.append(f'Missing manager file: {required}')
             if errors:
                 raise ValueError('Candidate validation failed: ' + '; '.join(errors[:10]))
+            if (target / 'skills/ai-platform-docs/generated').exists():
+                docs = documentation_status(target)
+                if not docs['ready']:
+                    raise ValueError('Candidate documentation invalid: ' + docs['reason'])
             check_uv_locks(target)
             run(['powershell.exe', '-NoProfile', '-NonInteractive', '-Command',
                  "$ErrorActionPreference='Stop'; Get-ChildItem -LiteralPath $env:MURAN_CANDIDATE -Filter *.ps1 -Recurse | ForEach-Object { $tokens=$null; $parseErrors=$null; [void][System.Management.Automation.Language.Parser]::ParseFile($_.FullName,[ref]$tokens,[ref]$parseErrors); if ($parseErrors) { throw ($parseErrors | Out-String) } }"],
@@ -364,11 +368,16 @@ class Manager:
         if action == 'update':
             command += ['--if-changed']
         try:
+            if action == 'update':
+                from document_publish import prepare, publish
+                before = prepare(self)
             output = run(command, timeout=7100)
             (self.state_dir / 'docs-build.log').write_text(output[-64000:], encoding='utf-8')
             build_result = json.loads(output.strip().splitlines()[-1])
             docs = documentation_status(self.root)
             result = {'command': 'docs', 'action': action, 'ok': docs['ready'], **build_result, **docs}
+            if action == 'update' and result['ok']:
+                result['publication'] = publish(self, before)
         except (RuntimeError, OSError, ValueError, subprocess.TimeoutExpired) as exc:
             result = {'command': 'docs', 'action': action, 'ok': False, 'status': 'failed', 'error': str(exc)[-8000:]}
         state = self.load_state()

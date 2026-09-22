@@ -21,6 +21,7 @@ import tempfile
 
 from products import PRODUCTS, SKILL_ROOT
 from markdown_sources import providers, fetch_provider, load_provider, fingerprint_rows, build_provider
+from redact_docs import redact
 
 SCRIPTS = Path(__file__).resolve().parent
 CACHE = SKILL_ROOT / '.cache'
@@ -32,7 +33,7 @@ def run(script, *args, work):
     subprocess.run([sys.executable, '-B', '-X', 'utf8', str(SCRIPTS / script), *map(str, args)], env=env, check=True)
 
 
-def write_snapshot(folder, origin, source_fingerprint=None, sources=None):
+def write_snapshot(folder, origin, source_fingerprint=None, sources=None, redactions=None):
     files = {p.relative_to(folder).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
              for p in sorted(folder.rglob('*')) if p.is_file() and p.name != 'snapshot.json'}
     if 'INDEX.md' not in files or not any(name.startswith('chapters/') for name in files):
@@ -43,6 +44,8 @@ def write_snapshot(folder, origin, source_fingerprint=None, sources=None):
         metadata['source_fingerprint'] = source_fingerprint
     if sources:
         metadata['sources'] = sources
+    if redactions:
+        metadata['redactions'] = redactions
     (folder / 'snapshot.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
 
@@ -171,12 +174,8 @@ def build(args):
             return {'status': 'unchanged', 'rebuilt': False}
         if not args.import_from:
             for product in PRODUCTS:
-                if args.only and product['key'] != args.only:
-                    source = LIVE / 'chapters' / 'volcengine' / product['key']
-                    if not source.exists():  # Upgrade a snapshot built before platform grouping.
-                        source = LIVE / 'chapters' / product['key']
-                    shutil.copytree(source, work / 'generated' / 'chapters' / 'volcengine' / product['key'])
-                    continue
+                # Regenerate from raw cache before lossless checks. Published
+                # snapshots may contain redacted examples and cannot be reused here.
                 md = work / 'doc' / (product['source'] + '.md')
                 run('build_volc_doc_skill.py', '--md', md, '--product', product['key'],
                     '--out-dir', work / 'generated' / 'chapters' / 'volcengine' / product['key'],
@@ -193,7 +192,8 @@ def build(args):
             lines.append(f"- [{provider['label']}](INDEX-{provider['key']}.md)：{sources[provider['key']]['pages']} 页。")
         index.write_text('\n'.join(lines) + '\n', encoding='utf-8')
         origin = 'Official Volcengine PDF and Kling/MiniMax Markdown exports'
-        write_snapshot(work / 'generated', origin, fingerprint, sources)
+        redactions = redact(work / 'generated')
+        write_snapshot(work / 'generated', origin, fingerprint, sources, redactions)
         # Prepare both source caches before publishing. A failed publish rolls
         # the cache back together with the generated snapshot.
         next_work = work / 'next-work'

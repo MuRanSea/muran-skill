@@ -154,7 +154,7 @@ def forbidden_public_paths(paths: list[str]) -> list[str]:
         parts = Path(path).parts
         base = Path(path).name.lower()
         if (any(p in ('.cache', '.venv', '__pycache__') for p in parts)
-                or path.startswith(('skills/ai-platform-docs/generated/', 'skills/volcengine-docs/generated/'))
+                or path.startswith('skills/volcengine-docs/generated/')
                 or base.endswith(('.pdf', '.zip', '.pyc'))
                 or base == '.env' or (base.startswith('.env.') and base != '.env.example')):
             bad.append(path)

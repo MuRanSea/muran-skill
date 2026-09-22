@@ -1,4 +1,4 @@
-# Official documentation and machine-local data must never be published.
+# Raw PDF sources, caches and machine-local data must never be published.
 skills/volcengine-docs/generated/
 skills/volcengine-docs/.cache/
 .cache/
@@ -12,5 +12,4 @@ __pycache__/
 !.env.example
 output/
 
-skills/ai-platform-docs/generated/
 skills/ai-platform-docs/.cache/

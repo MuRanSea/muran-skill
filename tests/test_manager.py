@@ -24,7 +24,7 @@ def skill(root, name='example', body='A test skill.'):
 
 def copy_manager(root):
     shutil.copytree(ROOT / 'scripts', root / 'scripts', ignore=shutil.ignore_patterns('__pycache__'))
-    for name in ('muran.ps1', 'pyproject.toml', 'uv.lock', '.python-version', '.gitignore'):
+    for name in ('muran.ps1', 'pyproject.toml', 'uv.lock', '.python-version', '.gitignore', '.gitattributes'):
         shutil.copy2(ROOT / name, root / name)
 
 
@@ -234,10 +234,10 @@ class ManagerTests(unittest.TestCase):
 
     def test_excluded_public_content_rejects_candidate(self):
         before = self.git_fixture()
-        generated = self.publisher / 'skills/ai-platform-docs/generated'
+        generated = self.publisher / 'skills/ai-platform-docs/.cache'
         generated.mkdir(parents=True)
         (generated / 'document.md').write_text('must stay local')
-        git(self.publisher, 'add', '--force', 'skills/ai-platform-docs/generated/document.md')
+        git(self.publisher, 'add', '--force', 'skills/ai-platform-docs/.cache/document.md')
         self.publish()
         result = self.manager.update()
         self.assertFalse(result['ok'])
@@ -375,7 +375,7 @@ class ValidationTests(unittest.TestCase):
         self.assertIn('ai-platform-docs', names)
 
     def test_public_exclusions(self):
-        forbidden = ['skills/ai-platform-docs/generated/INDEX.md', 'skills/ai-platform-docs/.cache/doc/x.md', '.env', 'source.pdf']
+        forbidden = ['skills/volcengine-docs/generated/INDEX.md', 'skills/ai-platform-docs/.cache/doc/x.md', '.env', 'source.pdf']
         self.assertEqual(forbidden_public_paths(forbidden + ['skills/ai-platform-docs/SKILL.md', '.env.example']), forbidden)
 
     def test_frontmatter_delimiter_inside_a_string(self):
