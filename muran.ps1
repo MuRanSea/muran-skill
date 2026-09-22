@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Position = 0)]
-    [ValidateSet('install', 'sync', 'update', 'daily-update', 'doctor', 'auto-update', 'uninstall', 'docs')]
+    [ValidateSet('list', 'install', 'sync', 'update', 'daily-update', 'doctor', 'auto-update', 'uninstall', 'docs')]
     [string]$Command = 'doctor',
     [Parameter(Position = 1, ValueFromRemainingArguments = $true)]
     [string[]]$Rest

@@ -9,6 +9,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 import yaml
+from skill_packages import catalog
 
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
@@ -18,9 +19,11 @@ def validate(root: Path) -> tuple[list[dict], list[str]]:
     skills_root = root / "skills"
     if not skills_root.is_dir():
         return [], ["Missing skills directory"]
-    for folder in sorted(skills_root.iterdir()):
-        if folder.name.startswith('.') or not folder.is_dir():
-            continue
+    try:
+        packs = catalog(root)
+    except (ValueError, OSError, KeyError, TypeError) as exc:
+        return [], [str(exc)]
+    for package, folder in [(name, folder) for name, pack in packs.items() for folder in pack['folders']]:
         file = folder / "SKILL.md"
         try:
             if folder.is_symlink() or folder.is_junction():
@@ -41,7 +44,7 @@ def validate(root: Path) -> tuple[list[dict], list[str]]:
             for line in text[frontmatter.end():].splitlines():
                 if 'Skill tool' in line:
                     dependencies.update(re.findall(r'"([a-z][a-z0-9-]+)"', line))
-            skills.append({'name': name, 'path': str(folder), 'dependencies': sorted(dependencies)})
+            skills.append({'name': name, 'path': str(folder), 'package': package, 'dependencies': sorted(dependencies)})
             if name == 'ai-platform-docs':
                 config = json.loads((folder / 'providers.json').read_text(encoding='utf-8'))
                 keys = [p['key'] for p in config['providers']]
@@ -96,6 +99,8 @@ def validate(root: Path) -> tuple[list[dict], list[str]]:
         except (OSError, ValueError, KeyError, TypeError, AttributeError, yaml.YAMLError) as exc:
             errors.append(f'{folder.name}: {exc}')
     names = {s['name'] for s in skills}
+    if len(names) != len(skills):
+        errors.append('Skill names must be unique across packages')
     if not names:
         errors.append('No valid skills found')
     for skill in skills:

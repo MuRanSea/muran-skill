@@ -107,7 +107,7 @@ class UpstreamTests(unittest.TestCase):
         self.assertEqual(self.invoke()['status'], 'unchanged')
         self.assertEqual(git(self.repo, 'rev-parse', 'HEAD').strip(), self.before)
 
-    def test_doctor_reports_previous_document_and_upstream_failures(self):
+    def test_doctor_reports_upstream_failure_and_ignores_uninstalled_docs(self):
         self.prepare()
         state = self.manager.load_state()
         state['last_docs_update'] = {'ok': False, 'status': 'failed'}
@@ -115,8 +115,26 @@ class UpstreamTests(unittest.TestCase):
         self.manager.save(state)
         report = self.manager.doctor()
         self.assertFalse(report['ok'])
-        self.assertTrue(any('Last document rebuild failed' in error for error in report['errors']))
+        self.assertFalse(any('Last document rebuild failed' in error for error in report['errors']))
         self.assertTrue(any('Last Matt upstream update failed' in error for error in report['errors']))
+
+    def test_grouped_matt_update_stays_inside_its_package(self):
+        self.prepare()
+        parent = self.repo / 'skills/matt'
+        parent.mkdir()
+        (parent / 'pack.json').write_text(json.dumps({'schema_version': 1, 'name': 'matt', 'skills': ['*'], 'updater': 'matt'}))
+        source, destination = self.repo / 'skills/example', parent / 'example'
+        self.assertTrue(source.resolve().is_relative_to(self.repo.resolve()))
+        self.assertTrue(destination.resolve().is_relative_to(self.repo.resolve()))
+        source.rename(destination)
+        git(self.repo, 'add', '-A')
+        git(self.repo, 'commit', '-m', 'group package')
+        git(self.repo, 'push', 'origin', 'main')
+        result = self.invoke()
+        self.assertEqual(result['status'], 'published')
+        self.assertIn('Updated description', (destination / 'SKILL.md').read_text(encoding='utf-8'))
+        self.assertFalse(source.exists())
+        self.assertEqual((self.manager.shared / 'example').resolve(), destination.resolve())
 
     def test_remote_advance_rejects_push_without_overwriting_either_checkout(self):
         self.prepare()

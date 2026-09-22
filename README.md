@@ -4,6 +4,33 @@
 
 第一版面向 **Windows 当前用户**。首批包含 Matt Pocock 的 25 个正式技能（后续随正式发布清单更新），以及 `ai-platform-docs`：火山引擎、可灵和 MiniMax 的官方 API 与开发文档快照。技能来源与许可见 [NOTICE.md](NOTICE.md)。
 
+## 技能包与选择
+
+```text
+skills/
+├── matt/
+│   ├── pack.json
+│   ├── grill-me/SKILL.md
+│   └── ...
+└── ai-platform-docs/
+    ├── pack.json
+    ├── SKILL.md
+    ├── scripts/
+    └── generated/
+```
+
+终端运行 `install` 会显示编号菜单，可输入包名、多个编号或 `all`；回车取消。脚本或非交互环境必须传 `--packages`。选择记录在本机状态中，新增包不会自动安装；已安装包内新增技能会随 `sync` 生效。旧版安装按已有链接自动迁移，保留原先安装的技能；可随后按包卸载。
+
+客户端发现目录保持扁平，技能名称必须跨包唯一。若一个包依赖另一个包内的技能，安装时会提示缺少依赖，不会擅自安装另一包；卸载也会检查依赖。Git 拉取仍同步整个源仓库，按包选择控制客户端安装及上游更新任务，不是 Git 稀疏下载。
+
+每天 09:00 拉取本库，只对已安装的 Matt 包检查上游；09:30 文档任务仅在已安装文档包时运行。卸载文档包会关闭文档计划任务，再次需要时手动启用。其他包默认仅跟随本库 Git 更新。
+
+新增包：建立 `skills/<包名>/pack.json`，填写如下配置，将各技能放入其直接子目录。无需改安装器；使用 `skills: ["."]` 可将包目录本身作为单一技能入口（如 ai-platform-docs）。
+
+```json
+{"schema_version":1,"name":"my-pack","description":"我的技能包","skills":["*"],"updater":"git"}
+```
+
 ## 安装
 
 需要 Git、[uv](https://docs.astral.sh/uv/getting-started/installation/) 和 Windows PowerShell 5.1。运行环境与依赖由 uv 自动准备。先安装你需要使用的智能体；本工具只安装技能。部分 Matt 工作流另需 Git Bash、`gh` 等工具，在使用相应技能时按其要求准备。
@@ -29,7 +56,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 
 入口使用 `uv run --locked`，项目配置使用 uv 管理的运行时，首次运行自动下载所需运行时和锁定的依赖，以后复用本地缓存。`pyproject.toml` 声明依赖，`uv.lock` 固定版本；环境由 uv 管理，无需激活。可用 `MURAN_UV` 指定 `uv.exe` 的绝对路径。`CLAUDE_CONFIG_DIR` 会影响 Claude 技能目录。
 
-首次准备平台文档：
+可选：在维护文档的机器上配置独立文档更新：
 
 ```powershell
 # 已有旧火山项目时导入；同时补齐尚未缓存的可灵和 MiniMax 文档
@@ -41,7 +68,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 .\muran.ps1 doctor
 ```
 
-旧版管理器会拒绝含文档正文的候选版本。已安装旧版的其他机器需在工作区干净时先执行一次 `git pull --ff-only origin main` 升级发布规则，之后恢复正常自动更新。
+旧版管理器会拒绝含文档正文或分包目录的候选版本。已安装旧版的其他机器需在工作区干净时先执行一次 `git pull --ff-only origin main` 升级发布规则，之后恢复正常自动更新。
 
 公开仓库包含技能入口、脚本、来源说明，以及 `generated/` 下构建好的正文、索引和快照清单。其他机器拉取即可检索，无需首次下载 PDF。`.cache/` 源资料、PDF 和中间文件仍不进 Git。
 
@@ -51,12 +78,19 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 
 | 命令 | 行为 |
 |---|---|
-| `.\muran.ps1 install` | 检测已安装的五种智能体，建立或复用技能 Junction |
-| `.\muran.ps1 install --agents codex claude-code pi opencode grok` | 显式选择客户端，适合 PATH 未配置的机器 |
-| `.\muran.ps1 sync` | 补齐新增技能、修复缺失链接、清理已删除技能的受管链接 |
+| `.\muran.ps1 list` | 列出技能包、技能数量和安装状态 |
+| `.\muran.ps1 install` | 终端选择一个或多个包，再为已发现的客户端建立链接 |
+| `.\muran.ps1 install --packages matt` | 只新增安装 Matt 包，保留已安装的其他包 |
+| `.\muran.ps1 install --packages ai-platform-docs` | 只新增安装平台文档包 |
+| `.\muran.ps1 install --packages all` | 明确选择安装全部现有包 |
+| `.\muran.ps1 update --packages matt` | 只检查合并 Matt 上游，校验后提交推送 |
+| `.\muran.ps1 update --packages ai-platform-docs` | 只刷新并发布平台文档快照 |
+| `.\muran.ps1 uninstall --packages matt` | 只移除 Matt 包的受管链接，保留其他包 |
+| `.\muran.ps1 install --packages matt --agents codex claude-code pi opencode grok` | 显式选择客户端，适合 PATH 未配置的机器 |
+| `.\muran.ps1 sync` | 只同步已选择包的增删技能、修复缺失链接 |
 | `.\muran.ps1 update` | 校验远端候选版本、快进本库 main，再同步链接 |
 | `.\muran.ps1 doctor` | 检查格式、依赖、链接、文档哈希、任务及最近更新状态 |
-| `.\muran.ps1 daily-update` | 拉取本库，三方合并 Matt 正式技能，校验后自动提交推送 |
+| `.\muran.ps1 daily-update` | 拉取本库，仅在已安装 Matt 包时三方合并其正式技能，校验后自动提交推送 |
 | `.\muran.ps1 auto-update enable` | 开启每天北京时间 09:00 的自动更新 |
 | `.\muran.ps1 auto-update status` | 查看任务状态、执行结果和下次运行时间 |
 | `.\muran.ps1 auto-update disable` | 关闭本工具的每日任务 |
@@ -73,7 +107,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 
 ## 一处维护如何生效
 
-每个智能体的入口都链接到本库的 `skills/<技能名>`：
+智能体入口仍按技能名逐个建立链接：Matt 技能指向 `skills/matt/<技能名>`，文档技能指向 `skills/ai-platform-docs`。只为已选择的包建立链接：
 
 | 客户端 | 当前用户的入口 |
 |---|---|

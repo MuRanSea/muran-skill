@@ -130,7 +130,9 @@
         "upstream_path": "skills/productivity/writing-for-agents",
         "original_skill_sha256": "551adca942227b44192edba88acd4e8db911f0121ce58ad16944ccf6a896a74a"
       }
-    ]
+    ],
+    "local_root": "skills/matt",
+    "package": "matt"
   },
   "volcengine": {
     "name": "ai-platform-docs",
@@ -150,6 +152,7 @@
       "https://klingai.com/document-api/llms.txt",
       "https://platform.minimax.cn/docs/llms.txt"
     ],
-    "generated_content_committed": true
+    "generated_content_committed": true,
+    "package": "ai-platform-docs"
   }
 }

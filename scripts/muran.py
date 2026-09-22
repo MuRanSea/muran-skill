@@ -16,6 +16,7 @@ import tarfile
 import tempfile
 
 from validation import NAME, documentation_status, forbidden_public_paths, validate
+from skill_packages import catalog, selected_packages
 
 ROOT = Path(__file__).resolve().parent.parent
 AGENTS = {'codex': 'codex', 'claude-code': 'claude', 'pi': 'pi', 'opencode': 'opencode', 'grok': 'grok'}
@@ -150,8 +151,11 @@ class Manager:
         if not isinstance(name, str) or not NAME.fullmatch(name):
             return False
         path = Path(record.get('path', ''))
-        return (normalized(path) in {normalized(p / name) for p in (self.shared, self.claude, self.grok)}
-                and normalized(record.get('source', '')) == normalized(self.root / 'skills' / name))
+        source = Path(record.get('source', ''))
+        valid_source = normalized(source) == normalized(self.root / 'skills' / name)
+        if source.name == name and NAME.fullmatch(source.parent.name):
+            valid_source = valid_source or normalized(source.parent.parent) == normalized(self.root / 'skills')
+        return normalized(path) in {normalized(p / name) for p in (self.shared, self.claude, self.grok)} and valid_source
 
     def remove_owned_link(self, record):
         if not record.get('owned') or not self.safe_record(record):
@@ -171,12 +175,33 @@ class Manager:
         if normalized(destination.resolve()) != normalized(source.resolve()):
             raise RuntimeError(f'Junction verification failed: {destination}')
 
-    def sync(self, agents=None):
+    def sync(self, agents=None, packages=None):
         self.migrate_document_skill()
         skills, errors = validate(self.root)
         if errors:
             return {'command': 'sync', 'ok': False, 'errors': errors}
         state = self.load_state()
+        packs = catalog(self.root)
+        chosen = selected_packages(self.root, state)
+        if packages is None and not any(pack['explicit'] for pack in packs.values()):
+            chosen = list(packs)
+        if packages is not None:
+            unknown = set(packages) - packs.keys()
+            if unknown:
+                raise ValueError(f'Unknown packages: {sorted(unknown)}')
+            chosen = list(dict.fromkeys(chosen + list(packages)))
+        if not chosen and 'packages' not in state:
+            if not any(pack['explicit'] for pack in packs.values()):
+                chosen = list(packs)
+            else:
+                return {'command': 'sync', 'ok': False, 'errors': ['Select a package with install --packages NAME']}
+        skills = [skill for skill in skills if skill['package'] in chosen]
+        names = {skill['name'] for skill in skills}
+        for skill in skills:
+            missing = set(skill['dependencies']) - names
+            if missing:
+                return {'command': 'sync', 'ok': False, 'errors': [f"{skill['name']}: selected packages lack dependencies {sorted(missing)}"]}
+        state['packages'] = chosen
         selected = list(dict.fromkeys(agents if agents is not None else state['agents'] + self.detect()))
         if not selected:
             return {'command': 'sync', 'ok': False, 'errors': ['No installed agent found; select --agents explicitly']}
@@ -195,6 +220,10 @@ class Manager:
                 desired.add(key)
                 old = previous.get(key)
                 target = link_target(dest)
+                if old and target == normalized(old['source']) and target != normalized(source) and old.get('owned'):
+                    if self.remove_owned_link(old):
+                        removed += 1
+                        target = None
                 exists = os.path.lexists(dest)
                 if target and normalized(dest.resolve()) == normalized(source):
                     record = {'name': skill['name'], 'path': str(dest), 'source': str(source), 'owned': bool(old and old.get('owned') and target == normalized(source))}
@@ -223,8 +252,55 @@ class Manager:
                 new_links.append(record)
         state['links'] = new_links
         self.save(state)
-        return {'command': 'sync', 'ok': not conflicts, 'skills': len(skills), 'agents': selected,
+        return {'command': 'sync', 'ok': not conflicts, 'skills': len(skills), 'agents': selected, 'packages': chosen,
                 'created': created, 'reused': reused, 'removed': removed, 'conflicts': conflicts}
+
+    def package_list(self):
+        installed = selected_packages(self.root, self.load_state())
+        return [{'name': name, 'description': pack.get('description', name),
+                 'skills': len(pack['folders']), 'installed': name in installed,
+                 'updater': pack.get('updater', 'git')}
+                for name, pack in catalog(self.root).items()]
+
+    def uninstall_packages(self, packages):
+        if set(packages) - catalog(self.root).keys():
+            raise ValueError('Unknown package')
+        state = self.load_state()
+        state['packages'] = [name for name in selected_packages(self.root, state) if name not in packages]
+        skills, errors = validate(self.root)
+        remaining = [skill for skill in skills if skill['package'] in state['packages']]
+        names = {skill['name'] for skill in remaining}
+        if errors or any(set(skill['dependencies']) - names for skill in remaining):
+            raise ValueError('Cannot uninstall: remaining packages would have missing dependencies or invalid skills')
+        self.save(state)
+        result = self.sync()
+        result['command'] = 'uninstall'
+        if 'ai-platform-docs' in packages:
+            result['docs_task'] = self.task('disable', documents=True)
+        return result
+
+    def update_packages(self, packages):
+        packs = catalog(self.root)
+        if set(packages) - packs.keys():
+            raise ValueError('Unknown package')
+        initial = self.update()
+        result = {'command': 'update', 'ok': initial['ok'], 'repository': initial, 'packages': {}}
+        if not initial['ok'] or initial['status'] not in ('updated', 'unchanged'):
+            return result
+        for name in packages:
+            updater = packs[name].get('updater', 'git')
+            if updater == 'matt':
+                from upstream import sync_upstream
+                item = sync_upstream(self)
+            elif updater == 'documents':
+                item = self.build_docs('update')
+            else:
+                item = {'ok': True, 'status': initial['status']}
+            result['packages'][name] = item
+            if not item.get('ok', True):
+                result['ok'] = False
+                break
+        return result
 
     def migrate_document_skill(self):
         """Retain ignored snapshots when Git replaces the old skill entrypoint."""
@@ -270,7 +346,7 @@ class Manager:
                         raise ValueError('Candidate contains unsafe archive entry')
                 bundle.extractall(target, filter='data')
             _, errors = validate(target)
-            for required in ('muran.ps1', 'scripts/muran.py', 'scripts/upstream.py', 'scripts/document_publish.py', 'scripts/validation.py', 'scripts/scheduled-task.ps1', 'scripts/run-update.ps1', 'scripts/run-docs-update.ps1', 'scripts/task-action.ps1'):
+            for required in ('muran.ps1', 'scripts/muran.py', 'scripts/skill_packages.py', 'scripts/upstream.py', 'scripts/document_publish.py', 'scripts/validation.py', 'scripts/scheduled-task.ps1', 'scripts/run-update.ps1', 'scripts/run-docs-update.ps1', 'scripts/task-action.ps1'):
                 if not (target / required).is_file():
                     errors.append(f'Missing manager file: {required}')
             if errors:
@@ -388,6 +464,8 @@ class Manager:
     def doctor(self):
         skills, errors = validate(self.root)
         state = self.load_state()
+        chosen = selected_packages(self.root, state)
+        skills = [skill for skill in skills if skill['package'] in chosen]
         links = []
         for skill in skills:
             for parent in self.destinations(state['agents']):
@@ -401,9 +479,9 @@ class Manager:
         docs = documentation_status(self.root) if any(s['name'] == 'ai-platform-docs' for s in skills) else None
         if docs and not docs['ready']:
             errors.append('AI platform documentation missing or invalid; run docs update')
-        if state.get('last_docs_update', {}).get('ok') is False:
+        if 'ai-platform-docs' in chosen and state.get('last_docs_update', {}).get('ok') is False:
             errors.append('Last document rebuild failed; the previous snapshot may still be usable')
-        if state.get('last_upstream_update', {}).get('status') == 'failed':
+        if ('matt' in chosen or not any(p['explicit'] for p in catalog(self.root).values())) and state.get('last_upstream_update', {}).get('status') == 'failed':
             errors.append('Last Matt upstream update failed; inspect last_upstream_update')
         dependencies = {name: bool(shutil.which(name)) for name in ('git', 'powershell.exe')}
         dependencies['uv'] = bool(shutil.which(os.environ.get('MURAN_UV') or 'uv'))
@@ -417,18 +495,42 @@ class Manager:
         except (RuntimeError, ValueError, OSError, subprocess.TimeoutExpired) as exc:
             dependencies['uv_locks_current'] = False
             errors.append(f'uv lock validation failed: {exc}')
-        return {'command': 'doctor', 'ok': not errors, 'skills': len(skills), 'agents': state['agents'], 'links': links,
+        return {'command': 'doctor', 'ok': not errors, 'skills': len(skills), 'packages': chosen, 'agents': state['agents'], 'links': links,
                 'documentation': docs, 'dependencies': dependencies, 'last_update': state.get('last_update'),
                 'last_docs_update': state.get('last_docs_update'),
                 'last_upstream_update': state.get('last_upstream_update'), 'errors': errors}
 
 
+def choose_packages(manager):
+    rows = manager.package_list()
+    if not sys.stdin.isatty():
+        raise ValueError('Non-interactive installation requires --packages NAME; run list to see packages')
+    print('请选择要安装的技能包（多个编号用逗号分隔，all 表示全部，回车取消）：')
+    for number, row in enumerate(rows, 1):
+        print(f"  {number}. {row['name']} ({row['skills']} 个技能){' [已安装]' if row['installed'] else ''} — {row['description']}")
+    answer = input('安装选择: ').strip()
+    if not answer:
+        return []
+    if answer.lower() == 'all':
+        return [row['name'] for row in rows]
+    selected = []
+    for token in answer.replace('，', ',').replace(',', ' ').split():
+        if token.isdigit() and 1 <= int(token) <= len(rows):
+            token = rows[int(token) - 1]['name']
+        if token not in {row['name'] for row in rows}:
+            raise ValueError(f'Unknown package selection: {token}')
+        selected.append(token)
+    return list(dict.fromkeys(selected))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['install', 'sync', 'update', 'daily-update', 'doctor', 'auto-update', 'uninstall', 'docs'])
+    parser.add_argument('command', choices=['list', 'install', 'sync', 'update', 'daily-update', 'doctor', 'auto-update', 'uninstall', 'docs'])
     parser.add_argument('action', nargs='?')
     parser.add_argument('source', nargs='?')
     parser.add_argument('--agents', nargs='+', choices=list(AGENTS))
+    parser.add_argument('--packages', nargs='+')
+    parser.add_argument('--installed-only', action='store_true')
     parser.add_argument('--home', type=Path)
     parser.add_argument('--state-dir', type=Path)
     parser.add_argument('--task-name', default=TASK_NAME)
@@ -441,11 +543,20 @@ def main():
     manager = Manager(home=args.home, state_dir=args.state_dir)
     try:
         with repository_lock(manager.state_dir):
+            if args.packages == ['all']:
+                args.packages = list(catalog(manager.root))
+            if args.command == 'install' and args.packages is None:
+                args.packages = choose_packages(manager)
+                if not args.packages:
+                    print('已取消安装。')
+                    return 0
             if args.command in ('install', 'sync'):
-                result = manager.sync(args.agents)
+                result = manager.sync(args.agents, args.packages)
                 result['command'] = args.command
+            elif args.command == 'list':
+                result = {'command': 'list', 'ok': True, 'packages': manager.package_list()}
             elif args.command == 'update':
-                result = manager.update()
+                result = manager.update_packages(args.packages) if args.packages else manager.update()
             elif args.command == 'daily-update':
                 from upstream import daily
                 result = daily(manager)
@@ -465,7 +576,7 @@ def main():
                     result['ok'] = False
                     result['errors'].append('Could not inspect the scheduled task')
             elif args.command == 'uninstall':
-                result = manager.uninstall()
+                result = manager.uninstall_packages(args.packages) if args.packages else manager.uninstall()
             elif args.command == 'auto-update':
                 if args.action not in ('enable', 'disable', 'status'):
                     parser.error('auto-update requires enable, disable or status')
@@ -475,7 +586,10 @@ def main():
                     result = documentation_status(ROOT)
                     result['ok'] = result['ready']
                 elif args.action in ('build', 'import', 'update'):
-                    result = manager.build_docs(args.action, args.source, args.fetch)
+                    if args.installed_only and 'ai-platform-docs' not in selected_packages(manager.root, manager.load_state()):
+                        result = {'command': 'docs', 'ok': True, 'status': 'skipped_not_installed'}
+                    else:
+                        result = manager.build_docs(args.action, args.source, args.fetch)
                 elif args.action == 'auto-update':
                     if args.source not in ('enable', 'disable', 'status'):
                         parser.error('docs auto-update requires enable, disable or status')

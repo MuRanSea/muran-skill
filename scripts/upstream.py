@@ -13,6 +13,7 @@ import urllib.request
 
 from muran import Manager, git, now
 from validation import NAME, forbidden_public_paths
+from skill_packages import catalog, selected_packages
 
 UPSTREAM = 'https://github.com/mattpocock/skills'
 COMPATIBILITY = ('\n\n## Harness compatibility\n\n'
@@ -135,17 +136,22 @@ def sync_upstream(manager):
         return {'ok': True, 'status': 'unchanged', 'upstream_commit': latest}
     base, _ = adapted_tree(download(record['commit']))
     incoming, metadata = adapted_tree(download(latest))
+    prefix = 'skills/matt' if (root / 'skills/matt/pack.json').exists() else 'skills'
+    if prefix != 'skills':
+        base = {name.replace('skills/', prefix + '/', 1) if name.startswith('skills/') else name: body for name, body in base.items()}
+        incoming = {name.replace('skills/', prefix + '/', 1) if name.startswith('skills/') else name: body for name, body in incoming.items()}
     # Disallow a newly imported skill from taking over a separately maintained skill.
     old_names = {entry['name'] for entry in record['skills']}
+    local_names = {folder.name for pack in catalog(root).values() for folder in pack['folders']}
     for entry in metadata['skills']:
-        if entry['name'] not in old_names and git(root, 'ls-tree', 'HEAD', '--', f"skills/{entry['name']}").strip():
+        if entry['name'] not in old_names and entry['name'] in local_names:
             raise ValueError(f"New upstream skill conflicts with local skill: {entry['name']}")
     merged = {path: merge_file(path, base.get(path), local_blob(root, before, path), incoming.get(path))
               for path in sorted(base.keys() | incoming.keys())}
     # Deleting a catalog entry must not silently discard locally added resources.
     retired = old_names - {entry['name'] for entry in metadata['skills']}
     for name in retired:
-        local_paths = git(root, 'ls-tree', '-r', '--name-only', before, '--', f'skills/{name}').splitlines()
+        local_paths = git(root, 'ls-tree', '-r', '--name-only', before, '--', f'{prefix}/{name}').splitlines()
         if any(path not in base or merged.get(path) is not None for path in local_paths):
             raise ValueError(f'Retired upstream skill has local adaptations: {name}')
     provenance['mattpocock'] = {**record, **metadata, 'commit': latest}
@@ -196,7 +202,10 @@ def daily(manager):
     result = {'command': 'daily-update', 'ok': initial['ok'], 'repository': initial}
     if initial['ok'] and initial['status'] in ('updated', 'unchanged'):
         try:
-            result['upstream'] = sync_upstream(manager)
+            if any(pack['explicit'] for pack in catalog(manager.root).values()) and 'matt' not in selected_packages(manager.root, manager.load_state()):
+                result['upstream'] = {'ok': True, 'status': 'skipped_not_installed'}
+            else:
+                result['upstream'] = sync_upstream(manager)
             result['ok'] = result['upstream']['ok']
         except (RuntimeError, ValueError, OSError, KeyError, tarfile.TarError, subprocess.SubprocessError) as exc:
             result.update(ok=False, upstream={'status': 'failed', 'error': str(exc)})

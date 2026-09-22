@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "name": "matt",
+  "description": "Matt Pocock 正式技能：开发、评审、设计与需求讨论",
+  "skills": ["*"],
+  "updater": "matt"
+}

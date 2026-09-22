@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "name": "ai-platform-docs",
+  "description": "火山引擎、可灵、MiniMax 官方 API 文档快照",
+  "skills": ["."],
+  "updater": "documents"
+}
