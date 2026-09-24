@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/get-started/kling-skills.md -->
-<!-- Source SHA-256: 0d01f64b68963611b65cea0bf3882836cb6037fd1031addd22ad6af42de18e2b -->
+<!-- Source SHA-256: bf9288fa19b7382652d1a2d9fdd16e666ea0520ea7545eb917e1ef1f6d9e04e9 -->
 
 > ## Documentation Index
 >
@@ -25,8 +25,8 @@ KlingAI API 官方 skill，开发者可以在第三方Agent中使用Kling AI Ski
 
 <SkillCard icon="K" color="#2261f5" title="Kling AI Skill" clawHubButton="true" clawHubUrl="https://clawhub.ai/klingai-dev/klingai" buyButton="true" buyUrl="https://klingai.com/dev/pricing?scrollTo=video-package" buyText="购买资源包">
     <ul style="font-size: 12px !important;">
-        <li style="font-size: 12px !important;">视频生成（文生视频、图生视频、视频编辑 Omni 3.0）,支持模型：kling-v3 / kling-v2-6 / kling-v3-omni / kling-video-o1</li>
-        <li style="font-size: 12px !important;">图片生成（文生图、图生图、4K 高清）,支持模型：kling-v3 / kling-v3-omni / kling-image-o1</li>
+        <li style="font-size: 12px !important;">视频生成（文生视频、图生视频、视频编辑 Omni 3.0）,支持模型：kling-3.0 / kling-3.0-turbo / kling-3.0-omni / kling-2.6 / kling-2.5-turbo / kling-o1</li>
+        <li style="font-size: 12px !important;">图片生成（文生图、图生图、4K 高清）,支持模型：kling-v3 / kling-v3-omni / kling-v2-1 / kling-image-o1</li>
         <li style="font-size: 12px !important;">主体/角色管理 -- 创建可复用的角色、跨视频保持人物一致性</li>
     </ul>
 </SkillCard>
@@ -54,9 +54,8 @@ KlingAI API 官方 skill，开发者可以在第三方Agent中使用Kling AI Ski
 ### 认证方式：
 
 - 安装skill时将提供url链接，使用可灵账号完成一键绑定（推荐）
-- 手动获取 AK/SK 后通过指令绑定：
-  `node kling.mjs account --import-credentials --access_key_id <ak> --secret_access_key <sk>`
-- 暂时无法通过API Key的方式接入，预计6月内支持
+- 手动获取 api-key 后通过指令绑定：
+  `node kling.mjs account --import-credentials --api_key "<API_KEY>"`
 
 ### 区域：
 
