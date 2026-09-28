@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/models-intro.md -->
-<!-- Source SHA-256: 314382e2b4fb622889a147756d498abd58eed3bc3735c2aaa2b75701b6e92ec4 -->
+<!-- Source SHA-256: e68ae82eb3e00ba65d3a65f18ec9c4460234ceb8fb436fce0718bfcd98088af5 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,11 +11,14 @@
 
 ### 语言模型
 
-| **模型名称**                                                    | **介绍**                                                         |
-| :---------------------------------------------------------- | :------------------------------------------------------------- |
-| [MiniMax-M3](/docs/api-reference/text-anthropic-api)             | 原生多模态、1M 上下文的 Frontier Coding 模型                               |
-| [MiniMax-M2.7](/docs/api-reference/text-anthropic-api)           | 开启模型的自我迭代                                                      |
-| [MiniMax-M2.7-highspeed](/docs/api-reference/text-anthropic-api) | 与 M2.7 效果不变，速度大幅提升                                             |
+<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 Token Plan 和 MiniMax Code 提供。</Note>
+
+| **模型名称**                                                                                                 | **介绍**                                                         |
+| :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------- |
+| <a href="/docs/api-reference/text-anthropic-api" style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</a> | 原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调                        |
+| [MiniMax-M3](/docs/api-reference/text-anthropic-api)                                                          | 原生多模态、1M 上下文的 Frontier Coding 模型                               |
+| [MiniMax-M2.7](/docs/api-reference/text-anthropic-api)                                                        | 开启模型的自我迭代                                                      |
+| [MiniMax-M2.7-highspeed](/docs/api-reference/text-anthropic-api)                                              | 与 M2.7 效果不变，速度大幅提升                                             |
 
 <Accordion title="历史模型">
   | **模型名称**                                                    | **介绍**                                                         |

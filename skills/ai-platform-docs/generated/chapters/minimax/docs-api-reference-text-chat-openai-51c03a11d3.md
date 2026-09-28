@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-openai.md -->
-<!-- Source SHA-256: 75d5f2dd5b35e58a764abf17b78e0cb24f98e0eb01513d7d99262256bf6783a7 -->
+<!-- Source SHA-256: b1164ae1c5d547ddddf8e6cbca090cfd180307f0be1fabea69aae7b81d93d73c -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -10,16 +10,19 @@
 > 使用 OpenAI API 兼容 Chat Completions 格式调用 MiniMax 模型。
 
 <Note>
-  ✨ **全新模型 `MiniMax-M3`**
+  ✨ **全新模型 `MiniMax-M3.1-Flash-Preview`**
 
-  **核心能力**：**Coding/Agentic SOTA**、**1M 超长上下文**、**多模态**。
+  **核心能力**：**1M 超长上下文**、**多模态**、**思考深度可调**。
+
+  暂时仅通过 Token Plan 和 MiniMax Code 提供。
 </Note>
 
 <Tip>
-  **`MiniMax-M3` 新特性：**
+  **`MiniMax-M3.1-Flash-Preview` 新特性：**
 
   1. 支持图片、视频理解，可参考右方示例代码
-  2. 支持通过 `thinking` 参数控制思考
+  2. 支持通过 `reasoning_effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，默认档位为 `max`
+  3. 深度思考默认开启，无需额外配置；思考内容通过 `reasoning_content` 字段单独返回
 </Tip>
 
 
@@ -32,7 +35,7 @@ info:
   description: |
     MiniMax 文本生成 API，支持对话补全与流式输出。
 
-    > ⚡ **`MiniMax-M3` 亮点** —— **Coding/Agentic SOTA**、**1M 超长上下文**、**多模态**。
+    > ⚡ **`MiniMax-M3.1-Flash-Preview` 亮点** —— **1M 超长上下文**、**多模态**、**思考深度可调**。
   license:
     name: MIT
   version: 1.0.0
@@ -63,9 +66,19 @@ paths:
             schema:
               $ref: '#/components/schemas/ChatCompletionReq'
             examples:
+              深度思考:
+                value:
+                  model: MiniMax-M3.1-Flash-Preview
+                  thinking:
+                    type: adaptive
+                  messages:
+                    - role: user
+                      content: 9.11 和 9.9 哪个更大？
+                  max_completion_tokens: 500
+                  reasoning_effort: max
               图片理解:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   thinking:
                     type: adaptive
                   messages:
@@ -78,9 +91,10 @@ paths:
                             url: >-
                               https://filecdn.minimax.chat/public/fe9d04da-f60e-444d-a2e0-18ae743add33.jpeg
                   max_completion_tokens: 500
+                  reasoning_effort: max
               视频理解:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   thinking:
                     type: adaptive
                   messages:
@@ -93,18 +107,10 @@ paths:
                             url: >-
                               https://filecdn.minimax.chat/public/ee8c1648-21f1-41b7-8397-65022d22ffe5.mp4
                   max_completion_tokens: 500
-              深度思考:
-                value:
-                  model: MiniMax-M3
-                  thinking:
-                    type: adaptive
-                  messages:
-                    - role: user
-                      content: 9.11 和 9.9 哪个更大？
-                  max_completion_tokens: 500
+                  reasoning_effort: max
               流式:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   thinking:
                     type: adaptive
                   messages:
@@ -118,9 +124,10 @@ paths:
                               https://filecdn.minimax.chat/public/fe9d04da-f60e-444d-a2e0-18ae743add33.jpeg
                   stream: true
                   max_completion_tokens: 500
+                  reasoning_effort: max
               工具调用:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   messages:
                     - role: user
                       content: 旧金山现在天气怎么样？
@@ -139,6 +146,7 @@ paths:
                                 US
                           required:
                             - location
+                  reasoning_effort: max
         required: true
       responses:
         '200':
@@ -148,6 +156,83 @@ paths:
               schema:
                 $ref: '#/components/schemas/ChatCompletionResp'
               examples:
+                深度思考:
+                  value:
+                    id: 066b36619b147e326d17053cccdef70f
+                    choices:
+                      - finish_reason: stop
+                        index: 0
+                        message:
+                          content: >-
+                            **9.9 更大。**
+
+
+                            比较方法很简单：把小数位数对齐：
+
+
+                            - 9.11 = 9.11
+
+                            - 9.90 = 9.9
+
+
+                            整数部分都是 9，所以比较小数部分：90 > 11，因此 **9.9 > 9.11**。
+
+
+                            ---
+
+
+                            这是一个经典的小数比较问题，容易被混淆的原因在于：如果按**字符串**逐字符比较，"9.9"中的 '9'
+                            会大于 "9.11"中的 '1'，从而得出相反的结论。但在**数值**上，9.9 = 9.90 显然大于
+                            9.11。
+                          reasoning_content: >-
+                            The user is asking which is larger: 9.11 or 9.9.
+
+
+                            Let me compare these two numbers:
+
+                            - 9.11
+
+                            - 9.9 = 9.90
+
+
+                            Comparing 9.11 and 9.90:
+
+                            - The integer parts are both 9.
+
+                            - Compare the decimal parts: 11 vs 90 (treating as
+                            cents: 0.11 vs 0.90)
+
+                            - 90 > 11, so 9.9 > 9.11
+
+
+                            This is actually a famous question that is sometimes
+                            used to trick people who might confuse string
+                            comparison with numerical comparison (since "9.11" >
+                            "9.9" as strings, but numerically 9.9 > 9.11).
+
+
+                            The answer is straightforward: 9.9 is larger.
+                          role: assistant
+                          name: MiniMax AI
+                          audio_content: ''
+                    created: 1780220769
+                    model: MiniMax-M3.1-Flash-Preview
+                    object: chat.completion
+                    usage:
+                      total_tokens: 473
+                      total_characters: 0
+                      prompt_tokens: 170
+                      completion_tokens: 303
+                      prompt_tokens_details:
+                        cached_tokens: 157
+                    input_sensitive: false
+                    output_sensitive: false
+                    input_sensitive_type: 0
+                    output_sensitive_type: 0
+                    output_sensitive_int: 0
+                    base_resp:
+                      status_code: 0
+                      status_msg: ''
                 图片理解:
                   value:
                     id: 066a2a568140d42ba2020cec72d592c0
@@ -155,57 +240,37 @@ paths:
                       - finish_reason: stop
                         index: 0
                         message:
-                          content: >-
-                            <think>
+                          content: |-
+                            这张图片是一张温馨的人像摄影作品，画面内容如下：
 
+                            **主体人物：**
+                            - 一个可爱的小女孩，大约3-5岁左右
+                            - 她有一头蓬松的棕色卷发，额前有可爱的刘海
+                            - 有着大大的棕绿色眼睛，目光清澈明亮
+                            - 嘴角微微上扬，展露出甜美、纯真的微笑
+                            - 脸颊丰满，皮肤白皙光滑，透着孩童特有的红润
+
+                            **服装：**
+                            - 身穿一件米白色或奶油色的连衣裙
+                            - 衣领和肩部有精致的蕾丝花边装饰，带有荷叶边设计
+                            - 显得十分优雅可爱
+
+                            **构图与光线：**
+                            - 这是一张特写肖像照，聚焦于女孩的面部表情
+                            - 采用柔和的暖色调光线，营造出温馨梦幻的氛围
+                            - 背景是模糊的暖棕色调，采用了浅景深（背景虚化）效果
+                            - 整体呈现出油画般的质感，画风柔和、温暖
+
+                            整张照片充满了童真和纯朴之美，捕捉到了小女孩天真烂漫的瞬间。
+                          reasoning_content: >-
                             The user is asking in Chinese what the content of
                             this image is. Let me describe the image in detail
                             in Chinese.
-
-                            </think>
-
-                            这张图片是一张温馨的人像摄影作品，画面内容如下：
-
-
-                            **主体人物：**
-
-                            - 一个可爱的小女孩，大约3-5岁左右
-
-                            - 她有一头蓬松的棕色卷发，额前有可爱的刘海
-
-                            - 有着大大的棕绿色眼睛，目光清澈明亮
-
-                            - 嘴角微微上扬，展露出甜美、纯真的微笑
-
-                            - 脸颊丰满，皮肤白皙光滑，透着孩童特有的红润
-
-
-                            **服装：**
-
-                            - 身穿一件米白色或奶油色的连衣裙
-
-                            - 衣领和肩部有精致的蕾丝花边装饰，带有荷叶边设计
-
-                            - 显得十分优雅可爱
-
-
-                            **构图与光线：**
-
-                            - 这是一张特写肖像照，聚焦于女孩的面部表情
-
-                            - 采用柔和的暖色调光线，营造出温馨梦幻的氛围
-
-                            - 背景是模糊的暖棕色调，采用了浅景深（背景虚化）效果
-
-                            - 整体呈现出油画般的质感，画风柔和、温暖
-
-
-                            整张照片充满了童真和纯朴之美，捕捉到了小女孩天真烂漫的瞬间。
                           role: assistant
                           name: MiniMax AI
                           audio_content: ''
                     created: 1780152150
-                    model: MiniMax-M3
+                    model: MiniMax-M3.1-Flash-Preview
                     object: chat.completion
                     usage:
                       total_tokens: 1604
@@ -230,8 +295,10 @@ paths:
                         index: 0
                         message:
                           content: >-
-                            <think>
-
+                            The video shows a cat walking on a diving board. It
+                            then proceeds to jump off, performing a flip before
+                            plunging into the water below.
+                          reasoning_content: >-
                             The user wants me to describe the events in the
                             provided video.
 
@@ -273,17 +340,11 @@ paths:
                             "...performing a flip before plunging into the water
                             below." This covers all the key elements observed in
                             the video clip.
-
-                            </think>
-
-                            The video shows a cat walking on a diving board. It
-                            then proceeds to jump off, performing a flip before
-                            plunging into the water below.
                           role: assistant
                           name: MiniMax AI
                           audio_content: ''
                     created: 1780224598
-                    model: MiniMax-M3
+                    model: MiniMax-M3.1-Flash-Preview
                     object: chat.completion
                     usage:
                       total_tokens: 2647
@@ -300,101 +361,18 @@ paths:
                     base_resp:
                       status_code: 0
                       status_msg: ''
-                深度思考:
-                  value:
-                    id: 066b36619b147e326d17053cccdef70f
-                    choices:
-                      - finish_reason: stop
-                        index: 0
-                        message:
-                          content: >-
-                            <think>
-
-                            The user is asking which is larger: 9.11 or 9.9.
-
-
-                            Let me compare these two numbers:
-
-                            - 9.11
-
-                            - 9.9 = 9.90
-
-
-                            Comparing 9.11 and 9.90:
-
-                            - The integer parts are both 9.
-
-                            - Compare the decimal parts: 11 vs 90 (treating as
-                            cents: 0.11 vs 0.90)
-
-                            - 90 > 11, so 9.9 > 9.11
-
-
-                            This is actually a famous question that is sometimes
-                            used to trick people who might confuse string
-                            comparison with numerical comparison (since "9.11" >
-                            "9.9" as strings, but numerically 9.9 > 9.11).
-
-
-                            The answer is straightforward: 9.9 is larger.
-
-                            </think>
-
-                            **9.9 更大。**
-
-
-                            比较方法很简单：把小数位数对齐：
-
-
-                            - 9.11 = 9.11
-
-                            - 9.90 = 9.9
-
-
-                            整数部分都是 9，所以比较小数部分：90 > 11，因此 **9.9 > 9.11**。
-
-
-                            ---
-
-
-                            这是一个经典的小数比较问题，容易被混淆的原因在于：如果按**字符串**逐字符比较，"9.9"中的 '9'
-                            会大于 "9.11"中的 '1'，从而得出相反的结论。但在**数值**上，9.9 = 9.90 显然大于
-                            9.11。
-                          role: assistant
-                          name: MiniMax AI
-                          audio_content: ''
-                    created: 1780220769
-                    model: MiniMax-M3
-                    object: chat.completion
-                    usage:
-                      total_tokens: 473
-                      total_characters: 0
-                      prompt_tokens: 170
-                      completion_tokens: 303
-                      prompt_tokens_details:
-                        cached_tokens: 157
-                    input_sensitive: false
-                    output_sensitive: false
-                    input_sensitive_type: 0
-                    output_sensitive_type: 0
-                    output_sensitive_int: 0
-                    base_resp:
-                      status_code: 0
-                      status_msg: ''
                 流式:
                   value:
                     - id: 066a2db7cb70134c45f5d6443d434c2c
                       choices:
                         - index: 0
                           delta:
-                            content: |-
-                              <think>
-                              The user
+                            reasoning_content: The user
                             role: assistant
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -406,12 +384,12 @@ paths:
                       choices:
                         - index: 0
                           delta:
-                            content: ' is asking in Chinese what the content of this image is. Let me describe the image in detail.'
+                            reasoning_content: ' is asking in Chinese what the content of this image is. Let me describe the image in detail.'
                             role: assistant
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -424,8 +402,6 @@ paths:
                         - index: 0
                           delta:
                             content: |-
-
-                              </think>
                               这张图片是一个小女孩的肖像特写照片。
 
                               **图片内容描述：**
@@ -435,7 +411,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -453,7 +429,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -472,7 +448,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -491,7 +467,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -511,7 +487,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -530,7 +506,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -547,7 +523,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -566,7 +542,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -585,7 +561,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -602,7 +578,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -621,7 +597,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -639,7 +615,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -654,16 +630,11 @@ paths:
                       - finish_reason: tool_calls
                         index: 0
                         message:
-                          content: >-
-                            <think>
-
+                          content: 我来帮你查询旧金山的当前天气。
+                          reasoning_content: >-
                             The user is asking about the current weather in San
                             Francisco. I should use the get_weather tool to
                             fetch this information.
-
-                            </think>
-
-                            我来帮你查询旧金山的当前天气。
                           role: assistant
                           name: MiniMax AI
                           tool_calls:
@@ -675,7 +646,7 @@ paths:
                               index: 0
                           audio_content: ''
                     created: 1780211931
-                    model: MiniMax-M3
+                    model: MiniMax-M3.1-Flash-Preview
                     object: chat.completion
                     usage:
                       total_tokens: 477
@@ -702,14 +673,12 @@ paths:
                       choices:
                         - index: 0
                           delta:
-                            content: |-
-                              <think>
-                              The user
+                            reasoning_content: The user
                             role: assistant
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -721,12 +690,12 @@ paths:
                       choices:
                         - index: 0
                           delta:
-                            content: ' is asking in Chinese what the content of this image is. Let me describe the image in detail.'
+                            reasoning_content: ' is asking in Chinese what the content of this image is. Let me describe the image in detail.'
                             role: assistant
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -739,8 +708,6 @@ paths:
                         - index: 0
                           delta:
                             content: |-
-
-                              </think>
                               这张图片是一个小女孩的肖像特写照片。
 
                               **图片内容描述：**
@@ -750,7 +717,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -768,7 +735,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -787,7 +754,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -806,7 +773,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -826,7 +793,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -845,7 +812,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -862,7 +829,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -881,7 +848,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -900,7 +867,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -917,7 +884,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -936,7 +903,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -954,7 +921,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -974,6 +941,7 @@ components:
           type: string
           description: 模型 ID
           enum:
+            - MiniMax-M3.1-Flash-Preview
             - MiniMax-M3
             - MiniMax-M2.7
             - MiniMax-M2.7-highspeed
@@ -1000,8 +968,15 @@ components:
         thinking:
           type: object
           description: >-
-            控制 MiniMax-M3 thinking。省略时默认开启 adaptive thinking，响应会包含 thinking
-            内容。对于 M2.x 模型，thinking 无法关闭。
+            控制 thinking 行为。`adaptive` 这个默认值对所有模型都生效，差异只在 `disabled` 的效果上。
+
+            - `MiniMax-M3.1-Flash-Preview`：强制开启 thinking。传入 `disabled` 会返回 HTTP
+            400。如需调节思考深度，请使用 `reasoning_effort`。
+
+            - `MiniMax-M3`：默认开启 adaptive thinking；传入 `disabled` 会跳过 thinking
+            直接回答。
+
+            - M2.x 模型：thinking 无法关闭，传入 `disabled` 会被接收但不生效。
           properties:
             type:
               type: string
@@ -1012,17 +987,33 @@ components:
               description: >-
                 thinking 控制类型。
 
-                - `disabled`：让 MiniMax-M3 跳过 thinking 并直接回答。对于 M2.x 模型，thinking
-                仍会保持开启。
+                - `disabled`：让 `MiniMax-M3` 跳过 thinking
+                并直接回答。`MiniMax-M3.1-Flash-Preview` 不支持该取值，传入会返回 HTTP 400。对于 M2.x
+                模型，thinking 仍会保持开启。
 
-                - `adaptive`：为 MiniMax-M3 开启 adaptive thinking。省略 `thinking`
-                时默认使用该值。
+                - `adaptive`：开启 adaptive thinking。省略 `thinking` 时默认使用该值，也是
+                `MiniMax-M3.1-Flash-Preview` 唯一接受的取值。
           required: []
+        reasoning_effort:
+          type: string
+          description: >-
+            调节思考深度。仅 `MiniMax-M3.1-Flash-Preview`
+            支持真正的思考深度调节，其他模型会忽略该字段。省略时，该模型的默认思考深度为 `max`。由于
+            `MiniMax-M3.1-Flash-Preview` 强制开启 thinking，不接受 `none`，传入会返回 HTTP
+            400。
+          enum:
+            - low
+            - medium
+            - high
+            - xhigh
+            - max
         reasoning_split:
           type: boolean
           description: >-
-            输出格式开关。启用后将 thinking 内容拆分到 `reasoning_content` 和 `reasoning_details`
-            字段。这不会开启或关闭 thinking。
+            输出格式开关。为 `true` 时将 thinking 内容拆分到 `reasoning_content` 字段；为 `false` 时
+            thinking 以 `<think>` 标签保留在 `content`
+            字段内。`MiniMax-M3.1-Flash-Preview` 暂不支持将该参数设为 `false`。该参数不会开启或关闭
+            thinking。
         stream:
           type: boolean
           description: 是否使用流式传输，默认为 `false`。设置为 `true` 后，响应将分批返回。
@@ -1039,9 +1030,9 @@ components:
           type: integer
           format: int64
           description: >-
-            指定生成内容长度的上限（Token 数）。MiniMax-M3 推荐值为 131072（128K），上限为
-            524288（512K）；其他模型推荐值为 65536（64K），上限为 204800（200K）。如果生成因 `length`
-            原因中断，请尝试调高此值。
+            指定生成内容长度的上限（Token 数）。MiniMax-M3.1-Flash-Preview 和 MiniMax-M3 推荐值为
+            131072（128K），上限为 524288（512K）；其他模型推荐值为 65536（64K），上限为
+            204800（200K）。如果生成因 `length` 原因中断，请尝试调高此值。
           minimum: 1
         temperature:
           type: number
@@ -1053,7 +1044,9 @@ components:
         top_p:
           type: number
           format: double
-          description: 核采样参数，取值范围 [0, 1]。MiniMax-M3 默认值为 0.95，M2.x 系列模型默认值为 0.9。
+          description: >-
+            核采样参数，取值范围 [0, 1]。MiniMax-M3.1-Flash-Preview 和 MiniMax-M3 默认值为
+            0.95，M2.x 系列模型默认值为 0.9。
           minimum: 0
           maximum: 1
           default: 0.95
@@ -1127,28 +1120,7 @@ components:
                     description: 文本回复内容
                   reasoning_content:
                     type: string
-                    description: 思考内容。仅在启用 reasoning_split 时返回。
-                  reasoning_details:
-                    type: array
-                    description: 结构化思考内容。仅在启用 reasoning_split 时返回。
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                          description: 思考内容类型，例如 `reasoning.text`。
-                        id:
-                          type: string
-                          description: 思考片段的标识符。
-                        format:
-                          type: string
-                          description: 思考内容的格式标识，例如 `MiniMax-response-v1`。
-                        index:
-                          type: integer
-                          description: 思考片段的顺序索引。
-                        text:
-                          type: string
-                          description: 该片段的思考文本。
+                    description: 思考内容。深度思考是自适应的，模型在简单轮次可能不思考，此时响应中不会出现该字段，读取前请先判空。
                   role:
                     type: string
                     description: 角色，固定为 `assistant`
@@ -1245,6 +1217,9 @@ components:
                   content:
                     type: string
                     description: 增量文本内容
+                  reasoning_content:
+                    type: string
+                    description: 增量思考内容；未生成思考内容时不返回。
               finish_reason:
                 type: string
                 nullable: true
@@ -1302,7 +1277,8 @@ components:
               description: 文本消息内容
             - type: array
               description: >-
-                多模态消息内容块。MiniMax-M3 支持文本、图片和视频输入。
+                多模态消息内容块。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
+                支持文本、图片和视频输入。
 
 
                 **多模态文件大小及容量限制**
@@ -1313,7 +1289,7 @@ components:
                 形式引用，单个视频最大 512 MB。
               items:
                 $ref: '#/components/schemas/MessageContentPart'
-          description: 消息内容。MiniMax-M3 支持文本、图片和视频内容块。
+          description: 消息内容。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持文本、图片和视频内容块。
         tool_calls:
           type: array
           description: assistant 消息中的工具调用列表。

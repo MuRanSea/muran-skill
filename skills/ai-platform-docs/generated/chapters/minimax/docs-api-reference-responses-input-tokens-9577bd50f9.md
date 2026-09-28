@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/responses-input-tokens.md -->
-<!-- Source SHA-256: 347d4a668852df3c4b6ce2edffdfecb02fbf46cc1ef2de2443af90b91f4b1376 -->
+<!-- Source SHA-256: 1666c7e7e91aff23e75dad84398ad78c36df477623ced6d8e134b1e1cb82328e -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -50,7 +50,7 @@ paths:
             examples:
               Request:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   input:
                     - type: message
                       role: user
@@ -112,8 +112,8 @@ components:
       properties:
         model:
           type: string
-          description: 调用的模型名称，如 `MiniMax-M3`
-          example: MiniMax-M3
+          description: 调用的模型名称，如 `MiniMax-M3.1-Flash-Preview`
+          example: MiniMax-M3.1-Flash-Preview
         input:
           description: 对话内容，支持简单文本或完整对话历史数组
           oneOf:
@@ -153,9 +153,15 @@ components:
         reasoning:
           type: object
           description: >-
-            推理控制。对于 MiniMax-M3，默认为 `none`，即关闭推理。将 `effort` 设置为非 `none`
-            值（`minimal`、`low`、`medium` 或 `high`），即可开启 Adaptive Thinking，但不会调节
-            MiniMax-M3 的推理深度。对于 M2.x 模型，推理无法关闭。
+            推理控制。默认值随模型不同，因此未在 schema 层声明统一默认值。
+
+            - `MiniMax-M3.1-Flash-Preview`：推理始终开启，省略 `reasoning` 时也会推理。`effort`
+            可取 `low`、`medium`、`high`、`xhigh` 或 `max`，并且确实会调节推理深度；省略时默认使用 `max`
+            档位。传入 `effort: "none"` 会返回 HTTP 400。
+
+            - `MiniMax-M3`：默认关闭推理；将 `effort` 设为非 `none` 值可开启推理，但不会调节推理深度。
+
+            - M2.x 模型：推理无法关闭，传入 `effort: "none"` 会被接收但不生效。
           properties:
             effort:
               type: string
@@ -164,8 +170,9 @@ components:
                 - low
                 - medium
                 - high
+                - xhigh
+                - max
                 - none
-              default: none
           required: []
     EstimateInputTokensResp:
       type: object

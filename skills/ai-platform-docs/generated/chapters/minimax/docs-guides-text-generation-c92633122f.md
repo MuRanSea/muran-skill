@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-generation.md -->
-<!-- Source SHA-256: de69188ab6463c33832d9c1e211bac7add0901d2355739021f9638a289b92512 -->
+<!-- Source SHA-256: 1b75f1a7d671442bc6066630f2a68dc1d1aa608f35ccd6dc3fc43e64d7ab46d8 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -10,40 +10,50 @@
 > MiniMax 语言模型，支持多语言编程、Agent 工作流等复杂任务场景。
 
 <Note>
-  订阅 [Token Plan](https://platform.minimax.cn/subscribe/token-plan) ，即可以超低价格使用 MiniMax 全模态模型!
+  **MiniMax-M3.1-Flash-Preview 暂时仅通过 Token Plan 和 MiniMax Code 提供。**[获取订阅 Key](https://platform.minimax.cn/console/plan)。
 </Note>
 
 ## 模型概览
 
-MiniMax 提供多款语言模型，满足不同场景需求。**MiniMax-M3** 是最新 M 系列语言模型，适用于 Agent 推理、工具调用、代码和长上下文任务；**MiniMax-M2.7**、**MiniMax-M2.5**、**MiniMax-M2.1**、**MiniMax-M2** 及其 highspeed 版本，以及面向对话场景的 **M2-her** 均为历史模型，目前仍正常提供服务，可根据具体应用场景与性能要求选用。
+MiniMax 提供多款语言模型，满足不同场景需求。**MiniMax-M3.1-Flash-Preview** 是最新 M 系列语言模型，适用于 Agent 推理、工具调用、代码和长上下文任务，并支持通过 `effort` 调节思考深度。**MiniMax-M3**、**MiniMax-M2.7** 及 **MiniMax-M2.7-highspeed** 也正常提供服务；更早的型号收录在下方的历史模型中。
 
 ### 支持模型
 
-| 模型名称                                                |   上下文窗口   | 模型介绍                                                 |
-| :-------------------------------------------------- | :-------: | :--------------------------------------------------- |
-| [MiniMax-M3](https://www.minimax.cn/models/text/m3) | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型**（输出速度约 100+ TPS） |
-| MiniMax-M2.7                                        |  204,800  | **开启模型的自我迭代**（输出速度约 60 TPS）                          |
-| MiniMax-M2.7-highspeed                              |  204,800  | **M2.7 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS）              |
-| MiniMax-M2.5                                        |  204,800  | **顶尖性能与极致性价比，轻松驾驭复杂任务**（输出速度约 60 TPS）                |
-| MiniMax-M2.5-highspeed                              |  204,800  | **M2.5 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS）              |
-| MiniMax-M2.1                                        |  204,800  | **强大多语言编程能力，全面升级编程体验**（输出速度约 60 TPS）                 |
-| MiniMax-M2.1-highspeed                              |  204,800  | **M2.1 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS）              |
-| MiniMax-M2                                          |  204,800  | **专为高效编码与 Agent 工作流而生**                              |
-| [M2-her](/docs/guides/text-chat)                         |    64 K   | **专为对话场景设计，支持角色扮演和多轮对话**                             |
+| 模型名称                                                                  |   上下文窗口   | 模型介绍                                                 |
+| :-------------------------------------------------------------------- | :-------: | :--------------------------------------------------- |
+| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调**          |
+| MiniMax-M3                                                            | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型**（输出速度约 100+ TPS） |
+| MiniMax-M2.7                                                          |  204,800  | **开启模型的自我迭代**（输出速度约 60 TPS）                          |
+| MiniMax-M2.7-highspeed                                                |  204,800  | **M2.7 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS）              |
+
+<Accordion title="历史模型">
+  | 模型名称                        |  上下文窗口  | 模型介绍                                    |
+  | :-------------------------- | :-----: | :-------------------------------------- |
+  | MiniMax-M2.5                | 204,800 | **顶尖性能与极致性价比，轻松驾驭复杂任务**（输出速度约 60 TPS）   |
+  | MiniMax-M2.5-highspeed      | 204,800 | **M2.5 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
+  | MiniMax-M2.1                | 204,800 | **强大多语言编程能力，全面升级编程体验**（输出速度约 60 TPS）    |
+  | MiniMax-M2.1-highspeed      | 204,800 | **M2.1 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
+  | MiniMax-M2                  | 204,800 | **专为高效编码与 Agent 工作流而生**                 |
+  | [M2-her](/docs/guides/text-chat) |   64 K  | **专为对话场景设计，支持角色扮演和多轮对话**                |
+</Accordion>
 
 <Note>
-  TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%E6%96%87%E6%9C%AC%E6%A8%A1%E5%9E%8B%E7%9A%84-tpstokens-per-second%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
+  TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
 </Note>
 
-### **MiniMax M3** 核心亮点
+### **MiniMax M3.1-Flash-Preview** 核心亮点
 
 <AccordionGroup>
   <Accordion title="1M 上下文">
-    MiniMax-M3 支持最高 1,000,000 token 上下文，适用于长文档、代码库和多步骤 Agent 会话。
+    MiniMax-M3.1-Flash-Preview 支持最高 1,000,000 token 上下文，适用于长文档、代码库和多步骤 Agent 会话。
   </Accordion>
 
   <Accordion title="Agent 与代码场景">
-    MiniMax-M3 面向 Agent 推理、工具调用、代码和结构化任务执行优化。
+    MiniMax-M3.1-Flash-Preview 面向 Agent 推理、工具调用、代码和结构化任务执行优化。
+  </Accordion>
+
+  <Accordion title="思考深度可调（effort）">
+    通过 `effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，档位越高思考越充分。省略时默认使用 `max` 档位。详见[深度思考](#深度思考)。
   </Accordion>
 
   <Accordion title="多模态 Chat 输入">
@@ -51,22 +61,18 @@ MiniMax 提供多款语言模型，满足不同场景需求。**MiniMax-M3** 是
   </Accordion>
 </AccordionGroup>
 
-<Note>
-  更多模型介绍请参考 [MiniMax M3](https://www.minimax.cn/models/text/m3)。
-</Note>
-
 ***
 
 ## URL 配置
 
 调用 MiniMax 模型前，请先准备好以下信息：
 
-| 字段                          | 值                                                                      |
-| :-------------------------- | :--------------------------------------------------------------------- |
-| `base_url`（Anthropic 兼容，推荐） | `https://api.minimax.cn/anthropic`                                     |
-| `base_url`（OpenAI 兼容）       | `https://api.minimax.cn/v1`                                            |
-| `api_key`                   | [获取订阅 Key](https://platform.minimax.cn/user-center/payment/token-plan) |
-| `model`                     | 见上方[支持模型](#支持模型)表                                                      |
+| 字段                          | 值                                                    |
+| :-------------------------- | :--------------------------------------------------- |
+| `base_url`（Anthropic 兼容，推荐） | `https://api.minimax.cn/anthropic`                   |
+| `base_url`（OpenAI 兼容）       | `https://api.minimax.cn/v1`                          |
+| `api_key`                   | [获取订阅 Key](https://platform.minimax.cn/console/plan) |
+| `model`                     | 见上方[支持模型](#支持模型)表                                    |
 
 ***
 
@@ -84,8 +90,9 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
     -H "Authorization: Bearer <MINIMAX_API_KEY>" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "MiniMax-M3",
-      "max_tokens": 1000,
+      "model": "MiniMax-M3.1-Flash-Preview",
+      "output_config": {"effort": "max"},
+      "max_tokens": 4096,
       "messages": [
         {"role": "user", "content": "Hi, how are you?"}
       ]
@@ -102,8 +109,9 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
   )
 
   message = client.messages.create(
-      model="MiniMax-M3",
-      max_tokens=1000,
+      model="MiniMax-M3.1-Flash-Preview",
+      output_config={"effort": "max"},
+      max_tokens=4096,
       messages=[
           {"role": "user", "content": "Hi, how are you?"}
       ],
@@ -126,8 +134,9 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
   });
 
   const message = await client.messages.create({
-    model: "MiniMax-M3",
-    max_tokens: 1000,
+    model: "MiniMax-M3.1-Flash-Preview",
+    output_config: { effort: "max" },
+    max_tokens: 4096,
     messages: [
       { role: "user", content: "Hi, how are you?" },
     ],
@@ -153,7 +162,8 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
     -H "Authorization: Bearer <MINIMAX_API_KEY>" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "MiniMax-M3",
+      "model": "MiniMax-M3.1-Flash-Preview",
+      "reasoning_effort": "max",
       "messages": [
         {"role": "user", "content": "Hi, how are you?"}
       ]
@@ -170,7 +180,8 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
   )
 
   response = client.chat.completions.create(
-      model="MiniMax-M3",
+      model="MiniMax-M3.1-Flash-Preview",
+      reasoning_effort="max",
       messages=[
           {"role": "user", "content": "Hi, how are you?"},
       ],
@@ -189,7 +200,8 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
   });
 
   const response = await client.chat.completions.create({
-    model: "MiniMax-M3",
+    model: "MiniMax-M3.1-Flash-Preview",
+    reasoning_effort: "max",
     messages: [
       { role: "user", content: "Hi, how are you?" },
     ],
@@ -198,6 +210,45 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
   console.log(response.choices[0].message.content);
   ```
 </CodeGroup>
+
+***
+
+## 深度思考
+
+MiniMax-M3.1-Flash-Preview 在回答前会先进行推理，把复杂问题拆解成多步分析后再作答，在 Agent 推理、工具调用、代码和数学等任务上能明显提升准确性。深度思考**默认开启，无需额外配置**。
+
+思考内容与最终回答分开返回：在 OpenAI 兼容协议下，思考内容固定通过 `reasoning_content` 字段单独给出，`content` 只含最终回答，可以直接用于展示，不需要从 `<think>` 标签里自行解析。
+
+### 思考深度档位（effort）
+
+`effort` 可取 `low`、`medium`、`high`、`xhigh`、`max`，档位越高思考越充分、耗时和输出 token 也越多。`MiniMax-M3.1-Flash-Preview` 省略 `effort` 时默认为 `max`。不同协议下的字段名不同：
+
+| 协议               | 思考深度字段                 | 思考内容返回位置                | 输出上限字段                                 |
+| :--------------- | :--------------------- | :---------------------- | :------------------------------------- |
+| Anthropic 兼容     | `output_config.effort` | `thinking` 内容块          | `max_tokens`                           |
+| OpenAI 兼容        | `reasoning_effort`     | `reasoning_content` 字段  | `max_tokens` / `max_completion_tokens` |
+| OpenAI Responses | `reasoning.effort`     | `type: "reasoning"` 输出项 | `max_output_tokens`                    |
+
+Anthropic 兼容接口中，显式设置 `output_config.effort` 为 `max`：
+
+```json theme={null}
+{
+  "model": "MiniMax-M3.1-Flash-Preview",
+  "max_tokens": 4096,
+  "output_config": {"effort": "max"},
+  "messages": [{"role": "user", "content": "你好"}]
+}
+```
+
+### 使用限制
+
+深度思考不支持关闭。传入 `thinking: {"type": "disabled"}` 或 `effort: "none"` 会返回 `400`：
+
+```text theme={null}
+model "MiniMax-M3.1-Flash-Preview" requires adaptive thinking
+```
+
+如需减少思考带来的耗时和 token 用量，请调低 `effort` 档位，而不是关闭思考。
 
 ***
 
@@ -212,8 +263,8 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
     通过 OpenAI SDK 调用 MiniMax 模型
   </Card>
 
-  <Card title="在 AI 编程工具里使用 M3" icon="code" href="/docs/token-plan/openclaw" cta="查看文档">
-    在 Claude Code、Cursor 等工具中使用 M3
+  <Card title="在 AI 编程工具里使用 MiniMax M 系列模型" icon="code" href="/docs/token-plan/openclaw" cta="查看文档">
+    在 Claude Code、Cursor 等工具中使用 MiniMax M 系列模型
   </Card>
 
   <Card title="Chat Model" icon="messages-square" href="/docs/guides/text-chat" cta="查看文档">
@@ -234,4 +285,4 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
 
 * [Anthropic SDK 文档](https://docs.anthropic.com/en/api/client-sdks)
 * [OpenAI SDK 文档](https://platform.openai.com/docs/libraries)
-* [MiniMax M3](https://www.minimax.cn/models/text/m3)
+* [MiniMax M3.1-Flash-Preview](https://www.minimax.cn/models/text/m3)

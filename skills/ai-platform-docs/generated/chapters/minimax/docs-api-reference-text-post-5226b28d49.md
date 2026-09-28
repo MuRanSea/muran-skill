@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-post.md -->
-<!-- Source SHA-256: 37166dfcf9fc8ee0b180673952b1174398ed43986d141334ed40ff6356d2de87 -->
+<!-- Source SHA-256: 135b09b214f3b16ef280e3ae59c5e6183666a9cdf2018bb54aeb72e6518af364 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -52,7 +52,7 @@ paths:
             examples:
               Request:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   messages:
                     - role: system
                       name: MiniMax AI
@@ -61,7 +61,7 @@ paths:
                       content: 你好
               Stream:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   messages:
                     - role: system
                       name: MiniMax AI
@@ -108,7 +108,7 @@ paths:
                           audio_content: ''
                           reasoning_content: ...省略
                     created: 1755153113
-                    model: MiniMax-M3
+                    model: MiniMax-M3.1-Flash-Preview
                     object: chat.completion
                     usage:
                       total_tokens: 249
@@ -134,7 +134,7 @@ paths:
                             content: 你好
                             role: assistant
                       created: 1722829751
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       output_sensitive: false
                       input_sensitive_type: 0
@@ -147,7 +147,7 @@ paths:
                             content: ！有什么可以帮助你的吗？
                             role: assistant
                       created: 1722829751
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       output_sensitive: false
                       input_sensitive_type: 0
@@ -160,7 +160,7 @@ paths:
                             content: 你好！有什么可以帮助你的吗？
                             role: assistant
                       created: 1722829751
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion
                       usage:
                         total_tokens: 73
@@ -191,7 +191,7 @@ paths:
                             content: 你好
                             role: assistant
                       created: 1722829751
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       output_sensitive: false
                       input_sensitive_type: 0
@@ -204,7 +204,7 @@ paths:
                             content: ！有什么可以帮助你的吗？
                             role: assistant
                       created: 1722829751
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion.chunk
                       output_sensitive: false
                       input_sensitive_type: 0
@@ -217,7 +217,7 @@ paths:
                             content: 你好！有什么可以帮助你的吗？
                             role: assistant
                       created: 1722829751
-                      model: MiniMax-M3
+                      model: MiniMax-M3.1-Flash-Preview
                       object: chat.completion
                       usage:
                         total_tokens: 73
@@ -239,12 +239,14 @@ components:
         model:
           type: string
           description: >-
-            模型 ID。可选值：`MiniMax-M3`, `MiniMax-M2.7`, `MiniMax-M2.7-highspeed`,
-            `MiniMax-M2.5`, `MiniMax-M2.5-highspeed`, `MiniMax-M2.1`,
-            `MiniMax-M2` 。注：`MiniMax-M3`, `MiniMax-M2.7`,
+            模型 ID。可选值：`MiniMax-M3.1-Flash-Preview`, `MiniMax-M3`,
+            `MiniMax-M2.7`, `MiniMax-M2.7-highspeed`, `MiniMax-M2.5`,
+            `MiniMax-M2.5-highspeed`, `MiniMax-M2.1`, `MiniMax-M2`
+            。注：`MiniMax-M3.1-Flash-Preview`, `MiniMax-M3`, `MiniMax-M2.7`,
             `MiniMax-M2.7-highspeed`, `MiniMax-M2.5`, `MiniMax-M2.5-highspeed`,
             `MiniMax-M2.1` 和 `MiniMax-M2` 为推理模型，为获得最佳体验建议使用流式输出
           enum:
+            - MiniMax-M3.1-Flash-Preview
             - MiniMax-M3
             - MiniMax-M2.7
             - MiniMax-M2.7-highspeed

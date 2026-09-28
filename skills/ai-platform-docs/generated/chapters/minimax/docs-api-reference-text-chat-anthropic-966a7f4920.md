@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-anthropic.md -->
-<!-- Source SHA-256: 4dd26845f7c4f1dfb9a64130c0b9ff497dd5b500784412db0a74e8f510c07bb3 -->
+<!-- Source SHA-256: eee787fb1e69d735bbe1ab38f6a2bf9cdbd571e3f83dff060eaf1c18e523fd01 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -10,16 +10,19 @@
 > 使用 Anthropic API 兼容 Messages 格式调用 MiniMax 模型。
 
 <Note>
-  ✨ **全新模型 `MiniMax-M3`**
+  ✨ **全新模型 `MiniMax-M3.1-Flash-Preview`**
 
-  **核心能力**：**Coding/Agentic SOTA**、**1M 超长上下文**、**多模态**。
+  **核心能力**：**1M 超长上下文**、**多模态**、**思考深度可调**。
+
+  暂时仅通过 Token Plan 和 MiniMax Code 提供。
 </Note>
 
 <Tip>
-  **`MiniMax-M3` 新特性：**
+  **`MiniMax-M3.1-Flash-Preview` 新特性：**
 
   1. 支持图片、视频理解，可参考右方示例代码
-  2. 支持通过 `thinking` 参数控制思考
+  2. 支持通过 `output_config.effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，默认档位为 `max`
+  3. 深度思考默认开启，无需额外配置；思考内容通过 `thinking` 内容块单独返回
 </Tip>
 
 
@@ -32,7 +35,7 @@ info:
   description: |
     MiniMax 文本生成 API，支持对话补全与流式输出。
 
-    > ⚡ **`MiniMax-M3` 亮点** —— **Coding/Agentic SOTA**、**1M 超长上下文**、**多模态**。
+    > ⚡ **`MiniMax-M3.1-Flash-Preview` 亮点** —— **1M 超长上下文**、**多模态**、**思考深度可调**。
   license:
     name: MIT
   version: 1.0.0
@@ -64,9 +67,20 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateMessageReq'
             examples:
+              深度思考:
+                value:
+                  model: MiniMax-M3.1-Flash-Preview
+                  thinking:
+                    type: adaptive
+                  messages:
+                    - role: user
+                      content: 9.11 和 9.9 哪个更大？
+                  max_tokens: 4096
+                  output_config:
+                    effort: max
               图片理解:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   messages:
                     - role: user
                       content:
@@ -77,12 +91,14 @@ paths:
                             type: url
                             url: >-
                               https://filecdn.minimax.chat/public/fe9d04da-f60e-444d-a2e0-18ae743add33.jpeg
-                  max_tokens: 500
+                  max_tokens: 4096
                   thinking:
                     type: adaptive
+                  output_config:
+                    effort: max
               视频理解:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   thinking:
                     type: adaptive
                   messages:
@@ -95,19 +111,12 @@ paths:
                             type: url
                             url: >-
                               https://filecdn.minimax.chat/public/ee8c1648-21f1-41b7-8397-65022d22ffe5.mp4
-                  max_tokens: 1024
-              深度思考:
-                value:
-                  model: MiniMax-M3
-                  thinking:
-                    type: adaptive
-                  messages:
-                    - role: user
-                      content: 9.11 和 9.9 哪个更大？
-                  max_tokens: 1024
+                  max_tokens: 4096
+                  output_config:
+                    effort: max
               流式:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   messages:
                     - role: user
                       content:
@@ -119,16 +128,18 @@ paths:
                             url: >-
                               https://filecdn.minimax.chat/public/fe9d04da-f60e-444d-a2e0-18ae743add33.jpeg
                   stream: true
-                  max_tokens: 500
+                  max_tokens: 4096
                   thinking:
                     type: adaptive
+                  output_config:
+                    effort: max
               工具调用:
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
                   messages:
                     - role: user
                       content: 旧金山现在天气怎么样？
-                  max_tokens: 1024
+                  max_tokens: 4096
                   tools:
                     - name: get_weather
                       description: Get the current weather for a given location.
@@ -142,6 +153,8 @@ paths:
                           - location
                   tool_choice:
                     type: auto
+                  output_config:
+                    effort: max
         required: true
       responses:
         '200':
@@ -151,12 +164,54 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateMessageResp'
               examples:
+                深度思考:
+                  value:
+                    id: 066b367547c2650d17dc215f503da551
+                    type: message
+                    role: assistant
+                    model: MiniMax-M3.1-Flash-Preview
+                    content:
+                      - thinking: |-
+                          The user is asking which is larger: 9.11 or 9.9.
+
+                          Comparing 9.11 and 9.9:
+                          9.9 = 9.90
+                          9.11 = 9.11
+
+                          9.90 > 9.11, so 9.9 is larger.
+                        signature: >-
+                          7564f4e0e54b5c08b380d0b800aeb5463ea050e546cec7722e08ef6e912f6c67
+                        type: thinking
+                      - text: >-
+                          **9.9 更大。**
+
+
+                          比较方法很简单：将两个数的小数位数对齐后比较：
+
+
+                          - 9.11 = 9.**11**
+
+                          - 9.9 = 9.**90**
+
+
+                          因为 90 > 11，所以 **9.9 > 9.11**。
+
+
+                          这是一个常见的思维陷阱——虽然 11 看起来比 9 大，但在比较小数时，应该先比较整数部分（都是
+                          9），然后再比较小数部分，而小数部分需要**补齐位数**后再比较。
+                        type: text
+                    usage:
+                      input_tokens: 13
+                      output_tokens: 172
+                      cache_creation_input_tokens: 0
+                      cache_read_input_tokens: 157
+                    stop_reason: end_turn
                 图片理解:
                   value:
                     id: 066a381bdc3c0ded310e27c9a46d16e7
                     type: message
                     role: assistant
-                    model: MiniMax-M3
+                    model: MiniMax-M3.1-Flash-Preview
                     content:
                       - thinking: >-
                           The user is asking in Chinese what the content of the
@@ -190,7 +245,7 @@ paths:
                     id: 066b4573467fa2bb299cee687b68873d
                     type: message
                     role: assistant
-                    model: MiniMax-M3
+                    model: MiniMax-M3.1-Flash-Preview
                     content:
                       - thinking: >-
                           The user is asking in Chinese: "What happened in this
@@ -302,48 +357,6 @@ paths:
                       cache_creation_input_tokens: 0
                       cache_read_input_tokens: 1894
                     stop_reason: end_turn
-                深度思考:
-                  value:
-                    id: 066b367547c2650d17dc215f503da551
-                    type: message
-                    role: assistant
-                    model: MiniMax-M3
-                    content:
-                      - thinking: |-
-                          The user is asking which is larger: 9.11 or 9.9.
-
-                          Comparing 9.11 and 9.9:
-                          9.9 = 9.90
-                          9.11 = 9.11
-
-                          9.90 > 9.11, so 9.9 is larger.
-                        signature: >-
-                          7564f4e0e54b5c08b380d0b800aeb5463ea050e546cec7722e08ef6e912f6c67
-                        type: thinking
-                      - text: >-
-                          **9.9 更大。**
-
-
-                          比较方法很简单：将两个数的小数位数对齐后比较：
-
-
-                          - 9.11 = 9.**11**
-
-                          - 9.9 = 9.**90**
-
-
-                          因为 90 > 11，所以 **9.9 > 9.11**。
-
-
-                          这是一个常见的思维陷阱——虽然 11 看起来比 9 大，但在比较小数时，应该先比较整数部分（都是
-                          9），然后再比较小数部分，而小数部分需要**补齐位数**后再比较。
-                        type: text
-                    usage:
-                      input_tokens: 13
-                      output_tokens: 172
-                      cache_creation_input_tokens: 0
-                      cache_read_input_tokens: 157
-                    stop_reason: end_turn
                 流式:
                   value:
                     - type: message_start
@@ -352,7 +365,7 @@ paths:
                         type: message
                         role: assistant
                         content: []
-                        model: MiniMax-M3
+                        model: MiniMax-M3.1-Flash-Preview
                         stop_reason: null
                         stop_sequence: null
                         usage:
@@ -506,7 +519,7 @@ paths:
                     id: 066b13de1224099141792cd806ed4f56
                     type: message
                     role: assistant
-                    model: MiniMax-M3
+                    model: MiniMax-M3.1-Flash-Preview
                     content:
                       - thinking: >-
                           The user is asking about the current weather in San
@@ -540,7 +553,7 @@ paths:
                         type: message
                         role: assistant
                         content: []
-                        model: MiniMax-M3
+                        model: MiniMax-M3.1-Flash-Preview
                         stop_reason: null
                         stop_sequence: null
                         usage:
@@ -796,9 +809,13 @@ components:
         model:
           type: string
           description: >-
-            模型 ID。MiniMax-M3 是多模态模型，原生支持文本、图片和视频输入，并兼容工具调用与 thinking
-            内容块；M2.7、M2.5、M2.1 和 M2 系列仅支持文本与工具调用，不支持图片和视频输入。
+            模型 ID。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
+            是多模态模型，原生支持文本、图片和视频输入，并兼容工具调用与 thinking
+            内容块；`MiniMax-M3.1-Flash-Preview` 还会强制开启 thinking，并支持通过
+            `output_config.effort` 调节思考深度。M2.7、M2.5、M2.1 和 M2
+            系列仅支持文本与工具调用，不支持图片和视频输入。
           enum:
+            - MiniMax-M3.1-Flash-Preview
             - MiniMax-M3
             - MiniMax-M2.7
             - MiniMax-M2.7-highspeed
@@ -843,8 +860,9 @@ components:
         messages:
           type: array
           description: >-
-            对话历史。MiniMax-M3 支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。M2.7、M2.5、M2.1 和
-            M2 系列仅支持文本与工具调用相关内容块，不支持图片和视频输入。
+            对话历史。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
+            支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。M2.7、M2.5、M2.1 和 M2
+            系列仅支持文本与工具调用相关内容块，不支持图片和视频输入。
           items:
             $ref: '#/components/schemas/Message'
         stream:
@@ -855,9 +873,9 @@ components:
           type: integer
           format: int64
           description: >-
-            指定生成内容长度的上限（Token 数）。MiniMax-M3 推荐值为 131072（128K），上限为
-            524288（512K）；其他模型推荐值为 65536（64K），上限为 204800（200K）。超过上限的内容会被截断。如果生成因
-            `length` 原因中断，请尝试调高此值
+            指定生成内容长度的上限（Token 数）。MiniMax-M3.1-Flash-Preview 和 MiniMax-M3 推荐值为
+            131072（128K），上限为 524288（512K）；其他模型推荐值为 65536（64K），上限为
+            204800（200K）。超过上限的内容会被截断。如果生成因 `length` 原因中断，请尝试调高此值
           minimum: 1
         temperature:
           type: number
@@ -869,7 +887,9 @@ components:
         top_p:
           type: number
           format: double
-          description: 核采样参数，取值范围 [0, 1]。MiniMax-M3 默认值为 0.95，M2.x 系列模型默认值为 0.9。
+          description: >-
+            核采样参数，取值范围 [0, 1]。MiniMax-M3.1-Flash-Preview 和 MiniMax-M3 默认值为
+            0.95，M2.x 系列模型默认值为 0.9。
           minimum: 0
           maximum: 1
           default: 0.95
@@ -883,22 +903,47 @@ components:
         thinking:
           type: object
           description: >-
-            控制 MiniMax-M3 thinking。省略时默认关闭 thinking，响应不会包含 thinking 块。对于 M2.x
-            模型，thinking 无法关闭。
+            控制 thinking 行为。默认值随模型不同，因此未在 schema 层声明统一默认值。
+
+            - `MiniMax-M3.1-Flash-Preview`：强制开启 thinking。若传入 `type` 只能为
+            `adaptive`；传入 `disabled` 会返回 HTTP 400。如需调节思考深度，请使用
+            `output_config.effort`。
+
+            - `MiniMax-M3`：省略 `thinking` 时默认关闭；传入 `adaptive` 可开启并返回 thinking 块。
+
+            - M2.x 模型：thinking 无法关闭，传入 `disabled` 会被接收但不生效。
           properties:
             type:
               type: string
               enum:
                 - disabled
                 - adaptive
-              default: disabled
               description: >-
                 thinking 控制类型。
 
-                - `disabled`：关闭 MiniMax-M3 的 thinking 输出。省略 `thinking`
-                时默认使用该值。对于 M2.x 模型，thinking 仍会保持开启。
+                - `disabled`：关闭 `MiniMax-M3` 的 thinking
+                输出。`MiniMax-M3.1-Flash-Preview` 传入该值会返回 HTTP 400；M2.x 模型会接收但不生效。
 
-                - `adaptive`：开启 MiniMax-M3 的 thinking 输出，并返回 thinking 块。
+                - `adaptive`：开启 thinking 输出并返回 thinking 块。这是
+                `MiniMax-M3.1-Flash-Preview` 唯一接受的取值。
+          required: []
+        output_config:
+          type: object
+          description: 输出配置。通过 `effort` 调节 `MiniMax-M3.1-Flash-Preview` 的思考深度。
+          properties:
+            effort:
+              type: string
+              description: >-
+                `MiniMax-M3.1-Flash-Preview` 的思考深度档位，可取
+                `low`、`medium`、`high`、`xhigh`、`max`；省略时默认为
+                `max`。其他模型会忽略该字段。`MiniMax-M3.1-Flash-Preview` 不支持 `none`，传入会返回
+                HTTP 400。
+              enum:
+                - low
+                - medium
+                - high
+                - xhigh
+                - max
           required: []
         metadata:
           type: object
@@ -1092,14 +1137,20 @@ components:
             - group
             - sample_message_user
             - sample_message_ai
-          description: 消息发送方角色。MiniMax-M3 使用 user / assistant 交替消息。
+          description: >-
+            消息发送方角色。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 使用 user /
+            assistant 交替消息。
         content:
-          description: 消息内容。MiniMax-M3 支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。
+          description: >-
+            消息内容。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
+            支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。
           oneOf:
             - type: string
               description: 纯文本消息
             - type: array
-              description: 消息内容。MiniMax-M3 支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。
+              description: >-
+                消息内容。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
+                支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。
               items:
                 $ref: '#/components/schemas/RequestContentBlock'
     Tool:
@@ -1188,8 +1239,9 @@ components:
     RequestContentBlock:
       type: object
       description: >-
-        请求消息中可用的内容块。text 与工具相关块所有模型均支持；image 与 video 块仅 MiniMax-M3 支持。thinking
-        仅在多轮对话中将上一轮 assistant 输出原样回带时使用。
+        请求消息中可用的内容块。text 与工具相关块所有模型均支持；image 与 video 块仅
+        `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持。thinking 仅在多轮对话中将上一轮
+        assistant 输出原样回带时使用。
       required:
         - type
       properties:
@@ -1198,8 +1250,8 @@ components:
           description: |-
             内容块类型：
             - text：文本内容
-            - image：图片输入，仅 MiniMax-M3 支持
-            - video：视频输入，仅 MiniMax-M3 支持
+            - image：图片输入，仅 `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持
+            - video：视频输入，仅 `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持
             - tool_use：回带上一轮的 assistant 工具调用
             - tool_result：工具执行结果
             - thinking：回带上一轮的 assistant 思考内容
@@ -1217,7 +1269,9 @@ components:
           description: 文本内容，type=text 时使用。
         source:
           $ref: '#/components/schemas/MediaSource'
-          description: 图片或视频来源，type=image 或 type=video 时使用，仅 MiniMax-M3 支持。
+          description: >-
+            图片或视频来源，type=image 或 type=video 时使用，仅 `MiniMax-M3.1-Flash-Preview` 和
+            `MiniMax-M3` 支持。
         id:
           type: string
           description: 回带 type=tool_use 时使用的工具调用 ID。

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/api-overview.md -->
-<!-- Source SHA-256: c0cdfdfa638d4df150844ab400f287da6aefab146142e3c7a92373bdf4edb8d2 -->
+<!-- Source SHA-256: 503cce5f00aaca70e70c6c3337184b854085efe4d09908da6c2ca7e850d68e78 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -12,7 +12,6 @@
 ## 获取 API Key
 
 * **按量付费**：通过 [接口密钥 > 创建新的 API Key](https://platform.minimax.cn/user-center/basic-information/interface-key)，获取 **API Key**
-  <Note>按量付费支持使用所有模态模型，包括语言、视频、语音、图像等</Note>
 
 * **Token Plan**：通过 [订阅管理 > Token Plan](https://platform.minimax.cn/user-center/payment/token-plan)，查看 **订阅 Key**
   <Note>订阅 Key 用于 Token Plan 订阅套餐和已购积分，并与按量计费 API Key 相互独立。详情见 [Token Plan 概要](/docs/token-plan/intro)</Note>
@@ -21,22 +20,30 @@
 
 ## 语言模型
 
-语言模型接口使用 **MiniMax M3**，**MiniMax M2.7**，**MiniMax M2.7-highspeed**，**MiniMax M2.5**，**MiniMax M2.5-highspeed**，**MiniMax M2.1**，**MiniMax M2.1-highspeed**，**MiniMax M2** 根据输入的上下文，让模型生成对话内容、工具调用。
+语言模型接口使用 **MiniMax M3.1-Flash-Preview**，**MiniMax M3**，**MiniMax M2.7**，**MiniMax M2.7-highspeed**，**MiniMax M2.5**，**MiniMax M2.5-highspeed**，**MiniMax M2.1**，**MiniMax M2.1-highspeed**，**MiniMax M2** 根据输入的上下文，让模型生成对话内容、工具调用。
+
+<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 Token Plan 和 MiniMax Code 提供。</Note>
 
 可通过 **HTTP** 请求、**Anthropic SDK**（推荐） 或 **OpenAI SDK** 接入。
 
 **支持模型**
 
-| 模型名称                   | 输入输出总 token | 模型介绍                                                        |
-| :--------------------- | :---------: | :---------------------------------------------------------- |
-| MiniMax-M3             |  1,000,000  | **最新 M 系列语言模型，适用于 Agent 推理、工具调用、代码和长上下文任务**（输出速度约 100+ TPS） |
-| MiniMax-M2.7           |    204800   | **开启模型的自我迭代 (输出速度约60tps)**                                  |
-| MiniMax-M2.7-highspeed |    204800   | **M2.7 极速版：效果不变，更快，更敏捷  (输出速度约100tps)**                     |
-| MiniMax-M2.5           |    204800   | **顶尖性能与极致性价比，轻松驾驭复杂任务 (输出速度约60tps)**                        |
-| MiniMax-M2.5-highspeed |    204800   | **M2.5 极速版：效果不变，更快，更敏捷  (输出速度约100tps)**                     |
-| MiniMax-M2.1           |    204800   | **强大多语言编程能力，全面升级编程体验 (输出速度约60tps)**                         |
-| MiniMax-M2.1-highspeed |    204800   | **M2.1 极速版：效果不变，更快，更敏捷  (输出速度约100tps)**                     |
-| MiniMax-M2             |    204800   | **专为高效编码与Agent工作流而生**                                       |
+| 模型名称                                                                  | 输入输出总 token | 模型介绍                                                 |
+| :-------------------------------------------------------------------- | :---------: | :--------------------------------------------------- |
+| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> |  1,000,000  | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调**          |
+| MiniMax-M3                                                            |  1,000,000  | **原生多模态、1M 上下文的 Frontier Coding 模型**（输出速度约 100+ TPS） |
+| MiniMax-M2.7                                                          |    204800   | **开启模型的自我迭代 (输出速度约60tps)**                           |
+| MiniMax-M2.7-highspeed                                                |    204800   | **M2.7 极速版：效果不变，更快，更敏捷  (输出速度约100tps)**              |
+
+<Accordion title="历史模型">
+  | 模型名称                   | 输入输出总 token | 模型介绍                                    |
+  | :--------------------- | :---------: | :-------------------------------------- |
+  | MiniMax-M2.5           |    204800   | **顶尖性能与极致性价比，轻松驾驭复杂任务 (输出速度约60tps)**    |
+  | MiniMax-M2.5-highspeed |    204800   | **M2.5 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
+  | MiniMax-M2.1           |    204800   | **强大多语言编程能力，全面升级编程体验 (输出速度约60tps)**     |
+  | MiniMax-M2.1-highspeed |    204800   | **M2.1 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
+  | MiniMax-M2             |    204800   | **专为高效编码与Agent工作流而生**                   |
+</Accordion>
 
 如果在使用模型过程中遇到任何问题：
 

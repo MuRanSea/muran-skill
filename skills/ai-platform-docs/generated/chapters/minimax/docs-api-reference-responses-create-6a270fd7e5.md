@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/responses-create.md -->
-<!-- Source SHA-256: db194f0eeb6b19d0bf7b1010af66b25fc3cbcf2812cf7840ef55cfe6f63a6020 -->
+<!-- Source SHA-256: 5fb487d96aa2826639aa9ed4994abb0a6b6abbd486ba0c14af48a062eca20a5d -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,31 +9,7 @@
 
 > OpenAI Responses API 兼容的主接口调用MiniMax 模型，生成模型回复，支持流式与非流式。
 
-## 推理控制
-
-对于 `MiniMax-M3`，`reasoning` 字段用于控制响应是否包含推理输出。
-
-* 如果省略 `reasoning`，默认关闭推理，响应不会包含 `type: "reasoning"` 的输出项。
-* `reasoning: {"effort": "none"}` 是默认行为，可关闭 `MiniMax-M3` 的推理输出。
-* `minimal`、`low`、`medium` 和 `high` 这些取值会被兼容接收并开启推理输出，但不会调节 MiniMax-M3 的推理深度。
-* 对于 M2.x 模型，推理无法关闭；即使传入 `reasoning: {"effort": "none"}`，推理仍会保持开启。
-
-```json theme={null}
-{
-  "model": "MiniMax-M3",
-  "input": "9.11 和 9.9 哪个更大？"
-}
-```
-
-```json theme={null}
-{
-  "model": "MiniMax-M3",
-  "input": "9.11 和 9.9 哪个更大？",
-  "reasoning": {
-    "effort": "minimal"
-  }
-}
-```
+<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 Token Plan 和 MiniMax Code 提供。</Note>
 
 
 ## OpenAPI
@@ -76,12 +52,16 @@ paths:
               SimpleText:
                 summary: 简单文本输入
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
+                  reasoning:
+                    effort: max
                   input: 你好！
               ConversationHistory:
                 summary: 完整对话历史
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
+                  reasoning:
+                    effort: max
                   instructions: 你是一位中文技术写作助手。
                   input:
                     - role: user
@@ -91,13 +71,17 @@ paths:
               Streaming:
                 summary: 流式输出
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
+                  reasoning:
+                    effort: max
                   input: 你好！
                   stream: true
               FunctionCall:
                 summary: 工具调用
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
+                  reasoning:
+                    effort: max
                   input: What is the weather in Boston today?
                   tools:
                     - type: function
@@ -120,7 +104,9 @@ paths:
               MultiTurnFunctionCall:
                 summary: 多轮工具调用
                 value:
-                  model: MiniMax-M3
+                  model: MiniMax-M3.1-Flash-Preview
+                  reasoning:
+                    effort: max
                   input:
                     - type: message
                       role: user
@@ -157,9 +143,16 @@ paths:
                     id: abc123
                     object: response
                     created_at: 1764000000
-                    model: MiniMax-M3
+                    model: MiniMax-M3.1-Flash-Preview
                     status: completed
                     output:
+                      - id: abc123_rs
+                        type: reasoning
+                        status: completed
+                        summary: []
+                        content:
+                          - type: reasoning_text
+                            text: 用户打了招呼。用中文回一句简短友好的问候，并询问需要什么帮助即可。
                       - id: abc123_msg
                         type: message
                         status: completed
@@ -173,10 +166,10 @@ paths:
                       input_tokens: 8
                       input_tokens_details:
                         cached_tokens: 0
-                      output_tokens: 18
+                      output_tokens: 90
                       output_tokens_details:
-                        reasoning_tokens: 0
-                      total_tokens: 26
+                        reasoning_tokens: 76
+                      total_tokens: 98
                     parallel_tool_calls: true
                     store: false
                     truncation: disabled
@@ -190,8 +183,8 @@ components:
       properties:
         model:
           type: string
-          description: 调用的模型名称，如 `MiniMax-M3`
-          example: MiniMax-M3
+          description: 调用的模型名称，如 `MiniMax-M3.1-Flash-Preview`
+          example: MiniMax-M3.1-Flash-Preview
         service_tier:
           type: string
           description: >-
@@ -216,7 +209,9 @@ components:
           description: 系统指令
         max_output_tokens:
           type: integer
-          description: 最大输出 token 数
+          description: >-
+            最大输出 token 数。推理 token 也计入此上限，设置过小会导致 `status` 为 `incomplete` 且
+            `output` 中没有 `message` 项。
         temperature:
           type: number
           format: float
@@ -270,9 +265,15 @@ components:
         reasoning:
           type: object
           description: >-
-            推理控制。对于 MiniMax-M3，默认为 `none`，即关闭推理。将 `effort` 设置为非 `none`
-            值（`minimal`、`low`、`medium` 或 `high`），即可开启 Adaptive Thinking，但不会调节
-            MiniMax-M3 的推理深度。对于 M2.x 模型，推理无法关闭。
+            推理控制。默认值随模型不同，因此未在 schema 层声明统一默认值。
+
+            - `MiniMax-M3.1-Flash-Preview`：推理始终开启，省略 `reasoning` 时也会推理。`effort`
+            可取 `low`、`medium`、`high`、`xhigh` 或 `max`，并且确实会调节推理深度；省略时默认使用 `max`
+            档位。传入 `effort: "none"` 会返回 HTTP 400。
+
+            - `MiniMax-M3`：默认关闭推理；将 `effort` 设为非 `none` 值可开启推理，但不会调节推理深度。
+
+            - M2.x 模型：推理无法关闭，传入 `effort: "none"` 会被接收但不生效。
           properties:
             effort:
               type: string
@@ -281,8 +282,9 @@ components:
                 - low
                 - medium
                 - high
+                - xhigh
+                - max
                 - none
-              default: none
           required: []
     CreateResponseResp:
       type: object
