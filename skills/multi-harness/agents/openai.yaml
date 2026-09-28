@@ -1,0 +1,4 @@
+interface:
+  display_name: "多 Harness 协作"
+  short_description: "Codex 先规划任务并指定 CLI 与模型，再调度、验收和整合"
+  default_prompt: "使用 $multi-harness，先为目标制定方案和任务表，逐项明确 CLI、模型、范围、依赖及验收标准，再按计划派发，由 Codex 验收和整合。"

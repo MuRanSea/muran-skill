@@ -2,7 +2,7 @@
 
 个人技能库：在一处维护技能，Codex、Claude Code、Pi、OpenCode、Grok Build 共用同一份文件。
 
-第一版面向 **Windows 当前用户**。首批包含 Matt Pocock 的 25 个正式技能（后续随正式发布清单更新），以及 `ai-platform-docs`：火山引擎、可灵和 MiniMax 的官方 API 与开发文档快照。技能来源与许可见 [NOTICE.md](NOTICE.md)。
+第一版面向 **Windows 当前用户**。包含 Matt Pocock 的 25 个正式技能（后续随正式发布清单更新）、`ai-platform-docs` 官方 API 文档快照，以及 `multi-harness` 本地 CLI 委派技能。技能来源与许可见 [NOTICE.md](NOTICE.md)。
 
 ## 技能包与选择
 
@@ -12,6 +12,10 @@ skills/
 │   ├── pack.json
 │   ├── grill-me/SKILL.md
 │   └── ...
+├── multi-harness/
+│   ├── pack.json
+│   ├── SKILL.md
+│   └── scripts/harness.py
 └── ai-platform-docs/
     ├── pack.json
     ├── SKILL.md
@@ -30,6 +34,19 @@ skills/
 ```json
 {"schema_version":1,"name":"my-pack","description":"我的技能包","skills":["*"],"updater":"git"}
 ```
+
+## 多 Harness 协作首版
+
+`multi-harness` 由 Codex 先制定方案、拆分任务、逐项指定 CLI 与模型，再调用本地 Claude Code 或 Antigravity CLI（agy）。计划明确文件范围、依赖和验收标准；前序结果由 Codex 验收后才派发后续任务。worker 使用独立 worktree，保留日志和 patch，由 Codex 验证及整合。
+
+支持实时进度、取消、退回和显式会话续接；每轮文件快照独立保存。写作可配置汉字数、引用 URL 等自动检查，后续任务仅接收 Codex 核验后的交接材料。当前按轮次启动 CLI 并 resume，不是常驻消息服务。
+
+```powershell
+.\muran.ps1 install --packages multi-harness
+uv run --locked python skills/multi-harness/scripts/harness.py doctor
+```
+
+在 Codex 中提出目标，例如：`用 $multi-harness 修复标签归一化问题，先给出方案和任务分工，每项明确 CLI、模型及验收标准，然后按计划执行。` Codex 负责分工，用户可指定偏好。执行器要求 ready 计划和显式模型 ID，不再提供默认模型或直接 `run --task` 入口。`doctor` 与 `check-plan` 不调用模型；真实执行使用 CLI 现有账号。见 [设计与验收](docs/multi-harness-v1.md) 和 [计划与执行契约](skills/multi-harness/references/execution.md)。
 
 ## 安装
 
