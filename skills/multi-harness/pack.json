@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "multi-harness",
-  "description": "Codex 先规划并指定 CLI 与模型，再调度 Claude Code 和 Antigravity",
+  "description": "Codex 逐步提问确定方案，汇总确认后调度本地 CLI 协作",
   "skills": ["."],
   "updater": "git"
 }

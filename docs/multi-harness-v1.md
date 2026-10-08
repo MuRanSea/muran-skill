@@ -2,10 +2,10 @@
 
 ## 目标与职责
 
-用户通过 Codex 提出目标，Codex 先制定方案和任务表，逐项指定本地 CLI、具体模型、文件范围、依赖和验收标准，再按计划派发。技能承载规划和调度规则，Python 脚本负责计划校验、CLI 执行及证据保存。首版接入 Claude Code 与 Antigravity CLI（agy）；主 agent 保留判断、验证和整合职责。
+用户通过 Codex 提出目标，默认按[对话式规划](../skills/multi-harness/references/intake.md)逐步确定需求，每轮一个关键问题，最终汇总确认后再派发；用户明确要求直接执行时按其要求推进。Codex 填写含本地 CLI、具体模型、文件范围、依赖和验收标准的完整任务表。技能承载提问、规划和调度规则，Python 脚本负责计划校验、CLI 执行及证据保存，不独立校验人类确认。首版接入 Claude Code 与 Antigravity CLI（agy）；主 agent 保留判断、验证和整合职责。
 
 ```text
-用户目标 → Codex 方案与任务表 → ready 计划
+用户目标 → 逐步问答 → 方案确认 → ready 计划
          → 按任务指定 CLI + 模型 → 结果与 patch
          → Codex 验收记录 → 派发后续任务 → 整体验收与整合
 ```

@@ -576,7 +576,7 @@ def event_summary(harness, event):
     return summary
 
 
-def execute(launcher, task, workspace, run_dir, session_id=None, root=None):
+def execute(launcher, task, workspace, run_dir, session_id=None, root=None, cancel_check=None):
     env = {**os.environ, CHILD_MARKER: '1'}
     options = process_options() if os.name == 'nt' else {'start_new_session': True}
     args = adapter_args(task, session_id)
@@ -593,6 +593,10 @@ def execute(launcher, task, workspace, run_dir, session_id=None, root=None):
             (run_dir / 'stderr.log').open('wb') as err, \
             (run_dir / 'stdout.jsonl').open('rb') as reader, \
             (run_dir / 'events.jsonl').open('w', encoding='utf-8') as events:
+        if cancel_check and cancel_check():
+            progress.update(status='cancelled', exit_code=None, heartbeat_at=now())
+            write_json(run_dir / 'progress.json', progress)
+            return None, 'cancelled'
         proc = subprocess.Popen([*launcher, *args], cwd=workspace, env=env,
                                 stdin=prompt, stdout=out, stderr=err, **options)
         progress.update(status='running', pid=proc.pid)
@@ -630,7 +634,8 @@ def execute(launcher, task, workspace, run_dir, session_id=None, root=None):
                     break
                 consume()
                 cancel = root / 'cancel.json'
-                if cancel.exists() and read_json(cancel).get('attempt_dir') == str(run_dir):
+                if ((cancel_check and cancel_check()) or
+                        (cancel.exists() and read_json(cancel).get('attempt_dir') == str(run_dir))):
                     status = 'cancelled'
                     break
                 if time.monotonic() - last_heartbeat >= 1:
@@ -819,7 +824,7 @@ def run_task(value, output_root=None, *, plan=None, dispatch=None):
         return perform_attempt(task, adapter, record, run_dir, run_dir)
 
 
-def perform_attempt(task, adapter, record, run_dir, root, previous=None):
+def perform_attempt(task, adapter, record, run_dir, root, previous=None, cancel_check=None):
     workspace = Path(record['workspace'])
     base = record['base_commit']
     result = {'status': 'failed', 'errors': [], 'response': '', 'tool_calls': 0}
@@ -828,7 +833,7 @@ def perform_attempt(task, adapter, record, run_dir, root, previous=None):
         record['status'] = 'running'
         write_json(root / 'run.json', record)
         exit_code, forced_status = execute(adapter['launcher'], task, workspace, run_dir,
-                                          previous.get('session_id') if previous else None, root)
+                                          previous.get('session_id') if previous else None, root, cancel_check)
         if forced_status == 'output_limit':
             result['status'] = forced_status
             result['tool_calls'] = None

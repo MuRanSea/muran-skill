@@ -37,16 +37,20 @@ skills/
 
 ## 多 Harness 协作首版
 
-`multi-harness` 由 Codex 先制定方案、拆分任务、逐项指定 CLI 与模型，再调用本地 Claude Code 或 Antigravity CLI（agy）。计划明确文件范围、依赖和验收标准；前序结果由 Codex 验收后才派发后续任务。worker 使用独立 worktree，保留日志和 patch，由 Codex 验证及整合。
+`multi-harness` 从一句目标开始：`$multi-harness 帮我调研 Jev。` Codex 每轮只问一个关键选择，给出推荐，已有答案直接沿用；最后汇总目标、分工、具体模型和验收标准，等你确认后再调用本地 Claude Code 或 Antigravity CLI（agy）。JSON、文件范围、依赖和派发命令由 Codex 处理。见[对话式规划](skills/multi-harness/references/intake.md)。
+
+你可以说“按推荐”“沿用上次团队”，也可以指定某个成员或模型。信息齐全时直接进入方案确认；明确说“先展示计划，然后执行”或“直接执行，不用再问”则按该要求推进。执行后由 Codex 验收前序结果、处理必要修订并整合产物。
 
 支持实时进度、取消、退回和显式会话续接；每轮文件快照独立保存。写作可配置汉字数、引用 URL 等自动检查，后续任务仅接收 Codex 核验后的交接材料。当前按轮次启动 CLI 并 resume，不是常驻消息服务。
+
+还可在当前 Codex 对话中使用持久协作组：`$multi-harness 开一个研究组。` Codex 同样逐步帮你确定团队；开组后直接说“让研究员解释依据”“现在怎么样”“暂停这个组”“继续 Jev 那组”，不重新访谈。成员使用明确的 CLI/模型和独立讨论会话，消息按需排队派发；文件执行任务继续走原计划与验收。首次由 Codex 根据本机已核验模型保存团队配置，无需用户手填 JSON。见[协作组操作](skills/multi-harness/references/groups.md)与[设计和验收范围](docs/multi-harness-groups.md)。
 
 ```powershell
 .\muran.ps1 install --packages multi-harness
 uv run --locked python skills/multi-harness/scripts/harness.py doctor
 ```
 
-在 Codex 中提出目标，例如：`用 $multi-harness 修复标签归一化问题，先给出方案和任务分工，每项明确 CLI、模型及验收标准，然后按计划执行。` Codex 负责分工，用户可指定偏好。执行器要求 ready 计划和显式模型 ID，不再提供默认模型或直接 `run --task` 入口。`doctor` 与 `check-plan` 不调用模型；真实执行使用 CLI 现有账号。见 [设计与验收](docs/multi-harness-v1.md) 和 [计划与执行契约](skills/multi-harness/references/execution.md)。
+执行器要求 ready 计划和显式模型 ID；对话中的推荐不会变成省略模型或静默降级。worker 使用独立 worktree；`doctor` 与 `check-plan` 不调用模型，真实执行使用 CLI 现有账号。见 [设计与验收](docs/multi-harness-v1.md) 和 [计划与执行契约](skills/multi-harness/references/execution.md)。
 
 ## 安装
 
