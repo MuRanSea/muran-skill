@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-anthropic.md -->
-<!-- Source SHA-256: eee787fb1e69d735bbe1ab38f6a2bf9cdbd571e3f83dff060eaf1c18e523fd01 -->
+<!-- Source SHA-256: 86fabb79afdad36e17ab78f5e24de03a45ebef1f51454418ff652060ac148c10 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -14,7 +14,7 @@
 
   **核心能力**：**1M 超长上下文**、**多模态**、**思考深度可调**。
 
-  暂时仅通过 Token Plan 和 MiniMax Code 提供。
+  暂时仅通过 M Plan 和 MiniMax Code 提供。
 </Note>
 
 <Tip>
@@ -828,8 +828,8 @@ components:
           type: string
           description: >-
             请求准入服务层级。支持的取值为 `standard` 和 `priority`。省略时默认使用
-            `standard`。`priority` 的[价格](/guides/pricing-paygo)为 `standard` 的 1.5
-            倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
+            `standard`。`priority` 的[价格](/pricing/overview#overview)为 `standard`
+            的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
           enum:
             - standard
             - priority

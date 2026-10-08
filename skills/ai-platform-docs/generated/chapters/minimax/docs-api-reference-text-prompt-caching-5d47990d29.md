@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-prompt-caching.md -->
-<!-- Source SHA-256: 681224bda0c4649c3c5e18e79d56b089a62df612b1c7e9d4ea437ed6db724557 -->
+<!-- Source SHA-256: f6dabf357b1e642fdbe86bee7fa202a0d845ced80655bf8fb78c70ec0935d4a6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -217,7 +217,7 @@ prompt 缓存采用差异化的计费策略：
 * 新增的输入 Token: 按标准输入价格计费
 * 输出 Token：按标准输出价格计费
 
-> 详见 [按量计费价格页](/docs/guides/pricing-paygo)
+> 详见 [按量计费价格页](/docs/pricing/overview#overview)
 
 计费示例：
 
@@ -243,11 +243,11 @@ prompt 缓存采用差异化的计费策略：
 
 # Cache 对比
 
-|      | Prompt 缓存（被动缓存）                                                           | Anthropic 主动缓存                                                               |
-| :--- | :------------------------------------------------------------------------ | :--------------------------------------------------------------------------- |
-| 使用方式 | 自动识别重复内容并缓存                                                               | 在API中显式设置 cache\_control                                                     |
-| 计费方式 | 命中缓存的token以优惠价格进行计费<br />写入缓存的部分无额外计费                                     | 命中缓存的token以优惠价格进行计费<br />首次写入缓存的token需要额外计费                                  |
-| 缓存过期 | 根据系统负载自动调整过期时间                                                            | 5min过期时间，持续使用会自动续期                                                           |
+| | Prompt 缓存（被动缓存） | Anthropic 主动缓存 |
+| :- | :- | :- |
+| 使用方式 | 自动识别重复内容并缓存 | 在API中显式设置 cache\_control |
+| 计费方式 | 命中缓存的token以优惠价格进行计费<br />写入缓存的部分无额外计费 | 命中缓存的token以优惠价格进行计费<br />首次写入缓存的token需要额外计费 |
+| 缓存过期 | 根据系统负载自动调整过期时间 | 5min过期时间，持续使用会自动续期 |
 | 支持模型 | MiniMax-M3<br />MiniMax-M2.7 系列<br />MiniMax-M2.5 系列<br />MiniMax-M2.1 系列 | MiniMax-M2.7 系列<br />MiniMax-M2.5 系列<br />MiniMax-M2.1 系列<br />MiniMax-M2 系列 |
 
 # 更多阅读

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-ai-sdk.md -->
-<!-- Source SHA-256: 0aff64d79acf9796b135b2fe2ec1f377a57152b11ba8b52d7ef20876c4d3b32e -->
+<!-- Source SHA-256: 87a09af253cb7a16ad06e94ef32e4a7dc769e4bb5dee9a8400841c722c308b29 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,7 +11,7 @@
 
 为了满足开发者对 [AI SDK](https://ai-sdk.dev) 生态的使用需求，MiniMax 提供了官方社区 Provider。通过简单的配置，即可将 MiniMax 的能力接入到 AI SDK 生态中。
 
-<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 Token Plan 和 MiniMax Code 提供。</Note>
+<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。</Note>
 
 ## 快速开始
 
@@ -61,17 +61,17 @@ console.log(`Text:\n${text}\n`);
 
 使用 AI SDK 时，支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型：
 
-| 模型名称                                                                  |   上下文窗口   | 模型介绍                                        |
-| :-------------------------------------------------------------------- | :-------: | :------------------------------------------ |
+| 模型名称 | 上下文窗口 | 模型介绍 |
+| :- | :-: | :- |
 | <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
-| MiniMax-M3                                                            | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型**        |
-| MiniMax-M2.7                                                          |  204,800  | **开启模型的自我迭代**（输出速度约 60 TPS）                 |
-| MiniMax-M2.7-highspeed                                                |  204,800  | **M2.7 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS）     |
-| MiniMax-M2.5                                                          |  204,800  | **顶尖性能与极致性价比，轻松驾驭复杂任务**（输出速度约 60 TPS）       |
-| MiniMax-M2.5-highspeed                                                |  204,800  | **M2.5 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS）     |
-| MiniMax-M2.1                                                          |  204,800  | **强大多语言编程能力，全面升级编程体验**（输出速度约 60 TPS）        |
-| MiniMax-M2.1-highspeed                                                |  204,800  | **M2.1 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS）     |
-| MiniMax-M2                                                            |  204,800  | **专为高效编码与 Agent 工作流而生**                     |
+| MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型** |
+| MiniMax-M2.7 | 204,800 | **开启模型的自我迭代**（输出速度约 60 TPS） |
+| MiniMax-M2.7-highspeed | 204,800 | **M2.7 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
+| MiniMax-M2.5 | 204,800 | **顶尖性能与极致性价比，轻松驾驭复杂任务**（输出速度约 60 TPS） |
+| MiniMax-M2.5-highspeed | 204,800 | **M2.5 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
+| MiniMax-M2.1 | 204,800 | **强大多语言编程能力，全面升级编程体验**（输出速度约 60 TPS） |
+| MiniMax-M2.1-highspeed | 204,800 | **M2.1 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
+| MiniMax-M2 | 204,800 | **专为高效编码与 Agent 工作流而生** |
 
 <Note>
   TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
@@ -88,29 +88,29 @@ console.log(`Text:\n${text}\n`);
 
 在使用 AI SDK 接入时，我们支持以下输入参数：
 
-| 参数            | 支持状态 | 说明                                                                                                                                                                                   |
-| :------------ | :--- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `model`       | 完全支持 | 支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型 |
-| `messages`    | 部分支持 | 支持文本和工具调用，不支持图像和文档输入                                                                                                                                                                 |
-| `maxTokens`   | 完全支持 | 最大生成 token 数                                                                                                                                                                         |
-| `system`      | 完全支持 | 系统提示词                                                                                                                                                                                |
-| `temperature` | 完全支持 | 取值范围 \[0, 2]，控制输出随机性，建议取值 1                                                                                                                                                          |
-| `toolChoice`  | 完全支持 | 工具选择策略                                                                                                                                                                               |
-| `tools`       | 完全支持 | 工具定义                                                                                                                                                                                 |
-| `topP`        | 完全支持 | 核采样参数，取值范围 \[0, 1]，`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 默认值 0.95，`MiniMax-M2.x` 系列默认值 0.9                                                                                     |
+| 参数 | 支持状态 | 说明 |
+| :- | :- | :- |
+| `model` | 完全支持 | 支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型 |
+| `messages` | 部分支持 | 支持文本和工具调用，不支持图像和文档输入 |
+| `maxTokens` | 完全支持 | 最大生成 token 数 |
+| `system` | 完全支持 | 系统提示词 |
+| `temperature` | 完全支持 | 取值范围 \[0, 2]，控制输出随机性，建议取值 1 |
+| `toolChoice` | 完全支持 | 工具选择策略 |
+| `tools` | 完全支持 | 工具定义 |
+| `topP` | 完全支持 | 核采样参数，取值范围 \[0, 1]，`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 默认值 0.95，`MiniMax-M2.x` 系列默认值 0.9 |
 
 ### Messages 字段支持
 
-| 字段类型                 | 支持状态 | 说明       |
-| :------------------- | :--- | :------- |
-| `role="user"`        | 完全支持 | 用户文本消息   |
-| `role="assistant"`   | 完全支持 | 助手响应     |
-| `role="tool"`        | 完全支持 | 工具调用结果   |
-| `type="text"`        | 完全支持 | 文本内容     |
-| `type="tool-call"`   | 完全支持 | 工具调用     |
-| `type="tool-result"` | 完全支持 | 工具调用结果   |
-| `type="image"`       | 不支持  | 暂不支持图像输入 |
-| `type="file"`        | 不支持  | 暂不支持文件输入 |
+| 字段类型 | 支持状态 | 说明 |
+| :- | :- | :- |
+| `role="user"` | 完全支持 | 用户文本消息 |
+| `role="assistant"` | 完全支持 | 助手响应 |
+| `role="tool"` | 完全支持 | 工具调用结果 |
+| `type="text"` | 完全支持 | 文本内容 |
+| `type="tool-call"` | 完全支持 | 工具调用 |
+| `type="tool-result"` | 完全支持 | 工具调用结果 |
+| `type="image"` | 不支持 | 暂不支持图像输入 |
+| `type="file"` | 不支持 | 暂不支持文件输入 |
 
 ## 示例代码
 

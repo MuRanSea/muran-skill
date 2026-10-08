@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/about-apis.md -->
-<!-- Source SHA-256: a043e4be7589beae0de9e97aebeef5db560f58f34c9169b15d5f7d68d62958e0 -->
+<!-- Source SHA-256: f1dd3e3b614597f8abac421d624039b8cbfdbd7616beb4e07b69e177d34400ed -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,7 +11,7 @@
 
 ### 问：如何获取 API Key
 
-**答：** 您可前往[账户管理 > 接口密钥](https://platform.minimax.cn/user-center/basic-information/interface-key)创建并管理自己的 **按量计费 API Key**。前往[订阅管理 > Token Plan](https://platform.minimax.cn/user-center/payment/token-plan)查看您的 **订阅 Key**，它用于 Token Plan 订阅套餐和已购积分。请注意，API Key 是您调用接口的重要凭证，请不要与他人共享您的 API Key，或将其暴露在浏览器或其他客户端代码中。
+**答：** 您可前往[账户管理 > 接口密钥](https://platform.minimax.cn/user-center/basic-information/interface-key)创建并管理自己的 **按量计费 API Key**。前往[订阅管理 > M Plan](https://platform.minimax.cn/user-center/payment/token-plan)查看您的 **订阅 Key**，它用于 M Plan 订阅套餐和已购积分。请注意，API Key 是您调用接口的重要凭证，请不要与他人共享您的 API Key，或将其暴露在浏览器或其他客户端代码中。
 
 ### 问：如何提高速率限制
 
@@ -33,4 +33,4 @@ $$
 
 ### 问：如何才能使用声音复刻服务
 
-**答：** 基于法律法规的要求，如您需要使用声音克隆服务，请先前往[账户管理 > 账户信息](https://platform.minimax.cn/user-center/basic-information)中的认证信息中，完成**个人实名认证**或者**企业认证**完成认证后，即刻可以通过 [API 调试台 > Voice Cloning](https://platform.minimaxi.com/examination-center/voice-experience-center/voiceCloning) 页面，或者通过快速复刻接口使用声音复刻服务。
+**答：** 基于法律法规的要求，如需使用声音复刻服务，请先前往[账户管理 > 账户信息](https://platform.minimax.cn/user-center/basic-information)，完成**个人实名认证**或**企业认证**。认证完成后，即可通过[快速复刻接口](/docs/api-reference/voice-cloning-clone)使用声音复刻服务。

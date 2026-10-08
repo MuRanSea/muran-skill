@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/rate-limits.md -->
-<!-- Source SHA-256: 4a7eb59ff78373d56f8eb6ec566ffbafa1f693c921e0eeb3171692e80b4aaa00 -->
+<!-- Source SHA-256: 07d7926e944a6c931342d1aff06001138a4414facc7f6dafca825fb0df536236 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -20,34 +20,34 @@
 
 ### 语言
 
-| 模型   | MiniMax-M3 | MiniMax-M3 |
-| :--- | :--------- | :--------- |
-| 限制类型 | RPM        | TPM        |
-| 免费用户 | 20         | 1,000,000  |
-| 充值用户 | 200        | 10,000,000 |
+| 模型 | MiniMax-M3 | MiniMax-M3 |
+| :- | :- | :- |
+| 限制类型 | RPM | TPM |
+| 免费用户 | 20 | 1,000,000 |
+| 充值用户 | 200 | 10,000,000 |
 
-| 模型   | MiniMax-M2.7 / M2.7-highspeed<br />MiniMax-M2.5 / M2.5-highspeed<br />MiniMax-M2.1 / M2.1-highspeed<br />MiniMax-M2 | MiniMax-M2.7 / M2.7-highspeed<br />MiniMax-M2.5 / M2.5-highspeed<br />MiniMax-M2.1 / M2.1-highspeed<br />MiniMax-M2 |
-| :--- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------ |
-| 限制类型 | RPM                                                                                                                 | TPM                                                                                                                 |
-| 免费用户 | 20                                                                                                                  | 1,000,000                                                                                                           |
-| 充值用户 | 500                                                                                                                 | 20,000,000                                                                                                          |
+| 模型 | MiniMax-M2.7 / M2.7-highspeed<br />MiniMax-M2.5 / M2.5-highspeed<br />MiniMax-M2.1 / M2.1-highspeed<br />MiniMax-M2 | MiniMax-M2.7 / M2.7-highspeed<br />MiniMax-M2.5 / M2.5-highspeed<br />MiniMax-M2.1 / M2.1-highspeed<br />MiniMax-M2 |
+| :- | :- | :- |
+| 限制类型 | RPM | TPM |
+| 免费用户 | 20 | 1,000,000 |
+| 充值用户 | 500 | 20,000,000 |
 
 ### 视频
 
-| 接口名                       | Video Generation | Video Generation V2     |
-| :------------------------ | :--------------- | :---------------------- |
-| 模型                        | Hailuo 系列        | MiniMax-H3              |
-| RPM                       | 20               | 300                     |
-| 最大并行运行任务数（inflight tasks） | —                | 30                      |
+| 接口名           | Video Generation | Video Generation V2     |
+| :- | :- | :- |
+| 模型 | Hailuo 系列 | MiniMax-H3 |
+| RPM | 20 | 300 |
+| 最大并行运行任务数（inflight tasks） | — | 30 |
 
 ### 语音
 
-| 接口名  | T2A v2                                                                                                                | Voice Cloning     | Voice Design | Speech to Text |
-| :--- | :-------------------------------------------------------------------------------------------------------------------- | :---------------- | :----------- | :------------- |
-| 模型   | speech-02-hd<br />speech-02-turbo<br /> speech-2.6-hd<br />speech-2.6-turbo<br /> speech-2.8-hd<br />speech-2.8-turbo | ——                | ——           | asr-1.0        |
-| 限制类型 | RPM                                                                                                                   | RPM               | RPM          | CONN / TPM     |
-| 免费用户 | 10                                                                                                                    | 60                | 20           | ——             |
-| 充值用户 | 20                                                                                                                    | 60                | 20           | 2 / 30,000     |
+| 接口名 | T2A v2 | Voice Cloning     | Voice Design | Speech to Text |
+| :- | :- | :- | :- | :- |
+| 模型 | speech-02-hd<br />speech-02-turbo<br /> speech-2.6-hd<br />speech-2.6-turbo<br /> speech-2.8-hd<br />speech-2.8-turbo | —— | —— | asr-1.0 |
+| 限制类型 | RPM | RPM | RPM | CONN / TPM |
+| 免费用户 | 10 | 60 | 20 | —— |
+| 充值用户 | 20 | 60 | 20 | 2 / 30,000 |
 
 <Note>
   Speech to Text 暂不对免费用户开放，需为**充值用户**方可调用。TPM 以**音频秒数**作为 token 计量，即每分钟累计可识别的音频秒数。
@@ -56,19 +56,19 @@
 ### 图片
 
 | 接口名                | Image Generation                     | Image Generation     |
-| :----------------- | :----------------------------------- | :------------------- |
-| 限制类型               | RPM                                  | TPM                  |
-| 免费用户               | 10                                   | 60                   |
-| 充值用户               | 10                                   | 60                   |
+| :- | :- | :- |
+| 限制类型 | RPM | TPM |
+| 免费用户 | 10 | 60 |
+| 充值用户 | 10 | 60 |
 
 ### 音乐
 
-| 接口名                | Music Generation                     | Music Generation                    |
-| :----------------- | :----------------------------------- | :---------------------------------- |
-| 模型                 | music-2.6 / music-cover / music-2.0  | music-2.6 / music-cover / music-2.0 |
-| 限制类型               | RPM                                  | CONN（最大并行运行任务数）                     |
-| 免费用户               | 3                                    | 3                                   |
-| 充值用户               | 120                                  | 20                                  |
+| 接口名                | Music Generation                     | Music Generation     |
+| :- | :- | :- |
+| 模型 | music-2.6 / music-cover / music-2.0 | music-2.6 / music-cover / music-2.0 |
+| 限制类型 | RPM | CONN（最大并行运行任务数） |
+| 免费用户 | 3 | 3 |
+| 充值用户 | 120 | 20 |
 
 ## 相关说明
 

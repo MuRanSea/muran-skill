@@ -1,17 +1,15 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/speech-t2a-http.md -->
-<!-- Source SHA-256: 3d7c03d66793c73aa2ca732ceaa00c093af27e975e39886bb047254d1f94cacb -->
+<!-- Source SHA-256: e543e900f6f1f824aa8c2494fd28f630c1d8eead202ebe6c5aebf4422b70813e -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# 同步语音合成 HTTP
+# 同步语音合成
 
-> 使用本接口，在HTTP网络通信协议下进行同步语音合成。
+> 通过 HTTP 请求一次提交完整文本并返回合成音频，支持流式输出。
 
-备用接口地址
-
-`https://api-bj.minimaxi.com/v1/t2a_v2`
+华北地区建议接入地址见 [同步语音合成 · 接入地址](/docs/guides/speech-t2a-websocket#接入地址)。
 
 
 ## OpenAPI
@@ -204,10 +202,7 @@ components:
       properties:
         model:
           type: string
-          description: >-
-            请求的模型版本，可选范围：`speech-2.8-hd`, `speech-2.8-turbo`, `speech-2.6-hd`,
-            `speech-2.6-turbo`, `speech-02-hd`, `speech-02-turbo`,
-            `speech-01-hd`, `speech-01-turbo`.
+          description: 请求的模型版本
           enum:
             - speech-2.8-hd
             - speech-2.8-turbo
@@ -310,11 +305,26 @@ components:
           default: false
         subtitle_type:
           type: string
-          description: |-
+          description: >-
             字幕粒度，默认值为 `sentence`。可选值：
+
             - `sentence`：句级别时间戳
+
             - `word`：词级别时间戳
+
             - `word_streaming`：流式优化的词级别时间戳，仅在 `stream=true` 时有效
+
+
+            流式（`stream=true`）下字幕通过 `data.subtitle` 随音频下发，不返回 `subtitle_file`：
+
+            - `sentence` / `word`：每个分段只在该分段最后一个音频片段中返回一次完整字幕，`sentence` 不含
+            `timestamped_words`
+
+            - `word_streaming`：每个音频片段都返回当前分段截至目前的累计字幕（`timestamped_words` 与
+            `time_end` 持续增长），客户端应以最新一条覆盖同一分段的旧结果；`text_begin` 变化表示进入下一个分段
+
+
+            非流式下字幕以文件形式通过 `subtitle_file` 返回
           enum:
             - sentence
             - word
@@ -345,7 +355,21 @@ components:
               description: 合成后的音频数据，采用 hex 编码，格式与请求中指定的输出格式一致
             subtitle_file:
               type: string
-              description: 合成的字幕下载链接。音频文件对应的字幕，精确到句（不超过 50 字），单位为毫秒，格式为 json
+              description: >-
+                合成的字幕下载链接。音频文件对应的字幕，精确到句（不超过 50 字），单位为毫秒，格式为
+                json。仅非流式（`stream=false`）返回；流式请使用 `subtitle` / `subtitles`
+            subtitle:
+              description: >-
+                流式（`stream=true`）且开启字幕时返回，携带当前分段的字幕，随对应的音频片段下发。返回时机取决于
+                `subtitle_type`：`sentence` / `word`
+                在分段最后一个音频片段返回一次；`word_streaming` 在每个音频片段返回当前分段的累计结果
+              allOf:
+                - $ref: '#/components/schemas/T2ASubtitle'
+            subtitles:
+              type: array
+              description: 流式（`stream=true`）且开启字幕时，在最后一个数据包（`status=2`）中返回，汇总本次请求所有分段的字幕
+              items:
+                $ref: '#/components/schemas/T2ASubtitle'
             status:
               type: integer
               description: 当前音频流状态：1 表示合成中，2 表示合成结束
@@ -391,10 +415,14 @@ components:
               type: integer
               format: int64
               description: 计费字符数
+            usage_voice_count:
+              type: integer
+              format: int64
+              description: 本次请求计费的音色数量（音色首次使用时计费），仅在产生音色费用时返回
             word_count:
               type: integer
               format: int64
-              description: 已发音的字数统计，包含汉字、数字、字母，不包含标点符号
+              description: 合成文本的字符数（含标点和空格），仅供参考，不用于计费；计费字符数请以 `usage_characters` 为准
         base_resp:
           type: object
           description: 本次请求的状态码和详情
@@ -656,6 +684,55 @@ components:
             - auditorium_echo
             - lofi_telephone
             - robotic
+    T2ASubtitle:
+      type: object
+      description: 分段字幕。合成引擎会把文本切成若干分段（通常为一句），每个分段对应一条字幕
+      properties:
+        text:
+          type: string
+          description: 分段文本
+        text_begin:
+          type: integer
+          format: int64
+          description: 分段在本次合成文本中的起始字符位置（含）
+        text_end:
+          type: integer
+          format: int64
+          description: 分段在本次合成文本中的结束字符位置（不含）
+        time_begin:
+          type: number
+          description: 分段起始时间，单位毫秒，相对本次合成音频的起点
+        time_end:
+          type: number
+          description: 分段结束时间，单位毫秒，相对本次合成音频的起点
+        timestamped_words:
+          type: array
+          description: >-
+            词级时间戳，仅 `subtitle_type` 为 `word` / `word_streaming` 时返回，`sentence`
+            时为 `null`
+          items:
+            $ref: '#/components/schemas/T2ASubtitleWord'
+    T2ASubtitleWord:
+      type: object
+      description: 词级时间戳
+      properties:
+        word:
+          type: string
+          description: 词文本
+        word_begin:
+          type: integer
+          format: int64
+          description: 该词在本次合成文本中的起始字符位置（含）
+        word_end:
+          type: integer
+          format: int64
+          description: 该词在本次合成文本中的结束字符位置（不含）
+        time_begin:
+          type: number
+          description: 该词起始时间，单位毫秒
+        time_end:
+          type: number
+          description: 该词结束时间，单位毫秒
   securitySchemes:
     bearerAuth:
       type: http

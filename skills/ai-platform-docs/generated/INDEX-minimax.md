@@ -26,9 +26,9 @@
 | Token 估算 | `chapters/minimax/docs-api-reference-responses-input-tokens-9577bd50f9.md` | https://platform.minimax.cn/docs/api-reference/responses-input-tokens.md |
 | 创建异步语音合成任务 | `chapters/minimax/docs-api-reference-speech-t2a-async-create-b0c88d5449.md` | https://platform.minimax.cn/docs/api-reference/speech-t2a-async-create.md |
 | 查询语音生成任务状态 | `chapters/minimax/docs-api-reference-speech-t2a-async-query-39ec2c2e30.md` | https://platform.minimax.cn/docs/api-reference/speech-t2a-async-query.md |
-| 同步语音合成 HTTP | `chapters/minimax/docs-api-reference-speech-t2a-http-786236718f.md` | https://platform.minimax.cn/docs/api-reference/speech-t2a-http.md |
-| 同步语音合成 WebSocket（双向流式） | `chapters/minimax/docs-api-reference-speech-t2a-websocket-bidi-06a2c9c4d4.md` | https://platform.minimax.cn/docs/api-reference/speech-t2a-websocket-bidi.md |
-| 同步语音合成 WebSocket | `chapters/minimax/docs-api-reference-speech-t2a-websocket-fb0d88b17e.md` | https://platform.minimax.cn/docs/api-reference/speech-t2a-websocket.md |
+| 同步语音合成 | `chapters/minimax/docs-api-reference-speech-t2a-http-786236718f.md` | https://platform.minimax.cn/docs/api-reference/speech-t2a-http.md |
+| 双向流式语音合成 | `chapters/minimax/docs-api-reference-speech-t2a-websocket-bidi-06a2c9c4d4.md` | https://platform.minimax.cn/docs/api-reference/speech-t2a-websocket-bidi.md |
+| 同步语音合成 | `chapters/minimax/docs-api-reference-speech-t2a-websocket-fb0d88b17e.md` | https://platform.minimax.cn/docs/api-reference/speech-t2a-websocket.md |
 | 语音识别 | `chapters/minimax/docs-api-reference-speech-to-text-9cd7483c36.md` | https://platform.minimax.cn/docs/api-reference/speech-to-text.md |
 | AI SDK | `chapters/minimax/docs-api-reference-text-ai-sdk-0e01691b3b.md` | https://platform.minimax.cn/docs/api-reference/text-ai-sdk.md |
 | Anthropic SDK | `chapters/minimax/docs-api-reference-text-anthropic-api-49dd5a98b1.md` | https://platform.minimax.cn/docs/api-reference/text-anthropic-api.md |

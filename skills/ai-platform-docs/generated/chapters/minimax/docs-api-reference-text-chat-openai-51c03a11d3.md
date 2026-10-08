@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-openai.md -->
-<!-- Source SHA-256: b1164ae1c5d547ddddf8e6cbca090cfd180307f0be1fabea69aae7b81d93d73c -->
+<!-- Source SHA-256: 73de6c943f1d829cae09641fb3d7706a220f705da0fdab53afb6bab952bdeaad -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -14,7 +14,7 @@
 
   **核心能力**：**1M 超长上下文**、**多模态**、**思考深度可调**。
 
-  暂时仅通过 Token Plan 和 MiniMax Code 提供。
+  暂时仅通过 M Plan 和 MiniMax Code 提供。
 </Note>
 
 <Tip>
@@ -954,8 +954,8 @@ components:
           type: string
           description: >-
             请求准入服务层级。支持的取值为 `standard` 和 `priority`。省略时默认使用
-            `standard`。`priority` 的[价格](/guides/pricing-paygo)为 `standard` 的 1.5
-            倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
+            `standard`。`priority` 的[价格](/pricing/overview#overview)为 `standard`
+            的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
           enum:
             - standard
             - priority

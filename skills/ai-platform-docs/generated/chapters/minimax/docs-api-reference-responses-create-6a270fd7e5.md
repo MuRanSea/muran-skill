@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/responses-create.md -->
-<!-- Source SHA-256: 5fb487d96aa2826639aa9ed4994abb0a6b6abbd486ba0c14af48a062eca20a5d -->
+<!-- Source SHA-256: dc009244388fbd31f682a25fa5628a6be9cce0239f502a38f80bec435bc968e6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,7 +9,7 @@
 
 > OpenAI Responses API 兼容的主接口调用MiniMax 模型，生成模型回复，支持流式与非流式。
 
-<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 Token Plan 和 MiniMax Code 提供。</Note>
+<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。</Note>
 
 
 ## OpenAPI
@@ -189,8 +189,8 @@ components:
           type: string
           description: >-
             请求准入服务层级。支持的取值为 `standard` 和 `priority`。省略时默认使用
-            `standard`。`priority` 的[价格](/guides/pricing-paygo)为 `standard` 的 1.5
-            倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
+            `standard`。`priority` 的[价格](/pricing/overview#overview)为 `standard`
+            的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
           enum:
             - standard
             - priority

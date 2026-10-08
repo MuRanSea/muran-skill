@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/music-generation.md -->
-<!-- Source SHA-256: fb8ba6760ffe19483266a9ddc56853294cf099c0415d512d70e55ebad460ad2c -->
+<!-- Source SHA-256: 9b7c4433b54f25e43bb542883080fb2375e6a92e4cd12963eb2bc47bbaed9502 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -74,9 +74,9 @@ components:
           description: |-
             使用的模型名称。可选值：
 
-            - `music-3.0`（推荐）：文本生成音乐，仅限 Token Plan 用户和付费用户使用，RPM 为 120
-            - `music-2.6`：上一代文本生成音乐模型，仅限 Token Plan 用户和付费用户使用，RPM 为 120
-            - `music-cover`：基于参考音频生成翻唱版本，仅限 Token Plan 用户和付费用户使用，RPM 为 120
+            - `music-3.0`（推荐）：文本生成音乐，仅限 M Plan 用户和付费用户使用，RPM 为 120
+            - `music-2.6`：上一代文本生成音乐模型，仅限 M Plan 用户和付费用户使用，RPM 为 120
+            - `music-cover`：基于参考音频生成翻唱版本，仅限 M Plan 用户和付费用户使用，RPM 为 120
             - `music-3.0-free`：`music-3.0` 的限免版本，所有用户可通过 API Key 使用，RPM 为 3
             - `music-2.6-free`：`music-2.6` 的限免版本，所有用户可通过 API Key 使用，RPM 为 3
             - `music-cover-free`：`music-cover` 的限免版本，所有用户可通过 API Key 使用，RPM 为 3

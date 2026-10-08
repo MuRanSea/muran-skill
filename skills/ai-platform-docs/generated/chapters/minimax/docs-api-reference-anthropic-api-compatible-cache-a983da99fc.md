@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/anthropic-api-compatible-cache.md -->
-<!-- Source SHA-256: e70ddc78f304444d930f2b0c4d8fb3059ac371027d97c508bbbddc9ebd7a2269 -->
+<!-- Source SHA-256: 48caf13ea36b2f7f2e0d897fa9cf327de475c57a1096560ed647cbb003e9bebe -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -79,15 +79,15 @@
 
 Prompt 缓存引入了差异化的定价结构。下表显示了每个支持模型的百万 token 价格：
 
-| **模型**                                       | **输入价格**<br /> 元/百万 tokens | **输出价格** <br /> 元/百万 tokens | **缓存读取**<br /> 元/百万 tokens | **缓存写入**<br /> 元/百万 tokens |
-| :------------------------------------------- | :------------------------: | :-------------------------: | :------------------------: | :------------------------: |
-| **MiniMax-M2.7**                             |             2.1            |             8.4             |            0.42            |            2.625           |
-| **MiniMax-M2.7-highspeed** <br />效果不变，更快，更高效 |             2.1            |             16.8            |            0.42            |            2.625           |
-| **MiniMax-M2.5**                             |             2.1            |             8.4             |            0.21            |            2.625           |
-| **MiniMax-M2.5-highspeed** <br />效果不变，更快，更高效 |             2.1            |             16.8            |            0.21            |            2.625           |
-| **MiniMax-M2.1**                             |             2.1            |             8.4             |            0.21            |            2.625           |
-| **MiniMax-M2.1-highspeed** <br />更快，更高效      |             2.1            |             16.8            |            0.21            |            2.625           |
-| **MiniMax-M2**                               |             2.1            |             8.4             |            0.21            |            2.625           |
+| **模型** | **输入价格**<br /> 元/百万 tokens | **输出价格** <br /> 元/百万 tokens | **缓存读取**<br /> 元/百万 tokens | **缓存写入**<br /> 元/百万 tokens |
+| :- | :-: | :-: | :-: | :-: |
+| **MiniMax-M2.7** | 2.1 | 8.4 | 0.42 | 2.625 |
+| **MiniMax-M2.7-highspeed** <br />效果不变，更快，更高效 | 2.1 | 16.8 | 0.42 | 2.625 |
+| **MiniMax-M2.5** | 2.1 | 8.4 | 0.21 | 2.625 |
+| **MiniMax-M2.5-highspeed** <br />效果不变，更快，更高效 | 2.1 | 16.8 | 0.21 | 2.625 |
+| **MiniMax-M2.1** | 2.1 | 8.4 | 0.21 | 2.625 |
+| **MiniMax-M2.1-highspeed** <br />更快，更高效 | 2.1 | 16.8 | 0.21 | 2.625 |
+| **MiniMax-M2** | 2.1 | 8.4 | 0.21 | 2.625 |
 
 <Note>
   上表反映了以下 prompt 缓存定价规则：

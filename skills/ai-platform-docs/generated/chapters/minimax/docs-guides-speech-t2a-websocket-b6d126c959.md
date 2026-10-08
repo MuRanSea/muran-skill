@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-websocket.md -->
-<!-- Source SHA-256: 0dc97f689b5e011ee08a34fc14715694c64e78a21a0631c1d4ac47f20e2ed043 -->
+<!-- Source SHA-256: 9ad83b05a7cc9fc69d914bba5cafbee984534b6b9742397fe77b947ac8f24a9e -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,14 +13,14 @@
 
 以下为 MiniMax 提供的语音模型及其特性说明。
 
-| 模型               | 特性                         |
-| :--------------- | :------------------------- |
-| speech-2.8-hd    | 情绪渲染融合语气词，重塑自然听感           |
-| speech-2.8-turbo | 极致生成速度，更自然逼真的音频效果          |
-| speech-2.6-hd    | 超低延时，归一化升级，更高自然度           |
-| speech-2.6-turbo | 极速版，更快更优惠，更适用于语音聊天和数字人场景   |
-| speech-02-hd     | 拥有出色的韵律、稳定性和复刻相似度，音质表现突出   |
-| speech-02-turbo  | 拥有出色的韵律和稳定性，小语种能力加强，性能表现出色 |
+| 模型 | 特性 |
+| :- | :- |
+| speech-2.8-hd | 情绪渲染融合语气词，重塑自然听感 |
+| speech-2.8-turbo | 极致生成速度，更自然逼真的音频效果 |
+| speech-2.6-hd | 超低延时，归一化升级，更高自然度 |
+| speech-2.6-turbo | 极速版，更快更优惠，更适用于语音聊天和数字人场景 |
+| speech-02-hd | 拥有出色的韵律、稳定性和复刻相似度，音质表现突出 |
+| speech-02-turbo | 拥有出色的韵律和稳定性，小语种能力加强，性能表现出色 |
 
 ## 支持语言
 
@@ -28,22 +28,32 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
 
 目前支持的语言包含：
 
-| 支持语种                |                      |                       |
-| :------------------ | :------------------- | :-------------------- |
-| 1. 中文（Chinese）      | 15. 土耳其语（Turkish）    | 28. 马来语（Malay）        |
-| 2. 粤语（Cantonese）    | 16. 荷兰语（Dutch）       | 29. 波斯语（Persian）      |
-| 3. 英语（English）      | 17. 乌克兰语（Ukrainian）  | 30. 斯洛伐克语（Slovak）     |
-| 4. 西班牙语（Spanish）    | 18. 泰语（Thai）         | 31. 瑞典语（Swedish）      |
-| 5. 法语（French）       | 19. 波兰语（Polish）      | 32. 克罗地亚语（Croatian）   |
-| 6. 俄语（Russian）      | 20. 罗马尼亚语（Romanian）  | 33. 菲律宾语（Filipino）    |
-| 7. 德语（German）       | 21. 希腊语（Greek）       | 34. 匈牙利语（Hungarian）   |
-| 8. 葡萄牙语（Portuguese） | 22. 捷克语（Czech）       | 35. 挪威语（Norwegian）    |
-| 9. 阿拉伯语（Arabic）     | 23. 芬兰语（Finnish）     | 36. 斯洛文尼亚语（Slovenian） |
-| 10. 意大利语（Italian）   | 24. 印地语（Hindi）       | 37. 加泰罗尼亚语（Catalan）   |
-| 11. 日语（Japanese）    | 25. 保加利亚语（Bulgarian） | 38. 尼诺斯克语（Nynorsk）    |
-| 12. 韩语（Korean）      | 26. 丹麦语（Danish）      | 39. 泰米尔语（Tamil）       |
-| 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew）     | 40. 阿非利卡语（Afrikaans）  |
-| 14. 越南语（Vietnamese） |                      |                       |
+| 支持语种 | | |
+| :- | :- | :- |
+| 1. 中文（Chinese） | 15. 土耳其语（Turkish） | 28. 马来语（Malay） |
+| 2. 粤语（Cantonese） | 16. 荷兰语（Dutch） | 29. 波斯语（Persian） |
+| 3. 英语（English） | 17. 乌克兰语（Ukrainian） | 30. 斯洛伐克语（Slovak） |
+| 4. 西班牙语（Spanish） | 18. 泰语（Thai） | 31. 瑞典语（Swedish） |
+| 5. 法语（French） | 19. 波兰语（Polish） | 32. 克罗地亚语（Croatian） |
+| 6. 俄语（Russian） | 20. 罗马尼亚语（Romanian） | 33. 菲律宾语（Filipino） |
+| 7. 德语（German） | 21. 希腊语（Greek） | 34. 匈牙利语（Hungarian） |
+| 8. 葡萄牙语（Portuguese） | 22. 捷克语（Czech） | 35. 挪威语（Norwegian） |
+| 9. 阿拉伯语（Arabic） | 23. 芬兰语（Finnish） | 36. 斯洛文尼亚语（Slovenian） |
+| 10. 意大利语（Italian） | 24. 印地语（Hindi） | 37. 加泰罗尼亚语（Catalan） |
+| 11. 日语（Japanese） | 25. 保加利亚语（Bulgarian） | 38. 尼诺斯克语（Nynorsk） |
+| 12. 韩语（Korean） | 26. 丹麦语（Danish） | 39. 泰米尔语（Tamil） |
+| 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew） | 40. 阿非利卡语（Afrikaans） |
+| 14. 越南语（Vietnamese） | | |
+
+## 接入地址
+
+同步语音合成的 3 个接口均支持以下域名，华北地区建议接入 `api-bj.minimaxi.com`，首包延迟更低。
+
+| 接口 | 默认地址 | 华北地区建议接入 |
+| :- | :- | :- |
+| [同步语音合成（HTTP）](/docs/api-reference/speech-t2a-http) | `https://api.minimax.cn/v1/t2a_v2` | `https://api-bj.minimaxi.com/v1/t2a_v2` |
+| [同步语音合成（WebSocket）](/docs/api-reference/speech-t2a-websocket) | `wss://api.minimax.cn/ws/v1/t2a_v2` | `wss://api-bj.minimaxi.com/ws/v1/t2a_v2` |
+| [双向流式语音合成（WebSocket）](/docs/api-reference/speech-t2a-websocket-bidi) | `wss://api.minimax.cn/ws/v1/t2a_v2_bidi` | `wss://api-bj.minimaxi.com/ws/v1/t2a_v2_bidi` |
 
 ## 流式请求示例
 
@@ -243,19 +253,23 @@ if __name__ == "__main__":
 ## 推荐阅读
 
 <Columns cols={2}>
-  <Card title="同步语音合成 WebSocket" icon="book-open" href="/docs/api-reference/speech-t2a-websocket" arrow="true" cta="点击查看">
-    使用 API 接口，在WebSocket网络通信协议下进行同步语音合成。
+  <Card title="同步语音合成（HTTP）" icon="book-open" href="/docs/api-reference/speech-t2a-http" arrow="true" cta="点击查看">
+    通过 HTTP 请求一次提交完整文本并返回合成音频，支持流式输出。
   </Card>
 
-  <Card title="同步语音合成 HTTP" icon="book-open" href="/docs/api-reference/speech-t2a-http" arrow="true" cta="点击查看">
-    使用 API 接口，在HTTP网络通信协议下进行同步语音合成。
+  <Card title="同步语音合成（WebSocket）" icon="book-open" href="/docs/api-reference/speech-t2a-websocket" arrow="true" cta="点击查看">
+    通过 WebSocket 连接由客户端按句发送文本，流式返回合成音频，适合低延迟的实时播报。
   </Card>
 
-  <Card title="产品定价" icon="book-open" href="/docs/guides/pricing-paygo#语音" arrow="true" cta="点击查看">
+  <Card title="双向流式语音合成（WebSocket）" icon="book-open" href="/docs/api-reference/speech-t2a-websocket-bidi" arrow="true" cta="点击查看">
+    通过 WebSocket 连接按任意粒度（含逐字）流式发送文本，由服务端自动攒句合成，适合对接大模型流式输出。
+  </Card>
+
+  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#overview" arrow="true" cta="点击查看">
     各模型的定价说明、计费方式及使用限制。
   </Card>
 
-  <Card title="速率限制" icon="book-open" href="/docs/guides/rate-limits#3、我们的-api-的限速具体数值" arrow="true" cta="点击查看">
+  <Card title="速率限制" icon="book-open" href="/docs/guides/rate-limits#语音" arrow="true" cta="点击查看">
     为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。
   </Card>
 </Columns>

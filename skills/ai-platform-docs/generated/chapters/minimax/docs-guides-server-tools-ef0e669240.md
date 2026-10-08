@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/server-tools.md -->
-<!-- Source SHA-256: cd36e4ee11cf00149c5fb992d561a6f5b33f7f1e15ad6a2eed15f7b8c85b588e -->
+<!-- Source SHA-256: 06f33d01b70bcb6ea0c69d0c2c7846198905df9e23778a9c740938f247cb5964 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -27,11 +27,11 @@
 
 ## 支持范围
 
-| 能力   | 支持状态                                                                                                |
-| :--- | :-------------------------------------------------------------------------------------------------- |
-| 接口   | **Anthropic Messages API**（`/anthropic/v1/messages`）<br />**OpenAI Responses API**（`/v1/responses`） |
-| 可用工具 | `web_search`（联网搜索）                                                                                  |
-| 调用方式 | 在请求的 `tools` 数组中声明服务端工具                                                                             |
+| 能力 | 支持状态 |
+| :- | :- |
+| 接口 | **Anthropic Messages API**（`/anthropic/v1/messages`）<br />**OpenAI Responses API**（`/v1/responses`） |
+| 可用工具 | `web_search`（联网搜索） |
+| 调用方式 | 在请求的 `tools` 数组中声明服务端工具 |
 
 ## web\_search
 
@@ -118,10 +118,10 @@
 
 `message.content` 会按模型的执行顺序返回多个内容块，一次完整的搜索问答通常包含以下类型：
 
-| 内容块类型                    | 说明                                                                                     |
-| :----------------------- | :------------------------------------------------------------------------------------- |
-| `text`                   | 模型生成的文本。搜索前的引导语与搜索后的最终答案都属于此类型                                                         |
-| `server_tool_use`        | 模型在服务端发起的工具调用，`name` 为 `web_search`，`input.query` 为实际检索的关键词                            |
+| 内容块类型 | 说明 |
+| :- | :- |
+| `text` | 模型生成的文本。搜索前的引导语与搜索后的最终答案都属于此类型 |
+| `server_tool_use` | 模型在服务端发起的工具调用，`name` 为 `web_search`，`input.query` 为实际检索的关键词 |
 | `web_search_tool_result` | 服务端返回的搜索结果，`content` 为 `web_search_result` 列表，含 `title`、`url`、`page_age`、`content` 等字段 |
 
 <Accordion title="完整响应示例">
@@ -184,11 +184,11 @@
 
 启用 `web_search` 后，服务端会在一次请求内完成搜索和回复生成，无需回传工具结果。响应的 `output` 数组包含搜索调用和模型回复，直接读取顶层 `output_text` 即可获取最终答案。
 
-| 字段或输出项            | 说明                                              |
-| :---------------- | :---------------------------------------------- |
+| 字段或输出项 | 说明 |
+| :- | :- |
 | `web_search_call` | 服务端执行的联网搜索调用，包含调用 ID、执行状态和 `action.query` 实际检索词 |
-| `message`         | 模型生成的最终回复，文本位于 `content` 中                      |
-| `output_text`     | 聚合后的最终文本，可直接读取                                  |
+| `message` | 模型生成的最终回复，文本位于 `content` 中 |
+| `output_text` | 聚合后的最终文本，可直接读取 |
 
 <Accordion title="Responses API 响应示例">
   ```json theme={null}

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/image-generation.md -->
-<!-- Source SHA-256: cfb2d292661345ded67a15067afbc44bc87235a928822c3448aea9a731dbf0b6 -->
+<!-- Source SHA-256: 6917196737ce6c1bf4d7c7c2a1c7dd0d94a9292cfeb2e7bfe2a6db8bec1cc6ab -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -97,7 +97,7 @@
     使用 API 接口，输入图片内容，进行图片生成。
   </Card>
 
-  <Card title="产品定价" icon="book-open" href="/docs/guides/pricing-paygo#图像" arrow="true" cta="点击查看">
+  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#overview" arrow="true" cta="点击查看">
     各模型的定价说明、计费方式及使用限制。
   </Card>
 

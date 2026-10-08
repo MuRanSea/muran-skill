@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-to-text.md -->
-<!-- Source SHA-256: 3f4a2a584873e608e396c8985c9d4e1691522b8d1dba134f1ebf1d8406c1f287 -->
+<!-- Source SHA-256: 9a5d2ea5c9bb714a6792422efabe388ce182f4e0621da6c329b2b6686fefe64a -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,7 +9,7 @@
 
 > MiniMax ASR 将音频转写为文本，支持流式返回、说话人分离与字幕导出，可直接用于会议纪要、播客/视频转写、内容审核、通话质检等场景。
 
-若需要使用语音识别能力，请点击 [按量购买 API](/docs/guides/pricing-paygo#语音)，或 [订阅 Token Plan](/docs/guides/pricing-token-plan)。
+若需要使用语音识别能力，请点击 [按量购买 API](/docs/pricing/overview#overview)，或 [订阅 M Plan](https://platform.minimax.cn/docs/m-plan/intro)。
 
 ## 模型介绍
 
@@ -23,13 +23,13 @@ MiniMax 语音识别（ASR）把音频转写成文本，当前对外提供的模
 
 ## 核心能力
 
-| 能力          | 启用方式                           | 典型用途               |
-| :---------- | :----------------------------- | :----------------- |
-| 纯语音识别       | `response_format=json`（默认）     | 只关心文本内容            |
-| 流式识别        | `stream=true`，仅支持 `json`       | 直播字幕、边说边转、低延迟语音交互  |
-| 说话人分离 + 时间戳 | `response_format=verbose_json` | 会议纪要、访谈整理、多人通话质检   |
-| 字幕导出        | `response_format=srt` 或 `vtt`  | 直接投喂剪辑工具           |
-| 多语种混合识别     | 不传 `language`；或按需指定            | 跨语种会议、双语播客、海外内容本地化 |
+| 能力 | 启用方式 | 典型用途 |
+| :- | :- | :- |
+| 纯语音识别 | `response_format=json`（默认） | 只关心文本内容 |
+| 流式识别 | `stream=true`，仅支持 `json` | 直播字幕、边说边转、低延迟语音交互 |
+| 说话人分离 + 时间戳 | `response_format=verbose_json` | 会议纪要、访谈整理、多人通话质检 |
+| 字幕导出 | `response_format=srt` 或 `vtt` | 直接投喂剪辑工具 |
+| 多语种混合识别 | 不传 `language`；或按需指定 | 跨语种会议、双语播客、海外内容本地化 |
 
 <Note>
   `verbose_json` / `srt` / `vtt` 会启用说话人分离与时间戳对齐，**不能与 `stream=true` 同时使用**。
@@ -39,12 +39,12 @@ MiniMax 语音识别（ASR）把音频转写成文本，当前对外提供的模
 
 ### 音频文件
 
-| 项    | 约束                                                                     |
-| :--- | :--------------------------------------------------------------------- |
+| 项 | 约束 |
+| :- | :- |
 | 支持格式 | `wav` / `aiff` / `flac` / `alac`(m4a) / `mp3` / `aac` / `opus` / `ogg` |
-| 单次时长 | 不超过 **500 秒**；超出返回 `400`，不会被截断                                         |
-| 单次大小 | 不超过 **50 MB**；超出返回 `413`                                               |
-| 不支持  | 无容器的裸 PCM；音频流式输入（可自行用 VAD 切段实现伪流式）                                     |
+| 单次时长 | 不超过 **500 秒**；超出返回 `400`，不会被截断 |
+| 单次大小 | 不超过 **50 MB**；超出返回 `413` |
+| 不支持 | 无容器的裸 PCM；音频流式输入（可自行用 VAD 切段实现伪流式） |
 
 <Note>
   ASR 不依赖高采样率与立体声。未压缩高规格音频容易超上限（500 秒 48 kHz 立体声 WAV ≈ 92 MB），建议先转为**单声道 16 kHz**，或使用 `mp3` / `aac` / `opus`，识别结果不受影响。
@@ -54,23 +54,23 @@ MiniMax 语音识别（ASR）把音频转写成文本，当前对外提供的模
 
 不传 `language`（或传空）时启用混合语言识别；语种明确时建议显式指定，短音频与专业术语通常更稳。
 
-| 类别    | 语言（BCP-47 标签）                                                                    |
-| :---- | :------------------------------------------------------------------------------- |
-| 中文与东亚 | 中文 `zh`、粤语 `yue`、日语 `ja`、韩语 `ko`                                                 |
-| 东南亚   | 泰语 `th`、越南语 `vi`、印尼语 `id`、马来语 `ms`、菲律宾语 `fil`                                    |
-| 欧美    | 英语 `en`、法语 `fr`、德语 `de`、西班牙语 `es`、意大利语 `it`、葡萄牙语 `pt`、波兰语 `pl`、俄语 `ru`、乌克兰语 `uk` |
-| 其他    | 阿拉伯语 `ar`、土耳其语 `tr`                                                              |
+| 类别 | 语言（BCP-47 标签） |
+| :- | :- |
+| 中文与东亚 | 中文 `zh`、粤语 `yue`、日语 `ja`、韩语 `ko` |
+| 东南亚 | 泰语 `th`、越南语 `vi`、印尼语 `id`、马来语 `ms`、菲律宾语 `fil` |
+| 欧美 | 英语 `en`、法语 `fr`、德语 `de`、西班牙语 `es`、意大利语 `it`、葡萄牙语 `pt`、波兰语 `pl`、俄语 `ru`、乌克兰语 `uk` |
+| 其他 | 阿拉伯语 `ar`、土耳其语 `tr` |
 
 ### 返回格式
 
 通过 `response_format` 参数指定，可选取值如下：
 
-| 取值             | 响应类型               | 主要字段 / 内容                                                     |
-| :------------- | :----------------- | :------------------------------------------------------------ |
-| `json`（默认）     | `application/json` | `text` + `duration` + `trace_id`                              |
+| 取值 | 响应类型 | 主要字段 / 内容 |
+| :- | :- | :- |
+| `json`（默认） | `application/json` | `text` + `duration` + `trace_id` |
 | `verbose_json` | `application/json` | `text` + `duration` + `n_speakers` + `segments[]`（含说话人、逐句时间戳） |
-| `srt`          | `text/plain`       | 标准 SRT 字幕                                                     |
-| `vtt`          | `text/vtt`         | WebVTT 字幕                                                     |
+| `srt` | `text/plain` | 标准 SRT 字幕 |
+| `vtt` | `text/vtt` | WebVTT 字幕 |
 
 流式返回时 `response_format` 仅支持 `json`，事件以 `data: <json>` 逐行推送，字段为 `index` / `delta` / `finish` / `duration`（`duration` 仅终止事件返回）。
 
@@ -251,15 +251,15 @@ data: {"index":2,"delta":"","finish":true,"duration":26.325}
 
 服务采用 OpenAI 风格的错误响应，HTTP 状态码即为错误码，响应体形如 `{"type":"error","error":{...},"request_id":"..."}`。
 
-| HTTP  | `error.type`                 | 触发原因                        |
-| :---- | :--------------------------- | :-------------------------- |
-| `400` | `bad_request_error`          | 参数不合法，如音频时长超过 500 秒         |
-| `401` | `authorized_error`           | API Key 缺失或无效               |
-| `402` | `insufficient_balance_error` | 账户余额 / 资源包不足                |
-| `413` | `invalid_request_error`      | 请求体超过 50 MB 上限              |
-| `422` | `unprocessable_entity_error` | 音频内容涉及敏感内容                  |
-| `429` | `rate_limit_error`           | 触发限流                        |
-| `500` | `server_error`               | 服务端错误，可携带 `request_id` 联系我们 |
+| HTTP | `error.type` | 触发原因 |
+| :- | :- | :- |
+| `400` | `bad_request_error` | 参数不合法，如音频时长超过 500 秒 |
+| `401` | `authorized_error` | API Key 缺失或无效 |
+| `402` | `insufficient_balance_error` | 账户余额 / 资源包不足 |
+| `413` | `invalid_request_error` | 请求体超过 50 MB 上限 |
+| `422` | `unprocessable_entity_error` | 音频内容涉及敏感内容 |
+| `429` | `rate_limit_error` | 触发限流 |
+| `500` | `server_error` | 服务端错误，可携带 `request_id` 联系我们 |
 
 ## 推荐阅读
 
@@ -268,7 +268,7 @@ data: {"index":2,"delta":"","finish":true,"duration":26.325}
     Speech to Text 接口的完整参数、返回结构与错误码。
   </Card>
 
-  <Card title="产品定价" icon="book-open" href="/docs/guides/pricing-paygo#语音" arrow="true" cta="点击查看">
+  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#overview" arrow="true" cta="点击查看">
     各语音模型的定价说明、计费方式与使用限制。
   </Card>
 </Columns>

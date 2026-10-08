@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-m3-function-call.md -->
-<!-- Source SHA-256: e0f44efa26222e9bc802251dc1a247425bd816b781002371fa11e0e2a6d5565d -->
+<!-- Source SHA-256: 42193c24a679a9bc170cf1ee30b15a1ff5adae9a6f5c1a7cd222470f1fecc8a7 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -621,7 +621,7 @@ The weather in San Francisco is currently sunny with a temperature of 24℃.
 ## 推荐阅读
 
 <Columns cols={2}>
-  <Card title="在 AI 编程工具里使用 MiniMax-M3" icon="book-open" href="/docs/token-plan/openclaw" arrow="true" cta="点击查看">
+  <Card title="在 AI 编程工具里使用 MiniMax-M3" icon="book-open" href="/docs/m-plan/openclaw" arrow="true" cta="点击查看">
     具备代码理解能力，适用于代码助手等场景。
   </Card>
 

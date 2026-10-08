@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-voice-clone.md -->
-<!-- Source SHA-256: db93c3828f5ebadafaaf41b3bfa38a401b508ca75576ba9b4cdb161052db943b -->
+<!-- Source SHA-256: b12f442f6e0278b29e72f9d2c8e31bb7bdf93cd88819a0bfbd49a4fab51a1823 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -233,7 +233,7 @@
     同步语音合成支持基于文本到语音的同步生成，单次可处理最长 10,000 字符的文本。
   </Card>
 
-  <Card title="产品定价" icon="book-open" href="/docs/guides/pricing-paygo#语音" arrow="true" cta="点击查看">
+  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#overview" arrow="true" cta="点击查看">
     各模型的定价说明、计费方式及使用限制。
   </Card>
 

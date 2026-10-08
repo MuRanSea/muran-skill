@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-generation.md -->
-<!-- Source SHA-256: 1b75f1a7d671442bc6066630f2a68dc1d1aa608f35ccd6dc3fc43e64d7ab46d8 -->
+<!-- Source SHA-256: 0aacf9305d9b2b762bb594bc62bb7c9c2e65364935faceacbb18124c5501b2ae -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -10,7 +10,7 @@
 > MiniMax 语言模型，支持多语言编程、Agent 工作流等复杂任务场景。
 
 <Note>
-  **MiniMax-M3.1-Flash-Preview 暂时仅通过 Token Plan 和 MiniMax Code 提供。**[获取订阅 Key](https://platform.minimax.cn/console/plan)。
+  **MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。**[获取订阅 Key](https://platform.minimax.cn/console/plan)。
 </Note>
 
 ## 模型概览
@@ -19,22 +19,22 @@ MiniMax 提供多款语言模型，满足不同场景需求。**MiniMax-M3.1-Fla
 
 ### 支持模型
 
-| 模型名称                                                                  |   上下文窗口   | 模型介绍                                                 |
-| :-------------------------------------------------------------------- | :-------: | :--------------------------------------------------- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调**          |
-| MiniMax-M3                                                            | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型**（输出速度约 100+ TPS） |
-| MiniMax-M2.7                                                          |  204,800  | **开启模型的自我迭代**（输出速度约 60 TPS）                          |
-| MiniMax-M2.7-highspeed                                                |  204,800  | **M2.7 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS）              |
+| 模型名称 | 上下文窗口 | 模型介绍 |
+| :- | :-: | :- |
+| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
+| MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型**（输出速度约 100+ TPS） |
+| MiniMax-M2.7 | 204,800 | **开启模型的自我迭代**（输出速度约 60 TPS） |
+| MiniMax-M2.7-highspeed | 204,800 | **M2.7 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
 
 <Accordion title="历史模型">
-  | 模型名称                        |  上下文窗口  | 模型介绍                                    |
-  | :-------------------------- | :-----: | :-------------------------------------- |
-  | MiniMax-M2.5                | 204,800 | **顶尖性能与极致性价比，轻松驾驭复杂任务**（输出速度约 60 TPS）   |
-  | MiniMax-M2.5-highspeed      | 204,800 | **M2.5 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-  | MiniMax-M2.1                | 204,800 | **强大多语言编程能力，全面升级编程体验**（输出速度约 60 TPS）    |
-  | MiniMax-M2.1-highspeed      | 204,800 | **M2.1 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-  | MiniMax-M2                  | 204,800 | **专为高效编码与 Agent 工作流而生**                 |
-  | [M2-her](/docs/guides/text-chat) |   64 K  | **专为对话场景设计，支持角色扮演和多轮对话**                |
+  | 模型名称 | 上下文窗口 | 模型介绍 |
+  | :- | :-: | :- |
+  | MiniMax-M2.5 | 204,800 | **顶尖性能与极致性价比，轻松驾驭复杂任务**（输出速度约 60 TPS） |
+  | MiniMax-M2.5-highspeed | 204,800 | **M2.5 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
+  | MiniMax-M2.1 | 204,800 | **强大多语言编程能力，全面升级编程体验**（输出速度约 60 TPS） |
+  | MiniMax-M2.1-highspeed | 204,800 | **M2.1 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
+  | MiniMax-M2 | 204,800 | **专为高效编码与 Agent 工作流而生** |
+  | [M2-her](/docs/guides/text-chat) | 64 K | **专为对话场景设计，支持角色扮演和多轮对话** |
 </Accordion>
 
 <Note>
@@ -67,12 +67,12 @@ MiniMax 提供多款语言模型，满足不同场景需求。**MiniMax-M3.1-Fla
 
 调用 MiniMax 模型前，请先准备好以下信息：
 
-| 字段                          | 值                                                    |
-| :-------------------------- | :--------------------------------------------------- |
-| `base_url`（Anthropic 兼容，推荐） | `https://api.minimax.cn/anthropic`                   |
-| `base_url`（OpenAI 兼容）       | `https://api.minimax.cn/v1`                          |
-| `api_key`                   | [获取订阅 Key](https://platform.minimax.cn/console/plan) |
-| `model`                     | 见上方[支持模型](#支持模型)表                                    |
+| 字段 | 值 |
+| :- | :- |
+| `base_url`（Anthropic 兼容，推荐） | `https://api.minimax.cn/anthropic` |
+| `base_url`（OpenAI 兼容） | `https://api.minimax.cn/v1` |
+| `api_key` | [获取订阅 Key](https://platform.minimax.cn/console/plan) |
+| `model` | 见上方[支持模型](#支持模型)表 |
 
 ***
 
@@ -223,11 +223,11 @@ MiniMax-M3.1-Flash-Preview 在回答前会先进行推理，把复杂问题拆�
 
 `effort` 可取 `low`、`medium`、`high`、`xhigh`、`max`，档位越高思考越充分、耗时和输出 token 也越多。`MiniMax-M3.1-Flash-Preview` 省略 `effort` 时默认为 `max`。不同协议下的字段名不同：
 
-| 协议               | 思考深度字段                 | 思考内容返回位置                | 输出上限字段                                 |
-| :--------------- | :--------------------- | :---------------------- | :------------------------------------- |
-| Anthropic 兼容     | `output_config.effort` | `thinking` 内容块          | `max_tokens`                           |
-| OpenAI 兼容        | `reasoning_effort`     | `reasoning_content` 字段  | `max_tokens` / `max_completion_tokens` |
-| OpenAI Responses | `reasoning.effort`     | `type: "reasoning"` 输出项 | `max_output_tokens`                    |
+| 协议 | 思考深度字段 | 思考内容返回位置 | 输出上限字段 |
+| :- | :- | :- | :- |
+| Anthropic 兼容 | `output_config.effort` | `thinking` 内容块 | `max_tokens` |
+| OpenAI 兼容 | `reasoning_effort` | `reasoning_content` 字段 | `max_tokens` / `max_completion_tokens` |
+| OpenAI Responses | `reasoning.effort` | `type: "reasoning"` 输出项 | `max_output_tokens` |
 
 Anthropic 兼容接口中，显式设置 `output_config.effort` 为 `max`：
 
@@ -263,7 +263,7 @@ model "MiniMax-M3.1-Flash-Preview" requires adaptive thinking
     通过 OpenAI SDK 调用 MiniMax 模型
   </Card>
 
-  <Card title="在 AI 编程工具里使用 MiniMax M 系列模型" icon="code" href="/docs/token-plan/openclaw" cta="查看文档">
+  <Card title="在 AI 编程工具里使用 MiniMax M 系列模型" icon="code" href="/docs/m-plan/openclaw" cta="查看文档">
     在 Claude Code、Cursor 等工具中使用 MiniMax M 系列模型
   </Card>
 

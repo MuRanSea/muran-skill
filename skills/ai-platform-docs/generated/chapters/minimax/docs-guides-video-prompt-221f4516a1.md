@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-prompt.md -->
-<!-- Source SHA-256: f10d8e2c8bf36fa72a0b9642d9791625950f0b914e613d297f278a92dca09d9a -->
+<!-- Source SHA-256: af8249c69dff130221df43ae9937b16d3fd09fb978736ee51a67fcc403ad689e -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,10 +11,10 @@
 
 关于模型规格、输入条件与调用方式，请见 [视频生成](/docs/guides/video-generation)。
 
-| 三大能力                                                         | 阐释                                                            |
-| :----------------------------------------------------------- | ------------------------------------------------------------- |
-| <span style={{ whiteSpace: 'nowrap' }}>**原生多模态理解与生成**</span> | 支持文字、图片、音频、视频多种输入，理解人物、动作、声音、情绪、镜头、风格与表达意图，融合多种参考完成一体化视听创作。   |
-| <span style={{ whiteSpace: 'nowrap' }}>**多模态精准编辑与控制**</span> | 对人物、物体、场景、声音与节奏进行多维度编辑，具备精细化指令遵循能力，支持在已有内容上持续修改和迭代。           |
+| 三大能力 | 阐释 |
+| :- | - |
+| <span style={{ whiteSpace: 'nowrap' }}>**原生多模态理解与生成**</span> | 支持文字、图片、音频、视频多种输入，理解人物、动作、声音、情绪、镜头、风格与表达意图，融合多种参考完成一体化视听创作。 |
+| <span style={{ whiteSpace: 'nowrap' }}>**多模态精准编辑与控制**</span> | 对人物、物体、场景、声音与节奏进行多维度编辑，具备精细化指令遵循能力，支持在已有内容上持续修改和迭代。 |
 | <span style={{ whiteSpace: 'nowrap' }}>**商用级多场景内容生成**</span> | 面向影视、广告、品牌、电商与游戏场景，覆盖文字字幕、品牌信息、创意特效、产品展示、UI/UX 动效、游戏视觉及风格化表达。 |
 
 <Callout color="#4885FF">

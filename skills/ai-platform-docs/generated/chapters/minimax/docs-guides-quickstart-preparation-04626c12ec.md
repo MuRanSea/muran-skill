@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/quickstart-preparation.md -->
-<!-- Source SHA-256: 56bf52880f2082096ac7c279ff56b3299f2402738b7423564a00d02a2a5cf2e6 -->
+<!-- Source SHA-256: 3940c74f8d5ab905cc5e3fcc6b3f789c6c825230660b4b5786eccd8483ea0322 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -17,8 +17,8 @@
   <Step title="获取 Key">
     * **按量付费**：通过 [接口密钥 > 创建新的 API Key](https://platform.minimax.cn/user-center/basic-information/interface-key)，获取 **API Key**
       <Note>按量付费支持使用所有模态模型，包括语言、视频、语音、图像等</Note>
-    * **Token Plan**：通过 [订阅管理 > Token Plan](https://platform.minimax.cn/user-center/payment/token-plan)，查看 **订阅 Key**
-      <Note>订阅 Key 用于 Token Plan 订阅套餐和已购积分。它可以在付费资源可用之前就存在；当您拥有 Token Plan 席位或积分权限后才可实际使用资源。详情见 [Token Plan 概要](/docs/token-plan/intro)</Note>
+    * **M Plan**：通过 [订阅管理 > M Plan](https://platform.minimax.cn/user-center/payment/token-plan)，查看 **订阅 Key**
+      <Note>订阅 Key 用于 M Plan 订阅套餐和已购积分。它可以在付费资源可用之前就存在；当您拥有 M Plan 席位或积分权限后才可实际使用资源。详情见 [M Plan 概要](https://platform.minimax.cn/docs/m-plan/intro)</Note>
 
     生成 API Key 后，建议将其存储为环境变量或保存到 `.env` 文件中：
 
@@ -44,7 +44,7 @@
   </Step>
 
   <Step title="添加资源">
-    按量付费可通过 [账户管理 > 余额](https://platform.minimax.cn/user-center/payment/balance) 按需充值。Token Plan 可购买订阅或积分，也可以使用团队分配给您的资源。
+    按量付费可通过 [账户管理 > 余额](https://platform.minimax.cn/user-center/payment/balance) 按需充值。M Plan 可购买订阅或积分，也可以使用团队分配给您的资源。
   </Step>
 </Steps>
 

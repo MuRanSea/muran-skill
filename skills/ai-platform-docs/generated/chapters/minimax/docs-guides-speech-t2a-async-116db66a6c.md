@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-async.md -->
-<!-- Source SHA-256: 34381f9570e9a6a6b4ccc8a18037ccbed7caf778ac0f7d745623c7c7a0ea9307 -->
+<!-- Source SHA-256: 0cd5277b96c47b958468d8e1a29f76a26aa09082e4d660d2edbdedae68e74aeb -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -20,14 +20,14 @@
 
 以下为 MiniMax 已提供的语音模型及其特性说明。
 
-| 模型               | 特性                         |
-| :--------------- | :------------------------- |
-| speech-2.8-hd    | 情绪渲染融合语气词，重塑自然听感           |
-| speech-2.8-turbo | 极致生成速度，更自然逼真的音频效果          |
-| speech-2.6-hd    | 超低延时，归一化升级，更高自然度           |
-| speech-2.6-turbo | 极速版，更快更优惠，更适用于语音聊天和数字人场景   |
-| speech-02-hd     | 拥有出色的韵律、稳定性和复刻相似度，音质表现突出   |
-| speech-02-turbo  | 拥有出色的韵律和稳定性，小语种能力加强，性能表现出色 |
+| 模型 | 特性 |
+| :- | :- |
+| speech-2.8-hd | 情绪渲染融合语气词，重塑自然听感 |
+| speech-2.8-turbo | 极致生成速度，更自然逼真的音频效果 |
+| speech-2.6-hd | 超低延时，归一化升级，更高自然度 |
+| speech-2.6-turbo | 极速版，更快更优惠，更适用于语音聊天和数字人场景 |
+| speech-02-hd | 拥有出色的韵律、稳定性和复刻相似度，音质表现突出 |
+| speech-02-turbo | 拥有出色的韵律和稳定性，小语种能力加强，性能表现出色 |
 
 ## 支持语言
 
@@ -35,22 +35,22 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
 
 目前支持的语言包含：
 
-| 支持语种                |                      |                       |
-| :------------------ | :------------------- | :-------------------- |
-| 1. 中文（Chinese）      | 15. 土耳其语（Turkish）    | 28. 马来语（Malay）        |
-| 2. 粤语（Cantonese）    | 16. 荷兰语（Dutch）       | 29. 波斯语（Persian）      |
-| 3. 英语（English）      | 17. 乌克兰语（Ukrainian）  | 30. 斯洛伐克语（Slovak）     |
-| 4. 西班牙语（Spanish）    | 18. 泰语（Thai）         | 31. 瑞典语（Swedish）      |
-| 5. 法语（French）       | 19. 波兰语（Polish）      | 32. 克罗地亚语（Croatian）   |
-| 6. 俄语（Russian）      | 20. 罗马尼亚语（Romanian）  | 33. 菲律宾语（Filipino）    |
-| 7. 德语（German）       | 21. 希腊语（Greek）       | 34. 匈牙利语（Hungarian）   |
-| 8. 葡萄牙语（Portuguese） | 22. 捷克语（Czech）       | 35. 挪威语（Norwegian）    |
-| 9. 阿拉伯语（Arabic）     | 23. 芬兰语（Finnish）     | 36. 斯洛文尼亚语（Slovenian） |
-| 10. 意大利语（Italian）   | 24. 印地语（Hindi）       | 37. 加泰罗尼亚语（Catalan）   |
-| 11. 日语（Japanese）    | 25. 保加利亚语（Bulgarian） | 38. 尼诺斯克语（Nynorsk）    |
-| 12. 韩语（Korean）      | 26. 丹麦语（Danish）      | 39. 泰米尔语（Tamil）       |
-| 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew）     | 40. 阿非利卡语（Afrikaans）  |
-| 14. 越南语（Vietnamese） |                      |                       |
+| 支持语种 | | |
+| :- | :- | :- |
+| 1. 中文（Chinese） | 15. 土耳其语（Turkish） | 28. 马来语（Malay） |
+| 2. 粤语（Cantonese） | 16. 荷兰语（Dutch） | 29. 波斯语（Persian） |
+| 3. 英语（English） | 17. 乌克兰语（Ukrainian） | 30. 斯洛伐克语（Slovak） |
+| 4. 西班牙语（Spanish） | 18. 泰语（Thai） | 31. 瑞典语（Swedish） |
+| 5. 法语（French） | 19. 波兰语（Polish） | 32. 克罗地亚语（Croatian） |
+| 6. 俄语（Russian） | 20. 罗马尼亚语（Romanian） | 33. 菲律宾语（Filipino） |
+| 7. 德语（German） | 21. 希腊语（Greek） | 34. 匈牙利语（Hungarian） |
+| 8. 葡萄牙语（Portuguese） | 22. 捷克语（Czech） | 35. 挪威语（Norwegian） |
+| 9. 阿拉伯语（Arabic） | 23. 芬兰语（Finnish） | 36. 斯洛文尼亚语（Slovenian） |
+| 10. 意大利语（Italian） | 24. 印地语（Hindi） | 37. 加泰罗尼亚语（Catalan） |
+| 11. 日语（Japanese） | 25. 保加利亚语（Bulgarian） | 38. 尼诺斯克语（Nynorsk） |
+| 12. 韩语（Korean） | 26. 丹麦语（Danish） | 39. 泰米尔语（Tamil） |
+| 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew） | 40. 阿非利卡语（Afrikaans） |
+| 14. 越南语（Vietnamese） | | |
 
 ## 使用流程
 
@@ -273,7 +273,7 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
     使用 API 接口，在HTTP网络通信协议下进行同步语音合成。
   </Card>
 
-  <Card title="产品定价" icon="book-open" href="/docs/guides/pricing-paygo#语音" arrow="true" cta="点击查看">
+  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#overview" arrow="true" cta="点击查看">
     各模型的定价说明、计费方式及使用限制。
   </Card>
 

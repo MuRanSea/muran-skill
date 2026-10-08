@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/api-overview.md -->
-<!-- Source SHA-256: 503cce5f00aaca70e70c6c3337184b854085efe4d09908da6c2ca7e850d68e78 -->
+<!-- Source SHA-256: a12b56de0d37816006852bc6925344e4fe5953d093475c6705618969ab527015 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,8 +13,8 @@
 
 * **按量付费**：通过 [接口密钥 > 创建新的 API Key](https://platform.minimax.cn/user-center/basic-information/interface-key)，获取 **API Key**
 
-* **Token Plan**：通过 [订阅管理 > Token Plan](https://platform.minimax.cn/user-center/payment/token-plan)，查看 **订阅 Key**
-  <Note>订阅 Key 用于 Token Plan 订阅套餐和已购积分，并与按量计费 API Key 相互独立。详情见 [Token Plan 概要](/docs/token-plan/intro)</Note>
+* **M Plan**：通过 [订阅管理 > M Plan](https://platform.minimax.cn/user-center/payment/token-plan)，查看 **订阅 Key**
+  <Note>订阅 Key 用于 M Plan 订阅套餐和已购积分，并与按量计费 API Key 相互独立。详情见 [M Plan 概要](https://platform.minimax.cn/docs/m-plan/intro)</Note>
 
 ***
 
@@ -22,27 +22,27 @@
 
 语言模型接口使用 **MiniMax M3.1-Flash-Preview**，**MiniMax M3**，**MiniMax M2.7**，**MiniMax M2.7-highspeed**，**MiniMax M2.5**，**MiniMax M2.5-highspeed**，**MiniMax M2.1**，**MiniMax M2.1-highspeed**，**MiniMax M2** 根据输入的上下文，让模型生成对话内容、工具调用。
 
-<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 Token Plan 和 MiniMax Code 提供。</Note>
+<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。</Note>
 
 可通过 **HTTP** 请求、**Anthropic SDK**（推荐） 或 **OpenAI SDK** 接入。
 
 **支持模型**
 
-| 模型名称                                                                  | 输入输出总 token | 模型介绍                                                 |
-| :-------------------------------------------------------------------- | :---------: | :--------------------------------------------------- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> |  1,000,000  | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调**          |
-| MiniMax-M3                                                            |  1,000,000  | **原生多模态、1M 上下文的 Frontier Coding 模型**（输出速度约 100+ TPS） |
-| MiniMax-M2.7                                                          |    204800   | **开启模型的自我迭代 (输出速度约60tps)**                           |
-| MiniMax-M2.7-highspeed                                                |    204800   | **M2.7 极速版：效果不变，更快，更敏捷  (输出速度约100tps)**              |
+| 模型名称 | 输入输出总 token | 模型介绍 |
+| :- | :-: | :- |
+| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
+| MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型**（输出速度约 100+ TPS） |
+| MiniMax-M2.7 | 204800 | **开启模型的自我迭代 (输出速度约60tps)** |
+| MiniMax-M2.7-highspeed | 204800 | **M2.7 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
 
 <Accordion title="历史模型">
-  | 模型名称                   | 输入输出总 token | 模型介绍                                    |
-  | :--------------------- | :---------: | :-------------------------------------- |
-  | MiniMax-M2.5           |    204800   | **顶尖性能与极致性价比，轻松驾驭复杂任务 (输出速度约60tps)**    |
-  | MiniMax-M2.5-highspeed |    204800   | **M2.5 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
-  | MiniMax-M2.1           |    204800   | **强大多语言编程能力，全面升级编程体验 (输出速度约60tps)**     |
-  | MiniMax-M2.1-highspeed |    204800   | **M2.1 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
-  | MiniMax-M2             |    204800   | **专为高效编码与Agent工作流而生**                   |
+  | 模型名称 | 输入输出总 token | 模型介绍 |
+  | :- | :-: | :- |
+  | MiniMax-M2.5 | 204800 | **顶尖性能与极致性价比，轻松驾驭复杂任务 (输出速度约60tps)** |
+  | MiniMax-M2.5-highspeed | 204800 | **M2.5 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
+  | MiniMax-M2.1 | 204800 | **强大多语言编程能力，全面升级编程体验 (输出速度约60tps)** |
+  | MiniMax-M2.1-highspeed | 204800 | **M2.1 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
+  | MiniMax-M2 | 204800 | **专为高效编码与Agent工作流而生** |
 </Accordion>
 
 如果在使用模型过程中遇到任何问题：
@@ -68,9 +68,9 @@
 
 **支持模型**
 
-| 模型             | 功能                                                              |
-| :------------- | :-------------------------------------------------------------- |
-| MiniMax-H3     | 多模态视频生成模型，支持文生 / 图生 / 首尾帧 / 多模态参考，768P / 2K 分辨率，4–15s 时长        |
+| 模型 | 功能 |
+| :- | :- |
+| MiniMax-H3 | 多模态视频生成模型，支持文生 / 图生 / 首尾帧 / 多模态参考，768P / 2K 分辨率，4–15s 时长 |
 | MiniMax-H3-Max | 极速生成模型，支持文生 / 图生（首帧、尾帧）/ 多模态参考；480P / 768P 分辨率（不支持 2K），5–15s 时长 |
 
 **接口说明**
@@ -117,14 +117,14 @@
 
 **支持模型**
 
-| 模型               | 特性                             |
-| :--------------- | :----------------------------- |
-| speech-2.8-hd    | 最新的 HD 模型，情绪渲染融合语气词，重塑自然听感     |
+| 模型 | 特性 |
+| :- | :- |
+| speech-2.8-hd | 最新的 HD 模型，情绪渲染融合语气词，重塑自然听感 |
 | speech-2.8-turbo | 最新的 Turbo 模型，极致生成速度，更自然逼真的音频效果 |
-| speech-2.6-hd    | HD 模型，韵律表现出色，极致音质与韵律表现，生成更快更自然 |
-| speech-2.6-turbo | Turbo 模型，音质优异，超低时延，响应更灵敏       |
-| speech-02-hd     | 拥有出色的韵律、稳定性和复刻相似度，音质表现突出       |
-| speech-02-turbo  | 拥有出色的韵律和稳定性，小语种能力加强，性能表现出色     |
+| speech-2.6-hd | HD 模型，韵律表现出色，极致音质与韵律表现，生成更快更自然 |
+| speech-2.6-turbo | Turbo 模型，音质优异，超低时延，响应更灵敏 |
+| speech-02-hd | 拥有出色的韵律、稳定性和复刻相似度，音质表现突出 |
+| speech-02-turbo | 拥有出色的韵律和稳定性，小语种能力加强，性能表现出色 |
 
 **接口说明**
 
@@ -140,22 +140,22 @@
 </Note>
 
 <Accordion title="支持的 40 种语言">
-  | 支持语种                |                      |                       |
-  | :------------------ | :------------------- | :-------------------- |
-  | 1. 中文（Chinese）      | 15. 土耳其语（Turkish）    | 28. 马来语（Malay）        |
-  | 2. 粤语（Cantonese）    | 16. 荷兰语（Dutch）       | 29. 波斯语（Persian）      |
-  | 3. 英语（English）      | 17. 乌克兰语（Ukrainian）  | 30. 斯洛伐克语（Slovak）     |
-  | 4. 西班牙语（Spanish）    | 18. 泰语（Thai）         | 31. 瑞典语（Swedish）      |
-  | 5. 法语（French）       | 19. 波兰语（Polish）      | 32. 克罗地亚语（Croatian）   |
-  | 6. 俄语（Russian）      | 20. 罗马尼亚语（Romanian）  | 33. 菲律宾语（Filipino）    |
-  | 7. 德语（German）       | 21. 希腊语（Greek）       | 34. 匈牙利语（Hungarian）   |
-  | 8. 葡萄牙语（Portuguese） | 22. 捷克语（Czech）       | 35. 挪威语（Norwegian）    |
-  | 9. 阿拉伯语（Arabic）     | 23. 芬兰语（Finnish）     | 36. 斯洛文尼亚语（Slovenian） |
-  | 10. 意大利语（Italian）   | 24. 印地语（Hindi）       | 37. 加泰罗尼亚语（Catalan）   |
-  | 11. 日语（Japanese）    | 25. 保加利亚语（Bulgarian） | 38. 尼诺斯克语（Nynorsk）    |
-  | 12. 韩语（Korean）      | 26. 丹麦语（Danish）      | 39. 泰米尔语（Tamil）       |
-  | 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew）     | 40. 阿非利卡语（Afrikaans）  |
-  | 14. 越南语（Vietnamese） |                      |                       |
+  | 支持语种 | | |
+  | :- | :- | :- |
+  | 1. 中文（Chinese） | 15. 土耳其语（Turkish） | 28. 马来语（Malay） |
+  | 2. 粤语（Cantonese） | 16. 荷兰语（Dutch） | 29. 波斯语（Persian） |
+  | 3. 英语（English） | 17. 乌克兰语（Ukrainian） | 30. 斯洛伐克语（Slovak） |
+  | 4. 西班牙语（Spanish） | 18. 泰语（Thai） | 31. 瑞典语（Swedish） |
+  | 5. 法语（French） | 19. 波兰语（Polish） | 32. 克罗地亚语（Croatian） |
+  | 6. 俄语（Russian） | 20. 罗马尼亚语（Romanian） | 33. 菲律宾语（Filipino） |
+  | 7. 德语（German） | 21. 希腊语（Greek） | 34. 匈牙利语（Hungarian） |
+  | 8. 葡萄牙语（Portuguese） | 22. 捷克语（Czech） | 35. 挪威语（Norwegian） |
+  | 9. 阿拉伯语（Arabic） | 23. 芬兰语（Finnish） | 36. 斯洛文尼亚语（Slovenian） |
+  | 10. 意大利语（Italian） | 24. 印地语（Hindi） | 37. 加泰罗尼亚语（Catalan） |
+  | 11. 日语（Japanese） | 25. 保加利亚语（Bulgarian） | 38. 尼诺斯克语（Nynorsk） |
+  | 12. 韩语（Korean） | 26. 丹麦语（Danish） | 39. 泰米尔语（Tamil） |
+  | 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew） | 40. 阿非利卡语（Afrikaans） |
+  | 14. 越南语（Vietnamese） | | |
 </Accordion>
 
 <Columns cols={2}>
@@ -200,9 +200,9 @@
 
 **模型列表**
 
-| 模型名称          | 简介                              |
-| :------------ | :------------------------------ |
-| image-01      | 图像生成模型，画面表现细腻，支持文生图、图生图（人物主体参考） |
+| 模型名称 | 简介 |
+| :- | :- |
+| image-01 | 图像生成模型，画面表现细腻，支持文生图、图生图（人物主体参考） |
 | image-01-live | 图像生成模型，在 image-01 基础上额外支持多种画风设置 |
 
 <Columns cols={2}>
@@ -229,8 +229,8 @@
 
 **支持模型**
 
-| 模型名称      | 使用方法                            |
-| :-------- | :------------------------------ |
+| 模型名称 | 使用方法 |
+| :- | :- |
 | music-3.0 | 最新音乐生成模型，支持用户输入音乐灵感和歌词，生成 AI 音乐 |
 
 <Card title="音乐生成接口" icon="music" href="/docs/api-reference/music-generation" cta="查看文档">
@@ -270,11 +270,3 @@
 **官方 MCP**
 
 MiniMax 提供官方的 [Python 版本](https://github.com/MiniMax-AI/MiniMax-MCP) 和 [JavaScript 版本](https://github.com/MiniMax-AI/MiniMax-MCP-JS) 模型上下文协议（MCP）服务器实现代码，支持语音合成、音色克隆、视频生成、音乐生成等功能，详细说明请参考 [MiniMax MCP 使用指南](/docs/guides/mcp-guide)
-
-**语音调试台**
-
-<Columns cols={2}>
-  <Card title="语音合成调试台" icon="audio-lines" href="https://platform.minimaxi.com/examination-center/voice-experience-center/t2a_v2" cta="立即体验语音合成能力" />
-
-  <Card title="音色快速复刻调试台" icon="mic" href="https://platform.minimaxi.com/examination-center/voice-experience-center/voiceCloning" cta="立即体验音色快速复刻能力" />
-</Columns>

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-delete.md -->
-<!-- Source SHA-256: 340bea3e7d73b24b16585bcee8dcb000e286eda7b8f3a3662d5d14f496eb3aa0 -->
+<!-- Source SHA-256: 23164f2f8cadcf03ded43723b6f7ac9185e938966ef60d46840fe8a44190a8bd -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,13 +11,13 @@
 
 本接口会根据任务的**当前状态**自动执行取消或删除，行为如下：
 
-| 任务状态             | 执行操作（action） | 说明                 |
-| :--------------- | :----------- | :----------------- |
-| `queued`（排队中）    | `cancelled`  | 取消任务，任务尚未开始处理，无扣费  |
-| `succeeded`（成功）  | `deleted`    | 删除任务记录             |
-| `failed`（失败）     | `deleted`    | 删除任务记录             |
-| `running`（运行中）   | —            | 不可操作，返回错误（处理中无法取消） |
-| `cancelled`（已取消） | —            | 不可操作，返回错误          |
+| 任务状态 | 执行操作（action） | 说明 |
+| :- | :- | :- |
+| `queued`（排队中） | `cancelled` | 取消任务，任务尚未开始处理，无扣费 |
+| `succeeded`（成功） | `deleted` | 删除任务记录 |
+| `failed`（失败） | `deleted` | 删除任务记录 |
+| `running`（运行中） | — | 不可操作，返回错误（处理中无法取消） |
+| `cancelled`（已取消） | — | 不可操作，返回错误 |
 
 
 ## OpenAPI

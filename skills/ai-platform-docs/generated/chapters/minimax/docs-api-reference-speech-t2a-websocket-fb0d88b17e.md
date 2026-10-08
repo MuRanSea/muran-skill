@@ -1,13 +1,13 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/speech-t2a-websocket.md -->
-<!-- Source SHA-256: cc1e18e32e2831bf13d95b57fcc8a865063523064e3c0ea3f605cbcd65d43b49 -->
+<!-- Source SHA-256: be60c5427a4d2a433b8a89bf233d8293d33d560021696f541a142feb1d9f556c -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# 同步语音合成 WebSocket
+# 同步语音合成
 
-> 使用本接口，在WebSocket网络通信协议下进行同步语音合成。
+> 通过 WebSocket 连接由客户端按句发送文本，流式返回合成音频，适合低延迟的实时播报。
 
 
 
@@ -325,11 +325,28 @@ operations:
                 required: false
               - name: subtitle_type
                 type: string
-                description: |-
+                description: >-
                   字幕粒度，默认值为 `sentence`。可选值：
+
                   - `sentence`：句级别时间戳
+
                   - `word`：词级别时间戳
+
                   - `word_streaming`：流式优化的词级别时间戳
+
+
+                  字幕通过 `task_continued` 事件的 `data.subtitle` 随音频下发，不提供字幕文件：
+
+                  - `sentence` / `word`：每个分段只在该分段最后一个音频片段中返回一次完整字幕，`sentence` 不含
+                  `timestamped_words`
+
+                  - `word_streaming`：每个音频片段都返回当前分段截至目前的累计字幕（`timestamped_words`
+                  与 `time_end` 持续增长），客户端应以最新一条覆盖同一分段的旧结果；`text_begin`
+                  变化表示进入下一个分段
+
+
+                  `is_final` 为 `true` 的消息不含字幕，请在每条 `task_continued` 消息中检查
+                  `data.subtitle`
                 enumValues:
                   - sentence
                   - word
@@ -662,11 +679,27 @@ operations:
               x-parser-schema-id: <anonymous-schema-28>
             subtitle_type:
               type: string
-              description: |-
+              description: >-
                 字幕粒度，默认值为 `sentence`。可选值：
+
                 - `sentence`：句级别时间戳
+
                 - `word`：词级别时间戳
+
                 - `word_streaming`：流式优化的词级别时间戳
+
+
+                字幕通过 `task_continued` 事件的 `data.subtitle` 随音频下发，不提供字幕文件：
+
+                - `sentence` / `word`：每个分段只在该分段最后一个音频片段中返回一次完整字幕，`sentence` 不含
+                `timestamped_words`
+
+                - `word_streaming`：每个音频片段都返回当前分段截至目前的累计字幕（`timestamped_words` 与
+                `time_end` 持续增长），客户端应以最新一条覆盖同一分段的旧结果；`text_begin` 变化表示进入下一个分段
+
+
+                `is_final` 为 `true` 的消息不含字幕，请在每条 `task_continued` 消息中检查
+                `data.subtitle`
               enum:
                 - sentence
                 - word
@@ -820,7 +853,7 @@ operations:
               default:
                 - task_finish
               description: 表示会话事件类型，当前环节应填写 `task_finish`
-              x-parser-schema-id: <anonymous-schema-55>
+              x-parser-schema-id: <anonymous-schema-69>
           x-parser-schema-id: SendTaskFinishEvent
         title: 任务结束
         description: 服务端收到 `task_finish` 事件后，会等待当前队列中所有合成任务完成后，关闭 WebSocket 连接并结束任务。
@@ -1027,6 +1060,60 @@ operations:
                     type: string
                     description: 合成后的音频片段，采用 `hex` 编码，按照输入定义的格式进行生成（mp3/pcm/flac）
                     required: false
+                  - name: subtitle
+                    type: object
+                    description: >-
+                      开启字幕时返回，携带当前分段的字幕，随对应的音频片段下发，返回时机见 `task_start` 的
+                      `subtitle_type`。`is_final` 为 `true` 的消息不含该字段
+                    required: false
+                    properties:
+                      - name: text
+                        type: string
+                        description: 分段文本
+                        required: false
+                      - name: text_begin
+                        type: integer
+                        description: 分段在本次合成文本中的起始字符位置（含）
+                        required: false
+                      - name: text_end
+                        type: integer
+                        description: 分段在本次合成文本中的结束字符位置（不含）
+                        required: false
+                      - name: time_begin
+                        type: number
+                        description: 分段起始时间，单位毫秒，相对本次合成音频的起点
+                        required: false
+                      - name: time_end
+                        type: number
+                        description: 分段结束时间，单位毫秒，相对本次合成音频的起点
+                        required: false
+                      - name: timestamped_words
+                        type: array
+                        description: >-
+                          词级时间戳，仅 `subtitle_type` 为 `word` / `word_streaming`
+                          时返回，`sentence` 时为 `null`
+                        required: false
+                        properties:
+                          - name: word
+                            type: string
+                            description: 词文本
+                            required: false
+                          - name: word_begin
+                            type: integer
+                            description: 该词在本次合成文本中的起始字符位置（含）
+                            required: false
+                          - name: word_end
+                            type: integer
+                            description: 该词在本次合成文本中的结束字符位置（不含）
+                            required: false
+                          - name: time_begin
+                            type: number
+                            description: 该词起始时间，单位毫秒
+                            required: false
+                          - name: time_end
+                            type: number
+                            description: 该词结束时间，单位毫秒
+                            required: false
               - name: trace_id
                 type: string
                 description: 表示会话中单次请求的 id，用于在咨询/反馈时帮助定位问题。
@@ -1080,9 +1167,13 @@ operations:
                     type: integer
                     description: 计费字符数。本次语音生成的计费字符数
                     required: false
+                  - name: usage_voice_count
+                    type: integer
+                    description: 本次请求计费的音色数量（音色首次使用时计费），仅在产生音色费用时返回
+                    required: false
                   - name: word_count
                     type: integer
-                    description: 已发音的字数统计，包含汉字、数字、字母，不包含标点符号
+                    description: 合成文本的字符数（含标点和空格），仅供参考，不用于计费；计费字符数请以 `usage_characters` 为准
                     required: false
               - name: base_resp
                 type: object
@@ -1124,23 +1215,84 @@ operations:
                   type: string
                   description: 合成后的音频片段，采用 `hex` 编码，按照输入定义的格式进行生成（mp3/pcm/flac）
                   x-parser-schema-id: <anonymous-schema-39>
+                subtitle:
+                  type: object
+                  description: >-
+                    开启字幕时返回，携带当前分段的字幕，随对应的音频片段下发，返回时机见 `task_start` 的
+                    `subtitle_type`。`is_final` 为 `true` 的消息不含该字段
+                  properties:
+                    text:
+                      type: string
+                      description: 分段文本
+                      x-parser-schema-id: <anonymous-schema-41>
+                    text_begin:
+                      type: integer
+                      format: int64
+                      description: 分段在本次合成文本中的起始字符位置（含）
+                      x-parser-schema-id: <anonymous-schema-42>
+                    text_end:
+                      type: integer
+                      format: int64
+                      description: 分段在本次合成文本中的结束字符位置（不含）
+                      x-parser-schema-id: <anonymous-schema-43>
+                    time_begin:
+                      type: number
+                      description: 分段起始时间，单位毫秒，相对本次合成音频的起点
+                      x-parser-schema-id: <anonymous-schema-44>
+                    time_end:
+                      type: number
+                      description: 分段结束时间，单位毫秒，相对本次合成音频的起点
+                      x-parser-schema-id: <anonymous-schema-45>
+                    timestamped_words:
+                      type: array
+                      description: >-
+                        词级时间戳，仅 `subtitle_type` 为 `word` / `word_streaming`
+                        时返回，`sentence` 时为 `null`
+                      items:
+                        type: object
+                        properties:
+                          word:
+                            type: string
+                            description: 词文本
+                            x-parser-schema-id: <anonymous-schema-48>
+                          word_begin:
+                            type: integer
+                            format: int64
+                            description: 该词在本次合成文本中的起始字符位置（含）
+                            x-parser-schema-id: <anonymous-schema-49>
+                          word_end:
+                            type: integer
+                            format: int64
+                            description: 该词在本次合成文本中的结束字符位置（不含）
+                            x-parser-schema-id: <anonymous-schema-50>
+                          time_begin:
+                            type: number
+                            description: 该词起始时间，单位毫秒
+                            x-parser-schema-id: <anonymous-schema-51>
+                          time_end:
+                            type: number
+                            description: 该词结束时间，单位毫秒
+                            x-parser-schema-id: <anonymous-schema-52>
+                        x-parser-schema-id: <anonymous-schema-47>
+                      x-parser-schema-id: <anonymous-schema-46>
+                  x-parser-schema-id: <anonymous-schema-40>
               x-parser-schema-id: <anonymous-schema-38>
             trace_id:
               type: string
               description: 表示会话中单次请求的 id，用于在咨询/反馈时帮助定位问题。
-              x-parser-schema-id: <anonymous-schema-40>
+              x-parser-schema-id: <anonymous-schema-53>
             session_id:
               type: string
               description: 表示整个会话的 id。
-              x-parser-schema-id: <anonymous-schema-41>
+              x-parser-schema-id: <anonymous-schema-54>
             event:
               type: string
               description: 表示会话类型，当前环节成功后会返回 task_continued`
-              x-parser-schema-id: <anonymous-schema-42>
+              x-parser-schema-id: <anonymous-schema-55>
             is_final:
               type: boolean
               description: 该请求返回是否完结
-              x-parser-schema-id: <anonymous-schema-43>
+              x-parser-schema-id: <anonymous-schema-56>
             extra_info:
               type: object
               description: 相关额外信息
@@ -1149,46 +1301,51 @@ operations:
                   type: integer
                   format: int64
                   description: 音频时长，精确到毫秒
-                  x-parser-schema-id: <anonymous-schema-44>
+                  x-parser-schema-id: <anonymous-schema-57>
                 audio_sample_rate:
                   type: integer
                   format: int64
                   description: 音频采样率
-                  x-parser-schema-id: <anonymous-schema-45>
+                  x-parser-schema-id: <anonymous-schema-58>
                 audio_size:
                   type: integer
                   format: int64
                   description: 音频文件大小，单位为字节
-                  x-parser-schema-id: <anonymous-schema-46>
+                  x-parser-schema-id: <anonymous-schema-59>
                 bitrate:
                   type: integer
                   format: int64
                   description: 音频比特率
-                  x-parser-schema-id: <anonymous-schema-47>
+                  x-parser-schema-id: <anonymous-schema-60>
                 audio_format:
                   type: string
                   description: 生成音频文件的格式。取值范围 mp3/pcm/flac
-                  x-parser-schema-id: <anonymous-schema-48>
+                  x-parser-schema-id: <anonymous-schema-61>
                 audio_channel:
                   type: integer
                   format: int64
                   description: 生成音频声道数。1：单声道，2：双声道
-                  x-parser-schema-id: <anonymous-schema-49>
+                  x-parser-schema-id: <anonymous-schema-62>
                 invisible_character_ratio:
                   type: integer
                   format: float
                   description: 非法字符占比。非法字符不超过 10%（包含 10%），音频会正常生成并返回非法字符占比，超过进行报错
-                  x-parser-schema-id: <anonymous-schema-50>
+                  x-parser-schema-id: <anonymous-schema-63>
                 usage_characters:
                   type: integer
                   format: int64
                   description: 计费字符数。本次语音生成的计费字符数
-                  x-parser-schema-id: <anonymous-schema-51>
+                  x-parser-schema-id: <anonymous-schema-64>
+                usage_voice_count:
+                  type: integer
+                  format: int64
+                  description: 本次请求计费的音色数量（音色首次使用时计费），仅在产生音色费用时返回
+                  x-parser-schema-id: <anonymous-schema-65>
                 word_count:
                   type: integer
                   format: int64
-                  description: 已发音的字数统计，包含汉字、数字、字母，不包含标点符号
-                  x-parser-schema-id: <anonymous-schema-52>
+                  description: 合成文本的字符数（含标点和空格），仅供参考，不用于计费；计费字符数请以 `usage_characters` 为准
+                  x-parser-schema-id: <anonymous-schema-66>
               x-parser-schema-id: ExtraInfo
             base_resp:
               type: object
@@ -1212,11 +1369,11 @@ operations:
                     - 2204: 超出字符限制，跳过
                     - 2205: 请求超限
                     更多内容可查看 [错误码查询列表](/api-reference/errorcode) 了解详情
-                  x-parser-schema-id: <anonymous-schema-53>
+                  x-parser-schema-id: <anonymous-schema-67>
                 status_msg:
                   type: string
                   description: 状态详情
-                  x-parser-schema-id: <anonymous-schema-54>
+                  x-parser-schema-id: <anonymous-schema-68>
               x-parser-schema-id: TaskContinueBaseResp
           x-parser-schema-id: ReceiveTaskContinuedEvent
         title: 任务继续
@@ -1293,15 +1450,15 @@ operations:
             trace_id:
               type: string
               description: 表示会话中单次请求的 id，用于在咨询/反馈时帮助定位问题
-              x-parser-schema-id: <anonymous-schema-56>
+              x-parser-schema-id: <anonymous-schema-70>
             session_id:
               type: string
               description: 表示整个会话的 id
-              x-parser-schema-id: <anonymous-schema-57>
+              x-parser-schema-id: <anonymous-schema-71>
             event:
               type: string
               description: 表示会话类型，当前环节成功后会返回 `task_finished`
-              x-parser-schema-id: <anonymous-schema-58>
+              x-parser-schema-id: <anonymous-schema-72>
             base_resp: *ref_0
           x-parser-schema-id: ReceiveTaskFinishedEvent
         title: 任务结束
@@ -1370,15 +1527,15 @@ operations:
             trace_id:
               type: string
               description: 表示会话中单次请求的 id，用于在咨询/反馈时帮助定位问题
-              x-parser-schema-id: <anonymous-schema-59>
+              x-parser-schema-id: <anonymous-schema-73>
             session_id:
               type: string
               description: 表示整个会话的 id
-              x-parser-schema-id: <anonymous-schema-60>
+              x-parser-schema-id: <anonymous-schema-74>
             event:
               type: string
               description: 表示会话类型，任务失败会返回 `task_failed`
-              x-parser-schema-id: <anonymous-schema-61>
+              x-parser-schema-id: <anonymous-schema-75>
             base_resp:
               type: object
               description: 本次请求的状态码和详情
@@ -1396,11 +1553,11 @@ operations:
                     - `2013`: 输入参数信息不正常
                     - `2201`: 超时断开连接
                     更多内容可查看 [错误码查询列表](/api-reference/errorcode) 了解详情
-                  x-parser-schema-id: <anonymous-schema-62>
+                  x-parser-schema-id: <anonymous-schema-76>
                 status_msg:
                   type: string
                   description: 状态详情
-                  x-parser-schema-id: <anonymous-schema-63>
+                  x-parser-schema-id: <anonymous-schema-77>
               x-parser-schema-id: TaskFailedBaseResp
           x-parser-schema-id: ReceiveTaskFailedEvent
         title: 任务失败
