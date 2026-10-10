@@ -1,104 +1,35 @@
-"""Public group commands with durable storage and subprocess CLI fixtures."""
+"""Public group commands: durable state, parallel advance, review gates and recovery."""
 from contextlib import redirect_stdout
 from concurrent.futures import ThreadPoolExecutor
-import importlib.util
 import io
 import json
-import os
 from pathlib import Path
 import subprocess
 import sys
-import tempfile
 import time
 import unittest
-from unittest.mock import patch
 
-ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = ROOT / 'skills/multi-harness/scripts'
-sys.path.insert(0, str(SCRIPTS))
-spec = importlib.util.spec_from_file_location('groups', SCRIPTS / 'groups.py')
-groups = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(groups)
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from multi_harness_fixture import SCRIPTS, Fixture  # noqa: E402
 
-FAKE = r'''
-import json, os, pathlib, signal, sys, time, uuid
-if '--version' in sys.argv:
-    print('group-fixture 1.0'); raise SystemExit()
-if '--help' in sys.argv:
-    print('--output-format --tools --allowedTools --safe-mode --strict-mcp-config --disable-slash-commands --permission-mode --permission-prompts --resume --conversation --effort --max-budget-usd --mode --input-format --print-timeout --model'); raise SystemExit()
-agy = '--input-format' in sys.argv
-raw = sys.stdin.read()
-if agy: raw = json.loads(raw)['message']['content']
-packet = json.loads(raw.split('\n\n', 1)[1])
-discussion = packet.get('discussion', {'message': {'body': packet['objective']}})
-body = packet.get('feedback', discussion['message']['body'])
-flag = '--conversation' if agy else '--resume'
-session = sys.argv[sys.argv.index(flag) + 1] if flag in sys.argv else 'fixture-' + uuid.uuid4().hex
-statefile = pathlib.Path(os.environ['GROUP_FAKE_STATE']) / (session + '.json')
-if flag in sys.argv:
-    memory = json.loads(statefile.read_text())
-else:
-    memory = {'first': body}
-    statefile.write_text(json.dumps(memory))
-model = sys.argv[sys.argv.index('--model') + 1]
-if agy:
-    print(json.dumps({'event':'init','conversation_id':session,'init':{'model':model}}), flush=True)
-else:
-    print(json.dumps({'type':'system','subtype':'init','session_id':session}), flush=True)
-if body == 'slow': time.sleep(8)
-if body == 'kill-controller':
-    os.kill(int(os.environ['GROUP_TEST_CONTROLLER_PID']), signal.SIGTERM)
-    raise SystemExit()
-if body == 'broken':
-    print('invalid-stream'); raise SystemExit()
-if body == 'auth-error':
-    print(json.dumps({'type':'assistant','message':{'model':'<synthetic>','content':[]}}))
-    print(json.dumps({'type':'result','session_id':session,'subtype':'success','is_error':True,
-        'result':'Failed to authenticate: OAuth session expired and could not be refreshed','errors':[]}))
-    raise SystemExit(1)
-if body == 'mismatch': session = 'unexpected-session'
-if body == 'wrong-model': model = 'unplanned-model'
-if body == 'violate': pathlib.Path('outside.txt').write_text('unexpected')
-answer = json.dumps({'body':body, 'first':memory['first'], 'continued':flag in sys.argv, 'discussion':discussion}, ensure_ascii=False)
-if agy:
-    print(json.dumps({'event':'result','conversation_id':session,'result':{'status':'SUCCESS','response':answer}}))
-else:
-    print(json.dumps({'type':'assistant','message':{'model':model,'content':[]}}))
-    print(json.dumps({'type':'result','session_id':session,'subtype':'success','is_error':False,'result':answer,'errors':[]}))
-'''
+import groups  # noqa: E402
+import runner  # noqa: E402
+
+MEMBERS = [
+    {'id': 'researcher', 'role': '研究员', 'harness': 'claude', 'model': 'fixture-claude', 'mode': 'advisor', 'timeout_seconds': 20},
+    {'id': 'editor', 'role': '编辑', 'harness': 'agy', 'model': 'fixture-gemini', 'mode': 'advisor', 'timeout_seconds': 20},
+]
 
 
-class GroupTests(unittest.TestCase):
+class GroupTests(Fixture):
     def setUp(self):
-        parent = ROOT / '.cache/tests'
-        parent.mkdir(parents=True, exist_ok=True)
-        self.temp = tempfile.TemporaryDirectory(prefix='groups-', dir=parent)
-        self.base = Path(self.temp.name).resolve()
-        self.repo = self.base / 'project 中文'
-        self.repo.mkdir()
-        self.store = self.base / 'groups.sqlite3'
-        self.fake = self.base / 'fake cli.py'
-        self.fake.write_text(FAKE, encoding='utf-8')
-        session_dir = self.base / 'fake-sessions'
-        session_dir.mkdir()
-        self.env = patch.dict(os.environ, {'PYTHONUTF8': '1', 'GROUP_FAKE_STATE': str(session_dir)})
-        self.env.start()
-        self.launcher = patch.object(groups.harness, 'resolve_launcher', return_value=[sys.executable, str(self.fake)])
-        self.launcher.start()
-        for args in [('init', '-q'), ('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid',
-                                     '-c', 'commit.gpgsign=false', 'commit', '--allow-empty', '-qm', 'fixture')]:
-            subprocess.run(['git', *args], cwd=self.repo, check=True, capture_output=True)
-
-    def tearDown(self):
-        self.launcher.stop()
-        self.env.stop()
-        self.assertTrue(self.base.is_relative_to((ROOT / '.cache/tests').resolve()))
-        self.temp.cleanup()
+        super().setUp()
+        self.store = self.base / 'state' / 'collab.sqlite3'
 
     def file(self, name, value):
         path = self.base / name
         path.write_text(json.dumps(value, ensure_ascii=False), encoding='utf-8')
-        return str(path)
+        return path
 
     def invoke(self, *args, ok=True):
         out = io.StringIO()
@@ -108,292 +39,395 @@ class GroupTests(unittest.TestCase):
         self.assertEqual(code, 0 if ok else 1, value)
         return value
 
-    def team(self, **limits):
-        return self.invoke('team', '--name', '研究组', '--config', self.file('team.json', {
-            'members': [
-                {'id': 'researcher', 'role': '研究员', 'harness': 'claude', 'model': 'fixture-claude', 'mode': 'advisor', **limits},
-                {'id': 'editor', 'role': '编辑', 'harness': 'agy', 'model': 'fixture-gemini', 'mode': 'advisor', **limits},
-            ]}))
+    def scoped(self, command, group, *args, ok=True):
+        return self.invoke(command, '--cwd', self.repo, '--group', group['id'], *args, ok=ok)
 
-    def open_group(self, name='Jev', context='thread-one', **extra):
-        return self.invoke('open', '--config', self.file('group.json', {
-            'name': name, 'goal': '研究请求内容审查', 'strategy': '先调研，后写作，负责人验收',
-            'acceptance': ['来源可核对'], 'cwd': str(self.repo), 'team': '研究组', 'context': context, **extra}))
+    def open_group(self, name='Jev', context='thread-one', members=None, **extra):
+        config = {'name': name, 'goal': '研究请求内容审查', 'strategy': '先调研，后写作，负责人验收',
+                  'acceptance': ['来源可核对'], 'cwd': str(self.repo), 'context': context, **extra}
+        if 'team' not in config:
+            config['members'] = members or MEMBERS
+        return self.invoke('open', '--config', self.file('group.json', config))
 
-    def test_open_find_and_reuse_explicit_team_across_processes(self):
-        self.team()
-        first = self.open_group()
-        cmd = [sys.executable, str(SCRIPTS / 'groups.py'), '--store', str(self.store),
-               'status', '--cwd', str(self.repo), '--context', 'thread-one']
-        result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8')
-        self.assertEqual(result.returncode, 0, result.stderr)
+    def send(self, group, body, to='researcher', *extra):
+        return self.scoped('send', group, '--to', to, '--text', body, *extra)['messages']
+
+    def last_reply(self, group, sender=None):
+        messages = self.scoped('history', group)['messages']
+        replies = [m for m in messages if m['kind'] == 'reply' and (sender is None or m['sender'] == sender)]
+        return replies[-1], json.loads(replies[-1]['body'])
+
+    def plan(self, group, tasks, state='ready'):
+        return self.scoped('plan', group, '--config', self.file('plan.json', {'state': state, 'tasks': tasks}))
+
+    def task(self, task_id, member, objective, **extra):
+        return {'id': task_id, 'member': member, 'objective': objective, 'acceptance': ['Parent verifies'], **extra}
+
+    def accept(self, group, task_id, note='Parent checked the fixture output.', *extra):
+        return self.scoped('accept', group, '--task', task_id, '--note', note, *extra)
+
+    def tasks(self, group):
+        return {t['id']: t for t in self.scoped('status', group)['tasks']}
+
+    # ---- groups and discussion ----------------------------------------------
+
+    def test_open_find_and_reuse_saved_team_across_processes(self):
+        self.invoke('team', '--name', '研究组', '--config', self.file('team.json', {'members': MEMBERS}))
+        first = self.open_group(team='研究组')
+        result = subprocess.run([sys.executable, str(SCRIPTS / 'groups.py'), '--store', str(self.store), 'status',
+                                 '--cwd', str(self.repo), '--context', 'thread-one'], capture_output=True, text=True, encoding='utf-8')
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
         status = json.loads(result.stdout)
         self.assertEqual(status['id'], first['id'])
         self.assertEqual(status['members'][0]['model'], 'fixture-claude')
-        self.assertEqual(status['state'], 'active')
         self.open_group('Second', 'thread-two')
-        ambiguous = self.invoke('status', '--cwd', self.repo, ok=False)
-        self.assertIn('ambiguous', ambiguous['error'])
+        self.assertIn('ambiguous', self.invoke('status', '--cwd', self.repo, ok=False)['error'])
         self.assertEqual(self.invoke('status', '--cwd', self.repo, '--context', 'thread-one')['id'], first['id'])
         elsewhere = self.base / 'elsewhere'
         elsewhere.mkdir()
         self.invoke('status', '--cwd', elsewhere, '--context', 'thread-one', ok=False)
+        self.invoke('team', '--name', '研究组', '--config', self.file('changed.json', {'members': [
+            {'id': 'researcher', 'role': '研究员', 'harness': 'claude', 'model': 'changed-model'}]}))
+        self.assertEqual(self.scoped('status', first)['members'][0]['model'], 'fixture-claude')
+        self.assertEqual(len(self.invoke('list', '--cwd', self.repo)['groups']), 2)
 
-    def send(self, group, body, to='researcher', **options):
-        path = self.base / 'message.txt'
-        path.write_text(body, encoding='utf-8')
-        args = ['send', '--cwd', self.repo, '--group', group['id'], '--to', to, '--text-file', path]
-        for key, value in options.items():
-            args.extend(['--' + key.replace('_', '-'), str(value)])
-        return self.invoke(*args)
-
-    def test_addressed_messages_are_durable_and_idempotent_without_waking_members(self):
-        self.team()
+    def test_messages_are_durable_idempotent_and_do_not_wake_members(self):
         group = self.open_group()
-        first = self.send(group, '请核对官方接口', to='研究员', request_id='request-one')
-        same = self.send(group, '请核对官方接口', to='研究员', request_id='request-one')
-        self.assertEqual(first['id'], same['id'])
-        self.send(group, '只讨论，不改文件', to='codex', kind='decision')
-        messages = self.invoke('history', '--cwd', self.repo, '--group', group['id'])['messages']
-        self.assertEqual([(m['recipient'], m['status']) for m in messages], [('researcher', 'queued'), ('codex', 'recorded')])
-        self.assertTrue(all(m['sender'] == 'codex' for m in messages))
-        status = self.invoke('status', '--cwd', self.repo, '--group', group['id'])
-        self.assertEqual(status['queue'], {'researcher': 1, 'editor': 0})
+        first = self.send(group, '请核对官方接口', '研究员', '--request-id', 'request-one')
+        same = self.send(group, '请核对官方接口', '研究员', '--request-id', 'request-one')
+        self.assertEqual(first[0]['id'], same[0]['id'])
+        self.scoped('send', group, '--to', 'researcher', '--text', 'different', '--request-id', 'request-one', ok=False)
+        both = self.send(group, '大家评审方案', 'all', '--request-id', 'review')
+        self.assertEqual([m['recipient'] for m in both], ['researcher', 'editor'])
+        self.scoped('send', group, '--to', 'codex', '--kind', 'decision', '--text', '只讨论，不改文件')
+        self.scoped('send', group, '--to', 'editor', '--kind', 'decision', '--text', 'nope', ok=False)
+        status = self.scoped('status', group)
+        self.assertEqual(status['queue'], {'researcher': 2, 'editor': 1})
         self.assertEqual(status['turns_used'], 0)
-        self.assertFalse((self.base / 'groups-runs').exists())
+        self.assertTrue(any(hint.startswith('advance') for hint in status['next']))
+        self.assertEqual(self.sessions_started(), 0)
 
-    def test_dispatch_only_recipient_and_resume_its_real_cli_session(self):
-        self.team()
+    def test_advance_runs_members_in_parallel_and_resumes_each_session(self):
         group = self.open_group()
-        self.send(group, 'alpha')
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'])
-        messages = self.invoke('history', '--cwd', self.repo, '--group', group['id'])['messages']
-        reply = messages[-1]
-        self.assertEqual(reply['sender'], 'researcher')
-        self.assertEqual(reply['kind'], 'reply')
-        self.assertFalse(json.loads(reply['body'])['continued'])
-        first_session = reply['provenance']['session_id']
-        self.send(group, 'beta', reference=reply['id'])
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'])
-        second = self.invoke('history', '--cwd', self.repo, '--group', group['id'])['messages'][-1]
-        self.assertTrue(json.loads(second['body'])['continued'])
-        self.assertEqual(json.loads(second['body'])['first'], 'alpha')
-        self.assertEqual(second['provenance']['session_id'], first_session)
-        self.send(group, 'editor-only', to='editor')
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'])
-        third = self.invoke('history', '--cwd', self.repo, '--group', group['id'])['messages'][-1]
-        self.assertEqual(third['sender'], 'editor')
-        self.assertEqual(json.loads(third['body'])['first'], 'editor-only')
-        self.assertNotEqual(third['provenance']['session_id'], first_session)
-        self.assertNotIn('alpha', json.dumps(json.loads(third['body'])['discussion']))
-        self.send(group, 'editor-followup', to='editor')
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'])
-        fourth = self.invoke('history', '--cwd', self.repo, '--group', group['id'])['messages'][-1]
-        self.assertTrue(json.loads(fourth['body'])['continued'])
-        self.assertEqual(json.loads(fourth['body'])['first'], 'editor-only')
-        self.assertEqual(fourth['provenance']['session_id'], third['provenance']['session_id'])
-        self.assertEqual(self.invoke('status', '--cwd', self.repo, '--group', group['id'])['turns_used'], 4)
+        self.send(group, 'nap alpha')
+        self.send(group, 'nap beta', 'editor')
+        started = time.monotonic()
+        result = self.scoped('advance', group)
+        self.assertLess(time.monotonic() - started, 5.5, 'members should run concurrently')
+        self.assertEqual(sorted((r['member'], r['status']) for r in result['results']),
+                         [('editor', 'replied'), ('researcher', 'replied')])
+        reply, body = self.last_reply(group, 'researcher')
+        self.assertFalse(body['continued'])
+        self.send(group, 'gamma', 'researcher', '--reference', reply['id'])
+        self.scoped('advance', group)
+        second, body = self.last_reply(group, 'researcher')
+        self.assertTrue(body['continued'])
+        self.assertEqual(body['first'], 'nap alpha')
+        self.assertEqual(second['provenance']['session_id'], reply['provenance']['session_id'])
+        self.assertEqual(body['packet']['discussion']['quoted_references'][0]['id'], reply['id'])
+        _, editor = self.last_reply(group, 'editor')
+        self.assertNotIn('alpha', json.dumps(editor['packet']))
+        self.assertEqual(self.scoped('status', group)['turns_used'], 3)
 
-    def test_timeout_preserves_queue_and_blocks_automatic_continuation(self):
-        self.team(timeout_seconds=1)
-        group = self.open_group()
+    def test_failed_turn_blocks_only_that_member_and_fork_restarts_with_carryover(self):
+        group = self.open_group(members=[{**MEMBERS[0], 'timeout_seconds': 4}, MEMBERS[1]])
+        self.send(group, 'remember RIVER-42')
+        self.scoped('advance', group)
         self.send(group, 'slow')
-        self.send(group, 'later', to='editor')
-        result = self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], '--limit', 2, ok=False)
-        self.assertEqual(result['turns'][0]['status'], 'unknown')
-        terminal = json.loads(Path(result['turns'][0]['result_path']).read_text(encoding='utf-8'))
-        self.assertEqual(terminal['status'], 'timed_out')
-        status = self.invoke('status', '--cwd', self.repo, '--group', group['id'])
-        self.assertEqual(status['state'], 'needs_attention')
-        self.assertEqual(status['queue']['editor'], 1)
-        self.assertEqual(status['turns_used'], 1)
-        self.invoke('resume', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.assertEqual(len(list((self.base / 'fake-sessions').iterdir())), 1)
+        self.send(group, 'editor still works', 'editor')
+        result = self.scoped('advance', group, ok=False)
+        outcome = {r['member']: r for r in result['results']}
+        self.assertEqual(outcome['researcher']['status'], 'failed')
+        self.assertIn('timed_out', outcome['researcher']['error'])
+        self.assertEqual(outcome['editor']['status'], 'replied')
+        status = self.scoped('status', group)
+        self.assertEqual(status['state'], 'active')
+        self.assertTrue(status['members'][0]['blocked'])
+        self.send(group, 'queued while blocked')
+        blocked = self.scoped('advance', group, ok=False)
+        self.assertIn('fork --member', blocked['results'][0]['error'])
+        sessions = self.sessions_started()
+        self.scoped('fork', group, '--member', 'researcher')
+        self.scoped('advance', group)
+        _, body = self.last_reply(group, 'researcher')
+        self.assertFalse(body['continued'])
+        self.assertEqual(self.sessions_started(), sessions + 1)
+        self.assertIn('RIVER-42', json.dumps(body['packet']['discussion']['carryover'], ensure_ascii=False))
 
-    def test_agy_scope_violation_cannot_resume_or_modify_source(self):
-        self.team()
+    def test_pause_cancels_active_turn_preserves_queue_and_resume_continues_the_session(self):
         group = self.open_group()
-        self.send(group, 'violate', to='editor')
-        result = self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        terminal = json.loads(Path(result['turns'][0]['result_path']).read_text(encoding='utf-8'))
-        self.assertEqual(terminal['status'], 'scope_violation')
-        self.assertFalse((self.repo / 'outside.txt').exists())
-        self.send(group, 'do not continue', to='editor')
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.assertEqual(len(list((self.base / 'fake-sessions').iterdir())), 1)
-
-    def test_agy_source_baseline_change_requires_new_group(self):
-        self.team()
-        group = self.open_group()
-        self.send(group, 'first', to='editor')
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'])
-        subprocess.run(['git', '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid',
-                        '-c', 'commit.gpgsign=false', 'commit', '--allow-empty', '-qm', 'new baseline'],
-                       cwd=self.repo, check=True, capture_output=True)
-        self.send(group, 'second', to='editor')
-        result = self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.assertIn('baseline', result['turns'][0]['error'])
-        self.assertEqual(len(list((self.base / 'fake-sessions').iterdir())), 1)
-
-    def test_pause_cancels_active_turn_preserves_queue_and_resume_does_not_retry_it(self):
-        self.team()
-        group = self.open_group()
-        self.send(group, 'slow')
+        self.send(group, 'slow-init')
         service = groups.Groups(self.store)
         with ThreadPoolExecutor(max_workers=1) as pool:
-            running = pool.submit(service.dispatch, group['id'])
-            deadline = time.monotonic() + 5
-            while time.monotonic() < deadline:
-                status = self.invoke('status', '--cwd', self.repo, '--group', group['id'])
-                if (status.get('active_turn') or {}).get('progress'):
+            running = pool.submit(service.advance, group['id'])
+            deadline = time.monotonic() + 15
+            while time.monotonic() < deadline and not running.done():
+                turns = self.scoped('status', group)['running_turns']
+                progress = (turns[0].get('progress') or {}) if turns else {}
+                if progress.get('session_id'):
                     break
                 time.sleep(.05)
             else:
-                self.fail('CLI never reached a visible running state')
-            self.send(group, 'later', to='researcher')
-            self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-            paused = self.invoke('pause', '--cwd', self.repo, '--group', group['id'])
-            self.assertIn(paused['state'], ('pausing', 'paused'))
-            running.result(timeout=6)
-        status = self.invoke('status', '--cwd', self.repo, '--group', group['id'])
+                self.fail('CLI never reported a session ID before pause: '
+                          + (json.dumps(running.result(), ensure_ascii=False)[:2000] if running.done() else 'timeout'))
+            session_id = progress['session_id']
+            self.send(group, 'later')
+            self.assertEqual(self.scoped('advance', group)['results'], [])
+            self.assertIn(self.scoped('pause', group)['state'], ('pausing', 'paused'))
+            running.result(timeout=10)
+        status = self.scoped('status', group)
         self.assertEqual(status['state'], 'paused')
         self.assertEqual(status['queue']['researcher'], 1)
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.invoke('resume', '--cwd', self.repo, '--group', group['id'])
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'])
-        messages = self.invoke('history', '--cwd', self.repo, '--group', group['id'])['messages']
+        self.scoped('advance', group, ok=False)
+        self.scoped('resume', group)
+        self.scoped('advance', group)
+        messages = self.scoped('history', group)['messages']
         self.assertEqual(messages[0]['status'], 'cancelled')
-        self.assertEqual(messages[-1]['sender'], 'researcher')
+        reply, body = self.last_reply(group)
+        self.assertEqual(reply['provenance']['session_id'], session_id)
+        self.assertEqual((body['continued'], body['first'], body['body']), (True, 'slow-init', 'later'))
         self.assertEqual(len([m for m in messages if m['kind'] == 'reply']), 1)
 
-    def test_controller_crash_is_unknown_and_never_implicitly_replayed(self):
-        self.team()
+    def test_controller_crash_is_unknown_never_replayed_and_recoverable_by_fork(self):
         group = self.open_group()
         self.send(group, 'kill-controller')
-        driver = self.base / 'driver.py'
-        driver.write_text('import os, sys\nos.environ["GROUP_TEST_CONTROLLER_PID"] = str(os.getpid())\nsys.path.insert(0, ' + repr(str(SCRIPTS)) + ')\nimport groups\n'
-                          'groups.harness.resolve_launcher = lambda name: [sys.executable, ' + repr(str(self.fake)) + ']\n'
-                          'raise SystemExit(groups.main(sys.argv[1:]))\n', encoding='utf-8')
-        result = subprocess.run([sys.executable, str(driver), '--store', str(self.store), 'dispatch',
-                                 '--cwd', str(self.repo), '--group', group['id']], capture_output=True, timeout=8)
-        self.assertNotEqual(result.returncode, 0, result.stdout.decode('utf-8', errors='replace'))
-        status = self.invoke('status', '--cwd', self.repo, '--group', group['id'])
-        self.assertEqual(status['turns_used'], 1)
-        recovered = self.invoke('reconcile', '--cwd', self.repo, '--group', group['id'])
-        self.assertEqual(recovered['turns'][0]['status'], 'unknown')
-        self.invoke('resume', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.assertEqual(self.invoke('status', '--cwd', self.repo, '--group', group['id'])['turns_used'], 1)
+        result = subprocess.run([sys.executable, '-X', 'utf8', str(SCRIPTS / 'groups.py'), '--store', str(self.store),
+                                 'advance', '--cwd', str(self.repo), '--group', group['id']], capture_output=True, timeout=30)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(len(self.scoped('status', group)['running_turns']), 1)
+        recovered = self.scoped('reconcile', group)
+        self.assertEqual(recovered['recovered'][0]['status'], 'unknown')
+        self.assertTrue(self.scoped('status', group)['members'][0]['blocked'])
+        self.send(group, 'after crash')
+        self.scoped('advance', group, ok=False)
+        self.scoped('fork', group, '--member', 'researcher', '--note', 'Earlier turn lost; continue from the brief.')
+        self.scoped('advance', group)
+        _, body = self.last_reply(group)
+        self.assertEqual(body['packet']['discussion']['carryover'], {'summary': 'Earlier turn lost; continue from the brief.'})
+        statuses = [m['status'] for m in self.scoped('history', group)['messages'] if m['kind'] == 'question']
+        self.assertEqual(statuses, ['abandoned', 'replied'])
 
-    def test_followup_keeps_linked_task_acceptance_and_results_unchanged(self):
-        self.team()
-        group = self.open_group()
-        plan = self.file('plan.json', {
-            'schema_version': 1, 'plan_id': 'original-task', 'state': 'ready', 'goal': 'Read source',
-            'strategy': 'One scoped read', 'cwd': str(self.repo), 'acceptance': ['Evidence checked'],
-            'tasks': [{'id': 'inspect', 'depends_on': [], 'rationale': 'User assignment', 'task': {
-                'harness': 'claude', 'model': 'fixture-claude', 'mode': 'advisor', 'objective': 'original-task',
-                'acceptance': ['Parent verifies result'], 'timeout_seconds': 10}}]})
-        original = groups.harness.run_planned(plan, 'inspect', output_root=self.base / 'tasks')
-        evidence = self.base / 'evidence.md'
-        evidence.write_text('Verified fixture response and no source modifications.', encoding='utf-8')
-        groups.harness.accept_result(plan, 'inspect', original['result_path'], evidence)
-        root = Path(original['run_dir'])
-        before = {name: (root / name).read_bytes() for name in ('run.json', 'result.json', 'acceptance.json')}
-        self.invoke('link', '--cwd', self.repo, '--group', group['id'], '--member', 'researcher', '--result', original['result_path'])
-        self.send(group, '解释已完成任务的依据')
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'])
-        status = self.invoke('status', '--cwd', self.repo, '--group', group['id'])
-        self.assertEqual(status['tasks'][0]['status'], 'accepted')
-        self.assertEqual(before, {name: (root / name).read_bytes() for name in before})
-
-    def test_linked_task_reports_running_during_revision_before_result_exists(self):
-        self.team()
-        group = self.open_group()
-        plan = self.file('plan.json', {
-            'schema_version': 1, 'plan_id': 'linked-running', 'state': 'ready', 'goal': 'Read source',
-            'strategy': 'One scoped read', 'cwd': str(self.repo), 'acceptance': ['Evidence checked'],
-            'tasks': [{'id': 'inspect', 'depends_on': [], 'rationale': 'User assignment', 'task': {
-                'harness': 'claude', 'model': 'fixture-claude', 'mode': 'advisor', 'objective': 'original-task',
-                'acceptance': ['Parent verifies result'], 'timeout_seconds': 10}}]})
-        original = groups.harness.run_planned(plan, 'inspect', output_root=self.base / 'tasks')
-        self.invoke('link', '--cwd', self.repo, '--group', group['id'], '--member', 'researcher', '--result', original['result_path'])
-        feedback = self.base / 'feedback.txt'
-        feedback.write_text('slow', encoding='utf-8')
-        root = Path(original['run_dir'])
-        with ThreadPoolExecutor(max_workers=1) as pool:
-            running = pool.submit(groups.harness.revise_result, plan, 'inspect', original['result_path'], feedback)
-            try:
-                deadline = time.monotonic() + 5
-                while time.monotonic() < deadline:
-                    state = groups.harness.read_json(root / 'run.json')
-                    if state['status'] == 'running':
-                        break
-                    time.sleep(.05)
-                else:
-                    self.fail('Revision did not start')
-                status = self.invoke('status', '--cwd', self.repo, '--group', group['id'])
-                self.assertEqual(status['tasks'][0]['status'], 'running')
-                self.assertFalse(Path(status['tasks'][0]['result_path']).exists())
-            finally:
-                groups.harness.cancel_run(root)
-                running.result(timeout=6)
-
-    def test_group_list_and_team_updates_do_not_change_existing_member_models(self):
-        self.team()
-        group = self.open_group()
-        listed = self.invoke('list', '--cwd', self.repo)
-        self.assertEqual(listed['groups'][0]['id'], group['id'])
-        self.assertEqual(listed['teams'][0]['name'], '研究组')
-        self.invoke('team', '--name', '研究组', '--config', self.file('changed-team.json', {
-            'members': [{'id': 'researcher', 'role': '研究员', 'harness': 'claude', 'model': 'changed-model'}]}))
-        original = self.invoke('status', '--cwd', self.repo, '--group', group['id'])
-        self.assertEqual(original['members'][0]['model'], 'fixture-claude')
-
-    def test_budget_stops_new_dispatch_until_explicit_extension(self):
-        self.team()
-        group = self.open_group(max_turns=1)
-        self.send(group, 'one')
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'])
-        self.send(group, 'two')
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.assertEqual(self.invoke('status', '--cwd', self.repo, '--group', group['id'])['queue']['researcher'], 1)
-        self.invoke('resume', '--cwd', self.repo, '--group', group['id'], '--additional-turns', '1')
-        self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'])
-        self.assertEqual(self.invoke('status', '--cwd', self.repo, '--group', group['id'])['turns_used'], 2)
-
-    def test_invalid_stream_or_session_does_not_silently_start_a_new_conversation(self):
-        self.team()
-        for body in ('broken', 'mismatch'):
-            with self.subTest(body=body):
-                group = self.open_group(body, body)
-                self.send(group, body)
-                failure = self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-                self.assertEqual(failure['turns'][0]['status'], 'unknown')
-                self.send(group, 'do not replay')
-                self.invoke('resume', '--cwd', self.repo, '--group', group['id'], ok=False)
-                self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-                self.assertEqual(self.invoke('status', '--cwd', self.repo, '--group', group['id'])['turns_used'], 1)
-
-    def test_reported_model_mismatch_requires_review_before_continuing(self):
-        self.team()
+    def test_model_mismatch_and_auth_errors_are_explicit(self):
         group = self.open_group()
         self.send(group, 'wrong-model')
-        result = self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.assertEqual(result['turns'][0]['status'], 'failed')
-        self.send(group, 'do not resume silently')
-        result = self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.assertIn('model', result['turns'][0]['error'].lower())
+        result = self.scoped('advance', group, ok=False)
+        self.assertEqual(result['results'][0]['status'], 'failed')
+        self.assertIn('model', result['results'][0]['error'].lower())
+        self.send(group, 'auth-error', 'researcher')
+        self.scoped('fork', group, '--member', 'researcher')
+        result = self.scoped('advance', group, ok=False)
+        self.assertIn('OAuth session expired', result['results'][0]['error'])
+        self.assertNotIn('Reported model differs', result['results'][0]['error'])
 
-    def test_cli_authentication_error_is_not_hidden_by_a_synthetic_model_label(self):
-        self.team()
+    def test_agy_member_follows_new_commits_and_uncommitted_work_in_the_same_session(self):
         group = self.open_group()
-        self.send(group, 'auth-error')
-        result = self.invoke('dispatch', '--cwd', self.repo, '--group', group['id'], ok=False)
-        self.assertEqual(result['turns'][0]['status'], 'failed')
-        self.assertIn('OAuth session expired', result['turns'][0]['error'])
-        self.assertNotIn('Reported model differs', result['turns'][0]['error'])
+        self.send(group, 'read calc.py', 'editor')
+        self.scoped('advance', group)
+        first, _ = self.last_reply(group, 'editor')
+        (self.repo / 'calc.py').write_text('committed change\n')
+        self.commit('new baseline')
+        (self.repo / 'notes.md').write_text('uncommitted\n')
+        self.send(group, 'read calc.py notes.md', 'editor')
+        self.scoped('advance', group)
+        second, body = self.last_reply(group, 'editor')
+        self.assertTrue(body['continued'])
+        self.assertEqual(body['seen'], {'calc.py': 'committed change\n', 'notes.md': 'uncommitted\n'})
+        self.assertEqual(first['provenance']['session_id'], second['provenance']['session_id'])
+
+    def test_agy_discussion_scope_violation_blocks_member_and_leaves_source_alone(self):
+        group = self.open_group()
+        self.send(group, 'violate', 'editor')
+        result = self.scoped('advance', group, ok=False)
+        self.assertEqual(runner.read_json(result['results'][0]['result_path'])['status'], 'scope_violation')
+        self.assertFalse((self.repo / 'outside.txt').exists())
+        self.send(group, 'do not continue', 'editor')
+        self.scoped('advance', group, ok=False)
+        self.assertEqual(self.sessions_started(), 1)
+
+    def test_turn_budget_stops_until_explicit_extension(self):
+        group = self.open_group(max_turns=1)
+        self.send(group, 'one')
+        self.scoped('advance', group)
+        self.send(group, 'two')
+        self.assertIn('budget', self.scoped('advance', group, ok=False)['results'][0]['error'])
+        self.scoped('resume', group, '--additional-turns', 1)
+        self.scoped('advance', group)
+        self.assertEqual(self.scoped('status', group)['turns_used'], 2)
+
+    # ---- planned tasks ----------------------------------------------------
+
+    def test_plan_dispatch_review_gate_and_handoff_flow(self):
+        group = self.open_group()
+        self.send(group, 'Explain where subtraction happens')
+        self.scoped('advance', group)
+        self.plan(group, [self.task('inspect', 'editor', 'inspect input handling'),
+                          self.task('fix', '研究员', 'edit', mode='worker', allowed_paths=['calc.py', 'new.txt'],
+                                    depends_on=['inspect'])], state='draft')
+        self.assertTrue(any(h.startswith('approve') for h in self.scoped('status', group)['next']))
+        self.assertEqual(self.scoped('advance', group)['results'], [])
+        self.scoped('approve', group)
+        wave = self.scoped('advance', group)
+        self.assertEqual([(r['id'], r['state']) for r in wave['results']], [('inspect', 'awaiting_review')])
+        self.assertEqual(self.tasks(group)['fix']['waiting_on'], ['inspect'])
+        inspect = self.scoped('show', group, '--task', 'inspect')
+        handoff = self.file('handoff.json', {'summary': 'Verified: add() subtracts.', 'claims': [], 'limitations': ['fixture']})
+        self.accept(group, 'inspect', 'Checked calc.py myself.', '--handoff', handoff)
+        wave = self.scoped('advance', group)
+        fix = wave['results'][0]
+        self.assertEqual((fix['id'], fix['state'], fix['changed_files']), ('fix', 'awaiting_review', ['calc.py', 'new.txt']))
+        prompt = (Path(fix['result_path']).parent / 'prompt.txt').read_text(encoding='utf-8')
+        self.assertIn('Verified: add() subtracts.', prompt)
+        self.assertNotIn(inspect['response'], prompt)
+        self.assertIn('member_discussion', prompt)
+        self.assertIn('Explain where subtraction happens', prompt)
+        self.assertEqual(runner.read_json(fix['result_path'])['requested_model'], 'fixture-claude')
+        self.accept(group, 'fix')
+        self.assertEqual(self.git('status', '--porcelain'), '')
+        integrated = self.scoped('integrate', group, '--task', 'fix')
+        self.assertEqual(integrated['integration'], 'applied')
+        self.assertIn('a + b', (self.repo / 'calc.py').read_text())
+        self.assertEqual(self.scoped('integrate', group, '--task', 'fix')['integration'], 'already_present')
+        self.assertTrue(any('all tasks accepted' in h for h in self.scoped('status', group)['next']))
+
+    def test_chained_workers_receive_accepted_changes_without_any_commit(self):
+        (self.repo / 'wip.txt').write_text('user work in progress\n')
+        group = self.open_group()
+        self.plan(group, [
+            self.task('first', 'researcher', 'write step.txt one', mode='worker', allowed_paths=['step.txt']),
+            self.task('second', 'editor', 'write next.txt two', mode='worker', allowed_paths=['next.txt'], depends_on=['first']),
+            self.task('review', 'researcher', 'read step.txt next.txt wip.txt', depends_on=['first', 'second'])])
+        self.scoped('advance', group)
+        self.accept(group, 'first')
+        second = self.scoped('advance', group)['results'][0]
+        self.assertEqual(second['changed_files'], ['next.txt'])
+        self.assertTrue((Path(second['workspace']) / 'step.txt').exists())
+        self.accept(group, 'second')
+        review = self.scoped('advance', group)['results'][0]
+        seen = json.loads(self.scoped('show', group, '--task', 'review')['response'])['seen']
+        self.assertEqual(seen, {'step.txt': 'one\n', 'next.txt': 'two\n', 'wip.txt': 'user work in progress\n'})
+        self.assertNotEqual(Path(review['workspace']), self.repo)
+        self.assertEqual(self.git('status', '--porcelain'), '?? wip.txt')
+        self.scoped('integrate', group, '--task', 'first')
+        self.scoped('integrate', group, '--task', 'second')
+        self.assertEqual((self.repo / 'next.txt').read_text(), 'two\n')
+
+    def test_independent_tasks_run_in_parallel(self):
+        group = self.open_group()
+        self.plan(group, [self.task('a', 'researcher', 'nap a'), self.task('b', 'editor', 'nap b'),
+                          self.task('c', 'researcher', 'nap c')])
+        started = time.monotonic()
+        wave = self.scoped('advance', group)
+        self.assertLess(time.monotonic() - started, 8, 'three 3-second tasks should overlap')
+        self.assertEqual(sorted(r['id'] for r in wave['results']), ['a', 'b', 'c'])
+        self.assertTrue(all(r['state'] == 'awaiting_review' for r in wave['results']))
+
+    def test_revision_resumes_session_and_checks_gate_acceptance(self):
+        group = self.open_group()
+        self.plan(group, [self.task('write', 'editor', 'edit', mode='worker', profile='writer', effort='low',
+                                    allowed_paths=['calc.py', 'new.txt'],
+                                    checks=[{'type': 'contains', 'path': 'new.txt', 'text': '修订完成'}])])
+        first = self.scoped('advance', group)['results'][0]
+        self.assertEqual(first['state'], 'needs_revision')
+        self.assertFalse(first['checks_passed'])
+        self.scoped('accept', group, '--task', 'write', '--note', 'no', ok=False)
+        self.scoped('revise', group, '--task', 'write', '--feedback', 'revise-edit')
+        second = self.scoped('advance', group)['results'][0]
+        self.assertEqual((second['state'], second['attempt'], second['checks_passed']), ('awaiting_review', 2, True))
+        self.assertEqual(second['workspace'], first['workspace'])
+        self.assertTrue(json.loads(self.scoped('show', group, '--task', 'write')['response'])['continued'])
+        self.assertEqual((Path(first['result_path']).parent / 'artifacts/new.txt').read_text(encoding='utf-8'), '中文 new file\n')
+        self.accept(group, 'write')
+        self.scoped('revise', group, '--task', 'write', '--feedback', 'again', ok=False)
+
+    def test_protocol_error_requires_fork_which_starts_fresh_with_guidance(self):
+        group = self.open_group()
+        self.plan(group, [self.task('fix', 'researcher', 'edit', mode='worker', allowed_paths=['calc.py', 'new.txt'])])
+        first = self.scoped('advance', group)['results'][0]
+        self.scoped('revise', group, '--task', 'fix', '--feedback', 'session-mismatch')
+        failed = self.scoped('advance', group, ok=False)['results'][0]
+        self.assertEqual((failed['state'], failed['execution_status']), ('failed', 'protocol_error'))
+        self.assertIn('fork', self.scoped('revise', group, '--task', 'fix', '--feedback', 'x', ok=False)['error'])
+        self.scoped('fork', group, '--task', 'fix', '--note', 'Only change calc.py this time.')
+        fresh = self.scoped('advance', group)['results'][0]
+        self.assertEqual(fresh['state'], 'awaiting_review')
+        self.assertNotEqual(fresh['workspace'], first['workspace'])
+        shown = self.scoped('show', group, '--task', 'fix')
+        packet = json.loads(shown['response'])['packet']
+        self.assertEqual(packet['previous_attempt']['guidance'], 'Only change calc.py this time.')
+        self.assertFalse(json.loads(shown['response'])['continued'])
+        self.assertNotEqual(shown['session_id'], runner.read_json(first['result_path'])['session_id'])
+
+    def test_tampered_evidence_cannot_be_accepted_or_handed_off(self):
+        group = self.open_group()
+        self.plan(group, [self.task('fix', 'researcher', 'edit', mode='worker', allowed_paths=['calc.py', 'new.txt']),
+                          self.task('next', 'researcher', 'hello', depends_on=['fix'])])
+        first = self.scoped('advance', group)['results'][0]
+        artifact = Path(first['result_path']).parent / 'artifacts/new.txt'
+        original = artifact.read_bytes()
+        artifact.write_text('tampered')
+        self.assertIn('snapshot changed', self.scoped('accept', group, '--task', 'fix', '--note', 'x', ok=False)['error'])
+        artifact.write_bytes(original)
+        extra = Path(first['workspace']) / 'unexpected.txt'
+        extra.write_text('parent addition')
+        self.assertIn('changed file set', self.scoped('accept', group, '--task', 'fix', '--note', 'x', ok=False)['error'])
+        extra.unlink()
+        (Path(first['workspace']) / 'new.txt').write_text('parent edit')
+        self.assertIn('keep parent edits separate', self.scoped('accept', group, '--task', 'fix', '--note', 'x', ok=False)['error'])
+        (Path(first['workspace']) / 'new.txt').write_text('中文 new file\n', encoding='utf-8')
+        self.accept(group, 'fix')
+        runner.write_json(Path(first['result_path']).parent / 'handoff.json', {'summary': 'altered', 'claims': [], 'limitations': []})
+        result = self.scoped('advance', group, ok=False)['results'][0]
+        self.assertIn('handoff', result['error'])
+
+    def test_pause_cancels_running_tasks_and_cancel_targets_one(self):
+        group = self.open_group()
+        self.plan(group, [self.task('slow', 'researcher', 'slow'), self.task('other', 'editor', 'slow')])
+        service = groups.Groups(self.store)
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            running = pool.submit(service.advance, group['id'])
+            deadline = time.monotonic() + 8
+            while time.monotonic() < deadline and sum(t['state'] == 'running' for t in self.tasks(group).values()) < 2:
+                time.sleep(.05)
+            self.scoped('cancel', group, '--task', 'other')
+            time.sleep(1)
+            self.assertEqual(self.tasks(group)['other']['state'], 'cancelled')
+            self.assertEqual(self.tasks(group)['slow']['state'], 'running')
+            self.scoped('pause', group)
+            running.result(timeout=10)
+        self.assertEqual(self.scoped('status', group)['state'], 'paused')
+        self.assertEqual({t['state'] for t in self.tasks(group).values()}, {'cancelled'})
+        self.scoped('resume', group)
+        self.scoped('revise', group, '--task', 'slow', '--feedback', 'finish now')
+        self.assertEqual(self.scoped('advance', group)['results'][0]['state'], 'awaiting_review')
+
+    def test_plan_validation_and_attempt_cap(self):
+        group = self.open_group(max_task_attempts=1)
+        bad = [
+            ([self.task('a', 'nobody', 'x')], 'Unknown member'),
+            ([self.task('a', 'researcher', 'x', depends_on=['b']), self.task('b', 'researcher', 'x', depends_on=['a'])], 'cycle'),
+            ([self.task('a', 'researcher', 'x', depends_on=['missing'])], 'Unknown or self'),
+            ([self.task('a', 'researcher', 'x', model='other')], 'Unknown plan task fields'),
+            ([self.task('a', 'editor', 'x', mode='researcher')], 'not supported by agy'),
+        ]
+        for tasks, error in bad:
+            with self.subTest(error=error):
+                self.assertIn(error, self.scoped('plan', group, '--config', self.file('bad.json', {'tasks': tasks}), ok=False)['error'])
+        self.plan(group, [self.task('a', 'researcher', 'error-zero')])
+        self.scoped('advance', group, ok=False)
+        self.assertIn('already started', self.scoped('plan', group, '--config', self.file('again.json', {
+            'tasks': [self.task('a', 'researcher', 'x')]}), ok=False)['error'])
+        self.scoped('fork', group, '--task', 'a')
+        self.assertIn('max_task_attempts', self.scoped('advance', group, ok=False)['results'][0]['error'])
+
+    def test_detached_advance_runs_in_background_and_wait_collects_it(self):
+        group = self.open_group()
+        self.plan(group, [self.task('bg', 'researcher', 'nap background')])
+        started = self.scoped('advance', group, '--detach')
+        self.assertEqual(started['status'], 'started')
+        self.assertTrue(Path(started['log']).exists())
+        done = self.scoped('wait', group, '--timeout', 30)
+        self.assertFalse(done['waiting'])
+        self.assertEqual({t['id']: t['state'] for t in done['status']['tasks']}, {'bg': 'awaiting_review'})
 
 
 if __name__ == '__main__':
