@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/guides/get-started/quick-start.md -->
-<!-- Source SHA-256: 095b91c0f2534bb5fd7dbb0ecf5634a57fc379bd507cce2ec3633c3c85216cdc -->
+<!-- Source SHA-256: 316c5bea49aa08341a60fdcd9dfa40e9a8776346058818045058f96fd390f7d2 -->
 
 > ## Documentation Index
 >
@@ -23,7 +23,7 @@
 
 |                                     可灵AI 开发者平台                                      |
 | :----------------------------------------------------------------------------------------: |
-| ![](https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-zh.70df5415e1a4cdc2.png) |
+| ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-zh.70df5415e1a4cdc2.png) |
 
 ## Step 2: 资源包购买
 
@@ -34,7 +34,7 @@
 
 |                                       视频生成 API 资源包                                        |                                       图像生成 API 资源包                                        |
 | :----------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
-| ![](https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-video-zh.a2986bbf57d22eca.png) | ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-image-zh.db68ae2f858ad76a.png) |
+| ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-video-zh.a2986bbf57d22eca.png) | ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-image-zh.db68ae2f858ad76a.png) |
 
 ## Step 3: 登录开发者控制台
 
@@ -42,7 +42,7 @@
 
 |                                        开发者控制台                                        |
 | :----------------------------------------------------------------------------------------: |
-| ![](https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/list-zh.906efffb6f70bc0d.png) |
+| ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/list-zh.906efffb6f70bc0d.png) |
 
 2. 使用您的手机号或快手扫码登录，控制台账号与可灵AI web端账号一致
 
@@ -54,7 +54,7 @@
 
 | 新建 API 密钥名称                                                                                       | 一键复制API Key                                                                                              | 支持启用/禁用、编辑名称、删除                                                                         |
 | :------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/rename-zh.e6bd11d32ac78cb5.png) | ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/copy-zh.98938e404cfe67ab.png) | ![](https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/list-zh.906efffb6f70bc0d.png) |
+| ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/rename-zh.e6bd11d32ac78cb5.png) | ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/copy-zh.98938e404cfe67ab.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/list-zh.906efffb6f70bc0d.png) |
 
 1、打开可灵 AI 控制台并登录
 
@@ -76,4 +76,4 @@
 
 | 查看API 调用量&趋势                                                                     | 查看资源包消耗进度&趋势                                                                 | 查看资源包账单明细                                                                      | 查看额度账单明细                                                                        |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/1-zh.0797d1a83ea443ba.png) | ![](https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/2-zh.25a93ef0bbeb8ab6.png) | ![](https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/3-zh.63d730eac98a7e66.png) | ![](https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/4-zh.9d8dbf54f5220af7.png) |
+| ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/1-zh.0797d1a83ea443ba.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/2-zh.25a93ef0bbeb8ab6.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/3-zh.63d730eac98a7e66.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/4-zh.9d8dbf54f5220af7.png) |

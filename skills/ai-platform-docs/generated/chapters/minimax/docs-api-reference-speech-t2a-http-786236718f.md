@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/speech-t2a-http.md -->
-<!-- Source SHA-256: e543e900f6f1f824aa8c2494fd28f630c1d8eead202ebe6c5aebf4422b70813e -->
+<!-- Source SHA-256: 03b266fdd2c8d49b6c2b77ecaa832173ba5d291e80091dda63aed405824b7d40 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -294,6 +294,27 @@ components:
             - Afrikaans
             - auto
           default: null
+        text_normalization_mode:
+          type: string
+          description: >-
+            文本归一化模式。`basic` 使用快速的规则归一化；`quality` 采用 LLM +
+            规则的混合方案，归一化质量更高，但会增加一定延迟。详见[文本归一化](/guides/speech-t2a-websocket#文本归一化)。
+
+
+            注意：
+
+            - `quality` 目前仅对非流式请求（`stream=false`）生效，且仅支持
+            `speech-2.8-hd`、`speech-2.8-turbo`、`speech-2.6-hd`、`speech-2.6-turbo`；流式请求或其他模型传入
+            `quality` 时按 `basic` 处理，不会报错
+
+            - 传入本参数后，`voice_setting.text_normalization` 不再生效；不传时沿用
+            `voice_setting.text_normalization` 的设置（默认关闭）
+          enum:
+            - basic
+            - quality
+          x-mint:
+            post:
+              - updated
         voice_modify:
           $ref: '#/components/schemas/VoiceModify'
         subtitle_enable:
@@ -423,6 +444,13 @@ components:
               type: integer
               format: int64
               description: 合成文本的字符数（含标点和空格），仅供参考，不用于计费；计费字符数请以 `usage_characters` 为准
+            norm_text_char_count:
+              type: integer
+              format: int64
+              description: >-
+                本次经高质量文本归一化处理的字符数（按 Unicode 字符计）。仅在非流式请求且
+                `text_normalization_mode=quality` 时返回；为 `0`
+                表示本次未执行高质量归一化（例如所用模型不支持）。仅供参考，暂不用于计费
         base_resp:
           type: object
           description: 本次请求的状态码和详情
@@ -499,8 +527,15 @@ components:
             - whisper
         text_normalization:
           type: boolean
-          description: 是否启用中文、英语文本规范化，开启后可提升数字阅读场景的性能，但会略微增加延迟，默认值为 false
+          description: >-
+            废弃参数，请使用请求体一级参数 `text_normalization_mode`：本参数为 `true` 等价于
+            `text_normalization_mode=basic`；为 `false` 或不传等价于不传
+            `text_normalization_mode`。两者同时传入时以 `text_normalization_mode` 为准
+
+
+            是否启用中文、英语文本规范化，开启后可提升数字阅读场景的性能，但会略微增加延迟，默认值为 false
           default: false
+          deprecated: true
         latex_read:
           type: boolean
           description: >-

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-websocket.md -->
-<!-- Source SHA-256: 9ad83b05a7cc9fc69d914bba5cafbee984534b6b9742397fe77b947ac8f24a9e -->
+<!-- Source SHA-256: e7a02beb6661f67fc295ce315b0762f4229364bdf831470e9c7e827acf330a34 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -44,6 +44,66 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
 | 12. 韩语（Korean） | 26. 丹麦语（Danish） | 39. 泰米尔语（Tamil） |
 | 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew） | 40. 阿非利卡语（Afrikaans） |
 | 14. 越南语（Vietnamese） | | |
+
+## 文本归一化
+
+控制语音合成前如何将书面文本转换为口语文本。
+
+文本归一化会把书面写法转换为更适合朗读的形式。例如数字、日期、时间、货币、电话号码等结构化表达，往往需要结合上下文进行展开或解读。
+
+不传 `text_normalization_mode` 时，沿用 `voice_setting.text_normalization` 的设置（默认关闭）。
+
+通过 `text_normalization_mode` 字段控制归一化策略：
+
+* `basic`：基于规则的快速文本归一化，延迟低
+* `quality`：采用 LLM + 规则的混合方案，归一化质量更高，但会增加额外延迟
+
+### Basic 模式
+
+`basic` 面向低延迟的文本归一化。
+
+它使用基于规则的归一化系统，在生成语音前处理常见的书面表达。
+
+对于大多数语音合成请求，`basic` 能在归一化质量、稳定性和延迟之间取得良好平衡。
+
+```json theme={null}
+{
+  "text_normalization_mode": "basic"
+}
+```
+
+### Quality 模式
+
+`quality` 适用于归一化质量比延迟更重要的场景。
+
+它采用 LLM + 规则的混合方案，系统会根据输入文本自动将请求路由到规则分支或 LLM 分支。
+
+与 `basic` 相比，该模式对更复杂、更依赖上下文的输入有更好的归一化效果。
+
+```json theme={null}
+{
+  "text_normalization_mode": "quality"
+}
+```
+
+<Note>
+  `quality` 目前仅对非流式 HTTP 请求（`stream=false`）生效，且仅支持 `speech-2.8-hd`、`speech-2.8-turbo`、`speech-2.6-hd`、`speech-2.6-turbo`。流式请求（包括 WebSocket）或其他模型传入 `quality` 时按 `basic` 处理，不会报错。
+</Note>
+
+### 延迟
+
+`quality` 会增加额外的预处理延迟：
+
+* 选择规则分支时约 30 ms
+* 触发 LLM 分支时约 100 ms
+
+分支由系统根据输入文本自动选择。
+
+### 如何选择
+
+大多数应用推荐使用 `basic`。
+
+当归一化准确性更重要、且可以接受额外的预处理延迟时，使用 `quality`。
 
 ## 接入地址
 

@@ -5,10 +5,10 @@
 | 区 | 目录 | 源文档 | 页数 | 章节文件 | 章节表 |
 |----|------|-------|------|---------|-------|
 | TOS 区 | `chapters/volcengine/tos/` | 《对象存储 文档指南》 | 6492 | 1999 | `INDEX-tos.md` |
-| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1066 | 192 | `INDEX-ark.md` |
-| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2299 | 162 | `INDEX-ark-guide.md` |
+| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1065 | 192 | `INDEX-ark.md` |
+| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2296 | 162 | `INDEX-ark-guide.md` |
 | AI MediaKit API 区 | `chapters/volcengine/mediakit/` | 《AI MediaKit API 参考》 | 942 | 103 | `INDEX-mediakit.md` |
-| AI MediaKit 指南区 | `chapters/volcengine/mediakit-guide/` | 《AI MediaKit 文档指南》 | 889 | 152 | `INDEX-mediakit-guide.md` |
+| AI MediaKit 指南区 | `chapters/volcengine/mediakit-guide/` | 《AI MediaKit 文档指南》 | 890 | 152 | `INDEX-mediakit-guide.md` |
 
 「页码」是原 PDF 页码范围；「行范围」是中间 MD（`doc/<源文档>.md`）的 1 起始行号，可据此回查原文。章节文件本身已去掉页眉页脚，回查 PDF 时用这两列。文件名即章节标题，日常定位直接 Glob 文件名即可，用不到这两列。
 
@@ -67,13 +67,13 @@
 |------|------|---------|-------|
 | 1 | 入门 | 1-64 | 5 |
 | 2 | 模型 | 67-98 | 3 |
-| 3 | 调用 | 110-1287 | 47 |
-| 4 | 推理 | 1287-1374 | 12 |
-| 5 | 训练 | 1377-1582 | 19 |
-| 6 | Managed Agents | 1588-1734 | 21 |
-| 7 | 应用 | 1751-1759 | 2 |
-| 8 | 订阅 [Agent/Coding Plan] | 1760-1931 | 25 |
-| 9 | 资源 | 1937-2291 | 28 |
+| 3 | 调用 | 110-1284 | 47 |
+| 4 | 推理 | 1284-1371 | 12 |
+| 5 | 训练 | 1374-1579 | 19 |
+| 6 | Managed Agents | 1585-1731 | 21 |
+| 7 | 应用 | 1748-1756 | 2 |
+| 8 | 订阅 [Agent/Coding Plan] | 1757-1928 | 25 |
+| 9 | 资源 | 1934-2288 | 28 |
 
 ## AI MediaKit API 区（mediakit）
 
@@ -102,8 +102,8 @@
 | 1 | 产品动态 | 13-14 | 3 |
 | 2 | 开始使用 | 15-38 | 4 |
 | 3 | 开发指南 | 40-559 | 79 |
-| 4 | 智能体资源 | 564-595 | 3 |
-| 5 | 计费说明 | 617-661 | 7 |
-| 6 | 常见问题 | 662-662 | 1 |
-| 7 | 相关协议 | 665-671 | 3 |
-| 8 | 媒体处理（旧版） | 674-889 | 52 |
+| 4 | 智能体资源 | 565-596 | 3 |
+| 5 | 计费说明 | 618-662 | 7 |
+| 6 | 常见问题 | 663-663 | 1 |
+| 7 | 相关协议 | 666-672 | 3 |
+| 8 | 媒体处理（旧版） | 675-890 | 52 |
