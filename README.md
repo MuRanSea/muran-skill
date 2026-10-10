@@ -168,6 +168,8 @@ git diff --check
 
 测试使用独立临时用户目录和本地 Git 远端，验证目录联接、内容共享、增删、冲突、更新保护和文档回滚。文件校验不代表客户端已实际加载；客户端发现结果应通过各自原生接口单独验证。
 
+Windows CI 在 push 和 PR 时检查文档快照的文件清单、SHA-256 及平台章节完整性。只有 `skills/ai-platform-docs/generated/` 下的 Markdown 和 `snapshot.json` 变化时使用轻量校验；技能正文、脚本、测试、配置或其他文件变化时再运行全套测试。判断覆盖整个推送或 PR，新分支、无法取得比较基线或空差异默认运行全套。两种路径都会检查工作区未被改写及补丁空白错误。本地可运行 `uv run --locked scripts/ci_validate.py documents` 校验现有快照。
+
 主动升级依赖时运行 `uv lock --upgrade`，验证后将 `pyproject.toml` 与 `uv.lock` 一并提交。文档技能独立运行所需的脚本锁文件维护方式见其 [维护说明](skills/ai-platform-docs/MAINTENANCE.md)。日常命令和 CI 均使用锁定模式。
 
 发布前会将官方示例中形似访问密钥、API Token、JWT 和私钥的值替换成占位符，再生成快照哈希。源文档仍保存在被忽略的缓存中；接口参数、说明与其余示例保持原内容。GitHub 拒绝密钥推送时停止发布，不绕过扫描。
