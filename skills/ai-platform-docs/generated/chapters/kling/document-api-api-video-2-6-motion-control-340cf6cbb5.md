@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/2-6/motion-control.md -->
-<!-- Source SHA-256: c3e488bec62256e73a19c7525e4abb035d20d39bda4fb20cc72d7cf43e751d82 -->
+<!-- Source SHA-256: f540a0fd860d5d4fc5a22c84f69324438e17bf2797927f4282fabe2d88f0479a -->
 
 > ## Documentation Index
 >
@@ -157,7 +157,7 @@ curl --location 'https://api-beijing.klingai.com/motion-control/kling-2.6' \
     },
     {
       "type": "video",
-      "url": "https://v4-kling.kechuangai.com/kcdn/cdn-kcdn112452/kling-qa-test/dance_10s.mp4"
+      "url": "https://v1-kling.kechuangai.com/kcdn/cdn-kcdn112452/kling-qa-test/dance_10s.mp4"
     }
   ],
   "settings": {

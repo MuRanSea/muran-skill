@@ -107,7 +107,7 @@
 | 6.2 | 提交视频理解智能策略任务 API | 882-890 | 40040-40482 | 392 | `chapters/volcengine/mediakit/6.2 提交视频理解智能策略任务 API.md` |
 | 6.3 | 对话 Chat API | 891-915 | 40483-41257 | 592 | `chapters/volcengine/mediakit/6.3 对话 Chat API.md` |
 | 6.4 | MaaS 模型代理 API | 916-926 | 41258-41758 | 439 | `chapters/volcengine/mediakit/6.4 MaaS 模型代理 API.md` |
-| 7.1 | 查询任务信息 API | 927-931 | 41760-41929 | 144 | `chapters/volcengine/mediakit/7.1 查询任务信息 API.md` |
-| 7.2 | 获取媒体上传地址 API | 932-935 | 41930-42066 | 104 | `chapters/volcengine/mediakit/7.2 获取媒体上传地址 API.md` |
-| 7.3 | 事件回调 | 936-939 | 42067-42224 | 122 | `chapters/volcengine/mediakit/7.3 事件回调.md` |
-| 7.4 | 错误码 | 940-942 | 42225-42365 | 124 | `chapters/volcengine/mediakit/7.4 错误码.md` |
+| 7.1 | 查询任务信息 API | 927-931 | 41760-41932 | 145 | `chapters/volcengine/mediakit/7.1 查询任务信息 API.md` |
+| 7.2 | 获取媒体上传地址 API | 932-935 | 41933-42069 | 104 | `chapters/volcengine/mediakit/7.2 获取媒体上传地址 API.md` |
+| 7.3 | 事件回调 | 936-939 | 42070-42227 | 122 | `chapters/volcengine/mediakit/7.3 事件回调.md` |
+| 7.4 | 错误码 | 940-942 | 42228-42368 | 124 | `chapters/volcengine/mediakit/7.4 错误码.md` |
