@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/get-started/callbacks.md -->
-<!-- Source SHA-256: 4939e25411265cd55650b226cd0ee1f1d57ae099e0ab45e90ddbd35ebe616061 -->
+<!-- Source SHA-256: ee8e5fc227a30f7d5c78e9a56f8bb9b409a06e84fd39ef46329c58576c3d846e -->
 
 > ## Documentation Index
 >
@@ -190,7 +190,7 @@ Webhook Signature 是可灵平台提供的回调请求验签能力。配置后�
 
 | Step-1 登录控制台，进入「基础设置」 - [「Webhook」](https://klingai.com/dev/account-info?tab=webhooks) 页面，点击 **「创建 Webhook Secret」**。 | Step-2 **复制并保存**生成的 Secret，并在您的服务端配置该 Secret。                                           |
 | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage(0).828b41bd2408180c.png>)                     | ![](<https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(1).a6505fef1e0a4101.png>) |
+| ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage(0).828b41bd2408180c.png>)                     | ![](<https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(1).a6505fef1e0a4101.png>) |
 
 ### 轮换Webhook Secret
 
@@ -204,7 +204,7 @@ Webhook Signature 是可灵平台提供的回调请求验签能力。配置后�
 
 | Step-1 进入 **[「Webhook」](https://klingai.com/dev/account-info?tab=webhooks)** 页面，点击 **「轮换 Secret」**。              | Step-2 选择 **「标准轮换」**，生成新的 Webhook Secret。                                                     | Step-3 点击 **「复制 Secret」**，并尽快更新至您的服务端配置。                                               |
 | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| ![](<https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(2).8b0986a0b6a591e0.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(3).5ee004804a757ccc.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(4).91ab7b9140e76e67.png>) |
+| ![](<https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(2).8b0986a0b6a591e0.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(3).5ee004804a757ccc.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(4).91ab7b9140e76e67.png>) |
 
 #### 紧急重置
 
@@ -212,7 +212,7 @@ Webhook Signature 是可灵平台提供的回调请求验签能力。配置后�
 
 | Step-1 进入 **[「Webhook」](https://klingai.com/dev/account-info?tab=webhooks)** 页面，点击 **「轮换 Secret」**。              | Step-2 选择 **「紧急重置」**，生成新的 Webhook Secret。                                                     | Step-3 点击 **「复制 Secret」**，并**立即**更新至您的服务端配置。                                           |
 | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| ![](<https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(2).8b0986a0b6a591e0.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(6).48f872c0d307320a.png>) | ![](<https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(7).316a7bfe7ac88f28.png>) |
+| ![](<https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(2).8b0986a0b6a591e0.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(6).48f872c0d307320a.png>) | ![](<https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(7).316a7bfe7ac88f28.png>) |
 
 #### 缓冲期内的签名验证
 
@@ -234,7 +234,7 @@ webhook-signature: v1,K5oZfzeVuQvI4x1jrjAgMlkpJDoe1JhVmAbjR6eKeTM= v1,7qGhfzeVuQ
 
 | Step-1 进入 **[「Webhook」](https://klingai.com/dev/account-info?tab=webhooks)** 页面。                                        | Step-2 找到旧的 Webhook Secret，点击 **「删除旧 Secret」** 并确认。                                         |
 | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| ![](<https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(8).d61c8f426294b734.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(9).1bca792beabdb23e.png>) |
+| ![](<https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(8).d61c8f426294b734.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(9).1bca792beabdb23e.png>) |
 
 #### 删除全部Webhook Secret
 
@@ -266,7 +266,7 @@ webhook-signature: v1,K5oZfzeVuQvI4x1jrjAgMlkpJDoe1JhVmAbjR6eKeTM= v1,7qGhfzeVuQ
 
 | Step-1 进入 **[「Webhook」](https://klingai.com/dev/account-info?tab=webhooks)** 页面，点击 **「测试回调」**。                  | Step-2 填写 **`callback_url`**, 点击 **「发送测试回调」**,平台将立即向配置的 `callback_url` 发送测试回调请求。 | Step-3 接收回调请求，完成签名验证，并确认服务返回 HTTP 200。                                                 |
 | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(12).f155f92e39e0314e.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(13).0a78653c3ee84b2c.png>)   | ![](<https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(14).1c224a8a2fc831e3.png>) |
+| ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(12).f155f92e39e0314e.png>) | ![](<https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(13).0a78653c3ee84b2c.png>)   | ![](<https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/loadimage%20(14).1c224a8a2fc831e3.png>) |
 
 ### 接收测试回调请求
 

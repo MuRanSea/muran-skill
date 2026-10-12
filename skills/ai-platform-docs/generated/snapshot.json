@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "built_at": "2026-10-11T00:57:48.075920+00:00",
+  "built_at": "2026-10-12T00:57:40.028621+00:00",
   "origin": "Official Volcengine PDF and Kling/MiniMax Markdown exports",
   "files": {
     "chapters/kling/document-api-api-assets-account-usage-e78fd09f14.md": "0d47402b134974899cd3d8c9fa9f4acdfac95d5f6235453ac68bfa41126b5e49",
@@ -13,7 +13,7 @@
     "chapters/kling/document-api-api-ecommerce-replication-virtual-try-on-5cb603ae0e.md": "55456e69b9f0dd03a3978eb6b19b2f41f11773f0792ebe9ad3e528a9c2d0e93c",
     "chapters/kling/document-api-api-effects-video-effects-dfc8d5118f.md": "a4e4b91b241e57e6a85e07fe567f6ecf25a6419752c210a4716647a35393f79e",
     "chapters/kling/document-api-api-get-started-authentication-699d068777.md": "0662c6d39bc6b4fece5e818a9dc1280bb3b4e7ae3abb8e2053bf09748c89ad14",
-    "chapters/kling/document-api-api-get-started-callbacks-76b08f83d4.md": "a565bc602c8cdf20901741f15c18ac654f9ef60cf5cb69f1fc93e9a9ad4b97e6",
+    "chapters/kling/document-api-api-get-started-callbacks-76b08f83d4.md": "f07c10122a43bf253902570c5b0c250034b1e68bb3eff92d519a16bbe3c574ed",
     "chapters/kling/document-api-api-get-started-concurrency-rules-4797360aaa.md": "941838cc9f5463b4a6638f43513cbad2fbe896841f2d92f452be2271e330a183",
     "chapters/kling/document-api-api-get-started-error-codes-4bcd3e9e19.md": "f12fdd269536a7e27cf7e21c7e22f2a24b631d367f3cf4cfbf42fe0e5e804fba",
     "chapters/kling/document-api-api-get-started-kling-skills-abb9a588c4.md": "5e0f9f5f014b7f0ad34cb0731b1da7060fee670b85044da5cac104573ba55c3c",
@@ -29,7 +29,7 @@
     "chapters/kling/document-api-api-video-2-5-turbo-image-to-video-d026c199b7.md": "4986e5366574e6ea22e2fb972c967d466c7863f7e2efeb6cc64ee6472a01cfd3",
     "chapters/kling/document-api-api-video-2-5-turbo-text-to-video-018bd47e79.md": "0adecc6cca055b3051a8c0943344bc6defb748b95441668f9750c3efebe53cf9",
     "chapters/kling/document-api-api-video-2-6-image-to-video-ade5a29355.md": "7099431708188aa15bd9144259f027e82e933659b50671cabadc6cb656e9bb93",
-    "chapters/kling/document-api-api-video-2-6-motion-control-340cf6cbb5.md": "d427f2bf4130a52228c8ec6b7d98457c6a41772509e2fa00e3cd211c824badfb",
+    "chapters/kling/document-api-api-video-2-6-motion-control-340cf6cbb5.md": "46ce3a3d24e90b6f797b568d923982aad60aa076af340b5c6b977e4cd34e57df",
     "chapters/kling/document-api-api-video-2-6-text-to-video-4fcaed0667.md": "1f1878d9b2d88d6dd3139e4c88a8b060dd8bebd5b5e60d9bd51bda8f1d9ef199",
     "chapters/kling/document-api-api-video-2-6-voice-customization-eebbcdc16d.md": "6138c8ed6429fa625366a1eb89c5d119de4f81bc1783348043240583e08b800d",
     "chapters/kling/document-api-api-video-3-0-omni-elements-d6d4899891.md": "3eeaefe5954bd667952bf7fbbe40373d5a86df727700bb663457ba58ef019aaf",
@@ -48,13 +48,13 @@
     "chapters/kling/document-api-api-video-lip-sync-349945445b.md": "264a5add673a113bbc7ea38ad1ce5f35952bd1ece2c4405cd7ba1c9f28d1c066",
     "chapters/kling/document-api-api-video-lip-sync-face-detection-bd562b7d41.md": "0aed3635258b455e846d30547fa1b8f37fb0c7c587ec5f4feed53436c4a7afa6",
     "chapters/kling/document-api-api-video-motion-control-2-6-28300bbd16.md": "8d573eff607fa9905a9a7c9b3648aba59406eec8e7d3c95fe604dcdbde1d9042",
-    "chapters/kling/document-api-api-video-motion-control-b2e04eaaff.md": "e49a7cbe1a8c4c4ccc560d4c65164ad92078d2bc20475ead0e1e7c06ac6fd06a",
+    "chapters/kling/document-api-api-video-motion-control-b2e04eaaff.md": "b77643d5062e0939809051586677f42486eb38c2e68a0c15141d6170955626d9",
     "chapters/kling/document-api-api-video-multi-elements-ccaea7e7ae.md": "a69db94d0615372304573404c5e9a280bff266f93102262de8c1e9c6cc45df44",
     "chapters/kling/document-api-api-video-o1-elements-eca0d19bde.md": "e43e39a1403a064d41469fe9db7a9dd1890e5e67a23f22f322f65107535c421c",
     "chapters/kling/document-api-api-video-o1-video-omni-c56f3ad216.md": "e394c49e404e81e3c213ec3e08f3d2e3b039cbd4736b158d67d07494e152436b",
     "chapters/kling/document-api-guides-capability-map-image-20cbac4ec6.md": "9224af9b296094e7d66d0ad7253f4586cbcb120d568ad7d6d52cd69caa1f6857",
     "chapters/kling/document-api-guides-capability-map-video-cdb22beea3.md": "8bac29485d6b4d7d66cb372230de8bf883cae7ca35fe440489d96d02418095ff",
-    "chapters/kling/document-api-guides-get-started-quick-start-5fdd5bec10.md": "f6caace1d9bec4ac3992d6f8bf81531131440b554461f72e7faa9fd2dd6d5c17",
+    "chapters/kling/document-api-guides-get-started-quick-start-5fdd5bec10.md": "a4f286db1c3a308d0d21159f98c87dae33185210749c192f376c89c79e5b478f",
     "chapters/minimax/docs-api-reference-anthropic-api-compatible-cache-a983da99fc.md": "42fca6c6e68b72488651a93215efc787d71d0beeee493834c93b80b615fa1de7",
     "chapters/minimax/docs-api-reference-api-overview-9ff72b0d25.md": "eafe3a30101bc8e365c6904f2d0d1c1d45f43f74da9c30f212d59aaeba8e6f75",
     "chapters/minimax/docs-api-reference-errorcode-ac4439a637.md": "ee52f2a2929a342096533ed9ef8601e569c51b0e2c06387279faba729cbd4134",
@@ -2752,7 +2752,7 @@
     "INDEX.md": "743cb1a01dc52c6d384a0904a963b241bead4edc71d1049bed3124bff9b3351f"
   },
   "layout_version": 2,
-  "source_fingerprint": "61d4df961c28a3640c95c4d70a2f7e4f78392d9b02ac2f7824faa540764a529d",
+  "source_fingerprint": "d218e7037bd0cb681da8acac95fe1db58fcbd6c0c05f05122e09e3b696138712",
   "sources": {
     "volcengine": {
       "format": "official-pdf",
@@ -2770,7 +2770,7 @@
       "label": "可灵 API（中国区）",
       "region": "中国区；国际区调用前核对 kling.ai 的文档",
       "index_url": "https://klingai.com/document-api/llms.txt",
-      "checked_at": "2026-10-11T00:57:18.575877+00:00",
+      "checked_at": "2026-10-12T00:57:25.390196+00:00",
       "pages": 52
     },
     "minimax": {
@@ -2778,7 +2778,7 @@
       "label": "MiniMax API（中文）",
       "region": "中文文档；以各页面标注的国内/国际域名为准",
       "index_url": "https://platform.minimax.cn/docs/llms.txt",
-      "checked_at": "2026-10-11T00:57:29.427324+00:00",
+      "checked_at": "2026-10-12T00:57:35.997896+00:00",
       "pages": 71
     }
   },
