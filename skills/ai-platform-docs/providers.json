@@ -94,6 +94,19 @@
       ],
       "region": "中文文档；以各页面标注的国内/国际域名为准",
       "type": "markdown"
+    },
+    {
+      "key": "tencent",
+      "label": "腾讯云 TokenHub（中国站文档）",
+      "type": "tencent-cloud",
+      "product_id": 1823,
+      "index_url": "https://cloud.tencent.com/document/product/1823",
+      "hosts": ["cloud.tencent.com"],
+      "required_paths": [
+        "/document/product/1823/130050",
+        "/document/product/1823/130078"
+      ],
+      "region": "中国站中文文档；接入地域与接口域名以各页面说明为准"
     }
   ]
 }

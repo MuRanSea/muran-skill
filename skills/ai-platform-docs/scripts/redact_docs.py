@@ -2,6 +2,7 @@
 import re
 
 PATTERNS = (
+    (re.compile(r'\bAKID[A-Za-z0-9]{16,}\b'), '<TENCENT_CLOUD_SECRET_ID>'),
     (re.compile(r'\b(?:AKLT|AKTP)[A-Za-z0-9]+'), '<VOLCENGINE_ACCESS_KEY_ID>'),
     (re.compile(r'(?i)(X-Tos-(?:Security-Token|Signature)=)[^&\s"\x27<>]+'), r'\1<REDACTED_TOS_AUTH_PARAMETER>'),
     (re.compile(r'\b(?:AKIA|ASIA)[A-Z0-9]{16}\b'), '<AWS_ACCESS_KEY_ID>'),

@@ -74,7 +74,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 可选：在维护文档的机器上配置独立文档更新：
 
 ```powershell
-# 已有旧火山项目时导入；同时补齐尚未缓存的可灵和 MiniMax 文档
+# 已有旧火山项目时导入；同时补齐尚未缓存的可灵、MiniMax 和腾讯云 TokenHub 文档
 .\muran.ps1 docs import D:\Work\volcengine_doc_skill
 
 # 可选：维护文档的机器刷新官方来源并上传；首次下载和提取 PDF 可能较慢
@@ -109,7 +109,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 | `.\muran.ps1 auto-update enable` | 开启每天北京时间 09:00 的自动更新 |
 | `.\muran.ps1 auto-update status` | 查看任务状态、执行结果和下次运行时间 |
 | `.\muran.ps1 auto-update disable` | 关闭本工具的每日任务 |
-| `.\muran.ps1 docs update` | 检查火山 PDF 和可灵/MiniMax Markdown；内容或构建脚本变化时重建 |
+| `.\muran.ps1 docs update` | 检查火山 PDF、可灵/MiniMax Markdown 和腾讯云 TokenHub 文档；内容或构建脚本变化时重建 |
 | `.\muran.ps1 docs build` | 使用缓存源资料强制重建全部平台文档 |
 | `.\muran.ps1 docs build --fetch` | 拉取官方来源并强制重建 |
 | `.\muran.ps1 docs status` | 检查本地文档快照完整性 |
@@ -138,7 +138,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\muran.ps1 install
 
 任务名为 `MuranSkill-DailyUpdate`，每天北京时间 09:00 执行 `daily-update`，开启 `StartWhenAvailable`。任务使用当前用户交互登录身份，不保存密码；电脑关机或用户未登录时不会运行，错过后在下次可运行时补跑。后台窗口隐藏，并发运行会被锁阻止。
 
-文档任务为 `MuranSkill-DocsUpdate`，每天北京时间 09:30 运行 `docs update`，同样支持错过补跑、隐藏运行和并发保护。火山以官方 PDF 导出版本判断是否重新提取；可灵和 MiniMax 每次读取官方目录与所收录页面，比较内容哈希。来源与构建脚本都未变化、现有快照完整时返回 `unchanged`。任一来源下载或校验失败，保留上一份完整快照并记录失败原因；下次按计划重试。
+文档任务为 `MuranSkill-DocsUpdate`，每天北京时间 09:30 运行 `docs update`，同样支持错过补跑、隐藏运行和并发保护。火山以官方 PDF 导出版本判断是否重新提取；可灵、MiniMax 和腾讯云 TokenHub 每次读取官方目录与所收录页面，比较内容哈希。来源与构建脚本都未变化、现有快照完整时返回 `unchanged`。任一来源下载或校验失败，保留上一份完整快照并记录失败原因；下次按计划重试。
 
 任务记录 `uv.exe` 的绝对路径，运行时按仓库锁文件准备环境。升级旧版安装或移动 uv 后，分别执行 `auto-update enable` 和 `docs auto-update enable` 更新两个任务；对应 `status` 的 `runtime_current` 表示入口是否已更新。
 

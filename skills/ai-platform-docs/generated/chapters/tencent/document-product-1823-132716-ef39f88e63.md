@@ -1,0 +1,135 @@
+<!-- Official source: https://cloud.tencent.com/document/product/1823/132716 -->
+<!-- Source SHA-256: 28aa8e05a27d7fccd966ec97757059bfa92a0643b354d1d45d94dc88f7cb601c -->
+
+# 监控告警
+
+官方来源：https://cloud.tencent.com/document/product/1823/132716
+最近更新时间：2026-08-13 20:42:00
+
+您可通过 [腾讯云可观测平台](https://console.cloud.tencent.com/monitor/alarm/config/policy/create?monitorType=MT_QCE) 对 TokenHub 在控制台展示的用量与性能指标配置告警，及时发现 Token 突增、延迟劣化、限流异常等情况，保障在线推理服务稳定运行。
+
+## 告警视图
+
+TokenHub 已与腾讯云可观测平台打通，新建告警视图操作步骤如下：
+
+1. 在**告警管理 > 告警配置**中，选择**告警策略**页签。
+
+2. 单击**新建策略**，选择**自定义告警策略**。
+
+3. 在**新建告警策略**中，于策略类型下拉框选择**大模型服务平台 TokenHub**，即可对运行指标配置告警策略。
+
+在策略类型**大模型服务平台 TokenHub** 的二级菜单中提供 6 个告警视图，与控制台的筛选维度对应。每个视图下进一步细分为**用量指标**和**性能指标**两个策略子类，分别对应用量统计页面和模型监控页面的指标集合，您可以根据要监控的对象选择对应视图。
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/f0445052b9a36689c11b44953ec37419.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/f0445052b9a36689c11b44953ec37419.png)
+
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div><b>告警视图</b></div></td><td><div><b>控制台筛选维度</b></div></td><td><div><b>适用场景</b></div></td></tr><tr><td><div><b>服务</b></div></td><td><div>对应<b>模型监控</b>页面，按服务维度聚合</div></td><td><div>监控单个在线推理服务整体的监控指标配置告警。</div></td></tr><tr><td><div><b>模型</b></div></td><td><div>对应<b>模型监控</b>页面，按模型维度聚合</div></td><td><div>监控单个模型在所有服务上的监控指标配置告警。</div></td></tr><tr><td><div><b>APIKey</b></div></td><td><div>对应<b>用量统计 &gt; 用量趋势 </b>页面，按 API Key 维度聚合全部服务</div></td><td><div>按业务线 / 子账号维度监控 Key 的用量与性能，覆盖全部服务。</div></td></tr><tr><td><div><b>APIKey 下指定服务</b></div></td><td><div>对应<b>用量统计 &gt; 用量趋势 </b>页面，按 API Key × 服务（二级筛选）</div></td><td><div>同一 Key 调用了多个服务时，区分到具体某个服务的监控告警。</div></td></tr><tr><td><div><b>模型下指定服务</b></div></td><td><div>对应<b>用量统计 &gt; 用量趋势 </b>页面，按模型 × 服务（二级筛选）</div></td><td><div>同一模型部署在多个服务上时，区分到具体某个服务的监控告警。</div></td></tr><tr><td colspan="1" rowspan="1"><div><b>全量对象</b></div></td><td colspan="1" rowspan="1"><div>当前账号（Uin 维度）的所有监控对象</div></td><td colspan="1" rowspan="1"><div>监控账号级总量，例如该 Uin 下 Token 消耗总量。</div></td></tr></tbody></table>
+
+**说明：**
+
+“APIKey 下指定服务”与“模型下指定服务”对应控制台的二级下拉联动。
+
+## 告警指标说明
+
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div><b>模型类型</b></div></td><td><div><b>分类</b></div></td><td><div><b>覆盖指标</b></div></td></tr><tr><td colspan="1" rowspan="2"><div>语言模型</div></td><td><div>用量指标（详情参考 <a href="https://cloud.tencent.com/document/product/1823/130088">用量统计</a>）</div></td><td><div>总 TPM / 输入 TPM / 输出 TPM / Token 速率 / 每分钟读缓存 token 数 / 每分钟写入缓存 token 数 / 每分钟读显示缓存的 token 数 / 平均输入 Token / 平均输出 Token / TPM 配额使用率 （该指标仅支持在服务、模型维度下配置）</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div>性能指标（详情参考 <a href="https://cloud.tencent.com/document/product/1823/130089">模型监控</a>）</div></td><td><div>每分钟请求数（RPM）/ 首 Token 延迟（TTFT）/ 每 Token 输出延迟（TPOT）/ 非流式接口延时 / RPM 限流率 / 超时错误率 / 错误率 / 缓存命中率 / 客户端错误率 / 服务端错误率 / 调用失败次数 / 调用成功次数 / 429限流错误率</div></td></tr></tbody></table>
+
+## 配置告警
+
+在腾讯云可观测平台的**新建告警策略**页面完成基本信息、告警规则、告警通知三段配置即可生效。
+
+1. 填写基本信息：按照控制台指引依次填写策略名称、备注和策略所属标签。
+
+2. 配置告警规则：参考下述表格选择配置。
+
+| **配置项** | **说明** |
+| --- | --- |
+| 监控类型 | 选择**云产品监控。** |
+| 策略类型 | 选择**大模型服务平台 TokenHub**，选择具体视图（服务 / 全量对象 / 模型 / APIKey / APIKey 下指定服务 / 模型下指定服务），选择**用量指标**或**性能指标。** |
+| 告警对象 | 支持**指定实例**或**全部实例**。选择“指定实例”时，需在右侧下拉框选择具体的服务、模型或 API Key。 |
+| 触发条件 | 支持**选择模板**或**手动配置**。手动配置时按“指标 + 比较关系 + 阈值 + 数据点统计粒度 + 异常持续 + 告警频率”组合定义。 |
+
+3. 配置告警通知：绑定告警通知模板，可选择短信、邮件、电话、企业微信、Webhook 等多种通知渠道。具体配置请参见腾讯云可观测平台的 [告警通知模板](https://console.cloud.tencent.com/monitor/alarm2/notice) 文档。
+
+## 常见配置案例
+
+### 案例 1：配置 TPM 配额使用率
+
+**场景 1：**监控当前账号下**某模型的 TPM 配额使用**情况，希望在接近上限时提前告警及时提配。
+
+**配置步骤：**
+
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td colspan="1" rowspan="1"><div><b>步骤</b></div></td><td colspan="1" rowspan="1"><div><b>配置项</b></div></td><td colspan="1" rowspan="1"><div><b>取值</b></div></td></tr><tr><td colspan="1" rowspan="1"><div>1</div></td><td colspan="1" rowspan="1"><div>策略类型</div></td><td colspan="1" rowspan="1"><div>在<b>大模型服务平台 TokenHub</b> 下，依次选择 <b>模型 </b>和 <b>用量指标</b>。</div></td></tr><tr><td colspan="1" rowspan="1"><div>2</div></td><td colspan="1" rowspan="1"><div>告警对象</div></td><td colspan="1" rowspan="1"><div>选择<b>指定实例</b>，并选择目标模型。</div></td></tr><tr><td colspan="1" rowspan="1"><div>3</div></td><td colspan="1" rowspan="1"><div>触发条件</div></td><td colspan="1" rowspan="1"><div>选择<b>手动配置</b>。</div></td></tr><tr><td colspan="1" rowspan="1"><div>4</div></td><td colspan="1" rowspan="1"><div>指标</div></td><td colspan="1" rowspan="1"><div><b>TPM 配额使用率</b></div></td></tr></tbody></table>
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/513fb020be2b59f8446dfa92c7ab487e.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/513fb020be2b59f8446dfa92c7ab487e.png)
+
+**场景 2**：监控当前账号下某**具体服务的 TPM 配额**使用情况，希望在接近上限时提前告警。
+
+**配置步骤：**
+
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td colspan="1" rowspan="1"><div><b>步骤</b></div></td><td colspan="1" rowspan="1"><div><b>配置项</b></div></td><td colspan="1" rowspan="1"><div><b>取值</b></div></td></tr><tr><td colspan="1" rowspan="1"><div>1</div></td><td colspan="1" rowspan="1"><div>策略类型</div></td><td colspan="1" rowspan="1"><div>在<b>大模型服务平台 TokenHub</b> 下，依次选择 <b>服务 </b>和 <b>用量指标</b>。</div></td></tr><tr><td colspan="1" rowspan="1"><div>2</div></td><td colspan="1" rowspan="1"><div>告警对象</div></td><td colspan="1" rowspan="1"><div>选择<b>指定实例</b>，并选择目标模型。</div></td></tr><tr><td colspan="1" rowspan="1"><div>3</div></td><td colspan="1" rowspan="1"><div>触发条件</div></td><td colspan="1" rowspan="1"><div>选择<b>手动配置</b>。</div></td></tr><tr><td colspan="1" rowspan="1"><div>4</div></td><td colspan="1" rowspan="1"><div>指标</div></td><td colspan="1" rowspan="1"><div><b>TPM 配额使用率</b></div></td></tr></tbody></table>
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/3a64d4efaa15879ee9ee4be324a642fd.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/3a64d4efaa15879ee9ee4be324a642fd.png)
+
+### 案例 2：监控某个模型的每分钟输入 Token 数（TPM）
+
+**场景**：业务侧使用 `glm-5` 模型，担心突发流量导致输入 TPM 触达配额上限，希望在接近上限时提前告警。
+
+**配置步骤**：
+
+| **步骤** | **配置项** | **取值** |
+| --- | --- | --- |
+| 1 | 策略类型 | 在**大模型服务平台 TokenHub** 下，依次选择 **模型** 和 **用量指标**。 |
+| 2 | 告警对象 | 选择**指定实例**，并选择 `glm-5`。 |
+| 3 | 触发条件 | 选择**手动配置**。 |
+| 4 | 指标 | **每分钟输入 Token 数** |
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/bdca55244430d5771d56e514653e1b75.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/bdca55244430d5771d56e514653e1b75.png)
+
+**说明**：
+
+选择“模型”视图意味着对该模型在所有服务、所有 Key 下的合计输入 TPM 计算告警；如需精确到某个服务，请改用 **模型下指定服务** 视图。
+
+输出侧若同样需要监控，可叠加一条“每分钟输出 Token 数”指标，或在同一策略中通过“添加指标”加入。
+
+### 案例 3：监控某个服务的首 Token 延迟（TTFT）
+
+**场景**：在线推理服务对响应速度敏感，希望在 TTFT 持续劣化时及时告警。
+
+**配置步骤**：
+
+| 步骤 | 配置项 | 取值 |
+| --- | --- | --- |
+| 1 | 策略类型 | 在**大模型服务平台 TokenHub** 下，依次选择 **服务** 和 **性能指标。** |
+| 2 | 告警对象 | 选择**指定实例**，并选择 **ep-xxx**。 |
+| 3 | 触发条件 | 选择**手动配置**。 |
+| 4 | 指标 | **首 Token 延迟（TTFT）** |
+| 5 | 比较关系 / 阈值 | `>` `2000`（单位 ms，按业务 SLA 设定） |
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/cd790f5b4c515824d872e7ff50e3f2ca.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/cd790f5b4c515824d872e7ff50e3f2ca.png)
+
+**说明**：
+
+TTFT 仅统计流式请求；若服务以非流式调用为主，建议改用 **非流式接口延时** 指标。
+
+异常持续设为 5 个数据点（5 分钟）可有效过滤偶发抖动，避免单点波动产生误告警。
+
+同时关注**超时错误率**和**错误率**两项指标可形成完整的服务健康度监控体系，建议在同一策略中通过“添加指标”组合配置。
+
+## 常见问题
+
+**Q1：告警对象下拉框为什么找不到我刚创建的服务 / Key？**
+
+云可观测平台的对象列表存在数据同步延迟，新建对象通常 5~10 分钟后才会出现在下拉框中，请稍后重试。
+
+**Q2：为什么“全量对象（不区分筛选维度）”视图下的告警和单个对象告警结果不一致？**
+
+“全量对象”视图统计的是当前账号下所有对象的合计值，单个对象告警仅针对该对象。两者口径不同，应根据监控目的分别使用——监控账号级总量用“全量对象”，监控单点风险用具体对象视图。

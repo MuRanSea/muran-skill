@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.12,<3.13"
-# dependencies = ["pypdfium2>=4.30,<6"]
+# dependencies = ["pypdfium2>=4.30,<6", "markdownify>=1.2.3,<2"]
 # [tool.uv]
 # python-preference = "only-managed"
 # ///
@@ -191,7 +191,7 @@ def build(args):
         for provider in catalog:
             lines.append(f"- [{provider['label']}](INDEX-{provider['key']}.md)：{sources[provider['key']]['pages']} 页。")
         index.write_text('\n'.join(lines) + '\n', encoding='utf-8')
-        origin = 'Official Volcengine PDF and Kling/MiniMax Markdown exports'
+        origin = 'Official Volcengine PDF, Kling/MiniMax Markdown and Tencent Cloud documentation'
         redactions = redact(work / 'generated')
         write_snapshot(work / 'generated', origin, fingerprint, sources, redactions)
         # Prepare both source caches before publishing. A failed publish rolls

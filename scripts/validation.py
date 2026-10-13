@@ -63,7 +63,7 @@ def validate(root: Path) -> tuple[list[dict], list[str]]:
                             if any(c in product['source'] for c in '/\\:') or product['source'] in ('.', '..'):
                                 raise ValueError('Unsafe Volcengine source filename')
                             zone_keys.append(product['key'])
-                    elif provider['type'] == 'markdown':
+                    elif provider['type'] in ('markdown', 'tencent-cloud'):
                         zone_keys.append(provider['key'])
                     else:
                         raise ValueError('Unsupported document provider type')

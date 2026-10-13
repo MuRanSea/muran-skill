@@ -19,6 +19,17 @@ from redact_docs import redact
 
 
 class RedactionTests(unittest.TestCase):
+    def test_tencent_secret_id_examples_are_redacted(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            path = folder / 'example.md'
+            key = 'AKID' + 'a' * 32
+            original = ('SecretId: ' + key + '\nTokenHub API\n').encode()
+            path.write_bytes(original)
+            self.assertEqual(redact(folder)['replacements'], 1)
+            self.assertEqual(path.read_bytes(), original.replace(key.encode(), b'<TENCENT_CLOUD_SECRET_ID>'))
+            self.assertEqual(redact(folder)['replacements'], 0)
+
     def test_credential_examples_are_redacted_without_changing_other_bytes(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
@@ -33,10 +44,10 @@ class RedactionTests(unittest.TestCase):
 
 
 class ProviderRegistryTests(unittest.TestCase):
-    def test_markdown_dispatch_excludes_volcengine_pdf(self):
+    def test_page_dispatch_excludes_volcengine_pdf(self):
         config = json.loads((SCRIPTS.parent / 'providers.json').read_text(encoding='utf-8'))
-        self.assertEqual([p['key'] for p in config['providers']], ['volcengine', 'kling', 'minimax'])
-        self.assertEqual([p['key'] for p in sources.providers()], ['kling', 'minimax'])
+        self.assertEqual([p['key'] for p in config['providers']], ['volcengine', 'kling', 'minimax', 'tencent'])
+        self.assertEqual([p['key'] for p in sources.providers()], ['kling', 'minimax', 'tencent'])
 
     def test_fetch_uses_registry_library_ids_and_products(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -130,6 +141,91 @@ class MarkdownSourcesTests(unittest.TestCase):
             sources.catalog('- [Video](https://docs.example/api/video.md)', self.provider)
         with self.assertRaisesRegex(ValueError, 'Unexpected document URL'):
             sources.catalog(self.index + '- [Foreign](https://other.example/api/page.md)', self.provider)
+
+
+class TencentSourcesTests(unittest.TestCase):
+    def setUp(self):
+        import tencent_sources
+        self.tencent = tencent_sources
+        self.provider = next(p for p in sources.providers() if p['key'] == 'tencent')
+        self.url = self.provider['index_url'] + '/130078'
+        self.tree = {'categoryId': 1823, 'list': [
+            {'id': 130050, 'title': '产品简介', 'type': 'page'},
+            {'id': 130077, 'title': '调用指南', 'type': 'directory', 'children': [
+                {'id': 130078, 'title': 'API 使用说明', 'type': 'page'}]}]}
+        self.article = {'type': 'page', 'categoryId': 1823, 'content': {
+            'title': 'API 使用说明', 'recentReleaseTime': '2026-10-12',
+            'body': '<h2>鉴权</h2><div>参数说明</div>', 'markdown': ''}}
+
+    def response(self, data):
+        return json.dumps({'code': 0, 'data': data}, ensure_ascii=False)
+
+    def test_catalog_discovers_nested_pages_and_rejects_wrong_product_or_incomplete_tree(self):
+        pages = self.tencent.catalog(self.response(self.tree), self.provider)
+        self.assertEqual(len(pages), 2)
+        self.assertEqual(pages[-1], {'title': '调用指南 / API 使用说明', 'url': self.url})
+        self.tree['list'][1]['children'].append({'id': 140000, 'title': '新增接口', 'type': 'page'})
+        self.assertEqual(len(self.tencent.catalog(self.response(self.tree), self.provider)), 3)
+        self.tree['list'].pop(0)
+        with self.assertRaisesRegex(ValueError, 'Incomplete'):
+            self.tencent.catalog(self.response(self.tree), self.provider)
+        self.tree['categoryId'] = 1234
+        with self.assertRaisesRegex(ValueError, 'Unexpected product'):
+            self.tencent.catalog(self.response(self.tree), self.provider)
+
+    def test_html_conversion_preserves_code_tables_and_resolves_links(self):
+        self.article['content']['body'] = '''<h2>接口</h2><div>传入 prompt</div>
+<div class="code-block-toolbar">复制代码</div>
+<pre class="language-python"><div><span>if ready:</span></div><div><span>    call("```", 1)</span></div></pre>
+<table><tr><td>参数</td><td>值</td></tr><tr><td>model</td><td>example</td></tr></table>
+<table><tr><td rowspan="2">共享</td><td>A</td></tr><tr><td>B</td></tr></table>
+<a href="/document/product/1823/130050">简介</a><img src="/example.png" alt="示意图"/>'''
+        body = self.tencent.extract_article(self.response(self.article), self.url, self.provider)
+        self.assertIn('````python\nif ready:\n    call("```", 1)\n````', body)
+        self.assertIn('| model | example |', body)
+        self.assertIn('rowspan="2"', body)
+        self.assertIn('(https://cloud.tencent.com/document/product/1823/130050)', body)
+        self.assertIn('https://cloud.tencent.com/example.png', body)
+        self.assertNotIn('复制代码', body)
+
+    def test_markdown_is_preserved_and_errors_or_empty_articles_are_rejected(self):
+        markdown = '## API\n\n```json\n{"key":"value"}\n```'
+        self.article['content']['markdown'] = markdown
+        self.assertTrue(self.tencent.extract_article(self.response(self.article), self.url, self.provider).endswith(markdown + '\n'))
+        for response in ['<script>challenge()</script>', '{"code":1,"data":{}}']:
+            with self.assertRaisesRegex(ValueError, 'Invalid Tencent Cloud article'):
+                self.tencent.extract_article(response, self.url, self.provider)
+        self.article['categoryId'] = 1234
+        with self.assertRaisesRegex(ValueError, 'Unexpected'):
+            self.tencent.extract_article(self.response(self.article), self.url, self.provider)
+        self.article['categoryId'] = 1823
+        self.article['content'].update(body='', markdown='')
+        with self.assertRaisesRegex(ValueError, 'Empty article'):
+            self.tencent.extract_article(self.response(self.article), self.url, self.provider)
+
+    def test_glossary_loads_its_separate_body(self):
+        self.article['content'].update(body='', isGlossary=True)
+        body = self.tencent.extract_article(self.response(self.article), self.url, self.provider,
+            fetch_glossary=lambda: self.response({'glossaryContent': '<h2>Token</h2><p>词元说明</p>', 'recentReleaseTime': '2026-10-11'}))
+        self.assertIn('词元说明', body)
+
+    def test_download_build_and_catalog_removal_use_existing_snapshot_pipeline(self):
+        def fetch(url, provider, *, data=None):
+            if data['action'] == 'getDocProductMenuByDocType':
+                return self.response(self.tree)
+            self.assertEqual(data['action'], 'getDocPageDetail')
+            self.assertIn(data['payload']['id'], ('130050', '130078'))
+            return self.response(self.article)
+        with tempfile.TemporaryDirectory() as temp, patch.object(sources, 'fetch_text', side_effect=fetch), patch.object(sources.time, 'sleep'):
+            cache, output = Path(temp) / 'cache', Path(temp) / 'generated'
+            before = sources.fetch_provider(self.provider, cache)
+            self.assertEqual(sources.build_provider(self.provider, cache, output)['pages'], 2)
+            self.assertTrue((output / 'INDEX-tencent.md').is_file())
+            self.provider = {**self.provider, 'required_paths': ['/document/product/1823/130078']}
+            self.tree['list'].pop(0)
+            after = sources.fetch_provider(self.provider, cache)
+            self.assertNotEqual(sources.fingerprint_rows(before), sources.fingerprint_rows(after))
+            self.assertEqual(len(list((cache / 'tencent').glob('*.md'))), 1)
 
 
 class BuildTransactionTests(unittest.TestCase):

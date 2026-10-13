@@ -162,6 +162,9 @@
       "https://klingai.com/document-api/llms.txt",
       "https://platform.minimax.cn/docs/llms.txt"
     ],
+    "official_document_indexes": [
+      "https://cloud.tencent.com/document/product/1823"
+    ],
     "generated_content_committed": true,
     "package": "ai-platform-docs"
   }
