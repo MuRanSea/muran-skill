@@ -60,6 +60,7 @@
 | 账户相关 | `chapters/minimax/docs-faq-about-account-2efbe5791e.md` | https://platform.minimax.cn/docs/faq/about-account.md |
 | 接口相关 | `chapters/minimax/docs-faq-about-apis-3876ecf9ef.md` | https://platform.minimax.cn/docs/faq/about-apis.md |
 | 联系我们 | `chapters/minimax/docs-faq-contact-us-a0a59e5678.md` | https://platform.minimax.cn/docs/faq/contact-us.md |
+| 模型列表 | `chapters/minimax/docs-faq-models-efcb0960ac.md` | https://platform.minimax.cn/docs/faq/models.md |
 | 系统音色列表 | `chapters/minimax/docs-faq-system-voice-id-4d93b0c57e.md` | https://platform.minimax.cn/docs/faq/system-voice-id.md |
 | 视频模板列表 | `chapters/minimax/docs-faq-video-agent-templates-a17f1a3348.md` | https://platform.minimax.cn/docs/faq/video-agent-templates.md |
 | 图片生成 | `chapters/minimax/docs-guides-image-generation-e57837041f.md` | https://platform.minimax.cn/docs/guides/image-generation.md |

@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/136473 -->
-<!-- Source SHA-256: d1b26c30fcb92f951610f583aaf89dce4ea9b663f31e328cfdd3fa658eb50216 -->
+<!-- Source SHA-256: 3c07193e2e8c9f42e74793ced650e55ce14271853b827d76c8c4033591d77f0b -->
 
 # 节省计划
 
 官方来源：https://cloud.tencent.com/document/product/1823/136473
-最近更新时间：2026-09-07 18:45:32
+最近更新时间：2026-10-13 15:50:30
 
 ## 产品概述
 
@@ -14,9 +14,9 @@
 
 用户承诺每月消费一定的金额，在用户每月承诺的范围内的用量适用节省计划折扣价格，超出范围的用量按正常按量价格计费。节省计划会按照用户每月承诺的费用全额收取，即使用户当月的实际使用量未达到承诺金额。
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/d633c0532c94d9deb969526c400ff488.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/c23c0ec0177ae45b6ad62b29c4cdbb0d.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/d633c0532c94d9deb969526c400ff488.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/c23c0ec0177ae45b6ad62b29c4cdbb0d.png)
 
 ## 产品配置
 
@@ -35,8 +35,6 @@ TokenHub 节省计划属于**单产品型**，支持两种购买方式：
 
 意味着购买一个节省计划即可同时覆盖以下模型的消费，无论实际使用哪个模型产生的费用，都可以被该节省计划抵扣。适合同时使用多个模型的客户，一次购买，全面覆盖。
 
-TokenHub GLM-5.1
-
 TokenHub GLM-5.2
 
 TokenHub DeepSeek-V4-Pro
@@ -50,8 +48,6 @@ TokenHub DeepSeek-V4-Flash-0731
 **按单一产品购买（支持以下模型，单独选择）：**
 
 意味着只针对某一个指定模型购买节省计划，该节省计划仅抵扣该模型的消费，不跨模型共享。适合用量集中在单一模型、希望精准控制折扣范围的客户。
-
-TokenHub GLM-5.1
 
 TokenHub GLM-5.2
 
@@ -154,15 +150,15 @@ TokenHub 节省计划采用**到达阶梯价**，按月承诺金额越高、时�
 
 您可以登录腾讯云控制台，前往 [费用中心](https://console.cloud.tencent.com/expense) > **节省计划**页面，单击**购买节省计划**，进行节省计划的购买。
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/88e56039e9cb3bb33f1a3d441abdada1.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/76b44db25704897b6094e1254149818b.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/88e56039e9cb3bb33f1a3d441abdada1.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/76b44db25704897b6094e1254149818b.png)
 
 ### 购买页面
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/b9f326776a1d446dfaea1ea8366977a7.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/92242f76c3b3956a92a56aee67f4c230.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/b9f326776a1d446dfaea1ea8366977a7.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/92242f76c3b3956a92a56aee67f4c230.png)
 
 ### 按套餐购买
 
@@ -175,7 +171,7 @@ TokenHub 节省计划采用**到达阶梯价**，按月承诺金额越高、时�
 | 地域 | 选择**广州**或**新加坡**。 |
 | 可用区 | 选择**全部**。 |
 | 购买方式 | 选择**按套餐购买**。 |
-| 产品套餐 | 选择 **TokenHub 套餐**。包含6个产品，支持 GLM-5.1、GLM-5.2、DeepSeek-V4-Pro、DeepSeek-V4-Flash、DeepSeek-V4-Pro-0813、DeepSeek-V4-Flash-0731。 |
+| 产品套餐 | 选择 **TokenHub 套餐**。包含5个产品，支持 GLM-5.2、DeepSeek-V4-Pro、DeepSeek-V4-Flash、DeepSeek-V4-Pro-0813、DeepSeek-V4-Flash-0731。 |
 | 承诺消费周期 | 选择**按月**。 |
 | 承诺消费 | 填写每月承诺金额。 |
 | 时长 | 选择**1个月、3个月、6个月**。 |
@@ -195,7 +191,7 @@ TokenHub 节省计划采用**到达阶梯价**，按月承诺金额越高、时�
 | 地域 | 选择**广州**或**新加坡**。 |
 | 可用区 | 选择**全部**。 |
 | 购买方式 | 选择**按单一产品购买**。 |
-| 单一产品 | 选择具体模型。支持 GLM-5.1、GLM-5.2、DeepSeek-V4-Pro、DeepSeek-V4-Flash、DeepSeek-V4-Pro-0813、DeepSeek-V4-Flash-0731。 |
+| 单一产品 | 选择具体模型。支持 GLM-5.2、DeepSeek-V4-Pro、DeepSeek-V4-Flash、DeepSeek-V4-Pro-0813、DeepSeek-V4-Flash-0731。 |
 | 承诺消费周期 | 选择**按月**。 |
 | 承诺消费 | 填写每月承诺金额。 |
 | 时长 | 选择**1个月、3个月、6个月**。 |
@@ -220,7 +216,7 @@ TokenHub 节省计划采用**到达阶梯价**，按月承诺金额越高、时�
 
 #### **4. 多个模型能用一个节省计划覆盖吗？**
 
-可以，请选择**按套餐购买 - TokenHub 套餐**，GLM-5.1、GLM-5.2、DeepSeek-V4-Pro、DeepSeek-V4-Flash 、DeepSeek-V4-Pro-0813、DeepSeek-V4-Flash-0731的消费都可以被抵扣。
+可以，请选择**按套餐购买 - TokenHub 套餐**，GLM-5.2、DeepSeek-V4-Pro、DeepSeek-V4-Flash 、DeepSeek-V4-Pro-0813、DeepSeek-V4-Flash-0731的消费都可以被抵扣。
 
 #### **5. 可以叠加购买多个节省计划吗？**
 

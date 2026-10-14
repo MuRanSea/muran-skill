@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135745 -->
-<!-- Source SHA-256: 0cf4374ca35e10c26b3fde2cf7538ab16914b3a22dd43ae8dfc1af273929f19d -->
+<!-- Source SHA-256: f7203939e581307b7ed2e14021e0136de338ee024736a12a83c84dc9b84fcd08 -->
 
 # Hy 生图调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/135745
-最近更新时间：2026-09-24 21:20:30
+最近更新时间：2026-10-12 12:50:00
 
 ## 概述
 
@@ -180,7 +180,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/hunyuan-image/v35-generat
 | usage.total\_tokens | integer | 本次任务消耗的 token 总量（原厂依据，v3.5 目前不拆分 prompt / completion）。 |
 | tokenhub\_usage.total\_tokens | integer | TokenHub 网关侧计费/对账使用的 token 消耗，一般与 `usage.total_tokens` 保持一致。 |
 | request\_id | string | 唯一请求标识，用于排查问题。 |
-| assembled\_history | list | 服务端拼好的「下一轮回灌消息序列」，结构与请求体 `messages` 元素完全一致，典型为 3 条对象：  ① `role=assistant`（含 `reasoning` + `tool_calls`，描述本轮思考与工具调用）  ② `role=tool`（含工具产出图的中间 URL，`tool_call_id` 与 ① 一致）  ③ `role=assistant`（只含收尾文本，例如「你请求的图片已完成。」）  **多轮编辑时直接把该数组原样追加到下一轮** `messages` **即可。** |
+| assembled\_history | list | 服务端拼好的「下一轮回灌消息序列」，结构与请求体 `messages` 元素完全一致，典型为 3 条对象：  1. `role=assistant`（含 `reasoning` + `tool_calls`，描述本轮思考与工具调用）  2. `role=tool`（含工具产出图的中间 URL，`tool_call_id` 与 ① 一致）  3. `role=assistant`（只含收尾文本，例如「你请求的图片已完成。」）  **多轮编辑时直接把该数组原样追加到下一轮** `messages` **即可。** |
 | error | object | 仅失败终态帧才带，OpenAI 风格 `{type, code, message, request_id}`。 |
 
 **说明：**
@@ -312,7 +312,7 @@ curl -o generated_image.png 'https://aigc-output-image-file-1326893053.cos.ap-gu
 | --- | --- | --- | --- |
 | model | 是 | string | 模型 ID。取值：`hy-image-v3` |
 | prompt | 是 | string | 生成图片使用的文本，长度 ≤ 8192 字符。 |
-| images | 否 | array[string] | 参考图片，0~3 张。支持图片 URL 或 Base64。  格式 png / jpeg / jpg，单图大小 ≤ 10MB。 |
+| images | 否 | array[string] | 图片 images：支持 0张-3张图片输入， 支持 URL 和 Base64格式，图片格式：png/jpeg/jpg，单张大小≤10MB；  1. Base64：格式要求：data:image/<图片格式>;base64,<Base64 编码>。注：图片为 jpg 时图片格式填 jpeg。  2. URL：需要公网可访问（http/https）。 |
 | size | 否 | string | 生成尺寸，格式 `${宽}x${高}`。  约束：  1. 宽、高均在 [512, 2048] 像素范围内；  2. 宽高乘积（图像面积）不超过 1024×1024 像素。  不传时模型从 37 个预设组合中选择/预测，详情请参见 [附录：Hy-Image-3.0 预设尺寸列表](https://cloud.tencent.com/document/product/1823/135745#hy-image-3.0-.E9.A2.84.E8.AE.BE.E5.B0.BA.E5.AF.B8.E5.88.97.E8.A1.A8)。 |
 | seed | 否 | integer | 生成种子，范围 [1, 4294967295]，仅当生成图片数为 1 时生效；不传或为 0 时默认随机。 |
 | footnote | 否 | string | 业务自定义水印内容，限制 16 个字符长度（不区分中英文），生成在图片右下角。 |

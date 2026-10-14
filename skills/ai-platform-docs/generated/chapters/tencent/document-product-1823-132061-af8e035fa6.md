@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132061 -->
-<!-- Source SHA-256: e3d0969f947410a45819ac0b4fbe79119e02a6beeebb70f5adaa2d0672c40b5e -->
+<!-- Source SHA-256: a34dc90aa467affce01c8fa144c94f36d136b0cb86b180a1ee10bde7d5cd58f1 -->
 
 # GLM 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132061
-最近更新时间：2026-09-18 22:00:31
+最近更新时间：2026-10-13 15:50:30
 
 ## 概述
 
@@ -22,7 +22,7 @@
 
 ## 快速开始
 
-以下示例展示如何调用 `glm-5.1` 模型完成一次基础对话。请将 `YOUR_API_KEY` 替换为您创建的 API Key。
+以下示例展示如何调用 `glm-5.3` 模型完成一次基础对话。请将 `YOUR_API_KEY` 替换为您创建的 API Key。
 
 cURL
 
@@ -39,7 +39,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{
-    "model": "glm-5.1",
+    "model": "glm-5.3",
     "messages": [{"role": "user", "content": "你好"}],
     "max_tokens": 1024
   }'
@@ -54,7 +54,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="glm-5.1",
+    model="glm-5.3",
     messages=[{"role": "user", "content": "你好"}],
     max_tokens=1024,
 )
@@ -70,7 +70,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: 'glm-5.1',
+  model: 'glm-5.3',
   messages: [{ role: 'user', content: '你好' }],
   max_tokens: 1024,
 });
@@ -85,7 +85,7 @@ import java.util.*;
 public class GlmQuickStart {
     public static void main(String[] args) throws Exception {
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "glm-5.1");
+        body.put("model", "glm-5.3");
         body.put("messages", List.of(Map.of("role", "user", "content", "你好")));
         body.put("max_tokens", 1024);
 
@@ -115,7 +115,7 @@ import (
 
 func main() {
     body, _ := json.Marshal(map[string]interface{}{
-        "model":      "glm-5.1",
+        "model":      "glm-5.3",
         "messages":   []map[string]string{{"role": "user", "content": "你好"}},
         "max_tokens": 1024,
     })
@@ -146,10 +146,7 @@ GLM 系列模型默认开启思考模式，响应中会包含 `reasoning_content
 | `glm-5.3-flashx` | 轻量多模态（增强） | 1M tokens / 128K tokens | 支持图片、视频、文件 | 多模态理解、高速推理（200 tokens/s）、日常对话与创作 |
 | `glm-5.3-flash` | 轻量多模态 | 1M tokens / 128K tokens | 支持图片、视频、文件 | 多模态理解、快速推理、日常对话与创作 |
 | `glm-5.2` | 旗舰 | 1M tokens / 128K tokens | 不支持 | Agent 与编码、长程任务、全栈开发、代码翻译、科研复现 |
-| `glm-5.1` | 旗舰 | 200K tokens / 128K tokens | 不支持 | 通用对话、创作、知识问答、复杂推理 |
-| `glm-5` | 上一代旗舰 | 200K tokens / 128K tokens | 不支持 | 稳定性优先的场景 |
-| `glm-5-turbo` | Agent 优化 | 200K tokens / 128K tokens | 不支持 | 工具调用、长链路 Agent 任务 |
-| `glm-5v-turbo` | 多模态 | 200K tokens / 128K tokens | 支持图片、视频、文件 | 图像理解、视频分析、文档解析 |
+| `glm-5v-turbo`（即将下线） | 多模态 | 200K tokens / 128K tokens | 支持图片、视频、文件 | 图像理解、视频分析、文档解析 |
 
 ## 思考模式
 
@@ -180,7 +177,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{
-    "model": "glm-5.1",
+    "model": "glm-5.3",
     "messages": [{"role": "user", "content": "你好"}],
     "thinking": {"type": "disabled"}
   }'
@@ -188,7 +185,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
 
 ```python
 response = client.chat.completions.create(
-    model="glm-5.1",
+    model="glm-5.3",
     messages=[{"role": "user", "content": "你好"}],
     extra_body={"thinking": {"type": "disabled"}},
 )
@@ -196,7 +193,7 @@ response = client.chat.completions.create(
 
 ```javascript
 const response = await client.chat.completions.create({
-  model: 'glm-5.1',
+  model: 'glm-5.3',
   messages: [{ role: 'user', content: '你好' }],
   // @ts-ignore - thinking 为 GLM 扩展字段
   thinking: { type: 'disabled' },
@@ -211,7 +208,7 @@ import java.util.*;
 public class GlmThinkingDisabled {
     public static void main(String[] args) throws Exception {
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "glm-5.1");
+        body.put("model", "glm-5.3");
         body.put("messages", List.of(Map.of("role", "user", "content", "你好")));
         body.put("thinking", Map.of("type", "disabled"));
 
@@ -241,7 +238,7 @@ import (
 
 func main() {
     body, _ := json.Marshal(map[string]interface{}{
-        "model":    "glm-5.1",
+        "model":    "glm-5.3",
         "messages": []map[string]string{{"role": "user", "content": "你好"}},
         "thinking": map[string]string{"type": "disabled"},
     })
@@ -373,7 +370,7 @@ curl -N -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{
-    "model": "glm-5.1",
+    "model": "glm-5.3",
     "messages": [{"role": "user", "content": "解释量子纠缠"}],
     "stream": true,
     "stream_options": {"include_usage": true},
@@ -383,7 +380,7 @@ curl -N -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
 
 ```python
 stream = client.chat.completions.create(
-    model="glm-5.1",
+    model="glm-5.3",
     messages=[{"role": "user", "content": "解释量子纠缠"}],
     stream=True,
     stream_options={"include_usage": True},
@@ -406,7 +403,7 @@ for chunk in stream:
 
 ```javascript
 const stream = await client.chat.completions.create({
-  model: 'glm-5.1',
+  model: 'glm-5.3',
   messages: [{ role: 'user', content: '解释量子纠缠' }],
   stream: true,
   stream_options: { include_usage: true },
@@ -442,7 +439,7 @@ import java.io.InputStreamReader;
 public class GlmStream {
     public static void main(String[] args) throws Exception {
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "glm-5.1");
+        body.put("model", "glm-5.3");
         body.put("messages", List.of(Map.of("role", "user", "content", "解释量子纠缠")));
         body.put("stream", true);
         body.put("stream_options", Map.of("include_usage", true));
@@ -512,7 +509,7 @@ type StreamChunk struct {
 
 func main() {
     body, _ := json.Marshal(map[string]interface{}{
-        "model":          "glm-5.1",
+        "model":          "glm-5.3",
         "messages":       []map[string]string{{"role": "user", "content": "解释量子纠缠"}},
         "stream":         true,
         "stream_options": map[string]bool{"include_usage": true},
@@ -697,7 +694,7 @@ tools = [{
 }]
 
 completion = client.chat.completions.create(
-    model="glm-5.1",
+    model="glm-5.3",
     messages=[{"role": "user", "content": "查询深圳天气"}],
     tools=tools,
     stream=True,
@@ -738,7 +735,7 @@ const tools = [{
 }];
 
 const completion = await client.chat.completions.create({
-  model: 'glm-5.1',
+  model: 'glm-5.3',
   messages: [{ role: 'user', content: '查询深圳天气' }],
   tools: tools,
   stream: true,
@@ -784,7 +781,7 @@ List<Map<String, Object>> tools = List.of(Map.of(
 ));
 
 Map<String, Object> body = new HashMap<>();
-body.put("model", "glm-5.1");
+body.put("model", "glm-5.3");
 body.put("messages", List.of(Map.of("role", "user", "content", "查询深圳天气")));
 body.put("tools", tools);
 body.put("stream", true);
@@ -883,7 +880,7 @@ func main() {
     }}
 
     body, _ := json.Marshal(map[string]interface{}{
-        "model":    "glm-5.1",
+        "model":    "glm-5.3",
         "messages": []map[string]string{{"role": "user", "content": "查询深圳天气"}},
         "tools":    tools,
         "stream":   true,

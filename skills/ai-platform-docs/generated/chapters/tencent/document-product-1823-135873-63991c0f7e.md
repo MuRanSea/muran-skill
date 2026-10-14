@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135873 -->
-<!-- Source SHA-256: 75d46a9e98cd385f740be97369bcee95a5d8956235912ae32f3406746f29ff79 -->
+<!-- Source SHA-256: 153c2a4c9fedf8c12bbfe5a57d438ee6ac98b929330e48e1b2d208207a108c0d -->
 
 # OpenAI Response 协议字段说明
 
 官方来源：https://cloud.tencent.com/document/product/1823/135873
-最近更新时间：2026-10-10 14:05:00
+最近更新时间：2026-10-13 15:50:31
 
 ## OpenAI Responses API 使用
 
@@ -14,7 +14,7 @@
 
 | 参数 | 类型 | 必选 | 说明 |
 | --- | --- | --- | --- |
-| `model` | string | 否 | 用于生成响应的模型 ID，如 `hy3` 或 `qwen3.5-flash`。支持的推理模型：`hy3`、`deepseek-v4-flash`、`deepseek-v4-pro` 支持 `reasoning.effort` 全部取值；`qwen3.5-flash`、`qwen3.5-plus` 默认开启推理，`reasoning.effort` 支持 `none`、`low`、`medium`，传入 `high` 会返回 400。 |
+| `model` | string | 否 | 用于生成响应的模型 ID，如 `hy3` 。 |
 | `input` | string 或 array | 否 | 发送给模型的文本、图像或文件输入。string 为纯文本（等同 `user` 角色文本）；array 为输入条目列表，详见 [输入类型详解](https://cloud.tencent.com/document/product/1823/135873#35a07989-dc30-43f5-9e25-3506b2abeea0)。 |
 | `instructions` | string | 否 | 插入模型上下文的系统（或开发者）消息。与 `previous_response_id` 一起使用时，上一次响应的指令不会延续到下一次响应，便于替换系统消息。 |
 | `stream` | boolean | 否 | 设为 `true` 时，模型响应数据将通过 SSE 流式传输，事件包括 `response.created`、`response.output_text.delta`、`response.completed` 等。 |
@@ -49,7 +49,7 @@
 
 `tool_choice` 取值 `"required"` 及指定函数对象的支持情况因模型而异：
 
-`qwen3.5-flash`、`qwen3.5-plus`、`deepseek-v4-flash`、`deepseek-v4-pro`：默认开启思考模式，此时传入 `"required"` 或函数对象会返回 400。如需强制工具调用，请先显式关闭思考模式。
+`deepseek-v4-flash`、`deepseek-v4-pro`：默认开启思考模式，此时传入 `"required"` 或函数对象会返回 400。如需强制工具调用，请先显式关闭思考模式。
 
 `hy3`：当前不支持 `"required"` 及指定函数对象，请使用 `"auto"` 或 `"none"`。
 
@@ -67,7 +67,7 @@
 
 **注意：**
 
-使用 `json_schema` 或 `json_object` 时，`hy3`、`deepseek-v4-flash` 会严格输出纯 JSON；`qwen3.5-flash`、`qwen3.5-plus` 的输出可能被 Markdown 代码块（```json ... ```）包裹，需自行去除后再解析。另外 `json_schema` 的 schema 中需包含 `"additionalProperties": false`，否则 `hy3` 会报错。
+使用 `json_schema` 或 `json_object` 时，`hy3`、`deepseek-v4-flash` 会严格输出纯 JSON；部分模型 的输出可能被 Markdown 代码块（```json ... ```）包裹，需自行去除后再解析。另外 `json_schema` 的 schema 中需包含 `"additionalProperties": false`，否则 `hy3` 会报错。
 
 `include` 参数（array）：指定响应中额外包含的字段列表。三个模型均接受此参数，但额外字段实际是否返回取决于模型支持情况。
 
@@ -95,16 +95,16 @@
 
 **说明：**
 
-**模型支持**：`qwen3.5-flash`、`qwen3.5-plus` 支持此参数；`hy3` 及通过兼容模式接入的模型（如 `deepseek-v4-flash`、`deepseek-v4-pro`、`glm-5.2`、`kimi-k3` 等）不支持，传入非空值会返回 400 `previous_response_id is not supported in chat-compat mode`，多轮对话请通过 `input` 数组自行携带完整历史。
+**模型支持**：`hy3` 及通过兼容模式接入的模型（如 `deepseek-v4-flash`、`deepseek-v4-pro`、`glm-5.2`、`kimi-k3` 等）不支持，传入非空值会返回 400 `previous_response_id is not supported in chat-compat mode`，多轮对话请通过 `input` 数组自行携带完整历史。
 
 #### 其他参数
 
 | 参数 | 类型 | 说明 |
 | --- | --- | --- |
-| `background` | boolean | 是否后台异步运行。各模型均接受此参数，但实际均为同步返回（`hy3` 回显 `null`，`qwen3.5-flash/plus` 回显 `false`）。 |
+| `background` | boolean | 是否后台异步运行。各模型均接受此参数，但实际均为同步返回（`hy3` 回显 `null`）。 |
 | `store` | boolean | 是否存储响应以便后续检索。三个模型均接受（不报错），但实际不回显。 |
 | `metadata` | object | 附加到响应的键值对元数据（最多 16 对，键最长 64 字符，值最长 512 字符）。三个模型均接受但不在响应体中回显。 |
-| `service_tier` | string | 服务层级：`auto` / `default` / `flex` / `scale` / `priority`。`qwen3.5-flash/plus` 在响应中回显，`hy3` 不回显。 |
+| `service_tier` | string | 服务层级：`auto` / `default` / `flex` / `scale` / `priority`。部分模型不回显。 |
 
 ### 输入类型详解
 
@@ -150,7 +150,7 @@
 | `strict` | boolean | 是否强制严格参数验证，默认 `true`。 |
 | `description` | string | 可选。函数描述，供模型判断是否调用。 |
 
-**FileSearch（文件搜索工具）：**支持模型 `qwen3.5-flash`、`qwen3.5-plus`；`hy3` 不支持。需提供有效的 `vector_store_ids`。
+**FileSearch（文件搜索工具）：**需提供有效的 `vector_store_ids`。
 
 未配置有效 `vector_store_ids` 时，请求不会报错，但也不会执行检索，模型将直接基于自身知识作答。通过兼容模式接入的模型（如 `deepseek-v4-flash`、`deepseek-v4-pro`、`glm-5.2`、`kimi-k3` 等）仅支持 `function` 类型工具，`file_search`、`web_search`、`code_interpreter` 等内置工具会被自动丢弃且不报错。
 
@@ -161,7 +161,7 @@
 | `max_num_results` | number | 可选。最大返回结果数，范围 1-50。 |
 | `filters` | ComparisonFilter 或 CompoundFilter | 可选。过滤条件，详见 [过滤器类型](https://cloud.tencent.com/document/product/1823/135873#e78ad826-a9c7-4e18-a60d-01dbb786d322)。 |
 
-**WebSearch（网络搜索工具）：**工具类型为 `"web_search"`（非 OpenAI 官方的 `web_search_preview`）。支持模型 `qwen3.5-flash`、`qwen3.5-plus`；`hy3` 需开通联网搜索资源包。
+**WebSearch（网络搜索工具）：**工具类型为 `"web_search"`（非 OpenAI 官方的 `web_search_preview`）。`hy3` 需开通联网搜索资源包。
 
 | 字段 | 类型 | 说明 |
 | --- | --- | --- |
@@ -211,23 +211,23 @@
 | `max_output_tokens` | number | 请求中传入的最大输出 Token 数，未传入时不返回。 |
 | `model` | string | 用于生成响应的模型 ID。 |
 | `output` | array | 模型生成的输出条目列表，详见 [输出条目类型](https://cloud.tencent.com/document/product/1823/135873#output)。 |
-| `parallel_tool_calls` | boolean 或 null | 是否允许并行工具调用。`hy3` 返回 `null`；`qwen3.5-flash/plus` 返回 `true`/`false`。 |
+| `parallel_tool_calls` | boolean 或 null | 是否允许并行工具调用。 |
 | `previous_response_id` | string | 多轮对话时上一次响应的 ID，单轮时不返回。 |
 | `usage` | object | Token 使用统计，详见 [ResponseUsage 对象](https://cloud.tencent.com/document/product/1823/135873#ResponseUsage)。 |
-| `service_tier` | string | 实际使用的服务层级。`qwen3.5-flash/plus` 返回（值为 `"default"`）；`hy3` 不返回。 |
+| `service_tier` | string | 实际使用的服务层级。 |
 
 **说明：**
 
-`temperature`、`top_p`、`tool_choice`、`tools`、`top_logprobs`、`background` 等字段：`qwen3.5-flash`、`qwen3.5-plus` 会在响应中回显；`hy3` 不回显。
+`temperature`、`top_p`、`tool_choice`、`tools`、`top_logprobs`、`background` 等字段。
 
 **ResponseUsage 对象：**
 
 | 字段 | 类型 | 说明 |
 | --- | --- | --- |
 | `input_tokens` | number | 输入 Token 数量。 |
-| `input_tokens_details` | object | 输入 Token 详情，包含 `cached_tokens`。`qwen3.5-flash/plus` 返回；`hy3` 不返回。 |
+| `input_tokens_details` | object | 输入 Token 详情，包含 `cached_tokens`。部分模型不返回。 |
 | `output_tokens` | number | 输出 Token 数量。 |
-| `output_tokens_details` | object | 输出 Token 详情，包含 `reasoning_tokens`。`qwen3.5-flash/plus` 返回；`hy3` 不返回。 |
+| `output_tokens_details` | object | 输出 Token 详情，包含 `reasoning_tokens`。部分模型不返回。 |
 | `total_tokens` | number | 总 Token 数量（input + output）。 |
 
 **输出条目类型（** `output` **数组）：**
@@ -253,14 +253,14 @@
 | `arguments` | string | 函数参数的 JSON 字符串。 |
 | `status` | string | `in_progress` / `completed` / `incomplete`。 |
 
-*ReasoningItem（推理条目）：*推理模型（`hy3`、`deepseek-v4-flash`、`deepseek-v4-pro` 传入 `reasoning.effort` 时，或 `qwen3.5-flash`/`qwen3.5-plus` 默认）会在 `output` 中额外返回此条目。
+*ReasoningItem（推理条目）：*推理模型（`hy3`、`deepseek-v4-flash`、`deepseek-v4-pro` 传入 `reasoning.effort` 时）会在 `output` 中额外返回此条目。
 
 | 字段 | 类型 | 说明 |
 | --- | --- | --- |
 | `id` | string | 唯一 ID。 |
 | `type` | `"reasoning"` | 类型，始终为 `reasoning`。 |
 | `summary` | array | 推理摘要文本列表，每项含 `type: "summary_text"` 和 `text` 字段。 |
-| `status` | string | 状态。仅 `hy3` 返回，`qwen3.5-flash/plus` 不返回此字段。 |
+| `status` | string | 状态。仅 `hy3` 返回。 |
 
 ### 使用示例
 
@@ -402,8 +402,6 @@ func main() {
 #### 示例：图像输入
 
 **说明：**
-
-支持模型：`qwen3.5-flash`、`qwen3.5-plus`（`hy3`、`deepseek-v4-flash` 为纯文本模型，传入图像不会报错但不会被识别）。
 
 图像 URL 需为公网可达的直链；无法访问时将返回 400 错误。也可使用 `data:image/png;base64,...` 形式的 Base64 数据。
 
@@ -556,7 +554,7 @@ func main() {
 
 **说明：**
 
-文件输入（`input_file`）：`qwen3.5-flash`、`qwen3.5-plus` 支持，文件 URL 需为公网可达直链；`hy3` 暂不可用。
+文件输入（`input_file`）：文件 URL 需为公网可达直链；`hy3` 暂不可用。
 
 cURL
 
@@ -707,7 +705,7 @@ func main() {
 
 **说明：**
 
-网络搜索工具类型为 `"web_search"`。支持模型：`qwen3.5-flash`、`qwen3.5-plus`；`hy3` 需开通联网搜索资源包。
+网络搜索工具类型为 `"web_search"`。`hy3` 需开通联网搜索资源包。
 
 未开通联网搜索资源包时，请求不会报错，但搜索不会生效，响应中 `annotations` 为空。
 
@@ -822,7 +820,7 @@ func main() {
 
 **说明：**
 
-文件搜索（`file_search`）支持模型：`qwen3.5-flash`、`qwen3.5-plus`；`hy3` 不支持。需提供有效的 `vector_store_ids`。
+文件搜索（`file_search`）需提供有效的 `vector_store_ids`。
 
 传入不存在的 `vector_store_ids` 时不会报错，但不会执行检索。
 
@@ -1102,7 +1100,7 @@ event: response.completed
 
 **说明：**
 
-`qwen3.5-flash` / `qwen3.5-plus` 等推理模型在流式模式下会额外输出推理过程事件（`response.reasoning_summary_text.delta` / `response.reasoning_summary_text.done`）。
+推理模型在流式模式下会额外输出推理过程事件（`response.reasoning_summary_text.delta` / `response.reasoning_summary_text.done`）。
 
 #### 示例：函数调用（Function Calling）
 

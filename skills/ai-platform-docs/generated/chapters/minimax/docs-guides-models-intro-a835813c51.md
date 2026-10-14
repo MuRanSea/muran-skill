@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/models-intro.md -->
-<!-- Source SHA-256: 79aec16c3b99d3871ab75de58087b3d1baa40dd79a33b639ef3bc1c079859a46 -->
+<!-- Source SHA-256: 8c7dd5559f403cd0bf67915a4b1866885c8524dce67e48280f9643b729c9f073 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -8,6 +8,29 @@
 # 概览
 
 > MiniMax 模型体系涵盖语言、视频、语音、图像与音乐五大方向，助力开发者高效构建智能应用。
+
+<Info className="model-retirement-notice">
+  **MiniMax M2.5、M2.7 系列模型下线通知**
+
+  随着新版本模型的推出，我们将逐步停止提供 MiniMax M2.5、M2.7 系列模型服务，并为现有用户预留迁移时间。具体安排如下：
+
+  * **停止向新用户开放调用：**【2026年10月19日】
+  * **正式下线：**【2026年11月18日】
+
+  **按量付费 API 用户**
+
+  存量用户可继续调用至正式下线日，正式下线后相关 API 调用将不再可用。请提前核查调用情况，并在下线前完成模型迁移。
+
+  **M Plan 和 Token Plan 用户**
+
+  M2.5、M2.7 系列模型请求将于【2026年10月19日】统一路由至 **M3.1 Flash Preview**。
+
+  原模型名称保留作为兼容入口，用户无需修改模型名称，原有套餐用量权益不受影响。
+
+  为避免影响业务，**请尽快核查调用情况并提前做好模型迁移准备。**
+
+  感谢您一直以来对MiniMax的支持与信任。
+</Info>
 
 ### 语言模型
 

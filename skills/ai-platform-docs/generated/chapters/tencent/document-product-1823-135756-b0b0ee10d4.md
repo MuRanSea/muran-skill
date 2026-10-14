@@ -1,14 +1,14 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135756 -->
-<!-- Source SHA-256: a95ecf011842442379852bd5edb208fe22dabcc8a46ec7a76dca91885f228707 -->
+<!-- Source SHA-256: 432bdf3a93a41adf7b0ce1517616c81b98cdc4222f0ebdd92001f513075dbde1 -->
 
 # Vidu 生视频调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/135756
-最近更新时间：2026-10-09 10:22:50
+最近更新时间：2026-10-13 15:50:31
 
 ## 概述
 
-Vidu 是生数科技推出的视频生成模型系列，支持**文生视频、图生视频、多图参考生视频、首尾帧生视频**等能力，具备智能切镜、音画同出等特性。本文介绍如何通过 TokenHub 调用 Vidu 的六款视频模型：`vidu-video-q2`、`vidu-video-q2-pro`、`vidu-video-q2-turbo`、`vidu-video-q3`、`vidu-video-q3-pro`、`vidu-video-q3-turbo`。
+Vidu 是生数科技推出的视频生成模型系列，支持**文生视频、图生视频、多图参考生视频、首尾帧生视频**等能力，具备智能切镜、音画同出等特性。本文介绍如何通过 TokenHub 调用 Vidu 的七款视频模型：`vidu-video-q4-preview`、`vidu-video-q2`、`vidu-video-q2-pro`、`vidu-video-q2-turbo`、`vidu-video-q3`、`vidu-video-q3-pro`、`vidu-video-q3-turbo`。
 
 ### 前提条件
 
@@ -32,14 +32,13 @@ Vidu 是生数科技推出的视频生成模型系列，支持**文生视频、�
 
 **注意：**
 
-任务状态：created（创建成功）/ queueing（排队中）/ processing（处理中）/ success（成功）/ failed（失败）。
-
-所有接口响应均包含 `request_id`（顶层，用于排查问题）；查询接口额外返回 tokenhub\_usage（用量消耗）。
+任务状态：created（创建成功）/ queueing（排队中）/ processing（处理中）/ success（成功）/ failed（失败）。所有接口响应均包含 `request_id`（顶层，用于排查问题）；查询接口额外返回 tokenhub\_usage（用量消耗）。
 
 ### 模型列表
 
 | 模型名称 | model 参数值 | 支持能力 | 视频时长（秒） | 清晰度档位 | 选型建议 |
 | --- | --- | --- | --- | --- | --- |
+| Vidu-Video-q4-preview | `vidu-video-q4-preview` | 图生 / 参考生 / 音画同出 | 3 ~ 16 | 540p / 720p / 1080p / 2K / 4K | 最新旗舰预览版，支持 2K/4K 输出，参考图最多 15 张、参考音频最多 3 段 |
 | Vidu-Video-q3.0 | `vidu-video-q3` | 参考生 / 智能切镜 / 音画同出 | 参考生 3~16 | 540p / 720p / 1080p | 多机位一致性更出色 |
 | Vidu-Video-q3.0-pro | `vidu-video-q3-pro` | 文生 / 图生 / 首尾帧 / 智能切镜 / 音画同出 | 文生、图生、首尾帧 1~16 | 540p / 720p / 1080p | Q3 高画质版 |
 | Vidu-Video-q3.0-turbo | `vidu-video-q3-turbo` | 文生 / 图生 / 参考生 / 首尾帧 / 智能切镜 / 音画同出 | 文生、图生、首尾帧 1~16；参考生 3~16 | 540p / 720p / 1080p | 生成速度最快、性价比最高 |
@@ -52,6 +51,8 @@ Vidu 是生数科技推出的视频生成模型系列，支持**文生视频、�
 各接口实际支持的 model 取值与 `duration` 取值范围以各接口「输入参数」中的说明为准，不同能力的时长范围存在差异，请参见 [附录：各接口时长取值速查](https://cloud.tencent.com/document/product/1823/135756#.E5.90.84.E6.8E.A5.E5.8F.A3.E6.97.B6.E9.95.BF.E5.8F.96.E5.80.BC.E9.80.9F.E6.9F.A5)。
 
 `q3` 系列支持智能切镜与音画同出（`audio`）；`q2` 系列支持 `bgm`、`movement_amplitude` 等。
+
+`q4-preview` 目前仅支持**图生视频**与**参考生视频**：支持音画同出（`audio`，图生默认开启，参考生需显式传 `true`）、不支持 `bgm` 与 `movement_amplitude`；分辨率额外支持 `2K` / `4K`；参考生最多 15 张参考图 + 3 段参考音频（`sounds`）。
 
 参考生视频的 `videos` 视频参考与视频主体仅 `vidu-video-q2-pro` 支持。
 
@@ -70,7 +71,7 @@ Vidu 是生数科技推出的视频生成模型系列，支持**文生视频、�
 | model | 是 | string | 模型名称。取值：`vidu-video-q3-turbo`、`vidu-video-q3-pro`、`vidu-video-q2` |
 | prompt | 是 | string | 文本提示词。≤ 5000 字符。 |
 | style | 否 | string | 风格。默认 general；可选 general（通用）/ anime（动漫）。**q2、q3 系列不生效。** |
-| duration | 否 | integer | 视频时长（秒）。q3 系列可选 1~16；q2 系列可选 1~10。默认值：5。 |
+| duration | 否 | integer | 视频时长（秒）。默认值：5。 |
 | aspect\_ratio | 否 | string | 画面宽高比。默认 16:9；可选 16:9 / 9:16 / 3:4 / 4:3 / 1:1（部分比例仅特定模型支持）。 |
 | resolution | 否 | string | 分辨率。默认值依模型与时长而定；常见可选 540p / 720p / 1080p。 |
 | movement\_amplitude | 否 | string | 运动幅度。默认 auto；可选 auto / small / medium / large。**q2、q3 系列不生效。** |
@@ -151,17 +152,17 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/vidu/text-to-video' \\
 
 | 参数名 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
-| model | 是 | string | 模型名称。取值：`vidu-video-q3-turbo`、`vidu-video-q3-pro`、`vidu-video-q2-pro`、`vidu-video-q2-turbo` |
-| images | 是 | array[string] | 首帧图像（仅 1 张）。支持图片 URL 或 Base64；png/jpeg/jpg/webp；比例 < 1:4 或 4:1；≤ 50MB；POST body ≤ 20MB |
+| model | 是 | string | 模型名称。取值：`vidu-video-q4-preview`、`vidu-video-q3-turbo`、`vidu-video-q3-pro`、`vidu-video-q2-pro`、`vidu-video-q2-turbo` |
+| images | 是 | array[string] | 图片 images：支持1张图片输入， 支持 URL 和 Base64格式。图片格式：png/jpeg/jpg/webp，图片比例需要小于 1：4 或者 4：1；  1. Base64：图片大小<=15MB，转为 Base64大小和<=20MB；格式要求：`data:image/<图片格式>;base64,`。注：图片为 jpg 时图片格式填 jpeg。  2. URL：单个文件大小<=50MB；需要公网可访问（http/https）。 |
 | prompt | 否 | string | 文本提示词。≤ 5000 字符。使用 is\_rec 时本参数被忽略 |
-| audio | 否 | boolean | 是否音视频直出。默认 false（q3-pro/turbo 默认 true） |
+| audio | 否 | boolean | 是否音视频直出。默认 false（q3-pro / q3-turbo、q4-preview 默认 true） |
 | audio\_type | 否 | string | 音频类型（audio=true 时必填）。默认 all；可选 all / speech\_only / sound\_effect\_only |
 | voice\_id | 否 | string | 音色 ID（**q3 系列不生效**）。为空时系统自动推荐 |
 | is\_rec | 否 | boolean | 是否使用推荐提示词。true 时系统自动推荐并生成（每任务多消耗 10 积分） |
-| bgm | 否 | boolean | 是否添加背景音乐。默认 false（**q3 系列不生效**） |
-| duration | 否 | integer | 视频时长（秒）。q3 系列默认 5、可选 1~16；q2-pro / q2-turbo 默认 5、可选 1~10。默认值：5 |
-| resolution | 否 | string | 分辨率。默认值依模型与时长而定；常见可选 540p / 720p / 1080p |
-| movement\_amplitude | 否 | string | 运动幅度。默认 auto；可选 auto / small / medium / large（**q2、q3 不生效**） |
+| bgm | 否 | boolean | 是否添加背景音乐。默认 false（**q3 系列、q4-preview 不生效**） |
+| duration | 否 | integer | 视频时长（秒）。默认值：5。 |
+| resolution | 否 | string | 分辨率。默认值依模型与时长而定；常见可选 540p / 720p / 1080p。q4-preview 额外支持 2K / 4K，默认 720p |
+| movement\_amplitude | 否 | string | 运动幅度。默认 auto；可选 auto / small / medium / large（**q2、q3、q4-preview 不生效**） |
 | seed | 否 | integer | 随机种子。不传或传 0 时使用随机数 |
 | payload / watermark / wm\_position / wm\_url | 否 | - | 通用配置，同「文生视频」 |
 
@@ -233,19 +234,19 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/vidu/image-to-video' \\
 
 | 参数名 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
-| model | 是 | string | 模型名称。取值：`vidu-video-q3-turbo`、`vidu-video-q3`、`vidu-video-q2-pro`、`vidu-video-q2` |
+| model | 是 | string | 模型名称。取值：`vidu-video-q4-preview`、`vidu-video-q3-turbo`、`vidu-video-q3`、`vidu-video-q2-pro`、`vidu-video-q2` |
 | subjects | 条件必选 | array[object] | 主体集合（方式一，与 images/videos 二选一）。子字段见下表 |
-| images | 条件必选 | array[string] | 图像参考（方式二，1~7 张）。支持图片 URL 或 Base64；png/jpeg/jpg/webp；像素 ≥ 128×128；比例 < 1:4 或 4:1；≤ 50MB |
-| videos | 条件必选 | array[string] | 视频参考（方式二，1~2 个，**仅 q2-pro 支持**）。1 个 8 秒或 2 个 5 秒；mp4/avi/mov；≤ 100MB |
+| images | 条件必选 | array[string] | 图片 subjects.images[]：支持1张-3张图片输入， 支持 URL 和 Base64格式。图片格式：png/jpeg/jpg/webp，图片比例需要小于 1：4 或者 4：1；  1. Base64：所有图片大小和<=15MB，转为Base64大小和<=20MB；格式要求：`data:image/<图片格式>;base64,`。注：图片为 jpg 时图片格式填 jpeg。  2. URL：单个文件大小<=50MB；需要公网可访问（http/https）。 |
+| videos | 条件必选 | array[string] | 视频 subjects.videos[]：支持1个5秒视频输入，每个主体中的图片和视频，共享3个槽位， 支持 URL 和 Base64格式。视频格式：mp4/avi/mov，视频像素不能小于 128\*128，且比例需要小于1：4或者4：1；视频大小≤20MB；  1. Base64：格式要求：`data:video/<视频格式>;base64,`。注：视频为 mov 时视频格式填 quicktime；视频为 avi 时视频格式填 x-msvideo。  2. URL：需要公网可访问（http/https）。 |
 | prompt | 是 | string | 文本提示词。主体方式 ≤ 5000 字符（可用 `@主体名` 引用）；直接参考方式 ≤ 2000 字符 |
 | auto\_subjects | 否 | boolean | 是否使用智能主体库能力。默认 false |
-| audio | 否 | boolean | 是否音视频直出。q3/q3-turbo 默认 true，其他默认 false；非主体调用时仅 q3 支持 |
+| audio | 否 | boolean | 是否音视频直出。q3/q3-turbo 默认 true，其他默认 false；q4-preview 不传时按 false 下发，如需音画同出请显式传 `true`；非主体调用时仅 q3 支持，q4-preview 需使用 subjects 主体方式 |
 | audio\_type | 否 | string | 音频类型（audio=true 时必填）。默认 all；可选 all / speech\_only / sound\_effect\_only |
-| duration | 否 | integer | 视频时长（秒）。q3 系列可选 3~16；q2-pro 可选 0~10（**0 表示由模型自动判断时长**）；q2 可选 1~10。默认值：5 |
+| duration | 否 | integer | 视频时长（秒）。默认值：5。 |
 | aspect\_ratio | 否 | string | 画面宽高比。默认 16:9；可选 16:9 / 9:16 / 3:4 / 4:3 / 1:1 |
-| resolution | 否 | string | 分辨率。默认值依模型而定；常见可选 540p / 720p / 1080p |
-| movement\_amplitude | 否 | string | 运动幅度。默认 auto；可选 auto / small / medium / large（**q2、q3 不生效**） |
-| bgm | 否 | boolean | 是否添加背景音乐。默认 false（**q3 系列不生效**） |
+| resolution | 否 | string | 分辨率。默认值依模型而定；常见可选 540p / 720p / 1080p。q4-preview 额外支持 2K / 4K |
+| movement\_amplitude | 否 | string | 运动幅度。默认 auto；可选 auto / small / medium / large（**q2、q3、q4-preview 不生效**） |
+| bgm | 否 | boolean | 是否添加背景音乐。默认 false（**q3 系列、q4-preview 不生效**） |
 | seed / payload / watermark / wm\_position / wm\_url | 否 | - | 通用配置，同「文生视频」 |
 
 **subjects 数组元素子字段：**
@@ -253,13 +254,15 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/vidu/image-to-video' \\
 | 参数名 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
 | name | 是 | string | 主体 ID/名称，后续在 prompt 中以 `@name` 引用。 |
-| images | 条件必选 | array[string] | 主体图片（与 videos 必填其一）。最多 3 张；URL 或 Base64；png/jpeg/jpg/webp；比例 < 1:4 或 4:1；Base64 解码 < 20MB。 |
-| videos | 条件必选 | array[string] | 主体视频（与 images 必填其一，**仅 q2-pro 支持**）。1 个 5 秒视频；mp4/avi/mov；像素 ≥ 128×128。 |
+| images | 条件必选 | array[string] | 图片 subjects.images[]：支持1张-3张图片输入， 支持 URL 和Base64格式。图片格式：png/jpeg/jpg/webp，图片比例需要小于 1：4 或者 4：1；  1. Base64：所有图片大小和<=15MB，转为 Base64大小和<=20MB；格式要求：`data:image/<图片格式>;base64,`。注：图片为 jpg 时图片格式填 jpeg。  2. URL：单个文件大小<=50MB；需要公网可访问（http/https）。 |
+| videos | 条件必选 | array[string] | 视频 subjects.videos[]：支持1个5秒视频输入，每个主体中的图片和视频，共享3个槽位， 支持 URL 和 Base64格式。视频格式：mp4/avi/mov，视频像素不能小于 128\*128，且比例需要小于1：4或者4：1；视频大小≤20MB；  1. Base64：格式要求：`data:video/<视频格式>;base64,`。注：视频为 mov 时视频格式填 quicktime；视频为 avi 时视频格式填 x-msvideo。  2. URL：需要公网可访问（http/https）。 |
 | voice\_id | 否 | string | 主体音色 ID（**q3 参考生不生效**）。为空时自动推荐。 |
 
 **说明：**
 
 **主体数量限制：**
+
+q4-preview：最多 15 张参考图 + 3 段参考音频（`sounds`）。
 
 q3/q2：图片/文字主体最多 7 个，不支持视频主体。
 
@@ -352,10 +355,10 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/vidu/reference-to-video' 
 | 参数名 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
 | model | 是 | string | 模型名称。取值：`vidu-video-q3-turbo`、`vidu-video-q3-pro`、`vidu-video-q2-pro`、`vidu-video-q2-turbo` |
-| images | 是 | array[string] | 首尾帧图像：第 1 张为首帧、第 2 张为尾帧。支持图片 URL 或 Base64；首尾帧分辨率需相近（比值 0.8~1.25）；png/jpeg/jpg/webp；比例 < 1:4 或 4:1；≤ 50MB。 |
+| images | 是 | array[string] | 图片 images：支持2张图片输入， 支持 URL 和Base64格式，首尾帧两张输入图的分辨率需相近，首帧图的分辨率/尾帧图的分辨率要在0.8～1.25之间。且图片比例需要小于1：4或者4：1。图片格式：png/jpeg/jpg/webp；  1. Base64：图片大小<=15MB，转为 Base64大小和<=20MB；格式要求：`data:image/<图片格式>;base64`。注：图片为 jpg 时图片格式填 jpeg。  2. URL：单个文件大小<=50MB；需要公网可访问（http/https）。 |
 | prompt | 否 | string | 文本提示词。≤ 5000 字符。使用 is\_rec 时本参数被忽略。 |
 | is\_rec | 否 | boolean | 是否使用推荐提示词。true 时系统自动推荐并生成（每任务多消耗 10 积分）。 |
-| duration | 否 | integer | 视频时长（秒）。q3 系列默认 5、可选 1~16；q2-pro / q2-turbo 默认 5、可选 1~8。默认值：5。 |
+| duration | 否 | integer | 视频时长（秒）。默认值：5。 |
 | resolution | 否 | string | 分辨率。默认值依模型而定；常见可选 540p / 720p / 1080p。 |
 | movement\_amplitude | 否 | string | 运动幅度。默认 auto；可选 auto / small / medium / large（**q2、q3 不生效**）。 |
 | audio | 否 | boolean | 是否音视频直出。默认 true；**仅 q3 系列支持。** |
@@ -535,12 +538,12 @@ curl -X GET 'https://tokenhub.tencentmaas.com/v1/wand/vidu/tasks/YOUR_TASK_ID' \
 
 ### 各接口时长取值速查
 
-| 接口 | q3 系列（q3 / q3-pro / q3-turbo） | q2 系列（q2 / q2-pro / q2-turbo） |
-| --- | --- | --- |
-| 文生视频 | 1 ~ 16，默认 5 | 1 ~ 10，默认 5 |
-| 图生视频 | 1 ~ 16，默认 5 | 1 ~ 10，默认 5 |
-| 多图参考生视频 | 3 ~ 16，默认 5 | q2-pro：0 ~ 10（0 = 自动判断时长）；q2：1 ~ 10，默认 5 |
-| 首尾帧生视频 | 1 ~ 16，默认 5 | 1 ~ 8，默认 5 |
+| 接口 | q4-preview | q3 系列（q3 / q3-pro / q3-turbo） | q2 系列（q2 / q2-pro / q2-turbo） |
+| --- | --- | --- | --- |
+| 文生视频 | 不支持 | 1 ~ 16，默认 5 | 1 ~ 10，默认 5 |
+| 图生视频 | 3 ~ 16，默认 5 | 1 ~ 16，默认 5 | 1 ~ 10，默认 5 |
+| 多图参考生视频 | 3 ~ 16，默认 5 | 3 ~ 16，默认 5 | q2-pro：0 ~ 10（0 = 自动判断时长）；q2：1 ~ 10，默认 5 |
+| 首尾帧生视频 | 不支持 | 1 ~ 16，默认 5 | 1 ~ 8，默认 5 |
 
 **注意：**
 
@@ -558,7 +561,9 @@ curl -X GET 'https://tokenhub.tencentmaas.com/v1/wand/vidu/tasks/YOUR_TASK_ID' \
 
 ## 常见问题
 
-#### **1. 六款视频模型如何选择？**
+#### **1. 七款视频模型如何选择？**
+
+最新旗舰预览版、需要 2K / 4K 高分辨率或大容量参考（15 张图 + 3 段音频）：`vidu-video-q4-preview`（仅支持图生、参考生）；
 
 速度成本优先、要智能切镜/音画同出：`vidu-video-q3-turbo`；
 
@@ -580,7 +585,7 @@ images/videos 直接方式：直接传参考素材，不支持命名引用；pro
 
 #### **3. audio 和 bgm 有什么区别？**
 
-`audio` 是音视频直出（输出带台词/音效的有声视频），仅 q3 系列支持；`bgm` 是添加背景音乐，q3 系列不生效，q2 系列 duration 为 9/10 秒时不生效。
+`audio` 是音视频直出（输出带台词/音效的有声视频），q3 系列与 q4-preview 支持（q4-preview 图生默认开启，参考生需显式传 `true`）；`bgm` 是添加背景音乐，q3 系列与 q4-preview 不生效，q2 系列 duration 为 9/10 秒时不生效。
 
 #### **4. 哪些接口可以指定画面宽高比？**
 

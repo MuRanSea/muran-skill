@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135744 -->
-<!-- Source SHA-256: 18b487c062300a90c7ecb63c8e29a0f7d1d268ee08751b7d96c1a47f24f6ffd0 -->
+<!-- Source SHA-256: a707936e02ea7d96fd0f37b21aaf1b388f1a644753cc11121b06a55a77f9ad41 -->
 
 # 图像生成模型调用概览
 
 官方来源：https://cloud.tencent.com/document/product/1823/135744
-最近更新时间：2026-09-24 21:20:30
+最近更新时间：2026-10-13 15:50:31
 
 ## 概述
 
@@ -40,7 +40,7 @@
 
 详情请参见 [Seedream 生图调用指南](https://cloud.tencent.com/document/product/1823/136609)。
 
-<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型名称</div></td><td><div>model 参数值</div></td><td><div>支持能力</div></td><td><div>接口类型</div></td><td><div>简要说明</div></td></tr><tr><td colspan="1" rowspan="1"><div>Seedream-Image-v5.0-pro</div></td><td colspan="1" rowspan="1"><div><code>seedream-image-v5.0-pro</code></div></td><td colspan="1" rowspan="1"><div>参考生图 / 文生图</div></td><td><div>同步</div></td><td><div>旗舰高精度生图，精准坐标编辑</div></td></tr><tr><td colspan="1" rowspan="1"><div>Seedream-Image-v5.0-lite</div></td><td colspan="1" rowspan="1"><div><code>seedream-image-v5.0-lite</code></div></td><td><div>参考生图 / 文生图</div></td><td><div>同步</div></td><td><div>轻量快速，联网实时检索，高性价比生图</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型名称</div></td><td><div>model 参数值</div></td><td><div>支持能力</div></td><td><div>接口类型</div></td><td><div>简要说明</div></td></tr><tr><td colspan="1" rowspan="1"><div>Seedream-Image-v5.0-pro</div></td><td colspan="1" rowspan="1"><div><code>seedream-image-v5.0-pro</code></div></td><td colspan="1" rowspan="1"><div>参考生图 / 文生图</div></td><td><div>同步</div></td><td><div>旗舰高精度生图，精准坐标编辑</div></td></tr><tr><td colspan="1" rowspan="1"><div>Seedream-Image-v5.0-lite</div></td><td colspan="1" rowspan="1"><div><code>seedream-image-v5.0-lite</code></div></td><td><div>参考生图 / 文生图</div></td><td><div>同步</div></td><td><div>轻量快速，联网实时检索，高性价比生图</div></td></tr><tr><td><div>Seedream-Image-v5.0-flash</div></td><td><div><code>seedream-image-v5.0-flash</code></div></td><td><div>参考生图 / 文生图</div></td><td><div>同步</div></td><td><div>高速生图模型，出图更快、价格更低</div></td></tr></tbody></table>
 
 ### Kling 系列
 

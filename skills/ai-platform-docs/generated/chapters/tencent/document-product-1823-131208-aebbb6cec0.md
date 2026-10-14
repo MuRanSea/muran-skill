@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/131208 -->
-<!-- Source SHA-256: 51463a82c6eb16d2d955158fd4f3310c02af48083e11a7be1c3f8aa37bf901ef -->
+<!-- Source SHA-256: 14a5f98887bb8a82f541d7d9b134041b2ab996d28118690f93b612e4cdc50ba9 -->
 
 # 深度思考
 
 官方来源：https://cloud.tencent.com/document/product/1823/131208
-最近更新时间：2026-09-29 17:09:29
+最近更新时间：2026-10-13 15:50:31
 
 ## 功能说明
 
@@ -42,9 +42,6 @@
 | GLM-5.3-Flash | `glm-5.3-flash` | enabled（不支持关闭） |
 | GLM-5.3-FlashX | `glm-5.3-flashx` | enabled（不支持关闭） |
 | GLM-5.2 | `glm-5.2` | enabled |
-| GLM-5.1 | `glm-5.1` | enabled |
-| GLM-5 | `glm-5` | enabled |
-| GLM-5-Turbo | `glm-5-turbo` | enabled |
 | GLM-5V-Turbo | `glm-5v-turbo` | enabled |
 | Kimi K3 | `kimi-k3` | enabled（不支持关闭） |
 | Kimi-K2.7-Code | `kimi-k2.7-code` | enabled（不支持关闭） |

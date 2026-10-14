@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135746 -->
-<!-- Source SHA-256: 70acebefafbd1876ba7bce4027b4679411f442c9215724a5e98238410301dc5b -->
+<!-- Source SHA-256: 18de3381d74e0e6e2e102646e3d8782bebb0d6a15c162c2f51679996de5c0a48 -->
 
 # Vidu 生图调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/135746
-最近更新时间：2026-08-21 16:37:15
+最近更新时间：2026-10-12 12:50:00
 
 ## 概述
 
@@ -54,7 +54,7 @@ Vidu 图片生成（参考生图 / reference-to-image）接口。支持参考生
 | --- | --- | --- | --- |
 | model | 是 | string | 模型 ID。取值：`vidu-image-q2` |
 | prompt | 是 | string | 文本提示词，长度 ≤ 2000 字符。未传 images 时按此文本进行文生图。 |
-| images | 否 | array[string] | 参考图片，0~7 张。支持图片 URL 或 Base64（须带 `data:image/png;base64,` 前缀）。格式 png/jpeg/jpg/webp；像素 ≥ 128×128；比例须小于 1:4 或 4:1；单图 ≤ 50MB；POST body ≤ 20MB。 |
+| images | 否 | array[string] | 图片 images：支持 0张-7张图片输入， 支持 URL 和Base64格式。  图片格式：png/jpeg/jpg/webp，像素≥128×128，比例<1：4或4：1；  1. Base64：所有图片大小和<=15MB，转为 Base64大小和<=20MB; 格式要求：data:image/<图片格式>;base64,<Base64 编码>；注：图片为 jpg 时图片格式填 jpeg。  2. URL：单个文件大小<=50MB；需要公网可访问（http/https）。 |
 | aspect\_ratio | 否 | string | 画面宽高比。可选：16:9 / 9:16 / 1:1 / 3:4 / 4:3 / 21:9 / 2:3 / 3:2 / auto（与首张输入图比例一致）。默认值：16:9。 |
 | resolution | 否 | string | 分辨率。可选：1080p / 2K / 4K。默认值：1080p。 |
 | seed | 否 | integer | 随机种子。不传或传 0 时使用随机数。 |

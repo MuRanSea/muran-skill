@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132252 -->
-<!-- Source SHA-256: 4827dc78d8397ce02e953e166ee7c8f72a3c2c056121cf005eb1c3654bce19f8 -->
+<!-- Source SHA-256: 0a984bcf05d41cbe0dc7d477508ff52a0d951824e947b49de76b195bcb08da08 -->
 
 # 混元调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132252
-最近更新时间：2026-10-10 14:17:00
+最近更新时间：2026-10-13 15:50:31
 
 ## 概述
 
@@ -1921,7 +1921,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -d '{
     "model": "hy-mt2-plus",
     "messages": [
-      {"role": "user", "content": "将以下文本翻译为 英语 ，注意只需要输出翻译后的结果，不要额外解释： 会议开始前请确认所有参会人员都收到了议程。"}
+      {"role": "user", "content": "将以下文本翻译为英语，注意只需要输出翻译后的结果，不要额外解释： 会议开始前请确认所有参会人员都收到了议程。"}
     ]
   }'
 ```
@@ -2175,7 +2175,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -d '{
     "model": "hy-mt2-plus",
     "messages": [
-      {"role": "user", "content": "请将以下文本准确翻译为 英语。你必须在译文中保留等量的分隔符，绝对不可遗漏、转义或翻译该符号，并注意分隔符的位置。\\n每天保持八小时睡眠有助于身体健康<SEP>合理规划工作与休息可以提升效率<SEP>适度运动能有效缓解压力"}
+      {"role": "user", "content": "请将以下文本准确翻译为英语。你必须在译文中保留等量的分隔符，绝对不可遗漏、转义或翻译该符号，并注意分隔符的位置。\\n每天保持八小时睡眠有助于身体健康<SEP>合理规划工作与休息可以提升效率<SEP>适度运动能有效缓解压力"}
     ]
   }'
 ```
@@ -2256,7 +2256,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -d '{
     "model": "hy-mt2-plus",
     "messages": [
-      {"role": "user", "content": "【背景信息】\\n这是一篇介绍数据库系统的技术文档，上文提到的 transaction 指数据库事务，index 指数据库索引。\\n请结合背景信息将以下文本翻译为 英语。\\n【待翻译文本】\\n事务提交后，索引会被异步刷新到磁盘。"}
+      {"role": "user", "content": "【背景信息】\\n这是一篇介绍数据库系统的技术文档，上文提到的 transaction 指数据库事务，index 指数据库索引。\\n请结合背景信息将以下文本翻译为英语。\\n【待翻译文本】\\n事务提交后，索引会被异步刷新到磁盘。"}
     ]
   }'
 ```
@@ -2338,7 +2338,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -d '{
     "model": "hy-mt2-plus",
     "messages": [
-      {"role": "user", "content": "参考下面的翻译：\\n首播 翻译成 premiere\\n收视率 翻译成 ratings\\n将以下文本翻译为 英语，注意只需要输出翻译后的结果，不要额外解释：\\n这部剧在媒体平台首播后收视率一路走高。"}
+      {"role": "user", "content": "参考下面的翻译：\\n首播 翻译成 premiere\\n收视率 翻译成 ratings\\n将以下文本翻译为英语，注意只需要输出翻译后的结果，不要额外解释：\\n这部剧在媒体平台首播后收视率一路走高。"}
     ]
   }'
 ```
@@ -2421,7 +2421,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -d '{
     "model": "hy-mt2-plus",
     "messages": [
-      {"role": "user", "content": "请将以下文本翻译为 英语。注意翻译的风格要严格符合【科普文案：语言简洁有力、富有感染力】\\n适度户外活动有助于调节情绪，缓解精神压力。"}
+      {"role": "user", "content": "请将以下文本翻译为英语。注意翻译的风格要严格符合【科普文案：语言简洁有力、富有感染力】\\n适度户外活动有助于调节情绪，缓解精神压力。"}
     ]
   }'
 ```
@@ -2488,7 +2488,7 @@ print(response.choices[0].message.content)
 
 **请求参数说明**
 
-<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div>参数</div></td><td><div>类型</div></td><td><div>必填</div></td><td><div>说明</div></td></tr><tr><td><div><code>model</code></div></td><td><div>string</div></td><td><div>是</div></td><td><div>model 参数，如 <code>hy-mt2-plus</code></div></td></tr><tr><td><div><code>text</code></div></td><td><div>string</div></td><td><div>是</div></td><td><div>待翻译的文本</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>target</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>是</div></td><td colspan="1" rowspan="1"><div>目标语言代码</div></td></tr><tr><td><div><code>source</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>源语言代码，如不传参则模型自动识别</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>stream</code></div></td><td colspan="1" rowspan="1"><div>bool</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>是否流式返回，默认 <code>false</code></div></td></tr><tr><td><div><code>context</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>上下文信息，用于让译文更连贯</div></td></tr><tr><td><div><code>references</code></div></td><td><div>list of object</div></td><td><div>否</div></td><td><div>参考示例（句子或术语），最多 10 个</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>glossary_ids</code></div></td><td colspan="1" rowspan="1"><div>list of string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>术语库 ID 列表，最多 10 个</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div>参数</div></td><td><div>类型</div></td><td><div>必填</div></td><td><div>说明</div></td></tr><tr><td><div><code>model</code></div></td><td><div>string</div></td><td><div>是</div></td><td><div>model 参数，如 <code>hy-mt2-plus</code></div></td></tr><tr><td><div><code>text</code></div></td><td><div>string</div></td><td><div>是</div></td><td><div>待翻译的文本</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>target</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>是</div></td><td colspan="1" rowspan="1"><div>目标语言代码</div></td></tr><tr><td><div><code>source</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>源语言代码，如不传参则模型自动识别</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>stream</code></div></td><td colspan="1" rowspan="1"><div>bool</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>是否流式返回，默认 <code>false</code></div></td></tr><tr><td><div><code>context</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>上下文信息，用于让译文更连贯</div></td></tr><tr><td><div><code>references</code></div></td><td><div>list of object</div></td><td><div>否</div></td><td><div>参考示例（句子或术语），最多 10 个</div></td></tr><tr><td><div><code>references[n].type</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>翻译文本类型，其中"sentence"表示句子， "term"表示术语</div></td></tr><tr><td><div><code>references[n].text</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td><div>参考示例的原文</div></td></tr><tr><td><div><code>references[n].translation</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td><div>参考示例的译文</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>glossary_ids</code></div></td><td colspan="1" rowspan="1"><div>list of string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>术语库 ID 列表，最多 10 个，可参考 <a href="https://cloud.tencent.com/document/product/1823/132887">术语库管理相关接口</a> 创建术语库</div></td></tr></tbody></table>
 
 **响应字段说明**
 

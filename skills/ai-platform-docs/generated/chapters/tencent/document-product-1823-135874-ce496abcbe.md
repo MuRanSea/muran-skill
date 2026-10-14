@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135874 -->
-<!-- Source SHA-256: 25112fe409cfc552e79f9477410541f5721f08dee2d536983a57ea5583344058 -->
+<!-- Source SHA-256: 8c752b1eedc03fbb17bed766a073d57c33bc93698cc58c0678dd78e7a2d54acb -->
 
 # Anthropic Message 协议字段说明
 
 官方来源：https://cloud.tencent.com/document/product/1823/135874
-最近更新时间：2026-10-10 14:05:00
+最近更新时间：2026-10-12 12:50:00
 
 ## Anthropic Messages API 使用
 
@@ -14,7 +14,7 @@
 
 | 参数 | 类型 | 必选 | 说明 |
 | --- | --- | --- | --- |
-| `model` | string | 是 | 要使用的模型名称，如 `deepseek-v4-flash`。也支持 Claude 系列及其他 Anthropic 兼容模型名。需要图像输入时，请选择支持视觉能力的模型（如 `qwen3.5-flash`、`qwen3.5-plus`）；`deepseek-v4-flash`、`hy3` 为纯文本模型，传入图像不会报错但不会被识别。 |
+| `model` | string | 是 | 要使用的模型名称，如 `hy3`。也支持 Claude 系列及其他 Anthropic 兼容模型名。需要图像输入时，请选择支持视觉能力的模型（如 `glm-5.3-flash`）。 |
 | `messages` | array | 是 | 对话消息列表，按时间顺序排列，含完整上下文。平台不做会话管理，多轮对话需由客户端完整携带历史。详情请参见 [Message 对象详解](https://cloud.tencent.com/document/product/1823/135874#95b79d85-4224-46db-8e25-9bfd13146f7b)。 |
 | `system` | string 或 array | 否 | 系统提示词。不在 `messages` 内，通过顶层 `system` 字段单独传入。这是与 OpenAI Chat 协议的关键区别。 |
 | `max_tokens` | integer | 是 | 模型单次输出的最大 Token 数上限。不同模型有各自上限；思维链消耗的 Token 计入此限制，因此开启 thinking 时须大于 `budget_tokens`。达到上限时 `stop_reason` 为 `"max_tokens"`。 |
@@ -1111,7 +1111,7 @@ func main() {
     { "role": "user", "content": "如何优化成 O(n)？" }
   ],
   "max_tokens": 4096,
-  "thinking": { "type": "enabled", "budget_tokens": 5000 }
+  "thinking": { "type": "enabled", "budget_tokens": 2048 }
 }
 ```
 

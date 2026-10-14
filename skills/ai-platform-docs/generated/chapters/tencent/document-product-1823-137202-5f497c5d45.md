@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137202 -->
-<!-- Source SHA-256: 79c5a3cee68dfcbefed57ca1d6f6f0c7a0a2f9f8a110c6e77923555ba1bb220d -->
+<!-- Source SHA-256: faa3ac6f52872d748e8699e1533781ed0abd68746ccc89bbdc6b085901374610 -->
 
 # Hy 生视频调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137202
-最近更新时间：2026-09-24 21:20:30
+最近更新时间：2026-10-12 12:50:00
 
 ## 概述
 
@@ -61,7 +61,7 @@
 | model | 是 | string | 模型版本。取值：`hy-video-v1.5` |
 | prompt | 条件必选 | string | 文本提示词。文生视频必选；图生视频可选（用于描述图片中主体的运动）。 |
 | negative\_prompt | 否 | string | 负向提示词，描述不希望出现的内容。 |
-| image | 否 | string | 输入图片 Base64 编码，大小不超过10M，支持 jpg/jpeg/png 格式，携带即为图生视频。与 `image_url` 二选一；同时传入时以 `image` 为准。 |
+| image | 否 | string | 图片（单张）：支持 URL（image\_url）和 Base64格式（image），image 与 image\_url 二选一，图片格式：jpg/jpeg/png，图片大小≤10MB；  1. Base64：格式要求：data:image/<图片格式>;base64,<Base64 编码>。注：图片为 jpg 时图片格式填 jpeg。  2. URL：需要公网可访问（http/https）。 |
 | image\_url | 否 | string | 输入图片公网可访问 URL，大小不超过10M，支持 jpg/jpeg/png 格式，生成视频长宽比与传入图片保持一致，携带即为图生视频。与 `image` 二选一。 |
 | n | 否 | int | 输出视频数量。 |
 | duration | 否 | number | 视频时长（秒），小数将截断为整数。当前版本固定生成 5 秒。 |
