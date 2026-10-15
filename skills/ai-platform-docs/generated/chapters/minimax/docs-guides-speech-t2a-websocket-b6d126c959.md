@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-websocket.md -->
-<!-- Source SHA-256: e7a02beb6661f67fc295ce315b0762f4229364bdf831470e9c7e827acf330a34 -->
+<!-- Source SHA-256: 44996acd77ed35d6965b6b009bacfe67d9e5cfed80c1814f5d848757e80c9057 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -325,7 +325,7 @@ if __name__ == "__main__":
     通过 WebSocket 连接按任意粒度（含逐字）流式发送文本，由服务端自动攒句合成，适合对接大模型流式输出。
   </Card>
 
-  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#overview" arrow="true" cta="点击查看">
+  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#models/speech" arrow="true" cta="点击查看">
     各模型的定价说明、计费方式及使用限制。
   </Card>
 

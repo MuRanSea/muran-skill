@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-prompt-caching.md -->
-<!-- Source SHA-256: f6dabf357b1e642fdbe86bee7fa202a0d845ced80655bf8fb78c70ec0935d4a6 -->
+<!-- Source SHA-256: 70c432be36bcc3c413e6b8ade66adabd551f1a2259e8bbd75d982e708318e29e -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -217,7 +217,7 @@ prompt 缓存采用差异化的计费策略：
 * 新增的输入 Token: 按标准输入价格计费
 * 输出 Token：按标准输出价格计费
 
-> 详见 [按量计费价格页](/docs/pricing/overview#overview)
+> 详见 [按量计费价格页](/docs/pricing/overview#models/text)
 
 计费示例：
 

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-create.md -->
-<!-- Source SHA-256: 4dbb502b654cc136930a55285108aa18fec0702db40397431f7058deccb793a5 -->
+<!-- Source SHA-256: b7512ad43e9c8d8d7fc7a94e1592a566932b9800c571979c39d8acc0d06bbf72 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -7,7 +7,7 @@
 
 # 创建视频生成任务
 
-> 视频生成 V2 接口，通过多模态 content 数组输入（文本 / 图片 / 视频 / 音频），可通过 `model` 字段切换 MiniMax H3 与 MiniMax H3 Max，覆盖文生视频、图生视频（首尾帧）、多模态参考生视频，最高 2K 输出。<br /><br />提示：若需要使用 MiniMax H3 或 MiniMax H3 Max，请点击 [按量购买 API](/pricing/overview#overview)。
+> 视频生成 V2 接口，通过多模态 content 数组输入（文本 / 图片 / 视频 / 音频），可通过 `model` 字段切换 MiniMax H3 与 MiniMax H3 Max，覆盖文生视频、图生视频（首尾帧）、多模态参考生视频，最高 2K 输出。<br /><br />提示：若需要使用 MiniMax H3 或 MiniMax H3 Max，请点击 [按量购买 API](https://platform.minimax.cn/docs/pricing/overview#models/video)。
 
 
 

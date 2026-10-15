@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-generation.md -->
-<!-- Source SHA-256: 360fbb76ad8a572bada0fdceaf80a2747d6eaaf16ae976b0caa2a14853c272b3 -->
+<!-- Source SHA-256: 0fe4d737b74cf0aeeb5aa66638f3c9142dfd29bbf625157f0551caebb865c1ab -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -14,7 +14,7 @@ MiniMax 视频生成目前提供 **MiniMax H3** 与 **MiniMax H3 Max** 两款模
 * **MiniMax H3**：开放通用的多模态视频模型，可以统一理解文本、图片、视频和音频输入，完成视频生成、参考创作与视频编辑。
 * **MiniMax H3 Max**：MiniMax 与 [fal.ai](https://fal.ai/) 联合出品，基于 MiniMax H3 后训练的视频生成模型，专为高速视频生成而优化。输出 480P、768P 主流分辨率，生成速度比 MiniMax H3 更快。支持 T2V（文生视频）、I2V（图生视频）与全能参考生成。
 
-提示：若需要使用 MiniMax H3 或 MiniMax H3 Max，请点击 [按量购买 API](/docs/pricing/overview#overview)。
+提示：若需要使用 MiniMax H3 或 MiniMax H3 Max，请点击 [按量购买 API](https://platform.minimax.cn/docs/pricing/overview#models/video)。
 
 ## 支持的生成方式
 
@@ -279,7 +279,7 @@ H3-Context-IR 采用异步任务形式。创建成功后，使用[查询任务](
     取消排队中的任务，或删除成功和失败的任务记录。
   </Card>
 
-  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#overview" arrow="true" cta="点击查看">
+  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#models/video" arrow="true" cta="点击查看">
     各模型的定价说明、计费方式及使用限制。
   </Card>
 </Columns>

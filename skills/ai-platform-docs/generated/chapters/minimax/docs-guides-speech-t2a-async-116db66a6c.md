@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-async.md -->
-<!-- Source SHA-256: 0cd5277b96c47b958468d8e1a29f76a26aa09082e4d660d2edbdedae68e74aeb -->
+<!-- Source SHA-256: 095e5025af15f964b82e87adb8e435a656e429374ed51fe4a6fb507e85774f18 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -273,7 +273,7 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
     使用 API 接口，在HTTP网络通信协议下进行同步语音合成。
   </Card>
 
-  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#overview" arrow="true" cta="点击查看">
+  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#models/speech" arrow="true" cta="点击查看">
     各模型的定价说明、计费方式及使用限制。
   </Card>
 

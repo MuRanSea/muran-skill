@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-anthropic.md -->
-<!-- Source SHA-256: 86fabb79afdad36e17ab78f5e24de03a45ebef1f51454418ff652060ac148c10 -->
+<!-- Source SHA-256: 8519abe21561aa22065f1c9b2559b93e1aa922f5c9af92406798b7972c09c063 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -828,8 +828,9 @@ components:
           type: string
           description: >-
             请求准入服务层级。支持的取值为 `standard` 和 `priority`。省略时默认使用
-            `standard`。`priority` 的[价格](/pricing/overview#overview)为 `standard`
-            的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
+            `standard`。`priority`
+            的[价格](https://platform.minimax.cn/docs/pricing/overview#models/text)为
+            `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
           enum:
             - standard
             - priority

@@ -1,6 +1,6 @@
 # AI MediaKit API 区章节表（mediakit）
 
-来源：《AI MediaKit API 参考》（942 页）。103 个章节文件，接口级切分：一个接口/任务一个文件；超过 1500 行的按语义块自动再拆为`… - 第N部分`（0 个章节被拆分）。
+来源：《AI MediaKit API 参考》（945 页）。103 个章节文件，接口级切分：一个接口/任务一个文件；超过 1500 行的按语义块自动再拆为`… - 第N部分`（0 个章节被拆分）。
 
 「页码」是原 PDF 页码范围；「行范围」是中间 MD（`doc/<源文档>.md`）的 1 起始行号，可据此回查原文。章节文件本身已去掉页眉页脚，回查 PDF 时用这两列。文件名即章节标题，日常定位直接 Glob 文件名即可，用不到这两列。
 
@@ -12,102 +12,102 @@
 | 2.1 | 提交画质增强（大模型版）任务 API | 5-14 | 297-752 | 405 | `chapters/volcengine/mediakit/2.1 提交画质增强（大模型版）任务 API.md` |
 | 2.2 | 提交画质增强（标准版和专业版）任务 API | 15-28 | 753-1465 | 628 | `chapters/volcengine/mediakit/2.2 提交画质增强（标准版和专业版）任务 API.md` |
 | 2.3 | 提交画质增强（极速版）任务 API | 29-38 | 1466-1940 | 419 | `chapters/volcengine/mediakit/2.3 提交画质增强（极速版）任务 API.md` |
-| 2.4 | 提交字幕擦除（精细化版）任务 API | 39-55 | 1941-2729 | 717 | `chapters/volcengine/mediakit/2.4 提交字幕擦除（精细化版）任务 API.md` |
-| 2.5 | 提交字幕擦除（标准版）任务 API | 56-62 | 2730-3048 | 286 | `chapters/volcengine/mediakit/2.5 提交字幕擦除（标准版）任务 API.md` |
-| 2.6 | 提交语音转字幕（ASR）任务 API | 63-70 | 3049-3401 | 313 | `chapters/volcengine/mediakit/2.6 提交语音转字幕（ASR）任务 API.md` |
-| 2.7 | 提交视频识别字幕（OCR）任务 API | 71-78 | 3402-3709 | 276 | `chapters/volcengine/mediakit/2.7 提交视频识别字幕（OCR）任务 API.md` |
-| 2.8 | 提交场景切分任务 API | 79-86 | 3710-4075 | 330 | `chapters/volcengine/mediakit/2.8 提交场景切分任务 API.md` |
-| 2.9 | 提交智能语义切片（基础版）任务 API | 87-95 | 4076-4471 | 360 | `chapters/volcengine/mediakit/2.9 提交智能语义切片（基础版）任务 API.md` |
-| 2.10 | 提交智能语义切片（专业版）任务 API | 96-108 | 4472-5086 | 558 | `chapters/volcengine/mediakit/2.10 提交智能语义切片（专业版）任务 API.md` |
-| 2.11 | 提交高光智剪（短剧）任务 API | 109-126 | 5087-5944 | 781 | `chapters/volcengine/mediakit/2.11 提交高光智剪（短剧）任务 API.md` |
-| 2.12 | 提交高光智剪（小游戏）任务 API | 127-136 | 5945-6400 | 410 | `chapters/volcengine/mediakit/2.12 提交高光智剪（小游戏）任务 API.md` |
-| 2.13 | 提交高光智剪（影视拆条）任务 API | 137-148 | 6401-6985 | 534 | `chapters/volcengine/mediakit/2.13 提交高光智剪（影视拆条）任务 API.md` |
-| 2.14 | 提交高光片段提取任务 API | 149-156 | 6986-7321 | 298 | `chapters/volcengine/mediakit/2.14 提交高光片段提取任务 API.md` |
-| 2.15 | 提交视频绿幕抠图任务 API | 157-164 | 7322-7695 | 333 | `chapters/volcengine/mediakit/2.15 提交视频绿幕抠图任务 API.md` |
-| 2.16 | 提交视频人像抠图任务 API | 165-172 | 7696-8052 | 318 | `chapters/volcengine/mediakit/2.16 提交视频人像抠图任务 API.md` |
-| 2.17 | 提交剧情故事线分析任务 API | 173-180 | 8053-8370 | 283 | `chapters/volcengine/mediakit/2.17 提交剧情故事线分析任务 API.md` |
-| 2.18 | 提交视频元信息获取任务 API | 181-187 | 8371-8650 | 252 | `chapters/volcengine/mediakit/2.18 提交视频元信息获取任务 API.md` |
-| 2.19 | 提交剧本还原任务 API | 188-196 | 8651-9087 | 396 | `chapters/volcengine/mediakit/2.19 提交剧本还原任务 API.md` |
-| 2.20 | 提交剧本还原（重绘场景）任务 API | 197-207 | 9088-9606 | 440 | `chapters/volcengine/mediakit/2.20 提交剧本还原（重绘场景）任务 API.md` |
-| 2.21 | 提交解说视频生成任务 API | 208-221 | 9607-10292 | 611 | `chapters/volcengine/mediakit/2.21 提交解说视频生成任务 API.md` |
-| 2.22 | 提交解说视频生成（短剧行业模型）任务 API | 222-237 | 10293-11055 | 670 | `chapters/volcengine/mediakit/2.22 提交解说视频生成（短剧行业模型）任务 API.md` |
-| 2.23 | 提交视频抽帧任务 API | 238-248 | 11056-11567 | 464 | `chapters/volcengine/mediakit/2.23 提交视频抽帧任务 API.md` |
-| 2.24 | 提交视频暗水印添加任务 API | 249-256 | 11568-11948 | 339 | `chapters/volcengine/mediakit/2.24 提交视频暗水印添加任务 API.md` |
-| 2.25 | 提交视频暗水印提取任务 API | 257-261 | 11949-12148 | 177 | `chapters/volcengine/mediakit/2.25 提交视频暗水印提取任务 API.md` |
-| 2.26 | 提交视频转码任务 API | 262-278 | 12149-12997 | 776 | `chapters/volcengine/mediakit/2.26 提交视频转码任务 API.md` |
-| 2.27 | 提交极智超清任务 API | 279-295 | 12998-13874 | 799 | `chapters/volcengine/mediakit/2.27 提交极智超清任务 API.md` |
-| 2.28 | 提交视频转封装任务 API | 296-302 | 13875-14190 | 288 | `chapters/volcengine/mediakit/2.28 提交视频转封装任务 API.md` |
-| 2.29 | 提交视频画质检测 VQScore 任务 API | 303-307 | 14191-14399 | 182 | `chapters/volcengine/mediakit/2.29 提交视频画质检测 VQScore 任务 API.md` |
-| 2.30 | 提交视频人脸打码任务 API | 308-315 | 14400-14776 | 337 | `chapters/volcengine/mediakit/2.30 提交视频人脸打码任务 API.md` |
-| 2.31 | 提交视频人脸融合（换脸）任务 API | 316-323 | 14777-15155 | 339 | `chapters/volcengine/mediakit/2.31 提交视频人脸融合（换脸）任务 API.md` |
-| 2.32 | 提交视频插帧任务 API | 324-330 | 15156-15485 | 297 | `chapters/volcengine/mediakit/2.32 提交视频插帧任务 API.md` |
-| 2.33 | 提交视频口型对齐任务 API | 331-339 | 15486-15914 | 386 | `chapters/volcengine/mediakit/2.33 提交视频口型对齐任务 API.md` |
-| 2.34 | 提交视频横转竖任务 API | 340-348 | 15915-16275 | 317 | `chapters/volcengine/mediakit/2.34 提交视频横转竖任务 API.md` |
-| 2.35 | 提交视频流畅度提升任务 API | 349-358 | 16276-16755 | 426 | `chapters/volcengine/mediakit/2.35 提交视频流畅度提升任务 API.md` |
-| 3.1 | 提交图像画质增强任务 API | 359-370 | 16757-17291 | 481 | `chapters/volcengine/mediakit/3.1 提交图像画质增强任务 API.md` |
-| 3.2 | 提交图像画质评估任务 API | 371-380 | 17292-17743 | 392 | `chapters/volcengine/mediakit/3.2 提交图像画质评估任务 API.md` |
-| 3.3 | 提交图像人脸打码任务 API | 381-386 | 17744-17984 | 216 | `chapters/volcengine/mediakit/3.3 提交图像人脸打码任务 API.md` |
-| 3.4 | 提交图像擦除修复任务 API | 387-396 | 17985-18414 | 386 | `chapters/volcengine/mediakit/3.4 提交图像擦除修复任务 API.md` |
-| 3.5 | 提交图像背景移除任务 API | 397-405 | 18415-18798 | 347 | `chapters/volcengine/mediakit/3.5 提交图像背景移除任务 API.md` |
-| 3.6 | 提交图像文字识别（OCR）任务 API | 406-414 | 18799-19196 | 364 | `chapters/volcengine/mediakit/3.6 提交图像文字识别（OCR）任务 API.md` |
-| 3.7 | 提交图像智能裁剪任务 API | 415-420 | 19197-19449 | 226 | `chapters/volcengine/mediakit/3.7 提交图像智能裁剪任务 API.md` |
-| 3.8 | 提交智能扩图任务 API | 421-426 | 19450-19715 | 243 | `chapters/volcengine/mediakit/3.8 提交智能扩图任务 API.md` |
-| 3.9 | 提交集智瘦身任务 API | 427-432 | 19716-19954 | 214 | `chapters/volcengine/mediakit/3.9 提交集智瘦身任务 API.md` |
-| 3.10 | 提交图像翻译任务 API | 433-441 | 19955-20304 | 313 | `chapters/volcengine/mediakit/3.10 提交图像翻译任务 API.md` |
-| 3.11 | 提交电商牛皮癣擦除任务 API | 442-445 | 20305-20471 | 147 | `chapters/volcengine/mediakit/3.11 提交电商牛皮癣擦除任务 API.md` |
-| 3.12 | 提交电商万创（商品场景图生成）任务 API | 446-457 | 20472-21023 | 504 | `chapters/volcengine/mediakit/3.12 提交电商万创（商品场景图生成）任务 API.md` |
-| 3.13 | 提交图像元信息获取任务 API | 458-464 | 21024-21333 | 269 | `chapters/volcengine/mediakit/3.13 提交图像元信息获取任务 API.md` |
-| 3.14 | 提交图像暗水印添加任务 API | 465-471 | 21334-21644 | 281 | `chapters/volcengine/mediakit/3.14 提交图像暗水印添加任务 API.md` |
-| 3.15 | 提交图像暗水印提取任务 API | 472-476 | 21645-21853 | 188 | `chapters/volcengine/mediakit/3.15 提交图像暗水印提取任务 API.md` |
-| 3.16.1 | 提交圆角矩形任务 API | 477-482 | 21855-22115 | 233 | `chapters/volcengine/mediakit/3.16.1 提交圆角矩形任务 API.md` |
-| 3.16.2 | 提交图像旋转任务 API | 483-487 | 22116-22341 | 200 | `chapters/volcengine/mediakit/3.16.2 提交图像旋转任务 API.md` |
-| 3.16.3 | 提交图像翻转任务 API | 488-492 | 22342-22554 | 189 | `chapters/volcengine/mediakit/3.16.3 提交图像翻转任务 API.md` |
-| 3.16.4 | 提交图像锐化任务 API | 493-497 | 22555-22769 | 190 | `chapters/volcengine/mediakit/3.16.4 提交图像锐化任务 API.md` |
-| 3.16.5 | 提交图像高斯模糊任务 API | 498-502 | 22770-22985 | 193 | `chapters/volcengine/mediakit/3.16.5 提交图像高斯模糊任务 API.md` |
-| 3.16.6 | 提交图像打码任务 API | 503-509 | 22986-23296 | 277 | `chapters/volcengine/mediakit/3.16.6 提交图像打码任务 API.md` |
-| 3.16.7 | 提交图像添加图文水印任务 API | 510-519 | 23297-23747 | 400 | `chapters/volcengine/mediakit/3.16.7 提交图像添加图文水印任务 API.md` |
-| 3.16.8 | 提交图像缩放任务 API | 520-526 | 23748-24076 | 292 | `chapters/volcengine/mediakit/3.16.8 提交图像缩放任务 API.md` |
-| 3.16.9 | 提交图像调整任务 API | 527-532 | 24077-24306 | 202 | `chapters/volcengine/mediakit/3.16.9 提交图像调整任务 API.md` |
-| 3.16.10 | 提交图像裁剪任务 API | 533-541 | 24307-24709 | 357 | `chapters/volcengine/mediakit/3.16.10 提交图像裁剪任务 API.md` |
-| 3.16.11 | 提交图像压缩任务 API | 542-548 | 24710-24999 | 261 | `chapters/volcengine/mediakit/3.16.11 提交图像压缩任务 API.md` |
-| 3.16.12 | 提交图像负片任务 API | 549-553 | 25000-25203 | 181 | `chapters/volcengine/mediakit/3.16.12 提交图像负片任务 API.md` |
-| 4.1 | 提交智能剪辑任务 API | 554-585 | 25205-26437 | 1137 | `chapters/volcengine/mediakit/4.1 提交智能剪辑任务 API.md` |
-| 4.2 | 提交视频拼接任务 API | 586-594 | 26438-26823 | 346 | `chapters/volcengine/mediakit/4.2 提交视频拼接任务 API.md` |
-| 4.3 | 提交音频拼接任务 API | 595-601 | 26824-27129 | 275 | `chapters/volcengine/mediakit/4.3 提交音频拼接任务 API.md` |
-| 4.4 | 提交视频裁剪任务 API | 602-608 | 27130-27447 | 288 | `chapters/volcengine/mediakit/4.4 提交视频裁剪任务 API.md` |
-| 4.5 | 提交音频裁剪任务 API | 609-615 | 27448-27761 | 285 | `chapters/volcengine/mediakit/4.5 提交音频裁剪任务 API.md` |
-| 4.6 | 提交音频提取任务 API | 616-622 | 27762-28067 | 276 | `chapters/volcengine/mediakit/4.6 提交音频提取任务 API.md` |
-| 4.7 | 提交音视频合成任务 API | 623-631 | 28068-28500 | 382 | `chapters/volcengine/mediakit/4.7 提交音视频合成任务 API.md` |
-| 4.8 | 提交图片转视频任务 API | 632-641 | 28501-28913 | 367 | `chapters/volcengine/mediakit/4.8 提交图片转视频任务 API.md` |
-| 4.9 | 提交视频画面翻转任务 API | 642-648 | 28914-29260 | 318 | `chapters/volcengine/mediakit/4.9 提交视频画面翻转任务 API.md` |
-| 4.10 | 提交视频画面旋转任务 API | 649-655 | 29261-29581 | 287 | `chapters/volcengine/mediakit/4.10 提交视频画面旋转任务 API.md` |
-| 4.11 | 提交视频画面裁剪任务 API | 656-664 | 29582-29960 | 341 | `chapters/volcengine/mediakit/4.11 提交视频画面裁剪任务 API.md` |
-| 4.12 | 提交视频画面拼接任务 API | 665-672 | 29961-30330 | 333 | `chapters/volcengine/mediakit/4.12 提交视频画面拼接任务 API.md` |
-| 4.13 | 提交视频调速任务 API | 673-679 | 30331-30671 | 308 | `chapters/volcengine/mediakit/4.13 提交视频调速任务 API.md` |
-| 4.14 | 提交音频调速任务 API | 680-686 | 30672-30980 | 281 | `chapters/volcengine/mediakit/4.14 提交音频调速任务 API.md` |
-| 4.15 | 提交音频混合任务 API | 687-693 | 30981-31290 | 280 | `chapters/volcengine/mediakit/4.15 提交音频混合任务 API.md` |
-| 4.16 | 提交视频加字幕任务 API | 694-706 | 31291-31824 | 481 | `chapters/volcengine/mediakit/4.16 提交视频加字幕任务 API.md` |
-| 4.17 | 提交视频加图片任务 API | 707-715 | 31825-32250 | 388 | `chapters/volcengine/mediakit/4.17 提交视频加图片任务 API.md` |
-| 4.18 | 提交视频声音淡入淡出任务 API | 716-723 | 32251-32597 | 312 | `chapters/volcengine/mediakit/4.18 提交视频声音淡入淡出任务 API.md` |
-| 4.19 | 提交音频声音淡入淡出任务 API | 724-730 | 32598-32932 | 304 | `chapters/volcengine/mediakit/4.19 提交音频声音淡入淡出任务 API.md` |
-| 4.20 | 提交调整视频音量任务 API | 731-738 | 32933-33286 | 315 | `chapters/volcengine/mediakit/4.20 提交调整视频音量任务 API.md` |
-| 4.21 | 提交视频添加滤镜任务 API | 739-745 | 33287-33616 | 294 | `chapters/volcengine/mediakit/4.21 提交视频添加滤镜任务 API.md` |
-| 4.22 | 提交视频截取动图任务 API | 746-753 | 33617-33963 | 315 | `chapters/volcengine/mediakit/4.22 提交视频截取动图任务 API.md` |
-| 4.23 | 提交视频添加运镜任务 API | 754-760 | 33964-34275 | 275 | `chapters/volcengine/mediakit/4.23 提交视频添加运镜任务 API.md` |
-| 4.24 | 提交视频高斯模糊任务 API | 761-769 | 34276-34681 | 363 | `chapters/volcengine/mediakit/4.24 提交视频高斯模糊任务 API.md` |
-| 4.25 | 提交文字生成滚屏视频任务 API | 770-780 | 34682-35223 | 466 | `chapters/volcengine/mediakit/4.25 提交文字生成滚屏视频任务 API.md` |
-| 4.26 | 提交添加 AIGC 元数据标识任务 API | 781-791 | 35224-35788 | 512 | `chapters/volcengine/mediakit/4.26 提交添加 AIGC 元数据标识任务 API.md` |
-| 4.27 | 提交多轨道剪辑任务 API | 792-818 | 35789-37079 | 1193 | `chapters/volcengine/mediakit/4.27 提交多轨道剪辑任务 API.md` |
-| 5.1 | 提交人声背景音分离任务 API | 819-829 | 37081-37610 | 474 | `chapters/volcengine/mediakit/5.1 提交人声背景音分离任务 API.md` |
-| 5.2 | 提交语音端点识别任务 API | 830-836 | 37611-37904 | 264 | `chapters/volcengine/mediakit/5.2 提交语音端点识别任务 API.md` |
-| 5.3 | 提交音频转码任务 API | 837-847 | 37905-38425 | 470 | `chapters/volcengine/mediakit/5.3 提交音频转码任务 API.md` |
-| 5.4 | 提交音频元信息获取任务 API | 848-853 | 38426-38674 | 224 | `chapters/volcengine/mediakit/5.4 提交音频元信息获取任务 API.md` |
-| 5.5 | 提交音频内容编辑任务 API | 854-863 | 38675-39170 | 449 | `chapters/volcengine/mediakit/5.5 提交音频内容编辑任务 API.md` |
-| 6.1 | 提交大模型高光剪辑任务 API | 864-881 | 39172-40039 | 790 | `chapters/volcengine/mediakit/6.1 提交大模型高光剪辑任务 API.md` |
-| 6.2 | 提交视频理解智能策略任务 API | 882-890 | 40040-40482 | 392 | `chapters/volcengine/mediakit/6.2 提交视频理解智能策略任务 API.md` |
-| 6.3 | 对话 Chat API | 891-915 | 40483-41257 | 592 | `chapters/volcengine/mediakit/6.3 对话 Chat API.md` |
-| 6.4 | MaaS 模型代理 API | 916-926 | 41258-41758 | 439 | `chapters/volcengine/mediakit/6.4 MaaS 模型代理 API.md` |
-| 7.1 | 查询任务信息 API | 927-931 | 41760-41932 | 145 | `chapters/volcengine/mediakit/7.1 查询任务信息 API.md` |
-| 7.2 | 获取媒体上传地址 API | 932-935 | 41933-42069 | 104 | `chapters/volcengine/mediakit/7.2 获取媒体上传地址 API.md` |
-| 7.3 | 事件回调 | 936-939 | 42070-42227 | 122 | `chapters/volcengine/mediakit/7.3 事件回调.md` |
-| 7.4 | 错误码 | 940-942 | 42228-42368 | 124 | `chapters/volcengine/mediakit/7.4 错误码.md` |
+| 2.4 | 提交字幕擦除（精细化版）任务 API | 39-55 | 1941-2754 | 742 | `chapters/volcengine/mediakit/2.4 提交字幕擦除（精细化版）任务 API.md` |
+| 2.5 | 提交字幕擦除（标准版）任务 API | 56-62 | 2755-3073 | 286 | `chapters/volcengine/mediakit/2.5 提交字幕擦除（标准版）任务 API.md` |
+| 2.6 | 提交语音转字幕（ASR）任务 API | 63-70 | 3074-3426 | 313 | `chapters/volcengine/mediakit/2.6 提交语音转字幕（ASR）任务 API.md` |
+| 2.7 | 提交视频识别字幕（OCR）任务 API | 71-77 | 3427-3732 | 279 | `chapters/volcengine/mediakit/2.7 提交视频识别字幕（OCR）任务 API.md` |
+| 2.8 | 提交场景切分任务 API | 78-87 | 3733-4203 | 431 | `chapters/volcengine/mediakit/2.8 提交场景切分任务 API.md` |
+| 2.9 | 提交智能语义切片（基础版）任务 API | 88-96 | 4204-4599 | 360 | `chapters/volcengine/mediakit/2.9 提交智能语义切片（基础版）任务 API.md` |
+| 2.10 | 提交智能语义切片（专业版）任务 API | 97-109 | 4600-5214 | 558 | `chapters/volcengine/mediakit/2.10 提交智能语义切片（专业版）任务 API.md` |
+| 2.11 | 提交高光智剪（短剧）任务 API | 110-127 | 5215-6072 | 781 | `chapters/volcengine/mediakit/2.11 提交高光智剪（短剧）任务 API.md` |
+| 2.12 | 提交高光智剪（小游戏）任务 API | 128-137 | 6073-6528 | 410 | `chapters/volcengine/mediakit/2.12 提交高光智剪（小游戏）任务 API.md` |
+| 2.13 | 提交高光智剪（影视拆条）任务 API | 138-149 | 6529-7113 | 534 | `chapters/volcengine/mediakit/2.13 提交高光智剪（影视拆条）任务 API.md` |
+| 2.14 | 提交高光片段提取任务 API | 150-157 | 7114-7449 | 298 | `chapters/volcengine/mediakit/2.14 提交高光片段提取任务 API.md` |
+| 2.15 | 提交视频绿幕抠图任务 API | 158-165 | 7450-7823 | 333 | `chapters/volcengine/mediakit/2.15 提交视频绿幕抠图任务 API.md` |
+| 2.16 | 提交视频人像抠图任务 API | 166-173 | 7824-8180 | 318 | `chapters/volcengine/mediakit/2.16 提交视频人像抠图任务 API.md` |
+| 2.17 | 提交剧情故事线分析任务 API | 174-181 | 8181-8498 | 283 | `chapters/volcengine/mediakit/2.17 提交剧情故事线分析任务 API.md` |
+| 2.18 | 提交视频元信息获取任务 API | 182-188 | 8499-8778 | 252 | `chapters/volcengine/mediakit/2.18 提交视频元信息获取任务 API.md` |
+| 2.19 | 提交剧本还原任务 API | 189-197 | 8779-9215 | 396 | `chapters/volcengine/mediakit/2.19 提交剧本还原任务 API.md` |
+| 2.20 | 提交剧本还原（重绘场景）任务 API | 198-208 | 9216-9734 | 440 | `chapters/volcengine/mediakit/2.20 提交剧本还原（重绘场景）任务 API.md` |
+| 2.21 | 提交解说视频生成任务 API | 209-222 | 9735-10420 | 611 | `chapters/volcengine/mediakit/2.21 提交解说视频生成任务 API.md` |
+| 2.22 | 提交解说视频生成（短剧行业模型）任务 API | 223-238 | 10421-11183 | 670 | `chapters/volcengine/mediakit/2.22 提交解说视频生成（短剧行业模型）任务 API.md` |
+| 2.23 | 提交视频抽帧任务 API | 239-251 | 11184-11795 | 556 | `chapters/volcengine/mediakit/2.23 提交视频抽帧任务 API.md` |
+| 2.24 | 提交视频暗水印添加任务 API | 252-259 | 11796-12176 | 339 | `chapters/volcengine/mediakit/2.24 提交视频暗水印添加任务 API.md` |
+| 2.25 | 提交视频暗水印提取任务 API | 260-264 | 12177-12376 | 177 | `chapters/volcengine/mediakit/2.25 提交视频暗水印提取任务 API.md` |
+| 2.26 | 提交视频转码任务 API | 265-281 | 12377-13225 | 776 | `chapters/volcengine/mediakit/2.26 提交视频转码任务 API.md` |
+| 2.27 | 提交极智超清任务 API | 282-298 | 13226-14102 | 799 | `chapters/volcengine/mediakit/2.27 提交极智超清任务 API.md` |
+| 2.28 | 提交视频转封装任务 API | 299-305 | 14103-14418 | 288 | `chapters/volcengine/mediakit/2.28 提交视频转封装任务 API.md` |
+| 2.29 | 提交视频画质检测 VQScore 任务 API | 306-310 | 14419-14627 | 182 | `chapters/volcengine/mediakit/2.29 提交视频画质检测 VQScore 任务 API.md` |
+| 2.30 | 提交视频人脸打码任务 API | 311-318 | 14628-15004 | 337 | `chapters/volcengine/mediakit/2.30 提交视频人脸打码任务 API.md` |
+| 2.31 | 提交视频人脸融合（换脸）任务 API | 319-326 | 15005-15383 | 339 | `chapters/volcengine/mediakit/2.31 提交视频人脸融合（换脸）任务 API.md` |
+| 2.32 | 提交视频插帧任务 API | 327-333 | 15384-15713 | 297 | `chapters/volcengine/mediakit/2.32 提交视频插帧任务 API.md` |
+| 2.33 | 提交视频口型对齐任务 API | 334-342 | 15714-16142 | 386 | `chapters/volcengine/mediakit/2.33 提交视频口型对齐任务 API.md` |
+| 2.34 | 提交视频横转竖任务 API | 343-351 | 16143-16503 | 317 | `chapters/volcengine/mediakit/2.34 提交视频横转竖任务 API.md` |
+| 2.35 | 提交视频流畅度提升任务 API | 352-361 | 16504-16983 | 426 | `chapters/volcengine/mediakit/2.35 提交视频流畅度提升任务 API.md` |
+| 3.1 | 提交图像画质增强任务 API | 362-373 | 16985-17519 | 481 | `chapters/volcengine/mediakit/3.1 提交图像画质增强任务 API.md` |
+| 3.2 | 提交图像画质评估任务 API | 374-383 | 17520-17971 | 392 | `chapters/volcengine/mediakit/3.2 提交图像画质评估任务 API.md` |
+| 3.3 | 提交图像人脸打码任务 API | 384-389 | 17972-18212 | 216 | `chapters/volcengine/mediakit/3.3 提交图像人脸打码任务 API.md` |
+| 3.4 | 提交图像擦除修复任务 API | 390-399 | 18213-18642 | 386 | `chapters/volcengine/mediakit/3.4 提交图像擦除修复任务 API.md` |
+| 3.5 | 提交图像背景移除任务 API | 400-408 | 18643-19026 | 347 | `chapters/volcengine/mediakit/3.5 提交图像背景移除任务 API.md` |
+| 3.6 | 提交图像文字识别（OCR）任务 API | 409-417 | 19027-19424 | 364 | `chapters/volcengine/mediakit/3.6 提交图像文字识别（OCR）任务 API.md` |
+| 3.7 | 提交图像智能裁剪任务 API | 418-423 | 19425-19677 | 226 | `chapters/volcengine/mediakit/3.7 提交图像智能裁剪任务 API.md` |
+| 3.8 | 提交智能扩图任务 API | 424-429 | 19678-19943 | 243 | `chapters/volcengine/mediakit/3.8 提交智能扩图任务 API.md` |
+| 3.9 | 提交集智瘦身任务 API | 430-435 | 19944-20182 | 214 | `chapters/volcengine/mediakit/3.9 提交集智瘦身任务 API.md` |
+| 3.10 | 提交图像翻译任务 API | 436-444 | 20183-20532 | 313 | `chapters/volcengine/mediakit/3.10 提交图像翻译任务 API.md` |
+| 3.11 | 提交电商牛皮癣擦除任务 API | 445-448 | 20533-20699 | 147 | `chapters/volcengine/mediakit/3.11 提交电商牛皮癣擦除任务 API.md` |
+| 3.12 | 提交电商万创（商品场景图生成）任务 API | 449-460 | 20700-21251 | 504 | `chapters/volcengine/mediakit/3.12 提交电商万创（商品场景图生成）任务 API.md` |
+| 3.13 | 提交图像元信息获取任务 API | 461-467 | 21252-21561 | 269 | `chapters/volcengine/mediakit/3.13 提交图像元信息获取任务 API.md` |
+| 3.14 | 提交图像暗水印添加任务 API | 468-474 | 21562-21872 | 281 | `chapters/volcengine/mediakit/3.14 提交图像暗水印添加任务 API.md` |
+| 3.15 | 提交图像暗水印提取任务 API | 475-479 | 21873-22081 | 188 | `chapters/volcengine/mediakit/3.15 提交图像暗水印提取任务 API.md` |
+| 3.16.1 | 提交圆角矩形任务 API | 480-485 | 22083-22343 | 233 | `chapters/volcengine/mediakit/3.16.1 提交圆角矩形任务 API.md` |
+| 3.16.2 | 提交图像旋转任务 API | 486-490 | 22344-22569 | 200 | `chapters/volcengine/mediakit/3.16.2 提交图像旋转任务 API.md` |
+| 3.16.3 | 提交图像翻转任务 API | 491-495 | 22570-22782 | 189 | `chapters/volcengine/mediakit/3.16.3 提交图像翻转任务 API.md` |
+| 3.16.4 | 提交图像锐化任务 API | 496-500 | 22783-22997 | 190 | `chapters/volcengine/mediakit/3.16.4 提交图像锐化任务 API.md` |
+| 3.16.5 | 提交图像高斯模糊任务 API | 501-505 | 22998-23213 | 193 | `chapters/volcengine/mediakit/3.16.5 提交图像高斯模糊任务 API.md` |
+| 3.16.6 | 提交图像打码任务 API | 506-512 | 23214-23524 | 277 | `chapters/volcengine/mediakit/3.16.6 提交图像打码任务 API.md` |
+| 3.16.7 | 提交图像添加图文水印任务 API | 513-522 | 23525-23975 | 400 | `chapters/volcengine/mediakit/3.16.7 提交图像添加图文水印任务 API.md` |
+| 3.16.8 | 提交图像缩放任务 API | 523-529 | 23976-24304 | 292 | `chapters/volcengine/mediakit/3.16.8 提交图像缩放任务 API.md` |
+| 3.16.9 | 提交图像调整任务 API | 530-535 | 24305-24534 | 202 | `chapters/volcengine/mediakit/3.16.9 提交图像调整任务 API.md` |
+| 3.16.10 | 提交图像裁剪任务 API | 536-544 | 24535-24937 | 357 | `chapters/volcengine/mediakit/3.16.10 提交图像裁剪任务 API.md` |
+| 3.16.11 | 提交图像压缩任务 API | 545-551 | 24938-25227 | 261 | `chapters/volcengine/mediakit/3.16.11 提交图像压缩任务 API.md` |
+| 3.16.12 | 提交图像负片任务 API | 552-556 | 25228-25431 | 181 | `chapters/volcengine/mediakit/3.16.12 提交图像负片任务 API.md` |
+| 4.1 | 提交智能剪辑任务 API | 557-588 | 25433-26665 | 1137 | `chapters/volcengine/mediakit/4.1 提交智能剪辑任务 API.md` |
+| 4.2 | 提交视频拼接任务 API | 589-597 | 26666-27051 | 346 | `chapters/volcengine/mediakit/4.2 提交视频拼接任务 API.md` |
+| 4.3 | 提交音频拼接任务 API | 598-604 | 27052-27357 | 275 | `chapters/volcengine/mediakit/4.3 提交音频拼接任务 API.md` |
+| 4.4 | 提交视频裁剪任务 API | 605-611 | 27358-27675 | 288 | `chapters/volcengine/mediakit/4.4 提交视频裁剪任务 API.md` |
+| 4.5 | 提交音频裁剪任务 API | 612-618 | 27676-27989 | 285 | `chapters/volcengine/mediakit/4.5 提交音频裁剪任务 API.md` |
+| 4.6 | 提交音频提取任务 API | 619-625 | 27990-28295 | 276 | `chapters/volcengine/mediakit/4.6 提交音频提取任务 API.md` |
+| 4.7 | 提交音视频合成任务 API | 626-634 | 28296-28728 | 382 | `chapters/volcengine/mediakit/4.7 提交音视频合成任务 API.md` |
+| 4.8 | 提交图片转视频任务 API | 635-644 | 28729-29141 | 367 | `chapters/volcengine/mediakit/4.8 提交图片转视频任务 API.md` |
+| 4.9 | 提交视频画面翻转任务 API | 645-651 | 29142-29488 | 318 | `chapters/volcengine/mediakit/4.9 提交视频画面翻转任务 API.md` |
+| 4.10 | 提交视频画面旋转任务 API | 652-658 | 29489-29809 | 287 | `chapters/volcengine/mediakit/4.10 提交视频画面旋转任务 API.md` |
+| 4.11 | 提交视频画面裁剪任务 API | 659-667 | 29810-30188 | 341 | `chapters/volcengine/mediakit/4.11 提交视频画面裁剪任务 API.md` |
+| 4.12 | 提交视频画面拼接任务 API | 668-675 | 30189-30558 | 333 | `chapters/volcengine/mediakit/4.12 提交视频画面拼接任务 API.md` |
+| 4.13 | 提交视频调速任务 API | 676-682 | 30559-30899 | 308 | `chapters/volcengine/mediakit/4.13 提交视频调速任务 API.md` |
+| 4.14 | 提交音频调速任务 API | 683-689 | 30900-31208 | 281 | `chapters/volcengine/mediakit/4.14 提交音频调速任务 API.md` |
+| 4.15 | 提交音频混合任务 API | 690-696 | 31209-31518 | 280 | `chapters/volcengine/mediakit/4.15 提交音频混合任务 API.md` |
+| 4.16 | 提交视频加字幕任务 API | 697-709 | 31519-32052 | 481 | `chapters/volcengine/mediakit/4.16 提交视频加字幕任务 API.md` |
+| 4.17 | 提交视频加图片任务 API | 710-718 | 32053-32478 | 388 | `chapters/volcengine/mediakit/4.17 提交视频加图片任务 API.md` |
+| 4.18 | 提交视频声音淡入淡出任务 API | 719-726 | 32479-32825 | 312 | `chapters/volcengine/mediakit/4.18 提交视频声音淡入淡出任务 API.md` |
+| 4.19 | 提交音频声音淡入淡出任务 API | 727-733 | 32826-33160 | 304 | `chapters/volcengine/mediakit/4.19 提交音频声音淡入淡出任务 API.md` |
+| 4.20 | 提交调整视频音量任务 API | 734-741 | 33161-33514 | 315 | `chapters/volcengine/mediakit/4.20 提交调整视频音量任务 API.md` |
+| 4.21 | 提交视频添加滤镜任务 API | 742-748 | 33515-33844 | 294 | `chapters/volcengine/mediakit/4.21 提交视频添加滤镜任务 API.md` |
+| 4.22 | 提交视频截取动图任务 API | 749-756 | 33845-34191 | 315 | `chapters/volcengine/mediakit/4.22 提交视频截取动图任务 API.md` |
+| 4.23 | 提交视频添加运镜任务 API | 757-763 | 34192-34503 | 275 | `chapters/volcengine/mediakit/4.23 提交视频添加运镜任务 API.md` |
+| 4.24 | 提交视频高斯模糊任务 API | 764-772 | 34504-34909 | 363 | `chapters/volcengine/mediakit/4.24 提交视频高斯模糊任务 API.md` |
+| 4.25 | 提交文字生成滚屏视频任务 API | 773-783 | 34910-35451 | 466 | `chapters/volcengine/mediakit/4.25 提交文字生成滚屏视频任务 API.md` |
+| 4.26 | 提交添加 AIGC 元数据标识任务 API | 784-794 | 35452-36016 | 512 | `chapters/volcengine/mediakit/4.26 提交添加 AIGC 元数据标识任务 API.md` |
+| 4.27 | 提交多轨道剪辑任务 API | 795-821 | 36017-37307 | 1193 | `chapters/volcengine/mediakit/4.27 提交多轨道剪辑任务 API.md` |
+| 5.1 | 提交人声背景音分离任务 API | 822-832 | 37309-37838 | 474 | `chapters/volcengine/mediakit/5.1 提交人声背景音分离任务 API.md` |
+| 5.2 | 提交语音端点识别任务 API | 833-839 | 37839-38132 | 264 | `chapters/volcengine/mediakit/5.2 提交语音端点识别任务 API.md` |
+| 5.3 | 提交音频转码任务 API | 840-850 | 38133-38653 | 470 | `chapters/volcengine/mediakit/5.3 提交音频转码任务 API.md` |
+| 5.4 | 提交音频元信息获取任务 API | 851-856 | 38654-38902 | 224 | `chapters/volcengine/mediakit/5.4 提交音频元信息获取任务 API.md` |
+| 5.5 | 提交音频内容编辑任务 API | 857-866 | 38903-39398 | 449 | `chapters/volcengine/mediakit/5.5 提交音频内容编辑任务 API.md` |
+| 6.1 | 提交大模型高光剪辑任务 API | 867-884 | 39400-40267 | 790 | `chapters/volcengine/mediakit/6.1 提交大模型高光剪辑任务 API.md` |
+| 6.2 | 提交视频理解智能策略任务 API | 885-893 | 40268-40710 | 392 | `chapters/volcengine/mediakit/6.2 提交视频理解智能策略任务 API.md` |
+| 6.3 | 对话 Chat API | 894-918 | 40711-41485 | 592 | `chapters/volcengine/mediakit/6.3 对话 Chat API.md` |
+| 6.4 | MaaS 模型代理 API | 919-929 | 41486-41986 | 439 | `chapters/volcengine/mediakit/6.4 MaaS 模型代理 API.md` |
+| 7.1 | 查询任务信息 API | 930-934 | 41988-42160 | 145 | `chapters/volcengine/mediakit/7.1 查询任务信息 API.md` |
+| 7.2 | 获取媒体上传地址 API | 935-938 | 42161-42297 | 104 | `chapters/volcengine/mediakit/7.2 获取媒体上传地址 API.md` |
+| 7.3 | 事件回调 | 939-942 | 42298-42455 | 122 | `chapters/volcengine/mediakit/7.3 事件回调.md` |
+| 7.4 | 错误码 | 943-945 | 42456-42596 | 124 | `chapters/volcengine/mediakit/7.4 错误码.md` |

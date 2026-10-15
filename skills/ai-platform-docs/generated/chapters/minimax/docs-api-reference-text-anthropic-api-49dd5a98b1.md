@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-anthropic-api.md -->
-<!-- Source SHA-256: 6daf89aa6798bc504662acdeb6ed2a269fae35f94f1fa14559335c87c4ce7142 -->
+<!-- Source SHA-256: 723f562c60592f444e17cf087bd3ccfe6dc4e8b0e8c3438c2c08144aed6853ed -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -118,7 +118,7 @@ for block in message.content:
 | `thinking` | 完全支持 | `MiniMax-M3.1-Flash-Preview` 强制开启 thinking，传入 `disabled` 会返回 `400`。`MiniMax-M3` 默认关闭 thinking，可通过 `adaptive` 开启。M2.x 模型的 thinking 无法关闭。 |
 | `output_config.effort` | 完全支持 | 调节 `MiniMax-M3.1-Flash-Preview` 的思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`；省略时默认为 `max`。 |
 | `metadata` | 完全支持 | 元信息 |
-| `service_tier` | 完全支持 | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#overview)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。 |
+| `service_tier` | 完全支持 | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。 |
 | `top_k` | 忽略 | 该参数会被忽略 |
 | `stop_sequences` | 忽略 | 该参数会被忽略 |
 | `mcp_servers` | 忽略 | 该参数会被忽略 |

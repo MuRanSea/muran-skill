@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-openai-api.md -->
-<!-- Source SHA-256: 822edb6ab83b9083a3633bc945b3eb7b5e4d13bfd7232cac8c528c71dc6b390a -->
+<!-- Source SHA-256: 2b1b748877fe8f1c5712f9073dfaf3f4b83dfde89bf97cd7219300216fb3f552 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -142,7 +142,7 @@ response = client.chat.completions.create(
 | `top_p` | 核采样参数。范围 `[0, 1]`，`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 默认值 `0.95`，M2.x 系列默认值 `0.9`。 |
 | `tools` | 函数工具定义。 |
 | `reasoning_split` | 输出格式开关。为 `true` 时把 thinking 内容拆分到 `reasoning_content` 字段；为 `false` 时 thinking 以 `<think>` 标签保留在 `content` 内。`MiniMax-M3.1-Flash-Preview` 暂不支持将该参数设为 `false`。 |
-| `service_tier` | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#overview)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。 |
+| `service_tier` | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。 |
 
 ### Thinking 控制
 

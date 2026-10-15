@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/136609 -->
-<!-- Source SHA-256: 0fd3c72d0738c366895b56bfc66686e9d40c056331165b58afe884ab1a4c4452 -->
+<!-- Source SHA-256: a6adf8b3e213881ffa98fe6ccf0b93a28dcc41e13db46a787ab9f0ec5bf391ba -->
 
 # Seedream 生图调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/136609
-最近更新时间：2026-10-13 15:50:31
+最近更新时间：2026-10-14 10:27:42
 
 ## 概述
 
@@ -84,7 +84,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/si-image/generation' \\
 
 ### 4. 输出参数
 
-<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div>字段</div></td><td><div>类型</div></td><td><div>说明</div></td></tr><tr><td><div>created</div></td><td><div>string</div></td><td><div>任务创建时间。</div></td></tr><tr><td><div>data</div></td><td><div>object</div></td><td><div>返回图片内容。</div></td></tr><tr><td><div>data[].output_format</div></td><td><div>string</div></td><td><div>输出格式。</div></td></tr><tr><td><div>data[].size</div></td><td><div>string</div></td><td><div>图像尺寸。</div></td></tr><tr><td><div>data[].url</div></td><td><div>string</div></td><td><div>图片 URL。</div></td></tr><tr><td><div>data[].b64_json</div></td><td><div>string</div></td><td><div>图片 Base64 数据。</div></td></tr><tr><td><div>request_id</div></td><td><div>string</div></td><td><div>唯一请求标识，用于排查问题。</div></td></tr><tr><td><div>model</div></td><td><div>string</div></td><td><div>使用的生图模型。</div></td></tr><tr><td colspan="1" rowspan="1"><div>tokenhub_usage</div></td><td colspan="1" rowspan="1"><div>object</div></td><td colspan="1" rowspan="1"><div>用量消耗。</div></td></tr><tr><td colspan="1" rowspan="1"><div>tokenhub_usage.total_tokens</div></td><td colspan="1" rowspan="1"><div>integer</div></td><td colspan="1" rowspan="1"><div>本次任务消耗的 token 数，用于计费/对账。</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div>字段</div></td><td><div>类型</div></td><td><div>说明</div></td></tr><tr><td><div>created</div></td><td><div>integer</div></td><td><div>任务创建时间。</div></td></tr><tr><td><div>data</div></td><td><div>object</div></td><td><div>返回图片内容。</div></td></tr><tr><td><div>data[].output_format</div></td><td><div>string</div></td><td><div>输出格式。</div></td></tr><tr><td><div>data[].size</div></td><td><div>string</div></td><td><div>图像尺寸。</div></td></tr><tr><td><div>data[].url</div></td><td><div>string</div></td><td><div>图片 URL。</div></td></tr><tr><td><div>data[].b64_json</div></td><td><div>string</div></td><td><div>图片 Base64 数据。</div></td></tr><tr><td><div>request_id</div></td><td><div>string</div></td><td><div>唯一请求标识，用于排查问题。</div></td></tr><tr><td><div>model</div></td><td><div>string</div></td><td><div>使用的生图模型。</div></td></tr><tr><td colspan="1" rowspan="1"><div>tokenhub_usage</div></td><td colspan="1" rowspan="1"><div>object</div></td><td colspan="1" rowspan="1"><div>用量消耗。</div></td></tr><tr><td colspan="1" rowspan="1"><div>tokenhub_usage.total_tokens</div></td><td colspan="1" rowspan="1"><div>integer</div></td><td colspan="1" rowspan="1"><div>本次任务消耗的 token 数，用于计费/对账。</div></td></tr></tbody></table>
 
 ### 5. 响应示例
 
@@ -123,15 +123,6 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/si-image/generation' \\
 | ManagedAgentsRequired | Managed agents integration is required for request provider mode. | POST create 使用 request provider 模式，但服务端未配置 managed-agents loader。请在服务端完成 managed agents 集成后再调用。 |
 | ManagedAgentsRejected | Managed agent definition was rejected. | POST create 阶段 managed-agents 业务层拒绝请求。常见原因：目标 session 不存在、session 已被删除、租户与 session 归属不一致等。 |
 | ManagedAgentsInvalidAgent | Managed agent definition is invalid. | POST create 阶段 agent payload 无法翻译成合法的 AgentSpec。常见原因：agent.name 为空、权限策略或工具名不被识别、skill\_id 缺失等。 |
-| AuthenticationError | The API key or AK/SK in the request is missing or invalid. | 请求携带的 API Key 或 AK/SK 缺失、非法或已过期。请检查鉴权凭证的设置，或参考 API 调用文档排查。 |
-| MissingHeader | Authorization header is required for this request. | POST events 在 request provider 模式下要求 Authorization 请求头存在、非空且为 Bearer <token> 形态。请补齐该请求头。 |
-| MCPInvalidCredential | The MCP server rejected the credential; verify or update the API key or token. | 出向调用的 MCP server 判定当前凭证无效并拒绝请求。请更新对应的 API key 或 token。 |
-| MCPNeedsReauth | The MCP credential is unauthorized after refresh; re-authorization is required. | 出向 MCP 凭证在自动刷新后仍返回 401，说明 refresh token 已失效。请重新走 OAuth 授权流程获取新凭证。 |
-| AccessDenied | The request failed because you do not have access to the requested resource. | 调用方对目标资源无访问权限。请检查资源所属账号、项目授权及白名单配置。 |
-| OperationDenied(.<cause>) | Operation is denied [because <cause>]. | 操作被拒绝，携带子原因码 <cause> 指明具体原因，例如：商品未开通、子账号缺少所需权限、账号实名认证未通过、账号欠费导致服务暂停等。请根据 <cause> 与 message 定位并解决。 |
-| AccountOverdueError | The request failed because your account has an overdue balance. | 当前账号存在欠费或计费项未开通，服务被禁止调用。请前往火山引擎费用中心完成充值或开通对应计费项后重试。 |
-| MCPNetworkDenied | Network access to the requested MCP server is denied. | 目标 MCP server 未通过接入控制（connector 未启用，或 host 不在出向白名单）。请在方舟控制台开通对应的 MCP 出向策略。 |
-| PathNotFound | The path of api not found. | 请求所指的 API 路径不存在。请核对 endpoint 路径与 API 版本。 |
 | InvalidSession.NotFound | The session %s does not exist or you do not have access to it. | 指定的 session\_id 不存在，或调用者对该 session 无访问权限。 |
 | InvalidAgent.NotFound | The agent %s does not exist or you do not have access to it. | 指定的 agent\_id 不存在，或调用者对该 agent 无访问权限。 |
 | InvalidEnvironment.NotFound | The environment %s does not exist or you do not have access to it. | 指定的 environment\_id 不存在，或调用者对该 environment 无访问权限。 |
@@ -140,19 +131,9 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/si-image/generation' \\
 | InvalidMemoryStore.NotFound | The memory\_store %s does not exist or you do not have access to it. | 指定的 memory\_store\_id 不存在，或调用者对该 memory store 无访问权限。 |
 | InvalidFile.NotFound | The file %s does not exist or you do not have access to it. | 指定的 file\_id 不存在，或调用者对该文件无访问权限。 |
 | ResourceNotFound | The requested resource does not exist or you do not have access to it. | 请求的资源不存在或调用者无访问权限。当资源类型未落到上述具体 .NotFound 分支时使用此通用码。 |
-| ManagedAgentNotOpen | Your account %s has not activated the managed agent. Please activate the service in the Ark Console. | 当前账号 %s 未开通 Managed Agent 服务。请前往火山方舟控制台开通对应服务后再调用。 |
-| NotSupportedMCPServer.NotFound | The MCP server %q is not supported by the OAuth flow yet; ask operator to register it. | OAuth flow 中传入的 mcp\_server\_url 未在服务端预注册。请联系运营方将该 MCP server 完成注册后再走 OAuth 流程。 |
-| Conflict | The request conflicts with the current state of the resource. | 请求与目标资源的当前状态存在冲突。请刷新资源状态后重试。 |
-| ResourceConflict | The request conflicts with the current state of the resource. | 资源发生冲突（如同名或同路径的资源已存在）。请更换资源标识后重试。 |
-| SessionBusy | The session is currently busy with another in-flight request. Please retry after the current request finishes or send a user.interrupt first. | 同一 session 上已有 in-flight 回合正在执行。请等待其结束，或先向该 session 发送 user.interrupt 中断当前回合后再重试。 |
-| RuntimeBusy | Session is currently busy with another exclusive command; retry later. | POST create / POST events 阶段服务端在 HTTP 入口抢 session redislock 失败：同一 session 上已有另一个独占命令在执行。请等前一独占命令结束后再重试。SSE 阶段的同义码 loop.kernel.runtime\_busy 通过事件流下发、不携带 HTTP 状态码，语义与本码不同，不可复用其判定规则。 |
 | RequestTooLarge | The request entity is larger than the limit allowed. | 业务层单个 content / payload 超过上限（含单文件、zip 包、单条消息等业务粒度）。请拆分或压缩后重试。 |
 | RequestBodyTooLarge | The request body is larger than the limit allowed. | HTTP 请求体的字节数超过了传输层上限。请压缩或分批传输。此码与 RequestTooLarge 的区别是：前者是业务粒度限制，本码是传输粒度限制。 |
 | UpstreamUnavailable | An upstream dependency is temporarily unavailable. Please retry later or check that the upstream is healthy. | 客户侧上游依赖（如 MCP server、IdP）临时不可达，表现为超时、抖动或返回 5xx。请稍后重试，并排查上游服务健康度。 |
-| MCPInvalidResponse | The MCP server returned an invalid response; verify the server URL and credential. | MCP server 对 initialize 请求返回不合法响应。常见原因是 mcp\_server\_url 指向了非 MCP 服务。请核对 server URL 及凭证。 |
-| APIAccountRpmRateLimitExceeded | The RPM (Requests Per Minute) limit for the API on your account has been exceeded. | 当前账号在该 API 上的 RPM (Requests Per Minute) 限额已超出。请降低调用频率或稍后重试。 |
-| SessionQuotaExceeded | The number of active sessions has reached the quota. Finish or delete existing sessions before creating a new one. | 单个 agent 下的活跃 session 数量已达配额上限。请调用 delete session 接口删除部分已完成的 session 释放配额后，再创建新的 session。 |
-| RequestCanceled | The request is canceled before response. | 服务端在返回响应前请求已被客户端取消，通常由客户端主动断开或超时导致。 |
 | InternalServiceError | The service encountered an unexpected internal error. Please retry later. | 服务内部出现未预期错误。可重试；持续复现时请携带 Request ID 提工单排查。 |
 | SideEffectFailed | Request side effect failed. | 服务端在向运行时分派事件前执行关联操作失败。请重试；持续失败时携带 Request ID 提交工单。 |
 | ManagedAgentsUnavailable | Managed agent definition is temporarily unavailable. | POST create 反查 managed-agents 的 InnerGetSession 出现网络错误、非 2xx 响应或响应解码失败，上游 managed-agents 服务暂时不可用。请稍后重试。 |

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/responses-create.md -->
-<!-- Source SHA-256: dc009244388fbd31f682a25fa5628a6be9cce0239f502a38f80bec435bc968e6 -->
+<!-- Source SHA-256: e5b48637bec818558196da11a042c41b8f01868c9abf0fc8ccb1d4dee178763f -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,7 +9,49 @@
 
 > OpenAI Responses API 兼容的主接口调用MiniMax 模型，生成模型回复，支持流式与非流式。
 
+export const ResponsesReturnValues = ({label}) => {
+  const marker = useRef(null);
+  useEffect(() => {
+    const root = marker.current?.closest("#content-container");
+    if (!root) return;
+    const fixedFields = new Set(["response-object", "response-parallel-tool-calls", "response-store", "response-truncation"]);
+    const hiddenRows = new Map();
+    const updateLabels = () => {
+      root.querySelectorAll('[id^="response-"]').forEach(heading => {
+        const field = heading.closest(".primitive-param-field");
+        field?.querySelectorAll(".whitespace-pre-wrap.prose-sm").forEach(row => {
+          if (fixedFields.has(heading.id) && row.querySelectorAll("code").length === 1) {
+            if (!hiddenRows.has(row)) hiddenRows.set(row, row.hidden);
+            row.hidden = true;
+          }
+          row.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE && (/^(可用选项|Available options)$/).test(node.textContent.trim())) {
+              node.textContent = label;
+            }
+          });
+        });
+      });
+    };
+    updateLabels();
+    const observer = new MutationObserver(updateLabels);
+    observer.observe(root, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+    return () => {
+      observer.disconnect();
+      hiddenRows.forEach((hidden, row) => {
+        row.hidden = hidden;
+      });
+    };
+  }, [label]);
+  return <span ref={marker} hidden />;
+};
+
 <Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。</Note>
+
+<ResponsesReturnValues label="可能的返回值" />
 
 
 ## OpenAPI
@@ -189,8 +231,9 @@ components:
           type: string
           description: >-
             请求准入服务层级。支持的取值为 `standard` 和 `priority`。省略时默认使用
-            `standard`。`priority` 的[价格](/pricing/overview#overview)为 `standard`
-            的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
+            `standard`。`priority`
+            的[价格](https://platform.minimax.cn/docs/pricing/overview#models/text)为
+            `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
           enum:
             - standard
             - priority
@@ -288,13 +331,6 @@ components:
           required: []
     CreateResponseResp:
       type: object
-      required:
-        - id
-        - object
-        - created_at
-        - model
-        - status
-        - output
       properties:
         id:
           type: string
@@ -311,6 +347,7 @@ components:
         model:
           type: string
           description: 实际处理请求的模型名称
+          example: MiniMax-M3.1-Flash-Preview
         status:
           type: string
           enum:
@@ -326,7 +363,7 @@ components:
         output_text:
           type: string
           nullable: true
-          description: 便利字段，所有文本输出拼接后的结果
+          description: 便捷字段：所有文本输出拼接后的结果
         usage:
           $ref: '#/components/schemas/Usage'
         error:
@@ -352,15 +389,15 @@ components:
                 - content_filter
         parallel_tool_calls:
           type: boolean
-          description: 是否支持并行工具调用
+          description: 请求中暂不支持该参数，传入后将被忽略，响应中固定返回 **`true`**。
         store:
           type: boolean
-          description: 响应是否持久化
+          description: 请求中暂不支持该参数，传入后将被忽略，响应中固定返回 **`false`**。
         truncation:
           type: string
           enum:
             - disabled
-          description: 上下文截断策略
+          description: 请求中暂不支持该参数，传入后将被忽略，响应中固定返回 **`disabled`**。
     InputItem:
       type: object
       description: >-
@@ -445,7 +482,6 @@ components:
       oneOf:
         - title: Message
           type: object
-          description: 助手回复
           properties:
             id:
               type: string
