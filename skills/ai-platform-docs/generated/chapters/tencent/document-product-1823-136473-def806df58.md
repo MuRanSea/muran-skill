@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/136473 -->
-<!-- Source SHA-256: 3c07193e2e8c9f42e74793ced650e55ce14271853b827d76c8c4033591d77f0b -->
+<!-- Source SHA-256: 5445976c03bfbcf7536e62b3fdc14e6aa9fff5b9370410314506d1ef230439ac -->
 
 # 节省计划
 
 官方来源：https://cloud.tencent.com/document/product/1823/136473
-最近更新时间：2026-10-13 15:50:30
+最近更新时间：2026-10-15 18:21:30
 
 ## 产品概述
 
@@ -37,13 +37,17 @@ TokenHub 节省计划属于**单产品型**，支持两种购买方式：
 
 TokenHub GLM-5.2
 
-TokenHub DeepSeek-V4-Pro
+TokenHub GLM-5.3
 
-TokenHub DeepSeek-V4-Flash
+TokenHub DeepSeek-V4-Pro
 
 TokenHub DeepSeek-V4-Pro-0813
 
 TokenHub DeepSeek-V4-Flash-0731
+
+TokenHub DeepSeek-V4.1-Flash
+
+TokenHub Kimi K3
 
 **按单一产品购买（支持以下模型，单独选择）：**
 
@@ -52,8 +56,6 @@ TokenHub DeepSeek-V4-Flash-0731
 TokenHub GLM-5.2
 
 TokenHub DeepSeek-V4-Pro
-
-TokenHub DeepSeek-V4-Flash
 
 TokenHub DeepSeek-V4-Pro-0813
 

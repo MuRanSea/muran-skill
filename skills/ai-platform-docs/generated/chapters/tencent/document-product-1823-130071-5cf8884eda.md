@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130071 -->
-<!-- Source SHA-256: 07c291dfe8c88d50296247bac2ce75396840852ad0208b08340e802e1d8b874b -->
+<!-- Source SHA-256: 99d42c9f7e6f9ad6c9331eba6e3b8767d6d99e11e9a01283f7ab931b8d77c4cf -->
 
 # Codex
 
 官方来源：https://cloud.tencent.com/document/product/1823/130071
-最近更新时间：2026-09-03 14:36:30
+最近更新时间：2026-10-15 18:21:31
 
 Codex 是由 OpenAI 开发的新一代 AI 智能编程助手，基于 GPT 架构打造的强大代码生成引擎。Codex 通过深度学习技术，能够理解自然语言并转换为高质量代码，支持 Python、JavaScript、Java 等多种编程语言。本文介绍如何在 Codex 中配置与使用腾讯云大模型 Token Plan。
 
@@ -18,21 +18,7 @@ Codex 是由 OpenAI 开发的新一代 AI 智能编程助手，基于 GPT 架构
 
 ## 安装 Codex
 
-由于 Token Plan 套餐暂不兼容 Responses 协议，请您选择支持 Chat 版本的 Codex 进行安装。
-
-**版本要求（必读）：**
-
-Token Plan 仅兼容 Chat/Completions API，而新版 Codex 改用 Responses API，不再支持前者。如需在 Codex 中使用 Token Plan，请安装 0.80.0 及以下旧版本，详情可查阅 [Codex 官方文档](https://github.com/openai/codex/discussions/7782)。
-
-```java
-npm install -g @openai/codex@0.80.0
-```
-
-在终端中执行以下命令，若输出版本号，则表示安装成功。
-
-```bash
-codex --version
-```
+请根据实际环境类型安装 Codex，详情请参见 [Codex 安装](https://developers.openai.com/codex/quickstart)。如果已安装 Codex，可跳过此步骤。
 
 ## 配置 Token Plan
 
@@ -44,7 +30,7 @@ macOS/Linux：`~/.codex/config.toml`。
 
 Windows：`C:\\Users\\<用户名>\\.codex\\config.toml`。
 
-2. 复制以下内容粘贴到 config.toml 配置文件中，根据您购买的套餐类型，将 $model\_id 替换为[套餐支持的模型 ID](https://cloud.tencent.com/document/product/1823/130119)。
+2. 复制以下内容粘贴到 config.toml 配置文件中，根据您购买的套餐类型，将 $model\_id 替换为 [套餐支持的模型 ID](https://cloud.tencent.com/document/product/1823/130119)。
 
 如果您购买通用 Token Plan 套餐：请参见 [可用模型](https://cloud.tencent.com/document/product/1823/130060#b6fdbed0-897c-475d-a9a1-f9af922027c4)，选择具体的 **Model ID** 配置。
 
@@ -55,10 +41,9 @@ model_provider = "Tencent_Cloud_Token_Plan"
 model = "$model_id"
 [model_providers.Tencent_Cloud_Token_Plan]
 name = "Tencent_Cloud_Token_Plan"
-base_url = "https://api.lkeap.cloud.tencent.com/plan/v3"
+base_url = "https://tokenhub.tencentmaas.com/plan/v3"
 env_key = "Token_Plan_API_KEY"
-wire_api = "chat"
-# 请注意 Token Plan 需要使用 “chat” 模式
+wire_api = "responses"
 ```
 
 ### 配置环境变量

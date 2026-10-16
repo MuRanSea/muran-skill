@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132061 -->
-<!-- Source SHA-256: a34dc90aa467affce01c8fa144c94f36d136b0cb86b180a1ee10bde7d5cd58f1 -->
+<!-- Source SHA-256: 854e5e669624e49ddc5a68e7dad1ad46ad7e64cd444c6e8e8483b6e502b96644 -->
 
 # GLM 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132061
-最近更新时间：2026-10-13 15:50:30
+最近更新时间：2026-10-15 18:21:30
 
 ## 概述
 
@@ -160,7 +160,7 @@ GLM 系列将对话能力与推理能力合为一体，可通过 `thinking` 参�
 | --- | --- | --- | --- | --- |
 | `type` | String | `enabled` / `disabled` | `enabled` | 控制当前请求是否启用思考能力。**GLM-5.3、GLM-5.3-Flash 和 GLM-5.3-FlashX 默认启用且不支持关闭（即不支持** `disabled` **值），传入** `disabled` **会导致请求失败** |
 
-以下示例展示如何在请求中关闭思考：
+以下示例展示如何在请求中关闭思考（以 glm-5.2 为例；glm-5.3、glm-5.3-flash 和 glm-5.3-flashx 不支持关闭思考，传入 disabled 将导致请求失败）：
 
 cURL
 
@@ -177,7 +177,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{
-    "model": "glm-5.3",
+    "model": "glm-5.2",
     "messages": [{"role": "user", "content": "你好"}],
     "thinking": {"type": "disabled"}
   }'
@@ -185,7 +185,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
 
 ```python
 response = client.chat.completions.create(
-    model="glm-5.3",
+    model="glm-5.2",
     messages=[{"role": "user", "content": "你好"}],
     extra_body={"thinking": {"type": "disabled"}},
 )
@@ -193,7 +193,7 @@ response = client.chat.completions.create(
 
 ```javascript
 const response = await client.chat.completions.create({
-  model: 'glm-5.3',
+  model: 'glm-5.2',
   messages: [{ role: 'user', content: '你好' }],
   // @ts-ignore - thinking 为 GLM 扩展字段
   thinking: { type: 'disabled' },
@@ -208,7 +208,7 @@ import java.util.*;
 public class GlmThinkingDisabled {
     public static void main(String[] args) throws Exception {
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "glm-5.3");
+        body.put("model", "glm-5.2");
         body.put("messages", List.of(Map.of("role", "user", "content", "你好")));
         body.put("thinking", Map.of("type", "disabled"));
 
@@ -238,7 +238,7 @@ import (
 
 func main() {
     body, _ := json.Marshal(map[string]interface{}{
-        "model":    "glm-5.3",
+        "model":    "glm-5.2",
         "messages": []map[string]string{{"role": "user", "content": "你好"}},
         "thinking": map[string]string{"type": "disabled"},
     })
@@ -562,7 +562,7 @@ func main() {
 
 `glm-5.2`、`glm-5.3`、`glm-5.3-flash` 和 `glm-5.3-flashx` 在 `thinking` 字段之外，额外提供 `reasoning_effort` 参数用于控制思考深度，便于在效果与延迟之间灵活权衡。该参数仅 `glm-5.2`、`glm-5.3`、`glm-5.3-flash` 和 `glm-5.3-flashx` 支持，其他 GLM 模型请使用 `thinking` 字段控制（参见上文 [开启或关闭思考](https://cloud.tencent.com/document/product/1823/132061#649d4082-6015-4dcd-b6e1-d98852cf50ff)）。不传时默认 `max`。
 
-<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div>模型</div></td><td><div>取值</div></td><td><div>说明</div></td></tr><tr><td rowspan="3"><div><code>glm-5.3</code></div></td><td><div><code>max</code></div></td><td><div>深度推理（<b>默认值</b>）。适合复杂推理、长程任务、深度代码分析等场景。</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div><code>high</code></div></td><td><div>增强推理。适合常规推理、代码生成等场景。</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div><code>low</code></div></td><td><div>轻度推理。适合简单问答、快速响应等对延迟敏感的场景。</div></td></tr><tr><td rowspan="3"><div><code>glm-5.2</code></div></td><td><div><code>max</code>、<code>xhigh</code></div></td><td><div>深度推理（<b>默认值</b>，<code>xhigh</code> 效果等同 <code>max</code>）。适合复杂推理、长程任务等场景。</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div><code>high</code>、<code>medium</code>、<code>low</code></div></td><td><div>增强推理（三者效果等同）。适合常规推理、代码生成等场景。</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div><code>minimal</code>、<code>none</code></div></td><td><div>放弃思考，等同于关闭思考。</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div>模型</div></td><td><div>取值</div></td><td><div>说明</div></td></tr><tr><td rowspan="3"><div><code>glm-5.3</code> / <code>glm-5.3-flash</code> / <code>glm-5.3-flashx</code></div></td><td><div><code>max</code></div></td><td><div>深度推理（<b>默认值</b>）。适合复杂推理、长程任务、深度代码分析等场景。</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div><code>high</code></div></td><td><div>增强推理。适合常规推理、代码生成等场景。</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div><code>low</code></div></td><td><div>轻度推理。适合简单问答、快速响应等对延迟敏感的场景。</div></td></tr><tr><td rowspan="3"><div><code>glm-5.2</code></div></td><td><div><code>max</code>、<code>xhigh</code></div></td><td><div>深度推理（<b>默认值</b>，<code>xhigh</code> 效果等同 <code>max</code>）。适合复杂推理、长程任务等场景。</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div><code>high</code>、<code>medium</code>、<code>low</code></div></td><td><div>增强推理（三者效果等同）。适合常规推理、代码生成等场景。</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div><code>minimal</code>、<code>none</code></div></td><td><div>放弃思考，等同于关闭思考。</div></td></tr></tbody></table>
 
 `reasoning_effort` 不是 OpenAI 标准字段。使用 OpenAI SDK 时需通过 SDK 提供的额外字段机制（Python 用 `extra_body`、Node.js 直接传字段）；HTTP 直接调用时放在请求体顶层。示例如下：
 
@@ -638,9 +638,9 @@ console.log(completion.choices[0].message.content);
 
 **说明：**
 
-`thinking` 控制是否启用思考能力（开启 / 关闭）。`glm-5.3` 和 `glm-5.3-flash` 不支持关闭，传入 `disabled` 会导致请求失败。
+`thinking` 控制是否启用思考能力（开启 / 关闭）。`glm-5.3`、`glm-5.3-flash` 和 `glm-5.3-flashx` 不支持关闭，传入 `disabled` 会导致请求失败。
 
-`reasoning_effort` 控制思考深度，仅 `glm-5.2` / `glm-5.3` / `glm-5.3-flash` 支持，默认 `max`。
+`reasoning_effort` 控制思考深度，仅 `glm-5.2` / `glm-5.3` / `glm-5.3-flash` / `glm-5.3-flashx` 支持，默认 `max`。
 
 `thinking` 对象还支持 `clear_thinking` 布尔字段，智谱建议设置为 `false`。
 
@@ -694,7 +694,7 @@ tools = [{
 }]
 
 completion = client.chat.completions.create(
-    model="glm-5.3",
+    model="glm-5.2",
     messages=[{"role": "user", "content": "查询深圳天气"}],
     tools=tools,
     stream=True,
@@ -735,7 +735,7 @@ const tools = [{
 }];
 
 const completion = await client.chat.completions.create({
-  model: 'glm-5.3',
+  model: 'glm-5.2',
   messages: [{ role: 'user', content: '查询深圳天气' }],
   tools: tools,
   stream: true,
@@ -781,7 +781,7 @@ List<Map<String, Object>> tools = List.of(Map.of(
 ));
 
 Map<String, Object> body = new HashMap<>();
-body.put("model", "glm-5.3");
+body.put("model", "glm-5.2");
 body.put("messages", List.of(Map.of("role", "user", "content", "查询深圳天气")));
 body.put("tools", tools);
 body.put("stream", true);
@@ -880,7 +880,7 @@ func main() {
     }}
 
     body, _ := json.Marshal(map[string]interface{}{
-        "model":    "glm-5.3",
+        "model":    "glm-5.2",
         "messages": []map[string]string{{"role": "user", "content": "查询深圳天气"}},
         "tools":    tools,
         "stream":   true,
@@ -933,7 +933,7 @@ func main() {
 GLM 系列支持 `tool_stream` 参数（Boolean 类型），用于控制工具调用参数的流式分片粒度：
 
 ```python
-extra_body={"tool_stream": True, "thinking": {"type": "disabled"}}
+extra_body={"tool_stream": True, "thinking": {"type": "disabled"}}  # thinking 关闭仅适用于 glm-5.2、glm-5v-turbo 等支持关闭的模型，glm-5.3 系列传入 disabled 会报错
 ```
 
 ## 多模态调用
@@ -1320,7 +1320,7 @@ body, _ := json.Marshal(map[string]interface{}{
 
 | 限制项 | 说明 |
 | --- | --- |
-| 思考模式默认开启 | 不传 `thinking` 参数时默认启用，响应中会包含 `reasoning_content` 字段。不需要时请显式关闭。 |
+| 思考模式默认开启 | 不传 `thinking` 参数时默认启用思考，思考内容通过 `reasoning_content` 字段返回。glm-5.3、glm-5.3-flash 和 glm-5.3-flashx 不支持关闭思考；glm-5.2、glm-5v-turbo 等模型不需要思考时，可显式传入 `thinking: {"type": "disabled"}` 关闭。 |
 | 非流式调用超时风险 | 思考模式下输出较长，建议使用 `stream=True`。 |
 | 多模态仅限 glm-5v-turbo、glm-5.3-flash 和 glm-5.3-flashx | 其余模型不支持图像、视频、文件输入。 |
 | 多模态输入不可混合 | 图像、视频、文件在同一请求中只能传入一类。 |

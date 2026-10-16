@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130092 -->
-<!-- Source SHA-256: 427978610b3618217f883872570fc49ae9368a826febf8832210588b299d6de0 -->
+<!-- Source SHA-256: fb946027c1b42e3852b3602bb869a4c3fc1c3f28790ee9a8fcdad79878b3b1f8 -->
 
 # Coding Plan 概述
 
 官方来源：https://cloud.tencent.com/document/product/1823/130092
-最近更新时间：2026-09-10 12:23:58
+最近更新时间：2026-10-15 18:21:30
 
 腾讯云 Coding Plan，是为 AI Coding 场景推出的专属订阅套餐。支持使用 OpenClaw、CodeBuddy、Claude Code、Cline、Cursor 等主流编程工具。
 
@@ -75,7 +75,6 @@ Coding Plan 可用模型暂不支持多模态能力。
 | **模型** | **model 参数值** | **备注** |
 | --- | --- | --- |
 | Auto | tc-code-latest | - |
-| GLM-5 | glm-5  glm-5-0 | 将于2026年10月9日下线 |
 
 ### 支持的 AI 工具
 

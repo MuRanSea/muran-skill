@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/138217 -->
-<!-- Source SHA-256: 9c5449c9edb973374faaeda6a36945db029b576d6409b3aac6e59a1cbc33ba31 -->
+<!-- Source SHA-256: 5e33f2d3eb53f683eca06b81ede08be8c2e0ef018d8c0c63a8a32529c7cac4ea -->
 
 # TokenHub CLI 使用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/138217
-最近更新时间：2026-09-16 15:32:46
+最近更新时间：2026-10-15 18:21:30
 
 ## 概述
 
@@ -59,7 +59,7 @@ thcli auth login
 thcli auth login --browser no
 ```
 
-**方式三**：手动填入密钥——已有腾讯云永久密钥（SecretId/SecretKey）时可直接填入。
+**方式三**：手动填入密钥——已有 [腾讯云永久密钥](https://console.cloud.tencent.com/cam/capi)（SecretId/SecretKey）时可直接填入。
 
 ```bash
 thcli auth set --secret-id <SecretId> --secret-key <SecretKey>
