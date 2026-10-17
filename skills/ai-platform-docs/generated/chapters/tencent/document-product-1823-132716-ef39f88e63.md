@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132716 -->
-<!-- Source SHA-256: 28aa8e05a27d7fccd966ec97757059bfa92a0643b354d1d45d94dc88f7cb601c -->
+<!-- Source SHA-256: de28c901bb8bb83cd6f2cb679eb614455769b46d2bb42eb6b5c6273fcc226d41 -->
 
 # 监控告警
 
 官方来源：https://cloud.tencent.com/document/product/1823/132716
-最近更新时间：2026-08-13 20:42:00
+最近更新时间：2026-10-16 20:48:39
 
 您可通过 [腾讯云可观测平台](https://console.cloud.tencent.com/monitor/alarm/config/policy/create?monitorType=MT_QCE) 对 TokenHub 在控制台展示的用量与性能指标配置告警，及时发现 Token 突增、延迟劣化、限流异常等情况，保障在线推理服务稳定运行。
 
@@ -20,11 +20,18 @@ TokenHub 已与腾讯云可观测平台打通，新建告警视图操作步骤�
 
 在策略类型**大模型服务平台 TokenHub** 的二级菜单中提供 6 个告警视图，与控制台的筛选维度对应。每个视图下进一步细分为**用量指标**和**性能指标**两个策略子类，分别对应用量统计页面和模型监控页面的指标集合，您可以根据要监控的对象选择对应视图。
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/f0445052b9a36689c11b44953ec37419.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/720ff0c8e85f3e8374c50b50b7295312.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/f0445052b9a36689c11b44953ec37419.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/720ff0c8e85f3e8374c50b50b7295312.png)
 
-<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div><b>告警视图</b></div></td><td><div><b>控制台筛选维度</b></div></td><td><div><b>适用场景</b></div></td></tr><tr><td><div><b>服务</b></div></td><td><div>对应<b>模型监控</b>页面，按服务维度聚合</div></td><td><div>监控单个在线推理服务整体的监控指标配置告警。</div></td></tr><tr><td><div><b>模型</b></div></td><td><div>对应<b>模型监控</b>页面，按模型维度聚合</div></td><td><div>监控单个模型在所有服务上的监控指标配置告警。</div></td></tr><tr><td><div><b>APIKey</b></div></td><td><div>对应<b>用量统计 &gt; 用量趋势 </b>页面，按 API Key 维度聚合全部服务</div></td><td><div>按业务线 / 子账号维度监控 Key 的用量与性能，覆盖全部服务。</div></td></tr><tr><td><div><b>APIKey 下指定服务</b></div></td><td><div>对应<b>用量统计 &gt; 用量趋势 </b>页面，按 API Key × 服务（二级筛选）</div></td><td><div>同一 Key 调用了多个服务时，区分到具体某个服务的监控告警。</div></td></tr><tr><td><div><b>模型下指定服务</b></div></td><td><div>对应<b>用量统计 &gt; 用量趋势 </b>页面，按模型 × 服务（二级筛选）</div></td><td><div>同一模型部署在多个服务上时，区分到具体某个服务的监控告警。</div></td></tr><tr><td colspan="1" rowspan="1"><div><b>全量对象</b></div></td><td colspan="1" rowspan="1"><div>当前账号（Uin 维度）的所有监控对象</div></td><td colspan="1" rowspan="1"><div>监控账号级总量，例如该 Uin 下 Token 消耗总量。</div></td></tr></tbody></table>
+| **告警视图** | **控制台筛选维度** | **适用场景** |
+| --- | --- | --- |
+| **服务** | 对应**模型监控**页面，按服务维度聚合 | 监控单个在线推理服务整体的监控指标配置告警。 |
+| **模型** | 对应**模型监控**页面，按模型维度聚合 | 监控单个模型在所有服务上的监控指标配置告警。 |
+| **APIKey** | 对应**用量统计 > 用量趋势**页面，按 API Key 维度聚合全部服务 | 按业务线 / 子账号维度监控 Key 的用量与性能，覆盖全部服务。 |
+| **APIKey 下指定服务** | 对应**用量统计 > 用量趋势**页面，按 API Key × 服务（二级筛选） | 同一 Key 调用了多个服务时，区分到具体某个服务的监控告警。 |
+| **模型下指定服务** | 对应**用量统计 > 用量趋势**页面，按模型 × 服务（二级筛选） | 同一模型部署在多个服务上时，区分到具体某个服务的监控告警。 |
+| **全量对象** | 当前账号（Uin 维度）的所有监控对象 | 监控账号级总量，例如该 Uin 下 Token 消耗总量。 |
 
 **说明：**
 
@@ -32,7 +39,7 @@ TokenHub 已与腾讯云可观测平台打通，新建告警视图操作步骤�
 
 ## 告警指标说明
 
-<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div><b>模型类型</b></div></td><td><div><b>分类</b></div></td><td><div><b>覆盖指标</b></div></td></tr><tr><td colspan="1" rowspan="2"><div>语言模型</div></td><td><div>用量指标（详情参考 <a href="https://cloud.tencent.com/document/product/1823/130088">用量统计</a>）</div></td><td><div>总 TPM / 输入 TPM / 输出 TPM / Token 速率 / 每分钟读缓存 token 数 / 每分钟写入缓存 token 数 / 每分钟读显示缓存的 token 数 / 平均输入 Token / 平均输出 Token / TPM 配额使用率 （该指标仅支持在服务、模型维度下配置）</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div>性能指标（详情参考 <a href="https://cloud.tencent.com/document/product/1823/130089">模型监控</a>）</div></td><td><div>每分钟请求数（RPM）/ 首 Token 延迟（TTFT）/ 每 Token 输出延迟（TPOT）/ 非流式接口延时 / RPM 限流率 / 超时错误率 / 错误率 / 缓存命中率 / 客户端错误率 / 服务端错误率 / 调用失败次数 / 调用成功次数 / 429限流错误率</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div><b>模型类型</b></div></td><td><div><b>分类</b></div></td><td><div><b>覆盖指标</b></div></td></tr><tr><td rowspan="2"><div>语言模型</div></td><td><div>用量指标（详情参考 <a href="https://cloud.tencent.com/document/product/1823/130088">用量统计</a>）</div></td><td><div>总 TPM / 输入 TPM / 输出 TPM / Token 速率 / 每分钟读缓存 token 数 / 每分钟写入缓存 token 数 / 每分钟读显示缓存的 token 数 / 平均输入 Token / 平均输出 Token / TPM 配额使用率 （该指标仅支持在服务、模型维度下配置）</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td><div>性能指标（详情参考 <a href="https://cloud.tencent.com/document/product/1823/130089">模型监控</a>）</div></td><td><div>每分钟请求数（RPM）/ 首 Token 延迟（TTFT）/ 每 Token 输出延迟（TPOT）/ 非流式接口延时 / RPM 限流率 / 超时错误率 / 错误率 / 缓存命中率 / 客户端错误率 / 服务端错误率 / 调用失败次数 / 调用成功次数 / 429限流错误率</div></td></tr></tbody></table>
 
 ## 配置告警
 
@@ -59,38 +66,47 @@ TokenHub 已与腾讯云可观测平台打通，新建告警视图操作步骤�
 
 **配置步骤：**
 
-<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td colspan="1" rowspan="1"><div><b>步骤</b></div></td><td colspan="1" rowspan="1"><div><b>配置项</b></div></td><td colspan="1" rowspan="1"><div><b>取值</b></div></td></tr><tr><td colspan="1" rowspan="1"><div>1</div></td><td colspan="1" rowspan="1"><div>策略类型</div></td><td colspan="1" rowspan="1"><div>在<b>大模型服务平台 TokenHub</b> 下，依次选择 <b>模型 </b>和 <b>用量指标</b>。</div></td></tr><tr><td colspan="1" rowspan="1"><div>2</div></td><td colspan="1" rowspan="1"><div>告警对象</div></td><td colspan="1" rowspan="1"><div>选择<b>指定实例</b>，并选择目标模型。</div></td></tr><tr><td colspan="1" rowspan="1"><div>3</div></td><td colspan="1" rowspan="1"><div>触发条件</div></td><td colspan="1" rowspan="1"><div>选择<b>手动配置</b>。</div></td></tr><tr><td colspan="1" rowspan="1"><div>4</div></td><td colspan="1" rowspan="1"><div>指标</div></td><td colspan="1" rowspan="1"><div><b>TPM 配额使用率</b></div></td></tr></tbody></table>
+| **步骤** | **配置项** | **取值** |
+| --- | --- | --- |
+| 1 | 策略类型 | 在**大模型服务平台 TokenHub** 下，依次选择 **模型** 和 **用量指标**。 |
+| 2 | 告警对象 | 选择**指定实例**，并选择目标模型。 |
+| 3 | 触发条件 | 选择**手动配置**。 |
+| 4 | 指标 | **TPM 配额使用率** |
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/513fb020be2b59f8446dfa92c7ab487e.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/f4fbb39ce958168ec32970f64ff16f58.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/513fb020be2b59f8446dfa92c7ab487e.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/f4fbb39ce958168ec32970f64ff16f58.png)
 
 **场景 2**：监控当前账号下某**具体服务的 TPM 配额**使用情况，希望在接近上限时提前告警。
 
 **配置步骤：**
 
-<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td colspan="1" rowspan="1"><div><b>步骤</b></div></td><td colspan="1" rowspan="1"><div><b>配置项</b></div></td><td colspan="1" rowspan="1"><div><b>取值</b></div></td></tr><tr><td colspan="1" rowspan="1"><div>1</div></td><td colspan="1" rowspan="1"><div>策略类型</div></td><td colspan="1" rowspan="1"><div>在<b>大模型服务平台 TokenHub</b> 下，依次选择 <b>服务 </b>和 <b>用量指标</b>。</div></td></tr><tr><td colspan="1" rowspan="1"><div>2</div></td><td colspan="1" rowspan="1"><div>告警对象</div></td><td colspan="1" rowspan="1"><div>选择<b>指定实例</b>，并选择目标模型。</div></td></tr><tr><td colspan="1" rowspan="1"><div>3</div></td><td colspan="1" rowspan="1"><div>触发条件</div></td><td colspan="1" rowspan="1"><div>选择<b>手动配置</b>。</div></td></tr><tr><td colspan="1" rowspan="1"><div>4</div></td><td colspan="1" rowspan="1"><div>指标</div></td><td colspan="1" rowspan="1"><div><b>TPM 配额使用率</b></div></td></tr></tbody></table>
+| **步骤** | **配置项** | **取值** |
+| --- | --- | --- |
+| 1 | 策略类型 | 在**大模型服务平台 TokenHub** 下，依次选择 **服务** 和 **用量指标**。 |
+| 2 | 告警对象 | 选择**指定实例**，并选择目标模型。 |
+| 3 | 触发条件 | 选择**手动配置**。 |
+| 4 | 指标 | **TPM 配额使用率** |
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/3a64d4efaa15879ee9ee4be324a642fd.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/b88885fa5cfc172037d7c1d82adb17b8.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/3a64d4efaa15879ee9ee4be324a642fd.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/b88885fa5cfc172037d7c1d82adb17b8.png)
 
 ### 案例 2：监控某个模型的每分钟输入 Token 数（TPM）
 
-**场景**：业务侧使用 `glm-5` 模型，担心突发流量导致输入 TPM 触达配额上限，希望在接近上限时提前告警。
+**场景**：业务侧使用 `glm-5.3` 模型，担心突发流量导致输入 TPM 触达配额上限，希望在接近上限时提前告警。
 
 **配置步骤**：
 
 | **步骤** | **配置项** | **取值** |
 | --- | --- | --- |
 | 1 | 策略类型 | 在**大模型服务平台 TokenHub** 下，依次选择 **模型** 和 **用量指标**。 |
-| 2 | 告警对象 | 选择**指定实例**，并选择 `glm-5`。 |
 | 3 | 触发条件 | 选择**手动配置**。 |
 | 4 | 指标 | **每分钟输入 Token 数** |
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/bdca55244430d5771d56e514653e1b75.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/ac0e7da9715c56a30980aed0954be0ab.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/bdca55244430d5771d56e514653e1b75.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/ac0e7da9715c56a30980aed0954be0ab.png)
 
 **说明**：
 
@@ -112,9 +128,9 @@ TokenHub 已与腾讯云可观测平台打通，新建告警视图操作步骤�
 | 4 | 指标 | **首 Token 延迟（TTFT）** |
 | 5 | 比较关系 / 阈值 | `>` `2000`（单位 ms，按业务 SLA 设定） |
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/cd790f5b4c515824d872e7ff50e3f2ca.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/c03b885c41a139608c03ac6329a378e0.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/cd790f5b4c515824d872e7ff50e3f2ca.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/c03b885c41a139608c03ac6329a378e0.png)
 
 **说明**：
 
