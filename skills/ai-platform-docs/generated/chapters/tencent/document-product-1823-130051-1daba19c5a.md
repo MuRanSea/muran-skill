@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130051 -->
-<!-- Source SHA-256: 369fdb0bd7ecbd4ed1b79cce006e67d007adc1d1a7ed76280c4d6918245314d7 -->
+<!-- Source SHA-256: 2d4c90575acc17337d12ed12a38cbc05dbb3b22c4924ce19e5f8338e1dc42f45 -->
 
 # 模型列表
 
 官方来源：https://cloud.tencent.com/document/product/1823/130051
-最近更新时间：2026-10-13 10:18:30
+最近更新时间：2026-10-17 16:42:45
 
 ## 语言模型
 
@@ -17,7 +17,7 @@
 | Hy-MT2-Lite | hy-mt2-lite | 混元翻译轻量级模型，适合对耗时有高要求的场景 | 8k | 4k | 4k |
 | Hy-Role-Latest | hunyuan-role-latest | 角色扮演模型  深度优化聊天体验与剧情互动 | 32k | 28k | 4k |
 | Hy-Role | hy-role | 角色扮演模型  贴合各种人设、剧情演绎 | 32k | 28k | 4k |
-| DeepSeek-V4.1-Flash 原厂直供 | deepseek/deepseek-flash | 深度思考  结构化输出  Function Calling  Cache 缓存  图片理解 | 1M | 1M | 384k |
+| DeepSeek-V4.1-Flash-1017 原厂直供 | deepseek/deepseek-flash | 深度思考  结构化输出  Function Calling  Cache 缓存  图片理解 | 1M | 1M | 384k |
 | DeepSeek-V4-Flash 0731 正式版 原厂直供 | deepseek-v4-flash-202605  deepseek/deepseek-v4-flash-0731  deepseek/deepseek-v4-flash | 深度思考  结构化输出  Function Calling  Cache 缓存  图片理解 | 1M | 1M | 384k |
 | DeepSeek-V4-Pro 0813 正式版 原厂直供 | deepseek-v4-pro-202606  deepseek/deepseek-v4-pro-0813  deepseek/deepseek-v4-pro | 深度思考  结构化输出  Function Calling  Cache 缓存 | 1M | 1M | 384k |
 | DeepSeek-V4-Flash-Vision-Exp 原厂直供 | deepseek/deepseek-v4-flash-vision-exp | 深度思考  结构化输出  Function Calling  Cache 缓存  图片理解 | 1M | 1M | 384k |

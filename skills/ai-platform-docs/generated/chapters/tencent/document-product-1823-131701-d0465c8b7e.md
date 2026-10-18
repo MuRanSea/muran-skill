@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/131701 -->
-<!-- Source SHA-256: 1775f74922eaaaad9db4693a8e7ed457e8d415d21675d033b553f67b313a9293 -->
+<!-- Source SHA-256: 629264100c9f0d2b0a19babcac357499a1cd445f0d233712a5f09a08acbac8de -->
 
 # 网络配置
 
 官方来源：https://cloud.tencent.com/document/product/1823/131701
-最近更新时间：2026-08-19 17:25:00
+最近更新时间：2026-10-17 13:11:21
 
 通过网络配置，您可以创建一条提供用户 VPC 到 TokenHub 的内网连接通道，实现内网访问 TokenHub 接口域名，提升网络安全。
 
@@ -52,7 +52,7 @@
 
 ## 其他操作
 
-### 创建多个 VPC 的内网连接
+### 1. 创建多个 VPC 的内网连接
 
 在网络配置页面单击**新建连接**，可创建多条网络连接，打通多个 VPC 的内网访问。
 
@@ -60,6 +60,16 @@
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/ca8fc47a899df531610d5fe016eae841.png)
 
-### 跨 VPC 网络内网访问
+### 2. 跨 VPC 网络内网访问
 
 默认情况下，打通网络连接后仅支持已创建连接的 VPC 内网访问 TokenHub 接口域名，当其他网络也需要内网访问时（如：跨 region VPC、跨云网络、混合云网络等），您需要确保该网络与已创建连接的 VPC 内网互通（更多关于私有网络连接的创建，请参见 [云联网](https://console.cloud.tencent.com/vpc/ccn)）。在内网互通的前提下，如果该网络无法自动解析已创建连接的 VPC DNS，则可通过手动添加域名解析的方式，将 TokenHub 接口域名解析到相应网络连接的终端节点 IP 即可实现内网域名访问。
+
+### 3. 使用 HTTP 协议或自定义域名
+
+网络连接创建后，默认情况下在创建链接的 VPC 中，平台已自动通过 PrivateDNS 为您配置了解析规则，将 TokenHub 公网域名解析到终端节点 IP，您无需修改任何调用配置即可通过内网访问模型服务。内网链接支持 HTTP 协议访问，如果您的访问节点不在此 VPC 中，但该节点与 VPC 内网互通，您可以通过使用 HTTP 协议访问终端节点 IP 的形式访问模型服务。例如：在下图所示的环境中，将`https://tokenhub.tencentmaas.com/v1/chat/completions` 替换为 `http://10.0.10.3/v1/chat/completions` 可正常访问模型服务。您也可以为终端节点 IP 添加自定义域名解析，通过自定义域名访问模型服务。
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/c978d4c221a587bd509146141cb513bc.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/c978d4c221a587bd509146141cb513bc.png)
+
+###

@@ -5,8 +5,8 @@
 | 区 | 目录 | 源文档 | 页数 | 章节文件 | 章节表 |
 |----|------|-------|------|---------|-------|
 | TOS 区 | `chapters/volcengine/tos/` | 《对象存储 文档指南》 | 6411 | 1990 | `INDEX-tos.md` |
-| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1391 | 199 | `INDEX-ark.md` |
-| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2415 | 165 | `INDEX-ark-guide.md` |
+| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1392 | 199 | `INDEX-ark.md` |
+| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2404 | 165 | `INDEX-ark-guide.md` |
 | AI MediaKit API 区 | `chapters/volcengine/mediakit/` | 《AI MediaKit API 参考》 | 942 | 104 | `INDEX-mediakit.md` |
 | AI MediaKit 指南区 | `chapters/volcengine/mediakit-guide/` | 《AI MediaKit 文档指南》 | 910 | 153 | `INDEX-mediakit-guide.md` |
 
@@ -44,7 +44,7 @@
 |------|------|---------|-------|
 | 1 | 准备工作 | 1-8 | 3 |
 | 2 | 对话(Chat) API | 11-11 | 1 |
-| 3 | Responses API | 43-524 | 13 |
+| 3 | Responses API | 42-524 | 13 |
 | 4 | Messages API | 530-550 | 2 |
 | 5 | System One API（beta） | 560-560 | 1 |
 | 6 | Files API | 569-583 | 5 |
@@ -56,7 +56,7 @@
 | 12 | 批量推理 API | 1081-1099 | 8 |
 | 13 | 分词 API | 1117-1117 | 1 |
 | 14 | 管控面 API | 1119-1335 | 69 |
-| 15 | 其他说明 | 1339-1374 | 5 |
+| 15 | 其他说明 | 1339-1375 | 5 |
 
 ## 方舟指南区（ark-guide）
 
@@ -68,13 +68,13 @@
 |------|------|---------|-------|
 | 1 | 入门 | 1-68 | 5 |
 | 2 | 模型 | 71-106 | 3 |
-| 3 | 调用 | 118-1345 | 49 |
-| 4 | 推理 | 1345-1436 | 12 |
-| 5 | 训练 | 1439-1645 | 19 |
-| 6 | Managed Agents | 1651-1823 | 22 |
-| 7 | 应用 | 1843-1851 | 2 |
-| 8 | 订阅 [Agent/Coding Plan] | 1852-2042 | 25 |
-| 9 | 资源 | 2049-2407 | 28 |
+| 3 | 调用 | 117-1335 | 49 |
+| 4 | 推理 | 1335-1425 | 12 |
+| 5 | 训练 | 1428-1634 | 19 |
+| 6 | Managed Agents | 1640-1812 | 22 |
+| 7 | 应用 | 1832-1840 | 2 |
+| 8 | 订阅 [Agent/Coding Plan] | 1841-2031 | 25 |
+| 9 | 资源 | 2038-2396 | 28 |
 
 ## AI MediaKit API 区（mediakit）
 
