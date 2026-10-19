@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "built_at": "2026-10-18T01:08:57.198760+00:00",
+  "built_at": "2026-10-19T01:00:29.670709+00:00",
   "origin": "Official Volcengine PDF, Kling/MiniMax Markdown and Tencent Cloud documentation",
   "files": {
     "chapters/kling/document-api-api-assets-account-usage-e78fd09f14.md": "0d47402b134974899cd3d8c9fa9f4acdfac95d5f6235453ac68bfa41126b5e49",
@@ -549,7 +549,7 @@
     "chapters/volcengine/ark-guide/1.3 模型价格.md": "70bdd400cf2bdba5410635b5f0ef520430cb7a24d12fa71960d777706c9c7482",
     "chapters/volcengine/ark-guide/1.4 Agent 场景模型调用的正确姿势.md": "560723420a953a46d74b64976a30150fbf125915e4b57f216ca3d2e4403d5ca2",
     "chapters/volcengine/ark-guide/1.5 迁移到方舟官方 SDK.md": "49b8f5130a4d16005525aa25fd892bf10057974fa3e7f1132a03f51bdc366514",
-    "chapters/volcengine/ark-guide/2.1 模型列表 - 第1部分.md": "6864db8061465afbbe4988a23c333c01d1d6f17260ed23c9a6cfc3435f792fda",
+    "chapters/volcengine/ark-guide/2.1 模型列表 - 第1部分.md": "a293dbb46e90ee3dda81f06b3b0390101d2eb712c53a481c89d0f97d86dbafef",
     "chapters/volcengine/ark-guide/2.2 Seed-Evolving.md": "191e107e3dcef3d81842bf8dd26c8a6f3b3f9ad2945403452ef667f234c34c07",
     "chapters/volcengine/ark-guide/2.3 DeepSeek-V4.1-Flash.md": "7c7bfcedb04cad7a309e8fccc4baee48d1f580be4660725ddedf8b6057a0b0be",
     "chapters/volcengine/ark-guide/3.1 文本生成.md": "2658683b0fce355ea42318b5aa05bad43592e0f0f562a69eb034b0399c1aee1d",
@@ -590,7 +590,7 @@
     "chapters/volcengine/ark-guide/3.7.6 云部署 MCP - Remote MCP.md": "c198a816cfcf26c6e8ccc4091f34e9bf2074c3e5ec03299d755888ebfa220e75",
     "chapters/volcengine/ark-guide/3.7.7 Function Calling（函数调用） - 第1部分.md": "0bc8ee4f88a3352a7f127d9e184f3436ff81b094c63a5b5426ee13a4e7cf5a69",
     "chapters/volcengine/ark-guide/3.7.8 Apply Patch（代码补丁工具）.md": "916bf5205e5b9f1119f7a9865e32699f7ca467cb2b3c4e687660e4cb180986b1",
-    "chapters/volcengine/ark-guide/3.8.1 深度思考.md": "2b169503e663593e31e4a41b1ec3b9856d64fa3f81c63a4959eab9a4199975b8",
+    "chapters/volcengine/ark-guide/3.8.1 深度思考.md": "250a8db5883eb0a812de362e1fca56c09fc4cff1ec5cf8bb4ac05a0e0e483b89",
     "chapters/volcengine/ark-guide/3.8.10 结构化输出(beta).md": "e56471e12a51f653a6d83bbd7317c82ae08b64ca7fbcacd3f2a62763afef0d6d",
     "chapters/volcengine/ark-guide/3.8.2 上下文管理.md": "ea936777881b51e9be19cc4469272b83a9c7f56885f03b7ec161afb4b5d6fed5",
     "chapters/volcengine/ark-guide/3.8.3 流式输出.md": "210310bcf3ae8055a76c21165f84a076bbbd413cfd81f492cbbb4ef7cec08bb7",
@@ -601,7 +601,7 @@
     "chapters/volcengine/ark-guide/3.8.8 视觉定位 Grounding.md": "06b27af60b97f6632eb63297703966f5e50a4afeb27a1ae22bf1237eb4a37e41",
     "chapters/volcengine/ark-guide/3.8.9 提示词工程.md": "45719755ebd93f597bd3f0e983cd76cd5c7e9bf4517157fd71256aa73617d6de",
     "chapters/volcengine/ark-guide/3.9 接入三方工具.md": "417d7b9cdb843d0b4d496308d6156725b5ef12d9f85047a9d6856e1c22e0b904",
-    "chapters/volcengine/ark-guide/4.1 推理方式概述.md": "301c633ac3e6edc03b06553cf18f6bdd55df359d9e83b79cb9b20a922982e1a9",
+    "chapters/volcengine/ark-guide/4.1 推理方式概述.md": "eb91b36aaec8ec22cf3056a88048370d95ed1e0bf97b8f5fd4d80e05a7ad4e03",
     "chapters/volcengine/ark-guide/4.2 在线推理（常规）.md": "ef4a99f30618f548370942deb2f8416ab3ef0a4dac19d776ab74ae20d2348435",
     "chapters/volcengine/ark-guide/4.3 在线推理（低延迟）.md": "e73732ed3f8f75711d90c542ee1f3e96c4683ff22045348920fe06c58dc6725e",
     "chapters/volcengine/ark-guide/4.4 在线推理（低优）.md": "ba059e3b6b03f9fdd27aca4b872bda0f0d7eaecf5c317d144affb0f7f30a2500",
@@ -628,7 +628,7 @@
     "chapters/volcengine/ark-guide/5.2.1 创建模型评测任务.md": "0f2762ad293ed13f3e44d8eb49a1ec897dc0d86c82fb0a614ccb76bbe059ef20",
     "chapters/volcengine/ark-guide/5.2.2 查看并管理模型评测任务.md": "63a64ac5a08ce6a663db5589367e7c0bda8681d30179d19d0a1d50e512558931",
     "chapters/volcengine/ark-guide/5.2.3 评测数据集格式说明.md": "5c8c61ccc8fbe365fe990eb2b5a9d8e12381f5b1a482b3e547dc7bb9eb2cbb99",
-    "chapters/volcengine/ark-guide/5.2.4.1 人工评测作业.md": "1cf724d56916bb8fe413a07adfeecce1f50f80cbedac4c58578c41b54874e76a",
+    "chapters/volcengine/ark-guide/5.2.4.1 人工评测作业.md": "e30d28a84e9c551ac15ead8184ccc05ce7c431a5cde2e1592d8ba8643bbec742",
     "chapters/volcengine/ark-guide/5.2.4.2 查看评测报告.md": "bd9701f37095f975e814821b8c72c7a7f94724ce4c63ba22846bd9e61f6ecf12",
     "chapters/volcengine/ark-guide/5.3.1 数据集介绍.md": "2d361c849d81578a5ed5d29198492683962eed177bffd95542174ec1a32f9718",
     "chapters/volcengine/ark-guide/5.3.2 共享数据集.md": "546689a45497bfbffb37be9bc0394cbba104312f462b4b92f38c885240b355aa",
@@ -2956,7 +2956,7 @@
     "chapters/volcengine/tos/9.9.8.4 删除场景（.NET SDK）.md": "00a53789b490a6fbb0bc55bb3e5dbe7ec93f5154f89153ef76d02558d5ddb4ad",
     "chapters/volcengine/tos/9.9.8.5 移动及重命名场景（.NET SDK）.md": "c41f41dcc271a88a5e13d37dcb8bd89390fce833c8ce4a11d3c1dd09989aea07",
     "chapters/volcengine/tos/9.9.9 异常处理（.NET SDK）.md": "7ed2fb43d1b0d0058fe042289b716e78b2441aeb548cacef14a406bead88fdaf",
-    "INDEX-ark-guide.md": "acc4f4b7993277fbbee63331f943c084c64ba5c1dc8e2d82e5d5613e4205d533",
+    "INDEX-ark-guide.md": "c0673289c89d9257f4fba630b6393b2670731bb035aa1b96ff8cc5e70b4592f7",
     "INDEX-ark.md": "e4f03e46727cd89d69f2c4aef212b265031fbc1a00cfc9cf27b2a97589ca04aa",
     "INDEX-kling.md": "a319ad7362d0a1dfff173bc81ba4f2f845af1067473ef43cd7323f7ef73b026a",
     "INDEX-mediakit-guide.md": "03871cce5c34e4f0ec8b21768c77a0f879dd99244630409c37732bf1c3c75bfa",
@@ -2964,11 +2964,11 @@
     "INDEX-minimax.md": "5dd3e8d7bf22ad213027a25b20be401a33f4fd061808c8a9a9cb84dccf9f226d",
     "INDEX-tencent.md": "9061c11af7866180c5acc97515ce3092f2bf52e2ea0899b019e23635086b1d31",
     "INDEX-tos.md": "6446fac719280d89b406266d2cdabd8589f4e60375a1dde5ed491f432d242b75",
-    "INDEX-volcengine.md": "6d07c57439fc0dd5cae76672a94c7fca98bf023488f4f5a044d23329749ac2ca",
+    "INDEX-volcengine.md": "2c47c7f1cd7c1e532f0aaa42d5c5b825d0603301f6c16132c22ed5a72848387d",
     "INDEX.md": "3f4294abc23f36d16aa21e3c26b19e8adacb1bd4094a5d2e153d9e14336095ea"
   },
   "layout_version": 2,
-  "source_fingerprint": "7d2d90764586a95e8b971464286cfafb3f050376e17431260fd0d8b53786cb48",
+  "source_fingerprint": "f360ce3c7746909aadf404b15f4fdec0ae1931511aab4054fb5d29883961b6b5",
   "sources": {
     "volcengine": {
       "format": "official-pdf",
@@ -2976,7 +2976,7 @@
       "pdf_versions": {
         "tos": "对象存储_文档指南_1792156742.pdf",
         "ark": "火山方舟_API参考_1792229399.pdf",
-        "ark-guide": "火山方舟_文档指南_1792230841.pdf",
+        "ark-guide": "火山方舟_文档指南_1792327766.pdf",
         "mediakit": "AI MediaKit_API 参考_1792135559.pdf",
         "mediakit-guide": "AI MediaKit_文档指南_1792124900.pdf"
       }
@@ -2986,7 +2986,7 @@
       "label": "可灵 API（中国区）",
       "region": "中国区；国际区调用前核对 kling.ai 的文档",
       "index_url": "https://klingai.com/document-api/llms.txt",
-      "checked_at": "2026-10-18T01:05:56.106972+00:00",
+      "checked_at": "2026-10-19T00:57:29.730420+00:00",
       "pages": 52
     },
     "minimax": {
@@ -2994,7 +2994,7 @@
       "label": "MiniMax API（中文）",
       "region": "中文文档；以各页面标注的国内/国际域名为准",
       "index_url": "https://platform.minimax.cn/docs/llms.txt",
-      "checked_at": "2026-10-18T01:06:06.086315+00:00",
+      "checked_at": "2026-10-19T00:57:39.153555+00:00",
       "pages": 72
     },
     "tencent": {
@@ -3002,7 +3002,7 @@
       "label": "腾讯云 TokenHub（中国站文档）",
       "region": "中国站中文文档；接入地域与接口域名以各页面说明为准",
       "index_url": "https://cloud.tencent.com/document/product/1823",
-      "checked_at": "2026-10-18T01:08:47.435423+00:00",
+      "checked_at": "2026-10-19T01:00:21.665495+00:00",
       "format": "official-document-api-to-markdown",
       "pages": 218
     }
