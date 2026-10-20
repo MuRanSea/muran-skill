@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132248 -->
-<!-- Source SHA-256: 3e52c56ee17213be872622fa5b02dac41d9d32b75a4bfc24c39fb87ba8ecc028 -->
+<!-- Source SHA-256: eab2d0044b23de0ecc54eb64465134a7c7733e9be265e3b1787b1ef01e95c766 -->
 
 # DeepSeek 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132248
-最近更新时间：2026-09-10 14:14:00
+最近更新时间：2026-10-19 15:53:02
 
 ## 概述
 
@@ -30,7 +30,16 @@ DeepSeek 系列模型已接入大模型服务平台 TokenHub，支持 OpenAI Cha
 
 TokenHub 当前支持以下 DeepSeek 模型（具体以 [模型列表](https://cloud.tencent.com/document/product/1823/130051) 为准）：
 
-<table><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型 ID</div></td><td><div>类型</div></td><td><div>思考能力</div></td><td><div>上下文窗口</div></td><td><div>最大输入</div></td><td><div>最大输出</div></td></tr><tr><td><div><code>deepseek/deepseek-flash</code></div></td><td colspan="1" rowspan="1"><div>通用对话模型</div></td><td colspan="1" rowspan="1"><div>可开关（默认开启）</div></td><td colspan="1" rowspan="1"><div>1M</div></td><td colspan="1" rowspan="1"><div>1M</div></td><td colspan="1" rowspan="1"><div>384K</div></td></tr><tr><td><div><code>deepseek-v4-flash-202605</code></div><div><code>deepseek/deepseek-v4-flash-0731</code></div><div><code>deepseek/deepseek-v4-flash</code></div></td><td><div>通用对话模型</div></td><td><div>可开关（默认开启）</div></td><td><div>1M</div></td><td><div>1M</div></td><td><div>384K</div></td></tr><tr><td><div><code>deepseek-v4-pro-202606</code></div><div><code>deepseek/deepseek-v4-pro-0813</code></div><div><code>deepseek/deepseek-v4-pro</code></div></td><td><div>通用对话模型</div></td><td><div>可开关（默认开启）</div></td><td><div>1M</div></td><td><div>1M</div></td><td><div>384K</div></td></tr><tr><td><div><code>deepseek-v4-flash-0731</code></div></td><td colspan="1" rowspan="1"><div>通用对话模型</div></td><td colspan="1" rowspan="1"><div>可开关（默认开启）</div></td><td colspan="1" rowspan="1"><div>1M</div></td><td colspan="1" rowspan="1"><div>1M</div></td><td colspan="1" rowspan="1"><div>384K</div></td></tr><tr><td><div><code>deepseek-v4-pro-0813</code></div></td><td colspan="1" rowspan="1"><div>通用对话模型</div></td><td colspan="1" rowspan="1"><div>可开关（默认开启）</div></td><td colspan="1" rowspan="1"><div>1M</div></td><td colspan="1" rowspan="1"><div>1M</div></td><td colspan="1" rowspan="1"><div>384K</div></td></tr><tr><td><div><code>deepseek-v4-flash</code></div></td><td><div>通用对话模型</div></td><td><div>可开关（默认开启）</div></td><td><div>1M</div></td><td><div>1M</div></td><td><div>384K</div></td></tr><tr><td><div><code>deepseek-v4-pro</code></div></td><td><div>通用对话模型</div></td><td><div>可开关（默认开启）</div></td><td><div>1M</div></td><td><div>1M</div></td><td><div>384K</div></td></tr><tr><td><div><code>deepseek/deepseek-v4-flash-vision-exp</code></div></td><td><div>多模态理解模型</div></td><td colspan="1" rowspan="1"><div>可开关（默认开启）</div></td><td colspan="1" rowspan="1"><div>1M</div></td><td colspan="1" rowspan="1"><div>1M</div></td><td colspan="1" rowspan="1"><div>384K</div></td></tr></tbody></table>
+| 模型 ID | 类型 | 思考能力 | 上下文窗口 | 最大输入 | 最大输出 |
+| --- | --- | --- | --- | --- | --- |
+| `deepseek/deepseek-flash` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
+| `deepseek-v4-flash-202605`  `deepseek/deepseek-v4-flash-0731`  `deepseek/deepseek-v4-flash` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
+| `deepseek-v4-pro-202606`  `deepseek/deepseek-v4-pro-0813`  `deepseek/deepseek-v4-pro` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
+| `deepseek-v4-flash-0731` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
+| `deepseek-v4-pro-0813` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
+| `deepseek-v4-flash` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
+| `deepseek-v4-pro` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
+| `deepseek/deepseek-v4-flash-vision-exp` | 多模态理解模型 | 可开关（默认开启） | 1M | 1M | 384K |
 
 **说明：**
 
@@ -1329,6 +1338,97 @@ body := map[string]interface{}{
 }
 // ... 发送请求
 ```
+
+## 联网搜索
+
+DeepSeek 原厂直供模型支持服务端联网搜索能力。开启后，模型在回答时可自动调用联网搜索工具获取实时网络信息，解决模型知识时效性不足的问题，适合新闻资讯、时事查询、公开资料检索等场景。联网搜索过程由模型在服务端自主完成：模型自行判断是否需要搜索、生成搜索词、阅读搜索结果，必要时打开网页读取正文，并在多轮搜索后生成带来源链接的回答。
+
+联网搜索通过对话接口的 `tools` 参数开启。当前不支持以独立 API 端点的形式调用搜索或网页抓取能力（即不提供独立的 Search API / Fetch API 端点，无法单独调用搜索或抓取能力获取结果），也不支持通过 OpenAI Chat Completions API 的 `tools` 参数为原厂直供模型开启联网搜索。
+
+### 支持的模型与协议
+
+| 模型 ID | Anthropic Messages API | OpenAI Responses API |
+| --- | --- | --- |
+| `deepseek/deepseek-flash` | 支持 | 不支持 |
+| `deepseek-v4-flash-202605`、`deepseek/deepseek-v4-flash-0731`、`deepseek/deepseek-v4-flash` | 支持 | 不支持 |
+| `deepseek-v4-pro-202606`、`deepseek/deepseek-v4-pro-0813`、`deepseek/deepseek-v4-pro` | 支持 | 支持 |
+| `deepseek/deepseek-v4-flash-vision-exp` | 支持 | 不支持 |
+
+**注意：**
+
+Responses API 仅 DeepSeek-V4-Pro 系列模型支持联网搜索。Flash 系列模型在 Responses API 中传入 `web_search` 工具时请求不会报错，但联网能力不生效，模型将基于自身知识回答。
+
+如使用平台渠道模型（如 `deepseek-v4-flash-0731`、`deepseek-v4-pro-0813`、`deepseek-v4-flash`、`deepseek-v4-pro`）并通过 Chat API 开启联网搜索，请参见 [联网搜索](https://cloud.tencent.com/document/product/1823/132358)。
+
+### 使用方式
+
+Anthropic Messages API 与 OpenAI Responses API 的基础调用参数（Base URL、鉴权方式、通用请求参数）请参见 [语言模型调用概览](https://cloud.tencent.com/document/product/1823/130079)。使用联网搜索时，仅需在请求体中增加 `tools` 字段，两个协议的工具写法不同：
+
+| 协议 | 端点 | 工具写法 |
+| --- | --- | --- |
+| Anthropic Messages API | `/v1/messages` | `{"type": "web_search_20250305", "name": "web_search"}` |
+| OpenAI Responses API | `/v1/responses` | `{"type": "web_search"}` |
+
+Anthropic Messages API 请求示例：
+
+cURL
+
+```bash
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/messages' \\
+  -H 'x-api-key: YOUR_API_KEY' \\
+  -H 'anthropic-version: 2023-06-01' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "model": "deepseek/deepseek-flash",
+    "max_tokens": 4096,
+    "messages": [
+      {
+        "role": "user",
+        "content": "最近一周有哪些重要的 AI 行业新闻？请附来源链接。"
+      }
+    ],
+    "tools": [
+      {
+        "type": "web_search_20250305",
+        "name": "web_search"
+      }
+    ]
+  }'
+```
+
+OpenAI Responses API 请求示例（仅 DeepSeek-V4-Pro 系列模型支持）：
+
+cURL
+
+```bash
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/responses' \\
+  -H 'Authorization: Bearer YOUR_API_KEY' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "model": "deepseek-v4-pro-202606",
+    "input": "最近一周有哪些重要的 AI 行业新闻？请附来源链接。",
+    "tools": [
+      {
+        "type": "web_search"
+      }
+    ]
+  }'
+```
+
+### 响应结构
+
+开启联网搜索后，可通过响应中的搜索调用内容块确认联网是否生效，模型最终回答中直接包含来源链接：
+
+| 协议 | 搜索调用内容块 | 说明 |
+| --- | --- | --- |
+| Anthropic Messages API | `server_tool_use` | 一次服务端搜索调用，`input.query` 为模型生成的搜索词。搜索调用次数通过 `usage.server_tool_use.web_search_requests` 返回。 |
+| OpenAI Responses API | `web_search_call` | 一次服务端搜索工具调用，`action.type` 为 `search` 时表示执行搜索，为 `open_page` 时表示模型打开网页读取正文。搜索调用次数可通过统计该类内容项数量获取。 |
+
+搜索结果注入的内容计入输入 Token，按模型标准价格计费。联网搜索能力本身的计费规则，正式收费时间和定价将另行通知。
+
+**注意：**
+
+工具类型与协议必须匹配：Anthropic Messages API 使用 `web_search_20250305`（误写为 `web_search` 时请求返回 400 错误），OpenAI Responses API 使用 `web_search`（误写为 `web_search_20250305` 时联网能力不生效）。
 
 ## 推荐参数与最佳实践
 

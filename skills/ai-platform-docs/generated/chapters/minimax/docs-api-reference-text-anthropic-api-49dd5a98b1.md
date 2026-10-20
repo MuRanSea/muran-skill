@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-anthropic-api.md -->
-<!-- Source SHA-256: 723f562c60592f444e17cf087bd3ccfe6dc4e8b0e8c3438c2c08144aed6853ed -->
+<!-- Source SHA-256: d295a3bd4f60f78b8aead098cbd19e91cb4646bba50fe0a73b9b151c333a55a2 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -10,8 +10,6 @@
 > 通过 Anthropic SDK 调用 MiniMax 模型
 
 为了满足开发者对 Anthropic API 生态的使用需求，我们的 API 新增了对 Anthropic API 格式的支持。通过简单的配置，即可将 MiniMax 的能力接入到 Anthropic API 生态中。
-
-<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。</Note>
 
 ## 快速开始
 
@@ -42,7 +40,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 message = client.messages.create(
-    model="MiniMax-M3.1-Flash-Preview",
+    model="MiniMax-M3.1-Flash",
     output_config={"effort": "max"},
     max_tokens=4096,
     system="You are a helpful assistant.",
@@ -75,26 +73,19 @@ for block in message.content:
 
 ## 支持的模型
 
-使用 Anthropic SDK 时，支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2`  模型：
+使用 Anthropic SDK 时，支持以下模型。
 
 | 模型名称 | 上下文窗口 | 模型介绍 |
 | :- | :-: | :- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
+| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
 | MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型** |
-| MiniMax-M2.7 | 204,800 | **开启模型的自我迭代**（输出速度约 60 TPS） |
-| MiniMax-M2.7-highspeed | 204,800 | **M2.7 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-| MiniMax-M2.5 | 204,800 | **顶尖性能与极致性价比，轻松驾驭复杂任务**（输出速度约 60 TPS） |
-| MiniMax-M2.5-highspeed | 204,800 | **M2.5 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-| MiniMax-M2.1 | 204,800 | **强大多语言编程能力，全面升级编程体验**（输出速度约 60 TPS） |
-| MiniMax-M2.1-highspeed | 204,800 | **M2.1 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-| MiniMax-M2 | 204,800 | **专为高效编码与 Agent 工作流而生** |
 
 <Note>
   TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
 </Note>
 
 <Note>
-  Anthropic API 兼容接口支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2`
+  Anthropic API 兼容接口支持 `MiniMax-M3.1-Flash` `MiniMax-M3`
   模型。如需使用其他模型，请使用标准的 MiniMax API 接口。
 </Note>
 
@@ -106,19 +97,19 @@ for block in message.content:
 
 | 参数 | 支持状态 | 说明 |
 | :- | :- | :- |
-| `model` | 完全支持 | 支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型 |
-| `messages` | 部分支持 | `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。M2.7、M2.5、M2.1 和 M2 系列仅支持文本与工具调用相关内容块，不支持图片和视频输入 |
+| `model` | 完全支持 | 支持 `MiniMax-M3.1-Flash` `MiniMax-M3` 模型 |
+| `messages` | 部分支持 | `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。M2.7、M2.5、M2.1 和 M2 系列仅支持文本与工具调用相关内容块，不支持图片和视频输入 |
 | `max_tokens` | 完全支持 | 最大生成 token 数。思考 token 也计入此上限，设置过小会导致 `stop_reason` 为 `max_tokens` 且无文本输出 |
 | `stream` | 完全支持 | 流式响应 |
 | `system` | 完全支持 | 系统提示词 |
 | `temperature` | 完全支持 | 取值范围 \[0, 2]，控制输出随机性，建议取值 1 |
 | `tool_choice` | 完全支持 | 工具选择策略 |
 | `tools` | 完全支持 | 工具定义 |
-| `top_p` | 完全支持 | 核采样参数，取值范围 \[0, 1]，`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 默认值 0.95，M2.x 系列默认值 0.9 |
-| `thinking` | 完全支持 | `MiniMax-M3.1-Flash-Preview` 强制开启 thinking，传入 `disabled` 会返回 `400`。`MiniMax-M3` 默认关闭 thinking，可通过 `adaptive` 开启。M2.x 模型的 thinking 无法关闭。 |
-| `output_config.effort` | 完全支持 | 调节 `MiniMax-M3.1-Flash-Preview` 的思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`；省略时默认为 `max`。 |
+| `top_p` | 完全支持 | 核采样参数，取值范围 \[0, 1]，`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 默认值 0.95，M2.x 系列默认值 0.9 |
+| `thinking` | 完全支持 | `MiniMax-M3.1-Flash` 强制开启 thinking，传入 `disabled` 会返回 `400`。`MiniMax-M3` 默认关闭 thinking，可通过 `adaptive` 开启。M2.x 模型的 thinking 无法关闭。 |
+| `output_config.effort` | 完全支持 | 调节 `MiniMax-M3.1-Flash` 的思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`；省略时默认为 `max`。 |
 | `metadata` | 完全支持 | 元信息 |
-| `service_tier` | 完全支持 | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。 |
+| `service_tier` | 完全支持 | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。`MiniMax-M3.1-Flash` 不支持该字段。 |
 | `top_k` | 忽略 | 该参数会被忽略 |
 | `stop_sequences` | 忽略 | 该参数会被忽略 |
 | `mcp_servers` | 忽略 | 该参数会被忽略 |
@@ -131,7 +122,7 @@ for block in message.content:
 
 | 模型 | 省略 `thinking` | `{"type": "adaptive"}` | `{"type": "disabled"}` |
 | :- | :- | :- | :- |
-| `MiniMax-M3.1-Flash-Preview` | 开启 thinking | 开启 thinking | **返回 `400`**，thinking 无法关闭 |
+| `MiniMax-M3.1-Flash` | 开启 thinking | 开启 thinking | **返回 `400`**，thinking 无法关闭 |
 | `MiniMax-M3` | 关闭 thinking | 开启 thinking | 保持 thinking 关闭 |
 | M2.x | 开启 thinking | 开启 thinking | 被接收但不生效，thinking 仍保持开启 |
 
@@ -139,15 +130,15 @@ for block in message.content:
   传入 `thinking: {"type": "disabled"}` 时返回的错误信息：
 
   ```text theme={null}
-  model "MiniMax-M3.1-Flash-Preview" requires adaptive thinking; thinking.type="disabled" (including reasoning.effort=none) is not allowed (2013)
+  model "MiniMax-M3.1-Flash" requires adaptive thinking; thinking.type="disabled" (including reasoning.effort=none) is not allowed (2013)
   ```
 </Note>
 
 当响应包含 `thinking` 内容块时，后续轮次中应原样保留这些内容块，尤其是在工具调用对话中。
 
-### 思考深度控制（仅 MiniMax-M3.1-Flash-Preview）
+### 思考深度控制（仅 MiniMax-M3.1-Flash）
 
-`MiniMax-M3.1-Flash-Preview` 支持通过 `output_config.effort` 调节思考深度，档位从低到高为 `low`、`medium`、`high`、`xhigh`、`max`。档位越高，模型思考越充分，输出的 thinking token 和响应耗时也越多。省略 `output_config.effort` 时默认为 `max`。
+`MiniMax-M3.1-Flash` 支持通过 `output_config.effort` 调节思考深度，档位从低到高为 `low`、`medium`、`high`、`xhigh`、`max`。档位越高，模型思考越充分，输出的 thinking token 和响应耗时也越多。省略 `output_config.effort` 时默认为 `max`。
 
 `none` 不支持，会返回 `400`。
 
@@ -156,7 +147,7 @@ curl https://api.minimax.cn/anthropic/v1/messages \
   -H "Authorization: Bearer <MINIMAX_API_KEY>" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "MiniMax-M3.1-Flash-Preview",
+    "model": "MiniMax-M3.1-Flash",
     "max_tokens": 2048,
     "output_config": { "effort": "max" },
     "messages": [{ "role": "user", "content": "Hi, how are you?" }]
@@ -168,13 +159,13 @@ curl https://api.minimax.cn/anthropic/v1/messages \
 | 字段类型 | 支持状态 | 说明 |
 | :- | :- | :- |
 | `type="text"` | 完全支持 | 文本消息 |
-| `type="image"` | 仅 M3.1-Flash-Preview / M3 | 通过 URL 或 base64 输入图片，支持 JPEG、PNG、GIF、WEBP |
-| `type="video"` | 仅 M3.1-Flash-Preview / M3 | 通过 URL、base64 或 `mm_file://{file_id}` 输入视频，支持 MP4、AVI、MOV、MKV |
+| `type="image"` | 仅 M3.1-Flash / M3 | 通过 URL 或 base64 输入图片，支持 JPEG、PNG、GIF、WEBP |
+| `type="video"` | 仅 M3.1-Flash / M3 | 通过 URL、base64 或 `mm_file://{file_id}` 输入视频，支持 MP4、AVI、MOV、MKV |
 | `type="tool_use"` | 完全支持 | 工具调用 |
 | `type="tool_result"` | 完全支持 | 工具调用结果 |
 | `type="thinking"` | 完全支持 | 推理内容。多轮 thinking 对话中需要原样回带 |
 
-对 `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`，URL 或 base64 视频最大 50 MB，图片最大 10 MB，请求体最大 64 MB。更大的视频请通过 Files API 上传后传入 `mm_file://{file_id}`，Files API 视频最大 512 MB。
+对 `MiniMax-M3.1-Flash` 和 `MiniMax-M3`，URL 或 base64 视频最大 50 MB，图片最大 10 MB，请求体最大 64 MB。更大的视频请通过 Files API 上传后传入 `mm_file://{file_id}`，Files API 视频最大 512 MB。
 
 图片 token 用量会随图片尺寸和内容变化。以下是单张图片的粗略估算；准确用量以 `POST /anthropic/v1/messages/count_tokens` 或响应中的 `usage` 为准：
 
@@ -184,7 +175,7 @@ curl https://api.minimax.cn/anthropic/v1/messages \
 | `default` | 通常约 1k-3k token，最高约 5k |
 | `high` | 通常为数千 token，最高约 15k+ |
 
-Anthropic API 兼容接口也支持 `POST /anthropic/v1/messages/count_tokens`，可用于 `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 调用前预估输入 token 用量，不会生成模型输出。
+Anthropic API 兼容接口也支持 `POST /anthropic/v1/messages/count_tokens`，可用于 `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 调用前预估输入 token 用量，不会生成模型输出。
 
 ## 示例代码
 
@@ -201,7 +192,7 @@ print("Thinking Process:")
 print("=" * 60)
 
 stream = client.messages.create(
-    model="MiniMax-M3.1-Flash-Preview",
+    model="MiniMax-M3.1-Flash",
     output_config={"effort": "max"},
     max_tokens=4096,
     system="You are a helpful assistant.",
@@ -244,15 +235,15 @@ print("\n")
 
 如果在使用模型过程中遇到任何问题：
 
-* 通过邮箱 [Model@minimaxi.com](mailto:Model@minimaxi.com) 等官方渠道联系我们的技术支持团队
+* 通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 等官方渠道联系我们的技术支持团队
 * 在我们的 [Github](https://github.com/MiniMax-AI/MiniMax-M2/issues) 仓库提交Issue
 
 <Warning>
-  1. Anthropic API 兼容接口目前支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2`  模型
+  1. Anthropic API 兼容接口目前支持 `MiniMax-M3.1-Flash` `MiniMax-M3` 模型
 
   2. `temperature` 参数取值范围为 \[0, 2]，推荐使用1.0，超出范围会返回错误
 
   3. 部分 Anthropic 参数（如 `top_k`、`stop_sequences`、`mcp_servers`、`context_management`、`container`）会被忽略
 
-  4. `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持通过 Anthropic 兼容内容块输入图片和视频；M2.7、M2.5、M2.1 和 M2 系列仅支持文本与工具调用相关内容块
+  4. `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持通过 Anthropic 兼容内容块输入图片和视频
 </Warning>

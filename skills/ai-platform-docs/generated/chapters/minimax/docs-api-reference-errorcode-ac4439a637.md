@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/errorcode.md -->
-<!-- Source SHA-256: 7a67eedd1d50e006bd91630fc5833b648847bdab21f0b1d0c59aa281a35dc5eb -->
+<!-- Source SHA-256: 9215a0730d6bd01d0c5e6706fcfe31dea118eb447bc81b65ce3ec9c310aa96ff -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -40,4 +40,4 @@
 | 2049 | 无效的 API Key | 请检查 API Key |
 | 2056 | 超出M Plan资源限制 | 请等待下一个时间段资源释放后，再次尝试 |
 
-如有其他疑问，请联系我们 [api@minimaxi.com](mailto:api@minimaxi.com)。
+如有其他疑问，请联系我们 [api@minimax.io](mailto:api@minimax.io)。

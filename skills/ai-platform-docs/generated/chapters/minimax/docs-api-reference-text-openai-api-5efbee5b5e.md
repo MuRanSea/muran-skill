@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-openai-api.md -->
-<!-- Source SHA-256: 2b1b748877fe8f1c5712f9073dfaf3f4b83dfde89bf97cd7219300216fb3f552 -->
+<!-- Source SHA-256: c63c2636481cca33a71ab737ce8dcd04458f4693e10ff27cf5f8a5572bcd12df -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -10,8 +10,6 @@
 > 通过 OpenAI SDK 调用 MiniMax 模型
 
 为了满足开发者对 OpenAI API 生态的使用需求，我们的 API 新增了对 OpenAI API 格式的支持。通过简单的配置，即可将 MiniMax 的能力接入到 OpenAI API 生态中。
-
-<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。</Note>
 
 ## 快速开始
 
@@ -42,7 +40,7 @@ from openai import OpenAI
 client = OpenAI()
 
 response = client.chat.completions.create(
-    model="MiniMax-M3.1-Flash-Preview",
+    model="MiniMax-M3.1-Flash",
     reasoning_effort="max",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
@@ -59,24 +57,17 @@ print(f"Text:\n{response.choices[0].message.content}\n")
 在多轮 Function Call 对话中，必须将完整的模型返回（即 assistant 消息）添加到对话历史，以保持思维链的连续性：
 
 * 将完整的 `response_message` 对象（包含 `tool_calls` 字段）添加到消息历史
-  * 原生的OpenAI API 的 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型 `content` 字段会包含 `<think>` 标签内容，需要完整保留
-  * `MiniMax-M3.1-Flash-Preview` 的模型思考内容通过 `reasoning_content` 字段单独提供，同样需要完整保留
+  * 原生的OpenAI API 的 `MiniMax-M3.1-Flash` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型 `content` 字段会包含 `<think>` 标签内容，需要完整保留
+  * `MiniMax-M3.1-Flash` 的模型思考内容通过 `reasoning_content` 字段单独提供，同样需要完整保留
 
 ## 支持的模型
 
-使用 OpenAI SDK 时，支持以下 MiniMax 模型：
+使用 OpenAI SDK 时，支持以下 MiniMax 模型。
 
 | 模型名称 | 上下文窗口 | 模型介绍 |
 | :- | :-: | :- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
+| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
 | MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型** |
-| MiniMax-M2.7 | 204,800 | **开启模型的自我迭代**（输出速度约 60 TPS） |
-| MiniMax-M2.7-highspeed | 204,800 | **M2.7 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-| MiniMax-M2.5 | 204,800 | **顶尖性能与极致性价比，轻松驾驭复杂任务**（输出速度约 60 TPS） |
-| MiniMax-M2.5-highspeed | 204,800 | **M2.5 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-| MiniMax-M2.1 | 204,800 | **强大多语言编程能力，全面升级编程体验**（输出速度约 60 TPS） |
-| MiniMax-M2.1-highspeed | 204,800 | **M2.1 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-| MiniMax-M2 | 204,800 | **专为高效编码与 Agent 工作流而生** |
 
 <Note>
   TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
@@ -86,7 +77,7 @@ print(f"Text:\n{response.choices[0].message.content}\n")
 
 ## 多模态输入
 
-OpenAI API 兼容的 Chat Completions 支持在 `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 中输入文本、图片和视频。
+OpenAI API 兼容的 Chat Completions 支持在 `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 中输入文本、图片和视频。
 
 图片使用 `image_url` 内容块，视频使用 `video_url` 内容块。`detail` 字段可取 `low`、`default`、`high`，默认值为 `default`；可通过 `max_long_side_pixel` 控制最长边。图片支持 JPEG、PNG、GIF、WEBP。视频支持 MP4、AVI、MOV、MKV；`fps` 默认值为 1，支持 0.2 到 5。URL 或 base64 视频最大 50 MB，图片最大 10 MB，请求体最大 64 MB。更大的视频请通过 Files API 上传后传入 `mm_file://{file_id}`，Files API 视频最大 512 MB。
 
@@ -100,7 +91,7 @@ OpenAI API 兼容的 Chat Completions 支持在 `MiniMax-M3.1-Flash-Preview` 和
 
 ```python Python theme={null}
 response = client.chat.completions.create(
-    model="MiniMax-M3.1-Flash-Preview",
+    model="MiniMax-M3.1-Flash",
     reasoning_effort="max",
     messages=[
         {
@@ -127,22 +118,22 @@ response = client.chat.completions.create(
 )
 ```
 
-## MiniMax-M3.1-Flash-Preview / MiniMax-M3 请求参数
+## MiniMax-M3.1-Flash / MiniMax-M3 请求参数
 
-`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 在 OpenAI API 兼容接口中支持以下额外的 Chat Completions 参数：
+`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 在 OpenAI API 兼容接口中支持以下额外的 Chat Completions 参数：
 
 | 参数 | 说明 |
 | :- | :- |
-| `thinking` | 控制 thinking。`type` 可取 `disabled` 或 `adaptive`；省略时默认开启 thinking。`MiniMax-M3.1-Flash-Preview` 强制开启 thinking，传入 `disabled` 会返回 `400`。对于 M2.x 模型，thinking 无法关闭。 |
-| `reasoning_effort` | 思考深度档位，仅 `MiniMax-M3.1-Flash-Preview` 生效。可取 `low`、`medium`、`high`、`xhigh`、`max`，档位越高思考越充分；省略时默认为 `max`。不支持 `none`。 |
+| `thinking` | 控制 thinking。`type` 可取 `disabled` 或 `adaptive`；省略时默认开启 thinking。`MiniMax-M3.1-Flash` 强制开启 thinking，传入 `disabled` 会返回 `400`。对于 M2.x 模型，thinking 无法关闭。 |
+| `reasoning_effort` | 思考深度档位，仅 `MiniMax-M3.1-Flash` 生效。可取 `low`、`medium`、`high`、`xhigh`、`max`，档位越高思考越充分；省略时默认为 `max`。不支持 `none`。 |
 | `stream_options.include_usage` | 流式调用时，设为 `true` 可在流中返回 token 用量。 |
 | `max_tokens` | 旧版生成长度限制参数。思考 token 也计入此上限，设置过小会导致 `finish_reason` 为 `length` 且 `content` 为空。 |
 | `max_completion_tokens` | 生成长度限制参数，新接入建议使用此字段。 |
 | `temperature` | 采样温度。范围 `[0, 2]`，默认值 `1`。 |
-| `top_p` | 核采样参数。范围 `[0, 1]`，`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 默认值 `0.95`，M2.x 系列默认值 `0.9`。 |
+| `top_p` | 核采样参数。范围 `[0, 1]`，`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 默认值 `0.95`，M2.x 系列默认值 `0.9`。 |
 | `tools` | 函数工具定义。 |
-| `reasoning_split` | 输出格式开关。为 `true` 时把 thinking 内容拆分到 `reasoning_content` 字段；为 `false` 时 thinking 以 `<think>` 标签保留在 `content` 内。`MiniMax-M3.1-Flash-Preview` 暂不支持将该参数设为 `false`。 |
-| `service_tier` | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。 |
+| `reasoning_split` | 输出格式开关。为 `true` 时把 thinking 内容拆分到 `reasoning_content` 字段；为 `false` 时 thinking 以 `<think>` 标签保留在 `content` 内。`MiniMax-M3.1-Flash` 不支持将该参数设为 `false`。 |
+| `service_tier` | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。`MiniMax-M3.1-Flash` 不支持该字段。 |
 
 ### Thinking 控制
 
@@ -150,7 +141,7 @@ response = client.chat.completions.create(
 
 | 模型 | 省略 `thinking` | `{"type": "adaptive"}` | `{"type": "disabled"}` |
 | :- | :- | :- | :- |
-| `MiniMax-M3.1-Flash-Preview` | 开启 thinking | 开启 thinking | **返回 `400`**，thinking 无法关闭 |
+| `MiniMax-M3.1-Flash` | 开启 thinking | 开启 thinking | **返回 `400`**，thinking 无法关闭 |
 | `MiniMax-M3` | 开启 thinking | 开启 thinking | 跳过 thinking，直接回答 |
 | M2.x | 开启 thinking | 开启 thinking | 被接收但不生效，thinking 仍保持开启 |
 
@@ -158,13 +149,13 @@ response = client.chat.completions.create(
   传入 `thinking: {"type": "disabled"}` 或 `reasoning_effort: "none"` 时返回的错误信息：
 
   ```text theme={null}
-  model "MiniMax-M3.1-Flash-Preview" requires adaptive thinking; thinking.type="disabled" (including reasoning.effort=none) is not allowed (2013)
+  model "MiniMax-M3.1-Flash" requires adaptive thinking; thinking.type="disabled" (including reasoning.effort=none) is not allowed (2013)
   ```
 </Note>
 
 ```python Python theme={null}
 response = client.chat.completions.create(
-    model="MiniMax-M3.1-Flash-Preview",
+    model="MiniMax-M3.1-Flash",
     reasoning_effort="max",
     messages=[{"role": "user", "content": "Hi, how are you?"}],
     extra_body={
@@ -173,15 +164,15 @@ response = client.chat.completions.create(
 )
 ```
 
-### 思考深度控制（仅 MiniMax-M3.1-Flash-Preview）
+### 思考深度控制（仅 MiniMax-M3.1-Flash）
 
-`MiniMax-M3.1-Flash-Preview` 支持通过 `reasoning_effort` 调节思考深度，档位从低到高为 `low`、`medium`、`high`、`xhigh`、`max`。档位越高，模型思考越充分，输出的 thinking token 和响应耗时也越多。省略 `reasoning_effort` 时默认为 `max`。
+`MiniMax-M3.1-Flash` 支持通过 `reasoning_effort` 调节思考深度，档位从低到高为 `low`、`medium`、`high`、`xhigh`、`max`。档位越高，模型思考越充分，输出的 thinking token 和响应耗时也越多。省略 `reasoning_effort` 时默认为 `max`。
 
 `none` 不支持，会返回 `400`。
 
 ```python Python theme={null}
 response = client.chat.completions.create(
-    model="MiniMax-M3.1-Flash-Preview",
+    model="MiniMax-M3.1-Flash",
     reasoning_effort="max",
     messages=[{"role": "user", "content": "Hi, how are you?"}],
 )
@@ -202,7 +193,7 @@ print("Thinking Process:")
 print("=" * 60)
 
 stream = client.chat.completions.create(
-    model="MiniMax-M3.1-Flash-Preview",
+    model="MiniMax-M3.1-Flash",
     reasoning_effort="max",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
@@ -234,11 +225,11 @@ print(f"{text_buffer}\n")
 
 ### Tool Use & Interleaved Thinking
 
-了解如何通过 OpenAI SDK 使用 M3.1-Flash-Preview Tool Use 和 Interleaved Thinking 能力，请参考以下文档。
+了解如何通过 OpenAI SDK 使用 M3.1-Flash Tool Use 和 Interleaved Thinking 能力，请参考以下文档。
 
 <Columns cols={1}>
   <Card title="Tool Use & Interleaved Thinking" icon="book-open" href="/docs/guides/text-m3-function-call#openai-sdk" arrow="true" cta="点击查看">
-    了解如何利用 MiniMax-M3.1-Flash-Preview 工具调用和 Interleaved Thinking 能力，提升复杂任务中的表现。
+    了解如何利用 MiniMax-M3.1-Flash 工具调用和 Interleaved Thinking 能力，提升复杂任务中的表现。
   </Card>
 </Columns>
 
@@ -246,7 +237,7 @@ print(f"{text_buffer}\n")
 
 如果在使用MiniMax模型过程中遇到任何问题：
 
-* 通过邮箱 [Model@minimaxi.com](mailto:Model@minimaxi.com) 等官方渠道联系我们的技术支持团队
+* 通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 等官方渠道联系我们的技术支持团队
 * 在我们的 [Github](https://github.com/MiniMax-AI/MiniMax-M2/issues) 仓库提交Issue
 
 <Warning>
@@ -254,7 +245,7 @@ print(f"{text_buffer}\n")
 
   2. 部分 OpenAI 参数（如`presence_penalty`、`frequency_penalty`、`logit_bias` 等）会被忽略
 
-  3. `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 可通过 OpenAI 兼容消息内容块输入图片和视频；当前不支持音频输入
+  3. `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 可通过 OpenAI 兼容消息内容块输入图片和视频；当前不支持音频输入
 
   4. `n` 参数仅支持值为 1
 

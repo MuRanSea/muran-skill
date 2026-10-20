@@ -1,24 +1,22 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-openai.md -->
-<!-- Source SHA-256: 9bf4eaa77f66d9f597cb65e33ced8abb440e29362f2e73e5061f6ca026797738 -->
+<!-- Source SHA-256: 5bdd517a03a870b059d536be037b9e7d951d2d52f1285029b69a34792b523178 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Chat Completions API
+# 对话补全
 
-> 使用 OpenAI API 兼容 Chat Completions 格式调用 MiniMax 模型。
+> 通过兼容 OpenAI Chat Completions API 的接口调用 MiniMax 模型生成回复，支持流式与非流式。
 
 <Note>
-  ✨ **全新模型 `MiniMax-M3.1-Flash-Preview`**
+  ✨ **全新模型 `MiniMax-M3.1-Flash`**
 
   **核心能力**：**1M 超长上下文**、**多模态**、**思考深度可调**。
-
-  暂时仅通过 M Plan 和 MiniMax Code 提供。
 </Note>
 
 <Tip>
-  **`MiniMax-M3.1-Flash-Preview` 新特性：**
+  **`MiniMax-M3.1-Flash` 新特性：**
 
   1. 支持图片、视频理解，可参考右方示例代码
   2. 支持通过 `reasoning_effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，默认档位为 `max`
@@ -35,7 +33,7 @@ info:
   description: |
     MiniMax 文本生成 API，支持对话补全与流式输出。
 
-    > ⚡ **`MiniMax-M3.1-Flash-Preview` 亮点** —— **1M 超长上下文**、**多模态**、**思考深度可调**。
+    > ⚡ **`MiniMax-M3.1-Flash` 亮点** —— **1M 超长上下文**、**多模态**、**思考深度可调**。
   license:
     name: MIT
   version: 1.0.0
@@ -68,7 +66,7 @@ paths:
             examples:
               深度思考:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   thinking:
                     type: adaptive
                   messages:
@@ -78,7 +76,7 @@ paths:
                   reasoning_effort: max
               图片理解:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   thinking:
                     type: adaptive
                   messages:
@@ -94,7 +92,7 @@ paths:
                   reasoning_effort: max
               视频理解:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   thinking:
                     type: adaptive
                   messages:
@@ -110,7 +108,7 @@ paths:
                   reasoning_effort: max
               流式:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   thinking:
                     type: adaptive
                   messages:
@@ -127,7 +125,7 @@ paths:
                   reasoning_effort: max
               工具调用:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   messages:
                     - role: user
                       content: 旧金山现在天气怎么样？
@@ -216,7 +214,7 @@ paths:
                           name: MiniMax AI
                           audio_content: ''
                     created: 1780220769
-                    model: MiniMax-M3.1-Flash-Preview
+                    model: MiniMax-M3.1-Flash
                     object: chat.completion
                     usage:
                       total_tokens: 473
@@ -270,7 +268,7 @@ paths:
                           name: MiniMax AI
                           audio_content: ''
                     created: 1780152150
-                    model: MiniMax-M3.1-Flash-Preview
+                    model: MiniMax-M3.1-Flash
                     object: chat.completion
                     usage:
                       total_tokens: 1604
@@ -344,7 +342,7 @@ paths:
                           name: MiniMax AI
                           audio_content: ''
                     created: 1780224598
-                    model: MiniMax-M3.1-Flash-Preview
+                    model: MiniMax-M3.1-Flash
                     object: chat.completion
                     usage:
                       total_tokens: 2647
@@ -372,7 +370,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -389,7 +387,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -411,7 +409,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -429,7 +427,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -448,7 +446,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -467,7 +465,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -487,7 +485,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -506,7 +504,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -523,7 +521,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -542,7 +540,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -561,7 +559,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -578,7 +576,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -597,7 +595,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -615,7 +613,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -646,7 +644,7 @@ paths:
                               index: 0
                           audio_content: ''
                     created: 1780211931
-                    model: MiniMax-M3.1-Flash-Preview
+                    model: MiniMax-M3.1-Flash
                     object: chat.completion
                     usage:
                       total_tokens: 477
@@ -678,7 +676,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -695,7 +693,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -717,7 +715,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -735,7 +733,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -754,7 +752,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -773,7 +771,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -793,7 +791,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -812,7 +810,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -829,7 +827,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -848,7 +846,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -867,7 +865,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -884,7 +882,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -903,7 +901,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -921,7 +919,7 @@ paths:
                             name: MiniMax AI
                             audio_content: ''
                       created: 1780153015
-                      model: MiniMax-M3.1-Flash-Preview
+                      model: MiniMax-M3.1-Flash
                       object: chat.completion.chunk
                       usage: null
                       input_sensitive: false
@@ -939,24 +937,19 @@ components:
       properties:
         model:
           type: string
-          description: 模型 ID
+          description: 模型 ID。支持 `MiniMax-M3.1-Flash` 和 `MiniMax-M3`。
           enum:
-            - MiniMax-M3.1-Flash-Preview
+            - MiniMax-M3.1-Flash
             - MiniMax-M3
-            - MiniMax-M2.7
-            - MiniMax-M2.7-highspeed
-            - MiniMax-M2.5
-            - MiniMax-M2.5-highspeed
-            - MiniMax-M2.1
-            - MiniMax-M2.1-highspeed
-            - MiniMax-M2
         service_tier:
           type: string
           description: >-
             请求准入服务层级。支持的取值为 `standard` 和 `priority`。省略时默认使用
             `standard`。`priority`
             的[价格](https://platform.minimax.cn/docs/pricing/overview#models/text)为
-            `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
+            `standard` 的 1.5
+            倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。`MiniMax-M3.1-Flash`
+            不支持该字段。
           enum:
             - standard
             - priority
@@ -971,7 +964,7 @@ components:
           description: >-
             控制 thinking 行为。`adaptive` 这个默认值对所有模型都生效，差异只在 `disabled` 的效果上。
 
-            - `MiniMax-M3.1-Flash-Preview`：强制开启 thinking。传入 `disabled` 会返回 HTTP
+            - `MiniMax-M3.1-Flash`：强制开启 thinking。传入 `disabled` 会返回 HTTP
             400。如需调节思考深度，请使用 `reasoning_effort`。
 
             - `MiniMax-M3`：默认开启 adaptive thinking；传入 `disabled` 会跳过 thinking
@@ -989,18 +982,17 @@ components:
                 thinking 控制类型。
 
                 - `disabled`：让 `MiniMax-M3` 跳过 thinking
-                并直接回答。`MiniMax-M3.1-Flash-Preview` 不支持该取值，传入会返回 HTTP 400。对于 M2.x
+                并直接回答。`MiniMax-M3.1-Flash` 不支持该取值，传入会返回 HTTP 400。对于 M2.x
                 模型，thinking 仍会保持开启。
 
                 - `adaptive`：开启 adaptive thinking。省略 `thinking` 时默认使用该值，也是
-                `MiniMax-M3.1-Flash-Preview` 唯一接受的取值。
+                `MiniMax-M3.1-Flash` 唯一接受的取值。
           required: []
         reasoning_effort:
           type: string
           description: >-
-            调节思考深度。仅 `MiniMax-M3.1-Flash-Preview`
-            支持真正的思考深度调节，其他模型会忽略该字段。省略时，该模型的默认思考深度为 `max`。由于
-            `MiniMax-M3.1-Flash-Preview` 强制开启 thinking，不接受 `none`，传入会返回 HTTP
+            调节思考深度。仅 `MiniMax-M3.1-Flash` 支持真正的思考深度调节，其他模型会忽略该字段。省略时，该模型的默认思考深度为
+            `max`。由于 `MiniMax-M3.1-Flash` 强制开启 thinking，不接受 `none`，传入会返回 HTTP
             400。
           enum:
             - low
@@ -1012,9 +1004,8 @@ components:
           type: boolean
           description: >-
             输出格式开关。为 `true` 时将 thinking 内容拆分到 `reasoning_content` 字段；为 `false` 时
-            thinking 以 `<think>` 标签保留在 `content`
-            字段内。`MiniMax-M3.1-Flash-Preview` 暂不支持将该参数设为 `false`。该参数不会开启或关闭
-            thinking。
+            thinking 以 `<think>` 标签保留在 `content` 字段内。`MiniMax-M3.1-Flash`
+            不支持将该参数设为 `false`。该参数不会开启或关闭 thinking。
         stream:
           type: boolean
           description: 是否使用流式传输，默认为 `false`。设置为 `true` 后，响应将分批返回。
@@ -1031,7 +1022,7 @@ components:
           type: integer
           format: int64
           description: >-
-            指定生成内容长度的上限（Token 数）。MiniMax-M3.1-Flash-Preview 和 MiniMax-M3 推荐值为
+            指定生成内容长度的上限（Token 数）。MiniMax-M3.1-Flash 和 MiniMax-M3 推荐值为
             131072（128K），上限为 524288（512K）；其他模型推荐值为 65536（64K），上限为
             204800（200K）。如果生成因 `length` 原因中断，请尝试调高此值。
           minimum: 1
@@ -1046,8 +1037,8 @@ components:
           type: number
           format: double
           description: >-
-            核采样参数，取值范围 [0, 1]。MiniMax-M3.1-Flash-Preview 和 MiniMax-M3 默认值为
-            0.95，M2.x 系列模型默认值为 0.9。
+            核采样参数，取值范围 [0, 1]。MiniMax-M3.1-Flash 和 MiniMax-M3 默认值为 0.95，M2.x
+            系列模型默认值为 0.9。
           minimum: 0
           maximum: 1
           default: 0.95
@@ -1278,8 +1269,7 @@ components:
               description: 文本消息内容
             - type: array
               description: >-
-                多模态消息内容块。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
-                支持文本、图片和视频输入。
+                多模态消息内容块。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片和视频输入。
 
 
                 **多模态文件大小及容量限制**
@@ -1290,7 +1280,7 @@ components:
                 形式引用，单个视频最大 512 MB。
               items:
                 $ref: '#/components/schemas/MessageContentPart'
-          description: 消息内容。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持文本、图片和视频内容块。
+          description: 消息内容。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片和视频内容块。
         tool_calls:
           type: array
           description: assistant 消息中的工具调用列表。

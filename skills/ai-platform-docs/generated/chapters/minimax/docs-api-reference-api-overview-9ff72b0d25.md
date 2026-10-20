@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/api-overview.md -->
-<!-- Source SHA-256: a12b56de0d37816006852bc6925344e4fe5953d093475c6705618969ab527015 -->
+<!-- Source SHA-256: 94874c204a808f4eeaefaa9ff52b09b3c31c5fb0f230ae600dc62e9b3bc0639f -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -20,9 +20,7 @@
 
 ## 语言模型
 
-语言模型接口使用 **MiniMax M3.1-Flash-Preview**，**MiniMax M3**，**MiniMax M2.7**，**MiniMax M2.7-highspeed**，**MiniMax M2.5**，**MiniMax M2.5-highspeed**，**MiniMax M2.1**，**MiniMax M2.1-highspeed**，**MiniMax M2** 根据输入的上下文，让模型生成对话内容、工具调用。
-
-<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。</Note>
+语言模型接口使用 **MiniMax M3.1-Flash**、**MiniMax M3**，根据输入的上下文，让模型生成对话内容、工具调用。
 
 可通过 **HTTP** 请求、**Anthropic SDK**（推荐） 或 **OpenAI SDK** 接入。
 
@@ -30,24 +28,12 @@
 
 | 模型名称 | 输入输出总 token | 模型介绍 |
 | :- | :-: | :- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
-| MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型**（输出速度约 100+ TPS） |
-| MiniMax-M2.7 | 204800 | **开启模型的自我迭代 (输出速度约60tps)** |
-| MiniMax-M2.7-highspeed | 204800 | **M2.7 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
-
-<Accordion title="历史模型">
-  | 模型名称 | 输入输出总 token | 模型介绍 |
-  | :- | :-: | :- |
-  | MiniMax-M2.5 | 204800 | **顶尖性能与极致性价比，轻松驾驭复杂任务 (输出速度约60tps)** |
-  | MiniMax-M2.5-highspeed | 204800 | **M2.5 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
-  | MiniMax-M2.1 | 204800 | **强大多语言编程能力，全面升级编程体验 (输出速度约60tps)** |
-  | MiniMax-M2.1-highspeed | 204800 | **M2.1 极速版：效果不变，更快，更敏捷  (输出速度约100tps)** |
-  | MiniMax-M2 | 204800 | **专为高效编码与Agent工作流而生** |
-</Accordion>
+| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
+| MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型** |
 
 如果在使用模型过程中遇到任何问题：
 
-* 通过邮箱 [Model@minimaxi.com](mailto:Model@minimaxi.com) 等官方渠道联系我们的技术支持团队
+* 通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 等官方渠道联系我们的技术支持团队
 * 在我们的 [Github](https://github.com/MiniMax-AI/MiniMax-M2/issues) 仓库提交Issue
 
 <Columns cols={2}>

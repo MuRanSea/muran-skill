@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/responses-input-tokens.md -->
-<!-- Source SHA-256: 1666c7e7e91aff23e75dad84398ad78c36df477623ced6d8e134b1e1cb82328e -->
+<!-- Source SHA-256: 4f112f8f15bcf1cf54653deaac84ed36bb74bcae297e82eabe223b95f73d3c40 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -50,45 +50,10 @@ paths:
             examples:
               Request:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
-                  input:
-                    - type: message
-                      role: user
-                      content: >-
-                        请帮我用 Python 实现一个支持泛型的快速排序算法，要求：1) 原地排序节省内存；2)
-                        处理重复元素时使用三路划分；3) 小数组切换到插入排序优化；4)
-                        提供完整的单元测试。最后还请解释一下三路划分相比经典 Lomuto 划分在重复键场景下的优势。
-                  tools:
-                    - type: function
-                      name: search_docs
-                      description: 搜索 Python 标准库或第三方库的官方文档
-                      parameters:
-                        type: object
-                        properties:
-                          library:
-                            type: string
-                            description: 库名称，如 `typing`、`itertools`
-                          query:
-                            type: string
-                            description: 搜索关键词
-                        required:
-                          - library
-                          - query
-                    - type: function
-                      name: run_python
-                      description: 在沙箱中执行 Python 代码，返回标准输出和错误信息
-                      parameters:
-                        type: object
-                        properties:
-                          code:
-                            type: string
-                            description: 要执行的 Python 代码
-                          timeout_seconds:
-                            type: integer
-                            description: 执行超时时间（秒）
-                            default: 10
-                        required:
-                          - code
+                  model: MiniMax-M3.1-Flash
+                  input: >-
+                    请帮我写一封邮件，邀请团队成员参加下周三下午 3
+                    点的项目复盘会议，说明会议议程，并提醒大家提前准备各自负责模块的进展总结和遇到的问题。
         required: true
       responses:
         '200':
@@ -101,7 +66,7 @@ paths:
                 Response:
                   value:
                     object: response.input_tokens
-                    input_tokens: 588
+                    input_tokens: 235
 components:
   schemas:
     EstimateInputTokensReq:
@@ -112,8 +77,8 @@ components:
       properties:
         model:
           type: string
-          description: 调用的模型名称，如 `MiniMax-M3.1-Flash-Preview`
-          example: MiniMax-M3.1-Flash-Preview
+          description: 调用的模型名称，如 `MiniMax-M3.1-Flash`
+          example: MiniMax-M3.1-Flash
         input:
           description: 对话内容，支持简单文本或完整对话历史数组
           oneOf:
@@ -134,9 +99,8 @@ components:
         tool_choice:
           type: string
           enum:
-            - none
             - auto
-          description: 工具选择策略：`none` 表示不调用任何工具；`auto` 表示由模型自动判断是否调用工具
+          description: 工具选择策略：`auto` 表示由模型自动判断是否调用工具
         text:
           type: object
           description: 输出格式控制
@@ -155,8 +119,8 @@ components:
           description: >-
             推理控制。默认值随模型不同，因此未在 schema 层声明统一默认值。
 
-            - `MiniMax-M3.1-Flash-Preview`：推理始终开启，省略 `reasoning` 时也会推理。`effort`
-            可取 `low`、`medium`、`high`、`xhigh` 或 `max`，并且确实会调节推理深度；省略时默认使用 `max`
+            - `MiniMax-M3.1-Flash`：推理始终开启，省略 `reasoning` 时也会推理。`effort` 可取
+            `low`、`medium`、`high`、`xhigh` 或 `max`，并且确实会调节推理深度；省略时默认使用 `max`
             档位。传入 `effort: "none"` 会返回 HTTP 400。
 
             - `MiniMax-M3`：默认关闭推理；将 `effort` 设为非 `none` 值可开启推理，但不会调节推理深度。

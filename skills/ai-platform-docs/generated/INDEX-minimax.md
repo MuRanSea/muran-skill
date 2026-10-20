@@ -5,7 +5,6 @@
 
 | 文档 | 本地文件 | 官方来源 |
 |---|---|---|
-| Anthropic 主动缓存 | `chapters/minimax/docs-api-reference-anthropic-api-compatible-cache-a983da99fc.md` | https://platform.minimax.cn/docs/api-reference/anthropic-api-compatible-cache.md |
 | 接口概览 | `chapters/minimax/docs-api-reference-api-overview-9ff72b0d25.md` | https://platform.minimax.cn/docs/api-reference/api-overview.md |
 | 错误码查询 | `chapters/minimax/docs-api-reference-errorcode-ac4439a637.md` | https://platform.minimax.cn/docs/api-reference/errorcode.md |
 | 文件删除 | `chapters/minimax/docs-api-reference-file-management-delete-a80c1390ce.md` | https://platform.minimax.cn/docs/api-reference/file-management-delete.md |
@@ -32,8 +31,8 @@
 | 语音识别 | `chapters/minimax/docs-api-reference-speech-to-text-9cd7483c36.md` | https://platform.minimax.cn/docs/api-reference/speech-to-text.md |
 | AI SDK | `chapters/minimax/docs-api-reference-text-ai-sdk-0e01691b3b.md` | https://platform.minimax.cn/docs/api-reference/text-ai-sdk.md |
 | Anthropic SDK | `chapters/minimax/docs-api-reference-text-anthropic-api-49dd5a98b1.md` | https://platform.minimax.cn/docs/api-reference/text-anthropic-api.md |
-| Messages API | `chapters/minimax/docs-api-reference-text-chat-anthropic-966a7f4920.md` | https://platform.minimax.cn/docs/api-reference/text-chat-anthropic.md |
-| Chat Completions API | `chapters/minimax/docs-api-reference-text-chat-openai-51c03a11d3.md` | https://platform.minimax.cn/docs/api-reference/text-chat-openai.md |
+| 消息生成 | `chapters/minimax/docs-api-reference-text-chat-anthropic-966a7f4920.md` | https://platform.minimax.cn/docs/api-reference/text-chat-anthropic.md |
+| 对话补全 | `chapters/minimax/docs-api-reference-text-chat-openai-51c03a11d3.md` | https://platform.minimax.cn/docs/api-reference/text-chat-openai.md |
 | OpenAI SDK | `chapters/minimax/docs-api-reference-text-openai-api-5efbee5b5e.md` | https://platform.minimax.cn/docs/api-reference/text-openai-api.md |
 | 文本合成 | `chapters/minimax/docs-api-reference-text-post-5226b28d49.md` | https://platform.minimax.cn/docs/api-reference/text-post.md |
 | Prompt 缓存 | `chapters/minimax/docs-api-reference-text-prompt-caching-5d47990d29.md` | https://platform.minimax.cn/docs/api-reference/text-prompt-caching.md |

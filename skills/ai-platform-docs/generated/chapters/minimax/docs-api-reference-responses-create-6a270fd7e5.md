@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/responses-create.md -->
-<!-- Source SHA-256: e5b48637bec818558196da11a042c41b8f01868c9abf0fc8ccb1d4dee178763f -->
+<!-- Source SHA-256: 4fb78e02136b74a7746293aba3cc1294af47cc9beb908ce230dc064b7b4d87c4 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -49,8 +49,6 @@ export const ResponsesReturnValues = ({label}) => {
   return <span ref={marker} hidden />;
 };
 
-<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。</Note>
-
 <ResponsesReturnValues label="可能的返回值" />
 
 
@@ -91,86 +89,70 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateResponseReq'
             examples:
-              SimpleText:
-                summary: 简单文本输入
+              深度思考:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   reasoning:
                     effort: max
-                  input: 你好！
-              ConversationHistory:
-                summary: 完整对话历史
+                  input: 9.11 和 9.9 哪个更大？
+              图片理解:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   reasoning:
                     effort: max
-                  instructions: 你是一位中文技术写作助手。
                   input:
                     - role: user
-                      content: >-
-                        我们公司要做一个海外社交产品，技术栈我倾向于 Go + React Native +
-                        PostgreSQL，你怎么看？
-              Streaming:
-                summary: 流式输出
+                      content:
+                        - type: input_text
+                          text: 这张图片的内容是什么？
+                        - type: input_image
+                          image_url: >-
+                            https://filecdn.minimax.chat/public/fe9d04da-f60e-444d-a2e0-18ae743add33.jpeg
+              视频理解:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   reasoning:
                     effort: max
-                  input: 你好！
+                  input:
+                    - role: user
+                      content:
+                        - type: input_text
+                          text: 这个视频里发生了什么？
+                        - type: input_video
+                          video_url: >-
+                            https://filecdn.minimax.chat/public/ee8c1648-21f1-41b7-8397-65022d22ffe5.mp4
+              流式:
+                value:
+                  model: MiniMax-M3.1-Flash
+                  reasoning:
+                    effort: max
+                  input:
+                    - role: user
+                      content:
+                        - type: input_text
+                          text: 这张图片的内容是什么？
+                        - type: input_image
+                          image_url: >-
+                            https://filecdn.minimax.chat/public/fe9d04da-f60e-444d-a2e0-18ae743add33.jpeg
                   stream: true
-              FunctionCall:
-                summary: 工具调用
+              工具调用:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   reasoning:
                     effort: max
-                  input: What is the weather in Boston today?
+                  input: 旧金山现在天气怎么样？
                   tools:
                     - type: function
-                      name: get_current_weather
-                      description: Get the current weather in a given location
+                      name: get_weather
+                      description: Get the current weather for a given location.
                       parameters:
                         type: object
                         properties:
                           location:
                             type: string
-                            description: The city and state, e.g. San Francisco, CA
-                          unit:
-                            type: string
-                            enum:
-                              - celsius
-                              - fahrenheit
+                            description: The city and state/country, e.g. San Francisco, US
                         required:
                           - location
-                          - unit
-              MultiTurnFunctionCall:
-                summary: 多轮工具调用
-                value:
-                  model: MiniMax-M3.1-Flash-Preview
-                  reasoning:
-                    effort: max
-                  input:
-                    - type: message
-                      role: user
-                      content: What is the weather in Beijing?
-                    - type: function_call
-                      call_id: call_abc123
-                      name: get_weather
-                      arguments: '{"city":"Beijing"}'
-                    - type: function_call_output
-                      call_id: call_abc123
-                      output: Sunny, 22°C
-                  tools:
-                    - type: function
-                      name: get_weather
-                      description: Get current weather for a city
-                      parameters:
-                        type: object
-                        properties:
-                          city:
-                            type: string
-                        required:
-                          - city
         required: true
       responses:
         '200':
@@ -180,41 +162,900 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateResponseResp'
               examples:
-                Response:
+                深度思考:
                   value:
-                    id: abc123
+                    id: 07229fa4ff19f5b74ad4581cad3af46c
                     object: response
-                    created_at: 1764000000
-                    model: MiniMax-M3.1-Flash-Preview
+                    created_at: 1792240804
+                    model: MiniMax-M3.1-Flash
                     status: completed
                     output:
-                      - id: abc123_rs
+                      - id: 07229fa4ff19f5b74ad4581cad3af46c_rs
                         type: reasoning
                         status: completed
                         summary: []
                         content:
                           - type: reasoning_text
-                            text: 用户打了招呼。用中文回一句简短友好的问候，并询问需要什么帮助即可。
-                      - id: abc123_msg
+                            text: >-
+                              We need answer Chinese. Need determine 9.11 vs
+                              9.9. Decimal comparison: 9.9 = 9.90 > 9.11. User
+                              asks which larger. Need concise maybe explain.
+                              Ensure not date ambiguity? They ask 9.11 and 9.9
+                              likely decimals. Answer 9.9 larger. Chinese.
+                      - id: 07229fa4ff19f5b74ad4581cad3af46c_msg
                         type: message
                         status: completed
                         role: assistant
                         content:
                           - type: output_text
-                            text: 你好！我是 MiniMax，请问有什么可以帮你的？
+                            text: |-
+                              9.9 更大。
+
+                              因为把小数位补齐：9.9 = 9.90，而 9.90 > 9.11。
                             annotations: []
-                    output_text: 你好！我是 MiniMax，请问有什么可以帮你的？
+                    output_text: |-
+                      9.9 更大。
+
+                      因为把小数位补齐：9.9 = 9.90，而 9.90 > 9.11。
                     usage:
-                      input_tokens: 8
+                      input_tokens: 216
+                      output_tokens: 107
+                      total_tokens: 323
                       input_tokens_details:
-                        cached_tokens: 0
-                      output_tokens: 90
+                        cached_tokens: 189
                       output_tokens_details:
-                        reasoning_tokens: 76
-                      total_tokens: 98
+                        reasoning_tokens: 75
+                    error: null
+                    incomplete_details: null
+                    instructions: null
+                    metadata: {}
+                    tools: null
+                    tool_choice: auto
+                    temperature: 1
+                    top_p: 0.95
+                    text:
+                      format:
+                        type: text
+                    reasoning:
+                      effort: max
+                      summary: null
+                    max_output_tokens: null
                     parallel_tool_calls: true
+                    previous_response_id: null
+                    conversation: null
                     store: false
+                    service_tier: null
+                    safety_identifier: null
                     truncation: disabled
+                图片理解:
+                  value:
+                    id: 07229fa4f4b7aa2578eef43416353b1e
+                    object: response
+                    created_at: 1792240804
+                    model: MiniMax-M3.1-Flash
+                    status: completed
+                    output:
+                      - id: 07229fa4f4b7aa2578eef43416353b1e_rs
+                        type: reasoning
+                        status: completed
+                        summary: []
+                        content:
+                          - type: reasoning_text
+                            text: >-
+                              We need answer Chinese. Need describe image. We
+                              can identify generic child, no sensitive. Need
+                              maybe mention close-up portrait of young girl
+                              smiling, curly brown hair bangs, green/hazel eyes,
+                              white lace dress, warm soft lighting, blurred
+                              brown-gray background. Since user asks content.
+                              Need concise. Ensure not infer identity. Let's
+                              craft.
+                      - id: 07229fa4f4b7aa2578eef43416353b1e_msg
+                        type: message
+                        status: completed
+                        role: assistant
+                        content:
+                          - type: output_text
+                            text: >-
+                              这是一张小女孩的暖调人像特写。她留着棕色卷发和齐刘海，睁着绿色或棕绿色的眼睛，面带微笑，身穿带蕾丝领口和肩部装饰的白色连衣裙。背景呈柔和的棕灰色虚化，光线温暖自然。
+                            annotations: []
+                    output_text: >-
+                      这是一张小女孩的暖调人像特写。她留着棕色卷发和齐刘海，睁着绿色或棕绿色的眼睛，面带微笑，身穿带蕾丝领口和肩部装饰的白色连衣裙。背景呈柔和的棕灰色虚化，光线温暖自然。
+                    usage:
+                      input_tokens: 1407
+                      output_tokens: 127
+                      total_tokens: 1534
+                      input_tokens_details:
+                        cached_tokens: 1405
+                      output_tokens_details:
+                        reasoning_tokens: 70
+                    error: null
+                    incomplete_details: null
+                    instructions: null
+                    metadata: {}
+                    tools: null
+                    tool_choice: auto
+                    temperature: 1
+                    top_p: 0.95
+                    text:
+                      format:
+                        type: text
+                    reasoning:
+                      effort: max
+                      summary: null
+                    max_output_tokens: null
+                    parallel_tool_calls: true
+                    previous_response_id: null
+                    conversation: null
+                    store: false
+                    service_tier: null
+                    safety_identifier: null
+                    truncation: disabled
+                视频理解:
+                  value:
+                    id: 07229fa44741487d6937e3789ea56819
+                    object: response
+                    created_at: 1792240804
+                    model: MiniMax-M3.1-Flash
+                    status: completed
+                    output:
+                      - id: 07229fa44741487d6937e3789ea56819_rs
+                        type: reasoning
+                        status: completed
+                        summary: []
+                        content:
+                          - type: reasoning_text
+                            text: >-
+                              We need answer in Chinese likely describe video.
+                              Need inspect sequence. We have frames 0-5.5 sec.
+                              It's a generated/edited video perhaps cat in
+                              Olympic diving venue, running along diving
+                              board/platform, leaps into pool, splash. Need
+                              accurately state. Let's parse details.
+
+
+                              At 0: cat (Asian? wildcat-looking domestic cat,
+                              spotted/striped) walking on narrow turquoise
+                              diving board/beam over pool in Olympic stadium.
+                              Background Olympic rings, crowds, purple signage
+                              "Lausanne 2024" perhaps. Camera tracks as cat
+                              runs. At ~2.5 sec cat leaps, paws extended, flying
+                              over diving platform, rotates/dives headfirst into
+                              pool around 4 sec, splash at 4.5, ripples. Need
+                              mention no visible injury perhaps. User asks
+                              "这个视频里发生了什么？" likely concise Chinese description.
+                              We should avoid overclaiming exact
+                              venue/competition or whether real. Say video
+                              depicts a cat walking/running along diving
+                              platform in an Olympic-themed swimming/diving
+                              arena, then jumps and dives into pool causing
+                              splash, ending with ripples. Maybe note it appears
+                              AI-generated due image/video artifacts/watermarks
+                              MiniMax/Hailuo AI. Should we mention? Could be
+                              useful but not needed. Need answer natural.
+
+
+                              Let's formulate:
+                              "视频中，一只带斑纹的猫在类似奥运会跳水馆的跳板/池边窄台上向前奔跑，背景有奥运五环和观众。跑到尽头后纵身跃起，身体在空中翻转，随后头朝下扎入泳池，激起大片水花；最后水面只剩涟漪和逐渐消散的水花。"
+                              Maybe if question wants event summary. Include
+                              duration ~5.5 sec. Need perhaps mention cat lands
+                              in diving pool, not necessarily headfirst? Frame
+                              3.5 body vertical head down, yes.
+
+
+                              Let's answer Chinese.
+                      - id: 07229fa44741487d6937e3789ea56819_msg
+                        type: message
+                        status: completed
+                        role: assistant
+                        content:
+                          - type: output_text
+                            text: >-
+                              视频里，一只带斑纹的猫沿着奥运跳水馆池边的窄平台向前奔跑，背景有奥运五环和观众。跑到尽头后，它纵身跃起，在空中翻转后头朝下跳入泳池，激起一大片水花，最后水面只剩下逐渐扩散的涟漪。
+                            annotations: []
+                    output_text: >-
+                      视频里，一只带斑纹的猫沿着奥运跳水馆池边的窄平台向前奔跑，背景有奥运五环和观众。跑到尽头后，它纵身跃起，在空中翻转后头朝下跳入泳池，激起一大片水花，最后水面只剩下逐渐扩散的涟漪。
+                    usage:
+                      input_tokens: 2285
+                      output_tokens: 430
+                      total_tokens: 2715
+                      input_tokens_details:
+                        cached_tokens: 2283
+                      output_tokens_details:
+                        reasoning_tokens: 369
+                    error: null
+                    incomplete_details: null
+                    instructions: null
+                    metadata: {}
+                    tools: null
+                    tool_choice: auto
+                    temperature: 1
+                    top_p: 0.95
+                    text:
+                      format:
+                        type: text
+                    reasoning:
+                      effort: max
+                      summary: null
+                    max_output_tokens: null
+                    parallel_tool_calls: true
+                    previous_response_id: null
+                    conversation: null
+                    store: false
+                    service_tier: null
+                    safety_identifier: null
+                    truncation: disabled
+                流式:
+                  value:
+                    - type: response.created
+                      sequence_number: 0
+                      response:
+                        id: 07229fa479c585e3683008175f57bd8f
+                        object: response
+                        created_at: 1792240804
+                        model: MiniMax-M3.1-Flash
+                        status: in_progress
+                        output: []
+                        output_text: null
+                        usage: null
+                        error: null
+                        incomplete_details: null
+                        instructions: null
+                        metadata: {}
+                        tools: null
+                        tool_choice: auto
+                        temperature: 1
+                        top_p: 0.95
+                        text:
+                          format:
+                            type: text
+                        reasoning:
+                          effort: max
+                          summary: null
+                        max_output_tokens: null
+                        parallel_tool_calls: true
+                        previous_response_id: null
+                        conversation: null
+                        store: false
+                        service_tier: null
+                        safety_identifier: null
+                        truncation: disabled
+                    - type: response.in_progress
+                      sequence_number: 1
+                      response:
+                        id: 07229fa479c585e3683008175f57bd8f
+                        object: response
+                        created_at: 1792240804
+                        model: MiniMax-M3.1-Flash
+                        status: in_progress
+                        output: []
+                        output_text: null
+                        usage: null
+                        error: null
+                        incomplete_details: null
+                        instructions: null
+                        metadata: {}
+                        tools: null
+                        tool_choice: auto
+                        temperature: 1
+                        top_p: 0.95
+                        text:
+                          format:
+                            type: text
+                        reasoning:
+                          effort: max
+                          summary: null
+                        max_output_tokens: null
+                        parallel_tool_calls: true
+                        previous_response_id: null
+                        conversation: null
+                        store: false
+                        service_tier: null
+                        safety_identifier: null
+                        truncation: disabled
+                    - type: response.output_item.added
+                      sequence_number: 2
+                      item:
+                        id: 07229fa479c585e3683008175f57bd8f_rs
+                        type: reasoning
+                        status: in_progress
+                        summary: []
+                        content: []
+                      output_index: 0
+                    - type: response.content_part.added
+                      sequence_number: 3
+                      part:
+                        type: reasoning_text
+                        text: ''
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                    - type: response.reasoning_text.delta
+                      sequence_number: 4
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: We need answer
+                    - type: response.reasoning_text.delta
+                      sequence_number: 5
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: ' Chinese describe image. Need be careful child, identity unknown. Need content: close-up portrait of young girl, brown'
+                    - type: response.reasoning_text.delta
+                      sequence_number: 6
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: ' wavy hair bangs, looking camera slight smile, cream lace dress, warm golden light, neutral blurred'
+                    - type: response.reasoning_text.delta
+                      sequence_number: 7
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: ' background. We should not infer ethnicity perhaps. concise. Maybe mention eyes green/hazel. Need answer in'
+                    - type: response.reasoning_text.delta
+                      sequence_number: 8
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: ' Chinese.'
+                    - type: response.reasoning_text.done
+                      sequence_number: 9
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      text: >-
+                        We need answer Chinese describe image. Need be careful
+                        child, identity unknown. Need content: close-up portrait
+                        of young girl, brown wavy hair bangs, looking camera
+                        slight smile, cream lace dress, warm golden light,
+                        neutral blurred background. We should not infer
+                        ethnicity perhaps. concise. Maybe mention eyes
+                        green/hazel. Need answer in Chinese.
+                    - type: response.content_part.done
+                      sequence_number: 10
+                      part:
+                        type: reasoning_text
+                        text: >-
+                          We need answer Chinese describe image. Need be careful
+                          child, identity unknown. Need content: close-up
+                          portrait of young girl, brown wavy hair bangs, looking
+                          camera slight smile, cream lace dress, warm golden
+                          light, neutral blurred background. We should not infer
+                          ethnicity perhaps. concise. Maybe mention eyes
+                          green/hazel. Need answer in Chinese.
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                    - type: response.output_item.done
+                      sequence_number: 11
+                      item:
+                        id: 07229fa479c585e3683008175f57bd8f_rs
+                        type: reasoning
+                        status: completed
+                        summary: []
+                        content:
+                          - type: reasoning_text
+                            text: >-
+                              We need answer Chinese describe image. Need be
+                              careful child, identity unknown. Need content:
+                              close-up portrait of young girl, brown wavy hair
+                              bangs, looking camera slight smile, cream lace
+                              dress, warm golden light, neutral blurred
+                              background. We should not infer ethnicity perhaps.
+                              concise. Maybe mention eyes green/hazel. Need
+                              answer in Chinese.
+                      output_index: 0
+                    - type: response.output_item.added
+                      sequence_number: 12
+                      item:
+                        type: message
+                        status: in_progress
+                        role: assistant
+                        content: []
+                        id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      output_index: 1
+                    - type: response.content_part.added
+                      sequence_number: 13
+                      part:
+                        type: output_text
+                        text: ''
+                        annotations: []
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                    - type: response.output_text.delta
+                      sequence_number: 14
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      delta: 这是一张小女孩的暖色调肖像特写。她留着棕色卷发
+                    - type: response.output_text.delta
+                      sequence_number: 15
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      delta: 和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面
+                    - type: response.output_text.delta
+                      sequence_number: 16
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      delta: 采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨
+                    - type: response.output_text.delta
+                      sequence_number: 17
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      delta: 自然。
+                    - type: response.output_text.done
+                      sequence_number: 18
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      text: >-
+                        这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                    - type: response.content_part.done
+                      sequence_number: 19
+                      part:
+                        type: output_text
+                        text: >-
+                          这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                        annotations: []
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                    - type: response.output_item.done
+                      sequence_number: 20
+                      item:
+                        id: 07229fa479c585e3683008175f57bd8f_msg_1
+                        type: message
+                        status: completed
+                        role: assistant
+                        content:
+                          - type: output_text
+                            text: >-
+                              这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                            annotations: []
+                      output_index: 1
+                    - type: response.completed
+                      sequence_number: 21
+                      response:
+                        id: 07229fa479c585e3683008175f57bd8f
+                        object: response
+                        created_at: 1792240804
+                        model: MiniMax-M3.1-Flash
+                        status: completed
+                        output:
+                          - id: 07229fa479c585e3683008175f57bd8f_rs
+                            type: reasoning
+                            status: completed
+                            summary: []
+                            content:
+                              - type: reasoning_text
+                                text: >-
+                                  We need answer Chinese describe image. Need be
+                                  careful child, identity unknown. Need content:
+                                  close-up portrait of young girl, brown wavy
+                                  hair bangs, looking camera slight smile, cream
+                                  lace dress, warm golden light, neutral blurred
+                                  background. We should not infer ethnicity
+                                  perhaps. concise. Maybe mention eyes
+                                  green/hazel. Need answer in Chinese.
+                          - id: 07229fa479c585e3683008175f57bd8f_msg_1
+                            type: message
+                            status: completed
+                            role: assistant
+                            content:
+                              - type: output_text
+                                text: >-
+                                  这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                                annotations: []
+                        output_text: >-
+                          这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                        usage:
+                          input_tokens: 1407
+                          output_tokens: 121
+                          total_tokens: 1528
+                          input_tokens_details:
+                            cached_tokens: 1405
+                          output_tokens_details:
+                            reasoning_tokens: 70
+                        error: null
+                        incomplete_details: null
+                        instructions: null
+                        metadata: {}
+                        tools: null
+                        tool_choice: auto
+                        temperature: 1
+                        top_p: 0.95
+                        text:
+                          format:
+                            type: text
+                        reasoning:
+                          effort: max
+                          summary: null
+                        max_output_tokens: null
+                        parallel_tool_calls: true
+                        previous_response_id: null
+                        conversation: null
+                        store: false
+                        service_tier: null
+                        safety_identifier: null
+                        truncation: disabled
+                工具调用:
+                  value:
+                    id: 07229fa434e87bfb6278664eb2616841
+                    object: response
+                    created_at: 1792240804
+                    model: MiniMax-M3.1-Flash
+                    status: completed
+                    output:
+                      - id: 07229fa434e87bfb6278664eb2616841_rs
+                        type: reasoning
+                        status: completed
+                        summary: []
+                        content:
+                          - type: reasoning_text
+                            text: >-
+                              The user asks in Chinese: "What's the current
+                              weather in San Francisco?" I should call the
+                              weather tool.
+                      - id: 07229fa434e87bfb6278664eb2616841_fc_0
+                        type: function_call
+                        status: completed
+                        call_id: call_function_f5xolsmpgj3i_1
+                        name: get_weather
+                        arguments: '{"location": "San Francisco, US"}'
+                    output_text: null
+                    usage:
+                      input_tokens: 463
+                      output_tokens: 54
+                      total_tokens: 517
+                      input_tokens_details:
+                        cached_tokens: 229
+                      output_tokens_details:
+                        reasoning_tokens: 24
+                    error: null
+                    incomplete_details: null
+                    instructions: null
+                    metadata: {}
+                    tools:
+                      - type: function
+                        name: get_weather
+                        description: Get the current weather for a given location.
+                        parameters:
+                          type: object
+                          properties:
+                            location:
+                              type: string
+                              description: >-
+                                The city and state/country, e.g. San Francisco,
+                                US
+                          required:
+                            - location
+                    tool_choice: auto
+                    temperature: 1
+                    top_p: 0.95
+                    text:
+                      format:
+                        type: text
+                    reasoning:
+                      effort: max
+                      summary: null
+                    max_output_tokens: null
+                    parallel_tool_calls: true
+                    previous_response_id: null
+                    conversation: null
+                    store: false
+                    service_tier: null
+                    safety_identifier: null
+                    truncation: disabled
+            text/event-stream:
+              schema:
+                type: object
+                description: 流式响应（SSE）。每个事件的 `data` 为 JSON，`type` 字段标识事件类型。
+              examples:
+                流式:
+                  value:
+                    - type: response.created
+                      sequence_number: 0
+                      response:
+                        id: 07229fa479c585e3683008175f57bd8f
+                        object: response
+                        created_at: 1792240804
+                        model: MiniMax-M3.1-Flash
+                        status: in_progress
+                        output: []
+                        output_text: null
+                        usage: null
+                        error: null
+                        incomplete_details: null
+                        instructions: null
+                        metadata: {}
+                        tools: null
+                        tool_choice: auto
+                        temperature: 1
+                        top_p: 0.95
+                        text:
+                          format:
+                            type: text
+                        reasoning:
+                          effort: max
+                          summary: null
+                        max_output_tokens: null
+                        parallel_tool_calls: true
+                        previous_response_id: null
+                        conversation: null
+                        store: false
+                        service_tier: null
+                        safety_identifier: null
+                        truncation: disabled
+                    - type: response.in_progress
+                      sequence_number: 1
+                      response:
+                        id: 07229fa479c585e3683008175f57bd8f
+                        object: response
+                        created_at: 1792240804
+                        model: MiniMax-M3.1-Flash
+                        status: in_progress
+                        output: []
+                        output_text: null
+                        usage: null
+                        error: null
+                        incomplete_details: null
+                        instructions: null
+                        metadata: {}
+                        tools: null
+                        tool_choice: auto
+                        temperature: 1
+                        top_p: 0.95
+                        text:
+                          format:
+                            type: text
+                        reasoning:
+                          effort: max
+                          summary: null
+                        max_output_tokens: null
+                        parallel_tool_calls: true
+                        previous_response_id: null
+                        conversation: null
+                        store: false
+                        service_tier: null
+                        safety_identifier: null
+                        truncation: disabled
+                    - type: response.output_item.added
+                      sequence_number: 2
+                      item:
+                        id: 07229fa479c585e3683008175f57bd8f_rs
+                        type: reasoning
+                        status: in_progress
+                        summary: []
+                        content: []
+                      output_index: 0
+                    - type: response.content_part.added
+                      sequence_number: 3
+                      part:
+                        type: reasoning_text
+                        text: ''
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                    - type: response.reasoning_text.delta
+                      sequence_number: 4
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: We need answer
+                    - type: response.reasoning_text.delta
+                      sequence_number: 5
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: ' Chinese describe image. Need be careful child, identity unknown. Need content: close-up portrait of young girl, brown'
+                    - type: response.reasoning_text.delta
+                      sequence_number: 6
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: ' wavy hair bangs, looking camera slight smile, cream lace dress, warm golden light, neutral blurred'
+                    - type: response.reasoning_text.delta
+                      sequence_number: 7
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: ' background. We should not infer ethnicity perhaps. concise. Maybe mention eyes green/hazel. Need answer in'
+                    - type: response.reasoning_text.delta
+                      sequence_number: 8
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      delta: ' Chinese.'
+                    - type: response.reasoning_text.done
+                      sequence_number: 9
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                      text: >-
+                        We need answer Chinese describe image. Need be careful
+                        child, identity unknown. Need content: close-up portrait
+                        of young girl, brown wavy hair bangs, looking camera
+                        slight smile, cream lace dress, warm golden light,
+                        neutral blurred background. We should not infer
+                        ethnicity perhaps. concise. Maybe mention eyes
+                        green/hazel. Need answer in Chinese.
+                    - type: response.content_part.done
+                      sequence_number: 10
+                      part:
+                        type: reasoning_text
+                        text: >-
+                          We need answer Chinese describe image. Need be careful
+                          child, identity unknown. Need content: close-up
+                          portrait of young girl, brown wavy hair bangs, looking
+                          camera slight smile, cream lace dress, warm golden
+                          light, neutral blurred background. We should not infer
+                          ethnicity perhaps. concise. Maybe mention eyes
+                          green/hazel. Need answer in Chinese.
+                      output_index: 0
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_rs
+                    - type: response.output_item.done
+                      sequence_number: 11
+                      item:
+                        id: 07229fa479c585e3683008175f57bd8f_rs
+                        type: reasoning
+                        status: completed
+                        summary: []
+                        content:
+                          - type: reasoning_text
+                            text: >-
+                              We need answer Chinese describe image. Need be
+                              careful child, identity unknown. Need content:
+                              close-up portrait of young girl, brown wavy hair
+                              bangs, looking camera slight smile, cream lace
+                              dress, warm golden light, neutral blurred
+                              background. We should not infer ethnicity perhaps.
+                              concise. Maybe mention eyes green/hazel. Need
+                              answer in Chinese.
+                      output_index: 0
+                    - type: response.output_item.added
+                      sequence_number: 12
+                      item:
+                        type: message
+                        status: in_progress
+                        role: assistant
+                        content: []
+                        id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      output_index: 1
+                    - type: response.content_part.added
+                      sequence_number: 13
+                      part:
+                        type: output_text
+                        text: ''
+                        annotations: []
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                    - type: response.output_text.delta
+                      sequence_number: 14
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      delta: 这是一张小女孩的暖色调肖像特写。她留着棕色卷发
+                    - type: response.output_text.delta
+                      sequence_number: 15
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      delta: 和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面
+                    - type: response.output_text.delta
+                      sequence_number: 16
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      delta: 采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨
+                    - type: response.output_text.delta
+                      sequence_number: 17
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      delta: 自然。
+                    - type: response.output_text.done
+                      sequence_number: 18
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                      text: >-
+                        这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                    - type: response.content_part.done
+                      sequence_number: 19
+                      part:
+                        type: output_text
+                        text: >-
+                          这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                        annotations: []
+                      output_index: 1
+                      content_index: 0
+                      item_id: 07229fa479c585e3683008175f57bd8f_msg_1
+                    - type: response.output_item.done
+                      sequence_number: 20
+                      item:
+                        id: 07229fa479c585e3683008175f57bd8f_msg_1
+                        type: message
+                        status: completed
+                        role: assistant
+                        content:
+                          - type: output_text
+                            text: >-
+                              这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                            annotations: []
+                      output_index: 1
+                    - type: response.completed
+                      sequence_number: 21
+                      response:
+                        id: 07229fa479c585e3683008175f57bd8f
+                        object: response
+                        created_at: 1792240804
+                        model: MiniMax-M3.1-Flash
+                        status: completed
+                        output:
+                          - id: 07229fa479c585e3683008175f57bd8f_rs
+                            type: reasoning
+                            status: completed
+                            summary: []
+                            content:
+                              - type: reasoning_text
+                                text: >-
+                                  We need answer Chinese describe image. Need be
+                                  careful child, identity unknown. Need content:
+                                  close-up portrait of young girl, brown wavy
+                                  hair bangs, looking camera slight smile, cream
+                                  lace dress, warm golden light, neutral blurred
+                                  background. We should not infer ethnicity
+                                  perhaps. concise. Maybe mention eyes
+                                  green/hazel. Need answer in Chinese.
+                          - id: 07229fa479c585e3683008175f57bd8f_msg_1
+                            type: message
+                            status: completed
+                            role: assistant
+                            content:
+                              - type: output_text
+                                text: >-
+                                  这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                                annotations: []
+                        output_text: >-
+                          这是一张小女孩的暖色调肖像特写。她留着棕色卷发和齐刘海，穿着带蕾丝边的米白色连衣裙，微微笑着看向镜头。画面采用柔和的侧光与浅景深，背景呈棕灰色虚化，整体温馨自然。
+                        usage:
+                          input_tokens: 1407
+                          output_tokens: 121
+                          total_tokens: 1528
+                          input_tokens_details:
+                            cached_tokens: 1405
+                          output_tokens_details:
+                            reasoning_tokens: 70
+                        error: null
+                        incomplete_details: null
+                        instructions: null
+                        metadata: {}
+                        tools: null
+                        tool_choice: auto
+                        temperature: 1
+                        top_p: 0.95
+                        text:
+                          format:
+                            type: text
+                        reasoning:
+                          effort: max
+                          summary: null
+                        max_output_tokens: null
+                        parallel_tool_calls: true
+                        previous_response_id: null
+                        conversation: null
+                        store: false
+                        service_tier: null
+                        safety_identifier: null
+                        truncation: disabled
 components:
   schemas:
     CreateResponseReq:
@@ -225,15 +1066,17 @@ components:
       properties:
         model:
           type: string
-          description: 调用的模型名称，如 `MiniMax-M3.1-Flash-Preview`
-          example: MiniMax-M3.1-Flash-Preview
+          description: 调用的模型名称，如 `MiniMax-M3.1-Flash`
+          example: MiniMax-M3.1-Flash
         service_tier:
           type: string
           description: >-
             请求准入服务层级。支持的取值为 `standard` 和 `priority`。省略时默认使用
             `standard`。`priority`
             的[价格](https://platform.minimax.cn/docs/pricing/overview#models/text)为
-            `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
+            `standard` 的 1.5
+            倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。`MiniMax-M3.1-Flash`
+            不支持该字段。
           enum:
             - standard
             - priority
@@ -281,9 +1124,8 @@ components:
         tool_choice:
           type: string
           enum:
-            - none
             - auto
-          description: 工具选择策略：`none` 表示不调用任何工具；`auto` 表示由模型自动判断是否调用工具
+          description: 工具选择策略：`auto` 表示由模型自动判断是否调用工具
         metadata:
           type: object
           description: 请求元数据，key-value 均为字符串
@@ -310,8 +1152,8 @@ components:
           description: >-
             推理控制。默认值随模型不同，因此未在 schema 层声明统一默认值。
 
-            - `MiniMax-M3.1-Flash-Preview`：推理始终开启，省略 `reasoning` 时也会推理。`effort`
-            可取 `low`、`medium`、`high`、`xhigh` 或 `max`，并且确实会调节推理深度；省略时默认使用 `max`
+            - `MiniMax-M3.1-Flash`：推理始终开启，省略 `reasoning` 时也会推理。`effort` 可取
+            `low`、`medium`、`high`、`xhigh` 或 `max`，并且确实会调节推理深度；省略时默认使用 `max`
             档位。传入 `effort: "none"` 会返回 HTTP 400。
 
             - `MiniMax-M3`：默认关闭推理；将 `effort` 设为非 `none` 值可开启推理，但不会调节推理深度。
@@ -347,7 +1189,7 @@ components:
         model:
           type: string
           description: 实际处理请求的模型名称
-          example: MiniMax-M3.1-Flash-Preview
+          example: MiniMax-M3.1-Flash
         status:
           type: string
           enum:
@@ -398,6 +1240,24 @@ components:
           enum:
             - disabled
           description: 请求中暂不支持该参数，传入后将被忽略，响应中固定返回 **`disabled`**。
+        previous_response_id:
+          type: string
+          nullable: true
+          description: 请求中暂不支持该参数，传入后将被忽略，响应中固定返回 **`null`**。
+        conversation:
+          type: object
+          nullable: true
+          description: 请求中暂不支持该参数，传入后将被忽略，响应中固定返回 **`null`**。
+        service_tier:
+          type: string
+          nullable: true
+          description: >-
+            本次请求实际生效的服务层级，取值为 `standard` 或 `priority`。`MiniMax-M3.1-Flash`
+            不支持该字段，响应中返回 **`null`**。
+        safety_identifier:
+          type: string
+          nullable: true
+          description: 请求中暂不支持该参数，传入后将被忽略，响应中固定返回 **`null`**。
     InputItem:
       type: object
       description: >-

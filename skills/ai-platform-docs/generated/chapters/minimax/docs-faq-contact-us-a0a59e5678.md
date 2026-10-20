@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/contact-us.md -->
-<!-- Source SHA-256: 0ed16750c2eda82464124adbf6db2d6b791da0fe77a091adaa1558f15e0f5847 -->
+<!-- Source SHA-256: 67bff564f3f3e2cebe7198bdd8c3a55bbe6c52cb38e4ad0e28fd48b8f8863c94 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -35,4 +35,4 @@
 
 ### 邮件联系
 
-**邮件联系：** 商务合作、开票、退款——[api@minimaxi.com](mailto:api@minimaxi.com)
+**邮件联系：** 商务合作、开票、退款——[api@minimax.io](mailto:api@minimax.io)

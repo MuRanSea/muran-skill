@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/models.md -->
-<!-- Source SHA-256: c146a865975cbbabaa3da441484c5e8d78fb274b8e3d03847907fbc08c30bc8f -->
+<!-- Source SHA-256: dbc0602785ec30ad6d4e1493f9ce51e79acfb095053c05000527d8ef183e4534 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,18 +11,35 @@
 
 模型定价信息请参阅[产品定价](/docs/pricing/overview)。
 
+<Accordion title="MiniMax M2.5、M2.7 系列模型下线通知">
+  随着新版本模型的推出，我们将逐步停止提供 MiniMax M2.5、M2.7 系列模型服务，并为现有用户预留迁移时间。具体安排如下：
+
+  * **停止向新用户开放调用：**【2026年10月19日】
+  * **正式下线：**【2026年11月18日】
+
+  **按量付费 API 用户**
+
+  存量用户可继续调用至正式下线日，正式下线后相关 API 调用将不再可用。请提前核查调用情况，并在下线前完成模型迁移。
+
+  **M Plan 和 Token Plan 用户**
+
+  M2.5、M2.7 系列模型请求将于【2026年10月19日】统一路由至 **M3.1 Flash**。
+
+  原模型名称保留作为兼容入口，用户无需修改模型名称，原有套餐用量权益不受影响。
+
+  为避免影响业务，**请尽快核查调用情况并提前做好模型迁移准备。**
+
+  感谢您一直以来对MiniMax的支持与信任。
+</Accordion>
+
 ## 可用模型
 
 ### 语言模型
 
 | 模型名称 | 描述 |
 | :- | :- |
-| [MiniMax-M3.1-Flash-Preview](/docs/guides/text-generation) | 原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调 |
+| [MiniMax-M3.1-Flash](/docs/guides/text-generation) | 原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调 |
 | [MiniMax-M3](/docs/guides/text-generation) | 原生多模态、1M 上下文的 Frontier Coding 模型 |
-| [MiniMax-M2.7](/docs/guides/text-generation) | 开启模型的自我迭代 |
-| [MiniMax-M2.7-highspeed](/docs/guides/text-generation) | 与 M2.7 效果不变，速度大幅提升 |
-| [MiniMax-M2.5](/docs/guides/text-generation) | 顶尖性能与极致性价比，轻松驾驭复杂任务 |
-| [MiniMax-M2.5-highspeed](/docs/guides/text-generation) | 与 M2.5 效果不变，速度大幅提升 |
 
 ### 视频模型
 
@@ -58,6 +75,10 @@
 
 | 模型名称 | 类型 | 状态 |
 | :- | :- | :- |
+| MiniMax-M2.7 | 语言模型 | 已下线 |
+| MiniMax-M2.7-highspeed | 语言模型 | 已下线 |
+| MiniMax-M2.5 | 语言模型 | 已下线 |
+| MiniMax-M2.5-highspeed | 语言模型 | 已下线 |
 | MiniMax-M2.1 | 语言模型 | 已下线 |
 | MiniMax-M2.1-highspeed | 语言模型 | 已下线 |
 | MiniMax-M2 | 语言模型 | 已下线 |

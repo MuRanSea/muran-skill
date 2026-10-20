@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-generation.md -->
-<!-- Source SHA-256: 0fe4d737b74cf0aeeb5aa66638f3c9142dfd29bbf625157f0551caebb865c1ab -->
+<!-- Source SHA-256: 5b2f1dc15657cf1d19c40f89712ea1c16d4558f8ec4e52207cffc78ad66f73a5 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -51,7 +51,7 @@ MiniMax 视频生成目前提供 **MiniMax H3** 与 **MiniMax H3 Max** 两款模
 | - | - |
 | **首/尾帧入口** | 图片：0、1、2 张；宽高范围 \[256, 5760]；宽高比 5:2～2:5 范围内 |
 | | 无图片输入时为文生视频模式 |
-| **全能参考入口** | 图片：≤ 9 张；宽高范围 \[256, 5760] |
+| **全能参考入口** | 图片：≤ 9 张；宽高范围 \[256, 5760]；宽高比 5:2～2:5 范围内 |
 | | 视频：≤ 3 段；单段时长 \[2, 15] 秒；总时长 ≤ 15 秒；宽高范围 \[256, 5760]；宽高比 5:2～2:5 范围内 |
 | | 音频：≤ 3 段；单段时长 \[2, 15] 秒；总时长 ≤ 15 秒 |
 | | 混合输入的总上限是 12 个文件 |

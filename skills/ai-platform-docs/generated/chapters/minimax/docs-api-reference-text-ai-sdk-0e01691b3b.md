@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-ai-sdk.md -->
-<!-- Source SHA-256: 87a09af253cb7a16ad06e94ef32e4a7dc769e4bb5dee9a8400841c722c308b29 -->
+<!-- Source SHA-256: 30e82a4e514dd039caaca11fb226040752767f3af2f9bdf947c986295e285e51 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,19 +11,17 @@
 
 为了满足开发者对 [AI SDK](https://ai-sdk.dev) 生态的使用需求，MiniMax 提供了官方社区 Provider。通过简单的配置，即可将 MiniMax 的能力接入到 AI SDK 生态中。
 
-<Note>MiniMax-M3.1-Flash-Preview 暂时仅通过 M Plan 和 MiniMax Code 提供。</Note>
-
 ## 快速开始
 
 ### 1. 安装 AI SDK 和 MiniMax Provider
 
 <CodeGroup>
   ```bash npm theme={null}
-  npm install ai vercel-minimax-ai-provider
+  npm install ai @minimax-ai/ai-sdk-provider
   ```
 
   ```bash pnpm theme={null}
-  pnpm add ai vercel-minimax-ai-provider
+  pnpm add ai @minimax-ai/ai-sdk-provider
   ```
 </CodeGroup>
 
@@ -36,17 +34,21 @@ export MINIMAX_API_KEY=${YOUR_API_KEY}
 ### 3. 调用 API
 
 ```typescript TypeScript theme={null}
-import { minimax } from 'vercel-minimax-ai-provider';
+import { createMinimax } from '@minimax-ai/ai-sdk-provider';
 import { generateText } from 'ai';
 
-const { text, reasoning } = await generateText({
-  model: minimax('MiniMax-M3.1-Flash-Preview'),
+const minimax = createMinimax({
+  baseURL: 'https://api.minimax.cn/anthropic/v1',
+});
+
+const { text, reasoningText } = await generateText({
+  model: minimax('MiniMax-M3.1-Flash'),
   system: 'You are a helpful assistant.',
   prompt: 'Hi, how are you?',
 });
 
-if (reasoning) {
-  console.log(`Thinking:\n${reasoning}\n`);
+if (reasoningText) {
+  console.log(`Thinking:\n${reasoningText}\n`);
 }
 console.log(`Text:\n${text}\n`);
 ```
@@ -59,26 +61,19 @@ console.log(`Text:\n${text}\n`);
 
 ## 支持的模型
 
-使用 AI SDK 时，支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型：
+使用 AI SDK 时，支持以下模型。
 
 | 模型名称 | 上下文窗口 | 模型介绍 |
 | :- | :-: | :- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash-Preview</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
+| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
 | MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型** |
-| MiniMax-M2.7 | 204,800 | **开启模型的自我迭代**（输出速度约 60 TPS） |
-| MiniMax-M2.7-highspeed | 204,800 | **M2.7 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-| MiniMax-M2.5 | 204,800 | **顶尖性能与极致性价比，轻松驾驭复杂任务**（输出速度约 60 TPS） |
-| MiniMax-M2.5-highspeed | 204,800 | **M2.5 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-| MiniMax-M2.1 | 204,800 | **强大多语言编程能力，全面升级编程体验**（输出速度约 60 TPS） |
-| MiniMax-M2.1-highspeed | 204,800 | **M2.1 极速版：效果不变，更快，更敏捷**（输出速度约 100 TPS） |
-| MiniMax-M2 | 204,800 | **专为高效编码与 Agent 工作流而生** |
 
 <Note>
   TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
 </Note>
 
 <Note>
-  AI SDK 兼容接口支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2`
+  AI SDK 兼容接口支持 `MiniMax-M3.1-Flash` `MiniMax-M3`
   模型。如需使用其他模型，请使用标准的 MiniMax API 接口。
 </Note>
 
@@ -90,14 +85,14 @@ console.log(`Text:\n${text}\n`);
 
 | 参数 | 支持状态 | 说明 |
 | :- | :- | :- |
-| `model` | 完全支持 | 支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型 |
-| `messages` | 部分支持 | 支持文本和工具调用，不支持图像和文档输入 |
-| `maxTokens` | 完全支持 | 最大生成 token 数 |
+| `model` | 完全支持 | 支持 `MiniMax-M3.1-Flash` `MiniMax-M3` 模型 |
+| `messages` | 部分支持 | 支持文本、图片和工具调用；使用默认的 `minimax`（Anthropic 兼容格式）时还支持 PDF 文档；不支持视频输入 |
+| `maxOutputTokens` | 完全支持 | 最大生成 token 数 |
 | `system` | 完全支持 | 系统提示词 |
 | `temperature` | 完全支持 | 取值范围 \[0, 2]，控制输出随机性，建议取值 1 |
-| `toolChoice` | 完全支持 | 工具选择策略 |
+| `toolChoice` | 部分支持 | 工具选择策略，仅支持 `auto` |
 | `tools` | 完全支持 | 工具定义 |
-| `topP` | 完全支持 | 核采样参数，取值范围 \[0, 1]，`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 默认值 0.95，`MiniMax-M2.x` 系列默认值 0.9 |
+| `topP` | 完全支持 | 核采样参数，取值范围 \[0, 1]，`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 默认值 0.95，`MiniMax-M2.x` 系列默认值 0.9 |
 
 ### Messages 字段支持
 
@@ -109,16 +104,44 @@ console.log(`Text:\n${text}\n`);
 | `type="text"` | 完全支持 | 文本内容 |
 | `type="tool-call"` | 完全支持 | 工具调用 |
 | `type="tool-result"` | 完全支持 | 工具调用结果 |
-| `type="image"` | 不支持 | 暂不支持图像输入 |
-| `type="file"` | 不支持 | 暂不支持文件输入 |
+| `type="image"` | 部分支持 | 图片输入。使用默认的 `minimax` 传图片 URL 时，需指定具体的 `mediaType`（如 `image/jpeg`）。AI SDK 已不再推荐该类型，建议改用 `type="file"` |
+| `type="file"` | 部分支持 | 支持图片，`mediaType` 需为具体的图片类型（如 `image/jpeg`、`image/png`），可传 URL 或 base64；使用默认的 `minimax` 时还支持 PDF（`application/pdf`）；不支持视频 |
 
 ## 示例代码
+
+### OpenAI 兼容格式
+
+默认的 `minimax` 使用 Anthropic 兼容格式（`/anthropic/v1/messages`）。如需使用 OpenAI Chat Completions 兼容格式（`/v1/chat/completions`），请改用 `createMinimaxOpenAI`：
+
+```typescript TypeScript theme={null}
+import { createMinimaxOpenAI } from '@minimax-ai/ai-sdk-provider';
+import { generateText } from 'ai';
+
+const minimax = createMinimaxOpenAI({
+  baseURL: 'https://api.minimax.cn/v1',
+});
+
+const { text, reasoningText } = await generateText({
+  model: minimax('MiniMax-M3.1-Flash'),
+  system: 'You are a helpful assistant.',
+  prompt: 'Hi, how are you?',
+});
+
+if (reasoningText) {
+  console.log(`Thinking:\n${reasoningText}\n`);
+}
+console.log(`Text:\n${text}\n`);
+```
 
 ### 流式响应
 
 ```typescript TypeScript theme={null}
-import { minimax } from 'vercel-minimax-ai-provider';
+import { createMinimax } from '@minimax-ai/ai-sdk-provider';
 import { streamText } from 'ai';
+
+const minimax = createMinimax({
+  baseURL: 'https://api.minimax.cn/anthropic/v1',
+});
 
 console.log("Starting stream response...\n");
 console.log("=".repeat(60));
@@ -126,7 +149,7 @@ console.log("Thinking Process:");
 console.log("=".repeat(60));
 
 const result = streamText({
-  model: minimax('MiniMax-M3.1-Flash-Preview'),
+  model: minimax('MiniMax-M3.1-Flash'),
   system: 'You are a helpful assistant.',
   prompt: 'Hi, how are you?',
   onError({ error }) {
@@ -137,10 +160,10 @@ const result = streamText({
 let inText = false;
 
 for await (const part of result.fullStream) {
-  if (part.type === 'reasoning') {
+  if (part.type === 'reasoning-delta') {
     // 流式输出思考过程
     process.stdout.write(part.text);
-  } else if (part.type === 'text') {
+  } else if (part.type === 'text-delta') {
     if (!inText) {
       inText = true;
       console.log("\n" + "=".repeat(60));
@@ -158,13 +181,13 @@ console.log("\n");
 ## 注意事项
 
 <Warning>
-  1. AI SDK 兼容接口目前支持 `MiniMax-M3.1-Flash-Preview` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型
+  1. AI SDK 兼容接口目前支持 `MiniMax-M3.1-Flash` `MiniMax-M3` 模型
 
   2. `temperature` 参数取值范围为 \[0, 2]，超出范围会返回错误
 
-  3. 当前不支持图像和文档类型的输入
+  3. 当前不支持通过 AI SDK 输入视频；PDF 文档仅在使用默认的 `minimax`（Anthropic 兼容格式）时支持
 
-  4. 默认的 `minimax` Provider 实例使用 Anthropic 兼容 API 格式。如需使用 OpenAI 兼容格式，请使用 `minimaxOpenAI`。
+  4. 默认的 `minimax` Provider 实例使用 Anthropic 兼容 API 格式。如需使用 OpenAI 兼容格式，请使用 `createMinimaxOpenAI`，详见 [OpenAI 兼容格式](#openai-兼容格式)。
 
   5. 更多信息请参阅 [MiniMax AI Provider on AI SDK](https://ai-sdk.dev/providers/community-providers/minimax) 和 [GitHub 仓库](https://github.com/MiniMax-AI/vercel-minimax-ai-provider)
 </Warning>

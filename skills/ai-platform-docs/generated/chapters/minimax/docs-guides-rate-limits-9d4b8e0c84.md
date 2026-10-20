@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/rate-limits.md -->
-<!-- Source SHA-256: 07d7926e944a6c931342d1aff06001138a4414facc7f6dafca825fb0df536236 -->
+<!-- Source SHA-256: b3d81f78b3e3a03896dcbb9f5d822cf6dfaaec3932a9c43fba803a806ba27f13 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -20,17 +20,11 @@
 
 ### 语言
 
-| 模型 | MiniMax-M3 | MiniMax-M3 |
+| 模型 | MiniMax-M3.1-Flash<br />MiniMax-M3 | MiniMax-M3.1-Flash<br />MiniMax-M3 |
 | :- | :- | :- |
 | 限制类型 | RPM | TPM |
 | 免费用户 | 20 | 1,000,000 |
 | 充值用户 | 200 | 10,000,000 |
-
-| 模型 | MiniMax-M2.7 / M2.7-highspeed<br />MiniMax-M2.5 / M2.5-highspeed<br />MiniMax-M2.1 / M2.1-highspeed<br />MiniMax-M2 | MiniMax-M2.7 / M2.7-highspeed<br />MiniMax-M2.5 / M2.5-highspeed<br />MiniMax-M2.1 / M2.1-highspeed<br />MiniMax-M2 |
-| :- | :- | :- |
-| 限制类型 | RPM | TPM |
-| 免费用户 | 20 | 1,000,000 |
-| 充值用户 | 500 | 20,000,000 |
 
 ### 视频
 
@@ -63,7 +57,7 @@
 
 ### 音乐
 
-| 接口名                | Music Generation                     | Music Generation     |
+| 接口名 | Music Generation | Music Generation |
 | :- | :- | :- |
 | 模型 | music-2.6 / music-cover / music-2.0 | music-2.6 / music-cover / music-2.0 |
 | 限制类型 | RPM | CONN（最大并行运行任务数） |
@@ -105,5 +99,5 @@
 ### 6、如何提高速率限制
 
 我们的默认限速是为了帮助最大限度的提高 API 调用的稳定性，以及更公平合理的将相应资源进行分配。\
-如果您认为您拥有必要的流量数据以来申请提高速率限制时，您可以通过页面底部官方客户或邮件[**api@minimaxi.com**](mailto:api@minimaxi.com) 进行提高速率限制的申请。\
+如果您认为您拥有必要的流量数据以来申请提高速率限制时，您可以通过页面底部官方客户或邮件[**api@minimax.io**](mailto:api@minimax.io) 进行提高速率限制的申请。\
 需要您知悉的是，提高限速有时可能需要 3-5 个工作日，因此如果您有确定数据支持您的申请时，为了不影响您的产品的正常上线发布，请务必尽早提交限速提升申请。

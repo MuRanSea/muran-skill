@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/server-tools.md -->
-<!-- Source SHA-256: 06f33d01b70bcb6ea0c69d0c2c7846198905df9e23778a9c740938f247cb5964 -->
+<!-- Source SHA-256: 750e62414d35b487e385719bde01c479fbd94e931dcc2a089543321b9eb890b0 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -74,7 +74,7 @@
       -H "x-api-key: ${MINIMAX_API_KEY}" \
       -H "anthropic-version: 2023-06-01" \
       -d '{
-        "model": "MiniMax-M3",
+        "model": "MiniMax-M3.1-Flash",
         "max_tokens": 8192,
         "messages": [
           {
@@ -98,7 +98,7 @@
       --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
       --header 'Content-Type: application/json' \
       --data '{
-        "model": "MiniMax-M3",
+        "model": "MiniMax-M3.1-Flash",
         "input": "帮我搜一下今天上海的天气",
         "tools": [
           {
@@ -120,56 +120,92 @@
 
 | 内容块类型 | 说明 |
 | :- | :- |
+| `thinking` | 模型的思考内容，模型按需生成，可能出现在搜索前后 |
 | `text` | 模型生成的文本。搜索前的引导语与搜索后的最终答案都属于此类型 |
 | `server_tool_use` | 模型在服务端发起的工具调用，`name` 为 `web_search`，`input.query` 为实际检索的关键词 |
 | `web_search_tool_result` | 服务端返回的搜索结果，`content` 为 `web_search_result` 列表，含 `title`、`url`、`page_age`、`content` 等字段 |
 
+若一次请求中模型发起的搜索次数达到上限，响应会以 `stop_reason: "pause_turn"` 结束，此时没有最终答案。将本次返回的 `content` 作为 assistant 消息原样追加到 `messages` 后再次请求，模型会继续执行并给出回复。
+
 <Accordion title="完整响应示例">
   ```json theme={null}
   {
-      "id": "069d492820d3562155e88b67fe988b42",
+      "id": "0722ab84a6341c026ba2a809efbfcf30",
       "type": "message",
       "role": "assistant",
-      "model": "MiniMax-M3",
+      "model": "MiniMax-M3.1-Flash",
       "content": [
           {
-              "text": "我来帮您搜索今天上海的天气信息。",
+              "thinking": "The user wants today's weather in Shanghai. I should use web search to find this. Let me search.\n\nNote: I don't have a real-time weather tool, but I have web search. Let me do the search. I should also consider searching in Chinese.\n\nLet me make multiple independent searches in one block.",
+              "signature": "7dd59de84e48f8a88b349037988d5db9c1f6943fc7143fd3092a0e4c79d59d8b",
+              "type": "thinking"
+          },
+          {
+              "text": "我来帮你搜索一下今天上海的天气。",
               "type": "text"
           },
           {
               "type": "server_tool_use",
-              "id": "call_function_aa733q961ql2_1",
+              "id": "call_function_gznzlqvp7j32_1",
               "name": "web_search",
               "input": {
-                  "query": "今天上海天气"
+                  "query": "上海今天天气预报"
               }
           },
           {
               "type": "web_search_tool_result",
-              "tool_use_id": "call_function_aa733q961ql2_1",
+              "tool_use_id": "call_function_gznzlqvp7j32_1",
               "content": [
-                  /// ...
                   {
                       "type": "web_search_result",
-                      "title": "上海天气预报",
-                      "url": "http://www.weather.com.cn/textFC/shanghai.shtml",
-                      "page_age": "2026-07-07 18:00:00",
-                      "content": "地图版国内城市天气预报 天气预报 >国内> 上海 上海 今天周二(7月7日) 周三(7月8日) 周四(7月9日) 周五(7月10日) 周六(7月11日) 周日(7月12日) 周一(7月13日) 市 区/县 周二(7月7日)白天 周二(7月7日)夜间 天气现象 风向风力 最高气温 天气现象 风向风力 最低气温 上海 上海 - - - - 小雨 南风 <3级 28 详情 闵行 - - - - 小雨 "
+                      "title": "上海24小时天气",
+                      "url": "https://beijing.tianqi.com/shanghai/today/",
+                      "page_age": "2026/10/17 20:00:15",
+                      "content": "上海24小时天气 天气网北京站。上海天气 [切换城市] 25℃ 晴22 ~ 28℃ 空气质量:优湿度:69%风向:东南风 2级紫外线:无日出: 05:58日落: 17:20 上海一周天气 上海10天天气 上海15天天气 上海30天天气 晴 多云 多云 多云 多云 多云 阴 多云 25 25 24 24 24 24 24……"
                   },
                   /// ...
               ]
           },
           {
-              "text": "根据最新搜索到的信息，今天（7月8日）上海的天气情况如下：\n\n## 🌤️ 上海今日天气\n\n- **天气**：多云到阴为主，局部地区有**短时阵雨或雷雨**\n- **气温**：早间最低气温约 30.3℃，白天最高气温可达 **35~36℃**\n- **风力**：南到西南风 3~4 级（沿江沿海地区 4~5 级），夜里转南到东南风\n- **湿度**：相对湿度 95%~60%，**体感闷热**\n- **预警**：上海市气象台已发布**中心城区高温黄色预警**\n\n## ⚠️ 温馨提示\n\n1. **防暑降温**：气温高、湿度大，闷热感明显，外出注意防晒、多补水。\n2. **防雨防雷**：局部有短时雷阵雨，建议随身带把伞，遮阳又挡雨。\n3. **台风消息**：今年第 14 号台风\"**巴威**\"强度超强，预计 11-13 日将对上海及周边海域产生明显的风雨影响，建议持续关注后续预报。\n\n## 📅 未来几天\n\n- **明天（7月9日）**：多云到阴，局部短时雷雨，气温 28~34℃，略有缓解\n- **周五起**：受台风\"巴威\"外流环流影响，多阵雨天气，气温下降并伴东南大风\n\n如需更详细的逐小时预报，可以访问 [中国天气网-上海](http://www.weather.com.cn/weather/101020100.shtml) 查询。",
+              "type": "server_tool_use",
+              "id": "call_function_gznzlqvp7j32_2",
+              "name": "web_search",
+              "input": {
+                  "query": "上海 今日天气 实时 气温"
+              }
+          },
+          {
+              "type": "web_search_tool_result",
+              "tool_use_id": "call_function_gznzlqvp7j32_2",
+              "content": [
+                  {
+                      "type": "web_search_result",
+                      "title": "周末最高31,上海大歌剧院今正式启幕;上海东站､上海宝山站预计明年投用",
+                      "url": "https://www.toutiao.com/article/7697404067781296659/",
+                      "page_age": "2026/10/17 06:59:24",
+                      "content": "发布时间:2026年10月17日。2026-10-1706:59·上观新闻上海今天多云到阴,东南风4~5级,沿江沿海地区阵风有6级,今天上午转4~5级阵风6级,沿江沿海地区5级阵风6~7级。今天最高气温28℃,最低气温22℃。相对湿度90%~45%。周日的最高气温可达31℃。周日夜里到下周一上海转受冷空气影响,将有一次……"
+                  },
+                  /// ...
+              ]
+          },
+          {
+              "thinking": "The search results indicate the current date appears to be 2026/10/17 (Saturday). Let me summarize today's weather in Shanghai.\n\nToday (Oct 17, Saturday): 多云到阴 (cloudy to overcast), 22-28/29°C, southeast wind 4-5 with gusts 6, humidity 90%-45%, feels warm and humid. Xujiahui station 21.9°C in the morning, max ~29°C.\n\nLet me present it clearly. I should note data is from 上海市气象台.",
+              "signature": "a0a55f6614593651f36378bbed6adafe841d20afb4f82631424cbc13e2e2ee46",
+              "type": "thinking"
+          },
+          {
+              "text": "今天（**10月17日 星期六**）上海天气如下：\n\n## 今日天气\n| 项目 | 情况 |\n|---|---|\n| 天气 | 多云到阴，局部有短时小雨，阳光偶有露脸 |\n| 气温 | 最低 **22℃** ~ 最高 **28~29℃**（徐家汇站最高 29℃ 上下） |\n| 风力 | 东南风 4~5 级，阵风 6 级；沿江沿海地区 5 级阵风 6~7 级 |\n| 湿度 | 90%~45%，体感偏暖湿 |\n| 空气质量 | 优 |\n\n**实况**：早晨全市起步气温 19~22℃，徐家汇站 21.9℃，白天阳光不错，适合抓紧洗晒；午后暖湿感明显。\n\n## 出行建议\n- 建议带把伞（局部短时小雨 + 阵风较大）\n- 穿短袖/薄外套即可，但**随身备一件薄外套**，昼夜温差体感较大\n- 风大，注意骑车、走高架桥时安全\n\n## 未来几天趋势（重点提醒）\n- **明天（10/18 周日）**：多云到阴转阴到多云，**24℃~31℃**，午后有阵雨或雷雨。31℃ 在历史同期不多见，体感潮湿闷热\n- **周一（10/19）**：受冷空气影响，有明显降水过程，**可能伴雷电**，最高降至 25℃\n- **周二（10/20）**：阴到多云有时有阵雨，22℃~27℃\n- **周三（10/21）**：多云到阴，**17℃~22℃**，最低跌至\"1字头\"，早晚明显凉意\n\n👉 未来十天冷暖交替频繁、气温起伏较大，建议随时关注临近预报、及时增减衣物。（数据来源：上海市气象台/上海天气发布、中央气象台）",
               "type": "text"
           }
       ],
       "usage": {
-          "input_tokens": 3206,
-          "output_tokens": 365,
+          "input_tokens": 10563,
+          "output_tokens": 647,
           "cache_creation_input_tokens": 0,
-          "cache_read_input_tokens": 228,
-          "service_tier": "standard"
+          "cache_read_input_tokens": 904,
+          "output_tokens_details": {
+              "thinking_tokens": 179
+          }
       },
       "stop_reason": "end_turn",
       "base_resp": {
@@ -186,61 +222,141 @@
 
 | 字段或输出项 | 说明 |
 | :- | :- |
+| `reasoning` | 模型的思考内容，模型按需生成，可能出现在搜索前后 |
 | `web_search_call` | 服务端执行的联网搜索调用，包含调用 ID、执行状态和 `action.query` 实际检索词 |
-| `message` | 模型生成的最终回复，文本位于 `content` 中 |
+| `message` | 模型生成的文本，文本位于 `content` 中。搜索前的引导语与搜索后的最终答案都属于此类型 |
 | `output_text` | 聚合后的最终文本，可直接读取 |
 
 <Accordion title="Responses API 响应示例">
   ```json theme={null}
   {
-    "id": "06dde8fff7573ca7ba181eecab350bd5",
-    "object": "response",
-    "created_at": 1787737599,
-    "status": "completed",
-    "model": "MiniMax-M3",
-    "output": [
-      {
-        "id": "call_function_1bto13bpgmku_1",
-        "type": "web_search_call",
-        "status": "completed",
-        "action": {
-          "type": "search",
-          "query": "今天上海天气"
-        }
-      },
-      {
-        "id": "06dde8fff7573ca7ba181eecab350bd5_msg",
-        "type": "message",
-        "status": "completed",
-        "role": "assistant",
-        "content": [
+      "id": "0722aabe22b03a2b97547a5ef5e9f5d3",
+      "object": "response",
+      "created_at": 1792243646,
+      "model": "MiniMax-M3.1-Flash",
+      "status": "completed",
+      "output": [
           {
-            "type": "output_text",
-            "text": "# 今日上海天气 🌤️\n\n根据搜索到的天气预报信息……",
-            "annotations": [
-              {
-                "type": "url_citation",
-                "title": "上海目前天氣",
-                "url": "https://weather.yahoo.com/zh-hant-tw/cn/%E4%B8%8A%E6%B5%B7/",
-                "start_index": 0,
-                "end_index": 0,
-                "content": "上海目前天氣……"
+              "id": "0722aabe22b03a2b97547a5ef5e9f5d3_rs",
+              "type": "reasoning",
+              "status": "completed",
+              "summary": [],
+              "content": [
+                  {
+                      "type": "reasoning_text",
+                      "text": "The user wants today's weather in Shanghai. I should use web search to find this. Let me search.\n\nLet me do a search for \"上海天气\" and also maybe \"上海天气预报 今天\".\n\nThe current date - I need to know today's date. Let me search and see.\n\nI'll make multiple independent calls in one block."
+                  }
+              ]
+          },
+          {
+              "id": "0722aabe22b03a2b97547a5ef5e9f5d3_msg",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                  {
+                      "type": "output_text",
+                      "text": "我来帮你搜索一下上海今天的天气。",
+                      "annotations": []
+                  }
+              ]
+          },
+          {
+              "id": "call_function_87l4jam0b0kj_1",
+              "type": "web_search_call",
+              "status": "completed",
+              "action": {
+                  "type": "search",
+                  "query": "上海天气预报 今天"
               }
-            ]
+          },
+          {
+              "id": "call_function_87l4jam0b0kj_2",
+              "type": "web_search_call",
+              "status": "completed",
+              "action": {
+                  "type": "search",
+                  "query": "上海 今日天气 气温 实时"
+              }
+          },
+          {
+              "id": "0722aabe22b03a2b97547a5ef5e9f5d3_rs_r1",
+              "type": "reasoning",
+              "status": "completed",
+              "summary": [],
+              "content": [
+                  {
+                      "type": "reasoning_text",
+                      "text": "The search results indicate today is 2026-10-17 (Saturday). Let me synthesize. The official 上海市气象台 forecast for today (10/17): 多云到阴, 东南风4~5级, 沿江沿海地区阵风有6级, 最高气温28℃, 最低气温22℃, 相对湿度90%~45%.\n\nSome sources mention 最高29℃ (新闻坊). 中国天气网: 阴 28/23℃. Let me present the main official forecast.\n\nLet me give a summary with today, tomorrow, and the week's trend.\n\nShould I do another search to confirm? The results are pretty consistent. Let me present it.\n\nNote: the date seems to be 2026-10-17. Let me present the info.\n\nI might do one more search for the most recent/current conditions, but the data seems sufficient. Let me just answer.\n\nActually, let me consider doing one more search to verify the most up-to-date hourly/real-time info. The search results include data updated 18:00 from 中国天气网 for 16日, and various 10/17 reports. I think that's enough. Let me answer."
+                  }
+              ]
+          },
+          {
+              "id": "0722aabe22b03a2b97547a5ef5e9f5d3_msg_r1",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                  {
+                      "type": "output_text",
+                      "text": "## 上海今日天气（2026年10月17日 星期六）\n\n**实况 / 今日预报**\n- **天气**：多云到阴，局部有短时小雨，阳光偶尔露脸\n- **气温**：22℃ ~ 28℃（部分媒体援引市气象台\"今日最高29℃左右\"；中国天气网城区预报为 28/23℃）\n- **早晨实况**：全市起步气温 19~22℃，徐家汇站 21.9℃；午后体感偏暖湿\n- **风力**：东南风 4~5 级，阵风 6 级，沿江沿海地区 5~6 级、阵风 6~7 级\n- **湿度**：90%~45%\n- **体感**：暖湿，午后偏闷；建议短袖 + 薄外套，风大注意防风，外出带把伞更稳妥\n\n**未来几天趋势（上海市气象台）**\n| 日期 | 天气 | 气温 |\n|---|---|---|\n| 10/18 周日 | 多云到阴转阴到多云，有时有阵雨或雷雨 | 24~31℃ |\n| 10/19 周一 | 阴到多云，有时有阵雨 | 21~25℃ |\n| 10/20 周二 | 阴到多云，有时有阵雨 | 22~27℃ |\n| 10/21 周三 | 多云到阴 | 17~22℃ |\n\n**几点提醒**\n1. **周日下午是转折点**：冷暖空气交汇，可能出现雷雨，气温随后明显回落。\n2. **周日 31℃ 属历史同期少见**（1872 年建站以来，10 月中旬日最高气温很少超 30℃，仅 11 天达到或超过）。\n3. **下周三前后最低气温跌到\"1 字头\"**，早晚凉意明显，衣物要能灵活增减。\n4. **台风\"蔷琵\"**（今年第 30 号）已在 16 日加强为强热带风暴/台风级，位于西北太平洋，未来 5 天对我国海区无直接影响，但是否奔我国要等 21~22 日形势明朗。\n5. 未来十天冷暖更替频繁，建议出门前再看一眼临近预报。\n\n（数据来源：上海市气象台/上海发布、中国天气网、上观新闻、新闻坊；不同来源对今日最高气温有 28℃/29℃ 的小幅差异，以实时观测为准。）",
+                      "annotations": [
+                          {
+                              "type": "url_citation",
+                              "title": "准备冲29度!",
+                              "url": "https://www.shhuangpu.gov.cn/xw/001015/20261013/ee809b0f-9ba2-48d4-8a3b-91897fc736e1.html",
+                              "start_index": 0,
+                              "end_index": 0,
+                              "content": "准备冲29度! 上海市黄浦区人民政府。今日回顾 今天空气里依旧弥漫着甜甜的桂花香,阳光上线,幸福感拉满~白天气温上升迅速,最高气温在26~28℃之间,市区徐家汇站26.9℃,空气不算干燥,体感较舒适。 今夜至明日天气 今天夜间到明天中东部降雨稀少。上海明天延续多云的好天气,但今天夜间稍有变化👇👇👇 01 具体预报 今天……"
+                          },
+                          /// ...
+                      ]
+                  }
+              ]
           }
-        ]
-      }
-    ],
-    "output_text": "# 今日上海天气 🌤️\n\n根据搜索到的天气预报信息……",
-    "usage": {
-      "input_tokens": 12036,
-      "output_tokens": 412,
-      "total_tokens": 12448,
-      "input_tokens_details": {
-        "cached_tokens": 348
-      }
-    },
-    "error": null
+      ],
+      "output_text": "我来帮你搜索一下上海今天的天气。## 上海今日天气（2026年10月17日 星期六）\n\n**实况 / 今日预报**\n- **天气**：多云到阴，局部有短时小雨，阳光偶尔露脸\n- **气温**：22℃ ~ 28℃（部分媒体援引市气象台\"今日最高29℃左右\"；中国天气网城区预报为 28/23℃）\n- **早晨实况**：全市起步气温 19~22℃，徐家汇站 21.9℃；午后体感偏暖湿\n- **风力**：东南风 4~5 级，阵风 6 级，沿江沿海地区 5~6 级、阵风 6~7 级\n- **湿度**：90%~45%\n- **体感**：暖湿，午后偏闷；建议短袖 + 薄外套，风大注意防风，外出带把伞更稳妥\n\n**未来几天趋势（上海市气象台）**\n| 日期 | 天气 | 气温 |\n|---|---|---|\n| 10/18 周日 | 多云到阴转阴到多云，有时有阵雨或雷雨 | 24~31℃ |\n| 10/19 周一 | 阴到多云，有时有阵雨 | 21~25℃ |\n| 10/20 周二 | 阴到多云，有时有阵雨 | 22~27℃ |\n| 10/21 周三 | 多云到阴 | 17~22℃ |\n\n**几点提醒**\n1. **周日下午是转折点**：冷暖空气交汇，可能出现雷雨，气温随后明显回落。\n2. **周日 31℃ 属历史同期少见**（1872 年建站以来，10 月中旬日最高气温很少超 30℃，仅 11 天达到或超过）。\n3. **下周三前后最低气温跌到\"1 字头\"**，早晚凉意明显，衣物要能灵活增减。\n4. **台风\"蔷琵\"**（今年第 30 号）已在 16 日加强为强热带风暴/台风级，位于西北太平洋，未来 5 天对我国海区无直接影响，但是否奔我国要等 21~22 日形势明朗。\n5. 未来十天冷暖更替频繁，建议出门前再看一眼临近预报。\n\n（数据来源：上海市气象台/上海发布、中国天气网、上观新闻、新闻坊；不同来源对今日最高气温有 28℃/29℃ 的小幅差异，以实时观测为准。）",
+      "usage": {
+          "input_tokens": 10485,
+          "output_tokens": 886,
+          "total_tokens": 11371,
+          "input_tokens_details": {
+              "cached_tokens": 905
+          },
+          "output_tokens_details": {
+              "reasoning_tokens": 313
+          }
+      },
+      "error": null,
+      "incomplete_details": null,
+      "instructions": null,
+      "metadata": {},
+      "tools": [
+          {
+              "type": "web_search",
+              "name": "",
+              "parameters": null
+          }
+      ],
+      "tool_choice": "auto",
+      "temperature": 1,
+      "top_p": 0.95,
+      "text": {
+          "format": {
+              "type": "text"
+          }
+      },
+      "reasoning": {
+          "effort": null,
+          "summary": null
+      },
+      "max_output_tokens": null,
+      "parallel_tool_calls": true,
+      "previous_response_id": null,
+      "conversation": null,
+      "store": false,
+      "safety_identifier": null,
+      "truncation": "disabled"
   }
   ```
 </Accordion>
@@ -255,4 +371,4 @@
 2. 目前服务端工具仅提供 `web_search`，支持通过 **Anthropic Messages API** 和 **OpenAI Responses API** 调用。
 3. Anthropic Messages API 的 Base URL 为 `https://api.minimax.cn/anthropic`；OpenAI Responses API 的端点为 `https://api.minimax.cn/v1/responses`。接口详情分别参见 [Anthropic SDK](/docs/api-reference/text-anthropic-api) 和 [Responses API](/docs/api-reference/responses-create)。
 
-如在使用过程中遇到问题，可通过邮箱 [Model@minimaxi.com](mailto:Model@minimaxi.com) 联系我们的技术支持团队。
+如在使用过程中遇到问题，可通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 联系我们的技术支持团队。

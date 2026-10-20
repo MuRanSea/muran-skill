@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-prompt-caching.md -->
-<!-- Source SHA-256: 70c432be36bcc3c413e6b8ade66adabd551f1a2259e8bbd75d982e708318e29e -->
+<!-- Source SHA-256: aa27305a8aaf97cd6b4fecbc9ad356dd7f10265620576f9f422169780ddd14fa -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,7 +11,7 @@
 
 # 功能特性
 
-* **自动缓存**：被动缓存，自动识别重复的上下文内容，无需更改接口调用方式 （*相对的，在 anthropic API 中使用的需要显式设置参数的缓存模式，我们称之为「主动缓存」，详见[Anthropic 主动缓存](/docs/api-reference/anthropic-api-compatible-cache)*）
+* **自动缓存**：自动识别重复的上下文内容，无需更改接口调用方式
 * **降低成本**：命中缓存的输入 Token 以更低价格计费，大幅节省成本
 * **提升速度**：减少重复内容的处理时间，加快模型响应
 
@@ -50,7 +50,7 @@
     client = anthropic.Anthropic()
 
     response1 = client.messages.create(
-        model="MiniMax-M3",
+        model="MiniMax-M3.1-Flash",
         system="You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
         messages=[
             {
@@ -82,7 +82,7 @@
 
     ```python theme={null} theme={null}
     response2 = client.messages.create(
-        model="MiniMax-M3",
+        model="MiniMax-M3.1-Flash",
         system="You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
         messages=[
             {
@@ -147,7 +147,7 @@
     client = OpenAI()
 
     response1 = client.chat.completions.create(
-        model="MiniMax-M3",
+        model="MiniMax-M3.1-Flash",
         messages=[
             {"role": "system", "content": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"},
             {"role": "user", "content": "<the entire contents of 'Pride and Prejudice'>"},
@@ -167,7 +167,7 @@
 
     ```python theme={null} theme={null}
     response2 = client.chat.completions.create(
-        model="MiniMax-M3",
+        model="MiniMax-M3.1-Flash",
         messages=[
             {"role": "system", "content": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"},
             {"role": "user", "content": "<the entire contents of 'Pride and Prejudice'>"},
@@ -203,6 +203,7 @@
 
 * 缓存适用于包含 512 个及以上的输入 token 数量的 API 调用；
 * 缓存采用前缀匹配的方式，以「工具定义-系统提示词-历史对话内容」为顺序构建，任意模块内容的变更，都可能会影响缓存的效果；
+* 支持模型：MiniMax-M3.1-Flash、MiniMax-M3、MiniMax-M2.7 系列、MiniMax-M2.5 系列、MiniMax-M2.1 系列。
 
 # 最佳实践
 
@@ -219,39 +220,19 @@ prompt 缓存采用差异化的计费策略：
 
 > 详见 [按量计费价格页](/docs/pricing/overview#models/text)
 
-计费示例：
+计费公式：
 
 ```
-假设使用 MiniMax-M3 输入 ≤512k tokens 的标准价格：输入 4.20 元/1M tokens，输出 16.80 元/1M tokens，缓存命中 0.84 元/1M tokens：
+单次请求费用 = 新增输入 Token 数 × 输入单价
+            + 缓存命中 Token 数 × 缓存命中单价
+            + 输出 Token 数 × 输出单价
 
-单次请求 token 用量详情：
-- 总输入 Token： 50000
-- 缓存命中 Token： 45000
-- 新增输入内容 Token： 5000
-- 输出 Token： 1000
-
-计费计算：
-- 新增输入内容费用： 5000 × 4.20/1000000 = 0.021 元
-- 缓存费用： 45000 × 0.84/1000000 = 0.0378 元
-- 输出费用： 1000 × 16.80/1000000 = 0.0168 元
-- 总费用：0.021+0.0378+0.0168 = 0.0756 元
-
-相比无缓存 （50000 × 4.20/1000000 + 1000 × 16.80/1000000 = 0.2268 元），节省约 66.7%
+其中：
+- 新增输入 Token 数 = 总输入 Token 数 − 缓存命中 Token 数
+- 各项单价以「元/百万 tokens」计，取值以按量计费价格页为准
 ```
 
-对 MiniMax-M3，请求输入 tokens 大于 512k 时适用长上下文价格，输入 tokens 包含缓存命中 tokens。
+缓存命中 Token 数可从响应的 `usage` 中获取：
 
-# Cache 对比
-
-| | Prompt 缓存（被动缓存） | Anthropic 主动缓存 |
-| :- | :- | :- |
-| 使用方式 | 自动识别重复内容并缓存 | 在API中显式设置 cache\_control |
-| 计费方式 | 命中缓存的token以优惠价格进行计费<br />写入缓存的部分无额外计费 | 命中缓存的token以优惠价格进行计费<br />首次写入缓存的token需要额外计费 |
-| 缓存过期 | 根据系统负载自动调整过期时间 | 5min过期时间，持续使用会自动续期 |
-| 支持模型 | MiniMax-M3<br />MiniMax-M2.7 系列<br />MiniMax-M2.5 系列<br />MiniMax-M2.1 系列 | MiniMax-M2.7 系列<br />MiniMax-M2.5 系列<br />MiniMax-M2.1 系列<br />MiniMax-M2 系列 |
-
-# 更多阅读
-
-<Columns cols={1}>
-  <Card title="Anthropic 主动缓存" icon="book-open" href="/docs/api-reference/anthropic-api-compatible-cache" arrow="true" cta="点击查看" />
-</Columns>
+* Anthropic 兼容接口：`usage.cache_read_input_tokens`；`usage.input_tokens` 即为新增输入 Token 数
+* OpenAI 兼容接口：`usage.prompt_tokens_details.cached_tokens`；`usage.prompt_tokens` 为总输入 Token 数

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-m3-function-call.md -->
-<!-- Source SHA-256: 42193c24a679a9bc170cf1ee30b15a1ff5adae9a6f5c1a7cd222470f1fecc8a7 -->
+<!-- Source SHA-256: a7cda1545cd2401b5a9fcd08dd3421c6468c88c1acb1186bac0dd05c78899793 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -7,15 +7,15 @@
 
 # 工具使用 & 交错思维链
 
-> MiniMax-M3 是一款 Agentic Model，具备优秀的工具使用 (Tool Use) 能力。
+> MiniMax-M3.1-Flash 是一款 Agentic Model，具备优秀的工具使用 (Tool Use) 能力。
 
-M3 原生支持 Interleaved Thinking。它能够在每轮 Tool Use 前，根据环境或工具的返回 (Output) 进行思考，并决策下一步行动。
+MiniMax-M3.1-Flash 原生支持 Interleaved Thinking。它能够在每轮 Tool Use 前，根据环境或工具的返回 (Output) 进行思考，并决策下一步行动。
 
 <img src="https://filecdn.minimax.chat/public/4f4b43c1-f0a5-416a-8770-1a4f80feeb1e.png" />
 
 这种能力使其在长程、复杂任务中表现出色，并在 SWE、BrowseCamp、xBench 等 Code & Agent Benchmark 上达到了 SOTA 水平。
 
-下面我们通过具体的案例，说明 M3 在 Tool Use 和 Interleaved Thinking 上的最佳实践，它的核心是：回传每一次模型 Response 的全部信息，尤其是其中的思考字段(thinking/reasoning\_details)。
+下面我们通过具体的案例，说明 MiniMax-M3.1-Flash 在 Tool Use 和 Interleaved Thinking 上的最佳实践，它的核心是：回传每一次模型 Response 的全部信息，尤其是其中的思考字段（`thinking` / `reasoning_content`）。
 
 ## 参数说明
 
@@ -27,12 +27,16 @@ M3 原生支持 Interleaved Thinking。它能够在每轮 Tool Use 前，根据�
 
 工具使用响应中的关键字段：
 
-* `thinking/reasoning_details`: 模型的思考（thinking）
-* `text/content`: 模型输出的文本
-* `tool_calls`: 模型决定调用工具
-* `function.name`: 被调用的工具名称
-* `function.arguments`: 工具调用参数（JSON 格式字符串）
+* `thinking` / `reasoning_content`: 模型的思考（thinking）
+* `text` / `content`: 模型输出的文本
+* `tool_use` / `tool_calls`: 模型决定调用工具
+* `name` / `function.name`: 被调用的工具名称
+* `input` / `function.arguments`: 工具调用参数（OpenAI 格式下为 JSON 字符串）
 * `id`: 工具调用的唯一标识符
+
+<Note>
+  MiniMax-M3.1-Flash 按需思考：在简单的工具调用中，模型可能直接调用工具而不输出思考内容，此时该轮响应中没有 `thinking` 内容块或 `reasoning_content` 字段。解析时请先判断字段是否存在，无论本轮是否包含思考内容，都需要完整回传模型返回的消息。
+</Note>
 
 ## 特别注意
 
@@ -40,9 +44,8 @@ M3 原生支持 Interleaved Thinking。它能够在每轮 Tool Use 前，根据�
 
 **OpenAI SDK:**
 
-* 将完整的 `response_message` 对象（包含 `tool_calls` 字段）添加到消息历史
-  * 原生的OpenAI API 的 MiniMax-M3 模型 `content` 字段会包含 `<think>` 标签内容，需要完整保留
-  * 在 Interleaved Thinking 友好格式中，通过启用额外的参数(`reasoning_split=True`)，模型思考内容通过 `reasoning_details` 字段单独提供，同样需要完整保留
+* 将完整的 `response_message` 对象（包含 `reasoning_content` 和 `tool_calls` 字段）添加到消息历史
+* 模型的思考内容通过 `reasoning_content` 字段返回，回传时需要一并保留
 
 **Anthropic SDK:**
 
@@ -89,7 +92,7 @@ tools = [
 
 def send_messages(messages):
     params = {
-        "model": "MiniMax-M3",
+        "model": "MiniMax-M3.1-Flash",
         "max_tokens": 4096,
         "messages": messages,
         "tools": tools,
@@ -160,94 +163,52 @@ if tool_use_blocks:
 **代码输出结果如下：**
 
 ```nushell theme={null}
-👤 User>         How's the weather in San Francisco?
-💭 Thinking>
-Okay, so the user is asking about the weather in San Francisco. This is a straightforward request that requires me to get current weather information for a specific location.
-
-Looking at my available tools, I see I have a `get_weather` function that can provide weather information for a location. This is exactly what I need to answer the user's question. The function requires a "location" parameter, which should be a string containing the city and potentially the state/country.
-
-In this case, the user has clearly specified San Francisco as the location. San Francisco is a major city in US, so I don't need to include the country code - just "San Francisco" should be sufficient for the weather service to identify the correct location.
-
-The required parameters for the get_weather tool are:
-- location: "San Francisco"
-
-I should call this tool to retrieve the current weather information for San Francisco before I can provide a meaningful answer to the user. Once I get the weather data back from the tool, I'll be able to share details like temperature, conditions (sunny, cloudy, rainy, etc.), and possibly other relevant information like humidity or wind speed.
-
-So I'll make a tool call to get_weather with the location parameter set to "San Francisco". After I receive the response from this tool call, I'll be able to provide the user with the current weather information they requested.
-
-🔧 Tool>        get_weather({"location": "San Francisco"})
+👤 User>	 How's the weather in San Francisco?
+💬 Model>	I'll check that for you.
+🔧 Tool>	get_weather({"location": "San Francisco, US"})
 
 🔨 执行工具: get_weather
 📊 工具返回: 24℃, sunny
 💭 Thinking>
-I've just called the get_weather tool to check the current conditions in San Francisco as the user requested. Let me analyze what information I received back.
+The user asked about the weather in San Francisco. The tool returned 24°C and sunny. Let me present that. Note 24°C is 75°F. I should just report the result. Maybe add a note about the temperature being unusually warm for SF, but I shouldn't over-speculate. I'll present the result clearly.
 
-The tool returned a simple response: "24℃, sunny". This is quite straightforward - it tells me the current temperature is 24 degrees Celsius and the weather conditions are sunny. This is exactly the basic weather information the user was asking about.
+💬 Model>	The weather in San Francisco is currently:
 
-The temperature is given in Celsius (24℃), which is appropriate since US uses the metric system. I could convert this to Fahrenheit for users who might be more familiar with that scale, but since the user didn't specify a preference, I'll stick with the metric measurement as provided by the tool.
+- **Temperature:** 24°C (about 75°F)
+- **Conditions:** Sunny
 
-For the weather condition, I received "sunny" which indicates clear skies and good visibility. This is useful information that tells the user they can expect good weather if they're planning to be outside.
-
-I don't have additional details like humidity, wind speed, or UV index from the tool response. If the user wants more detailed information, they could ask a follow-up question, and I might need to provide general advice about sunny weather conditions or suggest checking a more detailed weather service.
-
-Now I need to formulate a clear, concise response to the user that directly answers their question about the weather in San Francisco. I'll keep it simple and factual, stating the temperature and conditions clearly. I should also add a friendly closing to invite further questions if needed.
-
-The most straightforward way to present this information is to state the temperature first, followed by the conditions, and then add a friendly note inviting the user to ask for more information if they want it.
-
-💬 Model>       The current weather in San Francisco is 24℃ and sunny.
+A warm, sunny day — you'd typically want light clothing and maybe sunscreen if you're heading outside. Let me know if you'd like the forecast for a different location or need more details!
 ```
 
-**返回结果**
+**第一轮请求的返回结果**
 
 ```json theme={null}
 {
-    "id": "05566b8d51ded3a3016d6cc100685cad",
-    "choices": [
+    "id": "0722aa34c63ce29f90ac9051ece69b22",
+    "type": "message",
+    "role": "assistant",
+    "model": "MiniMax-M3.1-Flash",
+    "content": [
         {
-            "finish_reason": "tool_calls",
-            "index": 0,
-            "message": {
-                "content": "\n",
-                "role": "assistant",
-                "name": "MiniMax AI",
-                "tool_calls": [
-                    {
-                        "id": "call_function_2831178524_1",
-                        "type": "function",
-                        "function": {
-                            "name": "get_weather",
-                            "arguments": "{\"location\": \"San Francisco, US\"}"
-                        },
-                        "index": 0
-                    }
-                ],
-                "audio_content": "",
-                "reasoning_details": [
-                    {
-                        "type": "reasoning.text",
-                        "id": "reasoning-text-1",
-                        "format": "MiniMax-response-v1",
-                        "index": 0,
-                        "text": "Let me think about this request. The user is asking about the weather in San Francisco. This is a straightforward request where they want to know current weather conditions in a specific location.\n\nLooking at the tools available to me, I have access to a \"get_weather\" tool that can retrieve weather information for a location. The tool requires a location parameter in the format of \"city, state\" or \"city, country\". In this case, the user has specified \"San Francisco\" which is a city in the United States.\n\nTo properly use the tool, I need to format the location parameter correctly. The tool description mentions examples like \"San Francisco, US\" which follows the format of city, country code. However, since the user just mentioned \"San Francisco\" without specifying the state, and San Francisco is a well-known city that is specifically in California, I could use \"San Francisco, CA\" as the parameter value instead.\n\nActually, \"San Francisco, US\" would also work since the user is asking about the famous San Francisco in the United States, and there aren't other well-known cities with the same name that would cause confusion. The US country code is explicit and clear.\n\nBoth \"San Francisco, CA\" and \"San Francisco, US\" would be valid inputs for the tool. I'll go with \"San Francisco, US\" since it follows the exact format shown in the tool description example and is unambiguous.\n\nSo I'll need to call the get_weather tool with the location parameter set to \"San Francisco, US\". This will retrieve the current weather information for San Francisco, which I can then present to the user."
-                    }
-                ]
+            "text": "I'll check that for you.",
+            "type": "text"
+        },
+        {
+            "type": "tool_use",
+            "id": "call_function_a5g4we9cji7p_1",
+            "name": "get_weather",
+            "input": {
+                "location": "San Francisco, US"
             }
         }
     ],
-    "created": 1762080909,
-    "model": "MiniMax-M3",
-    "object": "chat.completion",
     "usage": {
-        "total_tokens": 560,
-        "total_characters": 0,
-        "prompt_tokens": 203,
-        "completion_tokens": 357
+        "input_tokens": 280,
+        "output_tokens": 37,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 188
     },
-    "input_sensitive": false,
-    "output_sensitive": false,
-    "input_sensitive_type": 0,
-    "output_sensitive_type": 0,
-    "output_sensitive_int": 0,
+    "stop_reason": "tool_use",
     "base_resp": {
         "status_code": 0,
         "status_msg": ""
@@ -264,15 +225,15 @@ export OPENAI_BASE_URL=https://api.minimax.cn/v1
 export OPENAI_API_KEY=${YOUR_API_KEY}
 ```
 
-#### Interleaved Thinking 友好格式
+#### 示例代码
 
-通过OpenAI SDK调用 MiniMax-M3 时，传递额外的参数(`reasoning_split=True`)，可获得更友好的输出格式，thinking内容将单独输出到`reasoning_details`字段中，开发者可以直接用于展示，无需手动从content字段中解析。
+通过 OpenAI SDK 调用 MiniMax-M3.1-Flash 时，思考内容通过 `reasoning_content` 字段返回，可以直接用于展示。
 
 <Note>
-  重要提醒：为了保证Interleaved Thinking的生效、模型思维链不被打断，包含`reasoning_details`在内完整`response_message`必须被保留在Message History中，在下一轮调用中，回传给模型。如此才能发挥模型的最佳性能！
+  重要提醒：为了保证 Interleaved Thinking 的生效、模型思维链不被打断，包含 `reasoning_content` 在内的完整 `response_message` 必须被保留在 Message History 中，在下一轮调用中回传给模型。如此才能发挥模型的最佳性能！
 </Note>
 
-请注意请求并解析API返回的函数`send_messages`的实现，和追加历史消息`messages.append(response_message)`操作：
+请注意请求并解析 API 返回的函数 `send_messages` 的实现，和追加历史消息 `messages.append(response_message)` 操作：
 
 ```python theme={null}
 import json
@@ -306,11 +267,9 @@ tools = [
 def send_messages(messages):
     """发送消息并返回响应"""
     response = client.chat.completions.create(
-        model="MiniMax-M3",
+        model="MiniMax-M3.1-Flash",
         messages=messages,
         tools=tools,
-        # 设置 reasoning_split=True 将思考内容分离到 reasoning_details 字段
-        extra_body={"reasoning_split": True},
     )
     return response.choices[0].message
 
@@ -325,11 +284,13 @@ response_message = send_messages(messages)
 if response_message.tool_calls:
     tool_call = response_message.tool_calls[0]
     function_args = json.loads(tool_call.function.arguments)
-    print(f"💭 Thinking>\t {response_message.reasoning_details[0]['text']}")
+    if getattr(response_message, "reasoning_content", None):
+        print(f"💭 Thinking>\t {response_message.reasoning_content}")
     print(f"💬 Model>\t {response_message.content}")
     print(f"🔧 Tool>\t {tool_call.function.name}({function_args['location']})")
 
     # 3. 执行工具并返回结果
+    # ⚠️ 关键：完整回传 response_message（包含 reasoning_content 和 tool_calls）
     messages.append(response_message)
     messages.append(
         {
@@ -341,9 +302,8 @@ if response_message.tool_calls:
 
     # 4. 获取最终回复
     final_message = send_messages(messages)
-    print(
-        f"💭 Thinking>\t {final_message.model_dump()['reasoning_details'][0]['text']}"
-    )
+    if getattr(final_message, "reasoning_content", None):
+        print(f"💭 Thinking>\t {final_message.reasoning_content}")
     print(f"💬 Model>\t {final_message.content}")
 else:
     print(f"💬 Model>\t {response_message.content}")
@@ -352,51 +312,28 @@ else:
 **代码输出结果如下：**
 
 ```
-👤 User>         How's the weather in San Francisco?
-💭 Thinking>     Alright, the user is asking about the weather in San Francisco. This is a straightforward question that requires real-time information about current weather conditions.
-
-Looking at the available tools, I see I have access to a "get_weather" tool that's specifically designed for this purpose. The tool requires a "location" parameter, which should be in the format of city and state, like "San Francisco, CA".
-
-The user has clearly specified they want weather information for "San Francisco" in their question. However, they didn't include the state (California), which is recommended for the tool parameter. While "San Francisco" alone might be sufficient since it's a well-known city, for accuracy and to follow the parameter format, I should include the state as well.
-
-Since I need to use the tool to get the current weather information, I'll need to call the "get_weather" tool with "San Francisco, CA" as the location parameter. This will provide the user with the most accurate and up-to-date weather information for their query.
-
-I'll format my response using the required tool_calls XML tags and include the tool name and arguments in the specified JSON format.
-💬 Model>        
-
-🔧 Tool>         get_weather(San Francisco, US)
-💭 Thinking>     Okay, I've received the user's question about the weather in San Francisco, and I've used the get_weather tool to retrieve the current conditions.
-
-The tool has returned a simple response: "24℃, sunny". This gives me two pieces of information - the temperature is 24 degrees Celsius, and the weather condition is sunny. That's quite straightforward and matches what I would expect for San Francisco on a nice day.
-
-Now I need to present this information to the user in a clear, concise way. Since the response from the tool was quite brief, I'll keep my answer similarly concise. I'll directly state the temperature and weather condition that the tool provided.
-
-I should make sure to mention that this information is current, so the user understands they're getting up-to-date conditions. I don't need to provide additional details like humidity, wind speed, or forecast since the user only asked about the current weather.
-
-The temperature is given in Celsius (24℃), which is the standard metric unit, so I'll leave it as is rather than converting to Fahrenheit, though I could mention the conversion if the user seems to be more familiar with Fahrenheit.
-
-Since this is a simple informational query, I don't need to ask follow-up questions or suggest activities based on the weather. I'll just provide the requested information clearly and directly.
-
-My response will be a single sentence stating the current temperature and weather conditions in San Francisco, which directly answers the user's question.
-💬 Model>        The weather in San Francisco is currently sunny with a temperature of 24℃.
+👤 User>	 How's the weather in San Francisco?
+💬 Model>	 I'll check the weather in San Francisco for you.
+🔧 Tool>	 get_weather(San Francisco, US)
+💬 Model>	 The weather in San Francisco is currently **24°C (75°F) and sunny** — pleasant conditions for a day out. If you need more detail (like wind, humidity, or a multi-day forecast), just let me know.
 ```
 
-**返回结果**
+**第一轮请求的返回结果**
 
 ```json theme={null}
 {
-    "id": "05566b8d51ded3a3016d6cc100685cad",
+    "id": "0722aa35f6b10a17627b07ff112caa6a",
     "choices": [
         {
             "finish_reason": "tool_calls",
             "index": 0,
             "message": {
-                "content": "\n",
+                "content": "I'll check that for you.",
                 "role": "assistant",
                 "name": "MiniMax AI",
                 "tool_calls": [
                     {
-                        "id": "call_function_2831178524_1",
+                        "id": "call_function_y7ipauye40nx_1",
                         "type": "function",
                         "function": {
                             "name": "get_weather",
@@ -405,27 +342,21 @@ My response will be a single sentence stating the current temperature and weathe
                         "index": 0
                     }
                 ],
-                "audio_content": "",
-                "reasoning_details": [
-                    {
-                        "type": "reasoning.text",
-                        "id": "reasoning-text-1",
-                        "format": "MiniMax-response-v1",
-                        "index": 0,
-                        "text": "Let me think about this request. The user is asking about the weather in San Francisco. This is a straightforward request where they want to know current weather conditions in a specific location.\n\nLooking at the tools available to me, I have access to a \"get_weather\" tool that can retrieve weather information for a location. The tool requires a location parameter in the format of \"city, state\" or \"city, country\". In this case, the user has specified \"San Francisco\" which is a city in the United States.\n\nTo properly use the tool, I need to format the location parameter correctly. The tool description mentions examples like \"San Francisco, US\" which follows the format of city, country code. However, since the user just mentioned \"San Francisco\" without specifying the state, and San Francisco is a well-known city that is specifically in California, I could use \"San Francisco, CA\" as the parameter value instead.\n\nActually, \"San Francisco, US\" would also work since the user is asking about the famous San Francisco in the United States, and there aren't other well-known cities with the same name that would cause confusion. The US country code is explicit and clear.\n\nBoth \"San Francisco, CA\" and \"San Francisco, US\" would be valid inputs for the tool. I'll go with \"San Francisco, US\" since it follows the exact format shown in the tool description example and is unambiguous.\n\nSo I'll need to call the get_weather tool with the location parameter set to \"San Francisco, US\". This will retrieve the current weather information for San Francisco, which I can then present to the user."
-                    }
-                ]
+                "audio_content": ""
             }
         }
     ],
-    "created": 1762080909,
-    "model": "MiniMax-M3",
+    "created": 1792243509,
+    "model": "MiniMax-M3.1-Flash",
     "object": "chat.completion",
     "usage": {
-        "total_tokens": 560,
+        "total_tokens": 505,
         "total_characters": 0,
-        "prompt_tokens": 203,
-        "completion_tokens": 357
+        "prompt_tokens": 468,
+        "completion_tokens": 37,
+        "prompt_tokens_details": {
+            "cached_tokens": 466
+        }
     },
     "input_sensitive": false,
     "output_sensitive": false,
@@ -439,189 +370,17 @@ My response will be a single sentence stating the current temperature and weathe
 }
 ```
 
-#### 原生格式
-
-由于OpenAI ChatCompletion API原生格式并不支持thinking返回与回传，因此模型的thinking以`<think>reasoning_content</think>`的形式注入到`content`字段中。开发者可以手动将其解析出来，用于展示。但我们强烈建议开发者使用Interleaved thinking友好格式。
-
-`extra_body={"reasoning_split": False}` 的作用：
-
-* 思考内容嵌入 content：模型的推理内容以 `<think>` 标签包裹在 `content` 字段中
-* 需要手动解析：如果想单独展示推理内容，需要手动解析 `<think>` 标签
-
-<Note>
-  重要提醒：如果选用原生格式，请注意，在历史消息中，切勿修改`content`的内容，务必完整保留模型思考内容，即`<think>reasoning_content</think>`, 这样才能保证Interleaved Thinking生效，发挥模型的最佳性能！
-</Note>
-
-```python theme={null}
-from openai import OpenAI
-import json
-
-# 初始化客户端
-client = OpenAI(
-    api_key="<api-key>",
-    base_url="https://api.minimax.cn/v1",
-)
-
-# 定义工具：天气查询
-tools = [
-    {
-        "type": "function",
-        "function": {
-            "name": "get_weather",
-            "description": "Get weather of a location, the user should supply a location first.",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "location": {
-                        "type": "string",
-                        "description": "The city and state, e.g. San Francisco, US",
-                    }
-                },
-                "required": ["location"]
-            },
-        }
-    },
-]
-
-def send_messages(messages):
-    """发送消息并返回响应"""
-    response = client.chat.completions.create(
-        model="MiniMax-M3",
-        messages=messages,
-        tools=tools,
-        # 设置 reasoning_split=False 将思考内容以 <think> 标签形式保留在 content 字段中
-        extra_body={"reasoning_split": False},
-    )
-    return response.choices[0].message
-
-# 1. 用户提问
-messages = [{"role": "user", "content": "How's the weather in San Francisco?"}]
-print(f"👤 User>\t {messages[0]['content']}")
-
-# 2. 模型返回工具调用
-response_message = send_messages(messages)
-
-if response_message.tool_calls:
-    tool_call = response_message.tool_calls[0]
-    function_args = json.loads(tool_call.function.arguments)
-    print(f"💬 Model>\t {response_message.content}")
-    print(f"🔧 Tool>\t {tool_call.function.name}({function_args['location']})")
-
-    # 3. 执行工具并返回结果
-    messages.append(response_message)
-    messages.append({
-        "role": "tool",
-        "tool_call_id": tool_call.id,
-        "content": "24℃, sunny"  # 实际应用中这里应该调用真实的天气API
-    })
-
-    # 4. 获取最终回复
-    final_message = send_messages(messages)
-    print(f"💬 Model>\t {final_message.content}")
-else:
-    print(f"💬 Model>\t {response_message.content}")
-```
-
-**代码输出结果如下：**
-
-```nushell theme={null}
-👤 User>         How's the weather in San Francisco?
-💬 Model>        <think>
-Alright, the user is asking about the weather in San Francisco. This is a straightforward request that I can handle using the tools provided to me.
-
-I see that I have access to a tool called "get_weather" which can provide weather information for a location. Looking at the parameters, it requires a "location" parameter which should be a string in the format of "city and state, e.g. San Francisco, US".
-
-In this case, the user has already specified the location as "San Francisco", which is a major city in California, US. I need to format this properly for the tool call. Following the example format in the tool description, I should format it as "San Francisco, US".
-
-The user didn't specify any other parameters or requirements, so a simple weather query should be sufficient. I don't need to ask for clarification since they've provided a clear location.
-
-Let me prepare the tool call to get the weather information for San Francisco. I'll use the "get_weather" tool with the location parameter set to "San Francisco, US". This should return the current weather conditions for San Francisco, which is what the user is asking about.
-
-Once I get the weather information back from the tool, I'll be able to provide the user with details about the current weather in San Francisco, such as temperature, conditions (sunny, cloudy, rainy, etc.), and possibly other relevant information like humidity or wind speed if that data is available.
-
-So I'll proceed with making the tool call to get_weather with the location parameter.
-</think>
-
-
-
-🔧 Tool>         get_weather(San Francisco, US)
-💬 Model>        <think>
-Let me analyze what's happening in this conversation. The user asked about the weather in San Francisco, and I needed to provide them with this information.
-
-Looking at the tools available to me, I have access to a "get_weather" tool that can retrieve weather information for a specific location. I used this tool and called it with the argument "location": "San Francisco, US" as specified in the tool's parameters.
-
-The tool has now returned a response with the weather information for San Francisco. The response is quite concise - it simply states "24℃, sunny". This gives me two pieces of information:
-1. The temperature is 24 degrees Celsius
-2. The weather condition is sunny
-
-This is exactly what the user wanted to know - how's the weather in San Francisco. The information is clear and straightforward.
-
-Now I need to format this information in a clear, natural way for the user. Since the tool returned the temperature in Celsius, I'll use that unit rather than converting to Fahrenheit (though 24°C is about 75°F if the user happens to think in those terms).
-
-I should keep my response concise since the weather information itself is simple. I don't need to add any caveats or additional explanations since the weather report is straightforward. I won't include any details about wind, humidity, or other meteorological data since the tool didn't provide that information.
-
-So my response will simply state the current temperature and that it's sunny in San Francisco, which directly answers the user's question.
-</think>
-
-The weather in San Francisco is currently sunny with a temperature of 24℃.
-```
-
-**返回结果**
-
-```json theme={null}
-{
-	"id": "055b7928a143b2d21ad6b2bab2c8f8b2",
-	"choices": [{
-		"finish_reason": "tool_calls",
-		"index": 0,
-		"message": {
-			"content": "<think>\nAlright, the user is asking about the weather in San Francisco. This is a straightforward request that I can handle using the tools provided to me.\n\nI see that I have access to a tool called \"get_weather\" which can provide weather information for a location. Looking at the parameters, it requires a \"location\" parameter which should be a string in the format of \"city and state, e.g. San Francisco, US\".\n\nIn this case, the user has already specified the location as \"San Francisco\", which is a major city in California, US. I need to format this properly for the tool call. Following the example format in the tool description, I should format it as \"San Francisco, US\".\n\nThe user didn't specify any other parameters or requirements, so a simple weather query should be sufficient. I don't need to ask for clarification since they've provided a clear location.\n\nLet me prepare the tool call to get the weather information for San Francisco. I'll use the \"get_weather\" tool with the location parameter set to \"San Francisco, US\". This should return the current weather conditions for San Francisco, which is what the user is asking about.\n\nOnce I get the weather information back from the tool, I'll be able to provide the user with details about the current weather in San Francisco, such as temperature, conditions (sunny, cloudy, rainy, etc.), and possibly other relevant information like humidity or wind speed if that data is available.\n\nSo I'll proceed with making the tool call to get_weather with the location parameter.\n</think>\n\n\n",
-			"role": "assistant",
-			"name": "MiniMax AI",
-			"tool_calls": [{
-				"id": "call_function_1202729600_1",
-				"type": "function",
-				"function": {
-					"name": "get_weather",
-					"arguments": "{\"location\": \"San Francisco, US\"}"
-				},
-				"index": 0
-			}],
-			"audio_content": ""
-		}
-	}],
-	"created": 1762412072,
-	"model": "MiniMax-M3",
-	"object": "chat.completion",
-	"usage": {
-		"total_tokens": 560,
-		"total_characters": 0,
-		"prompt_tokens": 222,
-		"completion_tokens": 338
-	},
-	"input_sensitive": false,
-	"output_sensitive": false,
-	"input_sensitive_type": 0,
-	"output_sensitive_type": 0,
-	"output_sensitive_int": 0,
-	"base_resp": {
-		"status_code": 0,
-		"status_msg": ""
-	}
-}
-```
-
 ## 注意事项
 
 如果在使用MiniMax模型过程中遇到任何问题：
 
-* 通过邮箱 [Model@minimaxi.com](mailto:Model@minimaxi.com) 等官方渠道联系我们的技术支持团队
+* 通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 等官方渠道联系我们的技术支持团队
 * 在我们的 [Github](https://github.com/MiniMax-AI/MiniMax-M2/issues) 仓库提交Issue
 
 ## 推荐阅读
 
 <Columns cols={2}>
-  <Card title="在 AI 编程工具里使用 MiniMax-M3" icon="book-open" href="/docs/m-plan/openclaw" arrow="true" cta="点击查看">
+  <Card title="在 AI 编程工具里使用 MiniMax-M3.1-Flash" icon="book-open" href="/docs/m-plan/openclaw" arrow="true" cta="点击查看">
     具备代码理解能力，适用于代码助手等场景。
   </Card>
 

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/about-apis.md -->
-<!-- Source SHA-256: f1dd3e3b614597f8abac421d624039b8cbfdbd7616beb4e07b69e177d34400ed -->
+<!-- Source SHA-256: d951d025addbcfe31d3b52f1b1b4dfa406971f861b317fee8920d848606be2f6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -15,7 +15,7 @@
 
 ### 问：如何提高速率限制
 
-**答：** MiniMax 开放平台为您提供不同的资源保障方案，可前往[速率限制](/docs/guides/rate-limits)页面查看具体内容。如您需要获得更高的资源保障，您可通过[api@minimaxi.com](mailto:api@minimaxi.com)与我们的商务获得联系。
+**答：** MiniMax 开放平台为您提供不同的资源保障方案，可前往[速率限制](/docs/guides/rate-limits)页面查看具体内容。如您需要获得更高的资源保障，您可通过[api@minimax.io](mailto:api@minimax.io)与我们的商务获得联系。
 
 ### 问：语言模型的 TPS（Tokens Per Second）是如何计算的
 

@@ -1,24 +1,22 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-anthropic.md -->
-<!-- Source SHA-256: 8519abe21561aa22065f1c9b2559b93e1aa922f5c9af92406798b7972c09c063 -->
+<!-- Source SHA-256: 76c4c79c09f61112bccc26f5b2ccbeecc1eed576ccf76b7be49b38d491a891c1 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Messages API
+# 消息生成
 
-> 使用 Anthropic API 兼容 Messages 格式调用 MiniMax 模型。
+> 通过兼容 Anthropic Messages API 的接口调用 MiniMax 模型生成回复，支持流式与非流式。
 
 <Note>
-  ✨ **全新模型 `MiniMax-M3.1-Flash-Preview`**
+  ✨ **全新模型 `MiniMax-M3.1-Flash`**
 
   **核心能力**：**1M 超长上下文**、**多模态**、**思考深度可调**。
-
-  暂时仅通过 M Plan 和 MiniMax Code 提供。
 </Note>
 
 <Tip>
-  **`MiniMax-M3.1-Flash-Preview` 新特性：**
+  **`MiniMax-M3.1-Flash` 新特性：**
 
   1. 支持图片、视频理解，可参考右方示例代码
   2. 支持通过 `output_config.effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，默认档位为 `max`
@@ -35,7 +33,7 @@ info:
   description: |
     MiniMax 文本生成 API，支持对话补全与流式输出。
 
-    > ⚡ **`MiniMax-M3.1-Flash-Preview` 亮点** —— **1M 超长上下文**、**多模态**、**思考深度可调**。
+    > ⚡ **`MiniMax-M3.1-Flash` 亮点** —— **1M 超长上下文**、**多模态**、**思考深度可调**。
   license:
     name: MIT
   version: 1.0.0
@@ -69,7 +67,7 @@ paths:
             examples:
               深度思考:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   thinking:
                     type: adaptive
                   messages:
@@ -80,7 +78,7 @@ paths:
                     effort: max
               图片理解:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   messages:
                     - role: user
                       content:
@@ -98,7 +96,7 @@ paths:
                     effort: max
               视频理解:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   thinking:
                     type: adaptive
                   messages:
@@ -116,7 +114,7 @@ paths:
                     effort: max
               流式:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   messages:
                     - role: user
                       content:
@@ -135,7 +133,7 @@ paths:
                     effort: max
               工具调用:
                 value:
-                  model: MiniMax-M3.1-Flash-Preview
+                  model: MiniMax-M3.1-Flash
                   messages:
                     - role: user
                       content: 旧金山现在天气怎么样？
@@ -169,7 +167,7 @@ paths:
                     id: 066b367547c2650d17dc215f503da551
                     type: message
                     role: assistant
-                    model: MiniMax-M3.1-Flash-Preview
+                    model: MiniMax-M3.1-Flash
                     content:
                       - thinking: |-
                           The user is asking which is larger: 9.11 or 9.9.
@@ -211,7 +209,7 @@ paths:
                     id: 066a381bdc3c0ded310e27c9a46d16e7
                     type: message
                     role: assistant
-                    model: MiniMax-M3.1-Flash-Preview
+                    model: MiniMax-M3.1-Flash
                     content:
                       - thinking: >-
                           The user is asking in Chinese what the content of the
@@ -245,7 +243,7 @@ paths:
                     id: 066b4573467fa2bb299cee687b68873d
                     type: message
                     role: assistant
-                    model: MiniMax-M3.1-Flash-Preview
+                    model: MiniMax-M3.1-Flash
                     content:
                       - thinking: >-
                           The user is asking in Chinese: "What happened in this
@@ -365,7 +363,7 @@ paths:
                         type: message
                         role: assistant
                         content: []
-                        model: MiniMax-M3.1-Flash-Preview
+                        model: MiniMax-M3.1-Flash
                         stop_reason: null
                         stop_sequence: null
                         usage:
@@ -519,7 +517,7 @@ paths:
                     id: 066b13de1224099141792cd806ed4f56
                     type: message
                     role: assistant
-                    model: MiniMax-M3.1-Flash-Preview
+                    model: MiniMax-M3.1-Flash
                     content:
                       - thinking: >-
                           The user is asking about the current weather in San
@@ -553,7 +551,7 @@ paths:
                         type: message
                         role: assistant
                         content: []
-                        model: MiniMax-M3.1-Flash-Preview
+                        model: MiniMax-M3.1-Flash
                         stop_reason: null
                         stop_sequence: null
                         usage:
@@ -809,28 +807,21 @@ components:
         model:
           type: string
           description: >-
-            模型 ID。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
-            是多模态模型，原生支持文本、图片和视频输入，并兼容工具调用与 thinking
-            内容块；`MiniMax-M3.1-Flash-Preview` 还会强制开启 thinking，并支持通过
-            `output_config.effort` 调节思考深度。M2.7、M2.5、M2.1 和 M2
-            系列仅支持文本与工具调用，不支持图片和视频输入。
+            模型 ID。`MiniMax-M3.1-Flash` 和 `MiniMax-M3`
+            是多模态模型，原生支持文本、图片和视频输入，并兼容工具调用与 thinking 内容块；`MiniMax-M3.1-Flash`
+            还会强制开启 thinking，并支持通过 `output_config.effort` 调节思考深度。
           enum:
-            - MiniMax-M3.1-Flash-Preview
+            - MiniMax-M3.1-Flash
             - MiniMax-M3
-            - MiniMax-M2.7
-            - MiniMax-M2.7-highspeed
-            - MiniMax-M2.5
-            - MiniMax-M2.5-highspeed
-            - MiniMax-M2.1
-            - MiniMax-M2.1-highspeed
-            - MiniMax-M2
         service_tier:
           type: string
           description: >-
             请求准入服务层级。支持的取值为 `standard` 和 `priority`。省略时默认使用
             `standard`。`priority`
             的[价格](https://platform.minimax.cn/docs/pricing/overview#models/text)为
-            `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。
+            `standard` 的 1.5
+            倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。`MiniMax-M3.1-Flash`
+            不支持该字段。
           enum:
             - standard
             - priority
@@ -841,7 +832,9 @@ components:
             - type: string
               description: 纯文本系统提示词
             - type: array
-              description: 内容块数组格式的系统提示词。text 块可携带 cache_control。
+              description: >-
+                内容块数组格式的系统提示词。text 块可携带 cache_control（MiniMax-M3 和
+                MiniMax-M3.1-Flash 不支持）。
               items:
                 type: object
                 properties:
@@ -861,9 +854,8 @@ components:
         messages:
           type: array
           description: >-
-            对话历史。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
-            支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。M2.7、M2.5、M2.1 和 M2
-            系列仅支持文本与工具调用相关内容块，不支持图片和视频输入。
+            对话历史。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片、视频、工具调用、工具结果和
+            thinking 内容块。M2.7、M2.5、M2.1 和 M2 系列仅支持文本与工具调用相关内容块，不支持图片和视频输入。
           items:
             $ref: '#/components/schemas/Message'
         stream:
@@ -874,7 +866,7 @@ components:
           type: integer
           format: int64
           description: >-
-            指定生成内容长度的上限（Token 数）。MiniMax-M3.1-Flash-Preview 和 MiniMax-M3 推荐值为
+            指定生成内容长度的上限（Token 数）。MiniMax-M3.1-Flash 和 MiniMax-M3 推荐值为
             131072（128K），上限为 524288（512K）；其他模型推荐值为 65536（64K），上限为
             204800（200K）。超过上限的内容会被截断。如果生成因 `length` 原因中断，请尝试调高此值
           minimum: 1
@@ -889,8 +881,8 @@ components:
           type: number
           format: double
           description: >-
-            核采样参数，取值范围 [0, 1]。MiniMax-M3.1-Flash-Preview 和 MiniMax-M3 默认值为
-            0.95，M2.x 系列模型默认值为 0.9。
+            核采样参数，取值范围 [0, 1]。MiniMax-M3.1-Flash 和 MiniMax-M3 默认值为 0.95，M2.x
+            系列模型默认值为 0.9。
           minimum: 0
           maximum: 1
           default: 0.95
@@ -906,9 +898,8 @@ components:
           description: >-
             控制 thinking 行为。默认值随模型不同，因此未在 schema 层声明统一默认值。
 
-            - `MiniMax-M3.1-Flash-Preview`：强制开启 thinking。若传入 `type` 只能为
-            `adaptive`；传入 `disabled` 会返回 HTTP 400。如需调节思考深度，请使用
-            `output_config.effort`。
+            - `MiniMax-M3.1-Flash`：强制开启 thinking。若传入 `type` 只能为 `adaptive`；传入
+            `disabled` 会返回 HTTP 400。如需调节思考深度，请使用 `output_config.effort`。
 
             - `MiniMax-M3`：省略 `thinking` 时默认关闭；传入 `adaptive` 可开启并返回 thinking 块。
 
@@ -922,23 +913,22 @@ components:
               description: >-
                 thinking 控制类型。
 
-                - `disabled`：关闭 `MiniMax-M3` 的 thinking
-                输出。`MiniMax-M3.1-Flash-Preview` 传入该值会返回 HTTP 400；M2.x 模型会接收但不生效。
+                - `disabled`：关闭 `MiniMax-M3` 的 thinking 输出。`MiniMax-M3.1-Flash`
+                传入该值会返回 HTTP 400；M2.x 模型会接收但不生效。
 
                 - `adaptive`：开启 thinking 输出并返回 thinking 块。这是
-                `MiniMax-M3.1-Flash-Preview` 唯一接受的取值。
+                `MiniMax-M3.1-Flash` 唯一接受的取值。
           required: []
         output_config:
           type: object
-          description: 输出配置。通过 `effort` 调节 `MiniMax-M3.1-Flash-Preview` 的思考深度。
+          description: 输出配置。通过 `effort` 调节 `MiniMax-M3.1-Flash` 的思考深度。
           properties:
             effort:
               type: string
               description: >-
-                `MiniMax-M3.1-Flash-Preview` 的思考深度档位，可取
+                `MiniMax-M3.1-Flash` 的思考深度档位，可取
                 `low`、`medium`、`high`、`xhigh`、`max`；省略时默认为
-                `max`。其他模型会忽略该字段。`MiniMax-M3.1-Flash-Preview` 不支持 `none`，传入会返回
-                HTTP 400。
+                `max`。其他模型会忽略该字段。`MiniMax-M3.1-Flash` 不支持 `none`，传入会返回 HTTP 400。
               enum:
                 - low
                 - medium
@@ -1114,7 +1104,7 @@ components:
               description: 错误详情。
     CacheControl:
       type: object
-      description: 提示词缓存标记。
+      description: 提示词缓存标记。MiniMax-M3 和 MiniMax-M3.1-Flash 不支持该参数。
       properties:
         type:
           type: string
@@ -1139,19 +1129,19 @@ components:
             - sample_message_user
             - sample_message_ai
           description: >-
-            消息发送方角色。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 使用 user /
-            assistant 交替消息。
+            消息发送方角色。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 使用 user / assistant
+            交替消息。
         content:
           description: >-
-            消息内容。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
-            支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。
+            消息内容。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片、视频、工具调用、工具结果和
+            thinking 内容块。
           oneOf:
             - type: string
               description: 纯文本消息
             - type: array
               description: >-
-                消息内容。`MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3`
-                支持文本、图片、视频、工具调用、工具结果和 thinking 内容块。
+                消息内容。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片、视频、工具调用、工具结果和
+                thinking 内容块。
               items:
                 $ref: '#/components/schemas/RequestContentBlock'
     Tool:
@@ -1174,13 +1164,12 @@ components:
         - input_schema
     ToolChoice:
       type: object
-      description: 工具选择策略。仅支持 auto 和 none。
+      description: 工具选择策略。仅支持 `auto`，由模型自动判断是否调用工具。
       properties:
         type:
           type: string
           enum:
             - auto
-            - none
           description: 工具选择类型。
       required:
         - type
@@ -1240,9 +1229,8 @@ components:
     RequestContentBlock:
       type: object
       description: >-
-        请求消息中可用的内容块。text 与工具相关块所有模型均支持；image 与 video 块仅
-        `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持。thinking 仅在多轮对话中将上一轮
-        assistant 输出原样回带时使用。
+        请求消息中可用的内容块。text 与工具相关块所有模型均支持；image 与 video 块仅 `MiniMax-M3.1-Flash` 和
+        `MiniMax-M3` 支持。thinking 仅在多轮对话中将上一轮 assistant 输出原样回带时使用。
       required:
         - type
       properties:
@@ -1251,8 +1239,8 @@ components:
           description: |-
             内容块类型：
             - text：文本内容
-            - image：图片输入，仅 `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持
-            - video：视频输入，仅 `MiniMax-M3.1-Flash-Preview` 和 `MiniMax-M3` 支持
+            - image：图片输入，仅 `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持
+            - video：视频输入，仅 `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持
             - tool_use：回带上一轮的 assistant 工具调用
             - tool_result：工具执行结果
             - thinking：回带上一轮的 assistant 思考内容
@@ -1271,7 +1259,7 @@ components:
         source:
           $ref: '#/components/schemas/MediaSource'
           description: >-
-            图片或视频来源，type=image 或 type=video 时使用，仅 `MiniMax-M3.1-Flash-Preview` 和
+            图片或视频来源，type=image 或 type=video 时使用，仅 `MiniMax-M3.1-Flash` 和
             `MiniMax-M3` 支持。
         id:
           type: string
