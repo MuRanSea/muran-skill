@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-generation.md -->
-<!-- Source SHA-256: 5b2f1dc15657cf1d19c40f89712ea1c16d4558f8ec4e52207cffc78ad66f73a5 -->
+<!-- Source SHA-256: 64f8f5facdb58d7175682657fdc133ac0b74fe6d898f74db1453a5a8006085e9 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -254,32 +254,30 @@ H3-Context-IR 采用异步任务形式。创建成功后，使用[查询任务](
 
 ## 推荐阅读
 
-<Columns cols={2}>
-  <Card title="创建视频生成任务" icon="book-open" href="/docs/api-reference/video-generation-v2-create" arrow="true" cta="点击查看">
-    使用本接口通过多模态 content 输入，创建 MiniMax-H3 视频生成任务。
-  </Card>
+> **[创建视频生成任务](/docs/api-reference/video-generation-v2-create)**
+>
+> 使用本接口通过多模态 content 输入，创建 MiniMax-H3 视频生成任务。
 
-  <Card title="创建 H3-Context-IR 任务" icon="book-open" href="/docs/api-reference/video-generation-v2-h3-context-ir" arrow="true" cta="点击查看">
-    深度理解视频生成的多模态上下文，并生成结构化增强提示词。
-  </Card>
+> **[创建 H3-Context-IR 任务](/docs/api-reference/video-generation-v2-h3-context-ir)**
+>
+> 深度理解视频生成的多模态上下文，并生成结构化增强提示词。
 
-  <Card title="创建视频再生成任务" icon="book-open" href="/docs/api-reference/video-generation-v2-regeneration" arrow="true" cta="点击查看">
-    对符合 MiniMax-H3 768P 输出规格的源视频进行再生成，输出 2K 视频。
-  </Card>
+> **[创建视频再生成任务](/docs/api-reference/video-generation-v2-regeneration)**
+>
+> 对符合 MiniMax-H3 768P 输出规格的源视频进行再生成，输出 2K 视频。
 
-  <Card title="查询任务" icon="book-open" href="/docs/api-reference/video-generation-v2-query" arrow="true" cta="点击查看">
-    使用本接口按 task\_id 查询任务状态并获取成片下载地址。
-  </Card>
+> **[查询任务](/docs/api-reference/video-generation-v2-query)**
+>
+> 使用本接口按 task\_id 查询任务状态并获取成片下载地址。
 
-  <Card title="查询任务列表" icon="book-open" href="/docs/api-reference/video-generation-v2-list" arrow="true" cta="点击查看">
-    分页查询最近 7 天内的任务，并按 task\_type 区分任务类型。
-  </Card>
+> **[查询任务列表](/docs/api-reference/video-generation-v2-list)**
+>
+> 分页查询最近 7 天内的任务，并按 task\_type 区分任务类型。
 
-  <Card title="取消或删除任务" icon="book-open" href="/docs/api-reference/video-generation-v2-delete" arrow="true" cta="点击查看">
-    取消排队中的任务，或删除成功和失败的任务记录。
-  </Card>
+> **[取消或删除任务](/docs/api-reference/video-generation-v2-delete)**
+>
+> 取消排队中的任务，或删除成功和失败的任务记录。
 
-  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#models/video" arrow="true" cta="点击查看">
-    各模型的定价说明、计费方式及使用限制。
-  </Card>
-</Columns>
+> **[产品定价](/docs/pricing/overview#models/video)**
+>
+> 各模型的定价说明、计费方式及使用限制。

@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137070 -->
-<!-- Source SHA-256: cb7a3566492973c597983b25fc85f1654261d2f0fdb814ef7ec21bd86bcd8447 -->
+<!-- Source SHA-256: dc70957b499f1a19abf1ffca804b40573b4f5d8b79fe2d3ebdd9f33adc5acc1f -->
 
 # Tripo-3D-Format 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137070
-最近更新时间：2026-08-27 11:35:32
+最近更新时间：2026-10-21 00:32:00
 
 ## 简介
 
@@ -64,6 +64,12 @@ Tripo 格式转换接口，将 3D 模型转换为其他格式，支持可选的�
 | part\_names | 否 | string[] | 要导出的部件名称，来自网格 / 分割数据。 |
 | export\_orientation | 否 | string | 导出朝向（前向轴）。  +x：默认，X 轴正方向朝前。  -x：X 轴负方向朝前。  -y：Y 轴负方向朝前。  +y：Y 轴正方向朝前。  默认值：+x |
 | fbx\_preset | 否 | string | FBX 兼容性预设。（仅导出 FBX 时生效）。  blender：针对 Blender 导入优化。  3dsmax：针对 3ds Max 导入优化。  mixamo：兼容 Mixamo 绑骨  默认值：blender。 |
+
+**说明：**
+
+**格式转换触发高级（传入以下任一非默认值参数即为 10 积分）:**
+
+quad、face\_limit、flatten\_bottom、flatten\_bottom\_threshold、texture\_size、texture\_format、pivot\_to\_center\_bottom、scale\_factor
 
 **输出参数**
 

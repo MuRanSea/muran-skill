@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/music-generation.md -->
-<!-- Source SHA-256: 6080b8b6b12486bdc4d710d1e89faa871bd3caa457a9ae77f5c87342f5b12165 -->
+<!-- Source SHA-256: 4a1012bbff07b0ca932c0122bb7c7f0da080f50694d56bb07741990acdcf6e98 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,11 +9,11 @@
 
 > 使用本接口，输入歌词和歌曲描述，进行歌曲生成。
 
-<Note title="Music API 服务调整通知">
-  自 2026 年 8 月 20 日起，付费接口（音乐生成、歌词生成）不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务；免费音乐生成接口（Music-3.0-free、Music-2.6-free、music-cover-free）停止服务。
-
-  如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimax.cn/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
-</Note>
+> [!NOTE]
+>
+> 自 2026 年 8 月 20 日起，付费接口（音乐生成、歌词生成）不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务；免费音乐生成接口（Music-3.0-free、Music-2.6-free、music-cover-free）停止服务。
+>
+> 如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimax.cn/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
 
 
 ## OpenAPI

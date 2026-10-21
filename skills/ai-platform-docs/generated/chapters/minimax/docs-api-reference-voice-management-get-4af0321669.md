@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/voice-management-get.md -->
-<!-- Source SHA-256: e9c7aec527e4112bd252e4b2eff3c143b87436cc497a7d20799cfa68cf7d0a63 -->
+<!-- Source SHA-256: cadda39a6be80740a549fdc9ea094da0ab274d456288a2184e999e2862bae1a1 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,9 +13,9 @@
 
 包括系统音色、快速克隆音色、文生音色接口生成的音色、音乐生成接口的人声音色以及伴奏音色。
 
-<Note>
-  快速复刻得到的音色为未激活状态，需正式调用一次才可在本接口查询到
-</Note>
+> [!NOTE]
+>
+> 快速复刻得到的音色为未激活状态，需正式调用一次才可在本接口查询到
 
 
 ## OpenAPI

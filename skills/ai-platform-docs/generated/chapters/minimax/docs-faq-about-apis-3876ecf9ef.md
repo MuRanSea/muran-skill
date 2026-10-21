@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/about-apis.md -->
-<!-- Source SHA-256: d951d025addbcfe31d3b52f1b1b4dfa406971f861b317fee8920d848606be2f6 -->
+<!-- Source SHA-256: e97a5d88c2acf63a13e711b42c901d4e9437a8fd1f95644a095a1313b92618f6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -27,9 +27,9 @@ $$
 
 即从模型输出第一个 token 开始计时，到最后一个 token 输出完成为止，期间生成的 token 总数除以这段时间（秒）。
 
-<Note>
-  TPS 在实际使用中可能存在波动，各模型页面标注的 TPS 为参考值。
-</Note>
+> [!NOTE]
+>
+> TPS 在实际使用中可能存在波动，各模型页面标注的 TPS 为参考值。
 
 ### 问：如何才能使用声音复刻服务
 

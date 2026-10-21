@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-anthropic.md -->
-<!-- Source SHA-256: 76c4c79c09f61112bccc26f5b2ccbeecc1eed576ccf76b7be49b38d491a891c1 -->
+<!-- Source SHA-256: 14d65b5a7d61f728066ad7c33bf80f938184da5fcbe659db0234a1cf5fadbb29 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,19 +9,19 @@
 
 > 通过兼容 Anthropic Messages API 的接口调用 MiniMax 模型生成回复，支持流式与非流式。
 
-<Note>
-  ✨ **全新模型 `MiniMax-M3.1-Flash`**
+> [!NOTE]
+>
+> ✨ **全新模型 `MiniMax-M3.1-Flash`**
+>
+> **核心能力**：**1M 超长上下文**、**多模态**、**思考深度可调**。
 
-  **核心能力**：**1M 超长上下文**、**多模态**、**思考深度可调**。
-</Note>
-
-<Tip>
-  **`MiniMax-M3.1-Flash` 新特性：**
-
-  1. 支持图片、视频理解，可参考右方示例代码
-  2. 支持通过 `output_config.effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，默认档位为 `max`
-  3. 深度思考默认开启，无需额外配置；思考内容通过 `thinking` 内容块单独返回
-</Tip>
+> [!TIP]
+>
+> **`MiniMax-M3.1-Flash` 新特性：**
+>
+> 1. 支持图片、视频理解，可参考右方示例代码
+> 2. 支持通过 `output_config.effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，默认档位为 `max`
+> 3. 深度思考默认开启，无需额外配置；思考内容通过 `thinking` 内容块单独返回
 
 
 ## OpenAPI
@@ -873,16 +873,14 @@ components:
         temperature:
           type: number
           format: double
-          description: 温度系数，影响输出随机性，取值范围 [0, 2]，默认值为 1。值越高，输出越随机；值越低，输出越确定。
-          minimum: 0
-          maximum: 2
+          description: 暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用 1。
           default: 1
         top_p:
           type: number
           format: double
           description: >-
-            核采样参数，取值范围 [0, 1]。MiniMax-M3.1-Flash 和 MiniMax-M3 默认值为 0.95，M2.x
-            系列模型默认值为 0.9。
+            暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用
+            0.95。若传入，取值需在 (0, 1] 范围内。
           minimum: 0
           maximum: 1
           default: 0.95

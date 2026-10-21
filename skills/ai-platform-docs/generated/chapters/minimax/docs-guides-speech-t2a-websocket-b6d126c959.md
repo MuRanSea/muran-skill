@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-websocket.md -->
-<!-- Source SHA-256: 44996acd77ed35d6965b6b009bacfe67d9e5cfed80c1814f5d848757e80c9057 -->
+<!-- Source SHA-256: dee2a53d3f6ad6ff8af6acb4a53d79649cb4e94ce475876dc5f91c77057da25e -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -86,9 +86,9 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
 }
 ```
 
-<Note>
-  `quality` 目前仅对非流式 HTTP 请求（`stream=false`）生效，且仅支持 `speech-2.8-hd`、`speech-2.8-turbo`、`speech-2.6-hd`、`speech-2.6-turbo`。流式请求（包括 WebSocket）或其他模型传入 `quality` 时按 `basic` 处理，不会报错。
-</Note>
+> [!NOTE]
+>
+> `quality` 目前仅对非流式 HTTP 请求（`stream=false`）生效，且仅支持 `speech-2.8-hd`、`speech-2.8-turbo`、`speech-2.6-hd`、`speech-2.6-turbo`。流式请求（包括 WebSocket）或其他模型传入 `quality` 时按 `basic` 处理，不会报错。
 
 ### 延迟
 
@@ -312,24 +312,22 @@ if __name__ == "__main__":
 
 ## 推荐阅读
 
-<Columns cols={2}>
-  <Card title="同步语音合成（HTTP）" icon="book-open" href="/docs/api-reference/speech-t2a-http" arrow="true" cta="点击查看">
-    通过 HTTP 请求一次提交完整文本并返回合成音频，支持流式输出。
-  </Card>
+> **[同步语音合成（HTTP）](/docs/api-reference/speech-t2a-http)**
+>
+> 通过 HTTP 请求一次提交完整文本并返回合成音频，支持流式输出。
 
-  <Card title="同步语音合成（WebSocket）" icon="book-open" href="/docs/api-reference/speech-t2a-websocket" arrow="true" cta="点击查看">
-    通过 WebSocket 连接由客户端按句发送文本，流式返回合成音频，适合低延迟的实时播报。
-  </Card>
+> **[同步语音合成（WebSocket）](/docs/api-reference/speech-t2a-websocket)**
+>
+> 通过 WebSocket 连接由客户端按句发送文本，流式返回合成音频，适合低延迟的实时播报。
 
-  <Card title="双向流式语音合成（WebSocket）" icon="book-open" href="/docs/api-reference/speech-t2a-websocket-bidi" arrow="true" cta="点击查看">
-    通过 WebSocket 连接按任意粒度（含逐字）流式发送文本，由服务端自动攒句合成，适合对接大模型流式输出。
-  </Card>
+> **[双向流式语音合成（WebSocket）](/docs/api-reference/speech-t2a-websocket-bidi)**
+>
+> 通过 WebSocket 连接按任意粒度（含逐字）流式发送文本，由服务端自动攒句合成，适合对接大模型流式输出。
 
-  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#models/speech" arrow="true" cta="点击查看">
-    各模型的定价说明、计费方式及使用限制。
-  </Card>
+> **[产品定价](/docs/pricing/overview#models/speech)**
+>
+> 各模型的定价说明、计费方式及使用限制。
 
-  <Card title="速率限制" icon="book-open" href="/docs/guides/rate-limits#语音" arrow="true" cta="点击查看">
-    为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。
-  </Card>
-</Columns>
+> **[速率限制](/docs/guides/rate-limits#语音)**
+>
+> 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。

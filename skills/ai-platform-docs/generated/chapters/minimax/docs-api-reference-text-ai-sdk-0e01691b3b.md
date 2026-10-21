@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-ai-sdk.md -->
-<!-- Source SHA-256: 30e82a4e514dd039caaca11fb226040752767f3af2f9bdf947c986295e285e51 -->
+<!-- Source SHA-256: 41317554d872a6b00c377d45dc41a127a80d5543de2ca9e487349dd4db678341 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -15,15 +15,13 @@
 
 ### 1. 安装 AI SDK 和 MiniMax Provider
 
-<CodeGroup>
-  ```bash npm theme={null}
-  npm install ai @minimax-ai/ai-sdk-provider
-  ```
+```bash npm theme={null}
+npm install ai @minimax-ai/ai-sdk-provider
+```
 
-  ```bash pnpm theme={null}
-  pnpm add ai @minimax-ai/ai-sdk-provider
-  ```
-</CodeGroup>
+```bash pnpm theme={null}
+pnpm add ai @minimax-ai/ai-sdk-provider
+```
 
 ### 2. 配置环境变量
 
@@ -65,17 +63,17 @@ console.log(`Text:\n${text}\n`);
 
 | 模型名称 | 上下文窗口 | 模型介绍 |
 | :- | :-: | :- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
+| MiniMax-M3.1-Flash | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
 | MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型** |
 
-<Note>
-  TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
-</Note>
+> [!NOTE]
+>
+> TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
 
-<Note>
-  AI SDK 兼容接口支持 `MiniMax-M3.1-Flash` `MiniMax-M3`
-  模型。如需使用其他模型，请使用标准的 MiniMax API 接口。
-</Note>
+> [!NOTE]
+>
+> AI SDK 兼容接口支持 `MiniMax-M3.1-Flash` `MiniMax-M3`
+> 模型。如需使用其他模型，请使用标准的 MiniMax API 接口。
 
 ## 兼容性说明
 
@@ -89,10 +87,10 @@ console.log(`Text:\n${text}\n`);
 | `messages` | 部分支持 | 支持文本、图片和工具调用；使用默认的 `minimax`（Anthropic 兼容格式）时还支持 PDF 文档；不支持视频输入 |
 | `maxOutputTokens` | 完全支持 | 最大生成 token 数 |
 | `system` | 完全支持 | 系统提示词 |
-| `temperature` | 完全支持 | 取值范围 \[0, 2]，控制输出随机性，建议取值 1 |
 | `toolChoice` | 部分支持 | 工具选择策略，仅支持 `auto` |
 | `tools` | 完全支持 | 工具定义 |
-| `topP` | 完全支持 | 核采样参数，取值范围 \[0, 1]，`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 默认值 0.95，`MiniMax-M2.x` 系列默认值 0.9 |
+| `temperature` | 忽略 | 暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用 1 |
+| `topP` | 忽略 | 暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用 0.95。若传入，取值需在 (0, 1] 范围内 |
 
 ### Messages 字段支持
 
@@ -180,14 +178,14 @@ console.log("\n");
 
 ## 注意事项
 
-<Warning>
-  1. AI SDK 兼容接口目前支持 `MiniMax-M3.1-Flash` `MiniMax-M3` 模型
-
-  2. `temperature` 参数取值范围为 \[0, 2]，超出范围会返回错误
-
-  3. 当前不支持通过 AI SDK 输入视频；PDF 文档仅在使用默认的 `minimax`（Anthropic 兼容格式）时支持
-
-  4. 默认的 `minimax` Provider 实例使用 Anthropic 兼容 API 格式。如需使用 OpenAI 兼容格式，请使用 `createMinimaxOpenAI`，详见 [OpenAI 兼容格式](#openai-兼容格式)。
-
-  5. 更多信息请参阅 [MiniMax AI Provider on AI SDK](https://ai-sdk.dev/providers/community-providers/minimax) 和 [GitHub 仓库](https://github.com/MiniMax-AI/vercel-minimax-ai-provider)
-</Warning>
+> [!WARNING]
+>
+> 1. AI SDK 兼容接口目前支持 `MiniMax-M3.1-Flash` `MiniMax-M3` 模型
+>
+> 2. `temperature`、`topP` 参数会被忽略
+>
+> 3. 当前不支持通过 AI SDK 输入视频；PDF 文档仅在使用默认的 `minimax`（Anthropic 兼容格式）时支持
+>
+> 4. 默认的 `minimax` Provider 实例使用 Anthropic 兼容 API 格式。如需使用 OpenAI 兼容格式，请使用 `createMinimaxOpenAI`，详见 [OpenAI 兼容格式](#openai-兼容格式)。
+>
+> 5. 更多信息请参阅 [MiniMax AI Provider on AI SDK](https://ai-sdk.dev/providers/community-providers/minimax) 和 [GitHub 仓库](https://github.com/MiniMax-AI/vercel-minimax-ai-provider)

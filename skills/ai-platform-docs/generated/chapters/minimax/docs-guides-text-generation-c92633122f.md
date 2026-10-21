@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-generation.md -->
-<!-- Source SHA-256: 22d992b5fd1d19aefed34df2cb62bc71e1a8f016f2a2769d9782675e892947f7 -->
+<!-- Source SHA-256: 2b64a68f9d23d18216e3e0fba92aa923a80ebafc94b2b0d91294580ef2568aed -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -17,32 +17,30 @@ MiniMax 提供多款语言模型，满足不同场景需求。**MiniMax-M3.1-Fla
 
 | 模型名称 | 上下文窗口 | 模型介绍 |
 | :- | :-: | :- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调**。一个面向真实工作的日常高效主力模型。 |
+| MiniMax-M3.1-Flash | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调**。一个面向真实工作的日常高效主力模型。 |
 | MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型** |
 
-<Note>
-  TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
-</Note>
+> [!NOTE]
+>
+> TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
 
 ### **MiniMax M3.1-Flash** 核心亮点
 
-<AccordionGroup>
-  <Accordion title="1M 上下文">
-    MiniMax-M3.1-Flash 支持最高 1,000,000 token 上下文，适用于长文档、代码库和多步骤 Agent 会话。
-  </Accordion>
+> **1M 上下文**
+>
+> MiniMax-M3.1-Flash 支持最高 1,000,000 token 上下文，适用于长文档、代码库和多步骤 Agent 会话。
 
-  <Accordion title="Agent 与代码场景">
-    MiniMax-M3.1-Flash 面向 Agent 推理、工具调用、代码和结构化任务执行优化。
-  </Accordion>
+> **Agent 与代码场景**
+>
+> MiniMax-M3.1-Flash 面向 Agent 推理、工具调用、代码和结构化任务执行优化。
 
-  <Accordion title="思考深度可调（effort）">
-    通过 `effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，档位越高思考越充分。省略时默认使用 `max` 档位。详见[深度思考](#深度思考)。
-  </Accordion>
+> **思考深度可调（effort）**
+>
+> 通过 `effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，档位越高思考越充分。省略时默认使用 `max` 档位。详见[深度思考](#深度思考)。
 
-  <Accordion title="多模态 Chat 输入">
-    支持文本、图片和视频等多模态输入，适用于丰富的内容理解与分析场景。
-  </Accordion>
-</AccordionGroup>
+> **多模态 Chat 输入**
+>
+> 支持文本、图片和视频等多模态输入，适用于丰富的内容理解与分析场景。
 
 ***
 
@@ -67,132 +65,128 @@ MiniMax 同时兼容 Anthropic 和 OpenAI 两种 API 协议格式，下面给出
 
 支持 thinking 块、interleaved thinking 等高级特性，是默认推荐路径。
 
-<CodeGroup>
-  ```bash curl theme={null}
-  curl https://api.minimax.cn/anthropic/v1/messages \
-    -H "Authorization: Bearer <MINIMAX_API_KEY>" \
-    -H "Content-Type: application/json" \
-    -d '{
-      "model": "MiniMax-M3.1-Flash",
-      "output_config": {"effort": "max"},
-      "max_tokens": 4096,
-      "messages": [
+```bash curl theme={null}
+curl https://api.minimax.cn/anthropic/v1/messages \
+  -H "Authorization: Bearer <MINIMAX_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "MiniMax-M3.1-Flash",
+    "output_config": {"effort": "max"},
+    "max_tokens": 4096,
+    "messages": [
+      {"role": "user", "content": "Hi, how are you?"}
+    ]
+  }'
+```
+
+```python Python theme={null}
+# 首次使用前请先安装 Anthropic SDK：`pip install anthropic`
+import anthropic
+
+client = anthropic.Anthropic(
+    base_url="https://api.minimax.cn/anthropic",
+    api_key="<MINIMAX_API_KEY>",
+)
+
+message = client.messages.create(
+    model="MiniMax-M3.1-Flash",
+    output_config={"effort": "max"},
+    max_tokens=4096,
+    messages=[
         {"role": "user", "content": "Hi, how are you?"}
-      ]
-    }'
-  ```
-
-  ```python Python theme={null}
-  # 首次使用前请先安装 Anthropic SDK：`pip install anthropic`
-  import anthropic
-
-  client = anthropic.Anthropic(
-      base_url="https://api.minimax.cn/anthropic",
-      api_key="<MINIMAX_API_KEY>",
-  )
-
-  message = client.messages.create(
-      model="MiniMax-M3.1-Flash",
-      output_config={"effort": "max"},
-      max_tokens=4096,
-      messages=[
-          {"role": "user", "content": "Hi, how are you?"}
-      ],
-  )
-
-  for block in message.content:
-      if block.type == "thinking":
-          print(f"Thinking:\n{block.thinking}\n")
-      elif block.type == "text":
-          print(f"Text:\n{block.text}\n")
-  ```
-
-  ```javascript Node.js theme={null}
-  // 首次使用前请先安装 Anthropic SDK：`npm install @anthropic-ai/sdk`
-  import Anthropic from "@anthropic-ai/sdk";
-
-  const client = new Anthropic({
-    baseURL: "https://api.minimax.cn/anthropic",
-    apiKey: "<MINIMAX_API_KEY>",
-  });
-
-  const message = await client.messages.create({
-    model: "MiniMax-M3.1-Flash",
-    output_config: { effort: "max" },
-    max_tokens: 4096,
-    messages: [
-      { role: "user", content: "Hi, how are you?" },
     ],
-  });
+)
 
-  for (const block of message.content) {
-    if (block.type === "thinking") {
-      console.log(`Thinking:\n${block.thinking}\n`);
-    } else if (block.type === "text") {
-      console.log(`Text:\n${block.text}\n`);
-    }
+for block in message.content:
+    if block.type == "thinking":
+        print(f"Thinking:\n{block.thinking}\n")
+    elif block.type == "text":
+        print(f"Text:\n{block.text}\n")
+```
+
+```javascript Node.js theme={null}
+// 首次使用前请先安装 Anthropic SDK：`npm install @anthropic-ai/sdk`
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic({
+  baseURL: "https://api.minimax.cn/anthropic",
+  apiKey: "<MINIMAX_API_KEY>",
+});
+
+const message = await client.messages.create({
+  model: "MiniMax-M3.1-Flash",
+  output_config: { effort: "max" },
+  max_tokens: 4096,
+  messages: [
+    { role: "user", content: "Hi, how are you?" },
+  ],
+});
+
+for (const block of message.content) {
+  if (block.type === "thinking") {
+    console.log(`Thinking:\n${block.thinking}\n`);
+  } else if (block.type === "text") {
+    console.log(`Text:\n${block.text}\n`);
   }
-  ```
-</CodeGroup>
+}
+```
 
 ### OpenAI 兼容
 
 如果你的项目已经接入 OpenAI SDK，把 `base_url` 和 `model` 换成下方的值即可直接复用，无需迁移到新 SDK。
 
-<CodeGroup>
-  ```bash curl theme={null}
-  curl https://api.minimax.cn/v1/chat/completions \
-    -H "Authorization: Bearer <MINIMAX_API_KEY>" \
-    -H "Content-Type: application/json" \
-    -d '{
-      "model": "MiniMax-M3.1-Flash",
-      "reasoning_effort": "max",
-      "messages": [
-        {"role": "user", "content": "Hi, how are you?"}
-      ]
-    }'
-  ```
+```bash curl theme={null}
+curl https://api.minimax.cn/v1/chat/completions \
+  -H "Authorization: Bearer <MINIMAX_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "MiniMax-M3.1-Flash",
+    "reasoning_effort": "max",
+    "messages": [
+      {"role": "user", "content": "Hi, how are you?"}
+    ]
+  }'
+```
 
-  ```python Python theme={null}
-  # 首次使用前请先安装 OpenAI SDK：`pip install openai`
-  from openai import OpenAI
+```python Python theme={null}
+# 首次使用前请先安装 OpenAI SDK：`pip install openai`
+from openai import OpenAI
 
-  client = OpenAI(
-      base_url="https://api.minimax.cn/v1",
-      api_key="<MINIMAX_API_KEY>",
-  )
+client = OpenAI(
+    base_url="https://api.minimax.cn/v1",
+    api_key="<MINIMAX_API_KEY>",
+)
 
-  response = client.chat.completions.create(
-      model="MiniMax-M3.1-Flash",
-      reasoning_effort="max",
-      messages=[
-          {"role": "user", "content": "Hi, how are you?"},
-      ],
-  )
-
-  print(response.choices[0].message.content)
-  ```
-
-  ```javascript Node.js theme={null}
-  // 首次使用前请先安装 OpenAI SDK：`npm install openai`
-  import OpenAI from "openai";
-
-  const client = new OpenAI({
-    baseURL: "https://api.minimax.cn/v1",
-    apiKey: "<MINIMAX_API_KEY>",
-  });
-
-  const response = await client.chat.completions.create({
-    model: "MiniMax-M3.1-Flash",
-    reasoning_effort: "max",
-    messages: [
-      { role: "user", content: "Hi, how are you?" },
+response = client.chat.completions.create(
+    model="MiniMax-M3.1-Flash",
+    reasoning_effort="max",
+    messages=[
+        {"role": "user", "content": "Hi, how are you?"},
     ],
-  });
+)
 
-  console.log(response.choices[0].message.content);
-  ```
-</CodeGroup>
+print(response.choices[0].message.content)
+```
+
+```javascript Node.js theme={null}
+// 首次使用前请先安装 OpenAI SDK：`npm install openai`
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://api.minimax.cn/v1",
+  apiKey: "<MINIMAX_API_KEY>",
+});
+
+const response = await client.chat.completions.create({
+  model: "MiniMax-M3.1-Flash",
+  reasoning_effort: "max",
+  messages: [
+    { role: "user", content: "Hi, how are you?" },
+  ],
+});
+
+console.log(response.choices[0].message.content);
+```
 
 ***
 
@@ -237,23 +231,21 @@ model "MiniMax-M3.1-Flash" requires adaptive thinking
 
 ## API 参考
 
-<Columns cols={2}>
-  <Card title="Anthropic API 兼容（推荐）" icon="book-open" href="/docs/api-reference/text-anthropic-api" cta="查看文档">
-    通过 Anthropic SDK 调用 MiniMax 模型，支持流式输出和 Interleaved Thinking
-  </Card>
+> **[Anthropic API 兼容（推荐）](/docs/api-reference/text-anthropic-api)**
+>
+> 通过 Anthropic SDK 调用 MiniMax 模型，支持流式输出和 Interleaved Thinking
 
-  <Card title="OpenAI API 兼容" icon="book-open" href="/docs/api-reference/text-openai-api" cta="查看文档">
-    通过 OpenAI SDK 调用 MiniMax 模型
-  </Card>
+> **[OpenAI API 兼容](/docs/api-reference/text-openai-api)**
+>
+> 通过 OpenAI SDK 调用 MiniMax 模型
 
-  <Card title="在 AI 编程工具里使用 MiniMax M 系列模型" icon="code" href="/docs/m-plan/openclaw" cta="查看文档">
-    在 Claude Code、Cursor 等工具中使用 MiniMax M 系列模型
-  </Card>
+> **[在 AI 编程工具里使用 MiniMax M 系列模型](/docs/m-plan/openclaw)**
+>
+> 在 Claude Code、Cursor 等工具中使用 MiniMax M 系列模型
 
-  <Card title="Chat Model" icon="messages-square" href="/docs/guides/text-chat" cta="查看文档">
-    M2-her 对话模型，专为角色扮演、多轮对话等场景设计
-  </Card>
-</Columns>
+> **[Chat Model](/docs/guides/text-chat)**
+>
+> M2-her 对话模型，专为角色扮演、多轮对话等场景设计
 
 ***
 

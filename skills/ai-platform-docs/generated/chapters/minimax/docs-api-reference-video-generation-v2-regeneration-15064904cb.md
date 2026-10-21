@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-regeneration.md -->
-<!-- Source SHA-256: c3a947a33c65a5368e6e300fd094f26f8aa0c54300a542789f8006ade1dec503 -->
+<!-- Source SHA-256: 440d81f77605a7f81a14217bb70f2d9fb75b9bea865586226e87ae6101232be0 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -14,13 +14,13 @@
 * **按任务 ID**：传已有生成任务的 `source_task_id`
 * **按源视频**：在 `content` 中传 `base_video`
 
-<Warning>
-  本接口仅支持对符合 MiniMax-H3 768P 输出规格的生成视频进行再生成并输出 2K，不支持任意视频的通用处理。
-</Warning>
+> [!WARNING]
+>
+> 本接口仅支持对符合 MiniMax-H3 768P 输出规格的生成视频进行再生成并输出 2K，不支持任意视频的通用处理。
 
-<Note>
-  再生成任务的 `task_type` 为 `regeneration`，可通过 H3 共用的[查询任务](/docs/api-reference/video-generation-v2-query)、[查询任务列表](/docs/api-reference/video-generation-v2-list)和[取消或删除任务](/docs/api-reference/video-generation-v2-delete)接口管理。
-</Note>
+> [!NOTE]
+>
+> 再生成任务的 `task_type` 为 `regeneration`，可通过 H3 共用的[查询任务](/docs/api-reference/video-generation-v2-query)、[查询任务列表](/docs/api-reference/video-generation-v2-list)和[取消或删除任务](/docs/api-reference/video-generation-v2-delete)接口管理。
 
 
 ## OpenAPI

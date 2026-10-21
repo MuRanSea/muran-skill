@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-to-text.md -->
-<!-- Source SHA-256: dc54b81c3b317ed979100bba31f6a69948724e4c49335880b2688412569fd81f -->
+<!-- Source SHA-256: 7507f46a5989383bc41ef725b88aeddb59d381e6b813ac6760857cdf05748b2d -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -31,9 +31,9 @@ MiniMax 语音识别（ASR）把音频转写成文本，当前对外提供的模
 | 字幕导出 | `response_format=srt` 或 `vtt` | 直接投喂剪辑工具 |
 | 多语种混合识别 | 不传 `language`；或按需指定 | 跨语种会议、双语播客、海外内容本地化 |
 
-<Note>
-  `verbose_json` / `srt` / `vtt` 会启用说话人分离与时间戳对齐，**不能与 `stream=true` 同时使用**。
-</Note>
+> [!NOTE]
+>
+> `verbose_json` / `srt` / `vtt` 会启用说话人分离与时间戳对齐，**不能与 `stream=true` 同时使用**。
 
 ## 基础规格
 
@@ -46,9 +46,9 @@ MiniMax 语音识别（ASR）把音频转写成文本，当前对外提供的模
 | 单次大小 | 不超过 **50 MB**；超出返回 `413` |
 | 不支持 | 无容器的裸 PCM；音频流式输入（可自行用 VAD 切段实现伪流式） |
 
-<Note>
-  ASR 不依赖高采样率与立体声。未压缩高规格音频容易超上限（500 秒 48 kHz 立体声 WAV ≈ 92 MB），建议先转为**单声道 16 kHz**，或使用 `mp3` / `aac` / `opus`，识别结果不受影响。
-</Note>
+> [!NOTE]
+>
+> ASR 不依赖高采样率与立体声。未压缩高规格音频容易超上限（500 秒 48 kHz 立体声 WAV ≈ 92 MB），建议先转为**单声道 16 kHz**，或使用 `mp3` / `aac` / `opus`，识别结果不受影响。
 
 ### 支持的语言
 
@@ -80,84 +80,78 @@ MiniMax 语音识别（ASR）把音频转写成文本，当前对外提供的模
 
 ### 一次性识别（默认）
 
-<CodeGroup>
-  ```python theme={null}
-  import os, requests
+```python theme={null}
+import os, requests
 
-  api_key = os.getenv("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/speech_to_text"
-  headers = {"Authorization": f"Bearer {api_key}"}
+api_key = os.getenv("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/speech_to_text"
+headers = {"Authorization": f"Bearer {api_key}"}
 
-  with open("/path/to/audio.mp3", "rb") as f:
-      files = {"file": ("audio.mp3", f)}
-      data = {"model": "asr-1.0"}
-      response = requests.post(url, headers=headers, data=data, files=files)
+with open("/path/to/audio.mp3", "rb") as f:
+    files = {"file": ("audio.mp3", f)}
+    data = {"model": "asr-1.0"}
+    response = requests.post(url, headers=headers, data=data, files=files)
 
-  response.raise_for_status()
-  print(response.json())
-  # {"text": "...", "duration": 26.325, "trace_id": "..."}
-  ```
+response.raise_for_status()
+print(response.json())
+# {"text": "...", "duration": 26.325, "trace_id": "..."}
+```
 
-  ```bash theme={null}
-  curl --location 'https://api.minimax.cn/v1/speech_to_text' \
-    --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
-    --form 'model="asr-1.0"' \
-    --form 'file=@"/path/to/audio.mp3"'
-  ```
-</CodeGroup>
+```bash theme={null}
+curl --location 'https://api.minimax.cn/v1/speech_to_text' \
+  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
+  --form 'model="asr-1.0"' \
+  --form 'file=@"/path/to/audio.mp3"'
+```
 
 ### 指定语种
 
-<CodeGroup>
-  ```python theme={null}
-  import os, requests
+```python theme={null}
+import os, requests
 
-  api_key = os.getenv("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/speech_to_text"
-  headers = {"Authorization": f"Bearer {api_key}", "language": "en"}
+api_key = os.getenv("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/speech_to_text"
+headers = {"Authorization": f"Bearer {api_key}", "language": "en"}
 
-  with open("/path/to/podcast.mp3", "rb") as f:
-      files = {"file": ("podcast.mp3", f)}
-      data = {"model": "asr-1.0"}
-      print(requests.post(url, headers=headers, data=data, files=files).json())
-  ```
+with open("/path/to/podcast.mp3", "rb") as f:
+    files = {"file": ("podcast.mp3", f)}
+    data = {"model": "asr-1.0"}
+    print(requests.post(url, headers=headers, data=data, files=files).json())
+```
 
-  ```bash theme={null}
-  curl --location 'https://api.minimax.cn/v1/speech_to_text' \
-    --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
-    --header 'language: en' \
-    --form 'model="asr-1.0"' \
-    --form 'file=@"/path/to/podcast.mp3"'
-  ```
-</CodeGroup>
+```bash theme={null}
+curl --location 'https://api.minimax.cn/v1/speech_to_text' \
+  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
+  --header 'language: en' \
+  --form 'model="asr-1.0"' \
+  --form 'file=@"/path/to/podcast.mp3"'
+```
 
 ### 说话人分离与逐句时间戳
 
-<CodeGroup>
-  ```python theme={null}
-  import os, requests
+```python theme={null}
+import os, requests
 
-  api_key = os.getenv("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/speech_to_text"
-  headers = {"Authorization": f"Bearer {api_key}"}
+api_key = os.getenv("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/speech_to_text"
+headers = {"Authorization": f"Bearer {api_key}"}
 
-  with open("/path/to/meeting.wav", "rb") as f:
-      files = {"file": ("meeting.wav", f)}
-      data = {"model": "asr-1.0", "response_format": "verbose_json"}
-      result = requests.post(url, headers=headers, data=data, files=files).json()
+with open("/path/to/meeting.wav", "rb") as f:
+    files = {"file": ("meeting.wav", f)}
+    data = {"model": "asr-1.0", "response_format": "verbose_json"}
+    result = requests.post(url, headers=headers, data=data, files=files).json()
 
-  for seg in result["segments"]:
-      print(f"[{seg['speaker']}] {seg['start']:.2f}-{seg['end']:.2f} {seg['text']}")
-  ```
+for seg in result["segments"]:
+    print(f"[{seg['speaker']}] {seg['start']:.2f}-{seg['end']:.2f} {seg['text']}")
+```
 
-  ```bash theme={null}
-  curl --location 'https://api.minimax.cn/v1/speech_to_text' \
-    --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
-    --form 'model="asr-1.0"' \
-    --form 'response_format="verbose_json"' \
-    --form 'file=@"/path/to/meeting.wav"'
-  ```
-</CodeGroup>
+```bash theme={null}
+curl --location 'https://api.minimax.cn/v1/speech_to_text' \
+  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
+  --form 'model="asr-1.0"' \
+  --form 'response_format="verbose_json"' \
+  --form 'file=@"/path/to/meeting.wav"'
+```
 
 返回示例：
 
@@ -176,66 +170,62 @@ MiniMax 语音识别（ASR）把音频转写成文本，当前对外提供的模
 
 ### 导出 SRT / VTT 字幕
 
-<CodeGroup>
-  ```python theme={null}
-  import os, requests
+```python theme={null}
+import os, requests
 
-  api_key = os.getenv("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/speech_to_text"
-  headers = {"Authorization": f"Bearer {api_key}"}
+api_key = os.getenv("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/speech_to_text"
+headers = {"Authorization": f"Bearer {api_key}"}
 
-  with open("/path/to/video.mp3", "rb") as f:
-      files = {"file": ("video.mp3", f)}
-      data = {"model": "asr-1.0", "response_format": "srt"}
-      resp = requests.post(url, headers=headers, data=data, files=files)
+with open("/path/to/video.mp3", "rb") as f:
+    files = {"file": ("video.mp3", f)}
+    data = {"model": "asr-1.0", "response_format": "srt"}
+    resp = requests.post(url, headers=headers, data=data, files=files)
 
-  with open("subtitle.srt", "w", encoding="utf-8") as out:
-      out.write(resp.text)
-  ```
+with open("subtitle.srt", "w", encoding="utf-8") as out:
+    out.write(resp.text)
+```
 
-  ```bash theme={null}
-  curl --location 'https://api.minimax.cn/v1/speech_to_text' \
-    --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
-    --form 'model="asr-1.0"' \
-    --form 'response_format="srt"' \
-    --form 'file=@"/path/to/video.mp3"' \
-    --output subtitle.srt
-  ```
-</CodeGroup>
+```bash theme={null}
+curl --location 'https://api.minimax.cn/v1/speech_to_text' \
+  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
+  --form 'model="asr-1.0"' \
+  --form 'response_format="srt"' \
+  --form 'file=@"/path/to/video.mp3"' \
+  --output subtitle.srt
+```
 
 ### 流式识别
 
-<CodeGroup>
-  ```python theme={null}
-  import os, json, requests
+```python theme={null}
+import os, json, requests
 
-  api_key = os.getenv("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/speech_to_text"
-  headers = {"Authorization": f"Bearer {api_key}"}
+api_key = os.getenv("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/speech_to_text"
+headers = {"Authorization": f"Bearer {api_key}"}
 
-  with open("/path/to/audio.mp3", "rb") as f:
-      files = {"file": ("audio.mp3", f)}
-      data = {"model": "asr-1.0", "stream": "true"}
-      with requests.post(url, headers=headers, data=data, files=files, stream=True) as resp:
-          resp.raise_for_status()
-          for raw in resp.iter_lines(decode_unicode=True):
-              if not raw or not raw.startswith("data:"):
-                  continue
-              event = json.loads(raw[len("data:"):].strip())
-              print(event.get("delta", ""), end="", flush=True)
-              if event.get("finish"):
-                  break
-  ```
+with open("/path/to/audio.mp3", "rb") as f:
+    files = {"file": ("audio.mp3", f)}
+    data = {"model": "asr-1.0", "stream": "true"}
+    with requests.post(url, headers=headers, data=data, files=files, stream=True) as resp:
+        resp.raise_for_status()
+        for raw in resp.iter_lines(decode_unicode=True):
+            if not raw or not raw.startswith("data:"):
+                continue
+            event = json.loads(raw[len("data:"):].strip())
+            print(event.get("delta", ""), end="", flush=True)
+            if event.get("finish"):
+                break
+```
 
-  ```bash theme={null}
-  curl --location 'https://api.minimax.cn/v1/speech_to_text' \
-    --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
-    --form 'model="asr-1.0"' \
-    --form 'stream="true"' \
-    --form 'file=@"/path/to/audio.mp3"' \
-    --no-buffer
-  ```
-</CodeGroup>
+```bash theme={null}
+curl --location 'https://api.minimax.cn/v1/speech_to_text' \
+  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
+  --form 'model="asr-1.0"' \
+  --form 'stream="true"' \
+  --form 'file=@"/path/to/audio.mp3"' \
+  --no-buffer
+```
 
 推送格式（事件之间以空行分隔）：
 
@@ -263,12 +253,10 @@ data: {"index":2,"delta":"","finish":true,"duration":26.325}
 
 ## 推荐阅读
 
-<Columns cols={2}>
-  <Card title="语音识别接口" icon="book-open" href="/docs/api-reference/speech-to-text" arrow="true" cta="点击查看">
-    Speech to Text 接口的完整参数、返回结构与错误码。
-  </Card>
+> **[语音识别接口](/docs/api-reference/speech-to-text)**
+>
+> Speech to Text 接口的完整参数、返回结构与错误码。
 
-  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#models/speech" arrow="true" cta="点击查看">
-    各语音模型的定价说明、计费方式与使用限制。
-  </Card>
-</Columns>
+> **[产品定价](/docs/pricing/overview#models/speech)**
+>
+> 各语音模型的定价说明、计费方式与使用限制。

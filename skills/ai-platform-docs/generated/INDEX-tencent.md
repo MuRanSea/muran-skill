@@ -223,3 +223,4 @@
 | 调用指南 / 图像生成模型 / Kling 生图调用指南 | `chapters/tencent/document-product-1823-138803-1b078e2db3.md` | https://cloud.tencent.com/document/product/1823/138803 |
 | 调用指南 / 语音模型 / 语音模型调用概览 | `chapters/tencent/document-product-1823-138804-8118ff0bc9.md` | https://cloud.tencent.com/document/product/1823/138804 |
 | 调用指南 / 语音模型 / 音乐生成 / Mureka 音乐生成 | `chapters/tencent/document-product-1823-138805-fba71bdd54.md` | https://cloud.tencent.com/document/product/1823/138805 |
+| 调用指南 / 3D 生成模型 / Rodin 调用指南 / Rodin-Gen-3D-2.5 调用指南 | `chapters/tencent/document-product-1823-139566-b5391b01be.md` | https://cloud.tencent.com/document/product/1823/139566 |

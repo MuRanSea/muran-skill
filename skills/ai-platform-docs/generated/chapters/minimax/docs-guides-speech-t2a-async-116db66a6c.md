@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-async.md -->
-<!-- Source SHA-256: 095e5025af15f964b82e87adb8e435a656e429374ed51fe4a6fb507e85774f18 -->
+<!-- Source SHA-256: 81a789ea1aac927071042cc58bd4144e3870e2c2fbbd69f779881611b578b141 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -65,219 +65,209 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
 
 ### 1. 获取 file\_id
 
-<CodeGroup dropdown>
-  ```python theme={null}
-  """
-  本示例用于待合成文本的 file_id。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
-  """
-  import requests
-  import os
+```python theme={null}
+"""
+本示例用于待合成文本的 file_id。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
+"""
+import requests
+import os
 
-  api_key = os.environ.get("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/files/upload"
+api_key = os.environ.get("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/files/upload"
 
-  payload = {'purpose': 't2a_async_input'}
-  files=[
-    ('file',('input_files.zip',open('path/to/input_files.zip','rb'),'application/zip'))
-  ]
-  headers = {
-    'authority': 'api.minimax.cn',
-    'Authorization': f'Bearer {api_key}'
-  }
+payload = {'purpose': 't2a_async_input'}
+files=[
+  ('file',('input_files.zip',open('path/to/input_files.zip','rb'),'application/zip'))
+]
+headers = {
+  'authority': 'api.minimax.cn',
+  'Authorization': f'Bearer {api_key}'
+}
 
-  response = requests.request("POST", url, headers=headers, data=payload, files=files)
+response = requests.request("POST", url, headers=headers, data=payload, files=files)
 
-  print(response.text)
-  ```
+print(response.text)
+```
 
-  ```bash theme={null}
-  curl --location 'https://api.minimax.cn/v1/files/upload' \
-  --header 'authority: api.minimax.cn' \
-  --header "Authorization: Bearer $MINIMAX_API_KEY" \
-  --form 'purpose=t2a_async_input' \
-  --form 'file=@test-json.zip'
-  ```
-</CodeGroup>
+```bash theme={null}
+curl --location 'https://api.minimax.cn/v1/files/upload' \
+--header 'authority: api.minimax.cn' \
+--header "Authorization: Bearer $MINIMAX_API_KEY" \
+--form 'purpose=t2a_async_input' \
+--form 'file=@test-json.zip'
+```
 
 ### 2. 创建语音合成任务
 
-<CodeGroup dropdown>
-  ```python theme={null}
-  """
-  本示例用于创建语音合成任务，若使用文件作为输入，则需要将<text_file_id>替换为文本文件的file_id，若使用文本作为输入，则设置"text"字段。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
-  """
-  import requests
-  import json
-  import os
+```python theme={null}
+"""
+本示例用于创建语音合成任务，若使用文件作为输入，则需要将<text_file_id>替换为文本文件的file_id，若使用文本作为输入，则设置"text"字段。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
+"""
+import requests
+import json
+import os
 
-  api_key = os.environ.get("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/t2a_async_v2"
+api_key = os.environ.get("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/t2a_async_v2"
 
-  payload = json.dumps({
-      "model": "speech-2.8-hd",
-      "text_file_id": <text_file_id>, # file as input
+payload = json.dumps({
+    "model": "speech-2.8-hd",
+    "text_file_id": <text_file_id>, # file as input
 
-      # "text":"微风拂过柔软的草地，清新的芳香伴随着鸟儿的歌唱。", # text as input
-
-      "language_boost": "auto",
-      "voice_setting": {
-      "voice_id": "audiobook_male_1",
-      "speed": 1,
-      "vol": 10,
-      "pitch": 1
-      },
-      "pronunciation_dict": {
-      "tone": [
-          "草地/(cao3)(di1)"
-      ]
-      },
-      "audio_setting": {
-          "audio_sample_rate": 32000,
-          "bitrate": 128000,
-          "format": "mp3",
-          "channel": 2
-      },
-      "voice_modify":{
-      "pitch":0,
-      "intensity":0,
-      "timbre":0,
-      "sound_effects":"spacious_echo"
-      }
-  })
-  headers = {
-      'Authorization': f'Bearer {api_key}',
-      'Content-Type': 'application/json'
-  }
-
-  response = requests.request("POST", url, headers=headers, data=payload)
-
-  print(response.text)
-  ```
-
-  ```bash theme={null}
-
-  # 若使用文件作为输入，则需要将<text_file_id>替换为文本文件的file_id，若使用文本作为输入，则设置"text"字段。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
-  curl --location 'https://api.minimax.cn/v1/t2a_async_v2' \
-  --header "authorization: Bearer ${MINIMAX_API_KEY}" \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "model": "speech-8-hd",
-    "text_file_id": <Your file_id>, # file as input
     # "text":"微风拂过柔软的草地，清新的芳香伴随着鸟儿的歌唱。", # text as input
+
     "language_boost": "auto",
     "voice_setting": {
-      "voice_id": "audiobook_male_1",
-      "speed": 1,
-      "vol": 10,
-      "pitch": 1
+    "voice_id": "audiobook_male_1",
+    "speed": 1,
+    "vol": 10,
+    "pitch": 1
     },
     "pronunciation_dict": {
-      "tone": [
+    "tone": [
         "草地/(cao3)(di1)"
-      ]
+    ]
     },
     "audio_setting": {
-      "audio_sample_rate": 32000,
-      "bitrate": 128000,
-      "format": "mp3",
-      "channel": 2
+        "audio_sample_rate": 32000,
+        "bitrate": 128000,
+        "format": "mp3",
+        "channel": 2
     },
     "voice_modify":{
-      "pitch":0,
-      "intensity":0,
-      "timbre":0,
-      "sound_effects":"spacious_echo"
+    "pitch":0,
+    "intensity":0,
+    "timbre":0,
+    "sound_effects":"spacious_echo"
     }
-  }'
-  ```
-</CodeGroup>
+})
+headers = {
+    'Authorization': f'Bearer {api_key}',
+    'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```bash theme={null}
+
+# 若使用文件作为输入，则需要将<text_file_id>替换为文本文件的file_id，若使用文本作为输入，则设置"text"字段。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
+curl --location 'https://api.minimax.cn/v1/t2a_async_v2' \
+--header "authorization: Bearer ${MINIMAX_API_KEY}" \
+--header 'Content-Type: application/json' \
+--data '{
+  "model": "speech-8-hd",
+  "text_file_id": <Your file_id>, # file as input
+  # "text":"微风拂过柔软的草地，清新的芳香伴随着鸟儿的歌唱。", # text as input
+  "language_boost": "auto",
+  "voice_setting": {
+    "voice_id": "audiobook_male_1",
+    "speed": 1,
+    "vol": 10,
+    "pitch": 1
+  },
+  "pronunciation_dict": {
+    "tone": [
+      "草地/(cao3)(di1)"
+    ]
+  },
+  "audio_setting": {
+    "audio_sample_rate": 32000,
+    "bitrate": 128000,
+    "format": "mp3",
+    "channel": 2
+  },
+  "voice_modify":{
+    "pitch":0,
+    "intensity":0,
+    "timbre":0,
+    "sound_effects":"spacious_echo"
+  }
+}'
+```
 
 ### 3. 查询语音合成进度
 
-<CodeGroup dropdown>
-  ```python theme={null}
-  """
-  本示例用于查询语音合成进度。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`，并将需要查询任务的 id 写入环境变量 `TASK_ID`。
-  """
-  import requests
-  import json
-  import os
+```python theme={null}
+"""
+本示例用于查询语音合成进度。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`，并将需要查询任务的 id 写入环境变量 `TASK_ID`。
+"""
+import requests
+import json
+import os
 
-  task_id = os.environ.get("TASK_ID")
-  api_key = os.environ.get("MINIMAX_API_KEY")
-  url = f"https://api.minimax.cn/v1/query/t2a_async_query_v2?task_id={task_id}"
+task_id = os.environ.get("TASK_ID")
+api_key = os.environ.get("MINIMAX_API_KEY")
+url = f"https://api.minimax.cn/v1/query/t2a_async_query_v2?task_id={task_id}"
 
-  payload = {}
-  headers = {
-      'Authorization': f'Bearer {api_key}',
-      'content-type': 'application/json',
-  }
+payload = {}
+headers = {
+    'Authorization': f'Bearer {api_key}',
+    'content-type': 'application/json',
+}
 
-  response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.request("GET", url, headers=headers, data=payload)
 
-  print(response.text)
-  ```
+print(response.text)
+```
 
-  ```bash theme={null}
+```bash theme={null}
 
-  curl --location "https://api.minimax.cn/v1/query/t2a_async_query_v2?task_id=${TASK_ID}" \
-  --header "authorization: Bearer ${MINIMAX_API_KEY}" \
-  --header 'content-type: application/json'
-  ```
-</CodeGroup>
+curl --location "https://api.minimax.cn/v1/query/t2a_async_query_v2?task_id=${TASK_ID}" \
+--header "authorization: Bearer ${MINIMAX_API_KEY}" \
+--header 'content-type: application/json'
+```
 
 ### 4. 下载语音合成文件
 
-<CodeGroup dropdown>
-  ```python theme={null}
-  """
-  本示例用于下载语音合成文件。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`，并将待下载文件的 id 写入环境变量 `FILE_ID`。
-  """
-  import requests
-  import os
+```python theme={null}
+"""
+本示例用于下载语音合成文件。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`，并将待下载文件的 id 写入环境变量 `FILE_ID`。
+"""
+import requests
+import os
 
-  api_key = os.environ.get("MINIMAX_API_KEY")
-  file_id = os.environ.get("FILE_ID")
+api_key = os.environ.get("MINIMAX_API_KEY")
+file_id = os.environ.get("FILE_ID")
 
-  url = f"https://api.minimax.cn/v1/files/retrieve_content?file_id={file_id}"
+url = f"https://api.minimax.cn/v1/files/retrieve_content?file_id={file_id}"
 
-  payload = {}
-  headers = {
-      'content-type': 'application/json',
-      'Authorization': f'Bearer {api_key}'
-  }
+payload = {}
+headers = {
+    'content-type': 'application/json',
+    'Authorization': f'Bearer {api_key}'
+}
 
-  response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.request("GET", url, headers=headers, data=payload)
 
-  with open(<output_filename>, 'wb') as f:
-  f.write(response.content)
-  ```
+with open(<output_filename>, 'wb') as f:
+f.write(response.content)
+```
 
-  ```bash theme={null}
+```bash theme={null}
 
-  curl --location "https://api.minimax.cn/v1/files/retrieve?file_id=${FILE_ID}" \
-  --header 'Content-Type: application/json' \
-  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
-  --output "${FILE_NAME}"
-  ```
-</CodeGroup>
+curl --location "https://api.minimax.cn/v1/files/retrieve?file_id=${FILE_ID}" \
+--header 'Content-Type: application/json' \
+--header "Authorization: Bearer ${MINIMAX_API_KEY}" \
+--output "${FILE_NAME}"
+```
 
 ## 推荐阅读
 
-<Columns cols={2}>
-  <Card title="异步语音合成" icon="book-open" href="/docs/api-reference/speech-t2a-async-create" arrow="true" cta="点击查看">
-    使用 API 接口，创建异步语音合成任务。
-  </Card>
+> **[异步语音合成](/docs/api-reference/speech-t2a-async-create)**
+>
+> 使用 API 接口，创建异步语音合成任务。
 
-  <Card title="同步语音合成 HTTP" icon="book-open" href="/docs/api-reference/speech-t2a-http" arrow="true" cta="点击查看">
-    使用 API 接口，在HTTP网络通信协议下进行同步语音合成。
-  </Card>
+> **[同步语音合成 HTTP](/docs/api-reference/speech-t2a-http)**
+>
+> 使用 API 接口，在HTTP网络通信协议下进行同步语音合成。
 
-  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#models/speech" arrow="true" cta="点击查看">
-    各模型的定价说明、计费方式及使用限制。
-  </Card>
+> **[产品定价](/docs/pricing/overview#models/speech)**
+>
+> 各模型的定价说明、计费方式及使用限制。
 
-  <Card title="速率限制" icon="book-open" href="/docs/guides/rate-limits#3、我们的-api-的限速具体数值" arrow="true" cta="点击查看">
-    为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。
-  </Card>
-</Columns>
+> **[速率限制](/docs/guides/rate-limits#3、我们的-api-的限速具体数值)**
+>
+> 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-h3-context-ir.md -->
-<!-- Source SHA-256: f6ee219b9ec103e74dc18cf266ee630291f98ddf5dee62c20e3eb53f0cd22c31 -->
+<!-- Source SHA-256: abc49ba6b1cb7812ce59c2605bbc617c8790b0b079e5464b43a207c15da13ca1 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,19 +9,19 @@
 
 > 深度理解多模态上下文，并生成结构化、语义更丰富的视频提示词。
 
-<Warning>
-  本接口只返回增强后的视频提示词，不会创建视频生成任务。
-</Warning>
+> [!WARNING]
+>
+> 本接口只返回增强后的视频提示词，不会创建视频生成任务。
 
 H3-Context-IR 对文本、图像、音频和视频等多模态上下文进行深度理解，分析素材之间以及素材与目标生成结果之间的关系，并进行复杂逻辑推理。系统会将理解结果转换为结构化表达，在尽量保持用户原始意图的前提下丰富语义细节。
 
-<Note>
-  H3-Context-IR 是一个复杂系统，暂不提供开源实现；本 API 既可用于验证 Full 2K-Workflow 的官方效果，也可集成到生产工作流中。
-</Note>
+> [!NOTE]
+>
+> H3-Context-IR 是一个复杂系统，暂不提供开源实现；本 API 既可用于验证 Full 2K-Workflow 的官方效果，也可集成到生产工作流中。
 
-<Note>
-  创建成功后，使用[查询任务](/docs/api-reference/video-generation-v2-query)或[查询任务列表](/docs/api-reference/video-generation-v2-list)接口查询。H3-Context-IR 任务的 `task_type` 为 `h3_context_ir`；任务成功后，从 `content.prompt` 获取增强提示词。
-</Note>
+> [!NOTE]
+>
+> 创建成功后，使用[查询任务](/docs/api-reference/video-generation-v2-query)或[查询任务列表](/docs/api-reference/video-generation-v2-list)接口查询。H3-Context-IR 任务的 `task_type` 为 `h3_context_ir`；任务成功后，从 `content.prompt` 获取增强提示词。
 
 
 ## OpenAPI

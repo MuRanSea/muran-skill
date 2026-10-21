@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-m3-function-call.md -->
-<!-- Source SHA-256: a7cda1545cd2401b5a9fcd08dd3421c6468c88c1acb1186bac0dd05c78899793 -->
+<!-- Source SHA-256: 047df205729cf44964a7cfed283186eee92ac8f3bf4b2215d7b932b3e3266b8c -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,7 +11,7 @@
 
 MiniMax-M3.1-Flash 原生支持 Interleaved Thinking。它能够在每轮 Tool Use 前，根据环境或工具的返回 (Output) 进行思考，并决策下一步行动。
 
-<img src="https://filecdn.minimax.chat/public/4f4b43c1-f0a5-416a-8770-1a4f80feeb1e.png" />
+![](https://filecdn.minimax.chat/public/4f4b43c1-f0a5-416a-8770-1a4f80feeb1e.png)
 
 这种能力使其在长程、复杂任务中表现出色，并在 SWE、BrowseCamp、xBench 等 Code & Agent Benchmark 上达到了 SOTA 水平。
 
@@ -34,9 +34,9 @@ MiniMax-M3.1-Flash 原生支持 Interleaved Thinking。它能够在每轮 Tool U
 * `input` / `function.arguments`: 工具调用参数（OpenAI 格式下为 JSON 字符串）
 * `id`: 工具调用的唯一标识符
 
-<Note>
-  MiniMax-M3.1-Flash 按需思考：在简单的工具调用中，模型可能直接调用工具而不输出思考内容，此时该轮响应中没有 `thinking` 内容块或 `reasoning_content` 字段。解析时请先判断字段是否存在，无论本轮是否包含思考内容，都需要完整回传模型返回的消息。
-</Note>
+> [!NOTE]
+>
+> MiniMax-M3.1-Flash 按需思考：在简单的工具调用中，模型可能直接调用工具而不输出思考内容，此时该轮响应中没有 `thinking` 内容块或 `reasoning_content` 字段。解析时请先判断字段是否存在，无论本轮是否包含思考内容，都需要完整回传模型返回的消息。
 
 ## 特别注意
 
@@ -229,9 +229,9 @@ export OPENAI_API_KEY=${YOUR_API_KEY}
 
 通过 OpenAI SDK 调用 MiniMax-M3.1-Flash 时，思考内容通过 `reasoning_content` 字段返回，可以直接用于展示。
 
-<Note>
-  重要提醒：为了保证 Interleaved Thinking 的生效、模型思维链不被打断，包含 `reasoning_content` 在内的完整 `response_message` 必须被保留在 Message History 中，在下一轮调用中回传给模型。如此才能发挥模型的最佳性能！
-</Note>
+> [!NOTE]
+>
+> 重要提醒：为了保证 Interleaved Thinking 的生效、模型思维链不被打断，包含 `reasoning_content` 在内的完整 `response_message` 必须被保留在 Message History 中，在下一轮调用中回传给模型。如此才能发挥模型的最佳性能！
 
 请注意请求并解析 API 返回的函数 `send_messages` 的实现，和追加历史消息 `messages.append(response_message)` 操作：
 
@@ -379,20 +379,18 @@ else:
 
 ## 推荐阅读
 
-<Columns cols={2}>
-  <Card title="在 AI 编程工具里使用 MiniMax-M3.1-Flash" icon="book-open" href="/docs/m-plan/openclaw" arrow="true" cta="点击查看">
-    具备代码理解能力，适用于代码助手等场景。
-  </Card>
+> **[在 AI 编程工具里使用 MiniMax-M3.1-Flash](/docs/m-plan/openclaw)**
+>
+> 具备代码理解能力，适用于代码助手等场景。
 
-  <Card title="文本生成指南" icon="book-open" href="/docs/guides/text-generation" cta="点击查看">
-    支持通过 Anthropic 和 OpenAI 兼容接口进行文本生成调用
-  </Card>
+> **[文本生成指南](/docs/guides/text-generation)**
+>
+> 支持通过 Anthropic 和 OpenAI 兼容接口进行文本生成调用
 
-  <Card title="Anthropic API 兼容（推荐）" icon="book-open" href="/docs/api-reference/text-anthropic-api" arrow="true" cta="点击查看">
-    通过 Anthropic SDK 调用 MiniMax 模型
-  </Card>
+> **[Anthropic API 兼容（推荐）](/docs/api-reference/text-anthropic-api)**
+>
+> 通过 Anthropic SDK 调用 MiniMax 模型
 
-  <Card title="OpenAI API 兼容" icon="book-open" href="/docs/api-reference/text-openai-api" arrow="true" cta="点击查看">
-    通过 OpenAI SDK 调用 MiniMax 模型
-  </Card>
-</Columns>
+> **[OpenAI API 兼容](/docs/api-reference/text-openai-api)**
+>
+> 通过 OpenAI SDK 调用 MiniMax 模型

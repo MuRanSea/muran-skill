@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/rate-limits.md -->
-<!-- Source SHA-256: b3d81f78b3e3a03896dcbb9f5d822cf6dfaaec3932a9c43fba803a806ba27f13 -->
+<!-- Source SHA-256: 29496200daacc925d7927166810c50c2c87297bacdedb88c6c39973a10234e5a -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -20,7 +20,7 @@
 
 ### 语言
 
-| 模型 | MiniMax-M3.1-Flash<br />MiniMax-M3 | MiniMax-M3.1-Flash<br />MiniMax-M3 |
+| 模型 | MiniMax-M3.1-Flash MiniMax-M3 | MiniMax-M3.1-Flash MiniMax-M3 |
 | :- | :- | :- |
 | 限制类型 | RPM | TPM |
 | 免费用户 | 20 | 1,000,000 |
@@ -38,14 +38,14 @@
 
 | 接口名 | T2A v2 | Voice Cloning     | Voice Design | Speech to Text |
 | :- | :- | :- | :- | :- |
-| 模型 | speech-02-hd<br />speech-02-turbo<br /> speech-2.6-hd<br />speech-2.6-turbo<br /> speech-2.8-hd<br />speech-2.8-turbo | —— | —— | asr-1.0 |
+| 模型 | speech-02-hd speech-02-turbo  speech-2.6-hd speech-2.6-turbo  speech-2.8-hd speech-2.8-turbo | —— | —— | asr-1.0 |
 | 限制类型 | RPM | RPM | RPM | CONN / TPM |
 | 免费用户 | 10 | 60 | 20 | —— |
 | 充值用户 | 20 | 60 | 20 | 2 / 30,000 |
 
-<Note>
-  Speech to Text 暂不对免费用户开放，需为**充值用户**方可调用。TPM 以**音频秒数**作为 token 计量，即每分钟累计可识别的音频秒数。
-</Note>
+> [!NOTE]
+>
+> Speech to Text 暂不对免费用户开放，需为**充值用户**方可调用。TPM 以**音频秒数**作为 token 计量，即每分钟累计可识别的音频秒数。
 
 ### 图片
 

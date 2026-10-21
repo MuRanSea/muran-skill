@@ -1,12 +1,12 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137074 -->
-<!-- Source SHA-256: 084d86d459974f3973a3347de37ef3e181103912bb8da29c8bdb320089c0e7bd -->
+<!-- Source SHA-256: 91f999e0fc668d2bd46877ca889a4f0689b1ef8c9a2450becd1a179d67686474 -->
 
 # Tripo-3D 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137074
-最近更新时间：2026-09-04 10:23:30
+最近更新时间：2026-10-20 12:08:05
 
-本文档适用范围：tripo-3d-3.1、tripo-3d-p1
+本文档适用范围：tripo-3d-3.1、tripo-3d-p1、tripo-3d-p2
 
 ## 简介
 
@@ -44,30 +44,7 @@ Tripo 生3d 接口，根据输入的文本描述/图片智能生成3d。
 
 **输入参数**
 
-| 参数名称 | 必选 | 类型 | 参数描述 |
-| --- | --- | --- | --- |
-| model | 是 | string | tripo 生3d 模型名称。可选项：tripo-3d-3.1、tripo-3d-p1。  默认为 tripo-3d-3.1。  示例值：tripo-3d-3.1 |
-| prompt | 否 | string | 文本提示词，最多 1024 个字符。仅使用文生3D 功能时生效；  描述形状、材质、风格和尺寸。 |
-| input | 否 | string | 图片生成图像来源。主体应清晰可见，遮挡最少。    示例值：https://cos.ap-guangzhou.myqcloud.com/image.jpg |
-| inputs | 否 | array of object | 多视图生成图像来源。主体应清晰可见，遮挡最少。详情请参见 inputs 数据结构。 |
-| negative\_prompt | 否 | string | 反向提示词，最多 255 个字符。描述不希望在生成模型中出现的内容。  示例值："blurry, low quality, broken mesh"。 |
-| image\_seed | 否 | integer | 内部文本转图像阶段的随机种子。  控制从文本提示词生成的参考图像，然后再进行 3d 转换。若未设置，每次会使用随机种子。    **注意：**  建议谨慎使用该参数。由于不同 seed 可能产生不同质量的结果，固定 seed 可能会限制探索更优生成结果的机会。  seed 取值范围：-2147483648 ~ 2147483647。 |
-| model\_seed | 否 | integer | 几何体生成的随机种子。  使用相同种子和相同输入将生成相同的 3d 网格。  若未设置，每次会使用随机种子。    **注意：**  建议谨慎使用该参数。由于不同 seed 可能产生不同质量的结果，固定 seed 可能会限制探索更优生成结果的机会。  seed 取值范围：-2147483648 ~ 2147483647。 |
-| enable\_image\_autofix | 否 | boolean | 是否在生成前自动优化输入图像。启用后，系统将增强低分辨率或低质量图像以改善 3d 生成效果。  默认为 false。 |
-| face\_limit | 否 | integer | 输出网格的最大面数。省略时模型使用自适应拓扑。  model 为 tripo-3d-3.1时：  纯三角面标准模式面数上限 1,500,000，超清模式上限 2,000,000。  四边面（quad: true）标准模式面数上限 150,000。  游戏资产推荐：50,000 – 100,000。web/移动端：10,000 – 50,000。  开启 smart\_low\_poly: true 时，面数限制与模型版本无关，统一为： 三角面 500 – 20,000，四边面 500 – 10,000。  model 为 tripo-3d-p1时：  输出网格的最大面数。支持范围：50 – 20,000。  省略时自适应确定面数。  最佳质量建议：简单模型从 150 面起步，复杂模型从 250 面起步。面数过低可能导致生成质量下降。 |
-| texture | 否 | boolean | 是否为模型生成贴图。  设为 false 可获取无贴图的纯几何体。  默认为 true。 |
-| pbr | 否 | boolean | 启用 pbr 材质贴图（base\_color、metallic、roughness、normal）。  当 pbr 设为 true 时，texture 会自动强制设为 true。  默认为 true。 |
-| texture\_seed | 否 | integer | 贴图生成的随机种子。使用相同种子将生成相同的贴图。若未设置，每次会使用随机种子。如需获取相同几何体但不同贴图的模型，请保持 model\_seed 不变并更改 texture\_seed。  **注意：**  建议谨慎使用该参数。由于不同 seed 可能产生不同质量的结果，固定 seed 可能会限制探索更优生成结果的机会。  seed 取值范围：-2147483648 ~ 2147483647。 |
-| texture\_alignment | 否 | string | 确定 3d 模型中纹理对齐的优先级。  仅单图和多图输入时生效。  可选值包括：original\_image、geometry。  original\_image：优先保证与源图像的视觉保真度，生成纹理与原图更相似，但可能导致轻微 3d 不一致。  geometry：优先保证三维结构精度，使纹理更好地贴合模型几何形状，但可能与原图外观略有偏差。  默认值为 original\_image。 |
-| texture\_quality | 否 | string | 贴图质量等级。  可选值包括：standard，detailed，extreme。  standard：质量与速度的平衡。  detailed：更高保真度，生成速度较慢。  extreme：8k 贴图，最高保真度。相比 detailed 额外消耗积分。  默认为 standard。 |
-| auto\_size | 否 | boolean | 是否自动将生成的模型缩放至真实世界尺寸。启用后，模型尺寸将以米为单位，适用于 ar/vr 或游戏引擎场景。  默认为 false。 |
-| orientation | 否 | string | 设置模型方向。  仅单图 image\_url 和 multiview\_image\_url 多图输入时生效；  default：自动朝向。  align\_image：将模型对齐至输入图像的视角。  仅当 texture 为 true 时生效，未开启贴图时此参数无效。  默认值为 default。 |
-| quad | 否 | boolean | model 为 tripo-3d-3.1时有效。  是否输出四边面网格（四边形多边形）而非三角面。若未设置 face\_limit，默认面数为 10,000。  启用 quad 会强制输出格式为 fbx。  默认为 false。 |
-| compress | 否 | string | 压缩类型。  geometry：meshopt 压缩，减小文件体积。 |
-| smart\_low\_poly | 否 | boolean | model 为 tripo-3d-3.1时有效。  是否生成具有手工风格、干净拓扑的低面数模型。  最适合简单、非复杂的输入。复杂模型可能偶尔失败。  默认为 false。 |
-| generate\_parts | 否 | boolean | model 为 tripo-3d-3.1时有效。  生成可编辑的分割部件。  与 texture=true、pbr=true 或 quad=true 不兼容。要使用此功能，需将这三者均设为 false。  默认为 false。 |
-| export\_uv | 否 | boolean | 控制生成过程中的 uv 展开。设为 false 可加快生成速度并减小文件体积。uv 展开将在贴图阶段处理。  默认为 false。 |
-| geometry\_quality | 否 | string | model 为 tripo-3d-3.1时有效。  几何体质量等级。  standard：质量与速度的平衡。  detailed：ultra 模式，更精细的几何细节。  默认为 standard。 |
+<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div>参数名称</div></td><td><div>必选</div></td><td><div>类型</div></td><td><div>参数描述</div></td></tr><tr><td><div>model</div></td><td><div>是</div></td><td><div>string</div></td><td><div>tripo 生3d 模型名称。可选项：tripo-3d-3.1、tripo-3d-p1、tripo-3d-p2。</div><div>默认为 tripo-3d-3.1。</div><div>示例值：tripo-3d-3.1</div></td></tr><tr><td><div>prompt</div></td><td><div>否</div></td><td><div>string</div></td><td><div>文本提示词，最多 1024 个字符。仅使用文生3D 功能时生效。</div><div>描述形状、材质、风格和尺寸。</div></td></tr><tr><td><div>input</div></td><td><div>否</div></td><td><div> string</div></td><td><div>图片生成图像来源。仅使用图生3D 功能时生效。</div><div>支持 PNG、JPEG、WebP，最大 20 MB，建议分辨率不低于 256 × 256 px。主体应清晰可见，背景干净，遮挡尽量少。</div><div> </div><div>示例值：https://cos.ap-guangzhou.myqcloud.com/image.jpg</div></td></tr><tr><td><div>inputs</div></td><td><div>否</div></td><td><div>array of object</div></td><td><div>多视图生成图像来源。仅使用多图生3D 功能时生效。主体应清晰可见，遮挡最少。</div><div>正面视图不可省略。其他视图可省略，但至少需要 2 张图像。</div><div>所有图像应在一致光照下拍摄同一物体。</div><div>支持格式：PNG、JPEG、WebP</div><div>推荐分辨率：至少 256 × 256 px。</div><div>详情请参见 inputs 数据结构。</div></td></tr><tr><td><div>negative_prompt</div></td><td><div>否</div></td><td><div>string</div></td><td><div>反向提示词，最多 255 个字符。描述不希望在生成模型中出现的内容。</div><div>示例值："blurry, low quality, broken mesh"。</div></td></tr><tr><td><div>image_seed</div></td><td><div>否</div></td><td><div>integer</div></td><td><div>内部文本转图像阶段的随机种子。</div><div>控制从文本提示词生成的参考图像，然后再进行 3d 转换。若未设置，每次会使用随机种子。</div><div></div><div><b>注意：</b></div><div>建议谨慎使用该参数。由于不同 seed 可能产生不同质量的结果，固定 seed 可能会限制探索更优生成结果的机会。</div><div>seed 取值范围：-2147483648 ~ 2147483647。</div></td></tr><tr><td><div>model_seed</div></td><td><div>否</div></td><td><div>integer</div></td><td><div>几何体生成的随机种子。</div><div>使用相同种子和相同输入将生成相同的 3d 网格。</div><div>若未设置，每次会使用随机种子。</div><div></div><div><b>注意：</b></div><div>建议谨慎使用该参数。由于不同 seed 可能产生不同质量的结果，固定 seed 可能会限制探索更优生成结果的机会。</div><div>seed 取值范围：-2147483648 ~ 2147483647。</div></td></tr><tr><td><div>enable_image_autofix</div></td><td><div>否</div></td><td><div>boolean</div></td><td><div>是否在生成前自动优化输入图像。启用后，系统将增强低分辨率或低质量图像以改善 3d 生成效果。</div><div>默认为 false。</div></td></tr><tr><td><div>face_limit</div></td><td><div>否</div></td><td><div>integer</div></td><td><div>输出网格的最大面数。省略时模型使用自适应拓扑。</div><div>model 为 tripo-3d-3.1时：</div><div>纯三角面标准模式面数上限 1,500,000，超清模式上限 2,000,000。</div><div>四边面（quad: true）标准模式面数上限 150,000。</div><div>游戏资产推荐：50,000 – 100,000。web/移动端：10,000 – 50,000。</div><div>开启 smart_low_poly: true 时，面数限制与模型版本无关，统一为： 三角面 500 – 20,000，四边面 500 – 10,000。</div><div>model 为 tripo-3d-p1时：</div><div>输出网格的最大面数。支持范围：50 – 20,000。</div><div>省略时自适应确定面数。</div><div>最佳质量建议：简单模型从 150 面起步，复杂模型从 250 面起步。面数过低可能导致生成质量下降。</div><div>model 为 tripo-3d-p2时：</div><div>输出网格最大面数。三角面范围为 48–50,000；quad=true 时范围为 48–25,000；省略时自动确定。</div><div>最佳质量建议：简单模型从 150 面起步，复杂模型从 250 面起步。面数过低可能导致生成质量下降。</div></td></tr><tr><td><div>texture</div></td><td><div>否</div></td><td><div>boolean</div></td><td><div>是否为模型生成贴图。</div><div>设为 false 可获取无贴图的纯几何体。</div><div>默认为 true。</div></td></tr><tr><td><div>pbr</div></td><td><div>否</div></td><td><div>boolean</div></td><td><div>启用 pbr 材质贴图（base_color、metallic、roughness、normal）。</div><div>当 pbr 设为 true 时，texture 会自动强制设为 true。</div><div>默认为 true。</div></td></tr><tr><td><div>texture_seed</div></td><td><div>否</div></td><td><div>integer</div></td><td><div>贴图生成的随机种子。使用相同种子将生成相同的贴图。若未设置，每次会使用随机种子。如需获取相同几何体但不同贴图的模型，请保持 model_seed 不变并更改 texture_seed。</div><div><b>注意：</b></div><div>建议谨慎使用该参数。由于不同 seed 可能产生不同质量的结果，固定 seed 可能会限制探索更优生成结果的机会。</div><div>seed 取值范围：-2147483648 ~ 2147483647。</div></td></tr><tr><td><div>texture_alignment</div></td><td><div>否</div></td><td><div>string</div></td><td><div>确定 3d 模型中纹理对齐的优先级。</div><div>仅单图和多图输入时生效。</div><div>可选值包括：original_image、geometry。</div><div>original_image：优先保证与源图像的视觉保真度，生成纹理与原图更相似，但可能导致轻微 3d 不一致。</div><div>geometry：优先保证三维结构精度，使纹理更好地贴合模型几何形状，但可能与原图外观略有偏差。</div><div>默认值为 original_image。</div></td></tr><tr><td><div>texture_quality</div></td><td><div>否</div></td><td><div>string</div></td><td><div>贴图质量等级。</div><div>可选值包括：fast，standard，detailed，extreme。</div><div>fast：生成最快，以细节换速度；输出贴图尺寸与 standard 相同。 需要贴图版本 v3.5-20260815；积分与 standard 相同。</div><div>standard：质量与速度的平衡。</div><div>detailed：更高保真度，生成速度较慢。</div><div>extreme：8k 贴图，最高保真度。相比 detailed 额外消耗积分。</div><div>默认为 standard。</div><div>fast 仅在贴图版本 v3.5-20260815 下可用。生成接口需将 texture_version 设为该版本。</div></td></tr><tr><td><div>texture_version</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>string</div></td><td><div>独立指定贴图模型，与几何体 model 解耦。</div><div>v3.5-20260815：最新贴图模型。使用 texture_quality=fast 与 delight 时必填。</div><div>v3.0-20250812：v3.x 与 P 系列几何体的默认值。</div><div>v2.5-20250123：v2.5-20250123 几何体的默认值。</div><div>省略时按上表根据几何体 model 自动推导。</div></td></tr><tr><td><div>delight</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>boolean</div></td><td><div>贴图前去除参考图中的光照信息。设为 false 可保留原有明暗。仅 v3.5-20260815 贴图模型支持，更早的贴图版本会忽略该参数。</div><div>默认为 true。</div></td></tr><tr><td><div>auto_size</div></td><td><div>否</div></td><td><div>boolean</div></td><td><div>是否自动将生成的模型缩放至真实世界尺寸。启用后，模型尺寸将以米为单位，适用于 ar/vr 或游戏引擎场景。</div><div>默认为 false。</div></td></tr><tr><td><div>orientation</div></td><td><div>否</div></td><td><div>string</div></td><td><div>设置模型方向。</div><div>仅单图和多图输入时生效；</div><div>default：自动朝向。</div><div>align_image：将模型对齐至输入图像的视角。</div><div>仅当 texture 为 true 时生效，未开启贴图时此参数无效。</div><div>默认值为 default。</div></td></tr><tr><td><div>quad</div></td><td><div>否</div></td><td><div>boolean</div></td><td><div>model 为 tripo-3d-p2时有效。</div><div>是否输出四边面网格，默认 false；开启后 face_limit 上限为25000。</div></td></tr><tr><td><div>compress</div></td><td><div>否</div></td><td><div>string</div></td><td><div>model 为 tripo-3d-3.1时有效。</div><div>压缩类型。</div><div>geometry：meshopt 压缩，减小文件体积。</div></td></tr><tr><td><div>smart_low_poly</div></td><td><div>否</div></td><td><div>boolean</div></td><td><div>model 为 tripo-3d-3.1时有效。</div><div>是否生成具有手工风格、干净拓扑的低面数模型。</div><div>最适合简单、非复杂的输入。复杂模型可能偶尔失败。</div><div>默认为 false。</div></td></tr><tr><td><div>generate_parts</div></td><td><div>否</div></td><td><div>boolean</div></td><td><div>model 为 tripo-3d-3.1时有效。</div><div>生成可编辑的分割部件。</div><div>与 texture=true、pbr=true 或 quad=true 不兼容。要使用此功能，需将这三者均设为 false。</div><div>默认为 false。</div></td></tr><tr><td><div>export_uv</div></td><td><div>否</div></td><td><div>boolean</div></td><td><div>控制生成过程中的 uv 展开。设为 false 可加快生成速度并减小文件体积。uv 展开将在贴图阶段处理。</div><div>默认为 true。</div></td></tr><tr><td><div>geometry_quality</div></td><td><div>否</div></td><td><div>string</div></td><td><div>model 为 tripo-3d-3.1时有效。</div><div>几何体质量等级。</div><div>standard：质量与速度的平衡。</div><div>detailed：ultra 模式，更精细的几何细节。</div><div>默认为 standard。</div></td></tr></tbody></table>
 
 **输出参数**
 
@@ -85,7 +62,7 @@ Tripo 生3d 接口，根据输入的文本描述/图片智能生成3d。
 
 | 参数名称 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
-| model | 是 | string | tripo 生3d 模型名称。可选项：tripo-3d-3.1、tripo-3d-p1。  默认为 tripo-3d-3.1。  示例值：tripo-3d-3.1 |
+| model | 是 | string | tripo 生3d 模型名称。可选项：tripo-3d-3.1、tripo-3d-p1、tripo-3d-p2。  默认为 tripo-3d-3.1。  示例值：tripo-3d-3.1 |
 | id | 是 | string | 任务 id。  示例值：1357237233311637504 |
 
 **输出参数**
@@ -146,7 +123,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/query' \\
 
 ```java
 {
-  "status": "success",
+  "status": "completed",
   "input": {
     "prompt": "一只可爱的小猫",
     "pbr": true,

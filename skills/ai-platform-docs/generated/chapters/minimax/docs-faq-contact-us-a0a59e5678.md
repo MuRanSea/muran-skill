@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/contact-us.md -->
-<!-- Source SHA-256: 67bff564f3f3e2cebe7198bdd8c3a55bbe6c52cb38e4ad0e28fd48b8f8863c94 -->
+<!-- Source SHA-256: 8f7bf1abb16f3edf6911000c9b8c1e33637524eebafebaa8f004986285799a98 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,19 +11,17 @@
 
 **1、开放平台用户交流群**——使用问题咨询、故障排查协助
 
-<img src="https://filecdn.minimax.chat/public/b5091a6b-efda-49ce-b621-e4d6a2698b28.png" style={{ width: "200px" }} />
+![](https://filecdn.minimax.chat/public/b5091a6b-efda-49ce-b621-e4d6a2698b28.png)
 
 **2、技术交流共创群**——分享实战心得，在交流中共同进阶
 
-<img src="https://filecdn.minimax.chat/public/b775dc77-0a41-4cae-be3a-2a92972634a0.png" style={{ width: "200px" }} />
+![](https://filecdn.minimax.chat/public/b775dc77-0a41-4cae-be3a-2a92972634a0.png)
 
 **3、商务合作咨询**
 
-<div style={{ display: "flex", gap: "20px", marginTop: "-20px" }}>
-  <img src="https://filecdn.minimax.chat/public/358e12fc-b7dc-43f8-bd43-a3b2e427df35.png" style={{ width: "200px" }} />
+![](https://filecdn.minimax.chat/public/358e12fc-b7dc-43f8-bd43-a3b2e427df35.png)
 
-  <img src="https://filecdn.minimax.chat/public/e18f7d91-c74a-4ed0-a1e2-2326eb4183c7.png" style={{ width: "200px" }} />
-</div>
+![](https://filecdn.minimax.chat/public/e18f7d91-c74a-4ed0-a1e2-2326eb4183c7.png)
 
 ### 品牌资源
 

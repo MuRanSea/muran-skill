@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-anthropic-api.md -->
-<!-- Source SHA-256: d295a3bd4f60f78b8aead098cbd19e91cb4646bba50fe0a73b9b151c333a55a2 -->
+<!-- Source SHA-256: 876aa54812c68c60a390ed5383f9f5f0c219ab15f755fdd6b2fc64e20a9756e4 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -15,15 +15,13 @@
 
 ### 1. 安装 Anthropic SDK
 
-<CodeGroup>
-  ```bash Python theme={null}
-  pip install anthropic
-  ```
+```bash Python theme={null}
+pip install anthropic
+```
 
-  ```bash Node.js theme={null}
-  npm install @anthropic-ai/sdk
-  ```
-</CodeGroup>
+```bash Node.js theme={null}
+npm install @anthropic-ai/sdk
+```
 
 ### 2. 配置环境变量
 
@@ -77,17 +75,17 @@ for block in message.content:
 
 | 模型名称 | 上下文窗口 | 模型介绍 |
 | :- | :-: | :- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
+| MiniMax-M3.1-Flash | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
 | MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型** |
 
-<Note>
-  TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
-</Note>
+> [!NOTE]
+>
+> TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
 
-<Note>
-  Anthropic API 兼容接口支持 `MiniMax-M3.1-Flash` `MiniMax-M3`
-  模型。如需使用其他模型，请使用标准的 MiniMax API 接口。
-</Note>
+> [!NOTE]
+>
+> Anthropic API 兼容接口支持 `MiniMax-M3.1-Flash` `MiniMax-M3`
+> 模型。如需使用其他模型，请使用标准的 MiniMax API 接口。
 
 ## 兼容性说明
 
@@ -102,14 +100,14 @@ for block in message.content:
 | `max_tokens` | 完全支持 | 最大生成 token 数。思考 token 也计入此上限，设置过小会导致 `stop_reason` 为 `max_tokens` 且无文本输出 |
 | `stream` | 完全支持 | 流式响应 |
 | `system` | 完全支持 | 系统提示词 |
-| `temperature` | 完全支持 | 取值范围 \[0, 2]，控制输出随机性，建议取值 1 |
 | `tool_choice` | 完全支持 | 工具选择策略 |
 | `tools` | 完全支持 | 工具定义 |
-| `top_p` | 完全支持 | 核采样参数，取值范围 \[0, 1]，`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 默认值 0.95，M2.x 系列默认值 0.9 |
 | `thinking` | 完全支持 | `MiniMax-M3.1-Flash` 强制开启 thinking，传入 `disabled` 会返回 `400`。`MiniMax-M3` 默认关闭 thinking，可通过 `adaptive` 开启。M2.x 模型的 thinking 无法关闭。 |
 | `output_config.effort` | 完全支持 | 调节 `MiniMax-M3.1-Flash` 的思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`；省略时默认为 `max`。 |
 | `metadata` | 完全支持 | 元信息 |
 | `service_tier` | 完全支持 | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。`MiniMax-M3.1-Flash` 不支持该字段。 |
+| `temperature` | 忽略 | 暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用 1 |
+| `top_p` | 忽略 | 暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用 0.95。若传入，取值需在 (0, 1] 范围内 |
 | `top_k` | 忽略 | 该参数会被忽略 |
 | `stop_sequences` | 忽略 | 该参数会被忽略 |
 | `mcp_servers` | 忽略 | 该参数会被忽略 |
@@ -126,13 +124,13 @@ for block in message.content:
 | `MiniMax-M3` | 关闭 thinking | 开启 thinking | 保持 thinking 关闭 |
 | M2.x | 开启 thinking | 开启 thinking | 被接收但不生效，thinking 仍保持开启 |
 
-<Note>
-  传入 `thinking: {"type": "disabled"}` 时返回的错误信息：
-
-  ```text theme={null}
-  model "MiniMax-M3.1-Flash" requires adaptive thinking; thinking.type="disabled" (including reasoning.effort=none) is not allowed (2013)
-  ```
-</Note>
+> [!NOTE]
+>
+> 传入 `thinking: {"type": "disabled"}` 时返回的错误信息：
+>
+> ```text theme={null}
+> model "MiniMax-M3.1-Flash" requires adaptive thinking; thinking.type="disabled" (including reasoning.effort=none) is not allowed (2013)
+> ```
 
 当响应包含 `thinking` 内容块时，后续轮次中应原样保留这些内容块，尤其是在工具调用对话中。
 
@@ -238,12 +236,10 @@ print("\n")
 * 通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 等官方渠道联系我们的技术支持团队
 * 在我们的 [Github](https://github.com/MiniMax-AI/MiniMax-M2/issues) 仓库提交Issue
 
-<Warning>
-  1. Anthropic API 兼容接口目前支持 `MiniMax-M3.1-Flash` `MiniMax-M3` 模型
-
-  2. `temperature` 参数取值范围为 \[0, 2]，推荐使用1.0，超出范围会返回错误
-
-  3. 部分 Anthropic 参数（如 `top_k`、`stop_sequences`、`mcp_servers`、`context_management`、`container`）会被忽略
-
-  4. `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持通过 Anthropic 兼容内容块输入图片和视频
-</Warning>
+> [!WARNING]
+>
+> 1. Anthropic API 兼容接口目前支持 `MiniMax-M3.1-Flash` `MiniMax-M3` 模型
+>
+> 2. 部分 Anthropic 参数（如 `temperature`、`top_p`、`top_k`、`stop_sequences`、`mcp_servers`、`context_management`、`container`）会被忽略
+>
+> 3. `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持通过 Anthropic 兼容内容块输入图片和视频

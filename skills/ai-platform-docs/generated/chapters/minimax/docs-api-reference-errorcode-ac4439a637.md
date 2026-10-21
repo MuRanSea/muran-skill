@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/errorcode.md -->
-<!-- Source SHA-256: 9215a0730d6bd01d0c5e6706fcfe31dea118eb447bc81b65ce3ec9c310aa96ff -->
+<!-- Source SHA-256: ca43be5d59737989c4d56345d1f908c0a0fb16e420964161547a7f8de19f9ec1 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,9 +9,9 @@
 
 > 本文档汇总 MiniMax 接口常见错误码及对应解决方案，帮助开发者快速排查并解决调用问题。
 
-<Info>
-  如需反馈问题，请提供 Header 中的 trace\_id，以便我们为您排查。
-</Info>
+> [!NOTE]
+>
+> 如需反馈问题，请提供 Header 中的 trace\_id，以便我们为您排查。
 
 | 错误码 | 含义 | 解决方法 |
 | :- | :- | :- |

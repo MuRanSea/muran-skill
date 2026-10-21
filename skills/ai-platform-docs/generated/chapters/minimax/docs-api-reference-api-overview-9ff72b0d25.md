@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/api-overview.md -->
-<!-- Source SHA-256: 94874c204a808f4eeaefaa9ff52b09b3c31c5fb0f230ae600dc62e9b3bc0639f -->
+<!-- Source SHA-256: ae007810611a778adcb2c5f05cfc8608ac4355ea90430478ad67538fb3b6ffdb -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -14,7 +14,7 @@
 * **按量付费**：通过 [接口密钥 > 创建新的 API Key](https://platform.minimax.cn/user-center/basic-information/interface-key)，获取 **API Key**
 
 * **M Plan**：通过 [订阅管理 > M Plan](https://platform.minimax.cn/user-center/payment/token-plan)，查看 **订阅 Key**
-  <Note>订阅 Key 用于 M Plan 订阅套餐和已购积分，并与按量计费 API Key 相互独立。详情见 [M Plan 概要](https://platform.minimax.cn/docs/m-plan/intro)</Note>
+  \[!NOTE] 订阅 Key 用于 M Plan 订阅套餐和已购积分，并与按量计费 API Key 相互独立。详情见 [M Plan 概要](https://platform.minimax.cn/docs/m-plan/intro)
 
 ***
 
@@ -28,7 +28,7 @@
 
 | 模型名称 | 输入输出总 token | 模型介绍 |
 | :- | :-: | :- |
-| <span style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash</span> | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
+| MiniMax-M3.1-Flash | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调** |
 | MiniMax-M3 | 1,000,000 | **原生多模态、1M 上下文的 Frontier Coding 模型** |
 
 如果在使用模型过程中遇到任何问题：
@@ -36,15 +36,13 @@
 * 通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 等官方渠道联系我们的技术支持团队
 * 在我们的 [Github](https://github.com/MiniMax-AI/MiniMax-M2/issues) 仓库提交Issue
 
-<Columns cols={2}>
-  <Card title="Anthropic API 兼容（推荐）" icon="book-open" href="/docs/api-reference/text-anthropic-api" cta="查看文档">
-    通过 Anthropic SDK 调用 MiniMax 模型
-  </Card>
+> **[Anthropic API 兼容（推荐）](/docs/api-reference/text-anthropic-api)**
+>
+> 通过 Anthropic SDK 调用 MiniMax 模型
 
-  <Card title="OpenAI API 兼容" icon="book-open" href="/docs/api-reference/text-openai-api" cta="查看文档">
-    通过 OpenAI SDK 调用 MiniMax 模型
-  </Card>
-</Columns>
+> **[OpenAI API 兼容](/docs/api-reference/text-openai-api)**
+>
+> 通过 OpenAI SDK 调用 MiniMax 模型
 
 ***
 
@@ -67,31 +65,29 @@
 2. 使用**查询任务**接口按 `task_id` 获取状态与结果；视频任务成功后从 `content.url` 获取成片地址，H3-Context-IR 任务成功后从 `content.prompt` 获取增强提示词。也可以使用**查询任务列表**接口批量查看，并通过 `task_type` 区分 `generation`、`h3_context_ir` 与 `regeneration`。
 3. 对排队中的任务，可使用**取消或删除任务**接口取消；对成功或失败的任务，可使用同一接口删除任务记录。
 
-<Columns cols={2}>
-  <Card title="创建视频生成任务" icon="circle-play" href="/docs/api-reference/video-generation-v2-create" cta="查看文档">
-    基于多模态 content 输入创建视频生成任务
-  </Card>
+> **[创建视频生成任务](/docs/api-reference/video-generation-v2-create)**
+>
+> 基于多模态 content 输入创建视频生成任务
 
-  <Card title="创建 H3-Context-IR 任务" icon="pen-to-square" href="/docs/api-reference/video-generation-v2-h3-context-ir" cta="查看文档">
-    深度理解视频生成的多模态上下文并生成结构化增强提示词
-  </Card>
+> **[创建 H3-Context-IR 任务](/docs/api-reference/video-generation-v2-h3-context-ir)**
+>
+> 深度理解视频生成的多模态上下文并生成结构化增强提示词
 
-  <Card title="创建视频再生成任务" icon="wand-magic-sparkles" href="/docs/api-reference/video-generation-v2-regeneration" cta="查看文档">
-    将符合 MiniMax-H3 768P 输出规格的视频再生成为 2K 视频
-  </Card>
+> **[创建视频再生成任务](/docs/api-reference/video-generation-v2-regeneration)**
+>
+> 将符合 MiniMax-H3 768P 输出规格的视频再生成为 2K 视频
 
-  <Card title="查询任务" icon="search" href="/docs/api-reference/video-generation-v2-query" cta="查看文档">
-    按 task\_id 查询任务状态并获取成片下载地址
-  </Card>
+> **[查询任务](/docs/api-reference/video-generation-v2-query)**
+>
+> 按 task\_id 查询任务状态并获取成片下载地址
 
-  <Card title="查询任务列表" icon="list" href="/docs/api-reference/video-generation-v2-list" cta="查看文档">
-    分页查询最近 7 天内的任务并按任务类型过滤
-  </Card>
+> **[查询任务列表](/docs/api-reference/video-generation-v2-list)**
+>
+> 分页查询最近 7 天内的任务并按任务类型过滤
 
-  <Card title="取消或删除任务" icon="trash" href="/docs/api-reference/video-generation-v2-delete" cta="查看文档">
-    取消排队中的任务，或删除成功和失败的任务记录
-  </Card>
-</Columns>
+> **[取消或删除任务](/docs/api-reference/video-generation-v2-delete)**
+>
+> 取消排队中的任务，或删除成功和失败的任务记录
 
 ***
 
@@ -121,58 +117,56 @@
 3. **音色快速复刻**：上传待复刻音频获取 `file_id`（可选再上传示例音频增强效果），再调用快速复刻生成自定义 `voice_id`。需先完成个人或企业认证。
 4. **音色设计**：基于声音描述 prompt 生成个性化音色，产出的 `voice_id` 可直接用于上述合成接口。
 
-<Note>
-  音色复刻与音色设计产出的均为**临时音色**：费用在首次用于语音合成时才收取（不含接口内试听）；若 \*\*168 小时（7 天）\*\*内未在任意语音合成接口中使用，该音色将被删除。
-</Note>
+> [!NOTE]
+>
+> 音色复刻与音色设计产出的均为**临时音色**：费用在首次用于语音合成时才收取（不含接口内试听）；若 \*\*168 小时（7 天）\*\*内未在任意语音合成接口中使用，该音色将被删除。
 
-<Accordion title="支持的 40 种语言">
-  | 支持语种 | | |
-  | :- | :- | :- |
-  | 1. 中文（Chinese） | 15. 土耳其语（Turkish） | 28. 马来语（Malay） |
-  | 2. 粤语（Cantonese） | 16. 荷兰语（Dutch） | 29. 波斯语（Persian） |
-  | 3. 英语（English） | 17. 乌克兰语（Ukrainian） | 30. 斯洛伐克语（Slovak） |
-  | 4. 西班牙语（Spanish） | 18. 泰语（Thai） | 31. 瑞典语（Swedish） |
-  | 5. 法语（French） | 19. 波兰语（Polish） | 32. 克罗地亚语（Croatian） |
-  | 6. 俄语（Russian） | 20. 罗马尼亚语（Romanian） | 33. 菲律宾语（Filipino） |
-  | 7. 德语（German） | 21. 希腊语（Greek） | 34. 匈牙利语（Hungarian） |
-  | 8. 葡萄牙语（Portuguese） | 22. 捷克语（Czech） | 35. 挪威语（Norwegian） |
-  | 9. 阿拉伯语（Arabic） | 23. 芬兰语（Finnish） | 36. 斯洛文尼亚语（Slovenian） |
-  | 10. 意大利语（Italian） | 24. 印地语（Hindi） | 37. 加泰罗尼亚语（Catalan） |
-  | 11. 日语（Japanese） | 25. 保加利亚语（Bulgarian） | 38. 尼诺斯克语（Nynorsk） |
-  | 12. 韩语（Korean） | 26. 丹麦语（Danish） | 39. 泰米尔语（Tamil） |
-  | 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew） | 40. 阿非利卡语（Afrikaans） |
-  | 14. 越南语（Vietnamese） | | |
-</Accordion>
+> **支持的 40 种语言**
+>
+> | 支持语种 | | |
+> | :- | :- | :- |
+> | 1. 中文（Chinese） | 15. 土耳其语（Turkish） | 28. 马来语（Malay） |
+> | 2. 粤语（Cantonese） | 16. 荷兰语（Dutch） | 29. 波斯语（Persian） |
+> | 3. 英语（English） | 17. 乌克兰语（Ukrainian） | 30. 斯洛伐克语（Slovak） |
+> | 4. 西班牙语（Spanish） | 18. 泰语（Thai） | 31. 瑞典语（Swedish） |
+> | 5. 法语（French） | 19. 波兰语（Polish） | 32. 克罗地亚语（Croatian） |
+> | 6. 俄语（Russian） | 20. 罗马尼亚语（Romanian） | 33. 菲律宾语（Filipino） |
+> | 7. 德语（German） | 21. 希腊语（Greek） | 34. 匈牙利语（Hungarian） |
+> | 8. 葡萄牙语（Portuguese） | 22. 捷克语（Czech） | 35. 挪威语（Norwegian） |
+> | 9. 阿拉伯语（Arabic） | 23. 芬兰语（Finnish） | 36. 斯洛文尼亚语（Slovenian） |
+> | 10. 意大利语（Italian） | 24. 印地语（Hindi） | 37. 加泰罗尼亚语（Catalan） |
+> | 11. 日语（Japanese） | 25. 保加利亚语（Bulgarian） | 38. 尼诺斯克语（Nynorsk） |
+> | 12. 韩语（Korean） | 26. 丹麦语（Danish） | 39. 泰米尔语（Tamil） |
+> | 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew） | 40. 阿非利卡语（Afrikaans） |
+> | 14. 越南语（Vietnamese） | | |
 
-<Columns cols={2}>
-  <Card title="HTTP 同步语音合成" icon="globe" href="/docs/api-reference/speech-t2a-http" cta="查看文档">
-    通过 HTTP 请求进行语音合成
-  </Card>
+> **[HTTP 同步语音合成](/docs/api-reference/speech-t2a-http)**
+>
+> 通过 HTTP 请求进行语音合成
 
-  <Card title="WebSocket 同步语音合成" icon="plug" href="/docs/api-reference/speech-t2a-websocket" cta="查看文档">
-    通过 WebSocket 进行流式语音合成
-  </Card>
+> **[WebSocket 同步语音合成](/docs/api-reference/speech-t2a-websocket)**
+>
+> 通过 WebSocket 进行流式语音合成
 
-  <Card title="创建异步语音任务" icon="circle-play" href="/docs/api-reference/speech-t2a-async-create" cta="查看文档">
-    创建长文本语音生成任务
-  </Card>
+> **[创建异步语音任务](/docs/api-reference/speech-t2a-async-create)**
+>
+> 创建长文本语音生成任务
 
-  <Card title="查询异步任务状态" icon="search" href="/docs/api-reference/speech-t2a-async-query" cta="查看文档">
-    查询语音生成任务状态
-  </Card>
+> **[查询异步任务状态](/docs/api-reference/speech-t2a-async-query)**
+>
+> 查询语音生成任务状态
 
-  <Card title="上传复刻音频" icon="upload" href="/docs/api-reference/voice-cloning-uploadcloneaudio" cta="查看文档">
-    上传待克隆的音频文件
-  </Card>
+> **[上传复刻音频](/docs/api-reference/voice-cloning-uploadcloneaudio)**
+>
+> 上传待克隆的音频文件
 
-  <Card title="快速复刻" icon="mic" href="/docs/api-reference/voice-cloning-clone" cta="查看文档">
-    执行音色克隆
-  </Card>
+> **[快速复刻](/docs/api-reference/voice-cloning-clone)**
+>
+> 执行音色克隆
 
-  <Card title="音色设计" icon="wand-magic-sparkles" href="/docs/api-reference/voice-design-design" cta="查看文档">
-    基于描述生成个性化音色
-  </Card>
-</Columns>
+> **[音色设计](/docs/api-reference/voice-design-design)**
+>
+> 基于描述生成个性化音色
 
 ***
 
@@ -191,25 +185,23 @@
 | image-01 | 图像生成模型，画面表现细腻，支持文生图、图生图（人物主体参考） |
 | image-01-live | 图像生成模型，在 image-01 基础上额外支持多种画风设置 |
 
-<Columns cols={2}>
-  <Card title="文生图" icon="file-text" href="/docs/api-reference/image-generation-t2i" cta="查看文档">
-    基于文本描述生成图像
-  </Card>
+> **[文生图](/docs/api-reference/image-generation-t2i)**
+>
+> 基于文本描述生成图像
 
-  <Card title="图生图" icon="image-plus" href="/docs/api-reference/image-generation-i2i" cta="查看文档">
-    基于参考图片生成图像
-  </Card>
-</Columns>
+> **[图生图](/docs/api-reference/image-generation-i2i)**
+>
+> 基于参考图片生成图像
 
 ***
 
 ## 音乐生成
 
-<Note title="Music API 服务调整通知">
-  自 2026 年 8 月 20 日起，付费接口（音乐生成、歌词生成）不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务；免费音乐生成接口（Music-3.0-free、Music-2.6-free、music-cover-free）停止服务。
-
-  如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimax.cn/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
-</Note>
+> [!NOTE]
+>
+> 自 2026 年 8 月 20 日起，付费接口（音乐生成、歌词生成）不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务；免费音乐生成接口（Music-3.0-free、Music-2.6-free、music-cover-free）停止服务。
+>
+> 如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimax.cn/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
 
 本接口根据歌曲描述（prompt）和歌词（lyrics），生成一首人声的歌曲。
 
@@ -219,9 +211,9 @@
 | :- | :- |
 | music-3.0 | 最新音乐生成模型，支持用户输入音乐灵感和歌词，生成 AI 音乐 |
 
-<Card title="音乐生成接口" icon="music" href="/docs/api-reference/music-generation" cta="查看文档">
-  根据描述和歌词生成音乐
-</Card>
+> **[音乐生成接口](/docs/api-reference/music-generation)**
+>
+> 根据描述和歌词生成音乐
 
 ***
 
@@ -235,15 +227,13 @@
 
 文件的支持格式、容量及大小限制以**上传文件**接口文档为准，详见 [上传文件](/docs/api-reference/file-management-upload)。
 
-<Columns cols={2}>
-  <Card title="上传文件" icon="upload" href="/docs/api-reference/file-management-upload" cta="查看文档">
-    上传文件到平台
-  </Card>
+> **[上传文件](/docs/api-reference/file-management-upload)**
+>
+> 上传文件到平台
 
-  <Card title="文件列表" icon="list" href="/docs/api-reference/file-management-list" cta="查看文档">
-    获取已上传的文件列表
-  </Card>
-</Columns>
+> **[文件列表](/docs/api-reference/file-management-list)**
+>
+> 获取已上传的文件列表
 
 ***
 

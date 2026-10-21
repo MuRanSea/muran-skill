@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/models-intro.md -->
-<!-- Source SHA-256: 5f003b7d50c57199470208d7a17c825e0d795bcd3d3b8052656082d597766b65 -->
+<!-- Source SHA-256: 694e24c8b71c128c83e55d70c3e2111cd7b428dfb1ca63101e1d86c3483b968b -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,7 +13,7 @@
 
 | **模型名称**             | **介绍**                                                         |
 | :- | :- |
-| <a href="/docs/api-reference/text-anthropic-api" style={{whiteSpace:"nowrap"}}>MiniMax-M3.1-Flash</a> | 原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调 |
+| [MiniMax-M3.1-Flash](/docs/api-reference/text-anthropic-api) | 原生多模态、1M 上下文的 Frontier Coding 模型，思考深度可调 |
 | [MiniMax-M3](/docs/api-reference/text-anthropic-api) | 原生多模态、1M 上下文的 Frontier Coding 模型 |
 
 ### 视频模型
@@ -23,13 +23,13 @@
 | [MiniMax H3](/docs/api-reference/video-generation-v2-create) | 新一代开放通用多模态视频模型，支持文生 / 图生 / 首尾帧 / 多模态参考，768P / 2K 分辨率，4–15s 时长 |
 | [MiniMax H3 Max](/docs/api-reference/video-generation-v2-create) | 由 [fal.ai](https://fal.ai/) 基于 MiniMax H3 后训练的极速视频生成模型，专为高速视频生成而优化。仅支持文生 / 图生（首帧、尾帧），480P / 768P 分辨率，5–15s 时长 |
 
-<Accordion title="历史模型">
-  | **模型名称**             | **介绍** |
-  | :- | :- |
-  | [MiniMax Hailuo 2.3](/docs/api-reference/video-generation-t2v) | 全新视频生成模型，肢体动作、面部表情、物理表现与指令遵循再度突破 |
-  | [MiniMax Hailuo 2.3 Fast](/docs/api-reference/video-generation-i2v) | 全新图生视频模型，物理表现与指令遵循具佳，更快更优惠 |
-  | [MiniMax Hailuo 02](/docs/api-reference/video-generation-t2v) | 新一代视频生成模型，1080p 原生，SOTA 指令遵循，极致物理表现 |
-</Accordion>
+> **历史模型**
+>
+> | **模型名称**             | **介绍** |
+> | :- | :- |
+> | [MiniMax Hailuo 2.3](/docs/api-reference/video-generation-t2v) | 全新视频生成模型，肢体动作、面部表情、物理表现与指令遵循再度突破 |
+> | [MiniMax Hailuo 2.3 Fast](/docs/api-reference/video-generation-i2v) | 全新图生视频模型，物理表现与指令遵循具佳，更快更优惠 |
+> | [MiniMax Hailuo 02](/docs/api-reference/video-generation-t2v) | 新一代视频生成模型，1080p 原生，SOTA 指令遵循，极致物理表现 |
 
 ### 语音模型
 
@@ -38,14 +38,14 @@
 | [Speech-2.8-HD](/docs/api-reference/speech-t2a-http) | 新一代语音 HD 模型，情绪渲染融合语气词，重塑自然听感 |
 | [Speech-2.8-Turbo](/docs/api-reference/speech-t2a-http) | 新一代语音 Turbo 模型，极致生成速度，更自然逼真的音频效果 |
 
-<Accordion title="历史模型">
-  | **模型名称**             | **介绍**                                                         |
-  | :- | :- |
-  | [Speech-2.6-HD](/docs/api-reference/speech-t2a-http) | 极致音质与韵律表现，生成更快更自然 |
-  | [Speech-2.6-Turbo](/docs/api-reference/speech-t2a-http) | 音质优异，超低时延，响应更灵敏 |
-  | [Speech-02-HD](/docs/api-reference/speech-t2a-http) | 语音 HD 模型，拥有出色的韵律和稳定性，复刻相似度和音质表现突出 |
-  | [Speech-02-Turbo](/docs/api-reference/speech-t2a-http) | 语音 Turbo 模型，小语种能力增强，性能表现出色 |
-</Accordion>
+> **历史模型**
+>
+> | **模型名称**             | **介绍**                                                         |
+> | :- | :- |
+> | [Speech-2.6-HD](/docs/api-reference/speech-t2a-http) | 极致音质与韵律表现，生成更快更自然 |
+> | [Speech-2.6-Turbo](/docs/api-reference/speech-t2a-http) | 音质优异，超低时延，响应更灵敏 |
+> | [Speech-02-HD](/docs/api-reference/speech-t2a-http) | 语音 HD 模型，拥有出色的韵律和稳定性，复刻相似度和音质表现突出 |
+> | [Speech-02-Turbo](/docs/api-reference/speech-t2a-http) | 语音 Turbo 模型，小语种能力增强，性能表现出色 |
 
 ### 图片模型
 
@@ -56,11 +56,11 @@
 
 ### 音乐模型
 
-<Note title="Music API 服务调整通知">
-  自 2026 年 8 月 20 日起，付费接口（音乐生成、歌词生成）不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务；免费音乐生成接口（Music-3.0-free、Music-2.6-free、music-cover-free）停止服务。
-
-  如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimax.cn/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
-</Note>
+> [!NOTE]
+>
+> 自 2026 年 8 月 20 日起，付费接口（音乐生成、歌词生成）不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务；免费音乐生成接口（Music-3.0-free、Music-2.6-free、music-cover-free）停止服务。
+>
+> 如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimax.cn/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
 
 | **模型名称**            | **介绍**                                                          |
 | :- | :- |

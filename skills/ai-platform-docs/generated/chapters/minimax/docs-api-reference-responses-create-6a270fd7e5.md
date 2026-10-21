@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/responses-create.md -->
-<!-- Source SHA-256: 4fb78e02136b74a7746293aba3cc1294af47cc9beb908ce230dc064b7b4d87c4 -->
+<!-- Source SHA-256: 80a696108b9e34f39677e6ce092a7c6ac291a64cb10953c8b1c44f586d98aa6d -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,47 +9,6 @@
 
 > OpenAI Responses API 兼容的主接口调用MiniMax 模型，生成模型回复，支持流式与非流式。
 
-export const ResponsesReturnValues = ({label}) => {
-  const marker = useRef(null);
-  useEffect(() => {
-    const root = marker.current?.closest("#content-container");
-    if (!root) return;
-    const fixedFields = new Set(["response-object", "response-parallel-tool-calls", "response-store", "response-truncation"]);
-    const hiddenRows = new Map();
-    const updateLabels = () => {
-      root.querySelectorAll('[id^="response-"]').forEach(heading => {
-        const field = heading.closest(".primitive-param-field");
-        field?.querySelectorAll(".whitespace-pre-wrap.prose-sm").forEach(row => {
-          if (fixedFields.has(heading.id) && row.querySelectorAll("code").length === 1) {
-            if (!hiddenRows.has(row)) hiddenRows.set(row, row.hidden);
-            row.hidden = true;
-          }
-          row.childNodes.forEach(node => {
-            if (node.nodeType === Node.TEXT_NODE && (/^(可用选项|Available options)$/).test(node.textContent.trim())) {
-              node.textContent = label;
-            }
-          });
-        });
-      });
-    };
-    updateLabels();
-    const observer = new MutationObserver(updateLabels);
-    observer.observe(root, {
-      childList: true,
-      subtree: true,
-      characterData: true
-    });
-    return () => {
-      observer.disconnect();
-      hiddenRows.forEach((hidden, row) => {
-        row.hidden = hidden;
-      });
-    };
-  }, [label]);
-  return <span ref={marker} hidden />;
-};
-
-<ResponsesReturnValues label="可能的返回值" />
 
 
 ## OpenAPI
@@ -1101,14 +1060,14 @@ components:
         temperature:
           type: number
           format: float
-          description: 采样温度，取值范围 (0, 1]
+          description: 暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用 1。
           default: 1
-          minimum: 0
-          maximum: 1
         top_p:
           type: number
           format: float
-          description: 核采样，取值范围 (0, 1]
+          description: >-
+            暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用
+            0.95。若传入，取值需在 (0, 1] 范围内。
           default: 0.95
           minimum: 0
           maximum: 1

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-voice-clone.md -->
-<!-- Source SHA-256: dc137795ce0342669600ee244dca1569d066b9339ce8d4ca282e73f6188b0e34 -->
+<!-- Source SHA-256: 049abd6255204b7dad5daadf23d88566d19212250be44285fe7c134adbe3d8ab -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -30,214 +30,204 @@
 
 ### 1. 上传复刻音频
 
-<CodeGroup>
-  ```python theme={null}
-  """
-  本示例用于获取复刻音频的 file_id。
-  注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
-  """
-  import requests
-  import os
+```python theme={null}
+"""
+本示例用于获取复刻音频的 file_id。
+注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
+"""
+import requests
+import os
 
-  api_key = os.getenv("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/files/upload"
+api_key = os.getenv("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/files/upload"
 
-  payload = {"purpose": "voice_clone"}
-  files = [
-    ("file", ("clone_input.mp3", open("/path/to/clone_input.mp3", "rb")))
-  ]
-  headers = {
-    "Authorization": f"Bearer {api_key}"
-  }
+payload = {"purpose": "voice_clone"}
+files = [
+  ("file", ("clone_input.mp3", open("/path/to/clone_input.mp3", "rb")))
+]
+headers = {
+  "Authorization": f"Bearer {api_key}"
+}
 
-  response = requests.post(url, headers=headers, data=payload, files=files)
-  response.raise_for_status()
-  file_id = response.json().get("file", {}).get("file_id")
-  print(file_id)
-  ```
+response = requests.post(url, headers=headers, data=payload, files=files)
+response.raise_for_status()
+file_id = response.json().get("file", {}).get("file_id")
+print(file_id)
+```
 
-  ```bash theme={null}
-  curl --location 'https://api.minimax.cn/v1/files/upload' \
-    --header 'Authorization: Bearer ${MINIMAX_API_KEY}' \
-    --form 'purpose="voice_clone"' \
-    --form 'file=@"/path/to/clone_input.mp3"'
-  ```
-</CodeGroup>
+```bash theme={null}
+curl --location 'https://api.minimax.cn/v1/files/upload' \
+  --header 'Authorization: Bearer ${MINIMAX_API_KEY}' \
+  --form 'purpose="voice_clone"' \
+  --form 'file=@"/path/to/clone_input.mp3"'
+```
 
 ### 2. 上传参考音频
 
-<CodeGroup>
-  ```python theme={null}
-  """
-  本示例用于获取示例音频的 file_id。
-  注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
-  """
-  import requests
-  import os
+```python theme={null}
+"""
+本示例用于获取示例音频的 file_id。
+注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
+"""
+import requests
+import os
 
-  api_key = os.getenv("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/files/upload"
+api_key = os.getenv("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/files/upload"
 
-  payload = {"purpose": "prompt_audio"}
-  files = [
-    ("file", ("clone_prompt.mp3", open("/path/to/clone_prompt.mp3", "rb")))
-  ]
-  headers = {
-    "Authorization": f"Bearer {api_key}"
-  }
+payload = {"purpose": "prompt_audio"}
+files = [
+  ("file", ("clone_prompt.mp3", open("/path/to/clone_prompt.mp3", "rb")))
+]
+headers = {
+  "Authorization": f"Bearer {api_key}"
+}
 
-  response = requests.post(url, headers=headers, data=payload, files=files)
-  response.raise_for_status()
-  prompt_file_id = response.json().get("file", {}).get("file_id")
-  print(prompt_file_id)
-  ```
+response = requests.post(url, headers=headers, data=payload, files=files)
+response.raise_for_status()
+prompt_file_id = response.json().get("file", {}).get("file_id")
+print(prompt_file_id)
+```
 
-  ```bash theme={null}
-  curl --location 'https://api.minimax.cn/v1/files/upload' \
-    --header 'Authorization: Bearer ${MINIMAX_API_KEY}' \
-    --form 'purpose="prompt_audio"' \
-    --form 'file=@"/path/to/clone_prompt.mp3"'
-  ```
-</CodeGroup>
+```bash theme={null}
+curl --location 'https://api.minimax.cn/v1/files/upload' \
+  --header 'Authorization: Bearer ${MINIMAX_API_KEY}' \
+  --form 'purpose="prompt_audio"' \
+  --form 'file=@"/path/to/clone_prompt.mp3"'
+```
 
 ### 3. 进行音色克隆
 
-<CodeGroup>
-  ```python theme={null}
-  """
-  本示例用于音色克隆。
-  注意：需要设置环境变量 `MINIMAX_API_KEY`，
-  并将 "<voice_id>", <file_id_of_cloned_voice>, <file_id_of_prompt_audio> 替换为实际值。
-  """
-  import requests
-  import json
-  import os
+```python theme={null}
+"""
+本示例用于音色克隆。
+注意：需要设置环境变量 `MINIMAX_API_KEY`，
+并将 "<voice_id>", <file_id_of_cloned_voice>, <file_id_of_prompt_audio> 替换为实际值。
+"""
+import requests
+import json
+import os
 
-  api_key = os.getenv("MINIMAX_API_KEY")
-  url = "https://api.minimax.cn/v1/voice_clone"
+api_key = os.getenv("MINIMAX_API_KEY")
+url = "https://api.minimax.cn/v1/voice_clone"
 
-  clone_payload = {
-      "file_id": file_id,
-      "voice_id": "<your_custom_voice_id>",
-      "clone_prompt": {
-          "prompt_audio": prompt_file_id,
-          "prompt_text": "后来认为啊，是有人抓这鸡，可是抓鸡的地方呢没人听过鸡叫。"
-      },
-      "text": "大兄弟，听您口音不是本地人吧，头回来天津卫，啊，待会您可甭跟着导航走，那玩意儿净给您往大马路上绕。",
-      "model": "speech-2.8-hd"
-  }
-  clone_headers = {
-      "Authorization": f"Bearer {api_key}",
-      "Content-Type": "application/json"
-  }
-
-  response = requests.post(url, headers=headers, json=payload)
-  response.raise_for_status()
-  print(response.text)
-  ```
-
-  ```bash theme={null}
-  curl --location 'https://api.minimax.cn/v1/voice_clone' \
-    --header 'Authorization: Bearer ${MINIMAX_API_KEY}' \
-    --header 'Content-Type: application/json' \
-    --data '{
-      "file_id": <file_id_of_cloned_voice>,
-      "voice_id": "<your_custom_voice_id>",
-      "clone_prompt": {
-        "prompt_audio": <file_id_of_prompt_audio>,
+clone_payload = {
+    "file_id": file_id,
+    "voice_id": "<your_custom_voice_id>",
+    "clone_prompt": {
+        "prompt_audio": prompt_file_id,
         "prompt_text": "后来认为啊，是有人抓这鸡，可是抓鸡的地方呢没人听过鸡叫。"
-      },
-      "text": "大兄弟，听您口音不是本地人吧，头回来天津卫，啊，待会您可甭跟着导航走，那玩意净给您往大马路上绕。",
-      "model": "speech-2.8"
-    }'
-  ```
-</CodeGroup>
+    },
+    "text": "大兄弟，听您口音不是本地人吧，头回来天津卫，啊，待会您可甭跟着导航走，那玩意儿净给您往大马路上绕。",
+    "model": "speech-2.8-hd"
+}
+clone_headers = {
+    "Authorization": f"Bearer {api_key}",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, headers=headers, json=payload)
+response.raise_for_status()
+print(response.text)
+```
+
+```bash theme={null}
+curl --location 'https://api.minimax.cn/v1/voice_clone' \
+  --header 'Authorization: Bearer ${MINIMAX_API_KEY}' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "file_id": <file_id_of_cloned_voice>,
+    "voice_id": "<your_custom_voice_id>",
+    "clone_prompt": {
+      "prompt_audio": <file_id_of_prompt_audio>,
+      "prompt_text": "后来认为啊，是有人抓这鸡，可是抓鸡的地方呢没人听过鸡叫。"
+    },
+    "text": "大兄弟，听您口音不是本地人吧，头回来天津卫，啊，待会您可甭跟着导航走，那玩意净给您往大马路上绕。",
+    "model": "speech-2.8"
+  }'
+```
 
 ## 完整示例
 
-<CodeGroup>
-  ```python theme={null}
-  """
-  本示例用于快速克隆音色并获取试听文件。
-  注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`，
-  并将"<your_custom_voice_id>"替换为您定义的音色 id。
-  """
-  import json
-  import requests
-  import os
+```python theme={null}
+"""
+本示例用于快速克隆音色并获取试听文件。
+注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`，
+并将"<your_custom_voice_id>"替换为您定义的音色 id。
+"""
+import json
+import requests
+import os
 
-  api_key = os.getenv("MINIMAX_API_KEY")
-  upload_url = "https://api.minimax.cn/v1/files/upload"
-  clone_url = "https://api.minimax.cn/v1/voice_clone"
-  headers = {"Authorization": f"Bearer {api_key}"}
+api_key = os.getenv("MINIMAX_API_KEY")
+upload_url = "https://api.minimax.cn/v1/files/upload"
+clone_url = "https://api.minimax.cn/v1/voice_clone"
+headers = {"Authorization": f"Bearer {api_key}"}
 
-  with open("/path/to/clone_input.mp3", "rb") as f:
-      files = {"file": ("clone_input.mp3", f)}
-      data = {"purpose": "voice_clone"}
-      response = requests.post(upload_url, headers=headers, data=data, files=files)
-  file_id = response.json()["file"]["file_id"]
-  print(f"File ID of the cloned audio: {file_id}")
+with open("/path/to/clone_input.mp3", "rb") as f:
+    files = {"file": ("clone_input.mp3", f)}
+    data = {"purpose": "voice_clone"}
+    response = requests.post(upload_url, headers=headers, data=data, files=files)
+file_id = response.json()["file"]["file_id"]
+print(f"File ID of the cloned audio: {file_id}")
 
-  # 2. 上传示例音频
+# 2. 上传示例音频
 
-  with open("/path/to/clone_prompt.mp3", "rb") as f:
-      files = {"file": ("clone_prompt.mp3", f)}
-      data = {"purpose": "prompt_audio"}
-      response = requests.post(upload_url, headers=headers, data=data, files=files)
-  prompt_file_id = response.json()["file"]["file_id"]
-  print(f"File ID of the prompt audio: {prompt_file_id}")
+with open("/path/to/clone_prompt.mp3", "rb") as f:
+    files = {"file": ("clone_prompt.mp3", f)}
+    data = {"purpose": "prompt_audio"}
+    response = requests.post(upload_url, headers=headers, data=data, files=files)
+prompt_file_id = response.json()["file"]["file_id"]
+print(f"File ID of the prompt audio: {prompt_file_id}")
 
-  # 3. 进行音色克隆
+# 3. 进行音色克隆
 
-  clone_payload = {
-      "file_id": file_id,
-      "voice_id": "<your_custom_voice_id>",
-      "clone_prompt": {
-          "prompt_audio": prompt_file_id,
-          "prompt_text": "后来认为啊，是有人抓这鸡，可是抓鸡的地方呢没人听过鸡叫。"
-      },
-      "text": "大兄弟，听您口音不是本地人吧，头回来天津卫，啊，待会您可甭跟着导航走，那玩意儿净给您往大马路上绕。",
-      "model": "speech-2.8-hd"
-  }
-  clone_headers = {
-      "Authorization": f"Bearer {api_key}",
-      "Content-Type": "application/json"
-  }
-  response = requests.post(clone_url, headers=clone_headers, json=clone_payload)
-  print(response.text)
-  ```
-</CodeGroup>
+clone_payload = {
+    "file_id": file_id,
+    "voice_id": "<your_custom_voice_id>",
+    "clone_prompt": {
+        "prompt_audio": prompt_file_id,
+        "prompt_text": "后来认为啊，是有人抓这鸡，可是抓鸡的地方呢没人听过鸡叫。"
+    },
+    "text": "大兄弟，听您口音不是本地人吧，头回来天津卫，啊，待会您可甭跟着导航走，那玩意儿净给您往大马路上绕。",
+    "model": "speech-2.8-hd"
+}
+clone_headers = {
+    "Authorization": f"Bearer {api_key}",
+    "Content-Type": "application/json"
+}
+response = requests.post(clone_url, headers=clone_headers, json=clone_payload)
+print(response.text)
+```
 
 ## 结果示例
 
 * **复刻音频**
 
-<video controls className="audio-container" src="https://filecdn.minimax.chat/public/9a226362-dddb-42bc-99fd-e8b426539ca7.wav" />
+<video controls src="https://filecdn.minimax.chat/public/9a226362-dddb-42bc-99fd-e8b426539ca7.wav" />
 
 * **示例音频**
 
-<video controls className="audio-container" src="https://filecdn.minimax.chat/public/846b954e-772f-4e26-a598-eac0bce1b491.wav" />
+<video controls src="https://filecdn.minimax.chat/public/846b954e-772f-4e26-a598-eac0bce1b491.wav" />
 
 * **结果音频**
 
-<video controls className="audio-container" src="https://filecdn.minimax.chat/public/90f581ac-cf37-4866-be54-711689c14cf9.mp3" />
+<video controls src="https://filecdn.minimax.chat/public/90f581ac-cf37-4866-be54-711689c14cf9.mp3" />
 
 ## 推荐阅读
 
-<Columns cols={2}>
-  <Card title="快速复刻接口" icon="book-open" href="/docs/api-reference/voice-cloning-clone" arrow="true" cta="点击查看">
-    使用 API 接口进行音色快速复刻。
-  </Card>
+> **[快速复刻接口](/docs/api-reference/voice-cloning-clone)**
+>
+> 使用 API 接口进行音色快速复刻。
 
-  <Card title="同步语音合成指南" icon="book-open" href="/docs/guides/speech-t2a-websocket" arrow="true" cta="点击查看">
-    同步语音合成支持基于文本到语音的同步生成，单次可处理最长 10,000 字符的文本。
-  </Card>
+> **[同步语音合成指南](/docs/guides/speech-t2a-websocket)**
+>
+> 同步语音合成支持基于文本到语音的同步生成，单次可处理最长 10,000 字符的文本。
 
-  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#models/speech" arrow="true" cta="点击查看">
-    各模型的定价说明、计费方式及使用限制。
-  </Card>
+> **[产品定价](/docs/pricing/overview#models/speech)**
+>
+> 各模型的定价说明、计费方式及使用限制。
 
-  <Card title="速率限制" icon="book-open" href="/docs/guides/rate-limits#3、我们的-api-的限速具体数值" arrow="true" cta="点击查看">
-    为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。
-  </Card>
-</Columns>
+> **[速率限制](/docs/guides/rate-limits#3、我们的-api-的限速具体数值)**
+>
+> 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。

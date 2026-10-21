@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/image-generation.md -->
-<!-- Source SHA-256: 919e83cae126971c46c639a87d1893fae868576b73c2ce8972922d7c151cb210 -->
+<!-- Source SHA-256: 3032deff8cf9da131abf63a6b47854ba5772e922ba9dc08bb348da64aab30967 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,33 +13,31 @@
 
 根据详尽的文本描述（prompt），直接生成与之匹配的图片。
 
-<CodeGroup>
-  ```python 请求示例 theme={null}
-  import base64
-  import requests
-  import os
+```python 请求示例 theme={null}
+import base64
+import requests
+import os
 
-  url = "https://api.minimax.cn/v1/image_generation"
-  api_key = os.environ.get("MINIMAX_API_KEY")
-  headers = {"Authorization": f"Bearer {api_key}"}
+url = "https://api.minimax.cn/v1/image_generation"
+api_key = os.environ.get("MINIMAX_API_KEY")
+headers = {"Authorization": f"Bearer {api_key}"}
 
-  payload = {
-      "model": "image-01",
-      "prompt": "men Dressing in white t shirt, full-body stand front view image :25, outdoor, Venice beach sign, full-body image, Los Angeles, Fashion photography of 90s, documentary, Film grain, photorealistic",
-      "aspect_ratio": "16:9",
-      "response_format": "base64",
-  }
+payload = {
+    "model": "image-01",
+    "prompt": "men Dressing in white t shirt, full-body stand front view image :25, outdoor, Venice beach sign, full-body image, Los Angeles, Fashion photography of 90s, documentary, Film grain, photorealistic",
+    "aspect_ratio": "16:9",
+    "response_format": "base64",
+}
 
-  response = requests.post(url, headers=headers, json=payload)
-  response.raise_for_status()
+response = requests.post(url, headers=headers, json=payload)
+response.raise_for_status()
 
-  images = response.json()["data"]["image_base64"]
+images = response.json()["data"]["image_base64"]
 
-  for i in range(len(images)):
-      with open(f"output-{i}.jpeg", "wb") as f:
-          f.write(base64.b64decode(images[i]))
-  ```
-</CodeGroup>
+for i in range(len(images)):
+    with open(f"output-{i}.jpeg", "wb") as f:
+        f.write(base64.b64decode(images[i]))
+```
 
 生成结果：
 
@@ -49,38 +47,36 @@
 
 此功能允许提供一张包含清晰主体的参考图（支持网络图片链接），并结合 prompt 描述，生成一张保留了主体特征的新图片。当前每次请求仅支持传入一张参考图。该功能尤其适用于需要保持人物形象一致性的场景，例如为同一个虚拟角色生成不同情境下的图片。
 
-<CodeGroup>
-  ```python 请求示例 theme={null}
-  import base64
-  import requests
-  import os
+```python 请求示例 theme={null}
+import base64
+import requests
+import os
 
-  url = "https://api.minimax.cn/v1/image_generation"
-  api_key = os.environ.get("MINIMAX_API_KEY")
-  headers = {"Authorization": f"Bearer {api_key}"}
+url = "https://api.minimax.cn/v1/image_generation"
+api_key = os.environ.get("MINIMAX_API_KEY")
+headers = {"Authorization": f"Bearer {api_key}"}
 
-  payload = {
-      "model": "image-01",
-      "prompt": "女孩在图书馆的窗户前，看向远方",
-      "aspect_ratio": "16:9",
-      "subject_reference": [
-          {
-              "type": "character",
-              "image_file": "https://cdn.hailuoai.com/prod/2025-08-12-17/video_cover/1754990600020238321-411603868533342214-cover.jpg",
-          }
-      ],
-      "response_format": "base64",
-  }
+payload = {
+    "model": "image-01",
+    "prompt": "女孩在图书馆的窗户前，看向远方",
+    "aspect_ratio": "16:9",
+    "subject_reference": [
+        {
+            "type": "character",
+            "image_file": "https://cdn.hailuoai.com/prod/2025-08-12-17/video_cover/1754990600020238321-411603868533342214-cover.jpg",
+        }
+    ],
+    "response_format": "base64",
+}
 
-  response = requests.post(url, headers=headers, json=payload)
-  response.raise_for_status()
-  images = response.json()["data"]["image_base64"]
+response = requests.post(url, headers=headers, json=payload)
+response.raise_for_status()
+images = response.json()["data"]["image_base64"]
 
-  for i in range(len(images)):
-      with open(f"output-{i}.jpeg", "wb") as f:
-          f.write(base64.b64decode(images[i]))
-  ```
-</CodeGroup>
+for i in range(len(images)):
+    with open(f"output-{i}.jpeg", "wb") as f:
+        f.write(base64.b64decode(images[i]))
+```
 
 生成结果：
 
@@ -88,20 +84,18 @@
 
 ## 推荐阅读
 
-<Columns cols={2}>
-  <Card title="文生图接口" icon="book-open" href="/docs/api-reference/image-generation-t2i" arrow="true" cta="点击查看">
-    使用 API 接口，输入文本描述，进行图片生成。
-  </Card>
+> **[文生图接口](/docs/api-reference/image-generation-t2i)**
+>
+> 使用 API 接口，输入文本描述，进行图片生成。
 
-  <Card title="图生图接口" icon="book-open" href="/docs/api-reference/image-generation-i2i" arrow="true" cta="点击查看">
-    使用 API 接口，输入图片内容，进行图片生成。
-  </Card>
+> **[图生图接口](/docs/api-reference/image-generation-i2i)**
+>
+> 使用 API 接口，输入图片内容，进行图片生成。
 
-  <Card title="产品定价" icon="book-open" href="/docs/pricing/overview#models/image" arrow="true" cta="点击查看">
-    各模型的定价说明、计费方式及使用限制。
-  </Card>
+> **[产品定价](/docs/pricing/overview#models/image)**
+>
+> 各模型的定价说明、计费方式及使用限制。
 
-  <Card title="速率限制" icon="book-open" href="/docs/guides/rate-limits#3、我们的-api-的限速具体数值" arrow="true" cta="点击查看">
-    为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。
-  </Card>
-</Columns>
+> **[速率限制](/docs/guides/rate-limits#3、我们的-api-的限速具体数值)**
+>
+> 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。
