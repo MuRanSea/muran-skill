@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/assets/billing-deduction/balance.md -->
-<!-- Source SHA-256: ebac5226e3a378a08d352b8ca4fab6438378945ef30717d78fc786ccdecd208f -->
+<!-- Source SHA-256: d559760922986e5e607fe693f47d03c71a078f648b366d880d0058c05c574b91 -->
 
 > ## Documentation Index
 >
@@ -115,8 +115,9 @@ curl --location --request POST 'https://api-beijing.klingai.com/account/billing/
           "product_function": "string", // 任务相关功能，如：Image to Video
           "model_name": "string", // 任务所用模型版本，与创建任务时所选模型版本一致
           "resolution": "string", // 生成结果的分辨率，枚举值：720p、1080p、4k（较早版本API通过mode参数定义分辨率，与当前参数对应关系为：720p=std、1080p=pro）
+          "input_duration": "8.03", // 输入视频总时长，包括feature_video、base_video、视频角色主体视频时长加总
           "duration": "5.04", // 生成视频的时长（当前参数仅生效于生成视频任务相关明细）
-          "refer_video_input": true, // 生成视频时是否有参考视频，布尔值：true, false（当前参数仅生效于生成视频任务相关明细）
+          "refer_video_input": true, // 生成视频时是否有参考视频，布尔值：true, false（当前参数仅生效于生成视频任务相关明细；如使用模型为Kling 4.0、Kling 4.0 Flash，当输入包含feature_video、base_video和视频角色主体任意一种时，该参数为true）
           "video_sound": "native", // 生成的视频是否包含声音，枚举值：native、original、off；依次对应随画面生成声音、保留参考视频原声、无声音（当前参数仅生效于生成视频任务相关明细）
           "voice_control": false, // 生成的视频是否有指定音色，布尔值：true, false；依次对应有指定音色、未指定音色（当前参数仅生效于生成视频任务相关明细）
           "deduction_time": "1779549455861", // 余额抵扣时间，Unix时间戳、单位ms时间

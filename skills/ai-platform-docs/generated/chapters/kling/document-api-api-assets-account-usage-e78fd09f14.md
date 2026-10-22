@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/assets/account-usage.md -->
-<!-- Source SHA-256: abcece1d59456b8fbdf625029ceb8d6287eeb639dd00a07b22cac8a6b7d617b7 -->
+<!-- Source SHA-256: c5e7e0fdd3affbab61352cf413bc8c555923f47ba33404b5fdd81082060a430c -->
 
 > ## Documentation Index
 >
@@ -67,6 +67,8 @@ curl --request GET \
         "resource_pack_name": "视频生成-10000条", // 资源包名称
         "resource_pack_id": "509f3fd3d4ab4a3f9eec5db27aa44f27", // 资源包ID
         "resource_pack_type": "decreasing_total", // 资源包类型，枚举值，"decreasing_total" = 总量递减型，"constant_period" = 周期恒定型
+        "resource_pack_tier": "flagship", // 资源包等级，枚举值："flagship" = 旗舰版，"general" = 通用版，"professional" = 专业版，"basic" = 基础版
+        "resource_pack_applicable_models": "Available only for Kling 4.0 and Kling 4.0 Flash", // 资源包适用模型说明
         "total_quantity": 200.0, // 总量
         "remaining_quantity": 118.0, // 余量（请注意，余量统计有12h的延迟）
         "purchase_time": 1726124664368, // 购买时间，Unix时间戳、单位ms

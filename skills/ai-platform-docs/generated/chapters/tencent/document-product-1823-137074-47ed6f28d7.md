@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137074 -->
-<!-- Source SHA-256: 91f999e0fc668d2bd46877ca889a4f0689b1ef8c9a2450becd1a179d67686474 -->
+<!-- Source SHA-256: c3c866c72ca1b763bec140ff4a637a9621d5b4011e1903cf06f78510a5021963 -->
 
 # Tripo-3D 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137074
-最近更新时间：2026-10-20 12:08:05
+最近更新时间：2026-10-21 10:09:00
 
 本文档适用范围：tripo-3d-3.1、tripo-3d-p1、tripo-3d-p2
 
@@ -152,7 +152,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/query' \\
 
 | 参数名称 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
-| front | 否 | string | 正视图图片。 |
+| front | 是 | string | 正视图图片。 |
 | back | 否 | string | 后视图图片。 |
 | left | 否 | string | 左视图图片。 |
 | right | 否 | string | 右视图图片。 |
@@ -175,9 +175,9 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/query' \\
 
 **任务生成结果。**
 
-| 参数名称 | 必选 | 类型 | 描述 |
-| --- | --- | --- | --- |
-| type | 是 | string | 生成任务类型。    示例值：multiview\_to\_model |
-| model\_url | 是 | string | 生成的3d 模型文件下载地址。 |
-| generated\_image\_url | 是 | string | 生成的参考图片地址 |
-| rendered\_image\_url | 是 | string | 生成结果的渲染预览图地址。 |
+| 参数名称 | 类型 | 描述 |
+| --- | --- | --- |
+| type | string | 生成任务类型。    示例值：multiview\_to\_model |
+| model\_url | string | 生成的3d 模型文件下载地址。 |
+| generated\_image\_url | string | 生成的参考图片地址 |
+| rendered\_image\_url | string | 生成结果的渲染预览图地址。 |

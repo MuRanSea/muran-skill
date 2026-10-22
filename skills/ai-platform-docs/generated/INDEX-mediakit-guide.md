@@ -1,6 +1,6 @@
 # AI MediaKit 指南区章节表（mediakit-guide）
 
-来源：《AI MediaKit 文档指南》（910 页）。153 个章节文件，接口级切分：一个接口/任务一个文件；超过 1500 行的按语义块自动再拆为`… - 第N部分`（0 个章节被拆分）。
+来源：《AI MediaKit 文档指南》（928 页）。153 个章节文件，接口级切分：一个接口/任务一个文件；超过 1500 行的按语义块自动再拆为`… - 第N部分`（0 个章节被拆分）。
 
 「页码」是原 PDF 页码范围；「行范围」是中间 MD（`doc/<源文档>.md`）的 1 起始行号，可据此回查原文。章节文件本身已去掉页眉页脚，回查 PDF 时用这两列。文件名即章节标题，日常定位直接 Glob 文件名即可，用不到这两列。
 
@@ -60,104 +60,104 @@
 | 3.2.13 | 图像暗水印 | 289-292 | 10574-10739 | 111 | `chapters/volcengine/mediakit-guide/3.2.13 图像暗水印.md` |
 | 3.2.14 | 图像基础编辑 | 293-315 | 10740-11497 | 594 | `chapters/volcengine/mediakit-guide/3.2.14 图像基础编辑.md` |
 | 3.3.1.1 | 智能剪辑 Vibe Editing | 316-324 | 11500-11824 | 207 | `chapters/volcengine/mediakit-guide/3.3.1.1 智能剪辑 Vibe Editing.md` |
-| 3.3.1.2 | Web 智能剪辑 SDK 集成指南 | 325-346 | 11825-12718 | 742 | `chapters/volcengine/mediakit-guide/3.3.1.2 Web 智能剪辑 SDK 集成指南.md` |
-| 3.3.2.1 | 多轨道剪辑 | 347-389 | 12720-14272 | 1352 | `chapters/volcengine/mediakit-guide/3.3.2.1 多轨道剪辑.md` |
-| 3.3.2.2 | Web 剪辑 SDK 集成指南 | 390-415 | 14273-15246 | 843 | `chapters/volcengine/mediakit-guide/3.3.2.2 Web 剪辑 SDK 集成指南.md` |
-| 3.3.2.3 | 音视频拼接 | 416-422 | 15247-15419 | 128 | `chapters/volcengine/mediakit-guide/3.3.2.3 音视频拼接.md` |
-| 3.3.2.4 | 音视频裁剪 | 423-426 | 15420-15559 | 102 | `chapters/volcengine/mediakit-guide/3.3.2.4 音视频裁剪.md` |
-| 3.3.2.5 | 音视频调速 | 427-430 | 15560-15663 | 71 | `chapters/volcengine/mediakit-guide/3.3.2.5 音视频调速.md` |
-| 3.3.2.6 | 音频提取 | 431-433 | 15664-15781 | 84 | `chapters/volcengine/mediakit-guide/3.3.2.6 音频提取.md` |
-| 3.3.2.7 | 音视频合成 | 434-438 | 15782-15970 | 140 | `chapters/volcengine/mediakit-guide/3.3.2.7 音视频合成.md` |
-| 3.3.2.8 | 音频混合 | 439-441 | 15971-16079 | 79 | `chapters/volcengine/mediakit-guide/3.3.2.8 音频混合.md` |
-| 3.3.2.9 | 音量调节与淡入淡出 | 442-446 | 16080-16258 | 133 | `chapters/volcengine/mediakit-guide/3.3.2.9 音量调节与淡入淡出.md` |
-| 3.3.2.10 | 图片转视频 | 447-453 | 16259-16482 | 170 | `chapters/volcengine/mediakit-guide/3.3.2.10 图片转视频.md` |
-| 3.3.2.11 | 视频画面变换 | 454-459 | 16483-16622 | 102 | `chapters/volcengine/mediakit-guide/3.3.2.11 视频画面变换.md` |
-| 3.3.2.12 | 视频添加运镜 | 460-465 | 16623-16768 | 109 | `chapters/volcengine/mediakit-guide/3.3.2.12 视频添加运镜.md` |
-| 3.3.2.13 | 视频加字幕 | 466-470 | 16769-16930 | 118 | `chapters/volcengine/mediakit-guide/3.3.2.13 视频加字幕.md` |
-| 3.3.2.14 | 视频加图片 | 471-474 | 16931-17037 | 75 | `chapters/volcengine/mediakit-guide/3.3.2.14 视频加图片.md` |
-| 3.3.2.15 | 视频添加滤镜 | 475-478 | 17038-17148 | 82 | `chapters/volcengine/mediakit-guide/3.3.2.15 视频添加滤镜.md` |
-| 3.3.2.16 | 视频截取动图 | 479-482 | 17149-17271 | 94 | `chapters/volcengine/mediakit-guide/3.3.2.16 视频截取动图.md` |
-| 3.3.2.17 | 视频高斯模糊 | 483-487 | 17272-17414 | 102 | `chapters/volcengine/mediakit-guide/3.3.2.17 视频高斯模糊.md` |
-| 3.3.2.18 | 文字生成滚屏视频 | 488-492 | 17415-17601 | 115 | `chapters/volcengine/mediakit-guide/3.3.2.18 文字生成滚屏视频.md` |
-| 3.3.2.19 | 添加 AIGC 元数据标识 | 493-496 | 17602-17744 | 107 | `chapters/volcengine/mediakit-guide/3.3.2.19 添加 AIGC 元数据标识.md` |
-| 3.4.1 | 人声背景音分离 | 497-501 | 17746-17938 | 136 | `chapters/volcengine/mediakit-guide/3.4.1 人声背景音分离.md` |
-| 3.4.2 | 语音端点识别 | 502-505 | 17939-18089 | 118 | `chapters/volcengine/mediakit-guide/3.4.2 语音端点识别.md` |
-| 3.4.3 | 音频内容编辑 | 506-508 | 18090-18203 | 76 | `chapters/volcengine/mediakit-guide/3.4.3 音频内容编辑.md` |
-| 3.4.4 | 音频转码 | 509-513 | 18204-18374 | 122 | `chapters/volcengine/mediakit-guide/3.4.4 音频转码.md` |
-| 3.5.1 | 视频理解智能策略 | 514-519 | 18376-18638 | 184 | `chapters/volcengine/mediakit-guide/3.5.1 视频理解智能策略.md` |
-| 3.5.2 | 大模型高光剪辑 | 520-526 | 18639-18890 | 189 | `chapters/volcengine/mediakit-guide/3.5.2 大模型高光剪辑.md` |
-| 3.5.3 | 视频理解拓展工具 | 527-549 | 18891-19830 | 814 | `chapters/volcengine/mediakit-guide/3.5.3 视频理解拓展工具.md` |
-| 3.5.4 | AIGC 视频生成质量评估 | 550-555 | 19831-20090 | 184 | `chapters/volcengine/mediakit-guide/3.5.4 AIGC 视频生成质量评估.md` |
-| 3.5.5 | 通过 AI MediaKit 调用图片生成大模型 | 556-558 | 20091-20199 | 76 | `chapters/volcengine/mediakit-guide/3.5.5 通过 AI MediaKit 调用图片生成大模型.md` |
-| 3.5.6 | 通过 AI MediaKit 调用视频生成大模型 | 559-561 | 20200-20316 | 84 | `chapters/volcengine/mediakit-guide/3.5.6 通过 AI MediaKit 调用视频生成大模型.md` |
-| 3.5.7 | 通过 AI MediaKit 调用音频生成大模型 | 562-564 | 20317-20413 | 68 | `chapters/volcengine/mediakit-guide/3.5.7 通过 AI MediaKit 调用音频生成大模型.md` |
-| 3.5.8 | 通过 AI MediaKit 调用语音识别大模型 | 565-567 | 20414-20526 | 79 | `chapters/volcengine/mediakit-guide/3.5.8 通过 AI MediaKit 调用语音识别大模型.md` |
-| 3.6.1 | 多源媒体输入与本地上传 | 568-572 | 20528-20715 | 136 | `chapters/volcengine/mediakit-guide/3.6.1 多源媒体输入与本地上传.md` |
-| 3.6.2 | 处理产物存储至 VOD 或 TOS | 573-577 | 20716-20892 | 102 | `chapters/volcengine/mediakit-guide/3.6.2 处理产物存储至 VOD 或 TOS.md` |
-| 3.7 | 按项目或 API Key 分账 | 578-583 | 20893-21075 | 115 | `chapters/volcengine/mediakit-guide/3.7 按项目或 API Key 分账.md` |
-| 4.1 | AI MediaKit CLI 用户指南 | 584-605 | 21077-21779 | 562 | `chapters/volcengine/mediakit-guide/4.1 AI MediaKit CLI 用户指南.md` |
-| 4.2 | AI MediaKit Skill 用户指南 | 606-614 | 21780-22101 | 222 | `chapters/volcengine/mediakit-guide/4.2 AI MediaKit Skill 用户指南.md` |
-| 4.3 | AI MediaKit MCP 用户指南 | 615-637 | 22102-23251 | 1053 | `chapters/volcengine/mediakit-guide/4.3 AI MediaKit MCP 用户指南.md` |
-| 5.1 | 资源包 | 638-642 | 23253-23465 | 154 | `chapters/volcengine/mediakit-guide/5.1 资源包.md` |
-| 5.2 | 剪辑工具计费 | 643-645 | 23466-23566 | 71 | `chapters/volcengine/mediakit-guide/5.2 剪辑工具计费.md` |
-| 5.3 | 视频工具计费 | 646-672 | 23567-24647 | 935 | `chapters/volcengine/mediakit-guide/5.3 视频工具计费.md` |
-| 5.4 | 音频工具计费 | 673-675 | 24648-24734 | 71 | `chapters/volcengine/mediakit-guide/5.4 音频工具计费.md` |
-| 5.5 | 图像工具计费 | 676-680 | 24735-24941 | 139 | `chapters/volcengine/mediakit-guide/5.5 图像工具计费.md` |
-| 5.6 | 大模型处理工具计费 | 681 | 24942-24952 | 4 | `chapters/volcengine/mediakit-guide/5.6 大模型处理工具计费.md` |
-| 5.7 | 计费常见问题 | 682 | 24953-24987 | 18 | `chapters/volcengine/mediakit-guide/5.7 计费常见问题.md` |
-| 6.1 | 常见问题 | 683-685 | 24989-25126 | 117 | `chapters/volcengine/mediakit-guide/6.1 常见问题.md` |
-| 7.1 | 视频云服务专用条款 | 686-689 | 25128-25265 | 40 | `chapters/volcengine/mediakit-guide/7.1 视频云服务专用条款.md` |
-| 7.2 | 智能处理服务计费结算规则 | 690-691 | 25266-25331 | 30 | `chapters/volcengine/mediakit-guide/7.2 智能处理服务计费结算规则.md` |
-| 7.3 | 智能处理服务等级协议 | 692-694 | 25332-25406 | 44 | `chapters/volcengine/mediakit-guide/7.3 智能处理服务等级协议.md` |
-| 8.1.1 | 概述 | 695 | 25409-25416 | 6 | `chapters/volcengine/mediakit-guide/8.1.1 概述.md` |
-| 8.1.2 | 产品优势 | 696 | 25417-25431 | 9 | `chapters/volcengine/mediakit-guide/8.1.2 产品优势.md` |
-| 8.1.3 | 应用场景 | 697 | 25432-25450 | 10 | `chapters/volcengine/mediakit-guide/8.1.3 应用场景.md` |
-| 8.1.4 | 产品功能 | 698 | 25451-25473 | 14 | `chapters/volcengine/mediakit-guide/8.1.4 产品功能.md` |
-| 8.1.5.1 | 老片修复 | 699-700 | 25475-25518 | 23 | `chapters/volcengine/mediakit-guide/8.1.5.1 老片修复.md` |
-| 8.1.5.2 | 大模型视频预处理解决方案 | 701 | 25519-25547 | 12 | `chapters/volcengine/mediakit-guide/8.1.5.2 大模型视频预处理解决方案.md` |
-| 8.2.1 | 计费概述 | 702-703 | 25549-25574 | 16 | `chapters/volcengine/mediakit-guide/8.2.1 计费概述.md` |
-| 8.2.2.1 | 按量计费 | 704-712 | 25576-25810 | 199 | `chapters/volcengine/mediakit-guide/8.2.2.1 按量计费.md` |
-| 8.2.2.2 | 资源包 | 713 | 25811-25847 | 23 | `chapters/volcengine/mediakit-guide/8.2.2.2 资源包.md` |
-| 8.3.1 | 快速入门 | 714-723 | 25849-26002 | 97 | `chapters/volcengine/mediakit-guide/8.3.1 快速入门.md` |
-| 8.4.1 | 控制台简介 | 724-727 | 26004-26081 | 66 | `chapters/volcengine/mediakit-guide/8.4.1 控制台简介.md` |
-| 8.4.2 | 概览 | 728-732 | 26082-26153 | 36 | `chapters/volcengine/mediakit-guide/8.4.2 概览.md` |
-| 8.4.3 | 任务管理 | 733-736 | 26154-26264 | 74 | `chapters/volcengine/mediakit-guide/8.4.3 任务管理.md` |
-| 8.4.4 | 自动任务触发器 | 737-740 | 26265-26324 | 41 | `chapters/volcengine/mediakit-guide/8.4.4 自动任务触发器.md` |
-| 8.4.5.1 | 功能概述 | 741-742 | 26326-26414 | 52 | `chapters/volcengine/mediakit-guide/8.4.5.1 功能概述.md` |
-| 8.4.5.2.1 | 基础转码 | 743-757 | 26416-26883 | 388 | `chapters/volcengine/mediakit-guide/8.4.5.2.1 基础转码.md` |
-| 8.4.5.2.2 | 极智超清 | 758-766 | 26884-27079 | 149 | `chapters/volcengine/mediakit-guide/8.4.5.2.2 极智超清.md` |
-| 8.4.5.3.1 | 精细化擦除 | 767-773 | 27081-27169 | 56 | `chapters/volcengine/mediakit-guide/8.4.5.3.1 精细化擦除.md` |
-| 8.4.5.4.1 | 画质检测修复 | 774-781 | 27171-27324 | 113 | `chapters/volcengine/mediakit-guide/8.4.5.4.1 画质检测修复.md` |
-| 8.4.5.4.2 | 画质增强 | 782-788 | 27325-27423 | 59 | `chapters/volcengine/mediakit-guide/8.4.5.4.2 画质增强.md` |
-| 8.4.5.5.1 | 智能识别剪切 | 789-793 | 27425-27493 | 43 | `chapters/volcengine/mediakit-guide/8.4.5.5.1 智能识别剪切.md` |
-| 8.4.5.5.2 | 智能表情合成 | 794-802 | 27494-27621 | 82 | `chapters/volcengine/mediakit-guide/8.4.5.5.2 智能表情合成.md` |
-| 8.4.5.5.3 | 智能抠图 | 803-809 | 27622-27699 | 51 | `chapters/volcengine/mediakit-guide/8.4.5.5.3 智能抠图.md` |
-| 8.4.6 | 工作流模板 | 810-818 | 27700-27981 | 174 | `chapters/volcengine/mediakit-guide/8.4.6 工作流模板.md` |
-| 8.4.7.1 | 统计数据 | 819-825 | 27983-28119 | 59 | `chapters/volcengine/mediakit-guide/8.4.7.1 统计数据.md` |
-| 8.4.8 | 系统配置 | 826-828 | 28120-28176 | 38 | `chapters/volcengine/mediakit-guide/8.4.8 系统配置.md` |
-| 8.4.9 | 媒体处理输出文件路径 | 829-830 | 28177-28216 | 33 | `chapters/volcengine/mediakit-guide/8.4.9 媒体处理输出文件路径.md` |
-| 8.5.1 | 使用说明 | 831 | 28218-28252 | 24 | `chapters/volcengine/mediakit-guide/8.5.1 使用说明.md` |
-| 8.5.2.1 | 安装 | 832 | 28254-28270 | 12 | `chapters/volcengine/mediakit-guide/8.5.2.1 安装.md` |
-| 8.5.2.2 | 初始化 | 833-834 | 28271-28311 | 30 | `chapters/volcengine/mediakit-guide/8.5.2.2 初始化.md` |
-| 8.5.2.3 | 媒体处理任务 | 835-838 | 28312-28439 | 120 | `chapters/volcengine/mediakit-guide/8.5.2.3 媒体处理任务.md` |
-| 8.5.3.1 | 安装 | 839 | 28441-28450 | 9 | `chapters/volcengine/mediakit-guide/8.5.3.1 安装.md` |
-| 8.5.3.2 | 初始化 | 840-841 | 28451-28496 | 35 | `chapters/volcengine/mediakit-guide/8.5.3.2 初始化.md` |
-| 8.5.3.3 | 媒体处理任务 | 842-845 | 28497-28646 | 142 | `chapters/volcengine/mediakit-guide/8.5.3.3 媒体处理任务.md` |
-| 8.5.4.1 | 安装 | 846 | 28648-28667 | 16 | `chapters/volcengine/mediakit-guide/8.5.4.1 安装.md` |
-| 8.5.4.2 | 初始化 | 847-848 | 28668-28713 | 35 | `chapters/volcengine/mediakit-guide/8.5.4.2 初始化.md` |
-| 8.5.4.3 | 媒体处理任务 | 849-853 | 28714-28871 | 148 | `chapters/volcengine/mediakit-guide/8.5.4.3 媒体处理任务.md` |
-| 8.5.5.1 | 安装 | 854 | 28873-28886 | 13 | `chapters/volcengine/mediakit-guide/8.5.5.1 安装.md` |
-| 8.5.5.2 | 初始化 | 855-856 | 28887-28931 | 34 | `chapters/volcengine/mediakit-guide/8.5.5.2 初始化.md` |
-| 8.5.5.3 | 媒体处理任务 | 857-860 | 28932-29072 | 132 | `chapters/volcengine/mediakit-guide/8.5.5.3 媒体处理任务.md` |
-| 8.6.1 | API 发布历史 | 861-862 | 29074-29165 | 63 | `chapters/volcengine/mediakit-guide/8.6.1 API 发布历史.md` |
-| 8.6.2 | API 概览 | 863 | 29166-29176 | 8 | `chapters/volcengine/mediakit-guide/8.6.2 API 概览.md` |
-| 8.6.3 | 调用方法 | 864-866 | 29177-29270 | 72 | `chapters/volcengine/mediakit-guide/8.6.3 调用方法.md` |
-| 8.6.4 | 公共错误码 | 867-871 | 29271-29366 | 86 | `chapters/volcengine/mediakit-guide/8.6.4 公共错误码.md` |
-| 8.6.5.1 | 媒体处理完成事件 | 872-873 | 29368-29432 | 56 | `chapters/volcengine/mediakit-guide/8.6.5.1 媒体处理完成事件.md` |
-| 8.6.6.1 | 提交媒体处理任务 | 874-881 | 29434-29765 | 302 | `chapters/volcengine/mediakit-guide/8.6.6.1 提交媒体处理任务.md` |
-| 8.6.6.2 | 查询媒体处理任务 | 882-883 | 29766-29844 | 70 | `chapters/volcengine/mediakit-guide/8.6.6.2 查询媒体处理任务.md` |
-| 8.6.6.3 | 取消媒体处理任务 | 884-885 | 29845-29893 | 40 | `chapters/volcengine/mediakit-guide/8.6.6.3 取消媒体处理任务.md` |
-| 8.6.6.4 | 任务节点输出定义 | 886-891 | 29894-30099 | 174 | `chapters/volcengine/mediakit-guide/8.6.6.4 任务节点输出定义.md` |
-| 8.6.6.5 | 任务输出状态码 | 892 | 30100-30119 | 18 | `chapters/volcengine/mediakit-guide/8.6.6.5 任务输出状态码.md` |
-| 8.6.7 | 公共数据结构 | 893-909 | 30120-30867 | 641 | `chapters/volcengine/mediakit-guide/8.6.7 公共数据结构.md` |
-| 8.7.1 | 联系我们 | 910 | 30869-30880 | 8 | `chapters/volcengine/mediakit-guide/8.7.1 联系我们.md` |
+| 3.3.1.2 | Web 智能剪辑 SDK 集成指南 | 325-356 | 11825-13336 | 1319 | `chapters/volcengine/mediakit-guide/3.3.1.2 Web 智能剪辑 SDK 集成指南.md` |
+| 3.3.2.1 | 多轨道剪辑 | 357-399 | 13338-14890 | 1352 | `chapters/volcengine/mediakit-guide/3.3.2.1 多轨道剪辑.md` |
+| 3.3.2.2 | Web 剪辑 SDK 集成指南 | 400-433 | 14891-16325 | 1220 | `chapters/volcengine/mediakit-guide/3.3.2.2 Web 剪辑 SDK 集成指南.md` |
+| 3.3.2.3 | 音视频拼接 | 434-440 | 16326-16498 | 128 | `chapters/volcengine/mediakit-guide/3.3.2.3 音视频拼接.md` |
+| 3.3.2.4 | 音视频裁剪 | 441-444 | 16499-16638 | 102 | `chapters/volcengine/mediakit-guide/3.3.2.4 音视频裁剪.md` |
+| 3.3.2.5 | 音视频调速 | 445-448 | 16639-16742 | 71 | `chapters/volcengine/mediakit-guide/3.3.2.5 音视频调速.md` |
+| 3.3.2.6 | 音频提取 | 449-451 | 16743-16860 | 84 | `chapters/volcengine/mediakit-guide/3.3.2.6 音频提取.md` |
+| 3.3.2.7 | 音视频合成 | 452-456 | 16861-17049 | 140 | `chapters/volcengine/mediakit-guide/3.3.2.7 音视频合成.md` |
+| 3.3.2.8 | 音频混合 | 457-459 | 17050-17158 | 79 | `chapters/volcengine/mediakit-guide/3.3.2.8 音频混合.md` |
+| 3.3.2.9 | 音量调节与淡入淡出 | 460-464 | 17159-17337 | 133 | `chapters/volcengine/mediakit-guide/3.3.2.9 音量调节与淡入淡出.md` |
+| 3.3.2.10 | 图片转视频 | 465-471 | 17338-17561 | 170 | `chapters/volcengine/mediakit-guide/3.3.2.10 图片转视频.md` |
+| 3.3.2.11 | 视频画面变换 | 472-477 | 17562-17701 | 102 | `chapters/volcengine/mediakit-guide/3.3.2.11 视频画面变换.md` |
+| 3.3.2.12 | 视频添加运镜 | 478-483 | 17702-17847 | 109 | `chapters/volcengine/mediakit-guide/3.3.2.12 视频添加运镜.md` |
+| 3.3.2.13 | 视频加字幕 | 484-488 | 17848-18009 | 118 | `chapters/volcengine/mediakit-guide/3.3.2.13 视频加字幕.md` |
+| 3.3.2.14 | 视频加图片 | 489-492 | 18010-18116 | 75 | `chapters/volcengine/mediakit-guide/3.3.2.14 视频加图片.md` |
+| 3.3.2.15 | 视频添加滤镜 | 493-496 | 18117-18227 | 82 | `chapters/volcengine/mediakit-guide/3.3.2.15 视频添加滤镜.md` |
+| 3.3.2.16 | 视频截取动图 | 497-500 | 18228-18350 | 94 | `chapters/volcengine/mediakit-guide/3.3.2.16 视频截取动图.md` |
+| 3.3.2.17 | 视频高斯模糊 | 501-505 | 18351-18493 | 102 | `chapters/volcengine/mediakit-guide/3.3.2.17 视频高斯模糊.md` |
+| 3.3.2.18 | 文字生成滚屏视频 | 506-510 | 18494-18680 | 115 | `chapters/volcengine/mediakit-guide/3.3.2.18 文字生成滚屏视频.md` |
+| 3.3.2.19 | 添加 AIGC 元数据标识 | 511-514 | 18681-18823 | 107 | `chapters/volcengine/mediakit-guide/3.3.2.19 添加 AIGC 元数据标识.md` |
+| 3.4.1 | 人声背景音分离 | 515-519 | 18825-19017 | 136 | `chapters/volcengine/mediakit-guide/3.4.1 人声背景音分离.md` |
+| 3.4.2 | 语音端点识别 | 520-523 | 19018-19168 | 118 | `chapters/volcengine/mediakit-guide/3.4.2 语音端点识别.md` |
+| 3.4.3 | 音频内容编辑 | 524-526 | 19169-19282 | 76 | `chapters/volcengine/mediakit-guide/3.4.3 音频内容编辑.md` |
+| 3.4.4 | 音频转码 | 527-531 | 19283-19453 | 122 | `chapters/volcengine/mediakit-guide/3.4.4 音频转码.md` |
+| 3.5.1 | 视频理解智能策略 | 532-537 | 19455-19717 | 184 | `chapters/volcengine/mediakit-guide/3.5.1 视频理解智能策略.md` |
+| 3.5.2 | 大模型高光剪辑 | 538-544 | 19718-19969 | 189 | `chapters/volcengine/mediakit-guide/3.5.2 大模型高光剪辑.md` |
+| 3.5.3 | 视频理解拓展工具 | 545-567 | 19970-20909 | 814 | `chapters/volcengine/mediakit-guide/3.5.3 视频理解拓展工具.md` |
+| 3.5.4 | AIGC 视频生成质量评估 | 568-573 | 20910-21169 | 184 | `chapters/volcengine/mediakit-guide/3.5.4 AIGC 视频生成质量评估.md` |
+| 3.5.5 | 通过 AI MediaKit 调用图片生成大模型 | 574-576 | 21170-21278 | 76 | `chapters/volcengine/mediakit-guide/3.5.5 通过 AI MediaKit 调用图片生成大模型.md` |
+| 3.5.6 | 通过 AI MediaKit 调用视频生成大模型 | 577-579 | 21279-21395 | 84 | `chapters/volcengine/mediakit-guide/3.5.6 通过 AI MediaKit 调用视频生成大模型.md` |
+| 3.5.7 | 通过 AI MediaKit 调用音频生成大模型 | 580-582 | 21396-21492 | 68 | `chapters/volcengine/mediakit-guide/3.5.7 通过 AI MediaKit 调用音频生成大模型.md` |
+| 3.5.8 | 通过 AI MediaKit 调用语音识别大模型 | 583-585 | 21493-21605 | 79 | `chapters/volcengine/mediakit-guide/3.5.8 通过 AI MediaKit 调用语音识别大模型.md` |
+| 3.6.1 | 多源媒体输入与本地上传 | 586-590 | 21607-21794 | 136 | `chapters/volcengine/mediakit-guide/3.6.1 多源媒体输入与本地上传.md` |
+| 3.6.2 | 处理产物存储至 VOD 或 TOS | 591-595 | 21795-21971 | 102 | `chapters/volcengine/mediakit-guide/3.6.2 处理产物存储至 VOD 或 TOS.md` |
+| 3.7 | 按项目或 API Key 分账 | 596-601 | 21972-22154 | 115 | `chapters/volcengine/mediakit-guide/3.7 按项目或 API Key 分账.md` |
+| 4.1 | AI MediaKit CLI 用户指南 | 602-623 | 22156-22858 | 562 | `chapters/volcengine/mediakit-guide/4.1 AI MediaKit CLI 用户指南.md` |
+| 4.2 | AI MediaKit Skill 用户指南 | 624-632 | 22859-23180 | 222 | `chapters/volcengine/mediakit-guide/4.2 AI MediaKit Skill 用户指南.md` |
+| 4.3 | AI MediaKit MCP 用户指南 | 633-655 | 23181-24330 | 1053 | `chapters/volcengine/mediakit-guide/4.3 AI MediaKit MCP 用户指南.md` |
+| 5.1 | 资源包 | 656-660 | 24332-24544 | 154 | `chapters/volcengine/mediakit-guide/5.1 资源包.md` |
+| 5.2 | 剪辑工具计费 | 661-663 | 24545-24645 | 71 | `chapters/volcengine/mediakit-guide/5.2 剪辑工具计费.md` |
+| 5.3 | 视频工具计费 | 664-690 | 24646-25726 | 935 | `chapters/volcengine/mediakit-guide/5.3 视频工具计费.md` |
+| 5.4 | 音频工具计费 | 691-693 | 25727-25813 | 71 | `chapters/volcengine/mediakit-guide/5.4 音频工具计费.md` |
+| 5.5 | 图像工具计费 | 694-698 | 25814-26020 | 139 | `chapters/volcengine/mediakit-guide/5.5 图像工具计费.md` |
+| 5.6 | 大模型处理工具计费 | 699 | 26021-26031 | 4 | `chapters/volcengine/mediakit-guide/5.6 大模型处理工具计费.md` |
+| 5.7 | 计费常见问题 | 700 | 26032-26066 | 18 | `chapters/volcengine/mediakit-guide/5.7 计费常见问题.md` |
+| 6.1 | 常见问题 | 701-703 | 26068-26205 | 117 | `chapters/volcengine/mediakit-guide/6.1 常见问题.md` |
+| 7.1 | 视频云服务专用条款 | 704-707 | 26207-26344 | 40 | `chapters/volcengine/mediakit-guide/7.1 视频云服务专用条款.md` |
+| 7.2 | 智能处理服务计费结算规则 | 708-709 | 26345-26410 | 30 | `chapters/volcengine/mediakit-guide/7.2 智能处理服务计费结算规则.md` |
+| 7.3 | 智能处理服务等级协议 | 710-712 | 26411-26485 | 44 | `chapters/volcengine/mediakit-guide/7.3 智能处理服务等级协议.md` |
+| 8.1.1 | 概述 | 713 | 26488-26495 | 6 | `chapters/volcengine/mediakit-guide/8.1.1 概述.md` |
+| 8.1.2 | 产品优势 | 714 | 26496-26510 | 9 | `chapters/volcengine/mediakit-guide/8.1.2 产品优势.md` |
+| 8.1.3 | 应用场景 | 715 | 26511-26529 | 10 | `chapters/volcengine/mediakit-guide/8.1.3 应用场景.md` |
+| 8.1.4 | 产品功能 | 716 | 26530-26552 | 14 | `chapters/volcengine/mediakit-guide/8.1.4 产品功能.md` |
+| 8.1.5.1 | 老片修复 | 717-718 | 26554-26597 | 23 | `chapters/volcengine/mediakit-guide/8.1.5.1 老片修复.md` |
+| 8.1.5.2 | 大模型视频预处理解决方案 | 719 | 26598-26626 | 12 | `chapters/volcengine/mediakit-guide/8.1.5.2 大模型视频预处理解决方案.md` |
+| 8.2.1 | 计费概述 | 720-721 | 26628-26653 | 16 | `chapters/volcengine/mediakit-guide/8.2.1 计费概述.md` |
+| 8.2.2.1 | 按量计费 | 722-730 | 26655-26889 | 199 | `chapters/volcengine/mediakit-guide/8.2.2.1 按量计费.md` |
+| 8.2.2.2 | 资源包 | 731 | 26890-26926 | 23 | `chapters/volcengine/mediakit-guide/8.2.2.2 资源包.md` |
+| 8.3.1 | 快速入门 | 732-741 | 26928-27081 | 97 | `chapters/volcengine/mediakit-guide/8.3.1 快速入门.md` |
+| 8.4.1 | 控制台简介 | 742-745 | 27083-27160 | 66 | `chapters/volcengine/mediakit-guide/8.4.1 控制台简介.md` |
+| 8.4.2 | 概览 | 746-750 | 27161-27232 | 36 | `chapters/volcengine/mediakit-guide/8.4.2 概览.md` |
+| 8.4.3 | 任务管理 | 751-754 | 27233-27343 | 74 | `chapters/volcengine/mediakit-guide/8.4.3 任务管理.md` |
+| 8.4.4 | 自动任务触发器 | 755-758 | 27344-27403 | 41 | `chapters/volcengine/mediakit-guide/8.4.4 自动任务触发器.md` |
+| 8.4.5.1 | 功能概述 | 759-760 | 27405-27493 | 52 | `chapters/volcengine/mediakit-guide/8.4.5.1 功能概述.md` |
+| 8.4.5.2.1 | 基础转码 | 761-775 | 27495-27962 | 388 | `chapters/volcengine/mediakit-guide/8.4.5.2.1 基础转码.md` |
+| 8.4.5.2.2 | 极智超清 | 776-784 | 27963-28158 | 149 | `chapters/volcengine/mediakit-guide/8.4.5.2.2 极智超清.md` |
+| 8.4.5.3.1 | 精细化擦除 | 785-791 | 28160-28248 | 56 | `chapters/volcengine/mediakit-guide/8.4.5.3.1 精细化擦除.md` |
+| 8.4.5.4.1 | 画质检测修复 | 792-799 | 28250-28403 | 113 | `chapters/volcengine/mediakit-guide/8.4.5.4.1 画质检测修复.md` |
+| 8.4.5.4.2 | 画质增强 | 800-806 | 28404-28502 | 59 | `chapters/volcengine/mediakit-guide/8.4.5.4.2 画质增强.md` |
+| 8.4.5.5.1 | 智能识别剪切 | 807-811 | 28504-28572 | 43 | `chapters/volcengine/mediakit-guide/8.4.5.5.1 智能识别剪切.md` |
+| 8.4.5.5.2 | 智能表情合成 | 812-820 | 28573-28700 | 82 | `chapters/volcengine/mediakit-guide/8.4.5.5.2 智能表情合成.md` |
+| 8.4.5.5.3 | 智能抠图 | 821-827 | 28701-28778 | 51 | `chapters/volcengine/mediakit-guide/8.4.5.5.3 智能抠图.md` |
+| 8.4.6 | 工作流模板 | 828-836 | 28779-29060 | 174 | `chapters/volcengine/mediakit-guide/8.4.6 工作流模板.md` |
+| 8.4.7.1 | 统计数据 | 837-843 | 29062-29198 | 59 | `chapters/volcengine/mediakit-guide/8.4.7.1 统计数据.md` |
+| 8.4.8 | 系统配置 | 844-846 | 29199-29255 | 38 | `chapters/volcengine/mediakit-guide/8.4.8 系统配置.md` |
+| 8.4.9 | 媒体处理输出文件路径 | 847-848 | 29256-29295 | 33 | `chapters/volcengine/mediakit-guide/8.4.9 媒体处理输出文件路径.md` |
+| 8.5.1 | 使用说明 | 849 | 29297-29331 | 24 | `chapters/volcengine/mediakit-guide/8.5.1 使用说明.md` |
+| 8.5.2.1 | 安装 | 850 | 29333-29349 | 12 | `chapters/volcengine/mediakit-guide/8.5.2.1 安装.md` |
+| 8.5.2.2 | 初始化 | 851-852 | 29350-29390 | 30 | `chapters/volcengine/mediakit-guide/8.5.2.2 初始化.md` |
+| 8.5.2.3 | 媒体处理任务 | 853-856 | 29391-29518 | 120 | `chapters/volcengine/mediakit-guide/8.5.2.3 媒体处理任务.md` |
+| 8.5.3.1 | 安装 | 857 | 29520-29529 | 9 | `chapters/volcengine/mediakit-guide/8.5.3.1 安装.md` |
+| 8.5.3.2 | 初始化 | 858-859 | 29530-29575 | 35 | `chapters/volcengine/mediakit-guide/8.5.3.2 初始化.md` |
+| 8.5.3.3 | 媒体处理任务 | 860-863 | 29576-29725 | 142 | `chapters/volcengine/mediakit-guide/8.5.3.3 媒体处理任务.md` |
+| 8.5.4.1 | 安装 | 864 | 29727-29746 | 16 | `chapters/volcengine/mediakit-guide/8.5.4.1 安装.md` |
+| 8.5.4.2 | 初始化 | 865-866 | 29747-29792 | 35 | `chapters/volcengine/mediakit-guide/8.5.4.2 初始化.md` |
+| 8.5.4.3 | 媒体处理任务 | 867-871 | 29793-29950 | 148 | `chapters/volcengine/mediakit-guide/8.5.4.3 媒体处理任务.md` |
+| 8.5.5.1 | 安装 | 872 | 29952-29965 | 13 | `chapters/volcengine/mediakit-guide/8.5.5.1 安装.md` |
+| 8.5.5.2 | 初始化 | 873-874 | 29966-30010 | 34 | `chapters/volcengine/mediakit-guide/8.5.5.2 初始化.md` |
+| 8.5.5.3 | 媒体处理任务 | 875-878 | 30011-30151 | 132 | `chapters/volcengine/mediakit-guide/8.5.5.3 媒体处理任务.md` |
+| 8.6.1 | API 发布历史 | 879-880 | 30153-30244 | 63 | `chapters/volcengine/mediakit-guide/8.6.1 API 发布历史.md` |
+| 8.6.2 | API 概览 | 881 | 30245-30255 | 8 | `chapters/volcengine/mediakit-guide/8.6.2 API 概览.md` |
+| 8.6.3 | 调用方法 | 882-884 | 30256-30349 | 72 | `chapters/volcengine/mediakit-guide/8.6.3 调用方法.md` |
+| 8.6.4 | 公共错误码 | 885-889 | 30350-30445 | 86 | `chapters/volcengine/mediakit-guide/8.6.4 公共错误码.md` |
+| 8.6.5.1 | 媒体处理完成事件 | 890-891 | 30447-30511 | 56 | `chapters/volcengine/mediakit-guide/8.6.5.1 媒体处理完成事件.md` |
+| 8.6.6.1 | 提交媒体处理任务 | 892-899 | 30513-30844 | 302 | `chapters/volcengine/mediakit-guide/8.6.6.1 提交媒体处理任务.md` |
+| 8.6.6.2 | 查询媒体处理任务 | 900-901 | 30845-30923 | 70 | `chapters/volcengine/mediakit-guide/8.6.6.2 查询媒体处理任务.md` |
+| 8.6.6.3 | 取消媒体处理任务 | 902-903 | 30924-30972 | 40 | `chapters/volcengine/mediakit-guide/8.6.6.3 取消媒体处理任务.md` |
+| 8.6.6.4 | 任务节点输出定义 | 904-909 | 30973-31178 | 174 | `chapters/volcengine/mediakit-guide/8.6.6.4 任务节点输出定义.md` |
+| 8.6.6.5 | 任务输出状态码 | 910 | 31179-31198 | 18 | `chapters/volcengine/mediakit-guide/8.6.6.5 任务输出状态码.md` |
+| 8.6.7 | 公共数据结构 | 911-927 | 31199-31946 | 641 | `chapters/volcengine/mediakit-guide/8.6.7 公共数据结构.md` |
+| 8.7.1 | 联系我们 | 928 | 31948-31959 | 8 | `chapters/volcengine/mediakit-guide/8.7.1 联系我们.md` |

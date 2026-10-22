@@ -1,15 +1,16 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130675 -->
-<!-- Source SHA-256: 159833a12a242bac2a2c91ffe33a7db73f9dbf37d0f11b8f6dde8f53164d2a6f -->
+<!-- Source SHA-256: 01733dc76eaacfe04d3a36abcce59070362f2e7da9e8ccb1b824ccce4aa83478 -->
 
 # 产品动态
 
 官方来源：https://cloud.tencent.com/document/product/1823/130675
-最近更新时间：2026-10-20 17:23:50
+最近更新时间：2026-10-21 10:09:00
 
 ## 2026年10月
 
 | **动态名称** | **动态描述** | **发布时间** | **相关文档** |
 | --- | --- | --- | --- |
+| 新增支持模型 | 按量付费和 Token Plan 企业版新增支持 DeepSeek-V4.1-Flash-1017 模型。 | 2026-10-20 | [模型列表](https://cloud.tencent.com/document/product/1823/130051)  [Token Plan 企业版专业套餐](https://cloud.tencent.com/document/product/1823/130659) |
 | 新增支持模型 | 新增支持 MiniMax-M3.1-Flash 模型。 | 2026-10-19 | [模型列表](https://cloud.tencent.com/document/product/1823/130051) |
 
 ## 2026年09月
@@ -26,7 +27,7 @@
 | --- | --- | --- | --- |
 | 新增支持模型 | 新增支持 Hy4 preview 模型。 | 2026-08-28 | [模型列表](https://cloud.tencent.com/document/product/1823/130051) |
 | 新增支持模型 | 新增支持 GLM-5.3-Flash 模型。 | 2026-08-26 | [模型列表](https://cloud.tencent.com/document/product/1823/130051) |
-| Token Plan 企业版：新增模型 | 新增支持 DeepSeek-V4-Flash 0731 正式版 、DeepSeek-V4-Pro 0813 正式版模型。 | 2026-08-24 | [模型列表](https://cloud.tencent.com/document/product/1823/130051) |
+| Token Plan 企业版：新增模型 | 新增支持 DeepSeek-V4-Flash 0731 正式版 、DeepSeek-V4-Pro 0813 正式版模型。 | 2026-08-24 | [Token Plan 企业版专业套餐](https://cloud.tencent.com/document/product/1823/130659) |
 | 新增支持模型 | 新增支持 DeepSeek-V4-Flash 0731 正式版 、DeepSeek-V4-Pro 0813 正式版模型。 | 2026-08-24 | [模型列表](https://cloud.tencent.com/document/product/1823/130051) |
 | 新增支持模型 | 新增支持 DeepSeek-V4-Flash-Vision-Exp 原厂直供模型。 | 2026-08-22 | [模型列表](https://cloud.tencent.com/document/product/1823/130051) |
 | Token Plan 企业版：新增模型 | 新增支持 GLM-5.3 模型。 | 2026-08-17 | [Token Plan 企业版专业套餐](https://cloud.tencent.com/document/product/1823/130659) |
