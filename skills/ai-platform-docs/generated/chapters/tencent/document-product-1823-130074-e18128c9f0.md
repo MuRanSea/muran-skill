@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130074 -->
-<!-- Source SHA-256: 7c6278771e22c90ad7cefdf4c9dc43158865318a841fb93aa7132c9257349a37 -->
+<!-- Source SHA-256: 2ba2fee4f0bb895080239384af90b911b9818f9a4e1f329e1a79b090f36e38fa -->
 
 # Kilo CLI
 
 官方来源：https://cloud.tencent.com/document/product/1823/130074
-最近更新时间：2026-09-29 14:11:34
+最近更新时间：2026-10-22 10:29:01
 
 Kilo CLI 是 Kilo Code 全栈式 AI 编程代理平台的命令行形态。本文介绍如何在 Kilo CLI 中配置与使用腾讯云大模型 Token Plan。
 
@@ -56,7 +56,7 @@ Hy Token Plan
       "npm": "@ai-sdk/anthropic",
       "name": "Tencent Token Plan",
       "options": {
-        "baseURL": "https://api.lkeap.cloud.tencent.com/plan/anthropic/v1",
+        "baseURL": "https://tokenhub.tencentmaas.com/plan/anthropic/v1",
         "apiKey": "<USER_API_KEY>"
       },
       "models": {
@@ -65,8 +65,6 @@ Hy Token Plan
         "deepseek-v4-pro-202606": { "name": "DeepSeek-V4-Pro 正式版 原厂直供", "options": { "thinking": { "type": "enabled", "budgetTokens": 1024 } } },
         "minimax-m2.7": { "name": "MiniMax-M2.7", "options": { "thinking": { "type": "enabled", "budgetTokens": 1024 } } },
         "minimax-m3": { "name": "MiniMax-M3", "options": { "thinking": { "type": "enabled", "budgetTokens": 1024 } } },
-        "glm-5": { "name": "GLM-5", "options": { "thinking": { "type": "enabled", "budgetTokens": 1024 } } },
-        "glm-5.1": { "name": "GLM-5.1", "options": { "thinking": { "type": "enabled", "budgetTokens": 1024 } } },
         "glm-5.2": { "name": "GLM-5.2", "options": { "thinking": { "type": "enabled", "budgetTokens": 1024 } } },
         "glm-5.3": { "name": "GLM-5.3", "options": { "thinking": { "type": "enabled", "budgetTokens": 1024 } } },
         "glm-5.3-flash": { "name": "GLM-5.3-Flash", "options": { "thinking": { "type": "enabled", "budgetTokens": 1024 } } },
@@ -88,7 +86,7 @@ Hy Token Plan
       "npm": "@ai-sdk/anthropic",
       "name": "Tencent Token Plan",
       "options": {
-        "baseURL": "https://api.lkeap.cloud.tencent.com/plan/anthropic/v1",
+        "baseURL": "https://tokenhub.tencentmaas.com/plan/anthropic/v1",
         "apiKey": "<USER_API_KEY>"
       },
       "models": {

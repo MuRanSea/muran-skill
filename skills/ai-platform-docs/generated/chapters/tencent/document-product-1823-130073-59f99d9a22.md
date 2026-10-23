@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130073 -->
-<!-- Source SHA-256: 76f22532a4d2e300a806b1f6a02ad92d7d9153182476828db977cbccc44f0003 -->
+<!-- Source SHA-256: b4204bd425c3cd5cb93628455b3619235c8d26740d1a1787c1a9f96892694218 -->
 
 # Cursor
 
 官方来源：https://cloud.tencent.com/document/product/1823/130073
-最近更新时间：2026-09-03 14:36:31
+最近更新时间：2026-10-22 10:29:00
 
 Cursor 是基于 VSCode 深度改造、AI 原生的代码编辑器，内置 GPT-4/Claude 等模型，支持自然语言生成、代码理解、跨文件重构、智能调试与自主代理（Agent）。本文介绍如何在 Cursor 中配置与使用腾讯云大模型 Token Plan。
 
@@ -28,7 +28,7 @@ Cursor 安装完成后，在 Cursor 中，单击右上角的 **Cursor Settings**
 
 OpenAI API Key：填写 Token Plan 的专属 API Key。
 
-Override OpenAI Base URL：`https://api.lkeap.cloud.tencent.com/plan/v3`。
+Override OpenAI Base URL：`https://tokenhub.tencentmaas.com/plan/v3`。
 
 Add Custom Model：根据您购买的套餐，填入 [套餐支持的模型 ID](https://cloud.tencent.com/document/product/1823/130119)。
 

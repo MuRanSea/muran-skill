@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130068 -->
-<!-- Source SHA-256: abb2ce3715cbd6a8447cae5eab773885171d9cb6ef7a213e1b74f4c2f5fd4aaf -->
+<!-- Source SHA-256: 3d41f7136bd974d38b7cc9cec80349d97d5d7795ccba048afe3847cef7c1e401 -->
 
 # CodeBuddy
 
 官方来源：https://cloud.tencent.com/document/product/1823/130068
-最近更新时间：2026-09-29 14:11:34
+最近更新时间：2026-10-22 10:29:00
 
 CodeBuddy 腾讯云推出的 AI 辅助编程工具，通过将 AI 深度融入全流程，实现从产品构思到产品发布的一站式高效交付平台。 产品支持 IDE、插件和 CLI 三种形态，覆盖从专业开发者到零基础用户的全场景需求。本文介绍如何在 CodeBuddy 中配置与使用腾讯云大模型 Token Plan，适用于 CodeBuddy IDE 和 CodeBuddy CLI。
 
@@ -58,19 +58,17 @@ macOS/Linux：`~/.codebuddy/models.json`。
 
 {
   "models": [
-    { "id": "tc-code-latest", "name": "Auto", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "deepseek-v4-flash-202605", "name": "DeepSeek-V4-Flash 正式版 原厂直供", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "deepseek-v4-pro-202606", "name": "DeepSeek-V4-Pro 正式版 原厂直供", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "minimax-m2.7", "name": "MiniMax-M2.7", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "minimax-m3", "name": "MiniMax-M3", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "glm-5", "name": "GLM-5", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "glm-5.1", "name": "GLM-5.1", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "glm-5.2", "name": "GLM-5.2", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "glm-5.3", "name": "GLM-5.3", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "glm-5.3-flash", "name": "GLM-5.3-Flash", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "hy4-preview", "name": "Hy4 preview", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "kimi-k2.7-code", "name": "Kimi K2.7 Code", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "kimi-k3", "name": "Kimi K3", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" }
+    { "id": "tc-code-latest", "name": "Auto", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "deepseek-v4-flash-202605", "name": "DeepSeek-V4-Flash 正式版 原厂直供", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "deepseek-v4-pro-202606", "name": "DeepSeek-V4-Pro 正式版 原厂直供", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "minimax-m2.7", "name": "MiniMax-M2.7", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "minimax-m3", "name": "MiniMax-M3", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "glm-5.2", "name": "GLM-5.2", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "glm-5.3", "name": "GLM-5.3", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "glm-5.3-flash", "name": "GLM-5.3-Flash", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "hy4-preview", "name": "Hy4 preview", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "kimi-k2.7-code", "name": "Kimi K2.7 Code", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "kimi-k3", "name": "Kimi K3", "vendor": "Tencent Cloud 通用 Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" }
   ]
 }
 ```
@@ -78,8 +76,8 @@ macOS/Linux：`~/.codebuddy/models.json`。
 ```json
 {
   "models": [
-    { "id": "hy3", "name": "Hy3", "vendor": "Tencent Cloud Hy Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" },
-    { "id": "hy4-preview", "name": "Hy4 preview", "vendor": "Tencent Cloud Hy Token Plan", "apiKey": "$your_api_key", "url": "https://api.lkeap.cloud.tencent.com/plan/v3" }
+    { "id": "hy3", "name": "Hy3", "vendor": "Tencent Cloud Hy Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" },
+    { "id": "hy4-preview", "name": "Hy4 preview", "vendor": "Tencent Cloud Hy Token Plan", "apiKey": "$your_api_key", "url": "https://tokenhub.tencentmaas.com/plan/v3" }
   ]
 }
 ```
@@ -90,11 +88,7 @@ CodeBuddy IDE
 
 CodeBuddy CLI
 
-模型配置完成后，在对话框即可选到配置好的模型进行对话。以下截图以 Hy Token Plan 为例：
-
-![](https://qcloudimg.tencent-cloud.cn/image/document/1eef501e7e055ebf8b7f8b83dcc96bcd.png)
-
-![](https://qcloudimg.tencent-cloud.cn/image/document/1eef501e7e055ebf8b7f8b83dcc96bcd.png)
+模型配置完成后，在对话框即可选到配置好的模型进行对话。
 
 模型配置完成后执行如下命令启动 CodeBuddy Code。
 

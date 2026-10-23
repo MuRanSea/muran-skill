@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130849 -->
-<!-- Source SHA-256: ce45bb387a302a33a9424c9ffb2ebf9e29630532348cb2cfe706fdba8f58c95a -->
+<!-- Source SHA-256: a084ebdf442e0ea9a9f682a5f9481f28647a046c30595ea7d8794cf469dff8c8 -->
 
 # 批量推理
 
 官方来源：https://cloud.tencent.com/document/product/1823/130849
-最近更新时间：2026-08-10 16:37:00
+最近更新时间：2026-10-22 10:29:00
 
 批量推理适用于对实时性要求不高、但需要大规模调用模型处理数据的场景。用户可将待处理的文本、图片或多模态数据整理为批量任务，由平台异步完成推理并输出结果，避免逐条调用 API 带来的开发和调度成本。典型场景包括离线内容审核、文档摘要生成、知识库数据清洗、客服对话质检、商品标题与描述生成、营销素材批量改写、数据标注辅助、模型效果评测等。通过批量推理，用户可以更低成本、更高效率地完成大规模 AI 任务处理，适合业务验证、周期性数据加工和生产环境中的离线智能处理流程。
 
@@ -18,7 +18,7 @@ Tokenhub 支持以 API 的形式发起批量推理任务，以下介绍使用方
 
 | **模型名称** | **model 参数值** |
 | --- | --- |
-| GLM-5.1 | `glm-5.1` |
+| Hy3 | `hy3` |
 
 ## 使用步骤
 
@@ -29,8 +29,8 @@ Tokenhub 支持以 API 的形式发起批量推理任务，以下介绍使用方
 数据参考如下：
 
 ```json
-{"custom_id":"req-001","method":"POST","url":"/v1/chat/completions","body":{"model":"glm-5.1","messages":[{"role":"user","content":"你好，请介绍一下你自己"}],"max_tokens":200}}
-{"custom_id":"req-002","method":"POST","url":"/v1/chat/completions","body":{"model":"glm-5.1","messages":[{"role":"user","content":"请用一句话总结机器学习"}],"max_tokens":200}}
+{"custom_id":"req-001","method":"POST","url":"/v1/chat/completions","body":{"model":"hy3","messages":[{"role":"user","content":"你好，请介绍一下你自己"}],"max_tokens":200}}
+{"custom_id":"req-002","method":"POST","url":"/v1/chat/completions","body":{"model":"hy3","messages":[{"role":"user","content":"请用一句话总结机器学习"}],"max_tokens":200}}
 ```
 
 **注意：**
@@ -44,7 +44,6 @@ Tokenhub 支持以 API 的形式发起批量推理任务，以下介绍使用方
 | custom\_id | 是 | 自定义请求 ID，文件内唯一，用于关联输出结果。 |
 | method | 是 | 固定填 "POST"。 |
 | url | 是 | 固定填 "/v1/chat/completions"。 |
-| body.model | 是 | 模型名称，如 "glm-5.1"。 |
 | body.messages | 是 | 对话消息，格式同 Chat Completions API。 |
 | body.max\_tokens | 否 | 最大输出 Token 数。 |
 
@@ -181,7 +180,7 @@ output.jsonl 每行格式（兼容 OpenAI）：
     "body": {
       "id": "chatcmpl-xxx",
       "object": "chat.completion",
-      "model": "glm-5.1",
+      "model": "hy3",
       "choices": [{"message": {"role": "assistant", "content": "..."}, "finish_reason": "stop"}],
       "usage": {"prompt_tokens": 10, "completion_tokens": 50, "total_tokens": 60}
     }

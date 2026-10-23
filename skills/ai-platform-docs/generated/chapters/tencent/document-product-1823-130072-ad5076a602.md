@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130072 -->
-<!-- Source SHA-256: 2bbbf8a048581ee36f71233113ce6acb0e8a09ddf0ea150d4c21d42973141606 -->
+<!-- Source SHA-256: 0414ef4f6ad890c238622ba88ced19fc3e026370ae460c5e13cb826c29a0affa -->
 
 # Cline
 
 官方来源：https://cloud.tencent.com/document/product/1823/130072
-最近更新时间：2026-09-03 14:36:31
+最近更新时间：2026-10-22 10:29:00
 
 Cline 是一款内置于编辑器和终端的 AI 编码助手。它可以读写文件、运行终端命令、使用浏览器，并通过自然对话帮助您构建功能。本文介绍如何在 Cline 中配置与使用腾讯云大模型 Token Plan。
 
@@ -24,15 +24,11 @@ Cline 是一款内置于编辑器和终端的 AI 编码助手。它可以读写�
 
 1. Cline 插件安装完成后，单击右上角的设置按钮。
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/a5b89bc6a720dd7fc7347370240afdab.png)
-
-![](https://qcloudimg.tencent-cloud.cn/image/document/a5b89bc6a720dd7fc7347370240afdab.png)
-
 2. 配置以下信息：
 
 API Provider：选择 **OpenAI Compatible**（Token Plan 接口兼容 OpenAI 标准）。
 
-Base URL：`https://api.lkeap.cloud.tencent.com/plan/v3`。
+Base URL：`https://tokenhub.tencentmaas.com/plan/v3`。
 
 API Key：填写 Token Plan 专属的 API Key。
 

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/quickstart-preparation.md -->
-<!-- Source SHA-256: e5512a5970b9dbb2eaddfcf592cdef69d69644195beb2c1dfddf54851852a11d -->
+<!-- Source SHA-256: 5ba523f1f0ed54860142b02a1b7a3c3e9e40ec1c2f539c3abcaafc7b584c4b71 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -22,21 +22,21 @@ API 调用前，需在 MiniMax 开放平台进行[账户注册](https://platform
 
 生成 API Key 后，建议将其存储为环境变量或保存到 `.env` 文件中：
 
-* 推荐使用 Anthropic API 兼容，具体查看：[Anthropic SDK](/docs/api-reference/text-anthropic-api)
+* 推荐使用 Anthropic API 兼容，具体查看：[Anthropic SDK](/docs/api-reference/text-anthropic-api.md)
 
   ```bash theme={null}
   export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic
   export ANTHROPIC_API_KEY=${YOUR_API_KEY}
   ```
 
-* 使用 OpenAI API 兼容，具体查看：[OpenAI SDK](/docs/api-reference/text-openai-api)
+* 使用 OpenAI API 兼容，具体查看：[OpenAI SDK](/docs/api-reference/text-openai-api.md)
 
   ```bash theme={null}
   export OPENAI_BASE_URL=https://api.minimax.cn/v1
   export OPENAI_API_KEY=${YOUR_API_KEY}
   ```
 
-* 使用 AI SDK 兼容，具体查看：[AI SDK](/docs/api-reference/text-ai-sdk)
+* 使用 AI SDK 兼容，具体查看：[AI SDK](/docs/api-reference/text-ai-sdk.md)
 
   ```bash theme={null}
   export MINIMAX_API_KEY=${YOUR_API_KEY}

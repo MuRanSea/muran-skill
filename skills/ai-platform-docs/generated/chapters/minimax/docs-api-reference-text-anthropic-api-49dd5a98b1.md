@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-anthropic-api.md -->
-<!-- Source SHA-256: 876aa54812c68c60a390ed5383f9f5f0c219ab15f755fdd6b2fc64e20a9756e4 -->
+<!-- Source SHA-256: 29e4d9700748fe3ced365a0c91aad328b1e3ab43ba091d3bcd536e77b45f7c49 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -80,7 +80,7 @@ for block in message.content:
 
 > [!NOTE]
 >
-> TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
+> TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis.md#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
 
 > [!NOTE]
 >
@@ -105,7 +105,7 @@ for block in message.content:
 | `thinking` | 完全支持 | `MiniMax-M3.1-Flash` 强制开启 thinking，传入 `disabled` 会返回 `400`。`MiniMax-M3` 默认关闭 thinking，可通过 `adaptive` 开启。M2.x 模型的 thinking 无法关闭。 |
 | `output_config.effort` | 完全支持 | 调节 `MiniMax-M3.1-Flash` 的思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`；省略时默认为 `max`。 |
 | `metadata` | 完全支持 | 元信息 |
-| `service_tier` | 完全支持 | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。`MiniMax-M3.1-Flash` 不支持该字段。 |
+| `service_tier` | 完全支持 | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](/docs/pricing/overview.md#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。`MiniMax-M3.1-Flash` 不支持该字段。 |
 | `temperature` | 忽略 | 暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用 1 |
 | `top_p` | 忽略 | 暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用 0.95。若传入，取值需在 (0, 1] 范围内 |
 | `top_k` | 忽略 | 该参数会被忽略 |

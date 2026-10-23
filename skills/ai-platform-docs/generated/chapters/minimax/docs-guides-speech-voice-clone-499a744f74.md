@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-voice-clone.md -->
-<!-- Source SHA-256: 049abd6255204b7dad5daadf23d88566d19212250be44285fe7c134adbe3d8ab -->
+<!-- Source SHA-256: d4dbb44d888507f32dd3b3b6cf7bc7eaf1d17862c6c6bed719ed2076bdae2403 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,11 +13,11 @@
 
 快速复刻功能实现具体操作流程如下：
 
-1. **上传待克隆音频** 调用 [上传复刻音频](/docs/api-reference/voice-cloning-uploadcloneaudio) 上传待克隆的音频文件并获取 `file_id`。
+1. **上传待克隆音频** 调用 [上传复刻音频](/docs/api-reference/voice-cloning-uploadcloneaudio.md) 上传待克隆的音频文件并获取 `file_id`。
 
 * 支持上传的文件需遵从以下规范： 上传的音频文件格式需为：mp3、m4a、wav 格式； 上传的音频文件的时长最少应不低于 10 秒，最长应不超过 5 分钟； 上传的音频文件大小需不超过 20mb。
 
-2. **上传示例音频 (可选)** 若需要提供示例音频以增强克隆效果，需要调用 [上传示例音频](/docs/api-reference/voice-cloning-uploadprompt)上传示例音频文件并获得对应的 `file_id`。填写在`clone_prompt`中的`prompt_audio`中。
+2. **上传示例音频 (可选)** 若需要提供示例音频以增强克隆效果，需要调用 [上传示例音频](/docs/api-reference/voice-cloning-uploadprompt.md)上传示例音频文件并获得对应的 `file_id`。填写在`clone_prompt`中的`prompt_audio`中。
 
 * 支持上传的文件需遵从以下规范： 上传的音频文件格式需为：mp3、m4a、wav 格式； 上传的音频文件的时长小于 8s； 上传的音频文件大小需不超过 20mb。
 
@@ -216,18 +216,18 @@ print(response.text)
 
 ## 推荐阅读
 
-> **[快速复刻接口](/docs/api-reference/voice-cloning-clone)**
+> **[快速复刻接口](/docs/api-reference/voice-cloning-clone.md)**
 >
 > 使用 API 接口进行音色快速复刻。
 
-> **[同步语音合成指南](/docs/guides/speech-t2a-websocket)**
+> **[同步语音合成指南](/docs/guides/speech-t2a-websocket.md)**
 >
 > 同步语音合成支持基于文本到语音的同步生成，单次可处理最长 10,000 字符的文本。
 
-> **[产品定价](/docs/pricing/overview#models/speech)**
+> **[产品定价](/docs/pricing/overview.md#models/speech)**
 >
 > 各模型的定价说明、计费方式及使用限制。
 
-> **[速率限制](/docs/guides/rate-limits#3、我们的-api-的限速具体数值)**
+> **[速率限制](/docs/guides/rate-limits.md#3、我们的-api-的限速具体数值)**
 >
 > 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-m3-function-call.md -->
-<!-- Source SHA-256: 047df205729cf44964a7cfed283186eee92ac8f3bf4b2215d7b932b3e3266b8c -->
+<!-- Source SHA-256: 58723ebb2ff5fc89f419c5978e8bb705706f06817e396655ea7857dc51978a39 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -379,18 +379,18 @@ else:
 
 ## 推荐阅读
 
-> **[在 AI 编程工具里使用 MiniMax-M3.1-Flash](/docs/m-plan/openclaw)**
+> **[在 AI 编程工具里使用 MiniMax-M3.1-Flash](/docs/m-plan/openclaw.md)**
 >
 > 具备代码理解能力，适用于代码助手等场景。
 
-> **[文本生成指南](/docs/guides/text-generation)**
+> **[文本生成指南](/docs/guides/text-generation.md)**
 >
 > 支持通过 Anthropic 和 OpenAI 兼容接口进行文本生成调用
 
-> **[Anthropic API 兼容（推荐）](/docs/api-reference/text-anthropic-api)**
+> **[Anthropic API 兼容（推荐）](/docs/api-reference/text-anthropic-api.md)**
 >
 > 通过 Anthropic SDK 调用 MiniMax 模型
 
-> **[OpenAI API 兼容](/docs/api-reference/text-openai-api)**
+> **[OpenAI API 兼容](/docs/api-reference/text-openai-api.md)**
 >
 > 通过 OpenAI SDK 调用 MiniMax 模型

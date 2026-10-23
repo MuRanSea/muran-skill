@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-h3-context-ir.md -->
-<!-- Source SHA-256: abc49ba6b1cb7812ce59c2605bbc617c8790b0b079e5464b43a207c15da13ca1 -->
+<!-- Source SHA-256: 96de866c4e16e2463c0b359bb6a65ebb17b7286bbd36cdcfda08caae7ebcae89 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -21,7 +21,7 @@ H3-Context-IR 对文本、图像、音频和视频等多模态上下文进行深
 
 > [!NOTE]
 >
-> 创建成功后，使用[查询任务](/docs/api-reference/video-generation-v2-query)或[查询任务列表](/docs/api-reference/video-generation-v2-list)接口查询。H3-Context-IR 任务的 `task_type` 为 `h3_context_ir`；任务成功后，从 `content.prompt` 获取增强提示词。
+> 创建成功后，使用[查询任务](/docs/api-reference/video-generation-v2-query.md)或[查询任务列表](/docs/api-reference/video-generation-v2-list.md)接口查询。H3-Context-IR 任务的 `task_type` 为 `h3_context_ir`；任务成功后，从 `content.prompt` 获取增强提示词。
 
 
 ## OpenAPI

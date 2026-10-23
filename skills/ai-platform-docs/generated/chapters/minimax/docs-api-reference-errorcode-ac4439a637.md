@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/errorcode.md -->
-<!-- Source SHA-256: 1e3013c5d57adb122e9d855113a1212b9f73c515101d1ef33e5c83e2f4e7f755 -->
+<!-- Source SHA-256: 6ee470331a2b5d4a72dc55fbb604d045701a3f5d031cb3ebf6e7414317754046 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -58,7 +58,7 @@
 | 2066 | 请求处理超时 | 请稍后重试 |
 | 2067 | 套餐额度已用完，且未开启积分自动消耗 | 请升级套餐，或购买积分并开启积分自动消耗 |
 | 2068 | 当前套餐等级不支持该模型 | 请升级套餐后使用 |
-| 2069 | 模型已下线 | 请更换为在售模型，详见[模型发布](/docs/release-notes/models) |
+| 2069 | 模型已下线 | 请更换为在售模型，详见[模型发布](/docs/release-notes/models.md) |
 | 2160 | 语音识别服务暂时不可用 | 请稍后重试 |
 
 如有其他疑问，请联系我们 [api@minimax.io](mailto:api@minimax.io)。

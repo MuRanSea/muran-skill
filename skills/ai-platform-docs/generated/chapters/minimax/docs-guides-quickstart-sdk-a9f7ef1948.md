@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/quickstart-sdk.md -->
-<!-- Source SHA-256: 9bcce6c8877657553a0473300e11d71ae36b1cd7d20e60e7ae7ed2ea7ebfcc42 -->
+<!-- Source SHA-256: 9b83fa66d4b768fc054cadc4a306d04ebe331d922a8209b464610be650645dbb -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -61,26 +61,26 @@ for block in message.content:
 
 ## 探索更多
 
-> **[语言模型](/docs/guides/text-generation)**
+> **[语言模型](/docs/guides/text-generation.md)**
 >
 > 探索 MiniMax 最新语言模型
 
-> **[视频生成](/docs/guides/video-generation)**
+> **[视频生成](/docs/guides/video-generation.md)**
 >
 > 使用 MiniMax-H3 创建视频生成任务
 
-> **[同步语音合成](/docs/guides/speech-t2a-websocket)**
+> **[同步语音合成](/docs/guides/speech-t2a-websocket.md)**
 >
 > 使用 Speech 2.8 进行同步语音合成
 
-> **[异步语音合成](/docs/guides/speech-t2a-async)**
+> **[异步语音合成](/docs/guides/speech-t2a-async.md)**
 >
 > 使用 Speech 2.8 进行异步语音合成
 
-> **[音色复刻](/docs/guides/speech-voice-clone)**
+> **[音色复刻](/docs/guides/speech-voice-clone.md)**
 >
 > 创建音色复刻任务
 
-> **[音乐生成](/docs/guides/music-generation)**
+> **[音乐生成](/docs/guides/music-generation.md)**
 >
 > 使用 Music 3.0 进行音乐创作

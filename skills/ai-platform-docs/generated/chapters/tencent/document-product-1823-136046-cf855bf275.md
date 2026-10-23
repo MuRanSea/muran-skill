@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/136046 -->
-<!-- Source SHA-256: 1dbb6b351f85547e91051d92581d8029b278471d8ecfcf82e0605d64998d4a52 -->
+<!-- Source SHA-256: a09968253daf23298271a0bd638ee36515f49b874b6dafd2f5c01992d6a9bc86 -->
 
 # DeepSeek Harness
 
 官方来源：https://cloud.tencent.com/document/product/1823/136046
-最近更新时间：2026-08-18 15:29:00
+最近更新时间：2026-10-22 10:29:00
 
 DeepSeek Harness 是 DeepSeek AI 开发的一套用来构建、运行和扩展智能体的应用框架，采用“一切皆插件”的架构。本文介绍如何在 DeepSeek Harness 中配置与使用腾讯云大模型 Token Plan 个人版。
 
@@ -44,7 +44,7 @@ npx @deepseek-ai/dsh web
 | --- | --- |
 | Provider ID | 自定义设置，后续如需重命名则需要添加新的提供方，并删除旧的提供方。 |
 | 显式名称 | 自定义设置 |
-| API 协议、API 地址 | openai-completions：`https://api.lkeap.cloud.tencent.com/plan/v3`  openai-responses：`https://api.lkeap.cloud.tencent.com/plan/v3`  anthropic-messages：`https://api.lkeap.cloud.tencent.com/plan/anthropic` |
+| API 协议、API 地址 | openai-completions：`https://tokenhub.tencentmaas.com/plan/v3`  openai-responses：`https://tokenhub.tencentmaas.com/plan/v3`  anthropic-messages：`https://tokenhub.tencentmaas.com/plan/anthropic` |
 | API 密钥 | 填写您在腾讯云控制台获取的 API Key，请参见 [获取 API Key](https://cloud.tencent.com/document/product/1823/130119#ac6f544e-6de6-46b7-8709-36d777248b34)。 |
 | 模型目录 | 单击**添加模型**，并根据您购买的套餐类型，填写您套餐支持的 Model ID。  如果您购买通用 Token Plan 套餐：请参见 [可用模型](https://cloud.tencent.com/document/product/1823/130060#b6fdbed0-897c-475d-a9a1-f9af922027c4)，选择具体的 **Model ID** 配置。  如果您购买 Hy Token Plan 套餐：请参见 [可用模型](https://cloud.tencent.com/document/product/1823/130060#b145766a-c747-42eb-89c2-a04463d20cc5)，选择具体的 **Model ID** 配置。 |
 

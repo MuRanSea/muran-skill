@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132296 -->
-<!-- Source SHA-256: df41ccdce19b8be20ea9441912e61c334e069965ee8915b6b2efb934ff2786b9 -->
+<!-- Source SHA-256: 2cd040f86d2b60291eec8ac9b408ae51810b4bd3c932a0181c09fb34858e72cd -->
 
 # TRAE
 
 官方来源：https://cloud.tencent.com/document/product/1823/132296
-最近更新时间：2026-09-03 14:36:30
+最近更新时间：2026-10-22 10:29:00
 
 TRAE IDE 是一款深度融合 AI 能力的开发工具，提供从代码编写、项目理解、调试运行到变更管理的完整开发体验。本文介绍如何在 TRAE 中配置与使用腾讯云大模型 Token Plan。
 
@@ -38,7 +38,7 @@ TRAE IDE 是一款深度融合 AI 能力的开发工具，提供从代码编写�
 
 1. **API 格式**：选择 **OpenAI Chat Completions 格式。**
 
-2. **自定义请求地址**：`https://api.lkeap.cloud.tencent.com/plan/v3`。
+2. **自定义请求地址**：`https://tokenhub.tencentmaas.com/plan/v3`。
 
 3. **模型 ID**：根据您购买的套餐，填入 [套餐支持的模型 ID](https://cloud.tencent.com/document/product/1823/130119)。
 
@@ -47,10 +47,6 @@ TRAE IDE 是一款深度融合 AI 能力的开发工具，提供从代码编写�
 如果您购买 Hy Token Plan 套餐：请参见 [可用模型](https://cloud.tencent.com/document/product/1823/130060#b145766a-c747-42eb-89c2-a04463d20cc5)，选择具体的 **Model ID** 配置。
 
 4. **API 密钥**：从套餐中 [获取 API Key](https://cloud.tencent.com/document/product/1823/130119#ac6f544e-6de6-46b7-8709-36d777248b34) 并填入。
-
-![](https://qcloudimg.tencent-cloud.cn/image/document/cda63041c1b5ee2b9ee71888a0ced7ae.png)
-
-![](https://qcloudimg.tencent-cloud.cn/image/document/cda63041c1b5ee2b9ee71888a0ced7ae.png)
 
 ### 步骤三：使用 TRAE
 

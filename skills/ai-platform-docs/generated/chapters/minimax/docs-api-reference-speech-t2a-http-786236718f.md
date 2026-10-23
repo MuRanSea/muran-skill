@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/speech-t2a-http.md -->
-<!-- Source SHA-256: 03b266fdd2c8d49b6c2b77ecaa832173ba5d291e80091dda63aed405824b7d40 -->
+<!-- Source SHA-256: 06d2e45085d3b270803da47a16637c6ebf728c8d66390e7ef1d6d178f3332ea5 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,7 +9,7 @@
 
 > 通过 HTTP 请求一次提交完整文本并返回合成音频，支持流式输出。
 
-华北地区建议接入地址见 [同步语音合成 · 接入地址](/docs/guides/speech-t2a-websocket#接入地址)。
+华北地区建议接入地址见 [同步语音合成 · 接入地址](/docs/guides/speech-t2a-websocket.md#接入地址)。
 
 
 ## OpenAPI

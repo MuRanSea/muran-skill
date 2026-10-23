@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130119 -->
-<!-- Source SHA-256: f1ef2605f1ebd1a2ba5c8990a26068186dc35fc9aae2fb541e4da2a0e1f8f40d -->
+<!-- Source SHA-256: a432ff7df272b3ea9ed7a15129eef519c4013fef7ace2f7a3d11420053499f2d -->
 
 # Token Plan 个人版快速入门
 
 官方来源：https://cloud.tencent.com/document/product/1823/130119
-最近更新时间：2026-09-14 10:37:12
+最近更新时间：2026-10-22 10:29:00
 
 本文介绍如何在龙虾或者编程工具中快速使用 Token Plan 套餐所支持的模型进行办公或者代码开发。
 
@@ -40,15 +40,15 @@
 
 1. **Base URL**
 
-兼容 OpenAI 接口协议工具：`https://api.lkeap.cloud.tencent.com/plan/v3`
+兼容 OpenAI 接口协议工具：`https://tokenhub.tencentmaas.com/plan/v3`
 
-兼容 Anthropic 接口协议工具：`https://api.lkeap.cloud.tencent.com/plan/anthropic`
+兼容 Anthropic 接口协议工具：`https://tokenhub.tencentmaas.com/plan/anthropic`
 
 2. **完整 URL**
 
-兼容 OpenAI 接口协议工具：`https://api.lkeap.cloud.tencent.com/plan/v3/chat/completions`
+兼容 OpenAI 接口协议工具：`https://tokenhub.tencentmaas.com/plan/v3/chat/completions`
 
-兼容 Anthropic 接口协议工具：`https://api.lkeap.cloud.tencent.com/plan/anthropic/v1/messages`
+兼容 Anthropic 接口协议工具：`https://tokenhub.tencentmaas.com/plan/anthropic/v1/messages`
 
 ### 获取 API Key
 
@@ -65,7 +65,7 @@
 获取 API Key 后您可在命令行终端通过 cURL 简单验证连通性，请将下方`$your_api_key` 替换为您的实际 API Key，`$model_id` 可以对照 [模型配置](https://cloud.tencent.com/document/product/1823/130119#ac64e0d9-6ef1-475c-9bed-f15dc361859a) 换成您要测试的模型 Model ID：
 
 ```java
-curl --location 'https://api.lkeap.cloud.tencent.com/plan/v3/chat/completions' \\
+curl --location 'https://tokenhub.tencentmaas.com/plan/v3/chat/completions' \\
 --header 'Authorization: Bearer $your_api_key' \\
 --header 'Content-Type: application/json' \\
 --data '{
@@ -181,7 +181,7 @@ Token Plan 支持**手动续费**和**自动续费**两种方式。具体说明�
 
 **手动续费**：套餐自购买到到期前，您可以在任意时间为套餐手动续费。
 
-在**大模型服务平台 TokenHub >** [**Token Plan**](https://console.cloud.tencent.com/tokenhub/tokenplan)页面，单击**立即续费。**
+在**大模型服务平台 TokenHub >** [**Token Plan**](https://console.cloud.tencent.com/tokenhub/tokenplan) 页面，单击**立即续费。**
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/4de78f855b9d7dc62df62d26cadcf4c9.png)
 
@@ -201,7 +201,13 @@ Token Plan 支持**手动续费**和**自动续费**两种方式。具体说明�
 
 ## 常见错误码
 
-<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td colspan="1" rowspan="1"><div><b>错误码</b></div></td><td colspan="1" rowspan="1"><div><b>错误信息</b></div></td><td colspan="1" rowspan="1"><div><b>可能原因</b></div></td><td colspan="1" rowspan="1"><div><b>解决方法</b></div></td></tr><tr><td colspan="1" rowspan="1"><div>401</div></td><td colspan="1" rowspan="1"><div>unauthorized</div></td><td colspan="1" rowspan="1"><div>URL 或者 API Key 配置错误</div></td><td colspan="1" rowspan="1"><div>1.<!-- --> 确认 URL 是 <a href="https://cloud.tencent.com/document/product/1823/130119#e1c62985-ad37-4de9-bafd-2cde1ded2e22">Token Plan 的 URL</a>。</div><div>2.<!-- --> 确认 API Key 根据 <a href="https://cloud.tencent.com/document/product/1823/130119#ac6f544e-6de6-46b7-8709-36d777248b34">API Key 获取指引</a> 正确获取。</div><div>3.<!-- --> 参考 <a href="https://cloud.tencent.com/document/product/1823/130061">龙虾工具</a>、<a href="https://cloud.tencent.com/document/product/1823/130067">编程工具</a>指引，确认 URL 和 API Key 配置正确。</div></td></tr><tr><td><div>429</div></td><td colspan="1" rowspan="1"><div>tpm rate limit exceeded</div></td><td colspan="1" rowspan="1"><div>系统负载高触发限流</div></td><td colspan="1" rowspan="1"><div>请重试 1-2 次或者切换其他模型。</div></td></tr><tr><td colspan="1" rowspan="1"><div>20033</div></td><td colspan="1" rowspan="1"><div>invalid model</div></td><td colspan="1" rowspan="1"><div>模型名称配置错误</div></td><td colspan="1" rowspan="1"><div>根据您订阅的套餐，检查模型配置是否正确：</div><div>﻿<a href="https://cloud.tencent.com/document/product/1823/130060#b6fdbed0-897c-475d-a9a1-f9af922027c4">通用 Token Plan 可用模型列表</a>﻿</div><div>﻿<a href="https://cloud.tencent.com/document/product/1823/130060#b145766a-c747-42eb-89c2-a04463d20cc5">Hy Token Plan 可用模型列表</a>﻿</div></td></tr><tr><td colspan="1" rowspan="1"><div>20059</div></td><td colspan="1" rowspan="1"><div>Input length too long</div></td><td colspan="1" rowspan="1"><div>输入长度超出了允许范围</div></td><td colspan="1" rowspan="1"><div>可通过新建会话解决报错。</div></td></tr><tr><td colspan="1" rowspan="1"><div>20097</div></td><td colspan="1" rowspan="1"><div>month allocated quota  exceeded</div></td><td colspan="1" rowspan="1"><div>每个订阅月请求额度已用完</div></td><td colspan="1" rowspan="1"><div>等待至下个订阅月的同一时刻（订阅时刻）额度重置，或升级至更高级套餐。</div></td></tr></tbody></table>
+| **错误码** | **错误信息** | **可能原因** | **解决方法** |
+| --- | --- | --- | --- |
+| 401 | unauthorized | URL 或者 API Key 配置错误 | 1. 确认 URL 是 [Token Plan 的 URL](https://cloud.tencent.com/document/product/1823/130119#e1c62985-ad37-4de9-bafd-2cde1ded2e22)。  1. 确认 API Key 根据 [API Key 获取指引](https://cloud.tencent.com/document/product/1823/130119#ac6f544e-6de6-46b7-8709-36d777248b34) 正确获取。  1. 参考 [龙虾工具](https://cloud.tencent.com/document/product/1823/130061)、[编程工具](https://cloud.tencent.com/document/product/1823/130067)指引，确认 URL 和 API Key 配置正确。 |
+| 429 | tpm rate limit exceeded | 系统负载高触发限流 | 请重试 1-2 次或者切换其他模型。 |
+| 20033 | invalid model | 模型名称配置错误 | 根据您订阅的套餐，检查模型配置是否正确：  ﻿[通用 Token Plan 可用模型列表](https://cloud.tencent.com/document/product/1823/130060#b6fdbed0-897c-475d-a9a1-f9af922027c4)﻿  ﻿[Hy Token Plan 可用模型列表](https://cloud.tencent.com/document/product/1823/130060#b145766a-c747-42eb-89c2-a04463d20cc5)﻿ |
+| 20059 | Input length too long | 输入长度超出了允许范围 | 可通过新建会话解决报错。 |
+| 20097 | month allocated quota exceeded | 每个订阅月请求额度已用完 | 等待至下个订阅月的同一时刻（订阅时刻）额度重置，或升级至更高级套餐。 |
 
 ## 常见问题
 

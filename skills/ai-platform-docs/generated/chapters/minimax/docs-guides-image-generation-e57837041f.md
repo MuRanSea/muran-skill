@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/image-generation.md -->
-<!-- Source SHA-256: 3032deff8cf9da131abf63a6b47854ba5772e922ba9dc08bb348da64aab30967 -->
+<!-- Source SHA-256: 36aeacfd4dea88a24ee6cf13d8ba303e548f358093dae97f0f4a6cf3c16f9058 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -84,18 +84,18 @@ for i in range(len(images)):
 
 ## 推荐阅读
 
-> **[文生图接口](/docs/api-reference/image-generation-t2i)**
+> **[文生图接口](/docs/api-reference/image-generation-t2i.md)**
 >
 > 使用 API 接口，输入文本描述，进行图片生成。
 
-> **[图生图接口](/docs/api-reference/image-generation-i2i)**
+> **[图生图接口](/docs/api-reference/image-generation-i2i.md)**
 >
 > 使用 API 接口，输入图片内容，进行图片生成。
 
-> **[产品定价](/docs/pricing/overview#models/image)**
+> **[产品定价](/docs/pricing/overview.md#models/image)**
 >
 > 各模型的定价说明、计费方式及使用限制。
 
-> **[速率限制](/docs/guides/rate-limits#3、我们的-api-的限速具体数值)**
+> **[速率限制](/docs/guides/rate-limits.md#3、我们的-api-的限速具体数值)**
 >
 > 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。
