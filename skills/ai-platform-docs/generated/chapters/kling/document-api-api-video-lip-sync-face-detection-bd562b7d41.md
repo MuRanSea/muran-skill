@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/lip-sync/face-detection.md -->
-<!-- Source SHA-256: f7021ad95bf158406fdb1f227bfe5c2d9abfec8c7b14b06254c2d637708e7ec1 -->
+<!-- Source SHA-256: 1d30a33a84295a4156580deb99e5501a6128a7cf0803d688eb0109a9b0ba6de5 -->
 
 > ## Documentation Index
 >
@@ -58,7 +58,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/identify-face \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "video_url": "https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/kling-qa-test/kling20260206mp4.mp4",

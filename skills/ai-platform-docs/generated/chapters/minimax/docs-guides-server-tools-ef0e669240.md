@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/server-tools.md -->
-<!-- Source SHA-256: 04331a2f5fc93ceba1d1b7cf88a28d933fd49dd4370b03c7f62155893b2995ec -->
+<!-- Source SHA-256: 0809d50dcc1120d667ffb890dd283fdde58ebad3f1e2e1be4ab3b858cce1b676 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -363,6 +363,6 @@ curl --location 'https://api.minimax.cn/v1/responses' \
 
 1. 服务端工具处于 **Beta** 阶段，行为与参数可能随时调整。
 2. 目前服务端工具仅提供 `web_search`，支持通过 **Anthropic Messages API** 和 **OpenAI Responses API** 调用。
-3. Anthropic Messages API 的 Base URL 为 `https://api.minimax.cn/anthropic`；OpenAI Responses API 的端点为 `https://api.minimax.cn/v1/responses`。接口详情分别参见 [Anthropic SDK](/docs/api-reference/text-anthropic-api.md) 和 [Responses API](/docs/api-reference/responses-create.md)。
+3. Anthropic Messages API 的 Base URL 为 `https://api.minimax.cn/anthropic`；OpenAI Responses API 的端点为 `https://api.minimax.cn/v1/responses`。接口详情分别参见 [Anthropic SDK](https://platform.minimaxi.com/docs/api-reference/text-anthropic-api.md) 和 [Responses API](https://platform.minimaxi.com/docs/api-reference/responses-create.md)。
 
 如在使用过程中遇到问题，可通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 联系我们的技术支持团队。

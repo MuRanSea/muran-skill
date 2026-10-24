@@ -1,16 +1,16 @@
 <!-- Official source: https://klingai.com/document-api/api/video/multi-elements.md -->
-<!-- Source SHA-256: 76362275740d5c0c36f85433f21a5123b6b7257a834aa7dc90e2ed26435f4cea -->
+<!-- Source SHA-256: 513b5c186280d383228b0c2e782cc8f0383662250bc1b4ff5df4c9fae510e7d5 -->
 
 > ## Documentation Index
 >
 > Fetch the complete documentation index at: https://klingai.com/document-api/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# 多模态视频参考编辑
+# 多模态视频编辑
 
 > 来源: https://klingai.com/document-api/api/video/multi-elements
 > 语言: zh
-> 当前 Tab: 多模态视频参考编辑
+> 当前 Tab: 多模态视频编辑
 > 此内容为面向 LLM 优化的 Markdown，已展开页面内 Tab，并省略页面目录、复制按钮等 UI 控件。
 
 ---
@@ -58,7 +58,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/multi-elements/init-selection \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "video_id": "",
@@ -130,7 +130,7 @@ curl --request POST \
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/multi-elements/add-selection \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "session_id": "847570360458960960",
@@ -313,7 +313,7 @@ function drawMask(rleMask: string, height: number, width: number) {
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/multi-elements/delete-selection \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "session_id": "847570360458960960",
@@ -389,7 +389,7 @@ curl --request POST \
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/multi-elements/clear-selection \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "session_id": "847570360458960960"
@@ -444,7 +444,7 @@ curl --request POST \
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/multi-elements/preview-selection \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "session_id": "847570360458960960"
@@ -584,7 +584,7 @@ curl --request POST \
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/multi-elements \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "session_id": "847570360458960960",
@@ -640,8 +640,8 @@ curl --request POST \
 
 | 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
 |---|---|---:|---|---|---|
-| `task_id` | string | 否 | - | - | 多模态视频编辑的任务 ID |
-| `external_task_id` | string | 否 | - | - | 多模态视频编辑的自定义任务 ID |
+| `task_id` | string | 否 | - | - | 多模态视频编辑的任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
+| `external_task_id` | string | 否 | - | - | 多模态视频编辑的自定义任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
 
 #### Path Params 字段补充说明
 
@@ -654,7 +654,7 @@ curl --request POST \
 ```bash
 curl --request GET \
   --url https://api-beijing.klingai.com/v1/videos/multi-elements/{task_id} \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -731,7 +731,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/videos/multi-elements?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

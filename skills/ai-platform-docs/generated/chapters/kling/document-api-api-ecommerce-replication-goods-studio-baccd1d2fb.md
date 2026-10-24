@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/goods-studio.md -->
-<!-- Source SHA-256: 9bd687e05773071abb0c5c62c5e1a83376f7e39111238e134cd774207d95e355 -->
+<!-- Source SHA-256: ffa2e2d76451b5f2b27294afd0666dbdcbf53c66796bae67b8ef1fa7a7797231 -->
 
 > ## Documentation Index
 >
@@ -147,7 +147,7 @@
 
 ```bash
 curl --location --request POST 'https://api-beijing.klingai.com/solutions/e-commerce/goods_studio' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "contents": [
@@ -241,7 +241,7 @@ curl --location --request POST 'https://api-beijing.klingai.com/solutions/e-comm
 ```bash
 curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer {apikey}"
+  -H "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

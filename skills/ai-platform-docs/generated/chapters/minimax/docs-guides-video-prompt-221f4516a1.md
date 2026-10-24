@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-prompt.md -->
-<!-- Source SHA-256: 0a3f5e07e30b188027f172a2728d0a3363b30f57f3b3cf9e0716dcef23d27f7f -->
+<!-- Source SHA-256: 991410753f3a4350a7042816d4ffd7a9fd1769aa1182a5578cdfecd980c1fc54 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,7 +9,7 @@
 
 > 通过一组典型示例，展示 MiniMax H3 在原生多模态理解与生成、多模态精准编辑与控制、商用级多场景内容生成三大能力下的实际输出效果。
 
-关于模型规格、输入条件与调用方式，请见 [视频生成](/docs/guides/video-generation.md)。
+关于模型规格、输入条件与调用方式，请见 [视频生成](https://platform.minimaxi.com/docs/guides/video-generation.md)。
 
 | 三大能力 | 阐释 |
 | :- | - |
@@ -265,4 +265,4 @@
 
 * [MiniMax Design](https://design.minimax.cn/)：领取桌面端专属权益，免费体验 3 次 H3 视频生成
 * [海螺 AI 体验中心](https://hailuoai.com/)
-* [开放平台 API](/docs/api-reference/video-generation-v2-create.md)
+* [开放平台 API](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md)

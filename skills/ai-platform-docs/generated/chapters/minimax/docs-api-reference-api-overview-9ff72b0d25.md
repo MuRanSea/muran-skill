@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/api-overview.md -->
-<!-- Source SHA-256: 87ee4da6d75028c1d9caaa1b314b50638b9e850216bc1881f8ba1c105ee3330f -->
+<!-- Source SHA-256: c0cecf3b34801d3f67a21d6cd4130b70296db6105217958e72854c199739ac96 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -36,11 +36,11 @@
 * 通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 等官方渠道联系我们的技术支持团队
 * 在我们的 [Github](https://github.com/MiniMax-AI/MiniMax-M2/issues) 仓库提交Issue
 
-> **[Anthropic API 兼容（推荐）](/docs/api-reference/text-anthropic-api.md)**
+> **[Anthropic API 兼容（推荐）](https://platform.minimaxi.com/docs/api-reference/text-anthropic-api.md)**
 >
 > 通过 Anthropic SDK 调用 MiniMax 模型
 
-> **[OpenAI API 兼容](/docs/api-reference/text-openai-api.md)**
+> **[OpenAI API 兼容](https://platform.minimaxi.com/docs/api-reference/text-openai-api.md)**
 >
 > 通过 OpenAI SDK 调用 MiniMax 模型
 
@@ -55,37 +55,39 @@
 | 模型 | 功能 |
 | :- | :- |
 | MiniMax-H3 | 多模态视频生成模型，支持文生 / 图生 / 首尾帧 / 多模态参考，768P / 2K 分辨率，4–15s 时长 |
+| MiniMax-H3-Highspeed | 兼顾生成质量与速度，支持文生 / 图生 / 首尾帧 / 多模态参考；768P 分辨率（不支持 2K），4–15s 时长 |
+| MiniMax-H3-Lite | 轻量模型，支持文生 / 图生（首帧、尾帧）/ 多模态参考；480P / 768P 分辨率（不支持 2K），4–15s 时长 |
 | MiniMax-H3-Max | 极速生成模型，支持文生 / 图生（首帧、尾帧）/ 多模态参考；480P / 768P 分辨率（不支持 2K），5–15s 时长 |
 
 **接口说明**
 
-两个模型共用同一套 `content[]` 请求协议与查询接口，切换模型只需改 `model` 字段。MiniMax-H3 任务采用异步方式，提供**创建视频生成任务**、**创建 H3-Context-IR 任务**和**创建视频再生成任务**三个创建入口，并共用查询、列表以及取消或删除接口；MiniMax-H3-Max 仅支持**创建视频生成任务**入口。使用步骤如下：
+四个模型共用同一套 `content[]` 请求协议与查询接口，切换模型只需改 `model` 字段。MiniMax-H3 任务采用异步方式，提供**创建视频生成任务**、**创建 H3-Context-IR 任务**和**创建视频再生成任务**三个创建入口，并共用查询、列表以及取消或删除接口；MiniMax-H3-Highspeed、MiniMax-H3-Lite 与 MiniMax-H3-Max 仅支持**创建视频生成任务**入口。使用步骤如下：
 
 1. 根据场景创建视频生成任务，使用相同的多模态输入创建 H3-Context-IR 任务，或对符合 MiniMax-H3 768P 输出规格的源视频创建视频再生成任务；再生成请求必须且只能包含一个 `role=base_video` 的源视频项。成功后均返回 `task_id`。
 2. 使用**查询任务**接口按 `task_id` 获取状态与结果；视频任务成功后从 `content.url` 获取成片地址，H3-Context-IR 任务成功后从 `content.prompt` 获取增强提示词。也可以使用**查询任务列表**接口批量查看，并通过 `task_type` 区分 `generation`、`h3_context_ir` 与 `regeneration`。
 3. 对排队中的任务，可使用**取消或删除任务**接口取消；对成功或失败的任务，可使用同一接口删除任务记录。
 
-> **[创建视频生成任务](/docs/api-reference/video-generation-v2-create.md)**
+> **[创建视频生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md)**
 >
 > 基于多模态 content 输入创建视频生成任务
 
-> **[创建 H3-Context-IR 任务](/docs/api-reference/video-generation-v2-h3-context-ir.md)**
+> **[创建 H3-Context-IR 任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir.md)**
 >
 > 深度理解视频生成的多模态上下文并生成结构化增强提示词
 
-> **[创建视频再生成任务](/docs/api-reference/video-generation-v2-regeneration.md)**
+> **[创建视频再生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration.md)**
 >
 > 将符合 MiniMax-H3 768P 输出规格的视频再生成为 2K 视频
 
-> **[查询任务](/docs/api-reference/video-generation-v2-query.md)**
+> **[查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)**
 >
 > 按 task\_id 查询任务状态并获取成片下载地址
 
-> **[查询任务列表](/docs/api-reference/video-generation-v2-list.md)**
+> **[查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)**
 >
 > 分页查询最近 7 天内的任务并按任务类型过滤
 
-> **[取消或删除任务](/docs/api-reference/video-generation-v2-delete.md)**
+> **[取消或删除任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-delete.md)**
 >
 > 取消排队中的任务，或删除成功和失败的任务记录
 
@@ -140,31 +142,31 @@
 > | 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew） | 40. 阿非利卡语（Afrikaans） |
 > | 14. 越南语（Vietnamese） | | |
 
-> **[HTTP 同步语音合成](/docs/api-reference/speech-t2a-http.md)**
+> **[HTTP 同步语音合成](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md)**
 >
 > 通过 HTTP 请求进行语音合成
 
-> **[WebSocket 同步语音合成](/docs/api-reference/speech-t2a-websocket.md)**
+> **[WebSocket 同步语音合成](https://platform.minimaxi.com/docs/api-reference/speech-t2a-websocket.md)**
 >
 > 通过 WebSocket 进行流式语音合成
 
-> **[创建异步语音任务](/docs/api-reference/speech-t2a-async-create.md)**
+> **[创建异步语音任务](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-create.md)**
 >
 > 创建长文本语音生成任务
 
-> **[查询异步任务状态](/docs/api-reference/speech-t2a-async-query.md)**
+> **[查询异步任务状态](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-query.md)**
 >
 > 查询语音生成任务状态
 
-> **[上传复刻音频](/docs/api-reference/voice-cloning-uploadcloneaudio.md)**
+> **[上传复刻音频](https://platform.minimaxi.com/docs/api-reference/voice-cloning-uploadcloneaudio.md)**
 >
 > 上传待克隆的音频文件
 
-> **[快速复刻](/docs/api-reference/voice-cloning-clone.md)**
+> **[快速复刻](https://platform.minimaxi.com/docs/api-reference/voice-cloning-clone.md)**
 >
 > 执行音色克隆
 
-> **[音色设计](/docs/api-reference/voice-design-design.md)**
+> **[音色设计](https://platform.minimaxi.com/docs/api-reference/voice-design-design.md)**
 >
 > 基于描述生成个性化音色
 
@@ -185,11 +187,11 @@
 | image-01 | 图像生成模型，画面表现细腻，支持文生图、图生图（人物主体参考） |
 | image-01-live | 图像生成模型，在 image-01 基础上额外支持多种画风设置 |
 
-> **[文生图](/docs/api-reference/image-generation-t2i.md)**
+> **[文生图](https://platform.minimaxi.com/docs/api-reference/image-generation-t2i.md)**
 >
 > 基于文本描述生成图像
 
-> **[图生图](/docs/api-reference/image-generation-i2i.md)**
+> **[图生图](https://platform.minimaxi.com/docs/api-reference/image-generation-i2i.md)**
 >
 > 基于参考图片生成图像
 
@@ -211,7 +213,7 @@
 | :- | :- |
 | music-3.0 | 最新音乐生成模型，支持用户输入音乐灵感和歌词，生成 AI 音乐 |
 
-> **[音乐生成接口](/docs/api-reference/music-generation.md)**
+> **[音乐生成接口](https://platform.minimaxi.com/docs/api-reference/music-generation.md)**
 >
 > 根据描述和歌词生成音乐
 
@@ -225,13 +227,13 @@
 
 本接口是作为文件管理接口，配合其他接口使用。共包含 5 个接口：**上传**、**列出**、**检索**、**下载**、**删除**。
 
-文件的支持格式、容量及大小限制以**上传文件**接口文档为准，详见 [上传文件](/docs/api-reference/file-management-upload.md)。
+文件的支持格式、容量及大小限制以**上传文件**接口文档为准，详见 [上传文件](https://platform.minimaxi.com/docs/api-reference/file-management-upload.md)。
 
-> **[上传文件](/docs/api-reference/file-management-upload.md)**
+> **[上传文件](https://platform.minimaxi.com/docs/api-reference/file-management-upload.md)**
 >
 > 上传文件到平台
 
-> **[文件列表](/docs/api-reference/file-management-list.md)**
+> **[文件列表](https://platform.minimaxi.com/docs/api-reference/file-management-list.md)**
 >
 > 获取已上传的文件列表
 
@@ -241,8 +243,8 @@
 
 **Web Search**
 
-`web_search` 是由 MiniMax 在服务端托管和执行的联网搜索工具。模型可在生成回复时自动检索实时信息，并基于搜索结果作答；支持通过 Anthropic Messages API 和 OpenAI Responses API 调用。接口说明与示例详见 [Web Search](/docs/guides/server-tools.md#web_search)。
+`web_search` 是由 MiniMax 在服务端托管和执行的联网搜索工具。模型可在生成回复时自动检索实时信息，并基于搜索结果作答；支持通过 Anthropic Messages API 和 OpenAI Responses API 调用。接口说明与示例详见 [Web Search](https://platform.minimaxi.com/docs/guides/server-tools.md#web_search)。
 
 **官方 MCP**
 
-MiniMax 提供官方的 [Python 版本](https://github.com/MiniMax-AI/MiniMax-MCP) 和 [JavaScript 版本](https://github.com/MiniMax-AI/MiniMax-MCP-JS) 模型上下文协议（MCP）服务器实现代码，支持语音合成、音色克隆、视频生成、音乐生成等功能，详细说明请参考 [MiniMax MCP 使用指南](/docs/guides/mcp-guide.md)
+MiniMax 提供官方的 [Python 版本](https://github.com/MiniMax-AI/MiniMax-MCP) 和 [JavaScript 版本](https://github.com/MiniMax-AI/MiniMax-MCP-JS) 模型上下文协议（MCP）服务器实现代码，支持语音合成、音色克隆、视频生成、音乐生成等功能，详细说明请参考 [MiniMax MCP 使用指南](https://platform.minimaxi.com/docs/guides/mcp-guide.md)

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/about-apis.md -->
-<!-- Source SHA-256: 7f2729e6abc022d6d73c3029435a92f4b0fca6ec720e990267e6f867808a9944 -->
+<!-- Source SHA-256: c745dd53b9330d4eeadac375af347d9beb65c8b58c7e12bc28bc5a3c628f8c9d -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -15,7 +15,7 @@
 
 ### 问：如何提高速率限制
 
-**答：** MiniMax 开放平台为您提供不同的资源保障方案，可前往[速率限制](/docs/guides/rate-limits.md)页面查看具体内容。如您需要获得更高的资源保障，您可通过[api@minimax.io](mailto:api@minimax.io)与我们的商务获得联系。
+**答：** MiniMax 开放平台为您提供不同的资源保障方案，可前往[速率限制](https://platform.minimaxi.com/docs/guides/rate-limits.md)页面查看具体内容。如您需要获得更高的资源保障，您可通过[api@minimax.io](mailto:api@minimax.io)与我们的商务获得联系。
 
 ### 问：语言模型的 TPS（Tokens Per Second）是如何计算的
 
@@ -33,4 +33,4 @@ $$
 
 ### 问：如何才能使用声音复刻服务
 
-**答：** 基于法律法规的要求，如需使用声音复刻服务，请先前往[账户管理 > 账户信息](https://platform.minimax.cn/user-center/basic-information)，完成**个人实名认证**或**企业认证**。认证完成后，即可通过[快速复刻接口](/docs/api-reference/voice-cloning-clone.md)使用声音复刻服务。
+**答：** 基于法律法规的要求，如需使用声音复刻服务，请先前往[账户管理 > 账户信息](https://platform.minimax.cn/user-center/basic-information)，完成**个人实名认证**或**企业认证**。认证完成后，即可通过[快速复刻接口](https://platform.minimaxi.com/docs/api-reference/voice-cloning-clone.md)使用声音复刻服务。

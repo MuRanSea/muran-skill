@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/138805 -->
-<!-- Source SHA-256: c63b585172a76ed6cb7b88848a73cbc238f3cd1f2e529c6d64b2a7ba5753e8e1 -->
+<!-- Source SHA-256: 6ce5c10c2c5d7415a54ba416d2c5b4bd3d6a555b1b9322252a8747f664b07242 -->
 
 # Mureka 音乐生成
 
 官方来源：https://cloud.tencent.com/document/product/1823/138805
-最近更新时间：2026-09-24 21:20:31
+最近更新时间：2026-10-23 18:08:00
 
 ## 概述
 
@@ -210,7 +210,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation' 
 
 根据用户输入的提示词生成歌曲，可搭配风格枚举，无需自己写歌词，模型自动完成作词、作曲与演唱。
 
-**接口：** `POST https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation`
+**接口：** `POST https://tokenhub.tencentmaas.com/v1/wand/mureka-music/easy-generation`
 
 ### 2. 输入参数
 
@@ -225,7 +225,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation' 
 
 ```bash
 # 提示词生成歌曲
-curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation' \\
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/easy-generation' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{
@@ -244,7 +244,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation' 
 
 根据用户输入的提示词生成无人声的纯音乐，适用于背景音乐、伴奏等场景。
 
-**接口：** `POST https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation`
+**接口：** `POST https://tokenhub.tencentmaas.com/v1/wand/mureka-music/instrumental-generation`
 
 ### 2. 输入参数
 
@@ -258,7 +258,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation' 
 
 ```bash
 # 生成纯音乐
-curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation' \\
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/instrumental-generation' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{
@@ -287,7 +287,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation' 
 
 #### **1. 三种生成能力怎么区分？**
 
-三者共用同一个生成接口，通过请求参数区分：传入 `lyrics` 为歌词生成歌曲；仅传 `prompt`（可搭配 `styles`）为提示词生成歌曲；传 `instrumental: true` 为生成纯音乐。注意三者的提示词上限不同：提示词生成歌曲为 2000 字符，歌词生成歌曲的风格提示词与纯音乐提示词均为 1024 字符。
+三者请求 model 相同，但接口 path 不同，歌词生歌曲使用 /v1/wand/mureka-music/generation，提示词生歌曲使用 /v1/wand/mureka-music/easy-generation，生成纯音乐使用 /v1/wand/mureka-music/instrumental-generation。注意三者的提示词上限不同：提示词生成歌曲为 2000 字符，歌词生成歌曲的风格提示词与纯音乐提示词均为 1024 字符。
 
 #### **2. 为什么默认生成了 2 首？**
 

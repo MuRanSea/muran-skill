@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-generation.md -->
-<!-- Source SHA-256: 26f8b7a9e2421d23f676e3d9943a86fce3bf886b0a9f8922053f814f593cb778 -->
+<!-- Source SHA-256: 0d37d04ebd26d09feac3f25f84b87e3e80e69f3c5901ee6b1103c235d2fefdb6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -22,7 +22,7 @@ MiniMax 提供多款语言模型，满足不同场景需求。**MiniMax-M3.1-Fla
 
 > [!NOTE]
 >
-> TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis.md#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
+> TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](https://platform.minimaxi.com/docs/faq/about-apis.md#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
 
 ### **MiniMax M3.1-Flash** 核心亮点
 
@@ -231,19 +231,19 @@ model "MiniMax-M3.1-Flash" requires adaptive thinking
 
 ## API 参考
 
-> **[Anthropic API 兼容（推荐）](/docs/api-reference/text-anthropic-api.md)**
+> **[Anthropic API 兼容（推荐）](https://platform.minimaxi.com/docs/api-reference/text-anthropic-api.md)**
 >
 > 通过 Anthropic SDK 调用 MiniMax 模型，支持流式输出和 Interleaved Thinking
 
-> **[OpenAI API 兼容](/docs/api-reference/text-openai-api.md)**
+> **[OpenAI API 兼容](https://platform.minimaxi.com/docs/api-reference/text-openai-api.md)**
 >
 > 通过 OpenAI SDK 调用 MiniMax 模型
 
-> **[在 AI 编程工具里使用 MiniMax M 系列模型](/docs/m-plan/openclaw.md)**
+> **[在 AI 编程工具里使用 MiniMax M 系列模型](https://platform.minimaxi.com/docs/m-plan/openclaw.md)**
 >
 > 在 Claude Code、Cursor 等工具中使用 MiniMax M 系列模型
 
-> **[Chat Model](/docs/guides/text-chat)**
+> **[Chat Model](https://platform.minimaxi.com/docs/guides/text-chat)**
 >
 > M2-her 对话模型，专为角色扮演、多轮对话等场景设计
 

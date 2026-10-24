@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/virtual-try-on.md -->
-<!-- Source SHA-256: 2492de5dd3f834325b363a1c1b870057939c15ecb3fd0f6e71b98cfdb7f7b970 -->
+<!-- Source SHA-256: 26d1aa0b936212760c639fd215c408b2fac01e81ad55b3d4c9477b919ec18935 -->
 
 > ## Documentation Index
 >
@@ -160,7 +160,7 @@ API 支持三个独立的图像控制维度：
 
 ```bash
 curl --location --request POST 'https://api-beijing.klingai.com/solutions/virtual_try_on' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "contents": [
@@ -250,12 +250,12 @@ curl --location --request POST 'https://api-beijing.klingai.com/solutions/virtua
 ```bash
 # 按 task_id 查询
 curl --location --request GET 'https://api-beijing.klingai.com/solutions?task_ids=882836916432285766' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json'
 
 # 按 external_task_id 查询
 curl --location --request GET 'https://api-beijing.klingai.com/solutions?external_task_ids=virtual-tryon-001' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json'
 ```
 
@@ -362,7 +362,7 @@ curl --location --request GET 'https://api-beijing.klingai.com/solutions?externa
 ```bash
 # 首次请求：按时间范围 + 状态筛选
 curl --location --request POST 'https://api-beijing.klingai.com/solutions' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "start_time": 1788134400000,
@@ -378,7 +378,7 @@ curl --location --request POST 'https://api-beijing.klingai.com/solutions' \
 
 # 翻页请求：传入 cursor 后，start_time / end_time 将被忽略
 curl --location --request POST 'https://api-beijing.klingai.com/solutions' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "cursor": "882836916432285766",

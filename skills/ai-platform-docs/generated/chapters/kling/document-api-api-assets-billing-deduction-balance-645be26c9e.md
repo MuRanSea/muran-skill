@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/assets/billing-deduction/balance.md -->
-<!-- Source SHA-256: d559760922986e5e607fe693f47d03c71a078f648b366d880d0058c05c574b91 -->
+<!-- Source SHA-256: 6abb6725a9570df95f433f51cd0702412ddd753d22113ed158ee56cac237dabe -->
 
 > ## Documentation Index
 >
@@ -83,7 +83,7 @@
 
 ```bash
 curl --location --request POST 'https://api-beijing.klingai.com/account/billing/balance' \
---header 'Authorization: Bearer xxx' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json; charset=utf-8' \
 --data-raw '{
   "start_time": 1741284003293,

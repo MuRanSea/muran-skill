@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/image/3-0-omni/image-generation.md -->
-<!-- Source SHA-256: 1a04423a512791acf6778ff2b3bb1ea68c2fb9ad243ddfc73ca9dc682969803c -->
+<!-- Source SHA-256: 8c0819e0474db9451183d8c97279c21e36eea959dbd4617589e2d521f217eb39 -->
 
 > ## Documentation Index
 >
@@ -113,7 +113,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/images/generations \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "model_name": "kling-v2-1",
@@ -167,8 +167,8 @@ curl --request POST \
 
 | 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
 |---|---|---:|---|---|---|
-| `task_id` | string | 是 | - | - | 图片生成的任务ID。请求路径参数，直接将值填写在请求路径中 |
-| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID |
+| `task_id` | string | 否 | - | - | 图片生成的任务ID。请求路径参数，直接将值填写在请求路径中。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
+| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
 
 #### Path Params 字段补充说明
 
@@ -180,7 +180,7 @@ curl --request POST \
 ```bash
 curl --request GET \
   --url https://api-beijing.klingai.com/v1/images/generations/{id} \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -255,7 +255,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/images/generations?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

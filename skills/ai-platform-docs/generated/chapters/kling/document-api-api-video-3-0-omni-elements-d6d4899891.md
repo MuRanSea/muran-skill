@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-omni/elements.md -->
-<!-- Source SHA-256: 7b8ce21ca255873029cffad031e95a5425acb8d43591cf6b9dcaef43317c7b5b -->
+<!-- Source SHA-256: 5d634b5516400a8859b925246845f7bca0e1ed7ee5c67e2137de69cffe8dc229 -->
 
 > ## Documentation Index
 >
@@ -121,10 +121,10 @@
 
 ### 创建图片定制主体
 
-```Bash
-curl --location 'https://xxx/v1/general/advanced-custom-elements/' \
---header 'Authorization: Bearer xxx' \
---header 'Content-Type: application/json\' \
+```cURL
+curl --location 'https://api-beijing.klingai.com/v1/general/advanced-custom-elements' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
+--header 'Content-Type: application/json' \
 --data '{
     "element_name": "xxx",
     "element_description": "xxx",
@@ -136,7 +136,7 @@ curl --location 'https://xxx/v1/general/advanced-custom-elements/' \
         {"image_url": "xxx"}
       ]
     },
-    "element_voice_id": string,
+    "element_voice_id": "string",
     "callback_url": "xxx",
     "external_task_id": "",
      "tag_list": [
@@ -149,10 +149,10 @@ curl --location 'https://xxx/v1/general/advanced-custom-elements/' \
 
 ### 创建视频定制主体
 
-```Bash
-curl --location 'https://xxx/v1/general/advanced-custom-elements/' \
---header 'Authorization: Bearer xxx' \
---header 'Content-Type: application/json\' \
+```cURL
+curl --location 'https://api-beijing.klingai.com/v1/general/advanced-custom-elements' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
+--header 'Content-Type: application/json' \
 --data '{
     "element_name": "xxx",
     "element_description": "xxx",
@@ -164,7 +164,7 @@ curl --location 'https://xxx/v1/general/advanced-custom-elements/' \
             }
         ]
     },
-    "element_voice_id": string,
+    "element_voice_id": "string",
     "callback_url": "xxx",
     "external_task_id": "",
     "tag_list": [
@@ -201,13 +201,13 @@ curl --location 'https://xxx/v1/general/advanced-custom-elements/' \
 
 | 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
 |---|---|---:|---|---|---|
-| `task_id` | string | 是 | - | - | 图片生成的任务ID。请求路径参数，直接将值填写在请求路径中 |
-| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID |
+| `task_id` | string | 否 | - | - | 创建主体任务时返回的任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值填写到路径参数 {id} 中 |
+| `external_task_id` | string | 否 | - | - | 主体创建任务的用户自定义任务 ID |
 
 #### Path Params 字段补充说明
 
-- `external_task_id`: 创建任务时填写的 external_task_id，与 task_id 两种查询方式二选一
-  - 请注意，单用户下需要保证唯一性
+- `external_task_id`: external_task_id 与 task_id 必须且只能选择一个，并将所选值填写到路径参数 {id} 中
+  - external_task_id 在单用户下必须保证唯一性
 
 ### Response Example
 

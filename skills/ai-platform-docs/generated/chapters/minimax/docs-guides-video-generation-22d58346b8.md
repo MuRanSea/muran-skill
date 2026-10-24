@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-generation.md -->
-<!-- Source SHA-256: 95638554343af8b452362481807568d798be45d295ed9601788afec16c470842 -->
+<!-- Source SHA-256: 94602e998a06129ad2d23ec8d6c5b2fc8a154aec6d8689745c9fd283f6f918ce -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -43,7 +43,7 @@ MiniMax 视频生成目前提供 **MiniMax H3** 与 **MiniMax H3 Max** 两款模
 | 模型名称 | `MiniMax-H3` | `MiniMax-H3-Max` |
 | 输出分辨率 | 768P / 2K | 480P / 768P |
 | 输出时长 | 4～15 秒，仅支持整数值 | 5～15 秒，仅支持整数值 |
-| 宽高比 | 支持多种常见比例或自适应，[详见 API 文档](/docs/api-reference/video-generation-v2-create.md) | 支持多种常见比例或自适应，[详见 API 文档](/docs/api-reference/video-generation-v2-create.md) |
+| 宽高比 | 支持多种常见比例或自适应，[详见 API 文档](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md) | 支持多种常见比例或自适应，[详见 API 文档](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md) |
 
 ### 输入条件
 
@@ -242,42 +242,42 @@ if __name__ == "__main__":
 
 ## 创建 H3-Context-IR 任务
 
-如需在生成视频前获得更完整的提示词，可以[创建 H3-Context-IR 任务](/docs/api-reference/video-generation-v2-h3-context-ir.md)。H3-Context-IR 会深度理解文本、图像、音频和视频等多模态上下文及其相互关系，通过复杂逻辑推理生成结构化表达，并在尽量保持用户原始意图的前提下丰富语义细节。本接口只返回增强提示词，不创建视频。
+如需在生成视频前获得更完整的提示词，可以[创建 H3-Context-IR 任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir.md)。H3-Context-IR 会深度理解文本、图像、音频和视频等多模态上下文及其相互关系，通过复杂逻辑推理生成结构化表达，并在尽量保持用户原始意图的前提下丰富语义细节。本接口只返回增强提示词，不创建视频。
 
-H3-Context-IR 采用异步任务形式。创建成功后，使用[查询任务](/docs/api-reference/video-generation-v2-query.md)或[查询任务列表](/docs/api-reference/video-generation-v2-list.md)获取结果；任务成功后从 `content.prompt` 获取增强提示词，并可通过 `task_type=h3_context_ir` 识别该任务。
+H3-Context-IR 采用异步任务形式。创建成功后，使用[查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)或[查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)获取结果；任务成功后从 `content.prompt` 获取增强提示词，并可通过 `task_type=h3_context_ir` 识别该任务。
 
 ## 视频再生成
 
-如果已有符合 MiniMax-H3 768P 输出规格的成片，可以调用[创建视频再生成任务](/docs/api-reference/video-generation-v2-regeneration.md)接口输出 2K 视频。请求时需原样提交生成 768P 视频时使用的全部 `content`，并额外加入且仅加入一个 `type=video_url`、`role=base_video` 的源视频项。
+如果已有符合 MiniMax-H3 768P 输出规格的成片，可以调用[创建视频再生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration.md)接口输出 2K 视频。请求时需原样提交生成 768P 视频时使用的全部 `content`，并额外加入且仅加入一个 `type=video_url`、`role=base_video` 的源视频项。
 
-再生成任务与其他 H3 任务共用[查询任务](/docs/api-reference/video-generation-v2-query.md)、[查询任务列表](/docs/api-reference/video-generation-v2-list.md)以及[取消或删除任务](/docs/api-reference/video-generation-v2-delete.md)接口；可通过 `task_type=regeneration` 识别。
+再生成任务与其他 H3 任务共用[查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)、[查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)以及[取消或删除任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-delete.md)接口；可通过 `task_type=regeneration` 识别。
 
 ## 推荐阅读
 
-> **[创建视频生成任务](/docs/api-reference/video-generation-v2-create.md)**
+> **[创建视频生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md)**
 >
 > 使用本接口通过多模态 content 输入，创建 MiniMax-H3 视频生成任务。
 
-> **[创建 H3-Context-IR 任务](/docs/api-reference/video-generation-v2-h3-context-ir.md)**
+> **[创建 H3-Context-IR 任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir.md)**
 >
 > 深度理解视频生成的多模态上下文，并生成结构化增强提示词。
 
-> **[创建视频再生成任务](/docs/api-reference/video-generation-v2-regeneration.md)**
+> **[创建视频再生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration.md)**
 >
 > 对符合 MiniMax-H3 768P 输出规格的源视频进行再生成，输出 2K 视频。
 
-> **[查询任务](/docs/api-reference/video-generation-v2-query.md)**
+> **[查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)**
 >
 > 使用本接口按 task\_id 查询任务状态并获取成片下载地址。
 
-> **[查询任务列表](/docs/api-reference/video-generation-v2-list.md)**
+> **[查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)**
 >
 > 分页查询最近 7 天内的任务，并按 task\_type 区分任务类型。
 
-> **[取消或删除任务](/docs/api-reference/video-generation-v2-delete.md)**
+> **[取消或删除任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-delete.md)**
 >
 > 取消排队中的任务，或删除成功和失败的任务记录。
 
-> **[产品定价](/docs/pricing/overview.md#models/video)**
+> **[产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/video)**
 >
 > 各模型的定价说明、计费方式及使用限制。

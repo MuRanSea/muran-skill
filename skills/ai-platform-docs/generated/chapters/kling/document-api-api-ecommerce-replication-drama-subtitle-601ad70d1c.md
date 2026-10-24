@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/drama-subtitle.md -->
-<!-- Source SHA-256: 533210b2c4ac8dd9cc1b5166fa993293407634a4adcd424de81748efe66fb81b -->
+<!-- Source SHA-256: ac6996a42088d4e7c0c4019ef727f2c48cba804aea0d9fb87dde665563c0ee0c -->
 
 > ## Documentation Index
 >
@@ -137,7 +137,7 @@
 
 ```bash
 curl --location --request POST 'https://api-beijing.klingai.com/solutions/drama_subtitle' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "contents": [
@@ -224,7 +224,7 @@ curl --location --request POST 'https://api-beijing.klingai.com/solutions/drama_
 ```bash
 curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer {apikey}"
+  -H "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130069 -->
-<!-- Source SHA-256: 529032b798ea93c4539f733bf1f9248ecbe47a5ebeffd8f8b33b4f93078b8a5b -->
+<!-- Source SHA-256: 4d7ee9ff1c96494872f947ac58d1332745856fa61abb19d516401141a6e91d65 -->
 
 # OpenCode
 
 官方来源：https://cloud.tencent.com/document/product/1823/130069
-最近更新时间：2026-09-14 10:35:48
+最近更新时间：2026-10-23 18:08:00
 
 OpenCode 是一款开源的 AI 编程代理工具，可以在终端、桌面客户端或 IDE 扩展中接入多种大模型使用，可帮助开发者进行代码分析、智能编码等多种任务。本文介绍如何在 OpenCode 中配置与使用腾讯云大模型 Token Plan 个人版。
 
@@ -52,11 +52,11 @@ OpenCode 支持通过**桌面客户端**或**命令行配置文件**接入腾讯
 
 显示名称：Tencent TokenPlan
 
-基础 URL：https://api.lkeap.cloud.tencent.com/plan/v3
+基础 URL：https://tokenhub.tencentmaas.com/plan/v3
 
 API 密钥：填写您的 API Key。
 
-model-id 和模型：根据您购买的套餐，填入 [套餐支持的模型 ID](https://cloud.tencent.com/document/product/1823/130119)。
+model-id 和模型：根据您购买的套餐，填入 [套餐支持的模型 ID](https://cloud.tencent.com/document/product/1823/130119#ac64e0d9-6ef1-475c-9bed-f15dc361859a)。
 
 4. 在对话窗口的模型列表中，找到并选定新配置的模型，即可进行对话使用。
 
@@ -87,7 +87,7 @@ Windows：`C:\\Users\\<用户名>\\.config\\opencode\\opencode.json`
       "npm": "@ai-sdk/openai-compatible",
       "name": "Tencent TokenPlan",
       "options": {
-        "baseURL": "https://api.lkeap.cloud.tencent.com/plan/v3",
+        "baseURL": "https://tokenhub.tencentmaas.com/plan/v3",
         "apiKey": "$your_api_key"
       },
       "models": {
@@ -114,16 +114,6 @@ Windows：`C:\\Users\\<用户名>\\.config\\opencode\\opencode.json`
         "minimax-m3": {
           "name": "MiniMax-M3",
           "modalities": { "input": ["text", "image"], "output": ["text"] }
-        },
-        "glm-5": {
-          "name": "GLM-5",
-          "modalities": { "input": ["text"], "output": ["text"] },
-          "options": { "thinking": { "type": "enabled" } }
-        },
-        "glm-5.1": {
-          "name": "GLM-5.1",
-          "modalities": { "input": ["text"], "output": ["text"] },
-          "options": { "thinking": { "type": "enabled" } }
         },
         "glm-5.2": {
           "name": "GLM-5.2",

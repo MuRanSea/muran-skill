@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130063 -->
-<!-- Source SHA-256: 6ea45df60864bca621b115485cd83dcfdf379b9dfc57e6d1309fa6c8acafa0f1 -->
+<!-- Source SHA-256: c96b0c535a63e8061bf79c53d327410ed7c4b735693af21f3ebcc93b783e7f36 -->
 
 # AutoClaw
 
 官方来源：https://cloud.tencent.com/document/product/1823/130063
-最近更新时间：2026-08-07 17:32:30
+最近更新时间：2026-10-23 15:47:30
 
 AutoClaw 是智谱 AI 推出的零门槛本地 AI 智能体，支持 OpenClaw 核心执行能力，主打普通用户轻松上手。本文介绍如何在 AutoClaw 中配置与使用腾讯云大模型 Token Plan。
 
@@ -53,7 +53,7 @@ AutoClaw 支持通过“**自定义模型**”功能接入任何兼容 OpenAI �
 | 配置项 | 填写说明 |
 | --- | --- |
 | 服务商 | 选择**自定义** |
-| 接口地址 | https://api.lkeap.cloud.tencent.com/plan/v3（直接复制使用） |
+| 接口地址 | https://tokenhub.tencentmaas.com/plan/v3（直接复制使用） |
 | API 协议类型 | 选择 **OpenAI** |
 | API Key | 填写您在腾讯云控制台获取的 API Key，请参见 [获取 API Key](https://cloud.tencent.com/document/product/1823/130119#ac6f544e-6de6-46b7-8709-36d777248b34)。 |
 | 模型名称 | 根据您购买的套餐类型，填写您套餐支持的 Model ID。  如果您购买通用 Token Plan 套餐：请参见 [可用模型](https://cloud.tencent.com/document/product/1823/130060#b6fdbed0-897c-475d-a9a1-f9af922027c4)，选择具体的 **Model ID** 配置。  如果您购买 Hy Token Plan 套餐：请参见 [可用模型](https://cloud.tencent.com/document/product/1823/130060#b145766a-c747-42eb-89c2-a04463d20cc5)，选择具体的 **Model ID** 配置。 |

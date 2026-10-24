@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/image-recognition.md -->
-<!-- Source SHA-256: 04a9cf6886470138dd8e44af2b8dd798ff488d856e63f87ce5b8474815525eae -->
+<!-- Source SHA-256: 5443c8f14da891a242cdb0727494325c28bb83df2bfc741a325f267dbe27d1eb -->
 
 > ## Documentation Index
 >
@@ -48,7 +48,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/image-recognize \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "image": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-qa-test/multi-1.png"

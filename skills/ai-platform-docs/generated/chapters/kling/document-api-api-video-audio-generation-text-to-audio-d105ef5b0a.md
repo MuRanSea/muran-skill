@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/audio-generation/text-to-audio.md -->
-<!-- Source SHA-256: ad64a8c4c1c0ac5b016f5e0c6908bddf185d671ae63a5e908db40379a3fd1277 -->
+<!-- Source SHA-256: 4cd55749914292bcb517830a2995cbc4d1f78ce3de09bbed5e0064e5c02223af -->
 
 > ## Documentation Index
 >
@@ -54,7 +54,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/audio/text-to-audio \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "prompt": "春节庆祝时的烟花声",
@@ -105,8 +105,8 @@ curl --request POST \
 
 | 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
 |---|---|---:|---|---|---|
-| `task_id` | string | 否 | - | - | 文生音频的任务 ID |
-| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID |
+| `task_id` | string | 否 | - | - | 文生音频的任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
+| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
 
 #### Path Params 字段补充说明
 
@@ -119,7 +119,7 @@ curl --request POST \
 ```bash
 curl --request GET \
   --url https://api-beijing.klingai.com/v1/audio/text-to-audio/{task_id} \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json'
 ```
 
@@ -194,7 +194,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/audio/text-to-audio?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json'
 ```
 

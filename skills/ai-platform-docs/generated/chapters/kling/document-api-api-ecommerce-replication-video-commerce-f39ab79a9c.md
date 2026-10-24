@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/video-commerce.md -->
-<!-- Source SHA-256: b2dc3abf724ef2e23543be2a4ce8c364f0c9db6415ffa4e70b645e47a7c67701 -->
+<!-- Source SHA-256: e2af21252a9a6430c2ab6c8c981053f65436533eb8f0afa26ad8ae0bc8b5cc57 -->
 
 > ## Documentation Index
 >
@@ -269,7 +269,7 @@
 ```bash
 # 口播带货：传入商品内容
 curl --location --request POST 'https://api-beijing.klingai.com/solutions/talking_agent' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "contents": [
@@ -325,7 +325,7 @@ curl --location --request POST 'https://api-beijing.klingai.com/solutions/talkin
 
 # 达人口播：不传商品内容
 curl --location --request POST 'https://api-beijing.klingai.com/solutions/talking_agent' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "contents": [
@@ -409,7 +409,7 @@ curl --location --request POST 'https://api-beijing.klingai.com/solutions/talkin
 ```bash
 curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer {apikey}"
+  -H "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

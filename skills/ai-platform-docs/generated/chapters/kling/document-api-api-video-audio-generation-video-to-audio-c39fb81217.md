@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/audio-generation/video-to-audio.md -->
-<!-- Source SHA-256: e9ffad2c0daefb4f173ab43f2e75992316c6968873d707575ca3444ad9b05d3a -->
+<!-- Source SHA-256: d5599af8dbd68653a4735ccc50e1c352ab487f503571e84e97938642add3ae29 -->
 
 > ## Documentation Index
 >
@@ -62,7 +62,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/audio/video-to-audio \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "video_url": "https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/kling-qa-test/20fps-7s.mov",
@@ -112,8 +112,8 @@ curl --request POST \
 
 | 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
 |---|---|---:|---|---|---|
-| `task_id` | string | 否 | - | - | 视频生音频的任务 ID |
-| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID |
+| `task_id` | string | 否 | - | - | 视频生音频的任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
+| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
 
 #### Path Params 字段补充说明
 
@@ -126,7 +126,7 @@ curl --request POST \
 ```bash
 curl --request GET \
   --url https://api-beijing.klingai.com/v1/audio/video-to-audio/{task_id} \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -212,7 +212,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/audio/video-to-audio?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/image/o1/image-generation.md -->
-<!-- Source SHA-256: 0f096c6d6818e70fdf69e3172e8a01e23b4a7ca8da4cc1c96af54446fce4578a -->
+<!-- Source SHA-256: 6dbc7c73da350e09e621f995602e6ece064fa72b9f5e1d20814c3cd5cc50ad92 -->
 
 > ## Documentation Index
 >
@@ -104,7 +104,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/images/omni-image \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "model_name": "kling-image-o1",
@@ -156,7 +156,7 @@ curl --request POST \
 
 ```Bash
 curl --location 'https://xxx/v1/images/generations' \
---header 'Authorization: Bearer xxx' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data '{
     "model_name": "kling-v3-omni",
@@ -208,8 +208,8 @@ curl --location 'https://xxx/v1/images/generations' \
 
 | 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
 |---|---|---:|---|---|---|
-| `task_id` | string | 是 | - | - | 图片生成的任务ID。请求路径参数，直接将值填写在请求路径中。与 external_task_id 两种查询方式二选一 |
-| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID |
+| `task_id` | string | 否 | - | - | 图片生成的任务ID。请求路径参数，直接将值填写在请求路径中。与 external_task_id 两种查询方式二选一。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
+| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
 
 #### Path Params 字段补充说明
 
@@ -221,7 +221,7 @@ curl --location 'https://xxx/v1/images/generations' \
 ```bash
 curl --request GET \
   --url https://api-beijing.klingai.com/v1/images/omni-image/{id} \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json'
 ```
 
@@ -303,7 +303,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/images/omni-image?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json'
 ```
 

@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130058 -->
-<!-- Source SHA-256: 424cb970b7ef89867225051abaef03406a2848e17f6b2506ebbd6b708105b286 -->
+<!-- Source SHA-256: de56a53a1536cacb1ccacd2b8c73334d8b8b440b3f274df97907ead80a79a4c7 -->
 
 # 快速入门
 
 官方来源：https://cloud.tencent.com/document/product/1823/130058
-最近更新时间：2026-06-05 18:01:33
+最近更新时间：2026-10-23 18:08:00
 
 本文将为您介绍如何在大模型服务平台 TokenHub 完成您的首次 API 调用。
 
@@ -18,7 +18,9 @@
 
 登录 [腾讯云大模型服务平台 TokenHub 控制台](https://console.cloud.tencent.com/tokenhub/)，按照界面提示开通大模型服务平台 TokenHub 后，您可以在模型广场浏览选择模型，详细模型信息可参见 [模型列表](https://cloud.tencent.com/document/product/1823/130051)。
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/feb071ccf7d7ab67105ea86d12ebfe81.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/28eef8ef5fd4917633029c1b62b1c66e.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/28eef8ef5fd4917633029c1b62b1c66e.png)
 
 ### 步骤二：领取免费体验包
 
@@ -30,8 +32,6 @@
 
 2. 在弹窗中勾选模型后，单击**立即领取**，即可获得多个模型的免费使用额度。
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/5cd11e46127fc5a832709ff48a7e1e76.png)
-
 ### 步骤三：创建 API Key
 
 在调用模型 API 之前，您需要先创建 API Key 作为鉴权凭证。
@@ -40,7 +40,9 @@
 
 2. 在页面上方选择地域后，单击**创建 API Key。**
 
-3. 在**创建 API Key** 对话框填写 **Key 名称**，并设置**可访问范围**：
+3. 在**创建 API Key** 对话框填写 **Key 名称**，并设置**额度限制**及**可访问范围**：
+
+**额度限制：**开启后，该 API Key 的 token 用量达到配额上限将停止服务，用量统计不区分模型与推理服务接入点（免费包不计算入内）。
 
 **全选**：可访问当前账号下所有模型和推理服务。
 
@@ -50,7 +52,9 @@
 
 创建完成后，请您务必**复制并妥善保管 API Key**，在后续调用 API 流程中将会使用该信息。更多 API Key 管理信息，请参见 [API Key 管理](https://cloud.tencent.com/document/product/1823/130090)。
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/926c15f53e05ba107aa45ac9d29ec867.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/acc114fd208cdb72c59df7d1e85f9baa.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/acc114fd208cdb72c59df7d1e85f9baa.png)
 
 ### 步骤四：调用模型
 
@@ -208,6 +212,20 @@ func main() {
 }
 ```
 
+#### 通过命令行工具调用
+
+您也可以使用 TokenHub 命令行工具（`thcli`），在终端一条命令完成模型调用，无需编写代码：
+
+```bash
+npm i -g tencent-tokenhub-cli
+thcli auth login
+thcli +chat --model <模型 Id>  "你好"
+```
+
+**说明：**
+
+除对话调用外，`thcli` 还支持查模型、管 API Key、看用量、排障等操作，详情请参见 [TokenHub CLI 使用指南](https://cloud.tencent.com/document/product/1823/138217)。
+
 #### 通过 AI 工具调用模型
 
 详情参考：
@@ -235,6 +253,8 @@ func main() {
 ## 下一步
 
 您可以前往**体验中心**，在线体验模型能力，详情请参见 [体验中心](https://cloud.tencent.com/document/product/1823/130085)。
+
+您可以前往**开通管理**，快速批量开启模型按量付费，详情请参见[开通管理](https://cloud.tencent.com/document/product/1823/137795)。
 
 您可以前往**在线推理**，管理正在使用的模型服务，详情请参见 [在线推理](https://cloud.tencent.com/document/product/1823/130087)。
 

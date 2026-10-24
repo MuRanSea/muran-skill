@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/apparel.md -->
-<!-- Source SHA-256: 38d470a30a67fff2b9e462454ba0eed0142d032262ad93cb3b49652a1f6acedf -->
+<!-- Source SHA-256: ab0a106a27e95b238520dd6c81badbe28f497d2913c3a11322d9fe16f55e78de -->
 
 > ## Documentation Index
 >
@@ -214,7 +214,7 @@
 
 ```bash
 curl --location --request POST 'https://api-beijing.klingai.com/solutions/e-commerce/clothing_dupe' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "contents": [
@@ -307,7 +307,7 @@ curl --location --request POST 'https://api-beijing.klingai.com/solutions/e-comm
 ```bash
 curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer {apikey}"
+  -H "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

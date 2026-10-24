@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/voice-management-delete.md -->
-<!-- Source SHA-256: 04fa34a0f8dadb0e82bdea0c5c1a6824ca3781a370013371fcaa33a71abb528f -->
+<!-- Source SHA-256: 2678b8a50b231288c89d0e474b3846ae041f8c0edc57ab4a1010c54270536229 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,7 +9,7 @@
 
 > 使用本接口，对于生成的部分音色进行删除。
 
-该 API 用于删除指定 voice\_id 的音色，删除范围为通过 [Voice Cloning API](/docs/api-reference/voice-cloning-clone.md) 和 [Voice Generation API](/docs/api-reference/voice-design-design.md) 生成的音色的 voice\_id。
+该 API 用于删除指定 voice\_id 的音色，删除范围为通过 [Voice Cloning API](https://platform.minimaxi.com/docs/api-reference/voice-cloning-clone.md) 和 [Voice Generation API](https://platform.minimaxi.com/docs/api-reference/voice-design-design.md) 生成的音色的 voice\_id。
 
 ⚠️ 注意：删除后，该 voice\_id 将无法再次使用。
 

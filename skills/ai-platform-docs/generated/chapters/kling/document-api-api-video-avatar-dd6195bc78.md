@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/avatar.md -->
-<!-- Source SHA-256: 2dfa05345dfdc6d2d2f8325b52810f8117a4cba119b5ff39cba7b09ee2fc3f30 -->
+<!-- Source SHA-256: 17959f83b570633b8c0a35081f10696804b808a7d9de7095b688c5d3c9fe561b -->
 
 > ## Documentation Index
 >
@@ -89,7 +89,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/avatar/image2video \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "image": "https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/kling-qa-test/pink_boy.png",
@@ -142,15 +142,15 @@ curl --request POST \
 
 | 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
 |---|---|---:|---|---|---|
-| `task_id` | string | 否 | - | - | 数字人的任务 ID，直接将值填写在请求路径中 |
-| `external_task_id` | string | 否 | - | - | 数字人的自定义任务ID。直接在请求路径中填写值，与task_id两种查询方式二选一 |
+| `task_id` | string | 否 | - | - | 数字人的任务 ID，直接将值填写在请求路径中。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
+| `external_task_id` | string | 否 | - | - | 数字人的自定义任务ID。直接在请求路径中填写值，与task_id两种查询方式二选一。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
 
 ### Request Example
 
 ```bash
 curl --request GET \
   --url https://api-beijing.klingai.com/v1/videos/avatar/image2video/{task_id} \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -226,7 +226,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/videos/avatar/image2video?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

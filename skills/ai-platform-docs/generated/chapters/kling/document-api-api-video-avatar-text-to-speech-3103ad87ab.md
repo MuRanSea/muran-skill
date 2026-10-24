@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/avatar/text-to-speech.md -->
-<!-- Source SHA-256: 5f9d3b50af72cfbcf825ab38816cece1d55e76830d5c382b2b98e14d385914cb -->
+<!-- Source SHA-256: 1ffa16580cd5a09f0c60d174ea3c6642ff74c91a1b065282a4f13f743a74e811 -->
 
 > ## Documentation Index
 >
@@ -59,7 +59,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/audio/tts \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "text": "Throughout my time in college, several memorable event left a significant impact on my life",

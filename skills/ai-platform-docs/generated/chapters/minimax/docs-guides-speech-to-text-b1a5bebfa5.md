@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-to-text.md -->
-<!-- Source SHA-256: 37b778155248c70e655aff3d9e54630c8cc3390eaf8e4c49f547d8f4e8ef58b2 -->
+<!-- Source SHA-256: 44a9263c34db011c7ff9258d5a6430fa47baef4ab17dc5d6f16ccce7b589eb45 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -9,7 +9,7 @@
 
 > MiniMax ASR 将音频转写为文本，支持流式返回、说话人分离与字幕导出，可直接用于会议纪要、播客/视频转写、内容审核、通话质检等场景。
 
-若需要使用语音识别能力，请点击 [按量购买 API](/docs/pricing/overview.md#models/speech)，或 [订阅 M Plan](https://platform.minimax.cn/docs/m-plan/intro)。
+若需要使用语音识别能力，请点击 [按量购买 API](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)，或 [订阅 M Plan](https://platform.minimax.cn/docs/m-plan/intro)。
 
 ## 模型介绍
 
@@ -253,10 +253,10 @@ data: {"index":2,"delta":"","finish":true,"duration":26.325}
 
 ## 推荐阅读
 
-> **[语音识别接口](/docs/api-reference/speech-to-text.md)**
+> **[语音识别接口](https://platform.minimaxi.com/docs/api-reference/speech-to-text.md)**
 >
 > Speech to Text 接口的完整参数、返回结构与错误码。
 
-> **[产品定价](/docs/pricing/overview.md#models/speech)**
+> **[产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)**
 >
 > 各语音模型的定价说明、计费方式与使用限制。

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/speech-t2a-websocket-bidi.md -->
-<!-- Source SHA-256: 2dac638bcb122d0d596c25839ca425b1c2ec8e1c8ce3f5130342be6987b83c82 -->
+<!-- Source SHA-256: b9dd9bba3da56eddb28626838d6dfa81a10b27845cc4f27b56d895933225bc6f -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,7 +13,7 @@
 
 本接口面向**文本流式输入**场景：把大模型的流式输出直接逐 token 转成语音。
 
-| | [`/ws/v1/t2a_v2`](/docs/api-reference/speech-t2a-websocket) | `/ws/v1/t2a_v2_bidi`（本接口） |
+| | [`/ws/v1/t2a_v2`](https://platform.minimaxi.com/docs/api-reference/speech-t2a-websocket) | `/ws/v1/t2a_v2_bidi`（本接口） |
 | - | - | - |
 | 攒句责任 | **客户端**自行判断句子边界 | **服务端**自动攒句 |
 | 逐字发送文本 | 每个字触发一次合成，音频碎裂 | 攒成完整句子后再合成 |

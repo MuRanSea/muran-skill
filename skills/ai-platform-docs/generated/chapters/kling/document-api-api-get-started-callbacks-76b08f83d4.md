@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/get-started/callbacks.md -->
-<!-- Source SHA-256: 4939e25411265cd55650b226cd0ee1f1d57ae099e0ab45e90ddbd35ebe616061 -->
+<!-- Source SHA-256: 1a7d1d3db950eaf73587153e064a41680e7554eb0355b1c1139fe945e9503d94 -->
 
 > ## Documentation Index
 >
@@ -93,7 +93,7 @@
           "owned_by": "string"          // 音色来源，kling为官方音色库，数字为创作者ID
         }
       ],
-      "owned_by": "string",             // 主体来源，kling为官方音色库，数字为创作者ID
+      "owned_by": "string",             // 主体来源，kling为官方主体库，数字为创作者ID
       "status": "string",               // 主体状态，分为正常和已被删除，枚举值分别为：succeeded, deleted
       "tags": [                         // 主体标签相关信息
         {

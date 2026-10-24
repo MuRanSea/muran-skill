@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/2-6/image-to-video.md -->
-<!-- Source SHA-256: 2e89ebb9d42ca63d1b578c2fee18650e35dfeaaac4e88b2423f6e7c3fa0284f8 -->
+<!-- Source SHA-256: 89b31fee81523d0230b5c11b70e87461b6d10f8d4f2d37b11f6d9ade33da2cf4 -->
 
 > ## Documentation Index
 >
@@ -139,7 +139,7 @@
 
 ```bash
 curl --location 'https://api-beijing.klingai.com/image-to-video/kling-2.6' \
---header 'Authorization: Bearer {apikey}' \
+--header "Authorization: Bearer ${KLING_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data '{
   "contents": [
@@ -220,10 +220,10 @@ curl --location 'https://api-beijing.klingai.com/image-to-video/kling-2.6' \
 
 #### Query Params 字段补充说明
 
-- `task_ids`: 请求路径参数，直接将值填写在请求路径中
+- `task_ids`: 查询参数，请将值填写在 URL query string 中
 - `task_ids`: 查询任务时，task_ids 与 external_task_ids 两种 ID 至少且只能选择一种，不可同时使用
 - `task_ids`: 支持批量查询，用 "," 分隔
-- `external_task_ids`: 请求路径参数，直接将值填写在请求路径中
+- `external_task_ids`: 查询参数，请将值填写在 URL query string 中
 - `external_task_ids`: 查询任务时，task_ids 与 external_task_ids 两种 ID 至少且只能选择一种，不可同时使用
 - `external_task_ids`: 支持批量查询，用 "," 分隔
 
@@ -232,7 +232,7 @@ curl --location 'https://api-beijing.klingai.com/image-to-video/kling-2.6' \
 ```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer {apikey}'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -306,7 +306,7 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
               "owned_by": "string" // 音色来源，kling为官方音色库，数字为创作者ID
             }
           ],
-          "owned_by": "string", // 主体来源，kling为官方音色库，数字为创作者ID
+          "owned_by": "string", // 主体来源，kling为官方主体库，数字为创作者ID
           "status": "string", // 主体状态，分为正常和已被删除，枚举值分别为：succeeded, deleted
           "tags": [ // 主体标签相关信息
             {
@@ -400,7 +400,7 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
 ```bash
 curl --location 'https://api-beijing.klingai.com/tasks' \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer {apikey}' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --data '{
     "start_time": "1781193600000",
     "end_time": "1781516352968",
@@ -491,7 +491,7 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
               "owned_by": "string" // 音色来源，kling为官方音色库，数字为创作者ID
             }
           ],
-          "owned_by": "string", // 主体来源，kling为官方音色库，数字为创作者ID
+          "owned_by": "string", // 主体来源，kling为官方主体库，数字为创作者ID
           "status": "string", // 主体状态，分为正常和已被删除，枚举值分别为：succeeded, deleted
           "tags": [ // 主体标签相关信息
             {

@@ -42,6 +42,11 @@
 | Kling 3.0 & 3.0 Omni - 音色管理 | `chapters/kling/document-api-api-video-3-0-omni-voice-customization-dfb491ebbb.md` | https://klingai.com/document-api/api/video/3-0-omni/voice-customization.md |
 | Kling 3.0 Turbo - 图生视频 | `chapters/kling/document-api-api-video-3-0-turbo-image-to-video-dd41eb0a3d.md` | https://klingai.com/document-api/api/video/3-0-turbo/image-to-video.md |
 | Kling 3.0 Turbo - 文生视频 | `chapters/kling/document-api-api-video-3-0-turbo-text-to-video-a4f69e671a.md` | https://klingai.com/document-api/api/video/3-0-turbo/text-to-video.md |
+| Kling 4.0 - 主体管理 | `chapters/kling/document-api-api-video-4-0-elements-f1dc4b0195.md` | https://klingai.com/document-api/api/video/4-0/elements.md |
+| Kling 4.0 - 图生视频 | `chapters/kling/document-api-api-video-4-0-image-to-video-52e62575ec.md` | https://klingai.com/document-api/api/video/4-0/image-to-video.md |
+| Kling 4.0 - 文生视频 | `chapters/kling/document-api-api-video-4-0-text-to-video-230357549a.md` | https://klingai.com/document-api/api/video/4-0/text-to-video.md |
+| Kling 4.0 - 全能参考生视频 | `chapters/kling/document-api-api-video-4-0-video-omni-d81857552d.md` | https://klingai.com/document-api/api/video/4-0/video-omni.md |
+| Kling 4.0 - 音色管理 | `chapters/kling/document-api-api-video-4-0-voice-customization-0f4829eafb.md` | https://klingai.com/document-api/api/video/4-0/voice-customization.md |
 | 音频生成 - 文生音效 | `chapters/kling/document-api-api-video-audio-generation-text-to-audio-d105ef5b0a.md` | https://klingai.com/document-api/api/video/audio-generation/text-to-audio.md |
 | 音频生成 - 视频生音效 | `chapters/kling/document-api-api-video-audio-generation-video-to-audio-c39fb81217.md` | https://klingai.com/document-api/api/video/audio-generation/video-to-audio.md |
 | 数字人 | `chapters/kling/document-api-api-video-avatar-dd6195bc78.md` | https://klingai.com/document-api/api/video/avatar.md |
@@ -51,7 +56,7 @@
 | 对口型 - 人脸识别 | `chapters/kling/document-api-api-video-lip-sync-face-detection-bd562b7d41.md` | https://klingai.com/document-api/api/video/lip-sync/face-detection.md |
 | 动作控制 - 动作控制 3.0 | `chapters/kling/document-api-api-video-motion-control-b2e04eaaff.md` | https://klingai.com/document-api/api/video/motion-control.md |
 | 动作控制 - 动作控制 2.6 | `chapters/kling/document-api-api-video-motion-control-2-6-28300bbd16.md` | https://klingai.com/document-api/api/video/motion-control/2-6.md |
-| 视频 - 多模态视频参考编辑 | `chapters/kling/document-api-api-video-multi-elements-ccaea7e7ae.md` | https://klingai.com/document-api/api/video/multi-elements.md |
+| 视频 - 多模态视频编辑 | `chapters/kling/document-api-api-video-multi-elements-ccaea7e7ae.md` | https://klingai.com/document-api/api/video/multi-elements.md |
 | Kling O1 - 主体管理 | `chapters/kling/document-api-api-video-o1-elements-eca0d19bde.md` | https://klingai.com/document-api/api/video/o1/elements.md |
 | Kling O1 - 视频生成 | `chapters/kling/document-api-api-video-o1-video-omni-c56f3ad216.md` | https://klingai.com/document-api/api/video/o1/video-omni.md |
 | 能力地图 - 图片 | `chapters/kling/document-api-guides-capability-map-image-20cbac4ec6.md` | https://klingai.com/document-api/guides/capability-map/image.md |

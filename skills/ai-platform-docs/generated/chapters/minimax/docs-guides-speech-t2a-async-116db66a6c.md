@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-async.md -->
-<!-- Source SHA-256: 951f009cab7f85f03035fc41af352a64e3692e49a4fe7399044a8591a69d6710 -->
+<!-- Source SHA-256: 5537e586566708509767c6294f7381e03633c3abc35fce70bbd240f81cd396b7 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -54,10 +54,10 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
 
 ## 使用流程
 
-1. 若使用文件输入，需先调用 [文件上传 API](/docs/api-reference/file-management-upload.md) 上传文本并获取 file\_id。若使用文本作为输入，则跳过此步骤
-2. 调用[创建语音生成任务 API](/docs/api-reference/speech-t2a-async-create.md)，获取 `task_id`
-3. 调用[查询语音生成任务状态 API](/docs/api-reference/speech-t2a-async-query.md)，基于 `task_id` 获取语音合成任务进度
-4. 当任务完成时，上述调用查询语音生成任务状态 API 返回的 `file_id` 可用于调用 [文件下载 API](/docs/api-reference/file-management-retrieve-content.md) 下载音频结果
+1. 若使用文件输入，需先调用 [文件上传 API](https://platform.minimaxi.com/docs/api-reference/file-management-upload.md) 上传文本并获取 file\_id。若使用文本作为输入，则跳过此步骤
+2. 调用[创建语音生成任务 API](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-create.md)，获取 `task_id`
+3. 调用[查询语音生成任务状态 API](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-query.md)，基于 `task_id` 获取语音合成任务进度
+4. 当任务完成时，上述调用查询语音生成任务状态 API 返回的 `file_id` 可用于调用 [文件下载 API](https://platform.minimaxi.com/docs/api-reference/file-management-retrieve-content.md) 下载音频结果
 
 注意：返回的下载 URL 自生成起 9 小时（32400 秒）内有效，过期后文件将失效，生成的信息便会丢失，请注意下载信息的时间，及时下载
 
@@ -256,18 +256,18 @@ curl --location "https://api.minimax.cn/v1/files/retrieve?file_id=${FILE_ID}" \
 
 ## 推荐阅读
 
-> **[异步语音合成](/docs/api-reference/speech-t2a-async-create.md)**
+> **[异步语音合成](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-create.md)**
 >
 > 使用 API 接口，创建异步语音合成任务。
 
-> **[同步语音合成 HTTP](/docs/api-reference/speech-t2a-http.md)**
+> **[同步语音合成 HTTP](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md)**
 >
 > 使用 API 接口，在HTTP网络通信协议下进行同步语音合成。
 
-> **[产品定价](/docs/pricing/overview.md#models/speech)**
+> **[产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)**
 >
 > 各模型的定价说明、计费方式及使用限制。
 
-> **[速率限制](/docs/guides/rate-limits.md#3、我们的-api-的限速具体数值)**
+> **[速率限制](https://platform.minimaxi.com/docs/guides/rate-limits.md#3、我们的-api-的限速具体数值)**
 >
 > 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。

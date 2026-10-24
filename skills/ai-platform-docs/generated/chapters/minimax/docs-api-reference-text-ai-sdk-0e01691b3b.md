@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-ai-sdk.md -->
-<!-- Source SHA-256: 97af9599f723e2a2076dddabb2625c1da7ceee94b2531df4e3544d0cb57db586 -->
+<!-- Source SHA-256: e892685bd47ea5919444594d3ce91d2aa11a1676af58558d57b847d698272bdf -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -68,7 +68,7 @@ console.log(`Text:\n${text}\n`);
 
 > [!NOTE]
 >
-> TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](/docs/faq/about-apis.md#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
+> TPS（Tokens Per Second）的计算方式详见[常见问题 > 接口相关](https://platform.minimaxi.com/docs/faq/about-apis.md#%E9%97%AE%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84-tps%EF%BC%88tokens-per-second%EF%BC%89%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%9A%84)。
 
 > [!NOTE]
 >

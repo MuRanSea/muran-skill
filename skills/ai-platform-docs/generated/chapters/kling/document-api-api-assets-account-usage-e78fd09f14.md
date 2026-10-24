@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/assets/account-usage.md -->
-<!-- Source SHA-256: c5e7e0fdd3affbab61352cf413bc8c555923f47ba33404b5fdd81082060a430c -->
+<!-- Source SHA-256: 10ef9679bd34f14f89a0fb4a377a8642c23dc48201e140c6f4dc67235eb9ed68 -->
 
 > ## Documentation Index
 >
@@ -48,7 +48,7 @@
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/account/costs?start_time=1726124664368&end_time=1727366400000' \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json'
 ```
 

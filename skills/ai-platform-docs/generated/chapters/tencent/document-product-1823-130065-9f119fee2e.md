@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130065 -->
-<!-- Source SHA-256: a77ec542d2fbb49e6e4bdb353ee3bdbe0518e58bae83c0fbb8f4bb39ffce53f8 -->
+<!-- Source SHA-256: e2f0c8f67fee551633e0cb6668d2a72738170e1f0f363dbba3edd2c808952566 -->
 
 # CoPaw
 
 官方来源：https://cloud.tencent.com/document/product/1823/130065
-最近更新时间：2026-08-07 17:32:30
+最近更新时间：2026-10-23 15:47:30
 
 CoPaw 是阿里云通义实验室推出的开源国产 AI 智能体。CoPaw 支持通过“自定义提供商”功能接入任何兼容 OpenAI 协议的第三方模型服务。通过以下配置，可将腾讯云 Token Plan 的模型接入 CoPaw。
 
@@ -41,7 +41,7 @@ CoPaw 是阿里云通义实验室推出的开源国产 AI 智能体。CoPaw 支�
 
 | 参数 | 值 |
 | --- | --- |
-| Base URL | `https://api.lkeap.cloud.tencent.com/plan/v3` |
+| Base URL | `https://tokenhub.tencentmaas.com/plan/v3` |
 | API Key | 购买 Token Plan 后获取的专属 API Key |
 
 填写完成后保存设置。

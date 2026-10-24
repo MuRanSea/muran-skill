@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/image/common/subject-completion.md -->
-<!-- Source SHA-256: 480db2d63c82939ebef713751fb891ed2a350ba5ec31f601b19ca1bad99851d9 -->
+<!-- Source SHA-256: 77959e39c023764bc18f0d87e6154a6389372a4ad7af88ec22f9c7b161726092 -->
 
 > ## Documentation Index
 >
@@ -54,7 +54,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/general/ai-multi-shot \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "element_frontal_image": "https://v1-kling.klingai.com/kcdn/cdn-kcdn112452/kling-qa-test/multi-1.png",
@@ -111,7 +111,7 @@ curl --request POST \
 ```bash
 curl --request GET \
   --url https://api-beijing.klingai.com/v1/general/ai-multi-shot/{task_id} \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -184,7 +184,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/general/ai-multi-shot?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

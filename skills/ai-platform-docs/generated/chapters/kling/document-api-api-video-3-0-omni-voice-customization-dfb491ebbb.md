@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-omni/voice-customization.md -->
-<!-- Source SHA-256: f5f2434684f6f580fe7af039c7bb64105a5f30a479aad857d48babb4477f4fff -->
+<!-- Source SHA-256: b28897ac6cd9dc6bf9205dfde5f027f56dbbb6033e7d22b71d4067169ddf3c81 -->
 
 > ## Documentation Index
 >
@@ -46,8 +46,10 @@
 
 - `voice_name`: 文本内容最大长度 20 个字符
 - `voice_name`: 创建后不再使用的音色可通过 API 删除
+- `voice_url`: voice_url 与 video_id 必须且只能传入一个；同时传入或均不传入都会报错
 - `voice_url`: 支持 .mp3 / .wav / .mp4 / .mov 格式的音视频文件
 - `voice_url`: 音频中人声需干净无杂音，有且只能有一种人声，时长不短于 5 秒且不长于 30 秒
+- `video_id`: video_id 与 voice_url 必须且只能传入一个；同时传入或均不传入都会报错
 - `video_id`: 仅满足以下条件的视频可以用于定制音色：
     - 使用 V2.6 版本模型生成且开启 sound 参数值为 on 的视频
     - 通过数字人 API 生成的视频
@@ -62,10 +64,9 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/general/custom-voices \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
-    "video_id": "",
     "voice_url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-qa-test/out.mp3",
     "voice_name": "定制人声",
     "callback_url": ""
@@ -113,20 +114,20 @@ curl --request POST \
 
 | 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
 |---|---|---:|---|---|---|
-| `task_id` | string | 是 | - | - | 图片生成的任务ID。请求路径参数，直接将值填写在请求路径中 |
-| `external_task_id` | string | 否 | - | - | 用户自定义任务 ID |
+| `task_id` | string | 否 | - | - | 创建自定义音色任务时返回的任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值填写到路径参数 {id} 中 |
+| `external_task_id` | string | 否 | - | - | 音色定制任务的用户自定义任务 ID |
 
 #### Path Params 字段补充说明
 
-- `external_task_id`: 创建任务时填写的 external_task_id，与 task_id 两种查询方式二选一
-  - 请注意，单用户下需要保证唯一性
+- `external_task_id`: external_task_id 与 task_id 必须且只能选择一个，并将所选值填写到路径参数 {id} 中
+  - external_task_id 在单用户下必须保证唯一性
 
 ### Request Example
 
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/general/custom-voices/{id}' \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -199,7 +200,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/general/custom-voices?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -274,7 +275,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/general/presets-voices?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -335,7 +336,7 @@ curl --request GET \
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/general/delete-voices \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "voice_id": "850087542757535834"

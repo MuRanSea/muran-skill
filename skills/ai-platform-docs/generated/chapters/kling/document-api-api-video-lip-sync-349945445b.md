@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/lip-sync.md -->
-<!-- Source SHA-256: c81c058b6825440d96d97b737c13ddfb5882f4456851bc40cf42f6c32c362bc0 -->
+<!-- Source SHA-256: ebd2b5115fbd5d9fdcee62e820d76d12b9dbff2a69a28ae6cde6ba304b42a158 -->
 
 > ## Documentation Index
 >
@@ -89,7 +89,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/advanced-lip-sync \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "session_id": "850508686686064678",
@@ -157,7 +157,7 @@ curl --request POST \
 ```bash
 curl --request GET \
   --url https://api-beijing.klingai.com/v1/videos/advanced-lip-sync/{task_id} \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -237,7 +237,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/videos/advanced-lip-sync?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example

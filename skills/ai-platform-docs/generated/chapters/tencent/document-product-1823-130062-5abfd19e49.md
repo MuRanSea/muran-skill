@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130062 -->
-<!-- Source SHA-256: 79ecabb7162421029345164fc89b23627cfe71dfe44f0443300d0e60ef9825d4 -->
+<!-- Source SHA-256: 7a2adef2ec7102759e01a4e6a41eb2a295f0bb4b0c697a4f9ae3f578439ad7ef -->
 
 # OpenClaw
 
 官方来源：https://cloud.tencent.com/document/product/1823/130062
-最近更新时间：2026-06-22 22:27:30
+最近更新时间：2026-10-23 18:08:00
 
 OpenClaw 是一款开源的本地 AI 代理框架，能让 AI 从“回答问题”进化为“动手执行任务”。它支持在 Windows、macOS 和 Linux 上自主运行，通过内置工具和可扩展的插件体系，自动完成文件整理、邮件处理、代码编写等操作。
 
@@ -120,8 +120,25 @@ Hy Token Plan
             "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
             "contextWindow": 202752,
             "maxTokens": 16384
-          }
-,
+          },
+          {
+            "id": "glm-5.1",
+            "name": "GLM-5.1",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 202752,
+            "maxTokens": 16384
+          },
+          {
+            "id": "minimax-m2.7",
+            "name": "MiniMax-M2.7",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 196608,
+            "maxTokens": 32768
+          },
           {
             "id": "deepseek-v4-flash-202605",
             "name": "DeepSeek-V4-Flash",
@@ -164,6 +181,15 @@ Hy Token Plan
             "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
             "contextWindow": 262144,
             "maxTokens": 131072
+          },
+          {
+            "id": "hy3",
+            "name": "Hy3",
+            "reasoning": true,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 262144,
+            "maxTokens": 131072
           }
         ]
       }
@@ -188,6 +214,8 @@ Hy Token Plan
         "tencent-token-plan/minimax-m2.5": {},
         "tencent-token-plan/kimi-k2.5": {},
         "tencent-token-plan/glm-5": {},
+        "tencent-token-plan/glm-5.1": {},
+        "tencent-token-plan/minimax-m2.7": {},
         "tencent-token-plan/deepseek-v4-flash-202605": {},
         "tencent-token-plan/deepseek-v4-pro-202606": {}
       }
@@ -202,13 +230,16 @@ Hy Token Plan
         "primary": "tencent-hy-token-plan/hy3-preview"
       },
       "models": {
-        "tencent-hy-token-plan/hy3-preview": {}
+        "tencent-hy-token-plan/hy3-preview": {},
+        "tencent-hy-token-plan/hy3": {}
       }
     }
 }
 ```
 
 4. 在界面上单击 **Save** 保存配置，保存完成后，单击 **Update** 使配置生效。
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/35892ab6adcd7714cabb98efd4273bd8.png)
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/35892ab6adcd7714cabb98efd4273bd8.png)
 
@@ -222,8 +253,12 @@ WebUI
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/f83db5fd93fe8202a0045f64b99a9062.png)
 
+![](https://qcloudimg.tencent-cloud.cn/image/document/f83db5fd93fe8202a0045f64b99a9062.png)
+
 TUI
 
 您可以通过 `openclaw tui` 命令打开 TUI 进行交互。
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/f5a48e525d80ca80411f10c4b1d77a62.png)
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/f5a48e525d80ca80411f10c4b1d77a62.png)

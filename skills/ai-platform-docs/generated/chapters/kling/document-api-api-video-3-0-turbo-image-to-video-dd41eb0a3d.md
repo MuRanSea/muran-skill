@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-turbo/image-to-video.md -->
-<!-- Source SHA-256: 7c7fbbf23bbdd218b08d2c29fb74aa0fd45bf5909f7b43f3bddee00d4f3b452c -->
+<!-- Source SHA-256: 1000a5218e97fe5b50596457dfcc13a3f34f7cac3f8d91e594e07d856906ea31 -->
 
 > ## Documentation Index
 >
@@ -118,7 +118,7 @@
 ```bash
 curl --location 'https://api-beijing.klingai.com/image-to-video/kling-3.0-turbo' \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer {apikey}' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --data-raw '{
     "contents": [
       {
@@ -204,7 +204,7 @@ curl --location 'https://api-beijing.klingai.com/image-to-video/kling-3.0-turbo'
 ```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer {apikey}'
+  --header "Authorization: Bearer ${KLING_API_KEY}"
 ```
 
 ### Response Example
@@ -278,7 +278,7 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
               "owned_by": "string" // 音色来源，kling为官方音色库，数字为创作者ID
             }
           ],
-          "owned_by": "string", // 主体来源，kling为官方音色库，数字为创作者ID
+          "owned_by": "string", // 主体来源，kling为官方主体库，数字为创作者ID
           "status": "string", // 主体状态，分为正常和已被删除，枚举值分别为：succeeded, deleted
           "tags": [ // 主体标签相关信息
             {
@@ -372,7 +372,7 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
 ```bash
 curl --location 'https://api-beijing.klingai.com/tasks' \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer {apikey}' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --data '{
     "start_time": 1781193600000,
     "end_time": 1781516352968,
@@ -463,7 +463,7 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
               "owned_by": "string" // 音色来源，kling为官方音色库，数字为创作者ID
             }
           ],
-          "owned_by": "string", // 主体来源，kling为官方音色库，数字为创作者ID
+          "owned_by": "string", // 主体来源，kling为官方主体库，数字为创作者ID
           "status": "string", // 主体状态，分为正常和已被删除，枚举值分别为：succeeded, deleted
           "tags": [ // 主体标签相关信息
             {

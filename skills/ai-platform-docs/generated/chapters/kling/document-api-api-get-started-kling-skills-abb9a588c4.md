@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/get-started/kling-skills.md -->
-<!-- Source SHA-256: bf9288fa19b7382652d1a2d9fdd16e666ea0520ea7545eb917e1ef1f6d9e04e9 -->
+<!-- Source SHA-256: 0def419e836910feec1da3e88dd5932383f34d1a02affd89bcf6ccb92b5d29e3 -->
 
 > ## Documentation Index
 >
@@ -13,7 +13,7 @@
 > 当前 Tab: Kling Skills
 > 此内容为面向 LLM 优化的 Markdown，已展开页面内 Tab，并省略页面目录、复制按钮等 UI 控件。
 
-<p style="color: var(--color-text-3); font-size: 13px; margin-top: -4px;">上次更新: 2026/04/01 16:02</p>
+更新日期：2026年4月1日
 
 ---
 

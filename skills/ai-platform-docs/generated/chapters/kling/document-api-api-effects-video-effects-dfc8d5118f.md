@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/effects/video-effects.md -->
-<!-- Source SHA-256: af6b9ad1f3d3d69b4d95b366da4a79321f496b830bb6450526fd149d6587b46d -->
+<!-- Source SHA-256: 0b1cf52e332dee6c8d5a706f0189ab8abca36db9ea00ec445e223f808d569ae0 -->
 
 > ## Documentation Index
 >
@@ -87,7 +87,7 @@
 ```bash
 curl --request POST \
   --url https://api-beijing.klingai.com/v1/videos/effects \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "effect_scene": "color_mixing",
@@ -162,8 +162,8 @@ curl --request POST \
 
 | 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
 |---|---|---:|---|---|---|
-| `task_id` | string | 否 | - | - | 视频特效的任务 ID |
-| `external_task_id` | string | 否 | - | - | 视频特效的自定义任务 ID |
+| `task_id` | string | 否 | - | - | 视频特效的任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
+| `external_task_id` | string | 否 | - | - | 视频特效的自定义任务 ID。task_id 与 external_task_id 必须且只能选择一个，并将所选值作为 {id} 路径参数。 |
 
 #### Path Params 字段补充说明
 
@@ -177,7 +177,7 @@ curl --request POST \
 ```bash
 curl --request GET \
   --url https://api-beijing.klingai.com/v1/videos/effects/{task_id} \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json'
 ```
 
@@ -253,7 +253,7 @@ curl --request GET \
 ```bash
 curl --request GET \
   --url 'https://api-beijing.klingai.com/v1/videos/effects?pageNum=1&pageSize=30' \
-  --header 'Authorization: Bearer <token>' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json'
 ```
 
