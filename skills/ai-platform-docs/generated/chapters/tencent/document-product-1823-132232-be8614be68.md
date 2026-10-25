@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132232 -->
-<!-- Source SHA-256: 9f96143b4e159b3ff72ae676a5fea91f274326cf622581d04fb07ccc1c4e61b8 -->
+<!-- Source SHA-256: b4986452e4fc21b50c9ea47479a2330f6f290cf56c3488621339ea5ce407e281 -->
 
 # Kimi 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132232
-最近更新时间：2026-09-18 14:22:00
+最近更新时间：2026-10-24 14:51:30
 
 Kimi 系列模型兼容 OpenAI / Anthropic 协议，可直接通过 OpenAI SDK 或标准 HTTP 接口调用。本文给出常用场景的 5 语言调用示例（cURL / Python / Node.js / Java / Go），并说明 Kimi 在思考模式、多模态等方面的特殊用法。
 
@@ -16,18 +16,13 @@ Kimi 系列模型兼容 OpenAI / Anthropic 协议，可直接通过 OpenAI SDK �
 
 TokenHub 当前支持以下 Kimi 模型（具体以 [模型列表](https://cloud.tencent.com/document/product/1823/130051) 为准）：
 
-| 模型 ID | 类型 | 思考能力 | 视觉能力 | 视频能力 |
-| --- | --- | --- | --- | --- |
-| `kimi-k3` | 通用对话模型 | 仅思考（不可关闭） | 支持 | 支持 |
-| `kimi-k2.8-preview` | 通用对话模型 | 仅思考（不可关闭） | 支持 | 支持 |
-| `kimi-k2.7-code` | Coding 模型 | 仅思考（不可关闭） | 支持 | 支持 |
-| `kimi-k2.6` | 通用对话模型 | 可开关（默认开启） | 支持 | 支持 |
+<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型 ID</div></td><td><div>类型</div></td><td><div>思考能力</div></td><td><div>视觉能力</div></td><td><div>视频能力</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>kimi-k3.1-pro-highspeed</code></div></td><td colspan="1" rowspan="1"><div>通用对话模型</div></td><td colspan="1" rowspan="1"><div>仅思考（不可关闭）</div></td><td colspan="1" rowspan="1"><div>支持</div></td><td colspan="1" rowspan="1"><div>支持</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>kimi-k3.1-pro</code></div></td><td colspan="1" rowspan="1"><div>通用对话模型</div></td><td colspan="1" rowspan="1"><div>仅思考（不可关闭）</div></td><td colspan="1" rowspan="1"><div>支持</div></td><td colspan="1" rowspan="1"><div>支持</div></td></tr><tr><td><div><code>kimi-k3</code></div></td><td><div>通用对话模型</div></td><td><div>仅思考（不可关闭）</div></td><td><div>支持</div></td><td><div>支持</div></td></tr><tr><td><div><code>kimi-k2.8-preview</code></div></td><td><div>通用对话模型</div></td><td><div>仅思考（不可关闭）</div></td><td><div>支持</div></td><td><div>支持</div></td></tr><tr><td><div><code>kimi-k2.7-code-highspeed</code></div></td><td colspan="1" rowspan="1"><div>Coding 模型</div></td><td colspan="1" rowspan="1"><div>仅思考（不可关闭）</div></td><td colspan="1" rowspan="1"><div>支持</div></td><td colspan="1" rowspan="1"><div>支持</div></td></tr><tr><td><div><code>kimi-k2.7-code</code></div></td><td><div>Coding 模型</div></td><td><div>仅思考（不可关闭）</div></td><td><div>支持</div></td><td><div>支持</div></td></tr><tr><td><div><code>kimi-k2.6</code></div></td><td><div>通用对话模型</div></td><td><div>可开关（默认开启）</div></td><td><div>支持</div></td><td><div>支持</div></td></tr></tbody></table>
 
 ## Kimi 各模型调用差异
 
 Kimi 系列模型整体兼容 OpenAI Chat Completions 协议，但不同模型的参数约束不同。接入时请按具体模型 ID 维护参数模板，不要把一套请求参数复用于所有 Kimi 模型。
 
-| 维度 | `kimi-k3` | `kimi-k2.8-preview` | `kimi-k2.7-code` / `kimi-k2.7-code-highspeed` | `kimi-k2.6` |
+| 维度 | `kimi-k3 / kimi-k3.1-pro / kimi-k3.1-pro-highspeed` | `kimi-k2.8-preview` | `kimi-k2.7-code` / `kimi-k2.7-code-highspeed` | `kimi-k2.6` |
 | --- | --- | --- | --- | --- |
 | 模型定位 | 旗舰通用模型，适合长上下文、知识工作、综合推理和多模态理解 | 综合性能接近 K3，编码与 Agent 能力较 K2.7 Code 提升，思考效率更高，适合长上下文代码任务 | Coding 模型，适合长程代码任务和工程 Agent；HighSpeed 版本更偏低延迟交互 | 通用对话 / 思考模型，适合通用推理、对话和多模态任务 |
 | 思考参数 | 使用顶层 `reasoning_effort`，支持 `"low"` / `"high"` / `"max"` 三档，默认 `"high"` | 使用顶层 `reasoning_effort`，支持 `"low"` / `"high"` / `"max"` 三档，默认 `"max"` | 仅支持思考，`thinking.type` 默认 `"enabled"`，关闭会报错 | 使用 `thinking.type`，可在 `enabled` / `disabled` 间切换 |

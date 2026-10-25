@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137073 -->
-<!-- Source SHA-256: e63aff41966be135799ac621fd32eff8ca2544abc66697e12971cd1433592c6f -->
+<!-- Source SHA-256: 5458cb5b4acdbf85d10d0ee0ebffc3226bc219a78890221e6cb8f4beb2728888 -->
 
 # Tripo-3D-Rigging-Check 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137073
-最近更新时间：2026-08-27 11:35:32
+最近更新时间：2026-10-24 13:10:06
 
 ## 简介
 
@@ -67,17 +67,7 @@ Tripo 绑骨前检查接口，检查模型是否可以绑骨，并返回推荐�
 
 **输出参数**
 
-| 参数名称 | 类型 | 描述 |
-| --- | --- | --- |
-| status | string | completed：任务成功，failed：任务失败，in\_progress：执行中，queued：等待中。  示例值：completed |
-| request\_id | string | 唯一请求 id，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 request\_id）。定位问题时需要提供该次请求的 request\_id。 |
-| output | object | 输出结果（TripoResult，任务完成时返回） |
-| output.riggable | boolean | 模型是否可绑骨。 |
-| output.rig\_type | string | 推荐的骨骼类型。  biped：双足人形。  quadruped：四足动物。  hexapod：六足生物。  octopod：八足生物。  avian：鸟类/有翼生物。  serpentine：蛇形生物。  aquatic：鱼类/水生生物。 |
-| input | string | 输入参数回显 |
-| object | string | 返回对象类型。3d 任务固定返回 3d\_job。 |
-| created\_at | integer | 任务创建时间。 |
-| completed\_at | integer | 任务完成时间。 |
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div>参数名称</div></td><td><div>类型</div></td><td><div>描述</div></td></tr><tr><td><div>status</div></td><td><div>string</div></td><td><div>completed：任务成功，failed：任务失败，in_progress：执行中，queued：等待中。</div><div>示例值：completed</div></td></tr><tr><td><div>request_id</div></td><td><div>string</div></td><td><div>唯一请求 id，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 request_id）。定位问题时需要提供该次请求的 request_id。</div></td></tr><tr><td><div>output</div></td><td><div>object</div></td><td><div>输出结果（TripoResult，任务完成时返回）</div></td></tr><tr><td><div>output.riggable</div></td><td><div>boolean</div></td><td><div>模型是否可绑骨。</div></td></tr><tr><td><div>output.rig_type</div></td><td><div>string</div></td><td><div>推荐的骨骼类型。</div><div>biped：双足人形。</div><div>quadruped：四足动物。</div><div>hexapod：六足生物。</div><div>octopod：八足生物。</div><div>avian：鸟类/有翼生物。</div><div>serpentine：蛇形生物。</div><div>aquatic：鱼类/水生生物。</div></td></tr><tr><td><div>input</div></td><td><div>string</div></td><td><div>输入参数回显</div></td></tr><tr><td><div>object</div></td><td><div>string</div></td><td><div>返回对象类型。3d 任务固定返回 3d_job。</div></td></tr><tr><td><div>created_at</div></td><td><div>integer</div></td><td><div>任务创建时间。</div></td></tr><tr><td><div>completed_at</div></td><td><div>integer</div></td><td><div>任务完成时间。</div></td></tr><tr><td colspan="1" rowspan="1"><div>credits_consumed</div></td><td colspan="1" rowspan="1"><div>number</div></td><td colspan="1" rowspan="1"><div>当前任务实际消耗的积分数。</div></td></tr></tbody></table>
 
 ## 示例
 
@@ -136,6 +126,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/query' \\
     "riggable": true
   },
   "request_id": "74a967e4-0e81-48c1-afde-555b79a1cdf3",
+  "credits_consumed": 0,
   "created_at": 1785989483,
   "completed_at": 1785989483
 }

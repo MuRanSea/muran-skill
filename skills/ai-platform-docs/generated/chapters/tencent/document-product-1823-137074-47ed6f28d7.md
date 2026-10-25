@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137074 -->
-<!-- Source SHA-256: c3c866c72ca1b763bec140ff4a637a9621d5b4011e1903cf06f78510a5021963 -->
+<!-- Source SHA-256: 29589e525b447a757347b59d42a3f1dd1b75ddb144e1cc4b10f75e2d61696747 -->
 
 # Tripo-3D 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137074
-最近更新时间：2026-10-21 10:09:00
+最近更新时间：2026-10-24 13:09:58
 
 本文档适用范围：tripo-3d-3.1、tripo-3d-p1、tripo-3d-p2
 
@@ -76,6 +76,7 @@ Tripo 生3d 接口，根据输入的文本描述/图片智能生成3d。
 | object | string | 返回对象类型。3d 任务固定返回 3d\_job。 |
 | created\_at | integer | 任务创建时间。 |
 | completed\_at | integer | 任务完成时间。 |
+| credits\_consumed | number | 当前任务实际消耗的积分数。 |
 
 ## 示例
 
@@ -139,6 +140,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/query' \\
     "generated_image_url": "https://vcg-prod-1258344699.cos.ap-guangzhou.tencentcos.cn/**********12.png",
     "rendered_image_url": "https://vcg-prod-1258344699.cos.ap-guangzhou.tencentcos.cn/**********12.png"
   },
+  "credits_consumed": 50,
   "created_at": 1785989483,
   "completed_at": 1785989483
 }

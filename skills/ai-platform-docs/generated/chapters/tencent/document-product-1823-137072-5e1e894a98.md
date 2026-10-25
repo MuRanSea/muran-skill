@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137072 -->
-<!-- Source SHA-256: 9f8bb11e66534e697097bc507c837db241e5b425521d272bbab025fa4de247c0 -->
+<!-- Source SHA-256: c0caa534ebd3402cb56ea77d91a3571b8a23a7bfe2163802c946d9d09a28e02c -->
 
 # Tripo-3D-Rigging 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137072
-最近更新时间：2026-08-27 11:35:32
+最近更新时间：2026-10-24 13:10:11
 
 ## 简介
 
@@ -71,17 +71,7 @@ Tripo 自动绑骨接口，自动为 3D 模型添加骨骼绑定。
 
 **输出参数**
 
-| 参数名称 | 类型 | 描述 |
-| --- | --- | --- |
-| status | string | completed：任务成功，failed：任务失败，in\_progress：执行中，queued：等待中。  示例值：completed |
-| request\_id | string | 唯一请求 id，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 request\_id）。定位问题时需要提供该次请求的 request\_id。 |
-| output | object | 输出结果（TripoResult，任务完成时返回） |
-| output.model\_url | string | 模型下载 URL |
-| output.rendered\_image\_url | string | 渲染图片 URL |
-| input | string | 输入参数回显 |
-| object | string | 返回对象类型。3d 任务固定返回 3d\_job。 |
-| created\_at | integer | 任务创建时间。 |
-| completed\_at | integer | 任务完成时间。 |
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div>参数名称</div></td><td><div>类型</div></td><td><div>描述</div></td></tr><tr><td><div>status</div></td><td><div>string</div></td><td><div>completed：任务成功，failed：任务失败，in_progress：执行中，queued：等待中。</div><div>示例值：completed</div></td></tr><tr><td><div>request_id</div></td><td><div>string</div></td><td><div>唯一请求 id，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 request_id）。定位问题时需要提供该次请求的 request_id。</div></td></tr><tr><td><div>output</div></td><td><div>object</div></td><td><div>输出结果（TripoResult，任务完成时返回）</div></td></tr><tr><td><div>output.model_url</div></td><td><div>string</div></td><td><div>模型下载 URL</div></td></tr><tr><td><div>output.rendered_image_url</div></td><td><div>string</div></td><td><div>渲染图片 URL</div></td></tr><tr><td><div>input</div></td><td><div>string</div></td><td><div>输入参数回显</div></td></tr><tr><td><div>object</div></td><td><div>string</div></td><td><div>返回对象类型。3d 任务固定返回 3d_job。</div></td></tr><tr><td><div>created_at</div></td><td><div>integer</div></td><td><div>任务创建时间。</div></td></tr><tr><td><div>completed_at</div></td><td><div>integer</div></td><td><div>任务完成时间。</div></td></tr><tr><td colspan="1" rowspan="1"><div>credits_consumed</div></td><td colspan="1" rowspan="1"><div>number</div></td><td colspan="1" rowspan="1"><div>当前任务实际消耗的积分数。</div></td></tr></tbody></table>
 
 ## 示例
 
@@ -138,6 +128,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/query' \\
       "model_url": "https://vcg-prod-1258344699.cos.ap-guangzhou.tencentcos.cn/**********12.glb"  
   },
   "request_id": "XXXXX-c925-4dda-90f0-XXXXX",
+  "credits_consumed": 25,
   "created_at": 1785989483,
   "completed_at": 1785989483
 }
