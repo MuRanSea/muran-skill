@@ -6,7 +6,7 @@
 |----|------|-------|------|---------|-------|
 | TOS 区 | `chapters/volcengine/tos/` | 《对象存储 文档指南》 | 6407 | 1993 | `INDEX-tos.md` |
 | 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1410 | 202 | `INDEX-ark.md` |
-| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2403 | 166 | `INDEX-ark-guide.md` |
+| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2398 | 166 | `INDEX-ark-guide.md` |
 | AI MediaKit API 区 | `chapters/volcengine/mediakit/` | 《AI MediaKit API 参考》 | 946 | 105 | `INDEX-mediakit.md` |
 | AI MediaKit 指南区 | `chapters/volcengine/mediakit-guide/` | 《AI MediaKit 文档指南》 | 932 | 154 | `INDEX-mediakit-guide.md` |
 
@@ -68,13 +68,13 @@
 |------|------|---------|-------|
 | 1 | 入门 | 1-68 | 5 |
 | 2 | 模型 | 71-109 | 3 |
-| 3 | 调用 | 120-1354 | 49 |
-| 4 | 推理 | 1354-1443 | 12 |
-| 5 | 训练 | 1446-1652 | 19 |
-| 6 | Managed Agents | 1658-1829 | 23 |
-| 7 | 应用 | 1849-1857 | 2 |
-| 8 | 订阅 [Agent/Coding Plan] | 1858-2033 | 25 |
-| 9 | 资源 | 2040-2395 | 28 |
+| 3 | 调用 | 120-1349 | 49 |
+| 4 | 推理 | 1349-1438 | 12 |
+| 5 | 训练 | 1441-1647 | 19 |
+| 6 | Managed Agents | 1653-1824 | 23 |
+| 7 | 应用 | 1844-1852 | 2 |
+| 8 | 订阅 [Agent/Coding Plan] | 1853-2028 | 25 |
+| 9 | 资源 | 2035-2390 | 28 |
 
 ## AI MediaKit API 区（mediakit）
 
