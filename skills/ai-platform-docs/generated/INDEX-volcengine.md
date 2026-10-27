@@ -5,9 +5,9 @@
 | 区 | 目录 | 源文档 | 页数 | 章节文件 | 章节表 |
 |----|------|-------|------|---------|-------|
 | TOS 区 | `chapters/volcengine/tos/` | 《对象存储 文档指南》 | 6407 | 1993 | `INDEX-tos.md` |
-| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1410 | 202 | `INDEX-ark.md` |
+| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1434 | 202 | `INDEX-ark.md` |
 | 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2398 | 166 | `INDEX-ark-guide.md` |
-| AI MediaKit API 区 | `chapters/volcengine/mediakit/` | 《AI MediaKit API 参考》 | 946 | 105 | `INDEX-mediakit.md` |
+| AI MediaKit API 区 | `chapters/volcengine/mediakit/` | 《AI MediaKit API 参考》 | 951 | 106 | `INDEX-mediakit.md` |
 | AI MediaKit 指南区 | `chapters/volcengine/mediakit-guide/` | 《AI MediaKit 文档指南》 | 932 | 154 | `INDEX-mediakit-guide.md` |
 
 「页码」是原 PDF 页码范围；「行范围」是中间 MD（`doc/<源文档>.md`）的 1 起始行号，可据此回查原文。章节文件本身已去掉页眉页脚，回查 PDF 时用这两列。文件名即章节标题，日常定位直接 Glob 文件名即可，用不到这两列。
@@ -44,19 +44,19 @@
 |------|------|---------|-------|
 | 1 | 准备工作 | 1-8 | 3 |
 | 2 | 对话(Chat) API | 11-11 | 1 |
-| 3 | Responses API | 43-528 | 13 |
-| 4 | Messages API | 534-554 | 2 |
-| 5 | System One API（beta） | 564-564 | 1 |
-| 6 | Files API | 573-587 | 5 |
-| 7 | 视频生成 API | 590-619 | 4 |
-| 8 | 图片生成 API | 620-638 | 2 |
-| 9 | 3D生成 API | 644-674 | 12 |
-| 10 | 向量化 API | 675-675 | 1 |
-| 11 | Managed Agents API | 681-1092 | 75 |
-| 12 | 批量推理 API | 1095-1113 | 8 |
-| 13 | 分词 API | 1136-1136 | 1 |
-| 14 | 管控面 API | 1138-1353 | 69 |
-| 15 | 其他说明 | 1357-1393 | 5 |
+| 3 | Responses API | 67-552 | 13 |
+| 4 | Messages API | 558-578 | 2 |
+| 5 | System One API（beta） | 588-588 | 1 |
+| 6 | Files API | 597-611 | 5 |
+| 7 | 视频生成 API | 614-643 | 4 |
+| 8 | 图片生成 API | 644-662 | 2 |
+| 9 | 3D生成 API | 668-698 | 12 |
+| 10 | 向量化 API | 699-699 | 1 |
+| 11 | Managed Agents API | 705-1116 | 75 |
+| 12 | 批量推理 API | 1119-1137 | 8 |
+| 13 | 分词 API | 1160-1160 | 1 |
+| 14 | 管控面 API | 1162-1377 | 69 |
+| 15 | 其他说明 | 1381-1417 | 5 |
 
 ## 方舟指南区（ark-guide）
 
@@ -71,26 +71,26 @@
 | 3 | 调用 | 120-1349 | 49 |
 | 4 | 推理 | 1349-1438 | 12 |
 | 5 | 训练 | 1441-1647 | 19 |
-| 6 | Managed Agents | 1653-1824 | 23 |
-| 7 | 应用 | 1844-1852 | 2 |
-| 8 | 订阅 [Agent/Coding Plan] | 1853-2028 | 25 |
-| 9 | 资源 | 2035-2390 | 28 |
+| 6 | Managed Agents | 1653-1823 | 23 |
+| 7 | 应用 | 1843-1851 | 2 |
+| 8 | 订阅 [Agent/Coding Plan] | 1852-2027 | 25 |
+| 9 | 资源 | 2034-2390 | 28 |
 
 ## AI MediaKit API 区（mediakit）
 
 智能处理接口契约：视频/图像/剪辑/音频/大模型工具提交任务 API、查询任务、获取媒体上传地址、事件回调、错误码
 
-全部 105 个章节文件见 `INDEX-mediakit.md`。
+全部 106 个章节文件见 `INDEX-mediakit.md`。
 
 | 章节 | 标题 | 页码范围 | 文件数 |
 |------|------|---------|-------|
 | 1 | 准备工作 | 1-1 | 1 |
-| 2 | 视频工具 API | 5-343 | 35 |
-| 3 | 图像工具 API | 353-539 | 27 |
-| 4 | 剪辑工具 API | 544-802 | 28 |
-| 5 | 音频工具 API | 809-848 | 5 |
-| 6 | 大模型处理工具 API | 854-921 | 5 |
-| 7 | 其他 | 931-944 | 4 |
+| 2 | 视频工具 API | 5-353 | 36 |
+| 3 | 图像工具 API | 358-544 | 27 |
+| 4 | 剪辑工具 API | 549-807 | 28 |
+| 5 | 音频工具 API | 814-853 | 5 |
+| 6 | 大模型处理工具 API | 859-926 | 5 |
+| 7 | 其他 | 936-949 | 4 |
 
 ## AI MediaKit 指南区（mediakit-guide）
 

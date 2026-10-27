@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137071 -->
-<!-- Source SHA-256: 9300ab68e3686df3a1b3ad421e2c0574a69af694f3f5e562ad9e639d59d0665e -->
+<!-- Source SHA-256: 601e1c8b3c43dbe4c05a1b348c91775fa48db222a19c6105bcacb8024bb89da8 -->
 
 # Tripo-3D-Animation 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137071
-最近更新时间：2026-10-24 13:10:16
+最近更新时间：2026-10-26 19:10:23
 
 ## 简介
 
@@ -47,9 +47,8 @@ Tripo 动画重定向接口，将预设动画应用到已绑骨的 3D 模型上�
 | model | 是 | string | 模型名称，默认为：tripo-3d-animation  示例值：tripo-3d-animation |
 | input | 是 | string | 已绑骨模型的 id |
 | animation | 条件必选 | string | 单个预设动画标识符。  与 animations 互斥，只能二选一。  骨骼类型详见：[骨骼类型说明](https://cloud.tencent.com/document/product/1823/137071#c06b9539-7724-4fdc-896c-8ac7f1a4311a) |
-| animations | 条件必选 | string[] | 多个预设动画标识符列表。  与 animation 互斥，只能二选一。 |
+| animations | 条件必选 | string[] | 多个预设动画标识符列表，最多 5 个；超过 5 个会报错。  与 animation 互斥，只能二选一。 |
 | out\_format | 否 | string | 输出格式。  glb：二进制 glTF，适用于 Web。  fbx：FBX，适用于 DCC 工具和游戏引擎。  默认值: glb |
-| bake\_animation | 否 | boolean | 将动画烘焙到模型中。仅对 glb 输出有效。  默认值: true |
 | export\_with\_geometry | 否 | boolean | 导出时包含几何体。  默认值: true |
 | animate\_in\_place | 否 | boolean | 原地播放动画，无位移。  默认值: false |
 
@@ -185,7 +184,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/query' \\
 | preset:biped:look\_around | preset:biped:make\_a\_call\_01 |
 | preset:biped:make\_a\_call\_02 | preset:biped:pitch\_baseball |
 | preset:biped:play\_mobile\_game | preset:biped:play\_video\_game |
-| preset:biped:press‑up | preset:biped:run\_upstairs |
+| preset:biped:press-up | preset:biped:run\_upstairs |
 | preset:biped:run | preset:biped:scared\_01 |
 | preset:biped:scared\_02 | preset:biped:scratch |
 | preset:biped:shoot | preset:biped:shovel |

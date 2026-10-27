@@ -1,15 +1,16 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130675 -->
-<!-- Source SHA-256: 01733dc76eaacfe04d3a36abcce59070362f2e7da9e8ccb1b824ccce4aa83478 -->
+<!-- Source SHA-256: 484e404b5a3e070c85bad81bced6d1dbf738749081845eb507eba207533cd742 -->
 
 # 产品动态
 
 官方来源：https://cloud.tencent.com/document/product/1823/130675
-最近更新时间：2026-10-21 10:09:00
+最近更新时间：2026-10-26 19:07:20
 
 ## 2026年10月
 
 | **动态名称** | **动态描述** | **发布时间** | **相关文档** |
 | --- | --- | --- | --- |
+| 新增支持模型 | 新增支持 Kimi K3.1 Pro、Kimi K3.1 Pro HighSpeed 模型。 | 2026-10-24 | [模型列表](https://cloud.tencent.com/document/product/1823/130051) |
 | 新增支持模型 | 按量付费和 Token Plan 企业版新增支持 DeepSeek-V4.1-Flash-1017 模型。 | 2026-10-20 | [模型列表](https://cloud.tencent.com/document/product/1823/130051)  [Token Plan 企业版专业套餐](https://cloud.tencent.com/document/product/1823/130659) |
 | 新增支持模型 | 新增支持 MiniMax-M3.1-Flash 模型。 | 2026-10-19 | [模型列表](https://cloud.tencent.com/document/product/1823/130051) |
 
