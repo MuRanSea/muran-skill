@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-async.md -->
-<!-- Source SHA-256: 5537e586566708509767c6294f7381e03633c3abc35fce70bbd240f81cd396b7 -->
+<!-- Source SHA-256: 55b876877013e44617f7c2a4900733e34fb12e7d5916d80721a344a451579373 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -67,7 +67,7 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
 
 ```python theme={null}
 """
-本示例用于待合成文本的 file_id。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
+本示例用于待合成文本的 file_id。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`（[配置方法](/guides/quickstart-preparation#env-vars)）。
 """
 import requests
 import os

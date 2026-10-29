@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-prompt-caching.md -->
-<!-- Source SHA-256: ceb338250ff16f3f3fad73fbf68e904e91d813d68a1107bb8740cbeda65061a0 -->
+<!-- Source SHA-256: 4721cc52f68bff14e725731b292d3b85db6d4464a33f1b1685a965601427c07d -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -35,12 +35,12 @@ pip install anthropic
 
 **环境变量设置**
 
-国内用户使用 `https://api.minimax.cn/v1`，国际用户使用 `https://api.minimax.io/v1`
-
 ```bash theme={null} theme={null}
 export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic
 export ANTHROPIC_API_KEY=${YOUR_API_KEY}
 ```
+
+配置方法见[配置环境变量](https://platform.minimaxi.com/docs/guides/quickstart-preparation.md#env-vars)。
 
 **第一次请求 - 建立缓存**
 
@@ -132,12 +132,12 @@ pip install openai
 
 **环境变量设置**
 
-国内用户使用 `https://api.minimax.cn/v1`，国际用户使用 `https://api.minimax.io/v1`
-
 ```bash theme={null} theme={null}
 export OPENAI_BASE_URL=https://api.minimax.cn/v1
 export OPENAI_API_KEY=${YOUR_API_KEY}
 ```
+
+配置方法见[配置环境变量](https://platform.minimaxi.com/docs/guides/quickstart-preparation.md#env-vars)。
 
 **第一次请求 - 建立缓存**
 

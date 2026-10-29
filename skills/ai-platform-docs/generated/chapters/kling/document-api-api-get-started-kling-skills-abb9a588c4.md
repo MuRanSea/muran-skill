@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/get-started/kling-skills.md -->
-<!-- Source SHA-256: 0def419e836910feec1da3e88dd5932383f34d1a02affd89bcf6ccb92b5d29e3 -->
+<!-- Source SHA-256: b3f3cd778f70c32f2b231a9b1a9cdbba2a69928491f670901a4dc449651d931c -->
 
 > ## Documentation Index
 >
@@ -13,7 +13,7 @@
 > 当前 Tab: Kling Skills
 > 此内容为面向 LLM 优化的 Markdown，已展开页面内 Tab，并省略页面目录、复制按钮等 UI 控件。
 
-更新日期：2026年4月1日
+更新日期：2026年10月28日
 
 ---
 
@@ -25,8 +25,8 @@ KlingAI API 官方 skill，开发者可以在第三方Agent中使用Kling AI Ski
 
 <SkillCard icon="K" color="#2261f5" title="Kling AI Skill" clawHubButton="true" clawHubUrl="https://clawhub.ai/klingai-dev/klingai" buyButton="true" buyUrl="https://klingai.com/dev/pricing?scrollTo=video-package" buyText="购买资源包">
     <ul style="font-size: 12px !important;">
-        <li style="font-size: 12px !important;">视频生成（文生视频、图生视频、视频编辑 Omni 3.0）,支持模型：kling-3.0 / kling-3.0-turbo / kling-3.0-omni / kling-2.6 / kling-2.5-turbo / kling-o1</li>
-        <li style="font-size: 12px !important;">图片生成（文生图、图生图、4K 高清）,支持模型：kling-v3 / kling-v3-omni / kling-v2-1 / kling-image-o1</li>
+        <li style="font-size: 12px !important;">视频生成支持模型：kling-3.0 / kling-3.0-turbo / kling-3.0-omni / kling-2.6 / kling-2.5-turbo / kling-o1</li>
+        <li style="font-size: 12px !important;">图片生成支持模型：kling-v3 / kling-v3-omni / kling-v2-1 / kling-image-o1</li>
         <li style="font-size: 12px !important;">主体/角色管理 -- 创建可复用的角色、跨视频保持人物一致性</li>
     </ul>
 </SkillCard>

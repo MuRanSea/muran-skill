@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/quickstart-preparation.md -->
-<!-- Source SHA-256: 246ceb76d106e97ba3f58aad2400b66dac979db4c2021e8faf1af79338879d5b -->
+<!-- Source SHA-256: af3b047967910d426ad41f8f0197945224d732a5b54bb0487aea8b572b822bd4 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -20,31 +20,68 @@ API 调用前，需在 MiniMax 开放平台进行[账户注册](https://platform
 * **M Plan**：通过 [订阅管理 > M Plan](https://platform.minimax.cn/user-center/payment/token-plan)，查看 **订阅 Key**
   \[!NOTE] 订阅 Key 用于 M Plan 订阅套餐和已购积分。它可以在付费资源可用之前就存在；当您拥有 M Plan 席位或积分权限后才可实际使用资源。详情见 [M Plan 概要](https://platform.minimax.cn/docs/m-plan/intro)
 
-生成 API Key 后，建议将其存储为环境变量或保存到 `.env` 文件中：
-
-* 推荐使用 Anthropic API 兼容，具体查看：[Anthropic SDK](https://platform.minimaxi.com/docs/api-reference/text-anthropic-api.md)
-
-  ```bash theme={null}
-  export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic
-  export ANTHROPIC_API_KEY=${YOUR_API_KEY}
-  ```
-
-* 使用 OpenAI API 兼容，具体查看：[OpenAI SDK](https://platform.minimaxi.com/docs/api-reference/text-openai-api.md)
-
-  ```bash theme={null}
-  export OPENAI_BASE_URL=https://api.minimax.cn/v1
-  export OPENAI_API_KEY=${YOUR_API_KEY}
-  ```
-
-* 使用 AI SDK 兼容，具体查看：[AI SDK](https://platform.minimaxi.com/docs/api-reference/text-ai-sdk.md)
-
-  ```bash theme={null}
-  export MINIMAX_API_KEY=${YOUR_API_KEY}
-  ```
+生成 Key 后，建议将其配置为环境变量，不要直接写在代码中。配置方法见下方[配置环境变量](#env-vars)。
 
 **3. 添加资源**
 
 按量付费可通过 [账户管理 > 余额](https://platform.minimax.cn/user-center/payment/balance) 按需充值。M Plan 可购买订阅或积分，也可以使用团队分配给您的资源。
+
+> **配置环境变量**
+>
+> MiniMax 文档中的示例代码会从环境变量读取 API 地址和 Key。按所用的接入方式选择变量，将 `<YOUR_API_KEY>` 替换为你的 API Key（M Plan 用户为订阅 Key）：
+>
+> | 接入方式 | 环境变量 |
+> | :- | :- |
+> | [Anthropic SDK](https://platform.minimaxi.com/docs/api-reference/text-anthropic-api.md)（推荐） | `ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic` `ANTHROPIC_API_KEY=<YOUR_API_KEY>` |
+> | [OpenAI SDK](https://platform.minimaxi.com/docs/api-reference/text-openai-api.md) | `OPENAI_BASE_URL=https://api.minimax.cn/v1` `OPENAI_API_KEY=<YOUR_API_KEY>` |
+> | [AI SDK](https://platform.minimaxi.com/docs/api-reference/text-ai-sdk.md)、语音等原生接口示例 | `MINIMAX_API_KEY=<YOUR_API_KEY>` |
+>
+> 以 Anthropic SDK 为例，按你的系统选择配置方式：
+>
+> **macOS / Linux**
+>
+> **临时生效**：在终端中执行，仅对当前终端窗口有效，关闭后失效：
+>
+> ```bash theme={null}
+> export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic
+> export ANTHROPIC_API_KEY=<YOUR_API_KEY>
+> ```
+>
+> **长期生效**：将上面两行加到 Shell 配置文件末尾。macOS 默认使用 zsh，配置文件为 `~/.zshrc`；多数 Linux 默认使用 bash，配置文件为 `~/.bashrc`。可通过 `echo $SHELL` 查看当前 Shell。
+>
+> ```bash theme={null}
+> echo 'export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic' >> ~/.zshrc
+> echo 'export ANTHROPIC_API_KEY=<YOUR_API_KEY>' >> ~/.zshrc
+> source ~/.zshrc
+> ```
+>
+> 使用 bash 时，将命令中的 `~/.zshrc` 换成 `~/.bashrc`。
+>
+> 配置完成后，在新终端中执行 `echo $ANTHROPIC_BASE_URL`，能输出地址即已生效。
+>
+> **Windows**
+>
+> **临时生效**：在 PowerShell 中执行，仅对当前窗口有效：
+>
+> ```powershell theme={null}
+> $env:ANTHROPIC_BASE_URL = "https://api.minimax.cn/anthropic"
+> $env:ANTHROPIC_API_KEY = "<YOUR_API_KEY>"
+> ```
+>
+> **长期生效**：在 PowerShell 中执行以下命令，写入当前用户的环境变量，**重新打开**终端后生效：
+>
+> ```powershell theme={null}
+> setx ANTHROPIC_BASE_URL "https://api.minimax.cn/anthropic"
+> setx ANTHROPIC_API_KEY "<YOUR_API_KEY>"
+> ```
+>
+> 也可以在「设置 > 系统 > 系统信息 > 高级系统设置 > 环境变量」中手动添加。
+>
+> 配置完成后，在新的 PowerShell 窗口中执行 `echo $env:ANTHROPIC_BASE_URL`，能输出地址即已生效。
+>
+> > [!WARNING]
+> >
+> > 请勿将 Key 提交到代码仓库或分享给他人。如使用 `.env` 文件保存，请将其加入 `.gitignore`。
 
 ***
 

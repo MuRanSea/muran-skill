@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-m3-function-call.md -->
-<!-- Source SHA-256: 5bfabab4c230000a3401e01f22732e69defac4e15a949db877b59a58d12dfa82 -->
+<!-- Source SHA-256: e42e611ccfaaf7e96d278de50254208c3a52bcf5a5f2c33df84f1e0359afa3a8 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -62,6 +62,8 @@ MiniMax-M3.1-Flash 原生支持 Interleaved Thinking。它能够在每轮 Tool U
 export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic
 export ANTHROPIC_API_KEY=${YOUR_API_KEY}
 ```
+
+配置方法见[配置环境变量](https://platform.minimaxi.com/docs/guides/quickstart-preparation.md#env-vars)。
 
 #### 示例代码
 
@@ -224,6 +226,8 @@ A warm, sunny day — you'd typically want light clothing and maybe sunscreen if
 export OPENAI_BASE_URL=https://api.minimax.cn/v1
 export OPENAI_API_KEY=${YOUR_API_KEY}
 ```
+
+配置方法见[配置环境变量](https://platform.minimaxi.com/docs/guides/quickstart-preparation.md#env-vars)。
 
 #### 示例代码
 

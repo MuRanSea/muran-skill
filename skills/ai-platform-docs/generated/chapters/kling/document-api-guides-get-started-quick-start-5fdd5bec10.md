@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/guides/get-started/quick-start.md -->
-<!-- Source SHA-256: 316c5bea49aa08341a60fdcd9dfa40e9a8776346058818045058f96fd390f7d2 -->
+<!-- Source SHA-256: 76dba4be31c5731d980d9b91fcee06f171e8410a2c841daaed316d54d4578e3b -->
 
 > ## Documentation Index
 >
@@ -23,26 +23,28 @@
 
 |                                     可灵AI 开发者平台                                      |
 | :----------------------------------------------------------------------------------------: |
-| ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-zh.70df5415e1a4cdc2.png) |
+| ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-zh.9f340aca6a28342c.png) |
 
-## Step 2: 资源包购买
+## Step 2: 资源包购买&现金额度充值
 
-我们现已全面开放视频生成和图像生成两种 API 资源包的购买渠道。您可以根据实际调用需求选择不同的套餐。此外，为了方便您快速接入，我们还提供了【试用资源包】以供联调测试。详情请访问下单页面进行查看。
+您可根据实际调用需求进行采购：
 
-- 视频生成 API 购买入口：https://klingai.com/dev/pricing?scrollTo=video
-- 图像生成 API 购买入口：https://klingai.com/dev/pricing?scrollTo=image
+**API 资源包：** 已全面开放视频生成与图像生成两类 API 资源包购买渠道，其中视频生成提供基础版、专业版、通用版、旗舰版四个版本，不同版本支持的模型与能力有所差异
 
-|                                       视频生成 API 资源包                                        |                                       图像生成 API 资源包                                        |
-| :----------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
-| ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-video-zh.a2986bbf57d22eca.png) | ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-image-zh.db68ae2f858ad76a.png) |
+- 视频生成 API 资源包购买入口：https://klingai.com/dev/pricing?scrollTo=video
+- 图像生成 API 资源包购买入口：https://klingai.com/dev/pricing?scrollTo=image
+
+**定制服务：** 若现有线上资源包无法满足您的业务需求，您有定制或大额采购需求，欢迎点击<a class="link-plain" href="#business-consult">【商务咨询】</a>填写问卷，我们将尽快与您联系，为您提供现金额度充值服务
+
+**说明：** Kling API 支持积分和现金额度调用两种模式，相关报价信息可前往<a class="link-plain" href="/document-api/pricing/base/video">「价格」</a>查看
 
 ## Step 3: 登录开发者控制台
 
 1. 访问 https://klingai.com/dev/api-key
 
-|                                        开发者控制台                                        |
-| :----------------------------------------------------------------------------------------: |
-| ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/list-zh.906efffb6f70bc0d.png) |
+|                                             开发者控制台                                             |
+| :--------------------------------------------------------------------------------------------------: |
+| ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/console-login-zh.b2f8e02cdac691e6.webp) |
 
 2. 使用您的手机号或快手扫码登录，控制台账号与可灵AI web端账号一致
 
@@ -52,9 +54,9 @@
 
 创建 API 密钥并命名管理，支持一键复制 API Key
 
-| 新建 API 密钥名称                                                                                       | 一键复制API Key                                                                                              | 支持启用/禁用、编辑名称、删除                                                                         |
-| :------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/rename-zh.e6bd11d32ac78cb5.png) | ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/images/copy-zh.98938e404cfe67ab.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/list-zh.906efffb6f70bc0d.png) |
+| 新建 API 密钥名称                                                                                               | 一键复制API Key                                                                                               | 支持启用/禁用、编辑名称、删除                                                                                    |
+| :-------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------- |
+| ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/api-key-create-zh.b7a919ff1e0c94de.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/api-key-copy-zh.e235d835373311b9.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/api-key-manage-zh.2767a8093c04055a.webp) |
 
 1、打开可灵 AI 控制台并登录
 
@@ -74,6 +76,6 @@
 
 ## Step 6: 控制台查看信息
 
-| 查看API 调用量&趋势                                                                     | 查看资源包消耗进度&趋势                                                                 | 查看资源包账单明细                                                                      | 查看额度账单明细                                                                        |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/1-zh.0797d1a83ea443ba.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/2-zh.25a93ef0bbeb8ab6.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/3-zh.63d730eac98a7e66.png) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/4-zh.9d8dbf54f5220af7.png) |
+| 查看API 调用量&趋势                                                                                | 查看资源包消耗进度&趋势                                                                              | 查看资源包账单明细                                                                                        | 查看额度账单明细                                                                                        |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| ![](https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/usage-calls-zh.77423db3bde0218d.webp) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/usage-package-zh.10edccb5a6e51f5a.webp) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/usage-package-bill-zh.5c6c7517f3f9f063.webp) | ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/usage-quota-bill-zh.add48e1f6fa41d20.webp) |

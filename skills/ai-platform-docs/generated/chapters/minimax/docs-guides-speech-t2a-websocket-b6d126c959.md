@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-websocket.md -->
-<!-- Source SHA-256: 25013441df2f3867557b6f90af2b2482c22b24b16e5af0a3cb3fb6217354a20b -->
+<!-- Source SHA-256: 1495873bf71360b98f9dbc1478c5bb5dfc43129a5f0134d9ecfc1aa68f34c3da -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -119,7 +119,7 @@ MiniMax 的语音合成模型具备卓越的跨语言能力，全面支持 40 �
 
 本指南指导，流式播放返回的音频文件，并保存完整音频文件。
 
-⚠️ 注意，为实时播放音频流，需要先安装 [mpv 播放器](https://mpv.io/installation/)。并且，需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
+⚠️ 注意，为实时播放音频流，需要先安装 [mpv 播放器](https://mpv.io/installation/)。并且，需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`（[配置方法](https://platform.minimaxi.com/docs/guides/quickstart-preparation.md#env-vars)）。
 
 请求示例
 

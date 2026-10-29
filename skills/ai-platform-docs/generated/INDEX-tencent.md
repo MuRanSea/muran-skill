@@ -224,5 +224,6 @@
 | 调用指南 / 语音模型 / 语音模型调用概览 | `chapters/tencent/document-product-1823-138804-8118ff0bc9.md` | https://cloud.tencent.com/document/product/1823/138804 |
 | 调用指南 / 语音模型 / 音乐生成 / Mureka 音乐生成 | `chapters/tencent/document-product-1823-138805-fba71bdd54.md` | https://cloud.tencent.com/document/product/1823/138805 |
 | 调用指南 / 3D 生成模型 / Rodin 调用指南 / Rodin-Gen-3D-2.5 调用指南 | `chapters/tencent/document-product-1823-139566-b5391b01be.md` | https://cloud.tencent.com/document/product/1823/139566 |
+| Token Plan / Token Plan 个人版 / Token Plan 个人版限时优惠活动 | `chapters/tencent/document-product-1823-140042-51d67eaf27.md` | https://cloud.tencent.com/document/product/1823/140042 |
 | 调用指南 / 语音模型 / 语音合成 / Tenlai 同步语音合成 | `chapters/tencent/document-product-1823-140153-7db2019f73.md` | https://cloud.tencent.com/document/product/1823/140153 |
 | 调用指南 / 语音模型 / 语音识别 / Tenlai 异步语音识别 | `chapters/tencent/document-product-1823-140154-3bdde80022.md` | https://cloud.tencent.com/document/product/1823/140154 |

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-ai-sdk.md -->
-<!-- Source SHA-256: e892685bd47ea5919444594d3ce91d2aa11a1676af58558d57b847d698272bdf -->
+<!-- Source SHA-256: 7cd52cd02be53f9e5e6acd7297b860ee62da967204fa81ecebce497cbf023e6e -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -28,6 +28,8 @@ pnpm add ai @minimax-ai/ai-sdk-provider
 ```bash theme={null}
 export MINIMAX_API_KEY=${YOUR_API_KEY}
 ```
+
+配置方法见[配置环境变量](https://platform.minimaxi.com/docs/guides/quickstart-preparation.md#env-vars)。
 
 ### 3. 调用 API
 

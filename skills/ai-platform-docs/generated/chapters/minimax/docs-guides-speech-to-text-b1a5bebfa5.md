@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-to-text.md -->
-<!-- Source SHA-256: 44a9263c34db011c7ff9258d5a6430fa47baef4ab17dc5d6f16ccce7b589eb45 -->
+<!-- Source SHA-256: ca0813911083854e35fb28ec9b489005183a8d5613bd65aaf06cce82494ca1f8 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -76,7 +76,7 @@ MiniMax 语音识别（ASR）把音频转写成文本，当前对外提供的模
 
 ## 功能与代码示例
 
-在 [账户管理 → 接口密钥](https://platform.minimax.cn/user-center/basic-information/interface-key) 获取 API Key 并写入环境变量 `MINIMAX_API_KEY`。
+在 [账户管理 → 接口密钥](https://platform.minimax.cn/user-center/basic-information/interface-key) 获取 API Key 并写入环境变量 `MINIMAX_API_KEY`（[配置方法](https://platform.minimaxi.com/docs/guides/quickstart-preparation.md#env-vars)）。
 
 ### 一次性识别（默认）
 

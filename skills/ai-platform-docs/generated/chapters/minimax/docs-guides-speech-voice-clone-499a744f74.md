@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-voice-clone.md -->
-<!-- Source SHA-256: ef66fd8afed3d8d889cbf51c8e20c109762dd6d4c2013da0240243c46f23717c -->
+<!-- Source SHA-256: 34be16d514986a33cbaf8b7d8c3b2530efb8a301383e5e32328fbedd73f55bbd -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -33,7 +33,7 @@
 ```python theme={null}
 """
 本示例用于获取复刻音频的 file_id。
-注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
+注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`（[配置方法](/guides/quickstart-preparation#env-vars)）。
 """
 import requests
 import os

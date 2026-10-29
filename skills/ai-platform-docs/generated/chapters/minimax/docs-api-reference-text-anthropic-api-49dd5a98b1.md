@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-anthropic-api.md -->
-<!-- Source SHA-256: 40fcb7555eb76c26ac57f5ea27111fb4c669f25b32db81ecf8fa58c645ebc6d2 -->
+<!-- Source SHA-256: b2cf317ff6d4318419ada634f8731cbdea9ae4f908bea26bbc449158fbcc7679 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -29,6 +29,8 @@ npm install @anthropic-ai/sdk
 export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic
 export ANTHROPIC_API_KEY=${YOUR_API_KEY}
 ```
+
+配置方法见[配置环境变量](https://platform.minimaxi.com/docs/guides/quickstart-preparation.md#env-vars)。
 
 ### 3. 调用 API
 

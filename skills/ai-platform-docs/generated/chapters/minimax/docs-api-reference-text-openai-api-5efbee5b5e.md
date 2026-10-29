@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-openai-api.md -->
-<!-- Source SHA-256: 975401c030c93a5db2fd8dc5cf384b20e72c5e9b7682e8d0774eb529ab350af8 -->
+<!-- Source SHA-256: f75625c188c6c8610254adabb1c10d0fb00651a5604c45c69269102b9f38abdc -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -29,6 +29,8 @@ npm install openai
 export OPENAI_BASE_URL=https://api.minimax.cn/v1
 export OPENAI_API_KEY=${YOUR_API_KEY}
 ```
+
+配置方法见[配置环境变量](https://platform.minimaxi.com/docs/guides/quickstart-preparation.md#env-vars)。
 
 ### 3. 调用 API
 

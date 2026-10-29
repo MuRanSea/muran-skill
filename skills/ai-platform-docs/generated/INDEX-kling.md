@@ -28,6 +28,8 @@
 | 通用 - 智能补全主体图 | `chapters/kling/document-api-api-image-common-subject-completion-a88ad15862.md` | https://klingai.com/document-api/api/image/common/subject-completion.md |
 | Kling Image O1 - 主体管理 | `chapters/kling/document-api-api-image-o1-elements-df500861e4.md` | https://klingai.com/document-api/api/image/o1/elements.md |
 | Kling Image O1 - 图片生成 | `chapters/kling/document-api-api-image-o1-image-generation-0e29fb20f0.md` | https://klingai.com/document-api/api/image/o1/image-generation.md |
+| 使用指南 - Kling 4.0 视频提示词案例 | `chapters/kling/document-api-api-usage-guide-kling-4-0-prompt-guide-75c107cb64.md` | https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide.md |
+| 使用指南 - Kling 4.0 视频使用手册 | `chapters/kling/document-api-api-usage-guide-kling-4-0-fef7e2a38a.md` | https://klingai.com/document-api/api/usage-guide/kling-4-0.md |
 | Kling 2.5 Turbo - 图生视频 | `chapters/kling/document-api-api-video-2-5-turbo-image-to-video-d026c199b7.md` | https://klingai.com/document-api/api/video/2-5-turbo/image-to-video.md |
 | Kling 2.5 Turbo - 文生视频 | `chapters/kling/document-api-api-video-2-5-turbo-text-to-video-018bd47e79.md` | https://klingai.com/document-api/api/video/2-5-turbo/text-to-video.md |
 | Kling 2.6 - 图生视频 | `chapters/kling/document-api-api-video-2-6-image-to-video-ade5a29355.md` | https://klingai.com/document-api/api/video/2-6/image-to-video.md |
