@@ -2,8 +2,8 @@
   "schema_version": 1,
   "mattpocock": {
     "repository": "https://github.com/mattpocock/skills",
-    "commit": "59db609eb1e18aaf59b63284d0e52255aff0c63c",
-    "version": "1.3.1",
+    "commit": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
+    "version": "1.3.2",
     "skills": [
       {
         "name": "ask-matt",
@@ -28,7 +28,7 @@
       {
         "name": "improve-codebase-architecture",
         "upstream_path": "skills/engineering/improve-codebase-architecture",
-        "original_skill_sha256": "552240a5ab5cec6b67c15dd1ad6e9f6962b1bca6ce870059a8c2713760c20392"
+        "original_skill_sha256": "35b03a3db61e0f5aa333ea59b54963e45a3d2ace6649b2ef4f9576603e2582a6"
       },
       {
         "name": "setup-matt-pocock-skills",
@@ -53,7 +53,7 @@
       {
         "name": "wayfinder",
         "upstream_path": "skills/engineering/wayfinder",
-        "original_skill_sha256": "9be7b478c389605a24517d27752f278933588da97a1b5921b165f455edf4c5b7"
+        "original_skill_sha256": "0c9fa96791aebf3b7d654cf35c6aadde97d81f57c17b07d13b27c14d9c46561f"
       },
       {
         "name": "implement",
@@ -63,7 +63,7 @@
       {
         "name": "implement-spec",
         "upstream_path": "skills/engineering/implement-spec",
-        "original_skill_sha256": "7a22dd2e60b8fcece478ced9d2533582adf3520d695acd3ab715341535c9e56d"
+        "original_skill_sha256": "1993a473cec40ac85d081c112cdffdc63ec3267c2e412055ad09e013a2f623d1"
       },
       {
         "name": "prototype",
@@ -73,7 +73,7 @@
       {
         "name": "research",
         "upstream_path": "skills/engineering/research",
-        "original_skill_sha256": "985569f15739c713d6784887c3d186d4ef9ac85bec5ad9c068d25bf0739928e4"
+        "original_skill_sha256": "1f629e18ab899412683bc6a1c4efb4339999e27c2fdac328f26ee10a8c031d33"
       },
       {
         "name": "domain-modeling",
@@ -88,7 +88,7 @@
       {
         "name": "code-review",
         "upstream_path": "skills/engineering/code-review",
-        "original_skill_sha256": "09eb147f793e4647949edd32dbad278f0554dfb56e0d46b699cd4c2c55bf0357"
+        "original_skill_sha256": "9c921a8d88138a41401d8897ca1bb852088ab1b7b605cdd04edc13e3e8aab6dd"
       },
       {
         "name": "pr",
@@ -113,7 +113,7 @@
       {
         "name": "grilling",
         "upstream_path": "skills/productivity/grilling",
-        "original_skill_sha256": "befdff1e27a1dfe2a294d5871169ac1afe16d983911daa4f32627514a48c1e15"
+        "original_skill_sha256": "a146842ed93ca43d833550fa9adf02e58cb63c83fea9d4b4522995b82242d4e2"
       },
       {
         "name": "handoff",
