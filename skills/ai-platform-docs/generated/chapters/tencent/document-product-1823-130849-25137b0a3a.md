@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130849 -->
-<!-- Source SHA-256: a084ebdf442e0ea9a9f682a5f9481f28647a046c30595ea7d8794cf469dff8c8 -->
+<!-- Source SHA-256: ae47d8a7cbbe60d087c98db18731b24367668ff3c18fc75a319c930ed193b384 -->
 
 # 批量推理
 
 官方来源：https://cloud.tencent.com/document/product/1823/130849
-最近更新时间：2026-10-22 10:29:00
+最近更新时间：2026-10-29 17:57:30
 
 批量推理适用于对实时性要求不高、但需要大规模调用模型处理数据的场景。用户可将待处理的文本、图片或多模态数据整理为批量任务，由平台异步完成推理并输出结果，避免逐条调用 API 带来的开发和调度成本。典型场景包括离线内容审核、文档摘要生成、知识库数据清洗、客服对话质检、商品标题与描述生成、营销素材批量改写、数据标注辅助、模型效果评测等。通过批量推理，用户可以更低成本、更高效率地完成大规模 AI 任务处理，适合业务验证、周期性数据加工和生产环境中的离线智能处理流程。
 
@@ -16,9 +16,7 @@ Tokenhub 支持以 API 的形式发起批量推理任务，以下介绍使用方
 
 ## 支持的模型
 
-| **模型名称** | **model 参数值** |
-| --- | --- |
-| Hy3 | `hy3` |
+<table><colgroup><col/><col/></colgroup><tbody><tr><td><div><b>模型名称</b></div></td><td><div><b>model 参数值</b></div></td></tr><tr><td><div>Hy3</div></td><td><div><code>hy3</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>Hy4 preview</div></td><td colspan="1" rowspan="1"><div><code>hy4-preview</code></div></td></tr></tbody></table>
 
 ## 使用步骤
 

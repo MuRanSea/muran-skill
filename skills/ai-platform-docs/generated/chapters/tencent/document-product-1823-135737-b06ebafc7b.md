@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135737 -->
-<!-- Source SHA-256: cb97367e1fc3f8912deffb9ac636b1645b6246bfd84e259974c791275be148c3 -->
+<!-- Source SHA-256: 371121a4acc79d61406fa0193b102053a53dc9b715ef0c42be76a0198b6ce983 -->
 
 # MiniMax 生视频调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/135737
-最近更新时间：2026-10-13 15:50:31
+最近更新时间：2026-10-29 09:58:30
 
 ## 概述
 
@@ -206,6 +206,7 @@ V2 提交响应**不含** `base_resp`（与 V1 不同），提交是否成功以
 | --- | --- | --- | --- |
 | model | 是 | string | 模型名称。取值：`minimax-video-v2.3`、`minimax-video-v2.3-fast` |
 | first\_frame\_image | 是 | string | 图片 first\_frame\_image：首帧图片，支持 URL 和 Base64格式，图片格式：jpg/jpeg/png/webp，短边>300px，宽高比 2：5~5：2；单张图片大小≤20MB；  1. Base64：所有图片大小和<=48MB，转为 Base64大小和<=64MB；格式要求：`data:image/<图片格式>;base64,`。注：图片为 jpg 时图片格式填 jpeg。  2. URL：需要公网可访问（http/https） |
+| last\_frame\_image | 否 | string | 首尾帧生视频时条件必选。将指定图片作为视频的结束帧。支持公网 URL 或 Base64 编码的 [Data URL](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data) (data:image/jpeg;base64,...)  图片要求：  格式：JPG, JPEG, PNG, WebP  体积：小于 20MB  尺寸：短边像素大于 300px，长宽比在 2:5 和 5:2 之间  **注意：**  生成视频尺寸遵循首帧图片，当首帧和尾帧的图片尺寸不一致时，模型将参考首帧对尾帧图片进行裁剪。 |
 | prompt | 否 | string | 文本提示词，≤ 2000 字符。支持 `[指令]` 运镜语法。 |
 | prompt\_optimizer | 否 | boolean | 是否自动优化 prompt。默认值：true。 |
 | fast\_pretreatment | 否 | boolean | 是否缩短优化耗时。默认值：false。 |
