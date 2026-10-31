@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-websocket.md -->
-<!-- Source SHA-256: 1495873bf71360b98f9dbc1478c5bb5dfc43129a5f0134d9ecfc1aa68f34c3da -->
+<!-- Source SHA-256: 04c9c4a29e9011036c9a2fa5524c537c4609725b8214d4c874f8e43940676536 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -312,22 +312,22 @@ if __name__ == "__main__":
 
 ## 推荐阅读
 
-> **[同步语音合成（HTTP）](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md)**
+> [card] [同步语音合成（HTTP）](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md)
 >
 > 通过 HTTP 请求一次提交完整文本并返回合成音频，支持流式输出。
 
-> **[同步语音合成（WebSocket）](https://platform.minimaxi.com/docs/api-reference/speech-t2a-websocket.md)**
+> [card] [同步语音合成（WebSocket）](https://platform.minimaxi.com/docs/api-reference/speech-t2a-websocket.md)
 >
 > 通过 WebSocket 连接由客户端按句发送文本，流式返回合成音频，适合低延迟的实时播报。
 
-> **[双向流式语音合成（WebSocket）](https://platform.minimaxi.com/docs/api-reference/speech-t2a-websocket-bidi.md)**
+> [card] [双向流式语音合成（WebSocket）](https://platform.minimaxi.com/docs/api-reference/speech-t2a-websocket-bidi.md)
 >
 > 通过 WebSocket 连接按任意粒度（含逐字）流式发送文本，由服务端自动攒句合成，适合对接大模型流式输出。
 
-> **[产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)**
+> [card] [产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)
 >
 > 各模型的定价说明、计费方式及使用限制。
 
-> **[速率限制](https://platform.minimaxi.com/docs/guides/rate-limits.md#语音)**
+> [card] [速率限制](https://platform.minimaxi.com/docs/guides/rate-limits.md#语音)
 >
 > 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。

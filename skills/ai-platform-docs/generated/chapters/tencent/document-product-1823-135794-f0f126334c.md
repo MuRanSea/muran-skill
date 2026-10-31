@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135794 -->
-<!-- Source SHA-256: 7266708298b4ba2d52f67b155c0029b0c63db7f1cd325c7c68af8936b9439084 -->
+<!-- Source SHA-256: 030a6b25053298777a7643fd194beb9108ad54173ea10b5031594e119de249f0 -->
 
 # WAND 异步语音识别
 
 官方来源：https://cloud.tencent.com/document/product/1823/135794
-最近更新时间：2026-09-29 17:39:33
+最近更新时间：2026-10-30 14:25:30
 
 ## 概述
 
@@ -129,6 +129,10 @@ curl -X GET 'https://tokenhub.tencentmaas.com/v1/wand/asrproxy/tasks/YOUR_TASK_I
 }
 ```
 
-## 错误码
+### 错误码
 
 请参见 [API 错误码说明](https://cloud.tencent.com/document/product/1823/131595)。
+
+## 支持语言
+
+请参见 [WAND 支持语言](https://cloud.tencent.com/document/product/1823/135793#ASRlanguages)。

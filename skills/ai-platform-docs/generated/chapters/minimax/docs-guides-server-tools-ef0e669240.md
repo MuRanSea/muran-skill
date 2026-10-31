@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/server-tools.md -->
-<!-- Source SHA-256: 0809d50dcc1120d667ffb890dd283fdde58ebad3f1e2e1be4ab3b858cce1b676 -->
+<!-- Source SHA-256: ff034c3eeea471582cd45f8213ad2c4f14c15d4a410d319076216e4689fdd3a8 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -15,11 +15,11 @@
 >
 > 该能力目前处于 **Beta** 阶段，功能与参数可能会调整。
 
-> **客户端工具（Function Call）**
+> [card] 客户端工具（Function Call）
 >
 > 模型返回 `tool_use`，由**你的代码**执行，再把 `tool_result` 回传给模型。需要多轮交互。
 
-> **服务端工具（Server Tools）**
+> [card] 服务端工具（Server Tools）
 >
 > 模型在 MiniMax **服务端**自动执行工具并获取结果，**一次请求**内完成，你只需读取最终回复。
 
@@ -39,22 +39,22 @@
 
 根据接口格式在 `tools` 数组中声明 `web_search`：
 
-**Anthropic Messages API**
+> [tab] Anthropic Messages API
+>
+> ```json theme={null}
+> {
+>   "type": "web_search_20250305",
+>   "name": "web_search"
+> }
+> ```
 
-```json theme={null}
-{
-  "type": "web_search_20250305",
-  "name": "web_search"
-}
-```
-
-**OpenAI Responses API**
-
-```json theme={null}
-{
-  "type": "web_search"
-}
-```
+> [tab] OpenAI Responses API
+>
+> ```json theme={null}
+> {
+>   "type": "web_search"
+> }
+> ```
 
 > [!NOTE]
 >
@@ -62,47 +62,47 @@
 
 ### 调用示例
 
-**Anthropic Messages API**
+> [tab] Anthropic Messages API
+>
+> ```bash cURL theme={null}
+> curl https://api.minimax.cn/anthropic/v1/messages \
+>   -H "Content-Type: application/json" \
+>   -H "x-api-key: ${MINIMAX_API_KEY}" \
+>   -H "anthropic-version: 2023-06-01" \
+>   -d '{
+>     "model": "MiniMax-M3.1-Flash",
+>     "max_tokens": 8192,
+>     "messages": [
+>       {
+>         "role": "user",
+>         "content": "帮我搜一下今天上海的天气"
+>       }
+>     ],
+>     "tools": [
+>       {
+>         "type": "web_search_20250305",
+>         "name": "web_search"
+>       }
+>     ]
+>   }'
+> ```
 
-```bash cURL theme={null}
-curl https://api.minimax.cn/anthropic/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: ${MINIMAX_API_KEY}" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "MiniMax-M3.1-Flash",
-    "max_tokens": 8192,
-    "messages": [
-      {
-        "role": "user",
-        "content": "帮我搜一下今天上海的天气"
-      }
-    ],
-    "tools": [
-      {
-        "type": "web_search_20250305",
-        "name": "web_search"
-      }
-    ]
-  }'
-```
-
-**OpenAI Responses API**
-
-```bash cURL theme={null}
-curl --location 'https://api.minimax.cn/v1/responses' \
-  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "model": "MiniMax-M3.1-Flash",
-    "input": "帮我搜一下今天上海的天气",
-    "tools": [
-      {
-        "type": "web_search"
-      }
-    ]
-  }'
-```
+> [tab] OpenAI Responses API
+>
+> ```bash cURL theme={null}
+> curl --location 'https://api.minimax.cn/v1/responses' \
+>   --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
+>   --header 'Content-Type: application/json' \
+>   --data '{
+>     "model": "MiniMax-M3.1-Flash",
+>     "input": "帮我搜一下今天上海的天气",
+>     "tools": [
+>       {
+>         "type": "web_search"
+>       }
+>     ]
+>   }'
+> ```
 
 ### 响应说明
 
@@ -121,7 +121,7 @@ curl --location 'https://api.minimax.cn/v1/responses' \
 
 若一次请求中模型发起的搜索次数达到上限，响应会以 `stop_reason: "pause_turn"` 结束，此时没有最终答案。将本次返回的 `content` 作为 assistant 消息原样追加到 `messages` 后再次请求，模型会继续执行并给出回复。
 
-> **完整响应示例**
+> [accordion] 完整响应示例
 >
 > ```json theme={null}
 > {
@@ -221,7 +221,7 @@ curl --location 'https://api.minimax.cn/v1/responses' \
 | `message` | 模型生成的文本，文本位于 `content` 中。搜索前的引导语与搜索后的最终答案都属于此类型 |
 | `output_text` | 聚合后的最终文本，可直接读取 |
 
-> **Responses API 响应示例**
+> [accordion] Responses API 响应示例
 >
 > ```json theme={null}
 > {

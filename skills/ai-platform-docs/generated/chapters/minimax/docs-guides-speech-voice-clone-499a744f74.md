@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-voice-clone.md -->
-<!-- Source SHA-256: 34be16d514986a33cbaf8b7d8c3b2530efb8a301383e5e32328fbedd73f55bbd -->
+<!-- Source SHA-256: 9556bb866d13efd8f60093e4cf5df1fcf9e854fd278cbda9fa47dffe7f9c84e6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -216,18 +216,18 @@ print(response.text)
 
 ## 推荐阅读
 
-> **[快速复刻接口](https://platform.minimaxi.com/docs/api-reference/voice-cloning-clone.md)**
+> [card] [快速复刻接口](https://platform.minimaxi.com/docs/api-reference/voice-cloning-clone.md)
 >
 > 使用 API 接口进行音色快速复刻。
 
-> **[同步语音合成指南](https://platform.minimaxi.com/docs/guides/speech-t2a-websocket.md)**
+> [card] [同步语音合成指南](https://platform.minimaxi.com/docs/guides/speech-t2a-websocket.md)
 >
 > 同步语音合成支持基于文本到语音的同步生成，单次可处理最长 10,000 字符的文本。
 
-> **[产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)**
+> [card] [产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)
 >
 > 各模型的定价说明、计费方式及使用限制。
 
-> **[速率限制](https://platform.minimaxi.com/docs/guides/rate-limits.md#3、我们的-api-的限速具体数值)**
+> [card] [速率限制](https://platform.minimaxi.com/docs/guides/rate-limits.md#3、我们的-api-的限速具体数值)
 >
 > 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。

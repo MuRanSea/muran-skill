@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-async.md -->
-<!-- Source SHA-256: 55b876877013e44617f7c2a4900733e34fb12e7d5916d80721a344a451579373 -->
+<!-- Source SHA-256: fc0c212bb5f31126bebb2ec245309f5c905fd161e9b4154a43e2cb2f700796b2 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -256,18 +256,18 @@ curl --location "https://api.minimax.cn/v1/files/retrieve?file_id=${FILE_ID}" \
 
 ## 推荐阅读
 
-> **[异步语音合成](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-create.md)**
+> [card] [异步语音合成](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-create.md)
 >
 > 使用 API 接口，创建异步语音合成任务。
 
-> **[同步语音合成 HTTP](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md)**
+> [card] [同步语音合成 HTTP](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md)
 >
 > 使用 API 接口，在HTTP网络通信协议下进行同步语音合成。
 
-> **[产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)**
+> [card] [产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)
 >
 > 各模型的定价说明、计费方式及使用限制。
 
-> **[速率限制](https://platform.minimaxi.com/docs/guides/rate-limits.md#3、我们的-api-的限速具体数值)**
+> [card] [速率限制](https://platform.minimaxi.com/docs/guides/rate-limits.md#3、我们的-api-的限速具体数值)
 >
 > 为保证资源的高效使用，引入速率限制，以确保服务的可用性、稳定性。

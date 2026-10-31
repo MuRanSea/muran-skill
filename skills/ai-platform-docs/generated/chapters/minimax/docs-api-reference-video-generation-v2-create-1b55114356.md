@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-create.md -->
-<!-- Source SHA-256: 238be3add02890d1bb561d2ab13aada0d0049ac30020988c88aab70fc4bfd16f -->
+<!-- Source SHA-256: 9a7276b7418755a8e7c5ff8e3819dd58b498eb7901fbdc5c5bf25df206905914 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -175,7 +175,8 @@ components:
             尾帧）与多模态参考生视频；分辨率 `768P` / `2K`，时长 4~15 秒。
 
             - **`MiniMax-H3-Highspeed`**：**兼顾生成质量与速度的版本**。支持文生视频、图生视频（首帧 /
-            尾帧）与多模态参考生视频（参考图 / 参考视频 / 参考音频）；分辨率 `768P`，**不支持 `2K`**；时长 4~15 秒。
+            尾帧）与多模态参考生视频（参考图 / 参考视频 / 参考音频）；分辨率 `480P` / `768P`，**不支持 `2K`**；时长
+            4~15 秒。
 
             - **`MiniMax-H3-Lite`**：**轻量版本**。支持文生视频、图生视频（首帧 / 尾帧）与多模态参考生视频（参考图 /
             参考视频 / 参考音频）；分辨率 `480P` / `768P`，**不支持 `2K`**；时长 4~15 秒。
@@ -287,9 +288,9 @@ components:
             视频分辨率。不同模型支持的档位不同：
 
             - **`MiniMax-H3`**：`768P`、`2K`
-            - **`MiniMax-H3-Highspeed`**：`768P`（不支持 `2K`）
-            - **`MiniMax-H3-Lite`**：`480P`、`768P`（默认 `768P`，不支持 `2K`）
-            - **`MiniMax-H3-Max`**：`480P`、`768P`（默认 `768P`，不支持 `2K`）
+            - **`MiniMax-H3-Highspeed`**：`480P`、`768P`（不支持 `2K`）
+            - **`MiniMax-H3-Lite`**：`480P`、`768P`（不支持 `2K`）
+            - **`MiniMax-H3-Max`**：`480P`、`768P`（不支持 `2K`）
           enum:
             - 480P
             - 768P

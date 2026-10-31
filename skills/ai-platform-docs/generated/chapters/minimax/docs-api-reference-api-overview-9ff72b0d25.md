@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/api-overview.md -->
-<!-- Source SHA-256: c0cecf3b34801d3f67a21d6cd4130b70296db6105217958e72854c199739ac96 -->
+<!-- Source SHA-256: 5a38a7dc6c5416c15832afe7138d333faca4c1c991546e424c3af3d1e652c3bc -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -36,11 +36,11 @@
 * 通过邮箱 [Model@minimax.io](mailto:Model@minimax.io) 等官方渠道联系我们的技术支持团队
 * 在我们的 [Github](https://github.com/MiniMax-AI/MiniMax-M2/issues) 仓库提交Issue
 
-> **[Anthropic API 兼容（推荐）](https://platform.minimaxi.com/docs/api-reference/text-anthropic-api.md)**
+> [card] [Anthropic API 兼容（推荐）](https://platform.minimaxi.com/docs/api-reference/text-anthropic-api.md)
 >
 > 通过 Anthropic SDK 调用 MiniMax 模型
 
-> **[OpenAI API 兼容](https://platform.minimaxi.com/docs/api-reference/text-openai-api.md)**
+> [card] [OpenAI API 兼容](https://platform.minimaxi.com/docs/api-reference/text-openai-api.md)
 >
 > 通过 OpenAI SDK 调用 MiniMax 模型
 
@@ -55,7 +55,7 @@
 | 模型 | 功能 |
 | :- | :- |
 | MiniMax-H3 | 多模态视频生成模型，支持文生 / 图生 / 首尾帧 / 多模态参考，768P / 2K 分辨率，4–15s 时长 |
-| MiniMax-H3-Highspeed | 兼顾生成质量与速度，支持文生 / 图生 / 首尾帧 / 多模态参考；768P 分辨率（不支持 2K），4–15s 时长 |
+| MiniMax-H3-Highspeed | 兼顾生成质量与速度，支持文生 / 图生 / 首尾帧 / 多模态参考；480P / 768P 分辨率（不支持 2K），4–15s 时长 |
 | MiniMax-H3-Lite | 轻量模型，支持文生 / 图生（首帧、尾帧）/ 多模态参考；480P / 768P 分辨率（不支持 2K），4–15s 时长 |
 | MiniMax-H3-Max | 极速生成模型，支持文生 / 图生（首帧、尾帧）/ 多模态参考；480P / 768P 分辨率（不支持 2K），5–15s 时长 |
 
@@ -67,27 +67,27 @@
 2. 使用**查询任务**接口按 `task_id` 获取状态与结果；视频任务成功后从 `content.url` 获取成片地址，H3-Context-IR 任务成功后从 `content.prompt` 获取增强提示词。也可以使用**查询任务列表**接口批量查看，并通过 `task_type` 区分 `generation`、`h3_context_ir` 与 `regeneration`。
 3. 对排队中的任务，可使用**取消或删除任务**接口取消；对成功或失败的任务，可使用同一接口删除任务记录。
 
-> **[创建视频生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md)**
+> [card] [创建视频生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md)
 >
 > 基于多模态 content 输入创建视频生成任务
 
-> **[创建 H3-Context-IR 任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir.md)**
+> [card] [创建 H3-Context-IR 任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir.md)
 >
 > 深度理解视频生成的多模态上下文并生成结构化增强提示词
 
-> **[创建视频再生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration.md)**
+> [card] [创建视频再生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration.md)
 >
 > 将符合 MiniMax-H3 768P 输出规格的视频再生成为 2K 视频
 
-> **[查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)**
+> [card] [查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)
 >
 > 按 task\_id 查询任务状态并获取成片下载地址
 
-> **[查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)**
+> [card] [查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)
 >
 > 分页查询最近 7 天内的任务并按任务类型过滤
 
-> **[取消或删除任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-delete.md)**
+> [card] [取消或删除任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-delete.md)
 >
 > 取消排队中的任务，或删除成功和失败的任务记录
 
@@ -123,7 +123,7 @@
 >
 > 音色复刻与音色设计产出的均为**临时音色**：费用在首次用于语音合成时才收取（不含接口内试听）；若 \*\*168 小时（7 天）\*\*内未在任意语音合成接口中使用，该音色将被删除。
 
-> **支持的 40 种语言**
+> [accordion] 支持的 40 种语言
 >
 > | 支持语种 | | |
 > | :- | :- | :- |
@@ -142,31 +142,31 @@
 > | 13. 印尼语（Indonesian） | 27. 希伯来语（Hebrew） | 40. 阿非利卡语（Afrikaans） |
 > | 14. 越南语（Vietnamese） | | |
 
-> **[HTTP 同步语音合成](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md)**
+> [card] [HTTP 同步语音合成](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md)
 >
 > 通过 HTTP 请求进行语音合成
 
-> **[WebSocket 同步语音合成](https://platform.minimaxi.com/docs/api-reference/speech-t2a-websocket.md)**
+> [card] [WebSocket 同步语音合成](https://platform.minimaxi.com/docs/api-reference/speech-t2a-websocket.md)
 >
 > 通过 WebSocket 进行流式语音合成
 
-> **[创建异步语音任务](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-create.md)**
+> [card] [创建异步语音任务](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-create.md)
 >
 > 创建长文本语音生成任务
 
-> **[查询异步任务状态](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-query.md)**
+> [card] [查询异步任务状态](https://platform.minimaxi.com/docs/api-reference/speech-t2a-async-query.md)
 >
 > 查询语音生成任务状态
 
-> **[上传复刻音频](https://platform.minimaxi.com/docs/api-reference/voice-cloning-uploadcloneaudio.md)**
+> [card] [上传复刻音频](https://platform.minimaxi.com/docs/api-reference/voice-cloning-uploadcloneaudio.md)
 >
 > 上传待克隆的音频文件
 
-> **[快速复刻](https://platform.minimaxi.com/docs/api-reference/voice-cloning-clone.md)**
+> [card] [快速复刻](https://platform.minimaxi.com/docs/api-reference/voice-cloning-clone.md)
 >
 > 执行音色克隆
 
-> **[音色设计](https://platform.minimaxi.com/docs/api-reference/voice-design-design.md)**
+> [card] [音色设计](https://platform.minimaxi.com/docs/api-reference/voice-design-design.md)
 >
 > 基于描述生成个性化音色
 
@@ -187,11 +187,11 @@
 | image-01 | 图像生成模型，画面表现细腻，支持文生图、图生图（人物主体参考） |
 | image-01-live | 图像生成模型，在 image-01 基础上额外支持多种画风设置 |
 
-> **[文生图](https://platform.minimaxi.com/docs/api-reference/image-generation-t2i.md)**
+> [card] [文生图](https://platform.minimaxi.com/docs/api-reference/image-generation-t2i.md)
 >
 > 基于文本描述生成图像
 
-> **[图生图](https://platform.minimaxi.com/docs/api-reference/image-generation-i2i.md)**
+> [card] [图生图](https://platform.minimaxi.com/docs/api-reference/image-generation-i2i.md)
 >
 > 基于参考图片生成图像
 
@@ -213,7 +213,7 @@
 | :- | :- |
 | music-3.0 | 最新音乐生成模型，支持用户输入音乐灵感和歌词，生成 AI 音乐 |
 
-> **[音乐生成接口](https://platform.minimaxi.com/docs/api-reference/music-generation.md)**
+> [card] [音乐生成接口](https://platform.minimaxi.com/docs/api-reference/music-generation.md)
 >
 > 根据描述和歌词生成音乐
 
@@ -229,11 +229,11 @@
 
 文件的支持格式、容量及大小限制以**上传文件**接口文档为准，详见 [上传文件](https://platform.minimaxi.com/docs/api-reference/file-management-upload.md)。
 
-> **[上传文件](https://platform.minimaxi.com/docs/api-reference/file-management-upload.md)**
+> [card] [上传文件](https://platform.minimaxi.com/docs/api-reference/file-management-upload.md)
 >
 > 上传文件到平台
 
-> **[文件列表](https://platform.minimaxi.com/docs/api-reference/file-management-list.md)**
+> [card] [文件列表](https://platform.minimaxi.com/docs/api-reference/file-management-list.md)
 >
 > 获取已上传的文件列表
 

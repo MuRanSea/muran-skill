@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/quickstart-sdk.md -->
-<!-- Source SHA-256: f819192dcf90c246275766a41db40bdeb5b1b8cafe834e24d99b61b904dba164 -->
+<!-- Source SHA-256: f63826b1bd169000465bd3badfea84714b61b5194d8a4c781798c48884ff712e -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -61,26 +61,26 @@ for block in message.content:
 
 ## 探索更多
 
-> **[语言模型](https://platform.minimaxi.com/docs/guides/text-generation.md)**
+> [card] [语言模型](https://platform.minimaxi.com/docs/guides/text-generation.md)
 >
 > 探索 MiniMax 最新语言模型
 
-> **[视频生成](https://platform.minimaxi.com/docs/guides/video-generation.md)**
+> [card] [视频生成](https://platform.minimaxi.com/docs/guides/video-generation.md)
 >
 > 使用 MiniMax-H3 创建视频生成任务
 
-> **[同步语音合成](https://platform.minimaxi.com/docs/guides/speech-t2a-websocket.md)**
+> [card] [同步语音合成](https://platform.minimaxi.com/docs/guides/speech-t2a-websocket.md)
 >
 > 使用 Speech 2.8 进行同步语音合成
 
-> **[异步语音合成](https://platform.minimaxi.com/docs/guides/speech-t2a-async.md)**
+> [card] [异步语音合成](https://platform.minimaxi.com/docs/guides/speech-t2a-async.md)
 >
 > 使用 Speech 2.8 进行异步语音合成
 
-> **[音色复刻](https://platform.minimaxi.com/docs/guides/speech-voice-clone.md)**
+> [card] [音色复刻](https://platform.minimaxi.com/docs/guides/speech-voice-clone.md)
 >
 > 创建音色复刻任务
 
-> **[音乐生成](https://platform.minimaxi.com/docs/guides/music-generation.md)**
+> [card] [音乐生成](https://platform.minimaxi.com/docs/guides/music-generation.md)
 >
 > 使用 Music 3.0 进行音乐创作

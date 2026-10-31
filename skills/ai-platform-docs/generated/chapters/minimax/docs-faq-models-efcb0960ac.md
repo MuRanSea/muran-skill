@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/models.md -->
-<!-- Source SHA-256: 61b206eed5484179457d55edbe04292bc545f623ba0757a5e9ed931682127fc9 -->
+<!-- Source SHA-256: 1f2b437460f88635da1ff94bdaefce997a8d7da65c00f3beed7289788c99098d -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,7 +11,7 @@
 
 模型定价信息请参阅[产品定价](https://platform.minimaxi.com/docs/pricing/overview.md)。
 
-> **MiniMax M2.5、M2.7 系列模型下线通知**
+> [accordion] MiniMax M2.5、M2.7 系列模型下线通知
 >
 > 随着新版本模型的推出，我们将逐步停止提供 MiniMax M2.5、M2.7 系列模型服务，并为现有用户预留迁移时间。具体安排如下：
 >

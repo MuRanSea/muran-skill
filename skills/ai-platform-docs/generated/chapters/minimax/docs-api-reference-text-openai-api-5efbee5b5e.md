@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-openai-api.md -->
-<!-- Source SHA-256: f75625c188c6c8610254adabb1c10d0fb00651a5604c45c69269102b9f38abdc -->
+<!-- Source SHA-256: c1a0b26cf4bb58ab0f30826ba1154ef49881a46f54b27703652168da1c2aed06 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -229,7 +229,7 @@ print(f"{text_buffer}\n")
 
 了解如何通过 OpenAI SDK 使用 M3.1-Flash Tool Use 和 Interleaved Thinking 能力，请参考以下文档。
 
-> **[Tool Use & Interleaved Thinking](https://platform.minimaxi.com/docs/guides/text-m3-function-call.md#openai-sdk)**
+> [card] [Tool Use & Interleaved Thinking](https://platform.minimaxi.com/docs/guides/text-m3-function-call.md#openai-sdk)
 >
 > 了解如何利用 MiniMax-M3.1-Flash 工具调用和 Interleaved Thinking 能力，提升复杂任务中的表现。
 

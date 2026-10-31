@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-to-text.md -->
-<!-- Source SHA-256: ca0813911083854e35fb28ec9b489005183a8d5613bd65aaf06cce82494ca1f8 -->
+<!-- Source SHA-256: 1fc93896287f9afba162b2945a258146cf3d702d9957f48f2bda81a9a3d1c6c6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -253,10 +253,10 @@ data: {"index":2,"delta":"","finish":true,"duration":26.325}
 
 ## 推荐阅读
 
-> **[语音识别接口](https://platform.minimaxi.com/docs/api-reference/speech-to-text.md)**
+> [card] [语音识别接口](https://platform.minimaxi.com/docs/api-reference/speech-to-text.md)
 >
 > Speech to Text 接口的完整参数、返回结构与错误码。
 
-> **[产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)**
+> [card] [产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/speech)
 >
 > 各语音模型的定价说明、计费方式与使用限制。

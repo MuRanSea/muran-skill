@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/quickstart-preparation.md -->
-<!-- Source SHA-256: af3b047967910d426ad41f8f0197945224d732a5b54bb0487aea8b572b822bd4 -->
+<!-- Source SHA-256: de64ca9eea30a6f1f7bdbd34573f72106a1031e7dfc5cb635f6762a9a008ab4a -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -26,7 +26,7 @@ API 调用前，需在 MiniMax 开放平台进行[账户注册](https://platform
 
 按量付费可通过 [账户管理 > 余额](https://platform.minimax.cn/user-center/payment/balance) 按需充值。M Plan 可购买订阅或积分，也可以使用团队分配给您的资源。
 
-> **配置环境变量**
+> [accordion] 配置环境变量
 >
 > MiniMax 文档中的示例代码会从环境变量读取 API 地址和 Key。按所用的接入方式选择变量，将 `<YOUR_API_KEY>` 替换为你的 API Key（M Plan 用户为订阅 Key）：
 >
@@ -38,46 +38,46 @@ API 调用前，需在 MiniMax 开放平台进行[账户注册](https://platform
 >
 > 以 Anthropic SDK 为例，按你的系统选择配置方式：
 >
-> **macOS / Linux**
+> > [tab] macOS / Linux
+> >
+> > **临时生效**：在终端中执行，仅对当前终端窗口有效，关闭后失效：
+> >
+> > ```bash theme={null}
+> > export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic
+> > export ANTHROPIC_API_KEY=<YOUR_API_KEY>
+> > ```
+> >
+> > **长期生效**：将上面两行加到 Shell 配置文件末尾。macOS 默认使用 zsh，配置文件为 `~/.zshrc`；多数 Linux 默认使用 bash，配置文件为 `~/.bashrc`。可通过 `echo $SHELL` 查看当前 Shell。
+> >
+> > ```bash theme={null}
+> > echo 'export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic' >> ~/.zshrc
+> > echo 'export ANTHROPIC_API_KEY=<YOUR_API_KEY>' >> ~/.zshrc
+> > source ~/.zshrc
+> > ```
+> >
+> > 使用 bash 时，将命令中的 `~/.zshrc` 换成 `~/.bashrc`。
+> >
+> > 配置完成后，在新终端中执行 `echo $ANTHROPIC_BASE_URL`，能输出地址即已生效。
 >
-> **临时生效**：在终端中执行，仅对当前终端窗口有效，关闭后失效：
->
-> ```bash theme={null}
-> export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic
-> export ANTHROPIC_API_KEY=<YOUR_API_KEY>
-> ```
->
-> **长期生效**：将上面两行加到 Shell 配置文件末尾。macOS 默认使用 zsh，配置文件为 `~/.zshrc`；多数 Linux 默认使用 bash，配置文件为 `~/.bashrc`。可通过 `echo $SHELL` 查看当前 Shell。
->
-> ```bash theme={null}
-> echo 'export ANTHROPIC_BASE_URL=https://api.minimax.cn/anthropic' >> ~/.zshrc
-> echo 'export ANTHROPIC_API_KEY=<YOUR_API_KEY>' >> ~/.zshrc
-> source ~/.zshrc
-> ```
->
-> 使用 bash 时，将命令中的 `~/.zshrc` 换成 `~/.bashrc`。
->
-> 配置完成后，在新终端中执行 `echo $ANTHROPIC_BASE_URL`，能输出地址即已生效。
->
-> **Windows**
->
-> **临时生效**：在 PowerShell 中执行，仅对当前窗口有效：
->
-> ```powershell theme={null}
-> $env:ANTHROPIC_BASE_URL = "https://api.minimax.cn/anthropic"
-> $env:ANTHROPIC_API_KEY = "<YOUR_API_KEY>"
-> ```
->
-> **长期生效**：在 PowerShell 中执行以下命令，写入当前用户的环境变量，**重新打开**终端后生效：
->
-> ```powershell theme={null}
-> setx ANTHROPIC_BASE_URL "https://api.minimax.cn/anthropic"
-> setx ANTHROPIC_API_KEY "<YOUR_API_KEY>"
-> ```
->
-> 也可以在「设置 > 系统 > 系统信息 > 高级系统设置 > 环境变量」中手动添加。
->
-> 配置完成后，在新的 PowerShell 窗口中执行 `echo $env:ANTHROPIC_BASE_URL`，能输出地址即已生效。
+> > [tab] Windows
+> >
+> > **临时生效**：在 PowerShell 中执行，仅对当前窗口有效：
+> >
+> > ```powershell theme={null}
+> > $env:ANTHROPIC_BASE_URL = "https://api.minimax.cn/anthropic"
+> > $env:ANTHROPIC_API_KEY = "<YOUR_API_KEY>"
+> > ```
+> >
+> > **长期生效**：在 PowerShell 中执行以下命令，写入当前用户的环境变量，**重新打开**终端后生效：
+> >
+> > ```powershell theme={null}
+> > setx ANTHROPIC_BASE_URL "https://api.minimax.cn/anthropic"
+> > setx ANTHROPIC_API_KEY "<YOUR_API_KEY>"
+> > ```
+> >
+> > 也可以在「设置 > 系统 > 系统信息 > 高级系统设置 > 环境变量」中手动添加。
+> >
+> > 配置完成后，在新的 PowerShell 窗口中执行 `echo $env:ANTHROPIC_BASE_URL`，能输出地址即已生效。
 >
 > > [!WARNING]
 > >
@@ -85,7 +85,7 @@ API 调用前，需在 MiniMax 开放平台进行[账户注册](https://platform
 
 ***
 
-> **企业团队注册说明**
+> [accordion] 企业团队注册说明
 >
 > 建议采用**主账号+子账号**的形式创建和管理。
 >

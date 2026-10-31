@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/models-intro.md -->
-<!-- Source SHA-256: 3cdfbd0339bfe98ed187bb211905df82521faee08971d9606ae6155881f3cebe -->
+<!-- Source SHA-256: aa9c7b9b61ef474a663b2726f65c652c2cdb2c15e11417ee316f9495ef39e58e -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -20,10 +20,9 @@
 
 | **模型名称**             | **介绍** |
 | :- | :- |
-| [MiniMax H3](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md) | 新一代开放通用多模态视频模型，支持文生 / 图生 / 首尾帧 / 多模态参考，768P / 2K 分辨率，4–15s 时长 |
-| [MiniMax H3 Max](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md) | 由 [fal.ai](https://fal.ai/) 基于 MiniMax H3 后训练的极速视频生成模型，专为高速视频生成而优化。仅支持文生 / 图生（首帧、尾帧），480P / 768P 分辨率，5–15s 时长 |
+| [MiniMax-H3](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md) | 新一代开放通用多模态视频模型，支持文生 / 图生 / 首尾帧 / 多模态参考，768P / 2K 分辨率，4–15s 时长 |
 
-> **历史模型**
+> [accordion] 历史模型
 >
 > | **模型名称**             | **介绍** |
 > | :- | :- |
@@ -38,7 +37,7 @@
 | [Speech-2.8-HD](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md) | 新一代语音 HD 模型，情绪渲染融合语气词，重塑自然听感 |
 | [Speech-2.8-Turbo](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md) | 新一代语音 Turbo 模型，极致生成速度，更自然逼真的音频效果 |
 
-> **历史模型**
+> [accordion] 历史模型
 >
 > | **模型名称**             | **介绍**                                                         |
 > | :- | :- |

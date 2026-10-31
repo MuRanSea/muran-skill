@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-generation.md -->
-<!-- Source SHA-256: 0d37d04ebd26d09feac3f25f84b87e3e80e69f3c5901ee6b1103c235d2fefdb6 -->
+<!-- Source SHA-256: 95ebef791e0b4e417a29f421cfbd4470758b3b2e02d73df2e4c8e053a8fde8f8 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -26,19 +26,19 @@ MiniMax 提供多款语言模型，满足不同场景需求。**MiniMax-M3.1-Fla
 
 ### **MiniMax M3.1-Flash** 核心亮点
 
-> **1M 上下文**
+> [accordion] 1M 上下文
 >
 > MiniMax-M3.1-Flash 支持最高 1,000,000 token 上下文，适用于长文档、代码库和多步骤 Agent 会话。
 
-> **Agent 与代码场景**
+> [accordion] Agent 与代码场景
 >
 > MiniMax-M3.1-Flash 面向 Agent 推理、工具调用、代码和结构化任务执行优化。
 
-> **思考深度可调（effort）**
+> [accordion] 思考深度可调（effort）
 >
 > 通过 `effort` 调节思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`，档位越高思考越充分。省略时默认使用 `max` 档位。详见[深度思考](#深度思考)。
 
-> **多模态 Chat 输入**
+> [accordion] 多模态 Chat 输入
 >
 > 支持文本、图片和视频等多模态输入，适用于丰富的内容理解与分析场景。
 
@@ -231,19 +231,19 @@ model "MiniMax-M3.1-Flash" requires adaptive thinking
 
 ## API 参考
 
-> **[Anthropic API 兼容（推荐）](https://platform.minimaxi.com/docs/api-reference/text-anthropic-api.md)**
+> [card] [Anthropic API 兼容（推荐）](https://platform.minimaxi.com/docs/api-reference/text-anthropic-api.md)
 >
 > 通过 Anthropic SDK 调用 MiniMax 模型，支持流式输出和 Interleaved Thinking
 
-> **[OpenAI API 兼容](https://platform.minimaxi.com/docs/api-reference/text-openai-api.md)**
+> [card] [OpenAI API 兼容](https://platform.minimaxi.com/docs/api-reference/text-openai-api.md)
 >
 > 通过 OpenAI SDK 调用 MiniMax 模型
 
-> **[在 AI 编程工具里使用 MiniMax M 系列模型](https://platform.minimaxi.com/docs/m-plan/openclaw.md)**
+> [card] [在 AI 编程工具里使用 MiniMax M 系列模型](https://platform.minimaxi.com/docs/m-plan/openclaw.md)
 >
 > 在 Claude Code、Cursor 等工具中使用 MiniMax M 系列模型
 
-> **[Chat Model](https://platform.minimaxi.com/docs/guides/text-chat)**
+> [card] [Chat Model](https://platform.minimaxi.com/docs/guides/text-chat)
 >
 > M2-her 对话模型，专为角色扮演、多轮对话等场景设计
 

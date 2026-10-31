@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-generation.md -->
-<!-- Source SHA-256: 94602e998a06129ad2d23ec8d6c5b2fc8a154aec6d8689745c9fd283f6f918ce -->
+<!-- Source SHA-256: bdb903bd990a86993565d7cedbe7032c95e68d5a0edb75359381d94e4b64b215 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -7,18 +7,17 @@
 
 # 视频生成
 
-> 本文档介绍 MiniMax 视频生成服务（MiniMax H3、MiniMax H3 Max）的使用方法，助力高效创作视频内容。
+> 本文档介绍 MiniMax 视频生成服务（MiniMax-H3）的使用方法，助力高效创作视频内容。
 
-MiniMax 视频生成目前提供 **MiniMax H3** 与 **MiniMax H3 Max** 两款模型：
+MiniMax 视频生成目前提供 **MiniMax-H3** 模型：
 
-* **MiniMax H3**：开放通用的多模态视频模型，可以统一理解文本、图片、视频和音频输入，完成视频生成、参考创作与视频编辑。
-* **MiniMax H3 Max**：MiniMax 与 [fal.ai](https://fal.ai/) 联合出品，基于 MiniMax H3 后训练的视频生成模型，专为高速视频生成而优化。输出 480P、768P 主流分辨率，生成速度比 MiniMax H3 更快。支持 T2V（文生视频）、I2V（图生视频）与全能参考生成。
+* **MiniMax-H3**：开放通用的多模态视频模型，可以统一理解文本、图片、视频和音频输入，完成视频生成、参考创作与视频编辑。
 
-提示：若需要使用 MiniMax H3 或 MiniMax H3 Max，请点击 [按量购买 API](https://platform.minimax.cn/docs/pricing/overview#models/video)。
+提示：若需要使用 MiniMax-H3，请点击 [按量购买 API](https://platform.minimax.cn/docs/pricing/overview#models/video)。
 
 ## 支持的生成方式
 
-### MiniMax H3
+### MiniMax-H3
 
 | 生成方式 | 输入内容 | 适用场景 |
 | - | - | - |
@@ -26,24 +25,15 @@ MiniMax 视频生成目前提供 **MiniMax H3** 与 **MiniMax H3 Max** 两款模
 | 图生视频 | Prompt + 首帧图片和/或尾帧图片 | 控制视频的开始或结束画面，让指定画面自然动起来 |
 | 全能参考生成 | Prompt + 参考图片、视频或音频 | 参考角色、动作、镜头、风格、声音或剪辑节奏 |
 
-### MiniMax H3 Max
-
-| 生成方式 | 输入内容 | 适用场景 |
-| - | - | - |
-| 文生视频（T2V） | Prompt | 根据文字描述从零生成视频 |
-| 图生视频（I2V） | Prompt + 首帧图片和/或尾帧图片 | 控制视频的开始或结束画面，让指定画面自然动起来 |
-| 全能参考生成 | Prompt + 参考图片、视频或音频 | 参考角色、动作、镜头、风格、声音或剪辑节奏 |
-
 ## 模型规格与输入条件
 
 ### 输出规格
 
-| 项目 | MiniMax H3 | MiniMax H3 Max |
+| 模型名称 | 输出分辨率 | 输出时长 |
 | - | - | - |
-| 模型名称 | `MiniMax-H3` | `MiniMax-H3-Max` |
-| 输出分辨率 | 768P / 2K | 480P / 768P |
-| 输出时长 | 4～15 秒，仅支持整数值 | 5～15 秒，仅支持整数值 |
-| 宽高比 | 支持多种常见比例或自适应，[详见 API 文档](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md) | 支持多种常见比例或自适应，[详见 API 文档](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md) |
+| `MiniMax-H3` | 768P / 2K | 4～15 秒 |
+
+输出时长仅支持整数值；支持多种常见宽高比或自适应，[详见 API 文档](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md)。
 
 ### 输入条件
 
@@ -254,30 +244,30 @@ H3-Context-IR 采用异步任务形式。创建成功后，使用[查询任务](
 
 ## 推荐阅读
 
-> **[创建视频生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md)**
+> [card] [创建视频生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create.md)
 >
 > 使用本接口通过多模态 content 输入，创建 MiniMax-H3 视频生成任务。
 
-> **[创建 H3-Context-IR 任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir.md)**
+> [card] [创建 H3-Context-IR 任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir.md)
 >
 > 深度理解视频生成的多模态上下文，并生成结构化增强提示词。
 
-> **[创建视频再生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration.md)**
+> [card] [创建视频再生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration.md)
 >
 > 对符合 MiniMax-H3 768P 输出规格的源视频进行再生成，输出 2K 视频。
 
-> **[查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)**
+> [card] [查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)
 >
 > 使用本接口按 task\_id 查询任务状态并获取成片下载地址。
 
-> **[查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)**
+> [card] [查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)
 >
 > 分页查询最近 7 天内的任务，并按 task\_type 区分任务类型。
 
-> **[取消或删除任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-delete.md)**
+> [card] [取消或删除任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-delete.md)
 >
 > 取消排队中的任务，或删除成功和失败的任务记录。
 
-> **[产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/video)**
+> [card] [产品定价](https://platform.minimaxi.com/docs/pricing/overview.md#models/video)
 >
 > 各模型的定价说明、计费方式及使用限制。

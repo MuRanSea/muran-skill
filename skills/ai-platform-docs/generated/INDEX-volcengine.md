@@ -6,7 +6,7 @@
 |----|------|-------|------|---------|-------|
 | TOS 区 | `chapters/volcengine/tos/` | 《对象存储 文档指南》 | 6407 | 1993 | `INDEX-tos.md` |
 | 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 2001 | 216 | `INDEX-ark.md` |
-| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2388 | 168 | `INDEX-ark-guide.md` |
+| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2391 | 168 | `INDEX-ark-guide.md` |
 | AI MediaKit API 区 | `chapters/volcengine/mediakit/` | 《AI MediaKit API 参考》 | 999 | 106 | `INDEX-mediakit.md` |
 | AI MediaKit 指南区 | `chapters/volcengine/mediakit-guide/` | 《AI MediaKit 文档指南》 | 934 | 155 | `INDEX-mediakit-guide.md` |
 
@@ -71,10 +71,10 @@
 | 3 | 调用 | 116-1319 | 48 |
 | 4 | 推理 | 1319-1406 | 12 |
 | 5 | 训练 | 1409-1616 | 19 |
-| 6 | Managed Agents | 1622-1814 | 25 |
-| 7 | 应用 | 1831-1839 | 2 |
-| 8 | 订阅 [Agent/Coding Plan] | 1840-2014 | 25 |
-| 9 | 资源 | 2022-2380 | 28 |
+| 6 | Managed Agents | 1622-1817 | 25 |
+| 7 | 应用 | 1834-1842 | 2 |
+| 8 | 订阅 [Agent/Coding Plan] | 1843-2017 | 25 |
+| 9 | 资源 | 2025-2383 | 28 |
 
 ## AI MediaKit API 区（mediakit）
 
