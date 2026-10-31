@@ -389,8 +389,16 @@ class GroupTests(Fixture):
             while time.monotonic() < deadline and sum(t['state'] == 'running' for t in self.tasks(group).values()) < 2:
                 time.sleep(.05)
             self.scoped('cancel', group, '--task', 'other')
-            time.sleep(1)
-            self.assertEqual(self.tasks(group)['other']['state'], 'cancelled')
+            # cancel() only sets cancel_requested; state flips when the worker
+            # observes it. Poll instead of a fixed sleep so Windows CI load
+            # does not flake this assertion.
+            cancel_deadline = time.monotonic() + 10
+            while time.monotonic() < cancel_deadline:
+                if self.tasks(group)['other']['state'] == 'cancelled':
+                    break
+                time.sleep(.05)
+            else:
+                self.fail(f"other stayed {self.tasks(group)['other']['state']!r} after cancel")
             self.assertEqual(self.tasks(group)['slow']['state'], 'running')
             self.scoped('pause', group)
             running.result(timeout=10)
