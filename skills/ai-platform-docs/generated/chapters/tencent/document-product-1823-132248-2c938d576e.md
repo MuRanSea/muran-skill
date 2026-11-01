@@ -1,16 +1,18 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132248 -->
-<!-- Source SHA-256: eab2d0044b23de0ecc54eb64465134a7c7733e9be265e3b1787b1ef01e95c766 -->
+<!-- Source SHA-256: 8c86d6385b1560e60d1468273477bbc3b83cbef6519183a36ebd0b29e0416da1 -->
 
 # DeepSeek 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132248
-最近更新时间：2026-10-19 15:53:02
+最近更新时间：2026-10-31 13:53:30
 
 ## 概述
 
 DeepSeek 系列模型已接入大模型服务平台 TokenHub，支持 OpenAI Chat Completions 和 Anthropic 两种协议，开发者无需更换 SDK 即可快速接入。本文介绍通用调用示例以及 DeepSeek 特有的思考模式、Function Calling 等核心能力。
 
 **注意：**
+
+受 DeepSeek 原厂联网搜索计费政策调整影响，大模型服务平台 TokenHub 将对 DeepSeek 原厂直供模型内置联网搜索工具产生的 **Search（搜索）/Fetch（网页抓取）调用开始收费**：后付费 API 接入自北京时间 **2026 年 11 月 1 日 00:00:00** 起生效，TokenPlan 个人版与企业版自北京时间 **2026 年 11 月 18 日 00:00:00** 起生效
 
 **DeepSeek-V4-Flash（Model ID：deepseek-v4-flash）**目前仍基于深度求索 **DeepSeek-V4-Flash 预览版**为您提供服务，此前通知中提及的自动静默升级将暂缓推进，后续以新版本上线为准。您现有的业务调用不会受到影响，模型服务能力、调用方式及计费标准均与此前保持一致，无需做任何调整。同时，考虑到新旧版本在模型能力与性能表现上存在较大差异，为避免对您的存量业务产生非预期影响，正式版模型将通过新的 Model ID 对外提供，由您按需自主切换。详情请查看[产品公告](https://cloud.tencent.com/document/product/1823/130758)。
 
@@ -1343,22 +1345,35 @@ body := map[string]interface{}{
 
 DeepSeek 原厂直供模型支持服务端联网搜索能力。开启后，模型在回答时可自动调用联网搜索工具获取实时网络信息，解决模型知识时效性不足的问题，适合新闻资讯、时事查询、公开资料检索等场景。联网搜索过程由模型在服务端自主完成：模型自行判断是否需要搜索、生成搜索词、阅读搜索结果，必要时打开网页读取正文，并在多轮搜索后生成带来源链接的回答。
 
-联网搜索通过对话接口的 `tools` 参数开启。当前不支持以独立 API 端点的形式调用搜索或网页抓取能力（即不提供独立的 Search API / Fetch API 端点，无法单独调用搜索或抓取能力获取结果），也不支持通过 OpenAI Chat Completions API 的 `tools` 参数为原厂直供模型开启联网搜索。
+联网搜索无需在控制台开通服务，通过对话接口的 `tools` 参数即可开启。DeepSeek 官方已面向 Agent 与 RAG 场景提供独立的 Search / Fetch API（按 query 搜索网页、按 URL 抓取网页正文），TokenHub 当前暂未开放该独立端点，仅支持通过对话接口的 `tools` 参数使用联网搜索；也不支持通过 OpenAI Chat Completions API 的 `tools` 参数为原厂直供模型开启联网搜索。
+
+**注意：**
+
+联网搜索按次计费说明：
+
+后付费 API 接入：Search 与 Fetch 均为 5 元/千次成功请求（仅返回 HTTP 200 且产生结果的请求计费），自北京时间 2026 年 11 月 1 日 00:00:00 起正式收费。搜索结果注入的内容计入输入 Token，按模型标准价格计费。
+
+Token Plan：自北京时间 2026 年 11 月 18 日 00:00:00 起正式收费，搜索结果注入的内容计入输入 Token，按模型输入积分抵扣。
+
+| 计费项 | 计费单位 | Token Plan 个人版 | Token Plan 企业版 |
+| --- | --- | --- | --- |
+| 联网搜索 Search | 千次成功请求 | 100 积分/千次 | 500 积分/千次 |
+| 联网搜索 Fetch | 千次成功请求 | 100 积分/千次 | 500 积分/千次 |
 
 ### 支持的模型与协议
 
-| 模型 ID | Anthropic Messages API | OpenAI Responses API |
-| --- | --- | --- |
-| `deepseek/deepseek-flash` | 支持 | 不支持 |
-| `deepseek-v4-flash-202605`、`deepseek/deepseek-v4-flash-0731`、`deepseek/deepseek-v4-flash` | 支持 | 不支持 |
-| `deepseek-v4-pro-202606`、`deepseek/deepseek-v4-pro-0813`、`deepseek/deepseek-v4-pro` | 支持 | 支持 |
-| `deepseek/deepseek-v4-flash-vision-exp` | 支持 | 不支持 |
+| 模型名称 | 模型 ID | Anthropic Messages API | OpenAI Responses API |
+| --- | --- | --- | --- |
+| DeepSeek-V4.1-Flash-1017（原厂直供） | `deepseek/deepseek-flash` | 支持 | 不支持 |
+| DeepSeek-V4-Flash 0731 正式版（原厂直供） | `deepseek-v4-flash-202605`、`deepseek/deepseek-v4-flash-0731`、`deepseek/deepseek-v4-flash` | 支持 | 不支持 |
+| DeepSeek-V4-Pro 0813 正式版（原厂直供） | `deepseek-v4-pro-202606`、`deepseek/deepseek-v4-pro-0813`、`deepseek/deepseek-v4-pro` | 支持 | 支持 |
+| DeepSeek-V4-Flash-Vision-Exp（原厂直供） | `deepseek/deepseek-v4-flash-vision-exp` | 支持 | 不支持 |
 
 **注意：**
 
 Responses API 仅 DeepSeek-V4-Pro 系列模型支持联网搜索。Flash 系列模型在 Responses API 中传入 `web_search` 工具时请求不会报错，但联网能力不生效，模型将基于自身知识回答。
 
-如使用平台渠道模型（如 `deepseek-v4-flash-0731`、`deepseek-v4-pro-0813`、`deepseek-v4-flash`、`deepseek-v4-pro`）并通过 Chat API 开启联网搜索，请参见 [联网搜索](https://cloud.tencent.com/document/product/1823/132358)。
+如使用非原厂模型（如 `deepseek-v4-flash-0731`、`deepseek-v4-pro-0813`、`deepseek-v4-flash`、`deepseek-v4-pro`）并通过 Chat API 开启联网搜索，请参见 [联网搜索](https://cloud.tencent.com/document/product/1823/132358)。
 
 ### 使用方式
 
@@ -1421,10 +1436,59 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/responses' \\
 
 | 协议 | 搜索调用内容块 | 说明 |
 | --- | --- | --- |
-| Anthropic Messages API | `server_tool_use` | 一次服务端搜索调用，`input.query` 为模型生成的搜索词。搜索调用次数通过 `usage.server_tool_use.web_search_requests` 返回。 |
-| OpenAI Responses API | `web_search_call` | 一次服务端搜索工具调用，`action.type` 为 `search` 时表示执行搜索，为 `open_page` 时表示模型打开网页读取正文。搜索调用次数可通过统计该类内容项数量获取。 |
+| Anthropic Messages API | `server_tool_use` | 一次服务端搜索调用，`input.query` 为模型生成的搜索词。搜索调用次数通过 `usage.server_tool_use` 中的 `web_search_requests` / `tool_search` 字段返回。 |
+| OpenAI Responses API | `web_search_call` | 一次服务端搜索工具调用，`action.type` 为 `search` 时表示执行搜索，为 `open_page` 时表示模型打开网页读取正文。搜索调用次数通过 `usage.server_tool_use` 中的 `tool_search` / `tool_fetch` 字段返回。 |
 
-搜索结果注入的内容计入输入 Token，按模型标准价格计费。联网搜索能力本身的计费规则，正式收费时间和定价将另行通知。
+### 计费次数查询
+
+当前联网搜索仅支持通过模型内置参数（Server 端工具）方式使用，暂未开放独立的 Search / Fetch API 端点。计费次数可通过调用响应中的字段统计：
+
+| 协议 | 计费次数查询方式 |
+| --- | --- |
+| Anthropic Messages API（`/v1/messages`） | 响应 `usage.server_tool_use` 字段返回本次调用的搜索次数（`web_search_requests`、`tool_search`） |
+| OpenAI Responses API（`/v1/responses`） | 响应 `usage.server_tool_use` 字段直接返回调用次数（`tool_search` 为 Search 次数，`tool_fetch` 为 Fetch 次数）；也可统计 `output` 数组中 `web_search_call` 内容块的数量（`action.type=search` 计为 Search，`action.type=open_page` 计为 Fetch） |
+
+响应 `usage` 中的 `server_tool_use` 字段示例如下。
+
+Anthropic Messages API：
+
+```json
+{
+  "usage": {
+    "input_tokens": 3488,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 384,
+    "output_tokens": 373,
+    "service_tier": "standard",
+    "server_tool_use": {
+      "web_search_requests": 1,
+      "tool_search": 1
+    }
+  }
+}
+```
+
+OpenAI Responses API：
+
+```json
+{
+  "usage": {
+    "input_tokens": 22316,
+    "input_tokens_details": {
+      "cached_tokens": 12160
+    },
+    "output_tokens": 2227,
+    "output_tokens_details": {
+      "reasoning_tokens": 838
+    },
+    "total_tokens": 24543,
+    "server_tool_use": {
+      "tool_search": 7,
+      "tool_fetch": 5
+    }
+  }
+}
+```
 
 **注意：**
 
