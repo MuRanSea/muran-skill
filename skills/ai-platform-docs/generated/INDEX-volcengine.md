@@ -5,8 +5,8 @@
 | 区 | 目录 | 源文档 | 页数 | 章节文件 | 章节表 |
 |----|------|-------|------|---------|-------|
 | TOS 区 | `chapters/volcengine/tos/` | 《对象存储 文档指南》 | 6407 | 1993 | `INDEX-tos.md` |
-| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 2001 | 216 | `INDEX-ark.md` |
-| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2391 | 168 | `INDEX-ark-guide.md` |
+| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 2037 | 219 | `INDEX-ark.md` |
+| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2392 | 168 | `INDEX-ark-guide.md` |
 | AI MediaKit API 区 | `chapters/volcengine/mediakit/` | 《AI MediaKit API 参考》 | 999 | 106 | `INDEX-mediakit.md` |
 | AI MediaKit 指南区 | `chapters/volcengine/mediakit-guide/` | 《AI MediaKit 文档指南》 | 934 | 155 | `INDEX-mediakit-guide.md` |
 
@@ -38,7 +38,7 @@
 
 方舟接口契约：Chat/Responses/Files、视频·图片·3D 生成、向量化、上下文缓存、批量推理、Managed Agents、接入点与 API Key 管理、分词
 
-全部 216 个章节文件见 `INDEX-ark.md`。
+全部 219 个章节文件见 `INDEX-ark.md`。
 
 | 章节 | 标题 | 页码范围 | 文件数 |
 |------|------|---------|-------|
@@ -52,11 +52,11 @@
 | 8 | 图片生成 API | 822-863 | 2 |
 | 9 | 3D生成 API | 869-916 | 12 |
 | 10 | 向量化 API | 918-918 | 1 |
-| 11 | Managed Agents API | 929-1574 | 87 |
-| 12 | 批量推理 API | 1577-1603 | 8 |
-| 13 | 分词 API | 1624-1624 | 1 |
-| 14 | 管控面 API | 1629-1941 | 71 |
-| 15 | 其他说明 | 1949-1986 | 5 |
+| 11 | Managed Agents API | 929-1610 | 90 |
+| 12 | 批量推理 API | 1613-1639 | 8 |
+| 13 | 分词 API | 1660-1660 | 1 |
+| 14 | 管控面 API | 1665-1977 | 71 |
+| 15 | 其他说明 | 1985-2022 | 5 |
 
 ## 方舟指南区（ark-guide）
 

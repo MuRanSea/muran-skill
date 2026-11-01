@@ -1,6 +1,6 @@
 # 方舟指南区章节表（ark-guide）
 
-来源：《火山方舟 文档指南》（2391 页）。168 个章节文件，接口级切分：一个接口/任务一个文件；超过 1500 行的按语义块自动再拆为`… - 第N部分`（10 个章节被拆分）。
+来源：《火山方舟 文档指南》（2392 页）。168 个章节文件，接口级切分：一个接口/任务一个文件；超过 1500 行的按语义块自动再拆为`… - 第N部分`（10 个章节被拆分）。
 
 「页码」是原 PDF 页码范围；「行范围」是中间 MD（`doc/<源文档>.md`）的 1 起始行号，可据此回查原文。章节文件本身已去掉页眉页脚，回查 PDF 时用这两列。文件名即章节标题，日常定位直接 Glob 文件名即可，用不到这两列。
 
@@ -102,77 +102,77 @@
 | 6.2.1 | Agent | 1645-1651 | 66855-67120 | 213 | `chapters/volcengine/ark-guide/6.2.1 Agent.md` |
 | 6.2.2 | Skills | 1652-1656 | 67121-67269 | 107 | `chapters/volcengine/ark-guide/6.2.2 Skills.md` |
 | 6.2.3 | MCP | 1657-1660 | 67270-67420 | 126 | `chapters/volcengine/ark-guide/6.2.3 MCP.md` |
-| 6.2.4 | Tools | 1661-1675 | 67421-68054 | 486 | `chapters/volcengine/ark-guide/6.2.4 Tools.md` |
-| 6.2.5 | 工具权限策略 | 1676-1679 | 68055-68210 | 135 | `chapters/volcengine/ark-guide/6.2.5 工具权限策略.md` |
-| 6.2.6 | 模型支持的参数列表 | 1680-1682 | 68211-68373 | 140 | `chapters/volcengine/ark-guide/6.2.6 模型支持的参数列表.md` |
-| 6.3.1 | 配置云环境 | 1683-1689 | 68375-68654 | 217 | `chapters/volcengine/ark-guide/6.3.1 配置云环境.md` |
-| 6.3.2 | 云沙箱参考 | 1690-1693 | 68655-68810 | 128 | `chapters/volcengine/ark-guide/6.3.2 云沙箱参考.md` |
-| 6.3.3.1 | 自托管环境概述 | 1694-1698 | 68812-69027 | 126 | `chapters/volcengine/ark-guide/6.3.3.1 自托管环境概述.md` |
-| 6.3.3.2 | 配置并运行自托管环境 | 1699-1713 | 69028-69612 | 476 | `chapters/volcengine/ark-guide/6.3.3.2 配置并运行自托管环境.md` |
-| 6.3.3.3 | 自托管环境安全说明 | 1714-1720 | 69613-69907 | 186 | `chapters/volcengine/ark-guide/6.3.3.3 自托管环境安全说明.md` |
-| 6.4.1 | 启动 Session | 1721-1735 | 69909-70534 | 509 | `chapters/volcengine/ark-guide/6.4.1 启动 Session.md` |
-| 6.4.2 | 管理 Session | 1736-1742 | 70535-70816 | 208 | `chapters/volcengine/ark-guide/6.4.2 管理 Session.md` |
-| 6.4.3 | Session 事件流 | 1743-1764 | 70817-71717 | 736 | `chapters/volcengine/ark-guide/6.4.3 Session 事件流.md` |
-| 6.4.4 | 使用 Webhook 接收事件通知 | 1765-1777 | 71718-72232 | 387 | `chapters/volcengine/ark-guide/6.4.4 使用 Webhook 接收事件通知.md` |
-| 6.4.5 | 使用 Vaults 认证 | 1778-1785 | 72233-72577 | 246 | `chapters/volcengine/ark-guide/6.4.5 使用 Vaults 认证.md` |
-| 6.4.6 | 运行和管理后台工具任务 | 1786-1791 | 72578-72807 | 155 | `chapters/volcengine/ark-guide/6.4.6 运行和管理后台工具任务.md` |
-| 6.5.1 | 上传与挂载文件 | 1792-1798 | 72809-73049 | 186 | `chapters/volcengine/ark-guide/6.5.1 上传与挂载文件.md` |
-| 6.5.2 | 持久化记忆 | 1799-1803 | 73050-73215 | 122 | `chapters/volcengine/ark-guide/6.5.2 持久化记忆.md` |
-| 6.5.3 | 使用 Dream 整理长期记忆 | 1804-1813 | 73216-73589 | 274 | `chapters/volcengine/ark-guide/6.5.3 使用 Dream 整理长期记忆.md` |
-| 6.5.4 | 配置上下文压缩 | 1814-1816 | 73590-73721 | 79 | `chapters/volcengine/ark-guide/6.5.4 配置上下文压缩.md` |
-| 6.6.1 | 编排 Multi Agent | 1817-1833 | 73723-74351 | 533 | `chapters/volcengine/ark-guide/6.6.1 编排 Multi Agent.md` |
-| 7.1 | 将零代码应用迁移至 Managed Agents | 1834-1841 | 74353-74693 | 239 | `chapters/volcengine/ark-guide/7.1 将零代码应用迁移至 Managed Agents.md` |
-| 7.2 | 知识库 | 1842 | 74694-74712 | 10 | `chapters/volcengine/ark-guide/7.2 知识库.md` |
-| 8.1.1 | 套餐概览 | 1843-1851 | 74715-75045 | 241 | `chapters/volcengine/ark-guide/8.1.1 套餐概览.md` |
-| 8.1.2 | 快速开始 | 1852-1859 | 75046-75286 | 173 | `chapters/volcengine/ark-guide/8.1.2 快速开始.md` |
-| 8.1.3.1 | Codex | 1860-1869 | 75288-75567 | 199 | `chapters/volcengine/ark-guide/8.1.3.1 Codex.md` |
-| 8.1.3.2 | Claude Code | 1870-1881 | 75568-75944 | 237 | `chapters/volcengine/ark-guide/8.1.3.2 Claude Code.md` |
-| 8.1.3.3 | OpenCode | 1882-1897 | 75945-76605 | 577 | `chapters/volcengine/ark-guide/8.1.3.3 OpenCode.md` |
-| 8.1.3.4 | OpenClaw | 1898-1916 | 76606-77338 | 602 | `chapters/volcengine/ark-guide/8.1.3.4 OpenClaw.md` |
-| 8.1.3.5 | Hermes Agent | 1917-1923 | 77339-77555 | 144 | `chapters/volcengine/ark-guide/8.1.3.5 Hermes Agent.md` |
-| 8.1.3.6 | TRAE | 1924-1926 | 77556-77642 | 54 | `chapters/volcengine/ark-guide/8.1.3.6 TRAE.md` |
-| 8.1.3.7 | WorkBuddy | 1927-1933 | 77643-77781 | 82 | `chapters/volcengine/ark-guide/8.1.3.7 WorkBuddy.md` |
-| 8.1.3.8 | ZCode | 1934-1945 | 77782-78177 | 323 | `chapters/volcengine/ark-guide/8.1.3.8 ZCode.md` |
-| 8.1.3.9 | DeepSeek Harness | 1946-1954 | 78178-78385 | 116 | `chapters/volcengine/ark-guide/8.1.3.9 DeepSeek Harness.md` |
-| 8.1.3.10 | Pi | 1955-1962 | 78386-78628 | 187 | `chapters/volcengine/ark-guide/8.1.3.10 Pi.md` |
-| 8.1.3.11 | OpenViking | 1963-1970 | 78629-78904 | 214 | `chapters/volcengine/ark-guide/8.1.3.11 OpenViking.md` |
-| 8.1.3.12 | 其他工具 | 1971-1974 | 78905-79030 | 80 | `chapters/volcengine/ark-guide/8.1.3.12 其他工具.md` |
-| 8.1.4.1 | ArkClaw | 1975-1976 | 79032-79093 | 32 | `chapters/volcengine/ark-guide/8.1.4.1 ArkClaw.md` |
-| 8.1.4.2 | 记忆增强-Embedding模型 | 1977-1979 | 79094-79209 | 87 | `chapters/volcengine/ark-guide/8.1.4.2 记忆增强-Embedding模型.md` |
-| 8.1.5 | Ark CLI：Coding Plan 个人版使用指南 | 1980-1983 | 79210-79302 | 74 | `chapters/volcengine/ark-guide/8.1.5 Ark CLI：Coding Plan 个人版使用指南.md` |
-| 8.1.6 | 常见问题 | 1984-1996 | 79303-79767 | 341 | `chapters/volcengine/ark-guide/8.1.6 常见问题.md` |
-| 8.1.7.1 | 限时邀请活动 | 1997-1998 | 79769-79835 | 36 | `chapters/volcengine/ark-guide/8.1.7.1 限时邀请活动.md` |
-| 8.1.7.2 | Coding Plan Lite & Pro 套餐 2.5 折普惠活动 | 1999-2000 | 79836-79913 | 52 | `chapters/volcengine/ark-guide/8.1.7.2 Coding Plan Lite & Pro 套餐 2.5 折普惠活动.md` |
-| 8.1.7.3 | Agent/Coding Plan 指定模型抵扣系数限时折扣活动 | 2001-2003 | 79914-80026 | 88 | `chapters/volcengine/ark-guide/8.1.7.3 Agent-Coding Plan 指定模型抵扣系数限时折扣活动.md` |
-| 8.1.7.4 | Coding Plan Pro 套餐赠送 ArkClaw 活动下线公告 | 2004 | 80027-80058 | 21 | `chapters/volcengine/ark-guide/8.1.7.4 Coding Plan Pro 套餐赠送 ArkClaw 活动下线公告.md` |
-| 8.1.7.5 | 功能发布公告 | 2005-2009 | 80059-80277 | 189 | `chapters/volcengine/ark-guide/8.1.7.5 功能发布公告.md` |
-| 8.1.7.6 | 模型上线公告 | 2010-2016 | 80278-80617 | 314 | `chapters/volcengine/ark-guide/8.1.7.6 模型上线公告.md` |
-| 8.1.7.7 | 模型下线公告 | 2017-2024 | 80618-80934 | 247 | `chapters/volcengine/ark-guide/8.1.7.7 模型下线公告.md` |
-| 9.1.1.1 | [基础] 构建连续对话的工单分诊助手 | 2025-2039 | 80938-81544 | 527 | `chapters/volcengine/ark-guide/9.1.1.1 [基础] 构建连续对话的工单分诊助手.md` |
-| 9.1.1.2 | [基础] 工单分诊 Agent 系统提示词版本管理 | 2040-2046 | 81545-81807 | 193 | `chapters/volcengine/ark-guide/9.1.1.2 [基础] 工单分诊 Agent 系统提示词版本管理.md` |
-| 9.1.1.3 | [基础] Custom Tool 使用教程 | 2047-2069 | 81808-82787 | 828 | `chapters/volcengine/ark-guide/9.1.1.3 [基础] Custom Tool 使用教程.md` |
-| 9.1.1.4 | [基础] 使用 Viking 知识库检索构建知识问答 Agent | 2070-2077 | 82788-82971 | 106 | `chapters/volcengine/ark-guide/9.1.1.4 [基础] 使用 Viking 知识库检索构建知识问答 Agent.md` |
-| 9.1.1.5 | [基础] 在豆包工作中使用 Managed Agents | 2078-2082 | 82972-83170 | 139 | `chapters/volcengine/ark-guide/9.1.1.5 [基础] 在豆包工作中使用 Managed Agents.md` |
-| 9.1.1.6 | [基础] 使用 Seedance Managed Agent 生成图片和视频 | 2083-2108 | 83171-84240 | 926 | `chapters/volcengine/ark-guide/9.1.1.6 [基础] 使用 Seedance Managed Agent 生成图片和视频.md` |
-| 9.1.1.7 | [进阶] 构建可持续迭代的 AI 研究交付工作台 | 2109-2121 | 84241-84740 | 410 | `chapters/volcengine/ark-guide/9.1.1.7 [进阶] 构建可持续迭代的 AI 研究交付工作台.md` |
-| 9.1.1.8 | [进阶] 构建从 CSV 到交互式报告的数据分析 Agent | 2122-2137 | 84741-85357 | 526 | `chapters/volcengine/ark-guide/9.1.1.8 [进阶] 构建从 CSV 到交互式报告的数据分析 Agent.md` |
-| 9.1.1.9 | [进阶] 使用 Vaults 让开发 Agent 以用户身份提交 | 2138-2154 | 85358-86024 | 577 | `chapters/volcengine/ark-guide/9.1.1.9 [进阶] 使用 Vaults 让开发 Agent 以用户身份提交.md` |
-| 9.1.1.10 | [进阶] 使用 Memory Store 构建有记忆的购物助手 | 2155-2170 | 86025-86623 | 521 | `chapters/volcengine/ark-guide/9.1.1.10 [进阶] 使用 Memory Store 构建有记忆的购物助手.md` |
-| 9.1.1.11 | [进阶] 用多智能体团队生成定制销售提案 | 2171-2197 | 86624-87739 | 1005 | `chapters/volcengine/ark-guide/9.1.1.11 [进阶] 用多智能体团队生成定制销售提案.md` |
-| 9.1.1.12 | [进阶] 使用 arkcli 构建集成 Vault 与 Memory 的投研 | 2198-2207 | 87740-88093 | 254 | `chapters/volcengine/ark-guide/9.1.1.12 [进阶] 使用 arkcli 构建集成 Vault 与 Memory 的投研.md` |
-| 9.1.2 | 快速入门(新手版) | 2208-2211 | 88094-88256 | 96 | `chapters/volcengine/ark-guide/9.1.2 快速入门(新手版).md` |
-| 9.1.3 | Seedance 1.0 系列提示词指南 | 2212-2228 | 88257-88602 | 292 | `chapters/volcengine/ark-guide/9.1.3 Seedance 1.0 系列提示词指南.md` |
-| 9.1.4 | Seedream 4.0-5.0 提示词指南 | 2229-2240 | 88603-88859 | 197 | `chapters/volcengine/ark-guide/9.1.4 Seedream 4.0-5.0 提示词指南.md` |
-| 9.1.5 | Seedream 4.0 助力 Seedance 生视频最佳实践 | 2241-2253 | 88860-89096 | 185 | `chapters/volcengine/ark-guide/9.1.5 Seedream 4.0 助力 Seedance 生视频最佳实践.md` |
-| 9.1.6 | RAG（检索增强）解决方案 | 2254-2255 | 89097-89148 | 26 | `chapters/volcengine/ark-guide/9.1.6 RAG（检索增强）解决方案.md` |
-| 9.1.7 | 数据回流操作流程 | 2256-2264 | 89149-89263 | 63 | `chapters/volcengine/ark-guide/9.1.7 数据回流操作流程.md` |
-| 9.1.8 | 强化学习最佳实践 | 2265-2299 | 89264-90368 | 802 | `chapters/volcengine/ark-guide/9.1.8 强化学习最佳实践.md` |
-| 9.1.9 | 如何设置控制台登录保持时间 | 2300 | 90369-90385 | 8 | `chapters/volcengine/ark-guide/9.1.9 如何设置控制台登录保持时间.md` |
-| 9.1.10 | 角色扮演场景提示词指南 | 2301-2326 | 90386-91252 | 688 | `chapters/volcengine/ark-guide/9.1.10 角色扮演场景提示词指南.md` |
-| 9.1.11 | 机密部署最佳实践 | 2327-2332 | 91253-91390 | 86 | `chapters/volcengine/ark-guide/9.1.11 机密部署最佳实践.md` |
-| 9.1.12 | 环境变量配置指南 | 2333-2338 | 91391-91572 | 131 | `chapters/volcengine/ark-guide/9.1.12 环境变量配置指南.md` |
-| 9.1.13 | 突发流量处理最佳实践 | 2339-2365 | 91573-92642 | 911 | `chapters/volcengine/ark-guide/9.1.13 突发流量处理最佳实践.md` |
-| 9.1.14 | 火山方舟分账最佳实践 | 2366-2374 | 92643-92867 | 108 | `chapters/volcengine/ark-guide/9.1.14 火山方舟分账最佳实践.md` |
-| 9.1.15 | 在应用中使用 RTC 实现 AI 实时对话 | 2375-2379 | 92868-93019 | 119 | `chapters/volcengine/ark-guide/9.1.15 在应用中使用 RTC 实现 AI 实时对话.md` |
-| 9.1.16 | 通过 TOS 内网预签名 URL 传入文件 | 2380-2382 | 93020-93136 | 93 | `chapters/volcengine/ark-guide/9.1.16 通过 TOS 内网预签名 URL 传入文件.md` |
-| 9.1.17 | 用量明细 CSV 解析最佳实践 | 2383-2391 | 93137-93471 | 283 | `chapters/volcengine/ark-guide/9.1.17 用量明细 CSV 解析最佳实践.md` |
+| 6.2.4 | Tools | 1661-1675 | 67421-68053 | 485 | `chapters/volcengine/ark-guide/6.2.4 Tools.md` |
+| 6.2.5 | 工具权限策略 | 1676-1679 | 68054-68209 | 135 | `chapters/volcengine/ark-guide/6.2.5 工具权限策略.md` |
+| 6.2.6 | 模型支持的参数列表 | 1680-1682 | 68210-68372 | 140 | `chapters/volcengine/ark-guide/6.2.6 模型支持的参数列表.md` |
+| 6.3.1 | 配置云环境 | 1683-1689 | 68374-68653 | 217 | `chapters/volcengine/ark-guide/6.3.1 配置云环境.md` |
+| 6.3.2 | 云沙箱参考 | 1690-1693 | 68654-68809 | 128 | `chapters/volcengine/ark-guide/6.3.2 云沙箱参考.md` |
+| 6.3.3.1 | 自托管环境概述 | 1694-1698 | 68811-69026 | 126 | `chapters/volcengine/ark-guide/6.3.3.1 自托管环境概述.md` |
+| 6.3.3.2 | 配置并运行自托管环境 | 1699-1713 | 69027-69611 | 476 | `chapters/volcengine/ark-guide/6.3.3.2 配置并运行自托管环境.md` |
+| 6.3.3.3 | 自托管环境安全说明 | 1714-1720 | 69612-69906 | 186 | `chapters/volcengine/ark-guide/6.3.3.3 自托管环境安全说明.md` |
+| 6.4.1 | 启动 Session | 1721-1735 | 69908-70533 | 509 | `chapters/volcengine/ark-guide/6.4.1 启动 Session.md` |
+| 6.4.2 | 管理 Session | 1736-1742 | 70534-70815 | 208 | `chapters/volcengine/ark-guide/6.4.2 管理 Session.md` |
+| 6.4.3 | Session 事件流 | 1743-1764 | 70816-71716 | 736 | `chapters/volcengine/ark-guide/6.4.3 Session 事件流.md` |
+| 6.4.4 | 使用 Webhook 接收事件通知 | 1765-1777 | 71717-72231 | 387 | `chapters/volcengine/ark-guide/6.4.4 使用 Webhook 接收事件通知.md` |
+| 6.4.5 | 使用 Vaults 认证 | 1778-1785 | 72232-72576 | 246 | `chapters/volcengine/ark-guide/6.4.5 使用 Vaults 认证.md` |
+| 6.4.6 | 运行和管理后台工具任务 | 1786-1791 | 72577-72806 | 155 | `chapters/volcengine/ark-guide/6.4.6 运行和管理后台工具任务.md` |
+| 6.5.1 | 上传与挂载文件 | 1792-1798 | 72808-73051 | 189 | `chapters/volcengine/ark-guide/6.5.1 上传与挂载文件.md` |
+| 6.5.2 | 持久化记忆 | 1799-1803 | 73052-73217 | 122 | `chapters/volcengine/ark-guide/6.5.2 持久化记忆.md` |
+| 6.5.3 | 使用 Dream 整理长期记忆 | 1804-1813 | 73218-73591 | 274 | `chapters/volcengine/ark-guide/6.5.3 使用 Dream 整理长期记忆.md` |
+| 6.5.4 | 配置上下文压缩 | 1814-1816 | 73592-73723 | 79 | `chapters/volcengine/ark-guide/6.5.4 配置上下文压缩.md` |
+| 6.6.1 | 编排 Multi Agent | 1817-1833 | 73725-74353 | 533 | `chapters/volcengine/ark-guide/6.6.1 编排 Multi Agent.md` |
+| 7.1 | 将零代码应用迁移至 Managed Agents | 1834-1841 | 74355-74695 | 239 | `chapters/volcengine/ark-guide/7.1 将零代码应用迁移至 Managed Agents.md` |
+| 7.2 | 知识库 | 1842 | 74696-74714 | 10 | `chapters/volcengine/ark-guide/7.2 知识库.md` |
+| 8.1.1 | 套餐概览 | 1843-1851 | 74717-75047 | 241 | `chapters/volcengine/ark-guide/8.1.1 套餐概览.md` |
+| 8.1.2 | 快速开始 | 1852-1859 | 75048-75288 | 173 | `chapters/volcengine/ark-guide/8.1.2 快速开始.md` |
+| 8.1.3.1 | Codex | 1860-1869 | 75290-75569 | 199 | `chapters/volcengine/ark-guide/8.1.3.1 Codex.md` |
+| 8.1.3.2 | Claude Code | 1870-1881 | 75570-75946 | 237 | `chapters/volcengine/ark-guide/8.1.3.2 Claude Code.md` |
+| 8.1.3.3 | OpenCode | 1882-1897 | 75947-76607 | 577 | `chapters/volcengine/ark-guide/8.1.3.3 OpenCode.md` |
+| 8.1.3.4 | OpenClaw | 1898-1916 | 76608-77340 | 602 | `chapters/volcengine/ark-guide/8.1.3.4 OpenClaw.md` |
+| 8.1.3.5 | Hermes Agent | 1917-1923 | 77341-77557 | 144 | `chapters/volcengine/ark-guide/8.1.3.5 Hermes Agent.md` |
+| 8.1.3.6 | TRAE | 1924-1926 | 77558-77644 | 54 | `chapters/volcengine/ark-guide/8.1.3.6 TRAE.md` |
+| 8.1.3.7 | WorkBuddy | 1927-1933 | 77645-77783 | 82 | `chapters/volcengine/ark-guide/8.1.3.7 WorkBuddy.md` |
+| 8.1.3.8 | ZCode | 1934-1945 | 77784-78179 | 323 | `chapters/volcengine/ark-guide/8.1.3.8 ZCode.md` |
+| 8.1.3.9 | DeepSeek Harness | 1946-1954 | 78180-78387 | 116 | `chapters/volcengine/ark-guide/8.1.3.9 DeepSeek Harness.md` |
+| 8.1.3.10 | Pi | 1955-1962 | 78388-78630 | 187 | `chapters/volcengine/ark-guide/8.1.3.10 Pi.md` |
+| 8.1.3.11 | OpenViking | 1963-1970 | 78631-78906 | 214 | `chapters/volcengine/ark-guide/8.1.3.11 OpenViking.md` |
+| 8.1.3.12 | 其他工具 | 1971-1974 | 78907-79032 | 80 | `chapters/volcengine/ark-guide/8.1.3.12 其他工具.md` |
+| 8.1.4.1 | ArkClaw | 1975-1976 | 79034-79095 | 32 | `chapters/volcengine/ark-guide/8.1.4.1 ArkClaw.md` |
+| 8.1.4.2 | 记忆增强-Embedding模型 | 1977-1979 | 79096-79211 | 87 | `chapters/volcengine/ark-guide/8.1.4.2 记忆增强-Embedding模型.md` |
+| 8.1.5 | Ark CLI：Coding Plan 个人版使用指南 | 1980-1983 | 79212-79304 | 74 | `chapters/volcengine/ark-guide/8.1.5 Ark CLI：Coding Plan 个人版使用指南.md` |
+| 8.1.6 | 常见问题 | 1984-1996 | 79305-79769 | 341 | `chapters/volcengine/ark-guide/8.1.6 常见问题.md` |
+| 8.1.7.1 | 限时邀请活动 | 1997-1998 | 79771-79837 | 36 | `chapters/volcengine/ark-guide/8.1.7.1 限时邀请活动.md` |
+| 8.1.7.2 | Coding Plan Lite & Pro 套餐 2.5 折普惠活动 | 1999-2000 | 79838-79915 | 52 | `chapters/volcengine/ark-guide/8.1.7.2 Coding Plan Lite & Pro 套餐 2.5 折普惠活动.md` |
+| 8.1.7.3 | Agent/Coding Plan 指定模型抵扣系数限时折扣活动 | 2001-2003 | 79916-80028 | 88 | `chapters/volcengine/ark-guide/8.1.7.3 Agent-Coding Plan 指定模型抵扣系数限时折扣活动.md` |
+| 8.1.7.4 | Coding Plan Pro 套餐赠送 ArkClaw 活动下线公告 | 2004 | 80029-80060 | 21 | `chapters/volcengine/ark-guide/8.1.7.4 Coding Plan Pro 套餐赠送 ArkClaw 活动下线公告.md` |
+| 8.1.7.5 | 功能发布公告 | 2005-2009 | 80061-80279 | 189 | `chapters/volcengine/ark-guide/8.1.7.5 功能发布公告.md` |
+| 8.1.7.6 | 模型上线公告 | 2010-2016 | 80280-80619 | 314 | `chapters/volcengine/ark-guide/8.1.7.6 模型上线公告.md` |
+| 8.1.7.7 | 模型下线公告 | 2017-2024 | 80620-80936 | 247 | `chapters/volcengine/ark-guide/8.1.7.7 模型下线公告.md` |
+| 9.1.1.1 | [基础] 构建连续对话的工单分诊助手 | 2025-2039 | 80940-81546 | 527 | `chapters/volcengine/ark-guide/9.1.1.1 [基础] 构建连续对话的工单分诊助手.md` |
+| 9.1.1.2 | [基础] 工单分诊 Agent 系统提示词版本管理 | 2040-2046 | 81547-81809 | 193 | `chapters/volcengine/ark-guide/9.1.1.2 [基础] 工单分诊 Agent 系统提示词版本管理.md` |
+| 9.1.1.3 | [基础] Custom Tool 使用教程 | 2047-2069 | 81810-82789 | 828 | `chapters/volcengine/ark-guide/9.1.1.3 [基础] Custom Tool 使用教程.md` |
+| 9.1.1.4 | [基础] 使用 Viking 知识库检索构建知识问答 Agent | 2070-2077 | 82790-82973 | 106 | `chapters/volcengine/ark-guide/9.1.1.4 [基础] 使用 Viking 知识库检索构建知识问答 Agent.md` |
+| 9.1.1.5 | [基础] 在豆包工作中使用 Managed Agents | 2078-2082 | 82974-83172 | 139 | `chapters/volcengine/ark-guide/9.1.1.5 [基础] 在豆包工作中使用 Managed Agents.md` |
+| 9.1.1.6 | [基础] 使用 Seedance Managed Agent 生成图片和视频 | 2083-2108 | 83173-84242 | 926 | `chapters/volcengine/ark-guide/9.1.1.6 [基础] 使用 Seedance Managed Agent 生成图片和视频.md` |
+| 9.1.1.7 | [进阶] 构建可持续迭代的 AI 研究交付工作台 | 2109-2121 | 84243-84742 | 410 | `chapters/volcengine/ark-guide/9.1.1.7 [进阶] 构建可持续迭代的 AI 研究交付工作台.md` |
+| 9.1.1.8 | [进阶] 构建从 CSV 到交互式报告的数据分析 Agent | 2122-2137 | 84743-85359 | 526 | `chapters/volcengine/ark-guide/9.1.1.8 [进阶] 构建从 CSV 到交互式报告的数据分析 Agent.md` |
+| 9.1.1.9 | [进阶] 使用 Vaults 让开发 Agent 以用户身份提交 | 2138-2154 | 85360-86026 | 577 | `chapters/volcengine/ark-guide/9.1.1.9 [进阶] 使用 Vaults 让开发 Agent 以用户身份提交.md` |
+| 9.1.1.10 | [进阶] 使用 Memory Store 构建有记忆的购物助手 | 2155-2170 | 86027-86625 | 521 | `chapters/volcengine/ark-guide/9.1.1.10 [进阶] 使用 Memory Store 构建有记忆的购物助手.md` |
+| 9.1.1.11 | [进阶] 用多智能体团队生成定制销售提案 | 2171-2197 | 86626-87741 | 1005 | `chapters/volcengine/ark-guide/9.1.1.11 [进阶] 用多智能体团队生成定制销售提案.md` |
+| 9.1.1.12 | [进阶] 使用 arkcli 构建集成 Vault 与 Memory 的投研 | 2198-2207 | 87742-88095 | 254 | `chapters/volcengine/ark-guide/9.1.1.12 [进阶] 使用 arkcli 构建集成 Vault 与 Memory 的投研.md` |
+| 9.1.2 | 快速入门(新手版) | 2208-2211 | 88096-88258 | 96 | `chapters/volcengine/ark-guide/9.1.2 快速入门(新手版).md` |
+| 9.1.3 | Seedance 1.0 系列提示词指南 | 2212-2228 | 88259-88604 | 292 | `chapters/volcengine/ark-guide/9.1.3 Seedance 1.0 系列提示词指南.md` |
+| 9.1.4 | Seedream 4.0-5.0 提示词指南 | 2229-2240 | 88605-88861 | 197 | `chapters/volcengine/ark-guide/9.1.4 Seedream 4.0-5.0 提示词指南.md` |
+| 9.1.5 | Seedream 4.0 助力 Seedance 生视频最佳实践 | 2241-2253 | 88862-89098 | 185 | `chapters/volcengine/ark-guide/9.1.5 Seedream 4.0 助力 Seedance 生视频最佳实践.md` |
+| 9.1.6 | RAG（检索增强）解决方案 | 2254-2255 | 89099-89150 | 26 | `chapters/volcengine/ark-guide/9.1.6 RAG（检索增强）解决方案.md` |
+| 9.1.7 | 数据回流操作流程 | 2256-2264 | 89151-89265 | 63 | `chapters/volcengine/ark-guide/9.1.7 数据回流操作流程.md` |
+| 9.1.8 | 强化学习最佳实践 | 2265-2299 | 89266-90370 | 802 | `chapters/volcengine/ark-guide/9.1.8 强化学习最佳实践.md` |
+| 9.1.9 | 如何设置控制台登录保持时间 | 2300 | 90371-90387 | 8 | `chapters/volcengine/ark-guide/9.1.9 如何设置控制台登录保持时间.md` |
+| 9.1.10 | 角色扮演场景提示词指南 | 2301-2326 | 90388-91254 | 688 | `chapters/volcengine/ark-guide/9.1.10 角色扮演场景提示词指南.md` |
+| 9.1.11 | 机密部署最佳实践 | 2327-2332 | 91255-91392 | 86 | `chapters/volcengine/ark-guide/9.1.11 机密部署最佳实践.md` |
+| 9.1.12 | 环境变量配置指南 | 2333-2338 | 91393-91574 | 131 | `chapters/volcengine/ark-guide/9.1.12 环境变量配置指南.md` |
+| 9.1.13 | 突发流量处理最佳实践 | 2339-2365 | 91575-92644 | 911 | `chapters/volcengine/ark-guide/9.1.13 突发流量处理最佳实践.md` |
+| 9.1.14 | 火山方舟分账最佳实践 | 2366-2374 | 92645-92869 | 108 | `chapters/volcengine/ark-guide/9.1.14 火山方舟分账最佳实践.md` |
+| 9.1.15 | 在应用中使用 RTC 实现 AI 实时对话 | 2375-2379 | 92870-93021 | 119 | `chapters/volcengine/ark-guide/9.1.15 在应用中使用 RTC 实现 AI 实时对话.md` |
+| 9.1.16 | 通过 TOS 内网预签名 URL 传入文件 | 2380-2382 | 93022-93138 | 93 | `chapters/volcengine/ark-guide/9.1.16 通过 TOS 内网预签名 URL 传入文件.md` |
+| 9.1.17 | 用量明细 CSV 解析最佳实践 | 2383-2392 | 93139-93526 | 331 | `chapters/volcengine/ark-guide/9.1.17 用量明细 CSV 解析最佳实践.md` |

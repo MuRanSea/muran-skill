@@ -1,26 +1,37 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132358 -->
-<!-- Source SHA-256: dd7b43674cd3b07aedd778751ee4cd5ebfbf6ff6b7bbbd9423c3945bd9357b20 -->
+<!-- Source SHA-256: 71051755365c8e7af1f4d36e8fc1cb163d515e1118bd3fe607781925400e23b4 -->
 
 # 联网搜索
 
 官方来源：https://cloud.tencent.com/document/product/1823/132358
-最近更新时间：2026-09-29 17:09:46
+最近更新时间：2026-10-31 13:53:30
 
 ## 功能概述
 
-联网搜索是 TokenHub 提供的模型增强能力。开启后，大模型在回答时可自动调用搜索引擎获取实时网络信息，解决模型知识时效性不足的问题。
+联网搜索是 TokenHub 提供的模型增强能力。开启后，大模型在回答时可自动调用搜索引擎获取实时网络信息，解决模型知识时效性不足的问题。模型会**自主判断**是否需要搜索、搜索什么关键词，并基于搜索结果生成回答。
 
-联网搜索支持两种 API 协议接入：
+### 联网搜索服务类型
 
-**Responses API**（`/v1/responses`）：对齐 OpenAI `web_search` 工具规范，通过 `tools` 字段声明搜索工具，响应中通过 `annotations` 结构化返回引用来源。
+TokenHub 当前提供两类联网搜索服务：
 
-**Chat API**（`/v1/chat/completions`）：兼容 OpenAI Chat Completions 协议，通过 `web_search_options` 字段开启搜索，响应中通过 `search_results` 返回引用来源。
+| 联网搜索方式 | 能力提供方 | 适用模型 | 使用方式 | 价格 |
+| --- | --- | --- | --- | --- |
+| TokenHub 联网搜索 | TokenHub | TokenHub 自建模型（非原厂直供），详情见[模型与协议支持矩阵](https://cloud.tencent.com/document/product/1823/132358#2fbb127a-dc23-4296-b791-3ba7eb734e75) | 需在**开通管理 >** [插件](https://console.cloud.tencent.com/tokenhub/open-management?regionId=1&tab=tools)打开联网搜索开关。详细使用方式请参考本文后续章节 | 按搜索次数计费，分轻量版 / 标准版，价格参见[模型价格](https://cloud.tencent.com/document/product/1823/130055) |
+| DeepSeek 原厂联网搜索 | DeepSeek（模型供应商） | DeepSeek 原厂直供模型 | 无需开启可直接调用，请参见 [DeepSeek 调用指南](https://cloud.tencent.com/document/product/1823/132248) 的"联网搜索"章节了解详细调用方式 | 按搜索次数计费，网页 Search 与 Fetch 分别计费，价格参见[模型价格](https://cloud.tencent.com/document/product/1823/130055) |
 
-模型会自主判断是否需要搜索、搜索什么关键词，并基于搜索结果生成回答。
+**说明：**
+
+本文后续章节介绍 **TokenHub 联网搜索** 的使用方式。
 
 ### 模型与协议支持矩阵
 
-<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div><b>模型名称</b></div></td><td><div><b>model 参数值</b></div></td><td><div><b>API 协议</b></div></td><td><div><b>端点</b></div></td></tr><tr><td><div>Hy3</div></td><td><div><code>hy3</code></div></td><td><div>Responses API、Chat API</div></td><td><div><code>/v1/responses</code>、<code>/v1/chat/completions</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>DeepSeek-V4-Flash 0731 正式版</div></td><td colspan="1" rowspan="1"><div><code>deepseek-v4-flash-0731</code></div></td><td colspan="1" rowspan="1"><div>Chat API</div></td><td colspan="1" rowspan="1"><div><code>/v1/chat/completions</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>DeepSeek-V4-Pro 0813 正式版</div></td><td colspan="1" rowspan="1"><div><code>deepseek-v4-pro-0813</code></div></td><td colspan="1" rowspan="1"><div>Chat API</div></td><td colspan="1" rowspan="1"><div><code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek V4 Pro</div></td><td><div><code>deepseek-v4-pro</code></div></td><td><div>Chat API</div></td><td><div><code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek V4 Flash</div></td><td><div><code>deepseek-v4-flash</code></div></td><td><div>Chat API</div></td><td><div><code>/v1/chat/completions</code></div></td></tr></tbody></table>
+| **模型名称** | **model 参数值** | **API 协议** | **端点** |
+| --- | --- | --- | --- |
+| Hy3 | `hy3` | Responses API、Chat API | `/v1/responses`、`/v1/chat/completions` |
+| DeepSeek-V4-Flash 0731 正式版 | `deepseek-v4-flash-0731` | Chat API | `/v1/chat/completions` |
+| DeepSeek-V4-Pro 0813 正式版 | `deepseek-v4-pro-0813` | Chat API | `/v1/chat/completions` |
+| DeepSeek V4 Pro | `deepseek-v4-pro` | Chat API | `/v1/chat/completions` |
+| DeepSeek V4 Flash | `deepseek-v4-flash` | Chat API | `/v1/chat/completions` |
 
 联网搜索可与思维链组合使用。开启思维链后，模型会在搜索前后进行深度推理，对多源信息进行交叉对比与综合分析，适合调研、比较、决策类场景。
 
@@ -38,13 +49,15 @@
 
 ## 开通服务
 
-如需开通联网搜索服务，请在**启用管理 >** [应用工具](https://console.cloud.tencent.com/tokenhub/open-management?regionId=1&tab=tools)页面领取**联网搜索免费资源包**或主动开通后付费。
+如需开通 TokenHub 联网搜索服务，请在**开通管理 >** [插件](https://console.cloud.tencent.com/tokenhub/open-management?regionId=1&tab=tools)页面领取**联网搜索免费资源包**或主动开通按量付费。
 
 **说明：**
 
 如需快速体验联网搜索效果，可在 [模型体验-语言模型](https://console.cloud.tencent.com/tokenhub/text) 页面选择已支持联网搜索的模型，开启联网搜索后直接对话。
 
-调用情况可在工具管理 > 用量监控中查询，包含联网搜索请求次数和搜索引擎调用次数。
+调用情况可在 开通管理 > [插件](https://console.cloud.tencent.com/tokenhub/open-management?regionId=1&tab=tools) > 用量监控中查询，包含联网搜索请求次数和搜索引擎调用次数。
+
+DeepSeek 原厂联网搜索无需开通服务，可直接传入参数使用。
 
 ## 搜索版本与费用
 
