@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/140042 -->
-<!-- Source SHA-256: c64c020753d4a40658c529b23230c2aa097923b96dfed67b824f81ffe8d18dea -->
+<!-- Source SHA-256: ade0aa05f10f7930f61a7f0af8631eeaf6657b4c6f1205c3910eb9233f172e6a -->
 
 # Token Plan 个人版限时优惠活动
 
 官方来源：https://cloud.tencent.com/document/product/1823/140042
-最近更新时间：2026-10-30 14:25:30
+最近更新时间：2026-11-01 11:58:30
 
 本文介绍 Token Plan 个人版当前及往期的限时优惠活动。活动期间调用指定模型，按活动积分价抵扣，到点自动生效，无需申请。
 
@@ -26,6 +26,14 @@
 
 ### 优惠活动 1
 
+**活动时间**：2026年10月31日 11:30:00 至 2026年11月16日 12:00:00（北京时间）
+
+通用 Token Plan
+
+<table><colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div><b>模型</b></div></td><td><div><b>Model ID</b></div></td><td><div><b>条件</b></div></td><td><div><b>优惠</b></div></td><td><div><b>未命中缓存输入价</b></div><div><b>（每百万 tokens）</b></div></td><td><div><b>输出价</b></div><div><b>（每百万 tokens）</b></div></td><td><div><b>命中缓存输入价</b></div><div><b>（每百万 tokens）</b></div></td></tr><tr><td rowspan="2"><div>DeepSeek-V4-Pro 0813 正式版</div></td><td rowspan="2"><div>deepseek-v4-pro-0813</div></td><td><div>空闲时段</div></td><td rowspan="2"><div>7折</div></td><td><div>63 积分（3.15 元）</div></td><td><div>189 积分（9.45 元）</div></td><td><div>2.1 积分（0.105 元）</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td colspan="0" rowspan="0"><div></div></td><td><div>高峰时段</div></td><td colspan="0" rowspan="0"><div></div></td><td><div>126 积分（6.3 元）</div></td><td><div>378 积分（18.9 元）</div></td><td><div>4.2 积分（0.21 元）</div></td></tr><tr><td rowspan="2"><div>DeepSeek-V4.1-Flash-1017</div></td><td rowspan="2"><div>deepseek-v4.1-flash-1017</div></td><td><div>空闲时段</div></td><td rowspan="2"><div>4折</div></td><td><div>8 积分（0.4 元）</div></td><td><div>32 积分（1.6 元）</div></td><td><div>0.16 积分（0.008 元）</div></td></tr><tr><td colspan="0" rowspan="0"><div></div></td><td colspan="0" rowspan="0"><div></div></td><td><div>高峰时段</div></td><td colspan="0" rowspan="0"><div></div></td><td><div>16  积分（0.8 元）</div></td><td><div>64 积分（3.2 元）</div></td><td><div>0.32 积分（0.016 元）</div></td></tr></tbody></table>
+
+### 优惠活动 2
+
 **活动时间**：2026年10月1日 00:30:00 至 2026年11月2日 00:00:00（北京时间）
 
 通用 Token Plan
@@ -44,7 +52,7 @@ Hy Token Plan
 | --- | --- | --- | --- | --- | --- |
 | Hy3 | hy3-202608 | 5 折 | 10 积分（0.5 元） | 40 积分（2 元） | 2.5 积分（0.125 元） |
 
-### 优惠活动 2
+### 优惠活动 3
 
 **活动时间**：2026年9月25日 00:00:00 至 2026年11月2日 00:00:00（北京时间）
 
