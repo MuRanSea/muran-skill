@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-01T01:08:42.586231+00:00",
+  "built_at": "2026-11-02T01:01:33.247268+00:00",
   "origin": "Official Volcengine PDF, Kling/MiniMax Markdown and Tencent Cloud documentation",
   "files": {
     "chapters/kling/document-api-api-assets-account-usage-e78fd09f14.md": "0050fdcc95f7ea8e92e913fa7fc187f963c5dac63d3a2fa635d452ad14d85bc9",
@@ -275,7 +275,7 @@
     "chapters/tencent/document-product-1823-133808-1b9581fdc9.md": "0fe85414e44e48231621e46c03a6a363e88d125b8b820c2f968c342401cd8433",
     "chapters/tencent/document-product-1823-133809-917ea1bf19.md": "474aca7cc6e2b418158e4369a11ff2a4f7db72a3ee9b21299173ad0962465f1e",
     "chapters/tencent/document-product-1823-133810-8f3b6ca1f1.md": "079e4e7513edcb40d16da379b90583e5a98b7c46d54bfcacd9ad5e937a9e60cf",
-    "chapters/tencent/document-product-1823-133811-475e3152a9.md": "f506b6f3fd0e107db7db9734cd4c3a90b8ee61fd6d090183ddbaf5e84cf5aee0",
+    "chapters/tencent/document-product-1823-133811-475e3152a9.md": "4c5281c6566c0750cf05301921b0233f973060834e44597d2aeecbfeac266aa7",
     "chapters/tencent/document-product-1823-133813-987e066511.md": "a51e91d92ee931f90ed736f509d85aabd7b604f13b5a642d6946d265496dff0c",
     "chapters/tencent/document-product-1823-134032-ba47ca4db4.md": "9b77a408f413d0c2f623bba969c3a825697160ab5c456f083a555cc38a18de1f",
     "chapters/tencent/document-product-1823-134033-e5b9d02e62.md": "115d1ccbd96aafcddd4207ac878157d6b34533f7ceded5dea1314fd3065b3e89",
@@ -352,7 +352,7 @@
     "chapters/tencent/document-product-1823-138804-8118ff0bc9.md": "3472fb2350a8f255f4f826c51dd6eda1505eb54077447eed429c05138527c535",
     "chapters/tencent/document-product-1823-138805-fba71bdd54.md": "bc64c6e2891a62d589efeb724b155d36417c1cefe7e6318e3c42eec5524db327",
     "chapters/tencent/document-product-1823-139566-b5391b01be.md": "cb9e3b9259fef4ee2886008c0528703ca7e8609f52dde8553fb646532065fabf",
-    "chapters/tencent/document-product-1823-140042-51d67eaf27.md": "46fdb8d0e9d3defd63453f7a4c523cf1e2afeb5dd059f520272e85af4d6137ec",
+    "chapters/tencent/document-product-1823-140042-51d67eaf27.md": "7b2c873896e654e6c1dc1ab5ccb3892668235f4e30c1f6edfb573cc49ea5616f",
     "chapters/tencent/document-product-1823-140153-7db2019f73.md": "f6da260cf05ecae5a9005ae551d1dfa2b59bb2f0b1b4c353ba5ebe3e1dc86c72",
     "chapters/tencent/document-product-1823-140154-3bdde80022.md": "2f057cb0a96db2ef52080c48c2c2fabaff824f8882bd13aa51de23ce3c5fbbcc",
     "chapters/volcengine/ark/1.1 获取 API Key 并配置.md": "46c8365edac6a502055f6342e7d6571bb91778cc09e226be401f05553ea1d0ae",
@@ -3008,7 +3008,7 @@
     "INDEX.md": "d895ea3343c9f4cca67b2594f8d44c56eef1b4f845e1cdcdfe3f338aa76a8e70"
   },
   "layout_version": 2,
-  "source_fingerprint": "13471eabaf61d99e98951ee3298ba0aee3a2f727455bc5ab731b67539af0acf6",
+  "source_fingerprint": "9c8a9d6ea61212b0945b311396bbc6c03eeb6a1dca20b2626a97a51b6cbd4629",
   "sources": {
     "volcengine": {
       "format": "official-pdf",
@@ -3026,7 +3026,7 @@
       "label": "可灵 API（中国区）",
       "region": "中国区；国际区调用前核对 kling.ai 的文档",
       "index_url": "https://klingai.com/document-api/llms.txt",
-      "checked_at": "2026-11-01T01:05:27.047726+00:00",
+      "checked_at": "2026-11-02T00:58:05.878152+00:00",
       "pages": 59
     },
     "minimax": {
@@ -3034,7 +3034,7 @@
       "label": "MiniMax API（中文）",
       "region": "中文文档；以各页面标注的国内/国际域名为准",
       "index_url": "https://platform.minimax.cn/docs/llms.txt",
-      "checked_at": "2026-11-01T01:05:36.212617+00:00",
+      "checked_at": "2026-11-02T00:58:14.764810+00:00",
       "pages": 71
     },
     "tencent": {
@@ -3042,7 +3042,7 @@
       "label": "腾讯云 TokenHub（中国站文档）",
       "region": "中国站中文文档；接入地域与接口域名以各页面说明为准",
       "index_url": "https://cloud.tencent.com/document/product/1823",
-      "checked_at": "2026-11-01T01:08:21.676713+00:00",
+      "checked_at": "2026-11-02T01:01:11.345249+00:00",
       "format": "official-document-api-to-markdown",
       "pages": 222
     }
