@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132358 -->
-<!-- Source SHA-256: 71051755365c8e7af1f4d36e8fc1cb163d515e1118bd3fe607781925400e23b4 -->
+<!-- Source SHA-256: 60dd153bd05222733bc7b86e3eadebab09f0eaeb50318b357a487a36b579da93 -->
 
 # 联网搜索
 
 官方来源：https://cloud.tencent.com/document/product/1823/132358
-最近更新时间：2026-10-31 13:53:30
+最近更新时间：2026-11-02 14:33:00
 
 ## 功能概述
 
@@ -25,13 +25,7 @@ TokenHub 当前提供两类联网搜索服务：
 
 ### 模型与协议支持矩阵
 
-| **模型名称** | **model 参数值** | **API 协议** | **端点** |
-| --- | --- | --- | --- |
-| Hy3 | `hy3` | Responses API、Chat API | `/v1/responses`、`/v1/chat/completions` |
-| DeepSeek-V4-Flash 0731 正式版 | `deepseek-v4-flash-0731` | Chat API | `/v1/chat/completions` |
-| DeepSeek-V4-Pro 0813 正式版 | `deepseek-v4-pro-0813` | Chat API | `/v1/chat/completions` |
-| DeepSeek V4 Pro | `deepseek-v4-pro` | Chat API | `/v1/chat/completions` |
-| DeepSeek V4 Flash | `deepseek-v4-flash` | Chat API | `/v1/chat/completions` |
+<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div><b>模型名称</b></div></td><td><div><b>model 参数值</b></div></td><td><div><b>API 协议</b></div></td><td><div><b>端点</b></div></td></tr><tr><td><div>Hy3</div></td><td><div><code>hy3</code></div></td><td><div>Responses API、Chat API</div></td><td><div><code>/v1/responses</code>、<code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek-V4.1-Flash-1017</div></td><td><div><code>deepseek-v4.1-flash-1017</code></div></td><td colspan="1" rowspan="1"><div>Responses API、Chat API</div></td><td colspan="1" rowspan="1"><div><code>/v1/responses</code>、<code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek-V4.1-Flash</div></td><td><div><code>deepseek-v4.1-flash</code></div></td><td colspan="1" rowspan="1"><div>Responses API、Chat API</div></td><td colspan="1" rowspan="1"><div><code>/v1/responses</code>、<code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek-V4-Pro 0813 正式版</div></td><td><div><code>deepseek-v4-pro-0813</code></div></td><td><div>Chat API</div></td><td><div><code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek V4 Pro</div></td><td><div><code>deepseek-v4-pro</code></div></td><td><div>Chat API</div></td><td><div><code>/v1/chat/completions</code></div></td></tr></tbody></table>
 
 联网搜索可与思维链组合使用。开启思维链后，模型会在搜索前后进行深度推理，对多源信息进行交叉对比与综合分析，适合调研、比较、决策类场景。
 
@@ -43,7 +37,7 @@ TokenHub 当前提供两类联网搜索服务：
 
 `deepseek-v4-pro、deepseek-v4-pro-0813`：默认思考开关为开启，默认推理强度为 `high`。
 
-`deepseek-v4-flash、deepseek-v4-flash-0731`：默认思考开关为开启，默认推理强度为 `high`。
+`deepseek-v4.1-flash、deepseek-v4.1-flash-1017`：默认思考开关为开启，默认推理强度为 `high`。
 
 如不希望响应中返回思维链内容，请不要依赖模型默认策略，建议在请求中显式关闭思考。Chat API 使用 `reasoning_effort`，Responses API 使用 `reasoning.effort`。
 

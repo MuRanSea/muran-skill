@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/rate-limits.md -->
-<!-- Source SHA-256: 29496200daacc925d7927166810c50c2c87297bacdedb88c6c39973a10234e5a -->
+<!-- Source SHA-256: 67d151996a14d09cdcf16c9adeda73d807ed947f467b6c128467fc51e4a191f6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -99,5 +99,5 @@
 ### 6、如何提高速率限制
 
 我们的默认限速是为了帮助最大限度的提高 API 调用的稳定性，以及更公平合理的将相应资源进行分配。\
-如果您认为您拥有必要的流量数据以来申请提高速率限制时，您可以通过页面底部官方客户或邮件[**api@minimax.io**](mailto:api@minimax.io) 进行提高速率限制的申请。\
+如果您认为您拥有必要的流量数据以来申请提高速率限制时，您可以通过页面底部官方客服或邮件[**api@minimax.io**](mailto:api@minimax.io) 进行提高速率限制的申请。\
 需要您知悉的是，提高限速有时可能需要 3-5 个工作日，因此如果您有确定数据支持您的申请时，为了不影响您的产品的正常上线发布，请务必尽早提交限速提升申请。

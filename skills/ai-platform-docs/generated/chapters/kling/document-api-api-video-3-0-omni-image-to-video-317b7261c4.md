@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-omni/image-to-video.md -->
-<!-- Source SHA-256: c4439f6148eb88f6c7c473dfd917b0e402cf5df6d48e155ae4f54d8f4710eb8c -->
+<!-- Source SHA-256: 50f0fd772bc8dcc6c966633b420b8b54f37d2ebc07c3a66d0344a6d328676b9b -->
 
 > ## Documentation Index
 >
@@ -415,10 +415,10 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
           ]
         }
       ],
-      "billing": [
+      "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
         {
           "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为cash，如果是消耗资源包则参数值为unit
-          "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance
+          "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
           "amount": "string", // 扣减数额；消耗额度场景（charge_type=cash）时代表额度扣减折扣价，消耗资源包场景（charge_type=unit）时代表积分扣减量；十进制
           "currency": "string", // 消耗单位，仅存在于消耗余额场景（charge_type=cash），固定枚举值：CNY, USD
           "package_type": "string", // 消耗资源包类型，仅存在于消耗资源包场景（charge_type=unit），固定枚举值：video, image, audio
@@ -600,10 +600,10 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
           ]
         }
       ],
-        "billing": [
+        "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
           {
             "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为 cash，如果消耗资源包则参数值为 unit
-            "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance
+            "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
             "amount": "string", // 扣减数额；消耗额度场景（charge_type=cash）时代表额度扣减折扣价，消耗资源包场景（charge_type=unit）时代表积分扣减量；十进制
             "currency": "string", // 消耗单位，仅存在于消耗余额场景（charge_type=cash），固定枚举值：CNY, USD
             "package_type": "string", // 消耗资源包类型，仅存在于消耗资源包场景（charge_type=unit），固定枚举值：video, image, audio

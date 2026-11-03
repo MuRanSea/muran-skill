@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/assets/billing-deduction/balance.md -->
-<!-- Source SHA-256: 6abb6725a9570df95f433f51cd0702412ddd753d22113ed158ee56cac237dabe -->
+<!-- Source SHA-256: 93bdf7bca8bd359db3266d5eb99e36652876c6951059eee4e3ff7a5dc325cdb4 -->
 
 > ## Documentation Index
 >
@@ -121,7 +121,7 @@ curl --location --request POST 'https://api-beijing.klingai.com/account/billing/
           "video_sound": "native", // 生成的视频是否包含声音，枚举值：native、original、off；依次对应随画面生成声音、保留参考视频原声、无声音（当前参数仅生效于生成视频任务相关明细）
           "voice_control": false, // 生成的视频是否有指定音色，布尔值：true, false；依次对应有指定音色、未指定音色（当前参数仅生效于生成视频任务相关明细）
           "deduction_time": "1779549455861", // 余额抵扣时间，Unix时间戳、单位ms时间
-          "cash_type": "string", // 额度类型；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance
+          "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
           "balance_before_deduction": 13037.3, // 抵扣前余额
           "deduction_amount": 5.0, // 抵扣金额
           "balance_after_deduction": 13032.3, // 抵扣后余额

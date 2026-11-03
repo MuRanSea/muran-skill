@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/4-0/video-omni.md -->
-<!-- Source SHA-256: 8306e7d9f59387c764d08b8a84018a72391b9c851be6e0288fd636a9059cfcda -->
+<!-- Source SHA-256: e71c1427b6c5a875a3e20a3e9080b2a90efd66057f062a303b2b94667dedd872 -->
 
 > ## Documentation Index
 >
@@ -485,10 +485,10 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
       "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略
         "input_duration": "8.03" // 输入视频总时长（包括视频主体），单位秒、两位小数字符串；仅 4.0 有视频输入时有值
       },
-      "billing": [
+      "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
         {
           "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为cash，如果是消耗资源包则参数值为unit
-          "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance
+          "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
           "amount": "string", // 扣减数额；消耗额度场景（charge_type=cash）时代表额度扣减折扣价，消耗资源包场景（charge_type=unit）时代表积分扣减量；十进制
           "currency": "string", // 消耗单位，仅存在于消耗余额场景（charge_type=cash），固定枚举值：CNY, USD
           "package_type": "string", // 消耗资源包类型，仅存在于消耗资源包场景（charge_type=unit），固定枚举值：video, image, audio
@@ -673,10 +673,10 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
         "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略
           "input_duration": "8.03" // 输入视频总时长（包括视频主体），单位秒、两位小数字符串；仅 4.0 有视频输入时有值
         },
-        "billing": [
+        "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
           {
             "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为 cash，如果消耗资源包则参数值为 unit
-            "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance
+            "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
             "amount": "string", // 扣减数额；消耗额度场景（charge_type=cash）时代表额度扣减折扣价，消耗资源包场景（charge_type=unit）时代表积分扣减量；十进制
             "currency": "string", // 消耗单位，仅存在于消耗余额场景（charge_type=cash），固定枚举值：CNY, USD
             "package_type": "string", // 消耗资源包类型，仅存在于消耗资源包场景（charge_type=unit），固定枚举值：video, image, audio

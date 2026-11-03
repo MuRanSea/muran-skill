@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/apparel.md -->
-<!-- Source SHA-256: ab0a106a27e95b238520dd6c81badbe28f497d2913c3a11322d9fe16f55e78de -->
+<!-- Source SHA-256: 1280cabdfd40803ca15eda8559cb410bff15a9725a2bbd0216eb32bf57d1d7f2 -->
 
 > ## Documentation Index
 >
@@ -342,7 +342,7 @@ curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
           "watermark_url": "string" // 含水印下载 URL，防盗链格式
         }
       ],
-      "billing": [ // 任务消耗信息
+      "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
         {
           "charge_type": "unit", // 消耗账户类型：资源包
           "amount": "string", // 扣减数额；unit 时代表积分扣减量；十进制
@@ -351,7 +351,7 @@ curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
         {
           "charge_type": "cash", // 消耗账户类型：余额
           "amount": "string", // 扣减数额；cash 时代表额度扣减折扣价；十进制
-          "cash_type": "balance", // 额度类型，仅 charge_type=cash 时存在；枚举值：balance（正式额度）、test_balance（测试金）
+          "cash_type": "balance", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
           "list_price": "string", // 额度扣减刊例价，仅 charge_type=cash 时存在
           "currency": "CNY" // 货币类型，仅 charge_type=cash 时存在；枚举值：CNY（人民币）、USD（美元）
         }

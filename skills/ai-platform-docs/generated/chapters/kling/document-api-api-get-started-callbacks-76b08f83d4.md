@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/get-started/callbacks.md -->
-<!-- Source SHA-256: 1a7d1d3db950eaf73587153e064a41680e7554eb0355b1c1139fe945e9503d94 -->
+<!-- Source SHA-256: 42ac7ba29373b4d83c22c9f2469f4e2e8e06d92c9128609260f7d7bc3facbb72 -->
 
 > ## Documentation Index
 >
@@ -104,10 +104,10 @@
       ]
     }
   ],
-  "billing": [                           // 任务消耗信息
+  "billing": [                           // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
     {
       "charge_type": "string",          // 消耗账户类型，如果消耗的是额度则参数值为cash，如果是消耗资源包则参数值为unit
-      "cash_type": "string",            // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance
+      "cash_type": "string",            // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
       "amount": "string",               // 扣减数额；消耗额度场景（charge_type=cash）时代表额度扣减折扣价，消耗资源包场景（charge_type=unit）时代表积分扣减量；十进制
       "currency": "string",             // 消耗单位，仅存在于消耗余额场景（charge_type=cash），固定枚举值：CNY, USD
       "package_type": "string",         // 消耗资源包类型，仅存在于消耗资源包场景（charge_type=unit），固定枚举值：video, image, audio
