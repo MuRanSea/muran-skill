@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/quickstart-sdk.md -->
-<!-- Source SHA-256: f63826b1bd169000465bd3badfea84714b61b5194d8a4c781798c48884ff712e -->
+<!-- Source SHA-256: 22ad555b6c67e33c8c786cc65415b9c8094a660a5b2b95d71b4012e7fee8d3f8 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -81,6 +81,6 @@ for block in message.content:
 >
 > 创建音色复刻任务
 
-> [card] [音乐生成](https://platform.minimaxi.com/docs/guides/music-generation.md)
+> [card] [音乐生成](https://platform.minimaxi.com/docs/guides/music-generation)
 >
 > 使用 Music 3.0 进行音乐创作

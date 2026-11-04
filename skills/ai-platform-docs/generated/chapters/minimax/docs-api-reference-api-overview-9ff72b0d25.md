@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/api-overview.md -->
-<!-- Source SHA-256: 810d8d3b122a56c082d90a2e599f8dc82ea06f0def41a271562c4cd0f8f4ca5a -->
+<!-- Source SHA-256: 133105e4b8190969233c6e1052f02065ceb47911f633353eeaee010b73a7ca8a -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -213,7 +213,7 @@
 | :- | :- |
 | music-3.0 | 最新音乐生成模型，支持用户输入音乐灵感和歌词，生成 AI 音乐 |
 
-> [card] [音乐生成接口](https://platform.minimaxi.com/docs/api-reference/music-generation.md)
+> [card] [音乐生成接口](https://platform.minimaxi.com/docs/api-reference/music-generation)
 >
 > 根据描述和歌词生成音乐
 

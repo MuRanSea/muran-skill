@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-openai-api.md -->
-<!-- Source SHA-256: c1a0b26cf4bb58ab0f30826ba1154ef49881a46f54b27703652168da1c2aed06 -->
+<!-- Source SHA-256: 02a24be1ec6ee92e273d00fcd99cb01850c8713eed0ec80ab8a46742272d3fc8 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -54,11 +54,7 @@ print(f"Text:\n{response.choices[0].message.content}\n")
 
 ### 4. 特别注意
 
-在多轮 Function Call 对话中，必须将完整的模型返回（即 assistant 消息）添加到对话历史，以保持思维链的连续性：
-
-* 将完整的 `response_message` 对象（包含 `tool_calls` 字段）添加到消息历史
-  * 原生的OpenAI API 的 `MiniMax-M3.1-Flash` `MiniMax-M3` `MiniMax-M2.7` `MiniMax-M2.7-highspeed` `MiniMax-M2.5` `MiniMax-M2.5-highspeed` `MiniMax-M2.1` `MiniMax-M2.1-highspeed` `MiniMax-M2` 模型 `content` 字段会包含 `<think>` 标签内容，需要完整保留
-  * `MiniMax-M3.1-Flash` 的模型思考内容通过 `reasoning_content` 字段单独提供，同样需要完整保留
+在多轮 Function Call 对话中，必须将完整的模型返回（即 `response_message` 对象）添加到对话历史，包括 `tool_calls` 字段，以及 `MiniMax-M3.1-Flash` 通过 `reasoning_content` 字段单独返回的思考内容，以保持思维链的连续性。
 
 ## 支持的模型
 

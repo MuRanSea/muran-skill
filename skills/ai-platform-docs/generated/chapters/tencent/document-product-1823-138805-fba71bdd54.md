@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/138805 -->
-<!-- Source SHA-256: 6ce5c10c2c5d7415a54ba416d2c5b4bd3d6a555b1b9322252a8747f664b07242 -->
+<!-- Source SHA-256: bcd398b1a1327b084c11ffa577ed9abf3866cbfcebb167d05fb127cf28c2af69 -->
 
 # Mureka 音乐生成
 
 官方来源：https://cloud.tencent.com/document/product/1823/138805
-最近更新时间：2026-10-23 18:08:00
+最近更新时间：2026-11-03 17:00:18
 
 ## 概述
 
@@ -32,10 +32,6 @@ Mureka 是昆仑万维推出的 AI 音乐生成模型，支持根据歌词、提
 | --- | --- | --- | --- | --- |
 | Mureka-Music-v9 | `mureka-music-v9` | 歌词生成歌曲 / 提示词生成歌曲 / 生成纯音乐 | 5000 字符 | 提示词生成歌曲 2000 字符；歌词生成歌曲的风格提示词、纯音乐提示词 1024 字符 |
 
-**注意：**
-
-三种能力的 `n` 参数默认值均为 2，且**按生成数量计费**，仅需 1 首时请显式传 `"n": 1`。
-
 ## 歌词生成歌曲
 
 ### 1. 接口描述
@@ -52,7 +48,7 @@ Mureka 是昆仑万维推出的 AI 音乐生成模型，支持根据歌词、提
 | lyrics | 是 | string | 歌词内容，长度 ≤ 5000 字符。  支持使用分段标签组织歌曲结构：`[Intro]`、`[Verse]`、`[Pre-Chorus]`、`[Chorus]`、`[Bridge]`、`[Outro]`。 |
 | prompt | 否 | string | 风格提示词，控制曲风、情绪、人声等（如 `r&b, slow, passionate, male vocal`），长度 ≤ 1024 字符。 |
 | gender | 否 | string | 人声性别倾向。可选值：female、male。 |
-| n | 否 | integer | 每次请求生成的歌曲数量，取值范围 [1, 3]，默认 2。 |
+| n | 否 | integer | 每次请求生成的歌曲数量，取值范围 [1, 3]，默认 1。 |
 
 ### 3. 请求示例
 
@@ -219,7 +215,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/generation' 
 | model | 是 | string | 模型 ID。取值：`mureka-music-v9` |
 | prompt | 是 | string | 提示词，描述想要的歌曲内容、情绪与画面感，长度 ≤ 2000 字符。 |
 | styles | 否 | array[string] | 风格列表，从枚举值中选择一个或多个风格：  pop、rock、jazz、r&b、edm、ambient、folk、latin、k-pop、j-pop、house、gospel、lo-fi。 |
-| n | 否 | integer | 每次请求生成的歌曲数量，取值范围 [1, 3]，默认 2。 |
+| n | 否 | integer | 每次请求生成的歌曲数量，取值范围 [1, 3]，默认 1。 |
 
 ### 3. 请求示例
 
@@ -252,7 +248,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/easy-generat
 | --- | --- | --- | --- |
 | model | 是 | string | 模型 ID。取值：`mureka-music-v9` |
 | prompt | 是 | string | 提示词，描述想要的纯音乐风格与场景，长度 ≤ 1024 字符。 |
-| n | 否 | integer | 每次请求生成的纯音乐数量，取值范围 [1, 3]，默认 2。 |
+| n | 否 | integer | 每次请求生成的纯音乐数量，取值范围 [1, 3]，默认 1。 |
 
 ### 3. 请求示例
 
@@ -289,9 +285,9 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/mureka-music/instrumental
 
 三者请求 model 相同，但接口 path 不同，歌词生歌曲使用 /v1/wand/mureka-music/generation，提示词生歌曲使用 /v1/wand/mureka-music/easy-generation，生成纯音乐使用 /v1/wand/mureka-music/instrumental-generation。注意三者的提示词上限不同：提示词生成歌曲为 2000 字符，歌词生成歌曲的风格提示词与纯音乐提示词均为 1024 字符。
 
-#### **2. 为什么默认生成了 2 首？**
+#### **2. 默认生成几首？**
 
-`n` 参数默认为 2，且按生成数量计费。只需 1 首时，请在请求中显式传入 `"n": 1`；最多可传 3。
+`n` 参数默认为 1，且按生成数量计费。需要 3 首时，请在请求中显式传入 `"n": 3`；最多可传 3。
 
 #### **3. 歌词怎么写效果更好？**
 

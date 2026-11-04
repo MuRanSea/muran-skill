@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/about-account.md -->
-<!-- Source SHA-256: af0e90fb6daa7df0e8626c395b629c7cb4370698607f942f412aa45d78429ee2 -->
+<!-- Source SHA-256: eeb704567dd0768f3721668c67fb05aeef866ddbf2826d5bf6af390cb5a06caf -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -32,7 +32,7 @@
 
 ### 问：资源包及有效期
 
-**答：** MiniMax 开放平台，目前提供视频及语音资源包的购买，具体套餐内容，您可前往[账户管理->API 资源包](https://platform.minimax.cn/user-center/payment/subscription)了解详细内容，并选择合适您的套餐。
+**答：** MiniMax 开放平台，目前提供视频及语音资源包的购买，具体套餐内容，您可前往[账户管理->API 资源包](https://platform.minimax.cn/console/resource-packs/buy/audio/turbo)了解详细内容，并选择合适您的套餐。
 
 > [!NOTE]
 >

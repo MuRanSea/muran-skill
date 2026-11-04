@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-websocket.md -->
-<!-- Source SHA-256: 04c9c4a29e9011036c9a2fa5524c537c4609725b8214d4c874f8e43940676536 -->
+<!-- Source SHA-256: 556a0083477067958feebb3148401ad72c0a928a2af3e2affc5238782a39f289 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -187,8 +187,6 @@ async def establish_connection(api_key):
     headers = {"Authorization": f"Bearer {api_key}"}
 
     ssl_context = ssl.create_default_context()
-    ssl_context.check_hostname = False
-    ssl_context.verify_mode = ssl.CERT_NONE
 
     try:
         ws = await websockets.connect(url, additional_headers=headers, ssl=ssl_context)

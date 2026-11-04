@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/speech-t2a-async-create.md -->
-<!-- Source SHA-256: c8235ae83d41b764191504a630aa58ba0bc40d1dc9bc85ba49635613d08b611c -->
+<!-- Source SHA-256: df6f981492349c6d7500f6f37988bd33145467b4ff1a67b5f4e0f25d61599aba -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -102,7 +102,7 @@ paths:
               文件输入:
                 value:
                   model: speech-2.8-hd
-                  text_file_id: text_file_id
+                  text_file_id: 176985063665730
                   language_boost: auto
                   voice_setting:
                     voice_id: audiobook_male_1
@@ -155,8 +155,6 @@ components:
       type: object
       required:
         - model
-        - text
-        - text_file_id
         - voice_setting
       properties:
         model:
@@ -177,14 +175,14 @@ components:
         text:
           type: string
           description: >-
-            待合成音频的文本，限制最长 5 万字符。和 `text_file_id` 二选一必填
+            待合成音频的文本，不超过 10 万字符（按计费字符计：汉字算 2 个，其他字符算 1 个）。和 `text_file_id` 二选一必填
 
             - 语气词标签：仅当模型选择 `speech-2.8-hd` 或 `speech-2.8-turbo`
             时，支持在文本中插入语气词标签。支持的语气词：`(laughs)`（笑声）、`(chuckle)`（轻笑）、`(coughs)`（咳嗽）、`(clear-throat)`（清嗓子）、`(groans)`（呻吟）、`(breath)`（正常换气）、`(pant)`（喘气）、`(inhale)`（吸气）、`(exhale)`（呼气）、`(gasps)`（倒吸气）、`(sniffs)`（吸鼻子）、`(sighs)`（叹气）、`(snorts)`（喷鼻息）、`(burps)`（打嗝）、`(lip-smacking)`（咂嘴）、`(humming)`（哼唱）、`(hissing)`（嘶嘶声）、`(emm)`（嗯）、`(whistles)`（口哨）、`(sneezes)`（喷嚏）、`(crying)`（抽泣）、`(applause)`（鼓掌）
         text_file_id:
           type: integer
           format: int64
-          description: "待合成音频的文本文件 待合成音频的文本文件 id，单个文件长度限制小于 100 万字符，支持的文件格式：txt、zip。和 `text` 二选一必填，传入后自动校验格式。\n- **txt 文件**：长度限制 <1,000,000 字符。支持使用 <#x#> 标记自定义停顿。x 为停顿时长（单位：秒），范围 [0.01,99.99]，最多保留两位小数。注意停顿需设置在两个可以语音发音的文本之间，不可连续使用多个停顿标记\n- **zip 文件**：\n\t- 压缩包内需包含同一格式的 txt 或 json 文件。\n\t- json 文件格式：支持 [`title`, `content`, `extra`] 三个字段，分别表示标题、正文、附加信息。若三个字段都存在，则产出 3 组结果，共 9 个文件，统一存放在一个文件夹中。若某字段不存在或内容为空，则该字段不会生成对应结果"
+          description: "待合成音频的文本文件 待合成音频的文本文件 id，单个 txt 文件或 zip 内每个文件不超过 10 万字符，zip 单次任务总计不超过 100 万字符（按计费字符计：汉字算 2 个，其他字符算 1 个），支持的文件格式：txt、zip。和 `text` 二选一必填，传入后自动校验格式。\n- **txt 文件**：长度不超过 100,000 字符。支持使用 <#x#> 标记自定义停顿。x 为停顿时长（单位：秒），范围 [0.01,99.99]，最多保留两位小数。注意停顿需设置在两个可以语音发音的文本之间，不可连续使用多个停顿标记\n- **zip 文件**：\n\t- 压缩包内需包含同一格式的 txt 或 json 文件。\n\t- json 文件格式：支持 [`title`, `content`, `extra`] 三个字段，分别表示标题、正文、附加信息。若三个字段都存在，则产出 3 组结果，共 9 个文件，统一存放在一个文件夹中。若某字段不存在或内容为空，则该字段不会生成对应结果"
         voice_setting:
           $ref: '#/components/schemas/T2AAsyncV2VoiceSetting'
         audio_setting:

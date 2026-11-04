@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132248 -->
-<!-- Source SHA-256: 8c86d6385b1560e60d1468273477bbc3b83cbef6519183a36ebd0b29e0416da1 -->
+<!-- Source SHA-256: 6a6844c2e645aff42a6821f77f8aa4b9e15cd2edfafeeb10c916bf50e9252ac6 -->
 
 # DeepSeek 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132248
-最近更新时间：2026-10-31 13:53:30
+最近更新时间：2026-11-03 16:53:57
 
 ## 概述
 
@@ -13,8 +13,6 @@ DeepSeek 系列模型已接入大模型服务平台 TokenHub，支持 OpenAI Cha
 **注意：**
 
 受 DeepSeek 原厂联网搜索计费政策调整影响，大模型服务平台 TokenHub 将对 DeepSeek 原厂直供模型内置联网搜索工具产生的 **Search（搜索）/Fetch（网页抓取）调用开始收费**：后付费 API 接入自北京时间 **2026 年 11 月 1 日 00:00:00** 起生效，TokenPlan 个人版与企业版自北京时间 **2026 年 11 月 18 日 00:00:00** 起生效
-
-**DeepSeek-V4-Flash（Model ID：deepseek-v4-flash）**目前仍基于深度求索 **DeepSeek-V4-Flash 预览版**为您提供服务，此前通知中提及的自动静默升级将暂缓推进，后续以新版本上线为准。您现有的业务调用不会受到影响，模型服务能力、调用方式及计费标准均与此前保持一致，无需做任何调整。同时，考虑到新旧版本在模型能力与性能表现上存在较大差异，为避免对您的存量业务产生非预期影响，正式版模型将通过新的 Model ID 对外提供，由您按需自主切换。详情请查看[产品公告](https://cloud.tencent.com/document/product/1823/130758)。
 
 **DeepSeek-V4-Flash 0731 正式版** **原厂直供**对应深度求索 **DeepSeek-V4-Flash-0731 正式版**，API 调用方式不变，model 调用参数设置为 deepseek-v4-flash-202605 即可使用最新版本。原本使用 DeepSeek-V4-Flash（**model:deepseek-v4-flash-202605**）的用户，平台将自动完成静默升级，无需任何操作即可体验最新能力。
 
@@ -37,9 +35,9 @@ TokenHub 当前支持以下 DeepSeek 模型（具体以 [模型列表](https://c
 | `deepseek/deepseek-flash` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
 | `deepseek-v4-flash-202605`  `deepseek/deepseek-v4-flash-0731`  `deepseek/deepseek-v4-flash` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
 | `deepseek-v4-pro-202606`  `deepseek/deepseek-v4-pro-0813`  `deepseek/deepseek-v4-pro` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
-| `deepseek-v4-flash-0731` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
+| `deepseek-v4.1-flash-1017` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
+| `deepseek-v4.1-flash` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
 | `deepseek-v4-pro-0813` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
-| `deepseek-v4-flash` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
 | `deepseek-v4-pro` | 通用对话模型 | 可开关（默认开启） | 1M | 1M | 384K |
 | `deepseek/deepseek-v4-flash-vision-exp` | 多模态理解模型 | 可开关（默认开启） | 1M | 1M | 384K |
 
@@ -83,18 +81,12 @@ curl https://tokenhub.tencentmaas.com/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": [
       {"role": "user", "content": "你好，请介绍一下你自己"}
     ],
     "max_tokens": 1024
   }'
-```
-
-#### Running Environment
-
-```
-Operating System: Ubuntu 24.04.3 LTS / x86_64Runtime Version: GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu)
 ```
 
 ```python
@@ -107,7 +99,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model="deepseek-v4.1-flash-1017",
     messages=[
         {"role": "user", "content": "你好，请介绍一下你自己"}
     ],
@@ -126,7 +118,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: "deepseek-v4-flash",
+  model: "deepseek-v4.1-flash-1017",
   messages: [
     { role: "user", content: "你好，请介绍一下你自己" }
   ],
@@ -143,7 +135,7 @@ import org.json.*;
 OkHttpClient httpClient = new OkHttpClient();
 
 JSONObject body = new JSONObject();
-body.put("model", "deepseek-v4-flash");
+body.put("model", "deepseek-v4.1-flash-1017");
 body.put("max_tokens", 1024);
 JSONArray messages = new JSONArray();
 JSONObject userMsg = new JSONObject();
@@ -163,7 +155,7 @@ try (Response response = httpClient.newCall(request).execute()) {
     JSONObject result = new JSONObject(response.body().string());
     System.out.println(result.getJSONArray("choices")
         .getJSONObject(0).getJSONObject("message").getString("content"));
-}
+}"
 ```
 
 ```go
@@ -179,7 +171,7 @@ import (
 
 func main() {
     body := map[string]interface{}{
-        "model": "deepseek-v4-flash",
+        "model": "deepseek-v4.1-flash-1017",
         "messages": []map[string]string{
             {"role": "user", "content": "你好，请介绍一下你自己"},
         },
@@ -226,13 +218,13 @@ curl https://tokenhub.tencentmaas.com/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": [
       {"role": "user", "content": "介绍一下大语言模型"}
     ],
     "max_tokens": 1024,
     "thinking": {"type": "disabled"}
-  }'
+  }'"
 ```
 
 ```python
@@ -244,7 +236,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model="deepseek-v4.1-flash-1017",
     messages=[
         {"role": "user", "content": "介绍一下大语言模型"}
     ],
@@ -263,7 +255,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: "deepseek-v4-flash",
+  model: "deepseek-v4.1-flash-1017",
   messages: [
     { role: "user", content: "介绍一下大语言模型" }
   ],
@@ -281,7 +273,7 @@ import org.json.*;
 OkHttpClient httpClient = new OkHttpClient();
 
 JSONObject body = new JSONObject();
-body.put("model", "deepseek-v4-flash");
+body.put("model", "deepseek-v4.1-flash-1017");
 body.put("max_tokens", 1024);
 
 JSONArray messages = new JSONArray();
@@ -311,7 +303,7 @@ try (Response response = httpClient.newCall(request).execute()) {
 
 ```go
 body := map[string]interface{}{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": []map[string]string{
         {"role": "user", "content": "介绍一下大语言模型"},
     },
@@ -340,7 +332,7 @@ curl https://tokenhub.tencentmaas.com/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": [
       {"role": "user", "content": "写一首关于春天的短诗"}
     ],
@@ -359,7 +351,7 @@ client = OpenAI(
 )
 
 stream = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model="deepseek-v4.1-flash-1017",
     messages=[
         {"role": "user", "content": "写一首关于春天的短诗"}
     ],
@@ -382,7 +374,7 @@ const client = new OpenAI({
 });
 
 const stream = await client.chat.completions.create({
-  model: "deepseek-v4-flash",
+  model: "deepseek-v4.1-flash-1017",
   messages: [
     { role: "user", content: "写一首关于春天的短诗" }
   ],
@@ -407,7 +399,7 @@ import org.json.*;
 OkHttpClient httpClient = new OkHttpClient();
 
 JSONObject body = new JSONObject();
-body.put("model", "deepseek-v4-flash");
+body.put("model", "deepseek-v4.1-flash-1017");
 body.put("max_tokens", 512);
 body.put("stream", true);
 JSONArray messages = new JSONArray();
@@ -450,7 +442,7 @@ import (
 )
 
 body := map[string]interface{}{
-    "model":      "deepseek-v4-flash",
+    "model":      "deepseek-v4.1-flash-1017",
     "messages":   []map[string]string{{"role": "user", "content": "写一首关于春天的短诗"}},
     "max_tokens": 512,
     "stream":     true,
@@ -502,7 +494,7 @@ curl https://tokenhub.tencentmaas.com/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": [
       {"role": "system", "content": "你是一位专业的 Python 编程助手，只回答与 Python 相关的问题，回答简洁明了。"},
       {"role": "user", "content": "如何读取一个 CSV 文件？"}
@@ -521,7 +513,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model=deepseek-v4.1-flash-1017,
     messages=[
         {
             "role": "system",
@@ -544,7 +536,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: "deepseek-v4-flash",
+  model: "deepseek-v4.1-flash-1017",
   messages: [
     {
       role: "system",
@@ -561,7 +553,7 @@ console.log(response.choices[0].message.content);
 
 ```java
 JSONObject body = new JSONObject();
-body.put("model", "deepseek-v4-flash");
+body.put("model", "deepseek-v4.1-flash-1017");
 body.put("max_tokens", 512);
 body.put("thinking", new JSONObject().put("type", "disabled"));
 
@@ -576,7 +568,7 @@ body.put("messages", messages);
 
 ```go
 body := map[string]interface{}{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": []map[string]string{
         {"role": "system", "content": "你是一位专业的 Python 编程助手，只回答与 Python 相关的问题，回答简洁明了。"},
         {"role": "user", "content": "如何读取一个 CSV 文件？"},
@@ -606,7 +598,7 @@ curl https://tokenhub.tencentmaas.com/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": [
       {"role": "user", "content": "我叫小明，我喜欢打篮球"},
       {"role": "assistant", "content": "你好，小明！打篮球是一项很棒的运动。"},
@@ -633,7 +625,7 @@ conversation = [
 def chat(user_input):
     conversation.append({"role": "user", "content": user_input})
     response = client.chat.completions.create(
-        model="deepseek-v4-flash",
+        model="deepseek-v4.1-flash-1017",
         messages=conversation,
         max_tokens=1024,
         extra_body={"thinking": {"type": "disabled"}},
@@ -661,7 +653,7 @@ const conversation = [
 async function chat(userInput) {
   conversation.push({ role: "user", content: userInput });
   const response = await client.chat.completions.create({
-    model: "deepseek-v4-flash",
+    model: "deepseek-v4.1-flash-1017",
     messages: conversation,
     max_tokens: 1024,
     // @ts-ignore
@@ -685,7 +677,7 @@ messages.put(new JSONObject().put("role", "assistant").put("content", "你好，
 messages.put(new JSONObject().put("role", "user").put("content", "你还记得我的名字和爱好吗？"));
 
 JSONObject body = new JSONObject();
-body.put("model", "deepseek-v4-flash");
+body.put("model", "deepseek-v4.1-flash-1017");
 body.put("messages", messages);
 body.put("max_tokens", 1024);
 body.put("thinking", new JSONObject().put("type", "disabled"));
@@ -694,7 +686,7 @@ body.put("thinking", new JSONObject().put("type", "disabled"));
 
 ```go
 body := map[string]interface{}{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": []map[string]string{
         {"role": "system", "content": "你是一个友好的 AI 助手。"},
         {"role": "user", "content": "我叫小明，我喜欢打篮球"},
@@ -735,7 +727,7 @@ curl https://tokenhub.tencentmaas.com/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": [
       {"role": "user", "content": "北京今天天气怎么样？"}
     ],
@@ -761,7 +753,7 @@ curl https://tokenhub.tencentmaas.com/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": [
       {"role": "user", "content": "北京今天天气怎么样？"},
       {"role": "assistant", "tool_calls": [{"id": "call_xxx", "type": "function", "function": {"name": "get_weather", "arguments": "{\\"city\\": \\"北京\\"}"}}]},
@@ -801,7 +793,7 @@ tools = [
 # 第一轮：发送问题
 messages = [{"role": "user", "content": "北京今天天气怎么样？"}]
 response = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model="deepseek-v4.1-flash-1017",
     messages=messages,
     tools=tools,
     extra_body={"thinking": {"type": "disabled"}},
@@ -825,7 +817,7 @@ if response.choices[0].finish_reason == "tool_calls":
     })
 
     final_response = client.chat.completions.create(
-        model="deepseek-v4-flash",
+        model="deepseek-v4.1-flash-1017",
         messages=messages,
         tools=tools,
         extra_body={"thinking": {"type": "disabled"}},
@@ -861,7 +853,7 @@ const tools = [
 // 第一轮
 const messages = [{ role: "user", content: "北京今天天气怎么样？" }];
 const response1 = await client.chat.completions.create({
-  model: "deepseek-v4-flash",
+  model: "deepseek-v4.1-flash-1017",
   messages,
   tools,
   // @ts-ignore
@@ -878,7 +870,7 @@ if (response1.choices[0].finish_reason === "tool_calls") {
   messages.push({ role: "tool", tool_call_id: toolCall.id, content: toolResult });
 
   const response2 = await client.chat.completions.create({
-    model: "deepseek-v4-flash",
+    model: "deepseek-v4.1-flash-1017",
     messages,
     tools,
     // @ts-ignore
@@ -902,7 +894,7 @@ JSONArray tools = new JSONArray()
     .put(new JSONObject().put("type", "function").put("function", toolFunc));
 
 JSONObject body = new JSONObject();
-body.put("model", "deepseek-v4-flash");
+body.put("model", "deepseek-v4.1-flash-1017");
 body.put("messages", new JSONArray().put(new JSONObject().put("role", "user").put("content", "北京今天天气怎么样？")));
 body.put("tools", tools);
 body.put("thinking", new JSONObject().put("type", "disabled"));
@@ -911,7 +903,7 @@ body.put("thinking", new JSONObject().put("type", "disabled"));
 
 ```go
 body := map[string]interface{}{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": []map[string]string{
         {"role": "user", "content": "北京今天天气怎么样？"},
     },
@@ -956,12 +948,6 @@ DeepSeek 模型支持通过 `thinking` 参数控制是否开启推理思考模�
 
 出于兼容考虑，`medium`、`xhigh` 会映射为 `high`。
 
-**模型支持情况**：
-
-`deepseek-v4-flash`：支持 `low`、`high`、`max` 三档。
-
-`deepseek-v4-pro`：暂时只支持 `high`、`max` 两档（`low` 按 `high` 处理，`xhigh` 按 `max` 处理），预计 2026年8月初支持三档。
-
 `reasoning_effort` 不是 OpenAI 标准字段。使用 OpenAI SDK 时需通过 SDK 提供的额外字段机制（Python 用 `extra_body`、Node.js 直接传字段）；HTTP 直接调用时放在请求体顶层。示例如下：
 
 ### 开启或关闭思考
@@ -981,7 +967,7 @@ curl https://tokenhub.tencentmaas.com/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": [
       {"role": "user", "content": "解方程 x^2 - 5x + 6 = 0"}
     ],
@@ -1000,7 +986,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model="deepseek-v4.1-flash-1017",
     messages=[{"role": "user", "content": "解方程 x^2 - 5x + 6 = 0"}],
     max_tokens=2048,
     extra_body={"thinking": {"type": "enabled"}},
@@ -1028,7 +1014,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: "deepseek-v4-flash",
+  model: "deepseek-v4.1-flash-1017",
   messages: [{ role: "user", content: "解方程 x^2 - 5x + 6 = 0" }],
   max_tokens: 2048,
   // @ts-ignore
@@ -1048,7 +1034,7 @@ console.log(msg.content);
 
 ```java
 JSONObject body = new JSONObject();
-body.put("model", "deepseek-v4-flash");
+body.put("model", "deepseek-v4.1-flash-1017");
 body.put("max_tokens", 2048);
 body.put("messages", new JSONArray()
     .put(new JSONObject().put("role", "user").put("content", "解方程 x^2 - 5x + 6 = 0")));
@@ -1069,7 +1055,7 @@ try (Response response = httpClient.newCall(request).execute()) {
 
 ```go
 body := map[string]interface{}{
-    "model":      "deepseek-v4-flash",
+    "model":      "deepseek-v4.1-flash-1017",
     "max_tokens": 2048,
     "messages": []map[string]string{
         {"role": "user", "content": "解方程 x^2 - 5x + 6 = 0"},
@@ -1120,7 +1106,7 @@ client = OpenAI(
 )
 
 stream = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model="deepseek-v4.1-flash-1017",
     messages=[{"role": "user", "content": "分析一下量子计算的优势和挑战"}],
     max_tokens=2048,
     stream=True,
@@ -1155,7 +1141,7 @@ const client = new OpenAI({
 });
 
 const stream = await client.chat.completions.create({
-  model: "deepseek-v4-flash",
+  model: "deepseek-v4.1-flash-1017",
   messages: [{ role: "user", content: "分析一下量子计算的优势和挑战" }],
   max_tokens: 2048,
   stream: true,
@@ -1200,7 +1186,7 @@ client = OpenAI(
 messages = [{"role": "user", "content": "斐波那契数列的第10项是多少？"}]
 
 response = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model="deepseek-v4.1-flash-1017",
     messages=messages,
     max_tokens=1024,
     extra_body={"thinking": {"type": "enabled"}},
@@ -1214,7 +1200,7 @@ messages.append({"role": "assistant", "content": assistant_msg.content})
 messages.append({"role": "user", "content": "那第20项呢？"})
 
 response2 = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model="deepseek-v4.1-flash-1017",
     messages=messages,
     max_tokens=1024,
     extra_body={"thinking": {"type": "enabled"}},
@@ -1249,7 +1235,7 @@ curl https://tokenhub.tencentmaas.com/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
-    "model": "deepseek-v4-flash",
+    "model": "deepseek-v4.1-flash-1017",
     "messages": [
       {"role": "system", "content": "请以 JSON 格式返回结果。"},
       {"role": "user", "content": "返回三座中国城市的信息，每个包含 name、province、population 字段"}
@@ -1270,7 +1256,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="deepseek-v4-flash",
+    model="deepseek-v4.1-flash-1017",
     messages=[
         {"role": "system", "content": "请以 JSON 格式返回结果。"},
         {
@@ -1296,7 +1282,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: "deepseek-v4-flash",
+  model: "deepseek-v4.1-flash-1017",
   messages: [
     { role: "system", content: "请以 JSON 格式返回结果。" },
     {
@@ -1316,7 +1302,7 @@ console.log(JSON.stringify(result, null, 2));
 
 ```java
 JSONObject body = new JSONObject();
-body.put("model", "deepseek-v4-flash");
+body.put("model", "deepseek-v4.1-flash-1017");
 body.put("max_tokens", 512);
 body.put("response_format", new JSONObject().put("type", "json_object"));
 body.put("thinking", new JSONObject().put("type", "disabled"));
@@ -1329,7 +1315,7 @@ body.put("messages", new JSONArray()
 
 ```go
 body := map[string]interface{}{
-    "model":           "deepseek-v4-flash",
+    "model":           "deepseek-v4.1-flash-1017",
     "max_tokens":      512,
     "response_format": map[string]string{"type": "json_object"},
     "thinking":        map[string]string{"type": "disabled"},
@@ -1504,7 +1490,7 @@ OpenAI Responses API：
 | `temperature` | 一般无需修改，使用默认值 1 | 创意写作可调高至 1.3-1.5；代码生成可调低至 0.2-0.5 |
 | 多轮对话 | 只将 `content` 回传，不回传 `reasoning_content` | 减少 token 消耗 |
 | SDK 访问推理字段 | Python 用 `getattr(msg, "reasoning_content", None)`；Node.js 用 `(msg as any).reasoning_content` | OpenAI SDK 类型定义中无此字段 |
-| 模型选择 | 日常任务用 `deepseek-v4-flash`；高精度任务用 `deepseek-v4-pro` | Flash 并发上限更高（2500 vs 500） |
+| 模型选择 | 日常任务可选 `deepseek-v4.1-flash-1017` 或 `deepseek-v4.1-flash`；高精度任务可选 `deepseek-v4-pro` | 具体模型能力及使用限制以模型列表为准 |
 
 ## 使用限制
 

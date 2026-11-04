@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/file-management-list.md -->
-<!-- Source SHA-256: 489cc6c6567bc94ce147b67c564b3a347610fb7ccbc60442ea74c26f3161cc9b -->
+<!-- Source SHA-256: db0cc99440e446a904b4777a4b36627175257f98b3b96e92d0026bc7dc6f0265 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -37,13 +37,13 @@ paths:
       parameters:
         - name: purpose
           in: query
-          required: true
+          required: false
           description: |-
-            列出文件分类。取值及支持格式如下：
+            列出文件分类，选填；不传时返回当前账号下全部分类的文件。取值及支持格式如下：
 
             1. __voice_clone__: 快速复刻原始文件
             2. __prompt_audio__: 音色复刻的示例音频
-            3. __t2a_async__: 异步长文本语音生成合成中音频
+            3. __t2a_async_input__: 异步长文本语音合成请求体中的文本文件
             4. __video_generation_input__: 视频生成的输入素材（首帧图 / 参考图 / 参考视频 / 参考音频）
           schema:
             type: string

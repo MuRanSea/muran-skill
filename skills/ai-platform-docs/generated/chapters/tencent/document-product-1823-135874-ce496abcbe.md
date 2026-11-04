@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135874 -->
-<!-- Source SHA-256: 8c752b1eedc03fbb17bed766a073d57c33bc93698cc58c0678dd78e7a2d54acb -->
+<!-- Source SHA-256: eff1206ced80ab6cba48c023aaba5690f18c7e1f0d2295d264ac1a9e3c567432 -->
 
 # Anthropic Message 协议字段说明
 
 官方来源：https://cloud.tencent.com/document/product/1823/135874
-最近更新时间：2026-10-12 12:50:00
+最近更新时间：2026-11-03 16:54:44
 
 ## Anthropic Messages API 使用
 
@@ -317,7 +317,7 @@ thinking（assistant 消息）：
 
 **注意：**
 
-**多轮回传要求**：多轮对话时，assistant 历史消息中的 thinking 块必须原样携带 `signature` 回传，否则服务返回 `400 Invalid signature`。`signature` 是加密凭证，不能截断或修改。该校验语义主要适用于 Claude 系列模型；其他模型以自有协议承载思维链时，回传要求以对应模型的说明为准。部分模型（如 `deepseek-v4-flash`、`hy3`）不返回 `signature`，此时多轮对话无需回传该字段。
+**多轮回传要求**：多轮对话时，assistant 历史消息中的 thinking 块必须原样携带 `signature` 回传，否则服务返回 `400 Invalid signature`。`signature` 是加密凭证，不能截断或修改。该校验语义主要适用于 Claude 系列模型；其他模型以自有协议承载思维链时，回传要求以对应模型的说明为准。部分模型（如 `hy3`）不返回 `signature`，此时多轮对话无需回传该字段。
 
 redacted\_thinking（assistant 消息）：部分思维内容因安全原因被加密，以 `{ "type": "redacted_thinking", "data": "<加密数据>" }` 返回，仅含 `data` 字段。多轮对话时需按原顺序全部回传，以维持上下文续写能力。该内容块主要出现在 Claude 系列模型，其他模型通常不返回。
 

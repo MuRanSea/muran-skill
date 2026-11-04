@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-voice-clone.md -->
-<!-- Source SHA-256: 9556bb866d13efd8f60093e4cf5df1fcf9e854fd278cbda9fa47dffe7f9c84e6 -->
+<!-- Source SHA-256: 31b93acbf8696e19e5a5387f6f213aca865cede8b31c3052d1f59f7a249b4a13 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -57,7 +57,7 @@ print(file_id)
 
 ```bash theme={null}
 curl --location 'https://api.minimax.cn/v1/files/upload' \
-  --header 'Authorization: Bearer ${MINIMAX_API_KEY}' \
+  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
   --form 'purpose="voice_clone"' \
   --form 'file=@"/path/to/clone_input.mp3"'
 ```
@@ -91,7 +91,7 @@ print(prompt_file_id)
 
 ```bash theme={null}
 curl --location 'https://api.minimax.cn/v1/files/upload' \
-  --header 'Authorization: Bearer ${MINIMAX_API_KEY}' \
+  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
   --form 'purpose="prompt_audio"' \
   --form 'file=@"/path/to/clone_prompt.mp3"'
 ```
@@ -126,14 +126,14 @@ clone_headers = {
     "Content-Type": "application/json"
 }
 
-response = requests.post(url, headers=headers, json=payload)
+response = requests.post(url, headers=clone_headers, json=clone_payload)
 response.raise_for_status()
 print(response.text)
 ```
 
 ```bash theme={null}
 curl --location 'https://api.minimax.cn/v1/voice_clone' \
-  --header 'Authorization: Bearer ${MINIMAX_API_KEY}' \
+  --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "file_id": <file_id_of_cloned_voice>,
@@ -143,7 +143,7 @@ curl --location 'https://api.minimax.cn/v1/voice_clone' \
       "prompt_text": "后来认为啊，是有人抓这鸡，可是抓鸡的地方呢没人听过鸡叫。"
     },
     "text": "大兄弟，听您口音不是本地人吧，头回来天津卫，啊，待会您可甭跟着导航走，那玩意净给您往大马路上绕。",
-    "model": "speech-2.8"
+    "model": "speech-2.8-hd"
   }'
 ```
 

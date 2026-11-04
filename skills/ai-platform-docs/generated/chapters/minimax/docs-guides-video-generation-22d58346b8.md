@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-generation.md -->
-<!-- Source SHA-256: bdb903bd990a86993565d7cedbe7032c95e68d5a0edb75359381d94e4b64b215 -->
+<!-- Source SHA-256: ac488c697aded1730769d9c7d0b93b13642ade8bbe6779e30a7f1ba52b6797fa -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,7 +13,7 @@ MiniMax 视频生成目前提供 **MiniMax-H3** 模型：
 
 * **MiniMax-H3**：开放通用的多模态视频模型，可以统一理解文本、图片、视频和音频输入，完成视频生成、参考创作与视频编辑。
 
-提示：若需要使用 MiniMax-H3，请点击 [按量购买 API](https://platform.minimax.cn/docs/pricing/overview#models/video)。
+提示：若需要使用 MiniMax-H3，请点击 [按量购买 API](https://platform.minimaxi.com/docs/pricing/overview.md#models/video)。
 
 ## 支持的生成方式
 

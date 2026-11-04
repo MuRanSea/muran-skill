@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/models.md -->
-<!-- Source SHA-256: 1f2b437460f88635da1ff94bdaefce997a8d7da65c00f3beed7289788c99098d -->
+<!-- Source SHA-256: a222962f400cae8a8e000a9ff777abb2875bd1e43e92e841fb1ef40a2be17878 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -46,7 +46,7 @@
 | 模型名称 | 描述 |
 | :- | :- |
 | [MiniMax-H3](https://platform.minimaxi.com/docs/guides/video-generation.md) | 新一代开放通用多模态视频模型，支持文生 / 图生 / 首尾帧 / 多模态参考，768P / 2K 分辨率，4–15s 时长 |
-| [MiniMax-H3-Max](https://platform.minimaxi.com/docs/guides/video-generation.md) | 基于 MiniMax H3 后训练的极速视频生成模型，专为高速视频生成而优化。仅支持文生 / 图生（首帧、尾帧），480P / 768P 分辨率，5–15s 时长 |
+| [MiniMax-H3-Max](https://platform.minimaxi.com/docs/guides/video-generation.md) | 基于 MiniMax H3 后训练的极速视频生成模型，专为高速视频生成而优化。支持文生 / 图生（首帧、尾帧）/ 多模态参考（参考图、参考视频、参考音频），480P / 768P 分辨率，5–15s 时长 |
 | [MiniMax-Hailuo-2.3](https://platform.minimaxi.com/docs/guides/video-generation.md) | 全新视频生成模型，肢体动作、面部表情、物理表现与指令遵循再度突破 |
 | [MiniMax-Hailuo-2.3-Fast](https://platform.minimaxi.com/docs/guides/video-generation.md) | 全新图生视频模型，物理表现与指令遵循具佳，更快更优惠 |
 | [MiniMax-Hailuo-02](https://platform.minimaxi.com/docs/guides/video-generation.md) | 新一代视频生成模型，1080p 原生，SOTA 指令遵循，极致物理表现 |
@@ -92,3 +92,14 @@
 | Music-2.5+ | 音乐 | 已下线 |
 | Music-2.5 | 音乐 | 已下线 |
 | Music-2.0 | 音乐 | 已下线 |
+
+> [accordion] 音乐生成使用指南
+>
+> 音乐模型已于 2026 年 8 月 20 日下线，不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务。如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimax.cn/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
+>
+> 历史付费用户可参考以下文档：
+>
+> * [音乐生成使用指南](https://platform.minimaxi.com/docs/guides/music-generation)：通过 `prompt` 定义风格，通过 `lyrics` 提供歌词，以及一步 / 两步翻唱流程
+> * [音乐生成 API](https://platform.minimaxi.com/docs/api-reference/music-generation)：`POST /v1/music_generation`，根据歌词和描述生成歌曲
+> * [翻唱前处理 API](https://platform.minimaxi.com/docs/api-reference/music-cover-preprocess)：`POST /v1/music_cover_preprocess`，从参考音频提取特征和歌词，用于两步翻唱
+> * [歌词生成 API](https://platform.minimaxi.com/docs/api-reference/lyrics-generation)：`POST /v1/lyrics_generation`，生成完整歌词或编辑、续写歌词

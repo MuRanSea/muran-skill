@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/speech-t2a-async.md -->
-<!-- Source SHA-256: fc0c212bb5f31126bebb2ec245309f5c905fd161e9b4154a43e2cb2f700796b2 -->
+<!-- Source SHA-256: 2abffcc696fb3ecfee55382dbe5dbdd4737946d72c433a8a96f2c7a3f7722931 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -7,7 +7,7 @@
 
 # 异步语音合成
 
-> MiniMax 提供异步语音合成 API，适用于长文本的音频合成任务，单个文件长度限制小于 10 万字符。
+> MiniMax 提供异步语音合成 API，适用于长文本的音频合成任务，直接传入的文本或单个文本文件不超过 10 万字符，单次任务（zip）总计不超过 100 万字符（汉字算 2 个字符，其他字符算 1 个）。
 
 1. 支持 100+系统音色、复刻音色自主选择
 2. 支持语调、语速、音量、比特率、采样率、输出格式调整
@@ -152,15 +152,14 @@ print(response.text)
 ```
 
 ```bash theme={null}
-
-# 若使用文件作为输入，则需要将<text_file_id>替换为文本文件的file_id，若使用文本作为输入，则设置"text"字段。注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
+# 若使用文件作为输入，则需要将 <Your file_id> 替换为文本文件的 file_id；若使用文本作为输入，则将 "text_file_id" 替换为 "text" 字段。
+# 注意：需要先将密钥信息写入环境变量 `MINIMAX_API_KEY`。
 curl --location 'https://api.minimax.cn/v1/t2a_async_v2' \
 --header "authorization: Bearer ${MINIMAX_API_KEY}" \
 --header 'Content-Type: application/json' \
 --data '{
-  "model": "speech-8-hd",
-  "text_file_id": <Your file_id>, # file as input
-  # "text":"微风拂过柔软的草地，清新的芳香伴随着鸟儿的歌唱。", # text as input
+  "model": "speech-2.8-hd",
+  "text_file_id": <Your file_id>,
   "language_boost": "auto",
   "voice_setting": {
     "voice_id": "audiobook_male_1",
@@ -243,12 +242,12 @@ headers = {
 response = requests.request("GET", url, headers=headers, data=payload)
 
 with open(<output_filename>, 'wb') as f:
-f.write(response.content)
+    f.write(response.content)
 ```
 
 ```bash theme={null}
 
-curl --location "https://api.minimax.cn/v1/files/retrieve?file_id=${FILE_ID}" \
+curl --location "https://api.minimax.cn/v1/files/retrieve_content?file_id=${FILE_ID}" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer ${MINIMAX_API_KEY}" \
 --output "${FILE_NAME}"

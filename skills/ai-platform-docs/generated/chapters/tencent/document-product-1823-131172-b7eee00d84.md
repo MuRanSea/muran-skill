@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/131172 -->
-<!-- Source SHA-256: 6023e38937731c4fa4eb37def7e344d3d5366897f57e6fdf686a2fb1f169b8c8 -->
+<!-- Source SHA-256: 211906cc2f4ad369d75cf86c1164798d0c1a6dae002fa49012df705be121e2e5 -->
 
 # Token Plan 企业版概述
 
 官方来源：https://cloud.tencent.com/document/product/1823/131172
-最近更新时间：2026-07-23 15:00:31
+最近更新时间：2026-11-03 16:52:32
 
 Token Plan 企业版套餐是面向企业客户的大模型订阅套餐，覆盖龙虾助手与 AI Coding 双场景，满足团队管理、预算可控的核心诉求，助力企业 AI 规模化应用与协作提效。产品包含 [企业版专业套餐](https://cloud.tencent.com/document/product/1823/130659)**（原 Token Plan 企业版）**和 [企业版轻享套餐](https://cloud.tencent.com/document/product/1823/131173) 两种不同套餐类型，适配不同企业使用需求。
 
@@ -22,7 +22,7 @@ Token Plan 企业版与个人版独立管理，个人版套餐详情请参见 [T
 | 包月订阅，成本可控 | 按月预算购买积分池/ Token 池，调用时按实际用量实时扣减，便于提前锁定资源并精细化管理成本。 |
 | 即开即用，极简流程 | 完成支付、获取 API Key 后即可快速接入，无需复杂配置。 |
 | 多维团队管理，协作高效 | 支持多套餐管理、多 Key 分配、独占积分及限额控制，用量明细与趋势实时可见。 |
-| 数据安全 | 数据安全保障，不使用用户请求与模型返回数据进行模型训练，满足企业级数据隐私要求。  **说明：**  由 DeepSeek 直接提供的 DeepSeek V4 Flash（deepseek-v4-flash）、 DeepSeek V4 Pro（deepseek-v4-pro） 模型服务，TokenHub 不对该服务提供 SLA 保障。使用该模型即视为您已知晓并同意遵守 [DeepSeek 的服务协议](https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html)，请您在使用前务必仔细阅读相关内容，如不接受上述内容，请立即停止使用。 |
+| 数据安全 | 数据安全保障，不使用用户请求与模型返回数据进行模型训练，满足企业级数据隐私要求。  **说明：**  由 DeepSeek 原厂直接提供的模型服务，TokenHub 不对该服务提供 SLA 保障。使用该模型即视为您已知晓并同意遵守 [DeepSeek 的服务协议](https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html)，请您在使用前务必仔细阅读相关内容，如不接受上述内容，请立即停止使用。 |
 
 ## 产品对比
 

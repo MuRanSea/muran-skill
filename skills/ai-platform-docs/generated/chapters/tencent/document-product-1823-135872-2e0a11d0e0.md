@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135872 -->
-<!-- Source SHA-256: 3c80c6f9e441378c90b92442ab28876c17525cac7b21c5f6b0952c7675fed85f -->
+<!-- Source SHA-256: d1114ac67d04e758645ac0f340851173473e482fd72f297b9a4b8f53f9595b44 -->
 
 # OpenAI Chat Completions 协议字段说明
 
 官方来源：https://cloud.tencent.com/document/product/1823/135872
-最近更新时间：2026-09-15 10:55:40
+最近更新时间：2026-11-03 16:54:16
 
 ## OpenAI Chat Completions API 使用
 
@@ -18,7 +18,7 @@
 
 | 参数 | 类型 | 必选 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-| `model` | string | 是 | - | 模型标识。平台默认服务 ID 与模型名称一致（如 `hy3`、`deepseek-v4-flash`）；自定义服务格式为 `ep-xxxxxxxx`。 |
+| `model` | string | 是 | - | 模型标识。平台默认服务 ID 与模型名称一致（如 `hy3`）；自定义服务格式为 `ep-xxxxxxxx`。 |
 | `messages` | array | 是 | - | 聊天上下文消息数组，详见 [Messages 参数](https://cloud.tencent.com/document/product/1823/135872#821d03e3-f2ee-4f69-b301-6a82b1d4e8e9)。 |
 | `stream` | boolean | 否 | `false` | 是否启用流式输出（SSE）。 |
 | `stream_options` | object | 否 | - | 流式选项，仅 `stream=true` 时生效。 |

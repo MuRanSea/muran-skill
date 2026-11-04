@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/models-intro.md -->
-<!-- Source SHA-256: 083b955884a5b601c80386979dcab21681d5ac4bc1b41a3d1cc76a9e4ab3ba45 -->
+<!-- Source SHA-256: f1310b1fb757cb0cf804530fc2c2a7d8d9f8a346a4d314396c2bbfdcc70a4819 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -63,6 +63,6 @@
 
 | **模型名称**            | **介绍**                                                          |
 | :- | :- |
-| [music-3.0](https://platform.minimaxi.com/docs/api-reference/music-generation.md) | 更懂创作意图，音质全面跃升，人声合成更自然 |
-| [music-2.6](https://platform.minimaxi.com/docs/api-reference/music-generation.md) | 以声传情：翻唱入心，器乐入魂 |
-| [music-cover](https://platform.minimaxi.com/docs/api-reference/music-generation.md) | 基于参考音频生成翻唱版本，支持一步翻唱和两步翻唱（可修改歌词），支持风格迁移和自动歌词提取 |
+| [music-3.0](https://platform.minimaxi.com/docs/api-reference/music-generation) | 更懂创作意图，音质全面跃升，人声合成更自然 |
+| [music-2.6](https://platform.minimaxi.com/docs/api-reference/music-generation) | 以声传情：翻唱入心，器乐入魂 |
+| [music-cover](https://platform.minimaxi.com/docs/api-reference/music-generation) | 基于参考音频生成翻唱版本，支持一步翻唱和两步翻唱（可修改歌词），支持风格迁移和自动歌词提取 |

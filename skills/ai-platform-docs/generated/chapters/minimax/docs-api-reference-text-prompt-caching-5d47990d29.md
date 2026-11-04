@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-prompt-caching.md -->
-<!-- Source SHA-256: d486cdd4f6f61c5747b61fae6a831a66666cfdb64ff824545451ec7e4282d5b0 -->
+<!-- Source SHA-256: ff80f5ec2c36cd16e294fb093b6d454abd68f078213f84545da981b23fb2087b -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -152,8 +152,6 @@
 >         {"role": "system", "content": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"},
 >         {"role": "user", "content": "<the entire contents of 'Pride and Prejudice'>"},
 >     ],
->     # 设置 reasoning_split=True 将思考内容分离到 reasoning_details 字段
->     extra_body={"reasoning_split": True},
 > )
 >
 > print("第一次请求结果:")
@@ -172,8 +170,6 @@
 >         {"role": "system", "content": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"},
 >         {"role": "user", "content": "<the entire contents of 'Pride and Prejudice'>"},
 >     ],
->     # 设置 reasoning_split=True 将思考内容分离到 reasoning_details 字段
->     extra_body={"reasoning_split": True},
 > )
 >
 > print("\n第二次请求结果:")
@@ -221,13 +217,21 @@ prompt 缓存采用差异化的计费策略：
 计费公式：
 
 ```
-单次请求费用 = 新增输入 Token 数 × 输入单价
-            + 缓存命中 Token 数 × 缓存命中单价
-            + 输出 Token 数 × 输出单价
+单次请求费用（元）= ( 新增输入 Token 数 × 输入单价
+                   + 缓存命中 Token 数 × 缓存命中单价
+                   + 输出 Token 数 × 输出单价 ) ÷ 1,000,000
 
 其中：
 - 新增输入 Token 数 = 总输入 Token 数 − 缓存命中 Token 数
 - 各项单价以「元/百万 tokens」计，取值以按量计费价格页为准
+```
+
+以 `MiniMax-M3.1-Flash` 为例（输入 1.00 元、缓存读取 0.10 元、输出 4.00 元，均为每百万 tokens），一次请求总输入 1,200 tokens，其中缓存命中 800 tokens，输出 300 tokens：
+
+```
+费用 = ( 400 × 1.00 + 800 × 0.10 + 300 × 4.00 ) ÷ 1,000,000
+     = ( 400 + 80 + 1,200 ) ÷ 1,000,000
+     = 0.00168 元
 ```
 
 缓存命中 Token 数可从响应的 `usage` 中获取：
