@@ -237,8 +237,12 @@ class Antigravity(Adapter):
     tool_control = 'prompt_and_audit'
     efforts = ('low', 'medium', 'high')
     modes = ('advisor', 'worker')
-    read_tools = ('view_file', 'grep_search', 'find_by_name', 'list_dir', 'finish')
-    write_tools = ('replace_file_content', 'multi_replace_file_content', 'write_to_file')
+    # agy >= 1.4 reports its file tools under these short names in step_update
+    # (`read_file`/`write_file`/`edit_file`), while its declared tool ids are
+    # view_file/write_to_file/replace_file_content. Accept both.
+    read_tools = ('view_file', 'grep_search', 'find_by_name', 'list_dir', 'finish', 'read_file')
+    write_tools = ('replace_file_content', 'multi_replace_file_content', 'write_to_file',
+                   'write_file', 'edit_file', 'sed_file')
 
     def isolated(self, mode):
         # Native permissions are not narrowed, so every mode runs in a worktree.
