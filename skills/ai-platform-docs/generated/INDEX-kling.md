@@ -44,6 +44,10 @@
 | Kling 3.0 & 3.0 Omni - 音色管理 | `chapters/kling/document-api-api-video-3-0-omni-voice-customization-dfb491ebbb.md` | https://klingai.com/document-api/api/video/3-0-omni/voice-customization.md |
 | Kling 3.0 Turbo - 图生视频 | `chapters/kling/document-api-api-video-3-0-turbo-image-to-video-dd41eb0a3d.md` | https://klingai.com/document-api/api/video/3-0-turbo/image-to-video.md |
 | Kling 3.0 Turbo - 文生视频 | `chapters/kling/document-api-api-video-3-0-turbo-text-to-video-a4f69e671a.md` | https://klingai.com/document-api/api/video/3-0-turbo/text-to-video.md |
+| Kling 4.0 Flash - 主体管理 | `chapters/kling/document-api-api-video-4-0-flash-elements-ada042c3cc.md` | https://klingai.com/document-api/api/video/4-0-flash/elements.md |
+| Kling 4.0 Flash - 图生视频 | `chapters/kling/document-api-api-video-4-0-flash-image-to-video-be9b7cdd56.md` | https://klingai.com/document-api/api/video/4-0-flash/image-to-video.md |
+| Kling 4.0 Flash - 文生视频 | `chapters/kling/document-api-api-video-4-0-flash-text-to-video-692ec82ab1.md` | https://klingai.com/document-api/api/video/4-0-flash/text-to-video.md |
+| Kling 4.0 Flash - 全能参考生视频 | `chapters/kling/document-api-api-video-4-0-flash-video-omni-1278b898a1.md` | https://klingai.com/document-api/api/video/4-0-flash/video-omni.md |
 | Kling 4.0 - 主体管理 | `chapters/kling/document-api-api-video-4-0-elements-f1dc4b0195.md` | https://klingai.com/document-api/api/video/4-0/elements.md |
 | Kling 4.0 - 图生视频 | `chapters/kling/document-api-api-video-4-0-image-to-video-52e62575ec.md` | https://klingai.com/document-api/api/video/4-0/image-to-video.md |
 | Kling 4.0 - 文生视频 | `chapters/kling/document-api-api-video-4-0-text-to-video-230357549a.md` | https://klingai.com/document-api/api/video/4-0/text-to-video.md |

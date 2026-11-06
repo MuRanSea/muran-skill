@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/136956 -->
-<!-- Source SHA-256: 4b9394d165a1fa9b97da95c8da679b37a0eb6fcb917ae8e3ab1f148ae79daa1d -->
+<!-- Source SHA-256: 1cc0ae884e08859afe5be47ce2fd7bbfede3919fc7fe46ec3728408bf2af2bfb -->
 
 # 图片理解
 
 官方来源：https://cloud.tencent.com/document/product/1823/136956
-最近更新时间：2026-08-27 11:35:31
+最近更新时间：2026-11-04 12:13:31
 
 ## **概述**
 
@@ -18,11 +18,11 @@ TokenHub 提供多款支持图片理解能力的模型，涵盖专用多模态�
 
 ### 支持的 API
 
-平台兼容 OpenAI 的以下两种协议，图片均通过 `image_url` 字段传入（支持公网 URL 或 Base64 编码）：
-
-**OpenAI Chat Completions 协议**（`/v1/chat/completions`）：图片以 `image_url` 类型块传入。详细参数与调用示例，请参见 [OpenAI Chat Completions 协议字段说明](https://cloud.tencent.com/document/product/1823/135872)。
-
-**OpenAI Responses 协议**（`/v1/responses`，OpenAI 原生格式）：图片以 `input_image` 类型块传入，其中图片数据通过 `image_url` 字段指定（支持公网 URL 或 Base64 编码）。仅部分模型支持。详细字段与调用示例，请参见 [OpenAI Response 协议字段说明](https://cloud.tencent.com/document/product/1823/135873)。
+| **协议** | **参数说明** | **详细参数与调用示例说明** |
+| --- | --- | --- |
+| **OpenAI Chat Completions**  （`/v1/chat/completions`） | 内容块 `type=image_url`  `image_url.url`：支持**公网**`https://`**URL** 或 **Base64 data URL**  `image_url.detail`：支持`auto`、`low`、`high`、`original` | [OpenAI Chat Completions 协议字段说明](https://cloud.tencent.com/document/product/1823/135872) |
+| **OpenAI Responses**  （`/v1/responses`） | 内容块 `type=input_image`  `image_url`：支持**公网**`https://`**URL** 或 **Base64 data URL**  `detail`：支持`auto`、`low`、`high`、`original` | [OpenAI Response 协议字段说明](https://cloud.tencent.com/document/product/1823/135873) |
+| **Anthropic**  （`/v1/messages`） | 内容块 `type=image`  `source.type`：支持`url`、`base64`  `source.url`：**公网**`https://`**URL**  `source.media_type`：`image/jpeg`、`image/png`、`image/webp`、`image/gif`  `source.data`：纯 Base64 编码，不带`data:`前缀 | [Anthropic Message 协议字段说明](https://cloud.tencent.com/document/product/1823/135874) |
 
 ## **图片传入方式（URL / Base64）**
 
@@ -65,6 +65,18 @@ TokenHub 提供多款支持图片理解能力的模型，涵盖专用多模态�
 }
 ```
 
+请求结构（Anthropic 协议）：
+
+```json
+{
+  "type": "image",
+  "source": {
+      "type": "url",
+      "url": "https://example.com/photo.jpg"
+      }
+}
+```
+
 ### **方式二：图片 Base64 传入**
 
 适用于图片无法公网访问的场景。将图片读取为二进制后做 Base64 编码，并以 `data:<mime>;base64,<编码>` 的形式填入 `image_url.url`。常见图片 MIME：`image/jpeg`、`image/png`、`image/webp`。
@@ -81,7 +93,7 @@ Base64 会使请求体膨胀约 33%，大图建议使用 URL 方式。
 {
   "type": "image_url",
   "image_url": {
-    "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABA..."
+    "url": "data:image/jpeg;base64,<BASE64_DATA>"
   }
 }
 ```
@@ -91,13 +103,26 @@ Base64 会使请求体膨胀约 33%，大图建议使用 URL 方式。
 ```json
 {
   "type": "input_image",
-  "image_url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABA..."
+  "image_url": "data:image/jpeg;base64,<BASE64_DATA>"
+}
+```
+
+请求结构（Anthropic 协议）：
+
+```json
+{
+  "type": "image",
+  "source": {
+      "type": "base64",
+      "media_type": "image/jpeg",
+      "data": "<BASE64_DATA>"
+      }
 }
 ```
 
 ## **调用示例**
 
-下面示例均使用 **OpenAI Chat Completions 协议**（`POST /v1/chat/completions`），以 `hy-vision-2.0-instruct` 模型为例。图片通过 `content` 中的 `image_url` 类型块传入，支持单图与多图两种输入。
+下面示例均使用 **OpenAI Chat Completions 协议**（`POST /v1/chat/completions`），以 `hy4` 模型为例。图片通过 `content` 中的 `image_url` 类型块传入，支持单图与多图两种输入。
 
 ### 单图输入
 
@@ -112,10 +137,10 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{
-    "model": "hy-vision-2.0-instruct",
+    "model": "hy4",
     "messages": [{"role": "user", "content": [
       {"type": "image_url", "image_url": {"url": "YOUR_IMAGE_URL"}},
-      {"type": "text", "text": "请描述这张图片的内容"}
+      {"type": "text", "text": "请描述这张图片的内容，并说出图中有几只动物。"}
     ]}],
     "stream": false
   }'
@@ -130,12 +155,12 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="hy-vision-2.0-instruct",
+    model="hy4",
     messages=[{
         "role": "user",
         "content": [
             {"type": "image_url", "image_url": {"url": "YOUR_IMAGE_URL"}},
-            {"type": "text", "text": "请描述这张图片的内容"},
+            {"type": "text", "text": "请描述这张图片的内容，并说出图中有几只动物。"},
         ],
     }],
 )
@@ -157,12 +182,12 @@ with open("example.jpg", "rb") as f:
     base64_image = base64.b64encode(f.read()).decode("utf-8")
 
 response = client.chat.completions.create(
-    model="hy-vision-2.0-instruct",
+    model="hy4",
     messages=[{
         "role": "user",
         "content": [
             {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}},
-            {"type": "text", "text": "请描述这张图片的内容"},
+            {"type": "text", "text": "请描述这张图片的内容，并说出图中有几只动物。"},
         ],
     }],
 )
@@ -174,31 +199,31 @@ print(response.choices[0].message.content)
 
 ```json
 {
-  "id": "57f096ed-219c-487a-8f1c-4f387faa81ca",
+  "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy-vision-2.0-instruct",
+  "model": "hy4",
   "created": 1787628534,
   "choices": [
     {
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "这张图片以深邃的蓝绿色为主色调，采用仰视构图，聚焦于水下一个人的后脑与肩背轮廓，上方散布着细密气泡，营造出静谧而沉浸的水下氛围。"
+        "content": "这张图片中有三只橘色的小猫，趴在窗台上晒太阳，背景是晴朗的天空。"
       },
       "finish_reason": "stop"
     }
   ],
   "usage": {
-    "prompt_tokens": 289,
-    "completion_tokens": 51,
-    "total_tokens": 340
+    "prompt_tokens": 1158,
+    "completion_tokens": 36,
+    "total_tokens": 1194
   }
 }
 ```
 
 ### 多图输入
 
-在 `content` 数组中并列多个 `image_url` 块即可实现多图输入。HY-Vision 系列图片数量受上下文窗口约束，无硬性张数上限。
+在 `content` 数组中并列多个 `image_url` 块即可实现多图输入。最大输入图片数量受上下文窗口约束，无硬性张数上限。
 
 cURL（多图 URL）
 
@@ -211,7 +236,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{
-    "model": "hy-vision-2.0-instruct",
+    "model": "hy4",
     "messages": [{"role": "user", "content": [
       {"type": "image_url", "image_url": {"url": "YOUR_IMAGE_URL"}},
       {"type": "image_url", "image_url": {"url": "YOUR_IMAGE_URL_2"}},
@@ -230,7 +255,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="hy-vision-2.0-instruct",
+    model="hy4",
     messages=[{
         "role": "user",
         "content": [
@@ -263,7 +288,7 @@ image_a = load_b64("example_a.jpg")
 image_b = load_b64("example_b.jpg")
 
 response = client.chat.completions.create(
-    model="hy-vision-2.0-instruct",
+    model="hy4",
     messages=[{
         "role": "user",
         "content": [
@@ -281,9 +306,9 @@ print(response.choices[0].message.content)
 
 ```json
 {
-  "id": "5593d937-3243-4aa3-82bb-ad142dfdb338",
+  "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy-vision-2.0-instruct",
+  "model": "hy4",
   "created": 1787628932,
   "choices": [
     {
@@ -309,19 +334,15 @@ print(response.choices[0].message.content)
 
 文本与图片可混合：`content` 数组中 `text` 与 `image_url` 的顺序即为模型接收的顺序。
 
-上述单图与多图示例，在 TokenHub 使用 `hy-vision-2.0-instruct` 均可正常返回图片理解结果（单图 `total_tokens` 约 340、多图约 800，详见上方响应示例）。多图 URL 与多图 Base64 两种传入方式返回结构一致，差异仅在图片传入形式。
+多图 Base64 与多图 URL 传入方式返回结构一致，差异仅在图片传入形式。
 
 ## **使用说明**
 
 ### 支持的图片格式
 
-已验证支持的格式为 **JPEG、PNG、GIF、WEBP** 四种常见图片格式。
+支持格式为 **JPEG、PNG、WEBP、非动态 GIF** 四种常见图片格式。
 
 如需使用上述四种以外的图片格式，建议在接入前自行实测验证，确认模型可正常解析后再正式使用。
-
-**注意：**
-
-已知 **GLM-5V-Turbo 不支持 GIF** 格式（实测返回 `400 图片输入格式/解析错误`），请勿向该模型传入 GIF 图片。
 
 ### 图片数量说明
 
@@ -354,6 +375,6 @@ print(response.choices[0].message.content)
 
 **说明：**
 
-TokenHub 对图片上传不施加特殊限制；对视频仅限制单个文件大小不超过 100 MB。因此，图片的尺寸、数量、格式等上限普遍来自模型侧（模型的上下文窗口及其自身约束）。实际可用范围请以所选模型的官方说明及调用返回为准。
+TokenHub 对图片上传不施加特殊限制；仅限制单个文件大小不超过 100 MB。因此，图片的尺寸、数量、格式等上限普遍来自模型侧（模型的上下文窗口及其自身约束）。实际可用范围请以所选模型的官方说明及调用返回为准。
 
 第三方视觉模型（Kimi / DeepSeek / MiniMax / GLM / Qwen 等）的具体限制，请参见对应模型调用指南或其官方文档。

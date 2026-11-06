@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/2-5-turbo/image-to-video.md -->
-<!-- Source SHA-256: f72dfc9824ac3731ef32755da5251d988d948449e19a0ce98ff577aa4b072513 -->
+<!-- Source SHA-256: e91cddaba5dae01b816043bd629eade557c75406e7f41f268cda94323e0277cf -->
 
 > ## Documentation Index
 >
@@ -198,6 +198,12 @@ curl --location 'https://api-beijing.klingai.com/image-to-video/kling-2.5-turbo'
 - `external_task_ids`: 支持批量查询，用 "," 分隔
 
 ### Request Example
+
+```bash
+curl --location 'https://api-beijing.klingai.com/tasks?task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
 
 ```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \

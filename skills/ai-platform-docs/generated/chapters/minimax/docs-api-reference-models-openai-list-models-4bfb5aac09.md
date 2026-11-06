@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/models/openai/list-models.md -->
-<!-- Source SHA-256: 25260276387548e4a02e7a64b698965573cc7da9c951d8426970fe83ce30a50b -->
+<!-- Source SHA-256: eb814b83ced6f2b520b1ba63dc2580bbb9e7098c933d8ec7bfb49aa5abdaa054 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -65,17 +65,13 @@ paths:
                   value:
                     object: list
                     data:
+                      - id: MiniMax-M3.1-Flash
+                        object: model
+                        created: 1789556118
+                        owned_by: minimax
                       - id: MiniMax-M3
                         object: model
                         created: 1780272000
-                        owned_by: minimax
-                      - id: MiniMax-M2.7
-                        object: model
-                        created: 1773799200
-                        owned_by: minimax
-                      - id: MiniMax-M2.5
-                        object: model
-                        created: 1770948000
                         owned_by: minimax
 components:
   securitySchemes:

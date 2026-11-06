@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/models/anthropic/list-models.md -->
-<!-- Source SHA-256: 0f289d536b98a0d6912bf8e3f4bca9d164a5421f1fed53a22d3e882abc9d0c52 -->
+<!-- Source SHA-256: b87f43bfb7f93a90a69cbfa174faaa062cfea9f2aa5d4ae429df16937df159f7 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -89,21 +89,17 @@ paths:
                 默认响应:
                   value:
                     data:
+                      - id: MiniMax-M3.1-Flash
+                        created_at: '2026-09-16T10:55:18Z'
+                        display_name: MiniMax-M3.1-Flash
+                        type: model
                       - id: MiniMax-M3
                         created_at: '2026-06-01T00:00:00Z'
                         display_name: MiniMax-M3
                         type: model
-                      - id: MiniMax-M2.7
-                        created_at: '2026-03-18T02:00:00Z'
-                        display_name: MiniMax-M2.7
-                        type: model
-                      - id: MiniMax-M2.5
-                        created_at: '2026-02-13T02:00:00Z'
-                        display_name: MiniMax-M2.5
-                        type: model
-                    first_id: MiniMax-M3
+                    first_id: MiniMax-M3.1-Flash
                     has_more: false
-                    last_id: MiniMax-M2.5
+                    last_id: MiniMax-M3
 components:
   securitySchemes:
     apiKeyAuth:

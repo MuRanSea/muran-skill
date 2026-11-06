@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132252 -->
-<!-- Source SHA-256: 0a984bcf05d41cbe0dc7d477508ff52a0d951824e947b49de76b195bcb08da08 -->
+<!-- Source SHA-256: 8dd63bddfce2241902e08bed58d58e36a17a4a7983c7081b383bd609bc7a8049 -->
 
 # 混元调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132252
-最近更新时间：2026-10-13 15:50:31
+最近更新时间：2026-11-04 12:13:30
 
 ## 概述
 
@@ -16,13 +16,13 @@
 
 已在 [TokenHub 控制台](https://console.cloud.tencent.com/tokenhub/apikey) 获取 API Key。
 
-## Hy4 preview 调用示例
+## Hy4 调用示例
 
-`hy4-preview` 兼容 OpenAI Chat Completions API 、OpenAI Responses 、Anthropic Messages API 协议。通用接口规范与所有语言模型一致，请参见 [语言模型调用概览](https://cloud.tencent.com/document/product/1823/130079) 与 [API 使用说明](https://cloud.tencent.com/document/product/1823/130078)。
+`hy4` 兼容 OpenAI Chat Completions API 、OpenAI Responses 、Anthropic Messages API 协议。通用接口规范与所有语言模型一致，请参见 [语言模型调用概览](https://cloud.tencent.com/document/product/1823/130079) 与 [API 使用说明](https://cloud.tencent.com/document/product/1823/130078)。
 
 以下为 OpenAI Chat Completions API 调用示例。
 
-<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>model（调用参数）</div></td><td><div>能力说明</div></td><td><div>上下文窗口</div></td><td><div>最大输入</div></td><td><div>最大输出</div></td></tr><tr><td><div><code>hy4-preview</code></div></td><td><div>新一代生产力模型，Agent 与复杂任务执行能力全面升级。</div></td><td><div>1024k</div></td><td><div>960k</div></td><td><div>64k</div></td></tr><tr><td><div><code>hy3</code></div></td><td><div>Hy3 基于真实业务场景打磨，兼具效果和性价比，强化 Coding、长文、推理和 Agent 等能力。</div></td><td colspan="1" rowspan="1"><div>256k</div></td><td colspan="1" rowspan="1"><div>192k</div></td><td colspan="1" rowspan="1"><div>128k</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>model（调用参数）</div></td><td><div>能力说明</div></td><td><div>上下文窗口</div></td><td><div>最大输入</div></td><td><div>最大输出</div></td></tr><tr><td><div><code>hy4</code></div></td><td><div>Hy4 正式版整体相比 Hy4 preview 实现了全面大幅提升，尤其强化了 Agent 能力和各类长程和真实生产力任务的能力，并首次引入了视觉理解。</div></td><td colspan="1" rowspan="1"><div>1024k</div></td><td colspan="1" rowspan="1"><div>960k</div></td><td colspan="1" rowspan="1"><div>64k</div></td></tr><tr><td><div><code>hy4-preview</code></div></td><td><div>新一代生产力模型，Agent 与复杂任务执行能力全面升级。</div></td><td><div>1024k</div></td><td><div>960k</div></td><td><div>64k</div></td></tr><tr><td><div><code>hy3</code></div></td><td><div>Hy3 基于真实业务场景打磨，兼具效果和性价比，强化 Coding、长文、推理和 Agent 等能力。</div></td><td colspan="1" rowspan="1"><div>256k</div></td><td colspan="1" rowspan="1"><div>192k</div></td><td colspan="1" rowspan="1"><div>128k</div></td></tr></tbody></table>
 
 **说明：**
 
@@ -50,7 +50,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy4-preview",
+    "model": "hy4",
     "messages": [
       {"role": "user", "content": "你好，请简单介绍一下你自己。"}
     ],
@@ -68,7 +68,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="hy4-preview",
+    model="hy4",
     messages=[
         {"role": "user", "content": "你好，请简单介绍一下你自己。"},
     ],
@@ -92,7 +92,7 @@ public class BasicChat {
                 .build();
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy4-preview");
+        body.put("model", "hy4");
         body.put("messages", List.of(
             Map.of("role", "user", "content", "你好，请简单介绍一下你自己。")
         ));
@@ -123,7 +123,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: 'hy4-preview',
+  model: 'hy4',
   messages: [
     { role: 'user', content: '你好，请简单介绍一下你自己。' },
   ],
@@ -145,7 +145,7 @@ import (
 
 func main() {
     body, _ := json.Marshal(map[string]interface{}{
-        "model": "hy4-preview",
+        "model": "hy4",
         "messages": []map[string]string{
             {"role": "user", "content": "你好，请简单介绍一下你自己。"},
         },
@@ -171,7 +171,7 @@ func main() {
 {
   "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy4-preview",
+  "model": "hy4",
   "created": 1775146513,
   "choices": [
     {
@@ -218,7 +218,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy4-preview",
+    "model": "hy4",
     "messages": [
       {"role": "user", "content": "你好"}
     ],
@@ -236,7 +236,7 @@ client = OpenAI(
 )
 
 stream = client.chat.completions.create(
-    model="hy4-preview",
+    model="hy4",
     messages=[{"role": "user", "content": "你好"}],
     stream=True,
     stream_options={"include_usage": True},
@@ -263,7 +263,7 @@ public class StreamingChat {
                 .build();
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy4-preview");
+        body.put("model", "hy4");
         body.put("messages", List.of(Map.of("role", "user", "content", "你好")));
         body.put("stream", true);
         body.put("stream_options", Map.of("include_usage", true));
@@ -295,7 +295,7 @@ const client = new OpenAI({
 });
 
 const stream = await client.chat.completions.create({
-  model: 'hy4-preview',
+  model: 'hy4',
   messages: [{ role: 'user', content: '你好' }],
   stream: true,
   stream_options: { include_usage: true },
@@ -321,7 +321,7 @@ import (
 
 func main() {
     body, _ := json.Marshal(map[string]interface{}{
-        "model": "hy4-preview",
+        "model": "hy4",
         "messages": []map[string]string{
             {"role": "user", "content": "你好"},
         },
@@ -351,22 +351,22 @@ func main() {
 **响应示例（SSE 片段）：**
 
 ```text
-data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4-preview", "choices": [{"index": 0, "delta": {"role": "assistant"}}]}
+data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4", "choices": [{"index": 0, "delta": {"role": "assistant"}}]}
 
-data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4-preview", "choices": [{"index": 0, "delta": {"content": "你好"}}]}
+data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4", "choices": [{"index": 0, "delta": {"content": "你好"}}]}
 
-data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4-preview", "choices": [{"index": 0, "delta": {"content": "帮你的吗"}}]}
+data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4", "choices": [{"index": 0, "delta": {"content": "帮你的吗"}}]}
 
-data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4-preview", "choices": [{"index": 0, "delta": {"content": " 😊"}, "finish_reason": "stop"}]}
+data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4", "choices": [{"index": 0, "delta": {"content": " 😊"}, "finish_reason": "stop"}]}
 
-data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4-preview", "choices": [], "usage": {"prompt_tokens": 16, "completion_tokens": 11, "total_tokens": 27, "prompt_tokens_details": {"cached_tokens": 0}, "completion_tokens_details": {"reasoning_tokens": 0}}}
+data: {"id": "REPLACED_ID", "object": "chat.completion.chunk", "created": 1779958293, "model": "hy4", "choices": [], "usage": {"prompt_tokens": 16, "completion_tokens": 11, "total_tokens": 27, "prompt_tokens_details": {"cached_tokens": 0}, "completion_tokens_details": {"reasoning_tokens": 0}}}
 
 data: [DONE]
 ```
 
 ### 深度思考
 
-`hy4-preview` 默认开启深度思考，详细说明请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208)。
+`hy4` 默认开启深度思考，详细说明请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208)。
 
 cURL
 
@@ -383,7 +383,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy4-preview",
+    "model": "hy4",
     "messages": [
       {"role": "user", "content": "小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？"}
     ],
@@ -401,7 +401,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="hy4-preview",
+    model="hy4",
     messages=[
         {"role": "user", "content": "小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？"},
     ],
@@ -425,7 +425,7 @@ const client = new OpenAI({
 
 // Node.js SDK：thinking 字段直接展开到顶层
 const response = await client.chat.completions.create({
-  model: 'hy4-preview',
+  model: 'hy4',
   messages: [
     { role: 'user', content: '小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？' },
   ],
@@ -452,7 +452,7 @@ public class ThinkingChat {
                 .build();
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy4-preview");
+        body.put("model", "hy4");
         body.put("messages", List.of(
             Map.of("role", "user", "content", "小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？")
         ));
@@ -488,7 +488,7 @@ import (
 
 func main() {
     body, _ := json.Marshal(map[string]interface{}{
-        "model": "hy4-preview",
+        "model": "hy4",
         "messages": []map[string]string{
             {"role": "user", "content": "小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？"},
         },
@@ -519,7 +519,7 @@ func main() {
   "id": "REPLACED_ID",
   "object": "chat.completion",
   "created": 1775146546,
-  "model": "hy4-preview",
+  "model": "hy4",
   "choices": [
     {
       "index": 0,
@@ -547,11 +547,11 @@ func main() {
 
 **推理深度配置**
 
-`hy4-preview` 、`hy3` 默认为 `high`。详细说明请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208)。
+`hy4`、`hy4-preview` 、`hy3` 默认为 `high`。详细说明请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208)。
 
 **注意：**
 
-Hy3正式版在 toolcall 场景下，模型已具备 adaptive thinking 能力，即可以根据任务复杂度，自主决定推理深度。当请求携带 tools 时，出于兼容考虑，此场景下若设置 `reasoning_effort` 为 `low`，API 会自动将 `low` 映射为 `high`。
+Hy3正式版起在 toolcall 场景下，模型已具备 adaptive thinking 能力，即可以根据任务复杂度，自主决定推理深度。
 
 cURL
 
@@ -568,7 +568,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy4-preview",
+    "model": "hy4",
     "messages": [
       {"role": "user", "content": "小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？"}
     ],
@@ -587,7 +587,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="hy4-preview",
+    model="hy4",
     messages=[
         {"role": "user", "content": "小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？"},
     ],
@@ -610,7 +610,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: 'hy4-preview',
+  model: 'hy4',
   messages: [
     { role: 'user', content: '小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？' },
   ],
@@ -638,7 +638,7 @@ public class ReasoningEffortChat {
                 .build();
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy4-preview");
+        body.put("model", "hy4");
         body.put("messages", List.of(
             Map.of("role", "user", "content", "小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？")
         ));
@@ -674,7 +674,7 @@ import (
 
 func main() {
     body, _ := json.Marshal(map[string]interface{}{
-        "model": "hy4-preview",
+        "model": "hy4",
         "messages": []map[string]string{
             {"role": "user", "content": "小明有5个苹果，给了小红2个，又买了3个，最后还剩几个？"},
         },
@@ -702,10 +702,10 @@ func main() {
 
 ```json
 {
-  "id": "c95dc87ecce440678c3bb08f5868fee6",
+  "id": "REPLACED_ID",
   "object": "chat.completion",
   "created": 1775146546,
-  "model": "hy4-preview",
+  "model": "hy4",
   "choices": [
     {
       "index": 0,
@@ -748,7 +748,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy4-preview",
+    "model": "hy4",
     "messages": [
       { "role": "system", "content": "你是一个 Agent，必须按步骤推理并调用工具完成任务。" },
       { "role": "user",   "content": "深圳今天天气怎么样？" }
@@ -801,7 +801,7 @@ messages = [
 
 # OpenAI Python SDK 类型签名严格，非标字段（如 reasoning_effort）需通过 extra_body 透传
 resp1 = client.chat.completions.create(
-    model="hy4-preview",
+    model="hy4",
     messages=messages,
     tools=tools,
     tool_choice="auto",
@@ -839,7 +839,7 @@ const messages = [
 ];
 
 const resp1 = await client.chat.completions.create({
-  model: 'hy4-preview',
+  model: 'hy4',
   messages,
   tools,
   tool_choice: 'auto',
@@ -870,7 +870,7 @@ public class InterleavedThinking {
     /** 通用 chat 调用，返回原始 JSON 响应字符串。 */
     static String chat(List<Map<String, Object>> messages, List<Map<String, Object>> tools) {
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy4-preview");
+        body.put("model", "hy4");
         body.put("messages", messages);
         body.put("tools", tools);
         body.put("tool_choice", "auto");
@@ -934,7 +934,7 @@ const (
 // 通用 chat 调用
 func chat(messages []map[string]interface{}, tools []map[string]interface{}) (map[string]interface{}, error) {
     body, _ := json.Marshal(map[string]interface{}{
-        "model":            "hy4-preview",
+        "model":            "hy4",
         "messages":         messages,
         "tools":            tools,
         "tool_choice":      "auto",
@@ -987,10 +987,10 @@ func main() {
 
 ```json
 {
-    "id": "31be91fe574e41e49616352366b4fa1b",
+    "id": "REPLACED_ID",
     "object": "chat.completion",
     "created": 1776057110,
-    "model": "hy4-preview",
+    "model": "hy4",
     "choices": [
         {
             "index": 0,
@@ -1041,7 +1041,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy4-preview",
+    "model": "hy4",
     "messages": [
       { "role": "system", "content": "你是一个 Agent，必须按步骤推理并调用工具完成任务。" },
       { "role": "user",   "content": "深圳今天天气怎么样？" },
@@ -1122,7 +1122,7 @@ for tc in (msg1.tool_calls or []):
 
 # 第 2 轮：把工具结果送回模型，模型继续思考并输出最终回答
 resp2 = client.chat.completions.create(
-    model="hy4-preview",
+    model="hy4",
     messages=messages,
     tools=tools,
     tool_choice="auto",
@@ -1155,7 +1155,7 @@ for (const tc of msg1.tool_calls || []) {
 }
 
 const resp2 = await client.chat.completions.create({
-  model: 'hy4-preview',
+  model: 'hy4',
   messages,
   tools,
   tool_choice: 'auto',
@@ -1235,10 +1235,10 @@ fmt.Printf("第 2 轮响应: %+v\\n", r2)
 
 ```json
 {
-    "id": "ae8941415e154a3c9749f0cf897469a4",
+    "id": "REPLACED_ID",
     "object": "chat.completion",
     "created": 1776057913,
-    "model": "hy4-preview",
+    "model": "hy4",
     "choices": [
         {
             "index": 0,
@@ -1277,7 +1277,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy4-preview",
+    "model": "hy4",
     "messages": [
       {"role": "system", "content": "你是一个专业的 AI 编程助手。"},
       {"role": "user", "content": "Python 中如何读取 JSON 文件？"},
@@ -1296,7 +1296,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="hy4-preview",
+    model="hy4",
     messages=[
         {"role": "system", "content": "你是一个专业的 AI 编程助手。"},
         {"role": "user", "content": "Python 中如何读取 JSON 文件？"},
@@ -1315,7 +1315,7 @@ import java.util.*;
 public class MultiTurn {
     public static void main(String[] args) throws Exception {
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy4-preview");
+        body.put("model", "hy4");
         body.put("messages", List.of(
             Map.of("role", "system",    "content", "你是一个专业的 AI 编程助手。"),
             Map.of("role", "user",      "content", "Python 中如何读取 JSON 文件？"),
@@ -1346,7 +1346,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: 'hy4-preview',
+  model: 'hy4',
   messages: [
     { role: 'system',    content: '你是一个专业的 AI 编程助手。' },
     { role: 'user',      content: 'Python 中如何读取 JSON 文件？' },
@@ -1370,7 +1370,7 @@ import (
 
 func main() {
     body, _ := json.Marshal(map[string]interface{}{
-        "model": "hy4-preview",
+        "model": "hy4",
         "messages": []map[string]string{
             {"role": "system",    "content": "你是一个专业的 AI 编程助手。"},
             {"role": "user",      "content": "Python 中如何读取 JSON 文件？"},
@@ -1396,9 +1396,13 @@ func main() {
 
 当历史对话中包含思考类响应时，回写 `assistant` 消息建议同时携带 `content` 与 `reasoning_content` 两个字段，避免推理上下文丢失。
 
+**多轮对话中的图片**：图片内容块与文本一样保留在历史消息中。后续轮次需要把包含图片的那条 user 消息完整回传，历史中的图片同样计入单请求 600 张的上限。使用 URL 或 Base64 时，每轮都会重新下载或解码。
+
 ### 工具调用（Function Calling）
 
-通过 `tools` 定义模型可调用的函数列表，模型在判断需要调用工具时返回 `tool_calls`；业务执行后将结果以 `role: "tool"` 消息回填，模型据此生成最终回答。
+`tools`：用于定义可调用的函数列表，包含工具类型（Function Calling 时固定为 `function`）、工具名、工具描述、参数要求等；模型在判断需要调用工具时返回 `tool_calls`；业务执行后将结果以 `role: "tool"` 消息回填，模型据此生成最终回答。
+
+`tool_choice`：调用规则。支持 `none`、`auto`、`required` 和指定函数；默认 `auto` 由模型基于上下文判断是否调用及调用哪个函数。
 
 cURL
 
@@ -1415,7 +1419,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy4-preview",
+    "model": "hy4",
     "messages": [
       {"role": "user", "content": "深圳今天天气怎么样？"}
     ],
@@ -1459,7 +1463,7 @@ tools = [{
 }]
 
 response = client.chat.completions.create(
-    model="hy4-preview",
+    model="hy4",
     messages=[{"role": "user", "content": "深圳今天天气怎么样？"}],
     tools=tools,
     tool_choice="auto",
@@ -1488,7 +1492,7 @@ public class FunctionCalling {
         );
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy4-preview");
+        body.put("model", "hy4");
         body.put("messages", List.of(Map.of("role", "user", "content", "深圳今天天气怎么样？")));
         body.put("tools", List.of(tool));
         body.put("tool_choice", "auto");
@@ -1529,7 +1533,7 @@ const tools = [{
 }];
 
 const response = await client.chat.completions.create({
-  model: 'hy4-preview',
+  model: 'hy4',
   messages: [{ role: 'user', content: '深圳今天天气怎么样？' }],
   tools,
   tool_choice: 'auto',
@@ -1565,7 +1569,7 @@ func main() {
     }
 
     body, _ := json.Marshal(map[string]interface{}{
-        "model":       "hy4-preview",
+        "model":       "hy4",
         "messages":    []map[string]string{{"role": "user", "content": "深圳今天天气怎么样？"}},
         "tools":       []map[string]interface{}{tool},
         "tool_choice": "auto",
@@ -1590,7 +1594,7 @@ func main() {
 {
   "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy4-preview",
+  "model": "hy4",
   "created": 1775146513,
   "choices": [
     {
@@ -1631,7 +1635,7 @@ func main() {
 
 ```json
 {
-  "model": "hy4-preview",
+  "model": "hy4",
   "messages": [
     {"role": "user", "content": "深圳今天天气怎么样？"},
     {
@@ -1654,7 +1658,7 @@ func main() {
 
 **注意：**
 
-在 `reasoning_effort=low/high` 的慢思考模式下进行工具调用，**每一轮请求都需要回填历史** `reasoning_content`，以获取最佳效果。
+在 `reasoning_effort=high` 的慢思考模式下进行工具调用，**每一轮请求都需要回填历史** `reasoning_content`，以获取最佳效果。
 
 ### 结构化输出
 
@@ -1675,7 +1679,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy4-preview",
+    "model": "hy4",
     "messages": [
       {"role": "user", "content": "请从以下文本中提取人物信息：张三，35岁，是一名高级软件工程师，擅长Python、Java和机器学习。"}
     ],
@@ -1718,7 +1722,7 @@ schema = {
 }
 
 response = client.chat.completions.create(
-    model="hy4-preview",
+    model="hy4",
     messages=[
         {"role": "user", "content": "请从以下文本中提取人物信息：张三，35岁，是一名高级软件工程师，擅长Python、Java和机器学习。"},
     ],
@@ -1749,7 +1753,7 @@ public class StructuredOutput {
         );
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy4-preview");
+        body.put("model", "hy4");
         body.put("messages", List.of(Map.of("role", "user", "content",
             "请从以下文本中提取人物信息：张三，35岁，是一名高级软件工程师，擅长Python、Java和机器学习。")));
         body.put("response_format", Map.of(
@@ -1791,7 +1795,7 @@ const schema = {
 };
 
 const response = await client.chat.completions.create({
-  model: 'hy4-preview',
+  model: 'hy4',
   messages: [
     { role: 'user', content: '请从以下文本中提取人物信息：张三，35岁，是一名高级软件工程师，擅长Python、Java和机器学习。' },
   ],
@@ -1829,7 +1833,7 @@ func main() {
     }
 
     body, _ := json.Marshal(map[string]interface{}{
-        "model": "hy4-preview",
+        "model": "hy4",
         "messages": []map[string]string{
             {"role": "user", "content": "请从以下文本中提取人物信息：张三，35岁，是一名高级软件工程师，擅长Python、Java和机器学习。"},
         },
@@ -1861,7 +1865,7 @@ func main() {
 {
   "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy4-preview",
+  "model": "hy4",
   "created": 1775146513,
   "choices": [
     {
@@ -1888,13 +1892,70 @@ func main() {
 }
 ```
 
+### 图片理解
+
+Hy4 支持 Chat Completions、Responses、Anthropic 协议在对话中直接输入图片，模型基于图文内容进行问答与理解，可用于图片描述、文字识别（OCR）、图表解读、截图分析等场景。图片与文本同属 Content Part，可在同一条消息中混合排布，支持多图与多轮。
+
+以下为 Hy4 `detail` 及输入限制说明，更多详细说明请参见 [图片理解](https://cloud.tencent.com/document/product/1823/136956)。
+
+**处理精细度（detail）**
+
+只需粗略理解画面、对成本敏感场景建议用 `low`；识别小字、表格、截图细节场景建议用 `high` 或 `original`。
+
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div>取值</div></td><td><div>说明</div></td><td><div>适用协议</div></td></tr><tr><td><div><code>auto</code></div></td><td><div>默认值</div></td><td colspan="1" rowspan="3"><div>Chat、Responses</div></td></tr><tr><td><div><code>low</code></div></td><td><div>缩放到 512×512 以内再处理，最省 token</div></td><td colspan="0" rowspan="0"><div></div></td></tr><tr><td><div><code>high</code></div></td><td><div>高清处理</div></td><td colspan="0" rowspan="0"><div></div></td></tr><tr><td><div><code>original</code></div></td><td><div>尽量保留原图分辨率</div></td><td><div>Responses</div></td></tr></tbody></table>
+
+**输入限制**
+
+| 类型 | 说明 |
+| --- | --- |
+| 图片格式 | PNG / JPEG / WEBP / 非动态 GIF |
+| 单张图片大小 | ≤ 10 MB。URL 按下载后的文件计，Base64 按解码后的文件计 |
+| 单请求张数 | ≤ 600 张，含多轮历史中的图片；Responses 与 Anthropic 协议下，URL / Base64 合并计数 |
+| **分辨率** | 建议在约 **128×128～2048×2048**  **注意：**  分辨率超过 5500×5500，**输入直接拒绝；**超过 2048×2048 的部分，**模型无法识别**。  所有图片最终都会缩放到约 2048×2048 以内，传入更大的图片不会让模型看到更多细节，只会增加上传体积。  Anthropic 官方的单图 10 MB 按 Base64 编码后的长度计算，Hy4 按解码后的图片文件计算。 |
+
+**单图输入示例**
+
+更多示例请参见 [图片理解](https://cloud.tencent.com/document/product/1823/136956)。
+
+cURL（单图 URL）
+
+cURL（单图 Base64）
+
+```bash
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
+  -H 'Authorization: Bearer YOUR_API_KEY' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "model": "hy4",
+    "messages": [{"role": "user", "content": [
+      {"type": "image_url", "image_url": {"url": "YOUR_IMAGE_URL"}},
+      {"type": "text", "text": "请描述这张图片的内容，并说出图中有几只动物。"}
+    ]}],
+    "stream": false
+  }'
+```
+
+```bash
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
+  -H 'Authorization: Bearer YOUR_API_KEY' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "model": "hy4",
+    "messages": [{"role": "user", "content": [
+      {"type": "image_url", "image_url": {"url": "data:image/png;base64,<BASE64_DATA>"}},
+      {"type": "text", "text": "请描述这张图片的内容，并说出图中有几只动物。"}
+    ]}],
+    "stream": false
+  }'
+```
+
 ## 翻译模型
 
 Hy-MT2 是一款面向真实复杂场景的“快思考”多语言翻译模型家族，包含 **1.8B、7B、30B-A3B（MoE）**三种体量，支持 **33 个语种**之间的互译，并能高效遵循多语言翻译指令。多维度评测显示，Hy-MT2 在通用翻译、真实业务场景翻译、垂直领域翻译以及指令遵循翻译等任务上均表现出色。
 
 ### 支持的模型
 
-<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>model（调用参数）</div></td><td><div>能力说明</div></td><td><div>上下文窗口</div></td><td><div>最大输入</div></td><td><div>最大输出</div></td></tr><tr><td><div><code>hy-mt2-pro</code></div></td><td><div>混元翻译旗舰模型，参数量30B-A3B，适合专业领域等对译文质量要求高的场景，有优秀的指令遵循能力。支持语种齐全，重点支持33个语种互译，支持5种民汉/方言。</div></td><td><div>8k</div></td><td><div>4k</div></td><td><div>4k</div></td></tr><tr><td><div><code>hy-mt2-plus</code></div></td><td><div>混元翻译模型，参数量7B。业界效果领先，开源测试集 Flores 200、WMT25效果领先，专业领域和真实业务场景表现优秀。支持语种齐全，重点支持33个语种互译，支持5种民汉/方言。</div></td><td colspan="1" rowspan="1"><div>8k</div></td><td colspan="1" rowspan="1"><div>4k</div></td><td colspan="1" rowspan="1"><div>4k</div></td></tr><tr><td><div><code>hy-mt2-lite</code></div></td><td><div>混元翻译轻量级模型，参数量1.8B。适合对耗时有高要求的场景。支持语种齐全，重点支持33个语种互译，支持5种民汉/方言。</div></td><td colspan="1" rowspan="1"><div>8k</div></td><td colspan="1" rowspan="1"><div>4k</div></td><td colspan="1" rowspan="1"><div>4k</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>model（调用参数）</div></td><td><div>能力说明</div></td><td><div>上下文窗口</div></td><td><div>最大输入</div></td><td><div>最大输出</div></td></tr><tr><td><div><code>hy-mt2-pro</code></div></td><td><div>混元翻译旗舰模型，<b>参数量30B-A3B</b>，适合专业领域等对译文质量要求高的场景，有优秀的指令遵循能力。支持语种齐全，重点支持33个语种互译，支持5种民汉/方言。</div></td><td><div>8k</div></td><td><div>4k</div></td><td><div>4k</div></td></tr><tr><td><div><code>hy-mt2-plus</code></div></td><td><div>混元翻译模型，<b>参数量7B</b>。业界效果领先，开源测试集 Flores 200、WMT25效果领先，专业领域和真实业务场景表现优秀。支持语种齐全，重点支持33个语种互译，支持5种民汉/方言。</div></td><td colspan="1" rowspan="1"><div>8k</div></td><td colspan="1" rowspan="1"><div>4k</div></td><td colspan="1" rowspan="1"><div>4k</div></td></tr><tr><td><div><code>hy-mt2-lite</code></div></td><td><div>混元翻译轻量级模型，<b>参数量1.8B</b>。适合对耗时有高要求的场景。支持语种齐全，重点支持33个语种互译，支持5种民汉/方言。</div></td><td colspan="1" rowspan="1"><div>8k</div></td><td colspan="1" rowspan="1"><div>4k</div></td><td colspan="1" rowspan="1"><div>4k</div></td></tr></tbody></table>
 
 ### 基础翻译
 

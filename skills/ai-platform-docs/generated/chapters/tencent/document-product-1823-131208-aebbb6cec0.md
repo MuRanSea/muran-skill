@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/131208 -->
-<!-- Source SHA-256: 14a5f98887bb8a82f541d7d9b134041b2ab996d28118690f93b612e4cdc50ba9 -->
+<!-- Source SHA-256: 4631c7381edd0df158e67d0a150eb8ca020cd1e9a2495f19556d28ad16eb6fdf -->
 
 # 深度思考
 
 官方来源：https://cloud.tencent.com/document/product/1823/131208
-最近更新时间：2026-10-13 15:50:31
+最近更新时间：2026-11-04 12:13:31
 
 ## 功能说明
 
@@ -30,29 +30,7 @@
 
 ### 支持模型
 
-| **模型名称** | **MODEL 参数值** | **默认值及说明** |
-| --- | --- | --- |
-| Hy4 preview | `hy4-preview` | enabled |
-| Hy3 | `hy3` | enabled |
-| DeepSeek-V4-Flash | `deepseek-v4-flash` | enabled |
-| DeepSeek-V4-Flash（原厂直连） | `deepseek-v4-flash-202605` | enabled |
-| DeepSeek-V4-Pro | `deepseek-v4-pro` | enabled |
-| DeepSeek-V4-Pro（原厂直连） | `deepseek-v4-pro-202606` | enabled |
-| GLM-5.3 | `glm-5.3` | enabled（不支持关闭） |
-| GLM-5.3-Flash | `glm-5.3-flash` | enabled（不支持关闭） |
-| GLM-5.3-FlashX | `glm-5.3-flashx` | enabled（不支持关闭） |
-| GLM-5.2 | `glm-5.2` | enabled |
-| GLM-5V-Turbo | `glm-5v-turbo` | enabled |
-| Kimi K3 | `kimi-k3` | enabled（不支持关闭） |
-| Kimi-K2.7-Code | `kimi-k2.7-code` | enabled（不支持关闭） |
-| Kimi-K2.7-Code-HighSpeed | `kimi-k2.7-code-highspeed` | enabled（不支持关闭） |
-| Kimi-K2.6 | `kimi-k2.6` | enabled |
-| Kimi-K2.5 | `kimi-k2.5` | enabled |
-| MiniMax-M3 | `minimax-m3` | adaptive |
-| MiniMax-M2.7 | `minimax-m2.7` | enabled（不支持关闭） |
-| MiniMax-M2.5 | `minimax-m2.5` | enabled（不支持关闭） |
-| Qwen3.5-Plus | `qwen3.5-plus` | enabled |
-| Qwen3.5-Flash | `qwen3.5-flash` | enabled |
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div><b>模型名称</b></div></td><td><div><b>MODEL 参数值</b></div></td><td><div><b>默认值及说明</b></div></td></tr><tr><td><div>Hy4</div></td><td><div><code>hy4</code></div></td><td><div>enabled</div></td></tr><tr><td colspan="1" rowspan="1"><div>Hy4 preview</div></td><td colspan="1" rowspan="1"><div><code>hy4-preview</code></div></td><td colspan="1" rowspan="1"><div>enabled</div></td></tr><tr><td><div>Hy3</div></td><td><div><code>hy3</code></div></td><td><div>enabled</div></td></tr><tr><td><div>DeepSeek-V4-Flash（原厂直连）</div></td><td><div><code>deepseek-v4-flash-202605</code></div></td><td><div>enabled</div></td></tr><tr><td><div>DeepSeek-V4-Pro</div></td><td><div><code>deepseek-v4-pro</code></div></td><td><div>enabled</div></td></tr><tr><td><div>DeepSeek-V4-Pro（原厂直连）</div></td><td><div><code>deepseek-v4-pro-202606</code></div></td><td><div>enabled</div></td></tr><tr><td><div>GLM-5.3</div></td><td><div><code>glm-5.3</code></div></td><td><div>enabled（不支持关闭）</div></td></tr><tr><td><div>GLM-5.3-Flash</div></td><td><div><code>glm-5.3-flash</code></div></td><td><div>enabled（不支持关闭）</div></td></tr><tr><td><div>GLM-5.3-FlashX</div></td><td><div><code>glm-5.3-flashx</code></div></td><td><div>enabled（不支持关闭）</div></td></tr><tr><td><div>GLM-5.2</div></td><td><div><code>glm-5.2</code></div></td><td><div>enabled</div></td></tr><tr><td><div>GLM-5V-Turbo</div></td><td><div><code>glm-5v-turbo</code></div></td><td><div>enabled</div></td></tr><tr><td><div>Kimi K3</div></td><td><div><code>kimi-k3</code></div></td><td><div>enabled（不支持关闭）</div></td></tr><tr><td><div>Kimi-K2.7-Code</div></td><td><div><code>kimi-k2.7-code</code></div></td><td><div>enabled（不支持关闭）</div></td></tr><tr><td><div>Kimi-K2.7-Code-HighSpeed</div></td><td><div><code>kimi-k2.7-code-highspeed</code></div></td><td><div>enabled（不支持关闭）</div></td></tr><tr><td><div>Kimi-K2.6</div></td><td><div><code>kimi-k2.6</code></div></td><td><div>enabled</div></td></tr><tr><td><div>MiniMax-M3</div></td><td><div><code>minimax-m3</code></div></td><td><div>adaptive</div></td></tr><tr><td><div>MiniMax-M2.7</div></td><td><div><code>minimax-m2.7</code></div></td><td><div>enabled（不支持关闭）</div></td></tr></tbody></table>
 
 ### 调用示例：开启深度思考
 
@@ -321,17 +299,7 @@ func main() {
 
 ### 支持模型
 
-| **模型名称** | **MODEL 参数值** | **说明** |
-| --- | --- | --- |
-| Hy4 preview | `hy4-preview` | 默认 `high`，支持 `high`、`none` |
-| Hy3 | `hy3` | 默认 `high`，支持 `low`、`high`、`none` |
-| DeepSeek-V4-Flash | `deepseek-v4-flash` | 默认 `high`，支持 `low`、`high`、`max` |
-| DeepSeek-V4-Pro | `deepseek-v4-pro` | 默认 `high`，支持 `low`、`high`、`max` |
-| GLM-5.3-Flash | `glm-5.3-flash` | 默认 `max`，支持 `low`、`high`、`max` |
-| GLM-5.3-FlashX | `glm-5.3-flashx` | 默认 `max`，支持 `low`、`high`、`max` |
-| GLM-5.3 | `glm-5.3` | 默认 `max`，支持 `low`、`high`、`max` |
-| GLM-5.2 | `glm-5.2` | 默认 `max`，支持 `max`、`xhigh`、`high`、`medium`、`low`、`minimal`、`none` |
-| Kimi K3 | `kimi-k3` | 默认 `max`，支持 `low`、`high`、`max` |
+<table><colgroup><col/><col/><col/></colgroup><tbody><tr><td><div><b>模型名称</b></div></td><td><div><b>MODEL 参数值</b></div></td><td><div><b>说明</b></div></td></tr><tr><td colspan="1" rowspan="1"><div>Hy4</div></td><td colspan="1" rowspan="1"><div><code>hy4</code></div></td><td><div>默认 <code>high</code>，支持 <code>high</code>、<code>no_think</code></div></td></tr><tr><td><div>Hy4 preview</div></td><td><div><code>hy4-preview</code></div></td><td><div>默认 <code>high</code>，支持 <code>high</code>、<code>no_think</code></div></td></tr><tr><td><div>Hy3</div></td><td><div><code>hy3</code></div></td><td><div>默认 <code>high</code>，支持 <code>low</code>、<code>high</code>、<code>no_think</code></div></td></tr><tr><td><div>DeepSeek-V4-Pro</div></td><td><div><code>deepseek-v4-pro</code></div></td><td><div>默认 <code>high</code>，支持 <code>low</code>、<code>high</code>、<code>max</code>、<code>none</code></div></td></tr><tr><td><div>GLM-5.3-Flash</div></td><td><div><code>glm-5.3-flash</code></div></td><td><div>默认 <code>max</code>，支持 <code>low</code>、<code>high</code>、<code>max</code></div></td></tr><tr><td><div>GLM-5.3-FlashX</div></td><td><div><code>glm-5.3-flashx</code></div></td><td><div>默认 <code>max</code>，支持 <code>low</code>、<code>high</code>、<code>max</code></div></td></tr><tr><td><div>GLM-5.3</div></td><td><div><code>glm-5.3</code></div></td><td><div>默认 <code>max</code>，支持 <code>low</code>、<code>high</code>、<code>max</code></div></td></tr><tr><td><div>GLM-5.2</div></td><td><div><code>glm-5.2</code></div></td><td><div>默认 <code>max</code>，支持 <code>max</code>、<code>xhigh</code>、<code>high</code>、<code>medium</code>、<code>low</code>、<code>minimal</code>、<code>none</code></div></td></tr><tr><td><div>Kimi K3</div></td><td><div><code>kimi-k3</code></div></td><td><div>默认 <code>max</code>，支持 <code>low</code>、<code>high</code>、<code>max</code></div></td></tr></tbody></table>
 
 ### 调用示例：推理深度配置
 
@@ -474,7 +442,7 @@ func main() {
 
 ```json
 {
-  "id": "c95dc87ecce440678c3bb08f5868fee6",
+  "id": "REPLACED_ID",
   "object": "chat.completion",
   "created": 1775146546,
   "model": "MODEL 参数值",

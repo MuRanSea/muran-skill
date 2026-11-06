@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-m3-function-call.md -->
-<!-- Source SHA-256: 4e98f5f2c43a9a29f569fbcfe8038e45ed5cc4ea60731bcab01d3b69b42c08f9 -->
+<!-- Source SHA-256: 5df799e4ce5554baf7f2f56ac8779d00ef38bc380cf6fd64136f31a9b790a7ec -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,7 +13,7 @@ MiniMax-M3.1-Flash 原生支持 Interleaved Thinking。它能够在每轮 Tool U
 
 ![](https://filecdn.minimax.chat/public/4f4b43c1-f0a5-416a-8770-1a4f80feeb1e.png)
 
-这种能力使其在长程、复杂任务中表现出色，并在 SWE、BrowseCamp、xBench 等 Code & Agent Benchmark 上达到了 SOTA 水平。
+这种能力使其在长程、复杂任务中表现出色，并在 SWE、BrowseComp、xBench 等 Code & Agent Benchmark 上达到了 SOTA 水平。
 
 下面我们通过具体的案例，说明 MiniMax-M3.1-Flash 在 Tool Use 和 Interleaved Thinking 上的最佳实践，它的核心是：回传每一次模型 Response 的全部信息，尤其是其中的思考字段（`thinking` / `reasoning_content`）。
 

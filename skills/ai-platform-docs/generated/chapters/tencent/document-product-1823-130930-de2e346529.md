@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130930 -->
-<!-- Source SHA-256: 64f7690693c3acd196fef9b4994140997430e9122c51486d6179f48653b65344 -->
+<!-- Source SHA-256: 3ed72deafe874028f25cf418eb7f8e500192b4234cbe1f28b66c7248b191400f -->
 
 # 交错式思考模式（Interleaved Thinking）
 
 官方来源：https://cloud.tencent.com/document/product/1823/130930
-最近更新时间：2026-05-28 14:57:31
+最近更新时间：2026-11-04 12:13:31
 
 ## 功能概述
 
@@ -18,13 +18,15 @@
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/7e33917ba81871a7cb0192b2bdba480b.png)
 
+![](https://qcloudimg.tencent-cloud.cn/image/document/7e33917ba81871a7cb0192b2bdba480b.png)
+
 ## API 示例
 
 以下以 [Chat Completions API 协议](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create) 为例，介绍慢思考 + 工具调用（如各类 Agent 场景）下的 API 调用方式。
 
 ### **请求侧主要字段（常用）**
 
-`model`：模型名称，例如 `hy3-preview`。
+`model`：模型名称，例如 `hy4`。
 
 `messages`：消息数组，支持 system/user/assistant/tool 等角色。
 
@@ -93,7 +95,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy3-preview",
+    "model": "hy4",
     "messages": [
       { "role": "system", "content": "你是一个 Agent，必须按步骤推理并调用工具完成任务。" },
       { "role": "user",   "content": "深圳今天天气怎么样？" }
@@ -146,7 +148,7 @@ messages = [
 
 # OpenAI Python SDK 类型签名严格，非标字段（如 reasoning_effort）需通过 extra_body 透传
 resp1 = client.chat.completions.create(
-    model="hy3-preview",
+    model="hy4",
     messages=messages,
     tools=tools,
     tool_choice="auto",
@@ -184,7 +186,7 @@ const messages = [
 ];
 
 const resp1 = await client.chat.completions.create({
-  model: 'hy3-preview',
+  model: 'hy4',
   messages,
   tools,
   tool_choice: 'auto',
@@ -210,7 +212,7 @@ public class InterleavedThinking {
     /** 通用 chat 调用，返回原始 JSON 响应字符串。 */
     static String chat(List<Map<String, Object>> messages, List<Map<String, Object>> tools) throws Exception {
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy3-preview");
+        body.put("model", "hy4");
         body.put("messages", messages);
         body.put("tools", tools);
         body.put("tool_choice", "auto");
@@ -272,7 +274,7 @@ const (
 // 通用 chat 调用
 func chat(messages []map[string]interface{}, tools []map[string]interface{}) (map[string]interface{}, error) {
     body, _ := json.Marshal(map[string]interface{}{
-        "model":            "hy3-preview",
+        "model":            "hy4",
         "messages":         messages,
         "tools":            tools,
         "tool_choice":      "auto",
@@ -325,10 +327,10 @@ func main() {
 
 ```json
 {
-    "id": "31be91fe574e41e49616352366b4fa1b",
+    "id": "REPLACED_ID",
     "object": "chat.completion",
     "created": 1776057110,
-    "model": "hy3-preview",
+    "model": "hy4",
     "choices": [
         {
             "index": 0,
@@ -379,7 +381,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy3-preview",
+    "model": "hy4",
     "messages": [
       { "role": "system", "content": "你是一个 Agent，必须按步骤推理并调用工具完成任务。" },
       { "role": "user",   "content": "深圳今天天气怎么样？" },
@@ -460,7 +462,7 @@ for tc in (msg1.tool_calls or []):
 
 # 第 2 轮：把工具结果送回模型，模型继续思考并输出最终回答
 resp2 = client.chat.completions.create(
-    model="hy3-preview",
+    model="hy4",
     messages=messages,
     tools=tools,
     tool_choice="auto",
@@ -493,7 +495,7 @@ for (const tc of msg1.tool_calls || []) {
 }
 
 const resp2 = await client.chat.completions.create({
-  model: 'hy3-preview',
+  model: 'hy4',
   messages,
   tools,
   tool_choice: 'auto',
@@ -573,10 +575,10 @@ fmt.Printf("第 2 轮响应: %+v\\n", r2)
 
 ```json
 {
-    "id": "ae8941415e154a3c9749f0cf897469a4",
+    "id": "REPLACED_ID",
     "object": "chat.completion",
     "created": 1776057913,
-    "model": "hy3-preview",
+    "model": "hy4",
     "choices": [
         {
             "index": 0,

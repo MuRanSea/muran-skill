@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/4-0/video-omni.md -->
-<!-- Source SHA-256: e71c1427b6c5a875a3e20a3e9080b2a90efd66057f062a303b2b94667dedd872 -->
+<!-- Source SHA-256: 4bead52bc2c5a1432b96f62e793fa65bb7bfdfacf97efb0c0c05184cd2eb3052 -->
 
 > ## Documentation Index
 >
@@ -39,9 +39,10 @@
 | `contents` | array | 是 | - | - | 参考素材合集，如提示词、图片、视频、主体、音色等 |
 | `contents[].type` | string | 是 | - | `prompt`, `first_frame`, `middle_frame`, `last_frame`, `refer_image`, `feature_video`, `base_video`, `element`, `voice` | 素材类型，支持：提示词、图片、视频、主体、音色 |
 | `settings` | object | 否 | - | - | 输出配置相关参数，如清晰度、时长等 |
+| `settings.audio` | string | 否 | `native` | `native`, `original` | 指定生成视频的声音处理方式。 |
 | `settings.resolution` | string | 否 | `1080p` | `720p`, `1080p` | 生成视频的清晰度 |
 | `settings.aspect_ratio` | string | 否 | `adaptive` | `21:9`, `16:9`, `9:16`, `1:1`, `adaptive` | 生成视频的画面纵横比（宽:高） |
-| `settings.duration` | int | 否 | `10` | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30` | 生成视频时长，单位 s |
+| `settings.duration` | int | 否 | - | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30` | 生成视频的目标时长，单位：秒。支持整数值。 |
 | `options` | object | 否 | - | - | 通用配置，如回调地址、是否含水印等 |
 | `options.callback_url` | string | 否 | - | - | 本次任务结果回调通知地址 |
 | `options.external_task_id` | string | 否 | - | - | 自定义任务ID |
@@ -107,7 +108,7 @@
     "text": "string" // 文本提示词内容；必填
   }
   ```
-- `contents[].type.prompt`: > **可灵视频 4.0 可通过 Prompt 描述素材用途、画面内容、事件顺序及声音要求，实现多素材参考生成与视频编辑。**
+- `contents[].type.prompt`: > **Kling 4.0 和 Kling 4.0 Flash 可通过 Prompt 描述素材用途、画面内容、事件顺序及声音要求，实现多素材参考生成与视频编辑。**
   >
   > 
   > 1. **通过自定义素材 ID 引用素材。** 在 `contents` 中定义图片、视频或主体等素材对象时，为其设置 `id`，并在 Prompt 中使用 `@id` 引用。例如，为 `refer_image` 对象设置 `"id": "image_1"` 后，通过 `@image_1` 引用该图片。同一任务内的素材 ID 不得重复。
@@ -116,7 +117,7 @@
   > 2. **明确每份素材的用途与作用范围。** 例如，“保持 `@image_1` 中人物的面孔、发型与服装”“参考 `@video_1` 的动作节奏，不使用其中的背景”。仅引用素材而不说明用途时，模型会自行推断，可能影响结果与预期的一致性。
   >
   > 
-  > 3. **建议按“素材用途＋整体设定＋分段事件＋声音要求”组织提示词。** 根据需要描述场景、视觉风格、镜头运动、动作顺序、台词、环境声、配乐与音效；视频编辑场景还应明确需要修改和保留的内容。详细信息见 [可灵4.0使用指南](https://docs.qingque.cn/d/home/eZQBwtYbPcQQkDUf3zQ56oqeW?identityId=1zDWrpFHUKR)。
+  > 3. **建议按“素材用途＋整体设定＋分段事件＋声音要求”组织提示词。** 根据需要描述场景、视觉风格、镜头运动、动作顺序、台词、环境声、配乐与音效；视频编辑场景还应明确需要修改和保留的内容。详细信息见 [Kling 4.0 & Kling 4.0 Flash 使用指南](https://klingai.com/document-api/api/usage-guide/kling-4-0)。
 - `contents[].type.first_frame / middle_frame / last_frame / refer_image`: 图片可作为场景、风格等参考图，也可作为关键帧生成视频。
 - `contents[].type.first_frame / middle_frame / last_frame / refer_image`: 通过JSON的格式定义，具体如下：
 - `contents[].type.first_frame / middle_frame / last_frame / refer_image`: ```json
@@ -132,6 +133,7 @@
 - `contents[].type.first_frame / middle_frame / last_frame / refer_image`: 如果有多张middle_frame、多张refer_image，id 参数必填。
 - `contents[].type.first_frame / middle_frame / last_frame / refer_image`: 图片数量不得超过10。
 - `contents[].type.first_frame / middle_frame / last_frame / refer_image`: 图片数量 + 视频数量 + 主体数量 + 音色数量之和不得超过15。
+- `contents[].type.first_frame / middle_frame / last_frame / refer_image`: 如同时存在`first_frame`, `last_frame`, `refer_image`, 请保持`contents`传入顺序为`first_frame`为第一张，`last_frame`为最后一张。同时，建议在prompt内以`@`形式引用图片id
 - `contents[].type.feature_video / base_video`: 视频可作为特征参考视频 feature_video，也可作为待编辑视频 base_video。
 - `contents[].type.feature_video / base_video`: 通过JSON的格式定义，具体如下：
 - `contents[].type.feature_video / base_video`: ```json
@@ -175,14 +177,20 @@
   ```
 - `contents[].type.voice`: 至多引用3个音色。
 - `contents[].type.voice`: voice_id参数值通过音色定制接口返回，也可使用系统预置音色，详见 [音色定制](https://klingai.com/document-api/api/video/3-0-omni/voice-customization)。
+- `settings.audio`: `native`：音画同出，生成与视频画面匹配的声音。
+  - `original`：保留输入视频的原声。需满足以下规则：
+    - 不可同时引用音色参考。
+    - 必须至少传入一段 `base_video` 或 `feature_video`。传入 `base_video` 时，采用 `base_video` 原声，未传入 `base_video` 时，采用 `contents` 中传入的第一段 `feature_video` 的原声。
 - `settings.resolution`: 720p：输出清晰度为 720P 的视频
 - `settings.resolution`: 1080p：输出清晰度为 1080P 的视频
-- `settings.aspect_ratio`: 传入明确的比例值时，以参数指定的比例为准。
-- `settings.aspect_ratio`: 未传入该参数，或用户传入 adaptive 时，模型会识别并遵循 Prompt 中的画面比例意图，例如“生成一段 9:16 的竖屏视频”。
-- `settings.aspect_ratio`: 如若 Prompt 中未识别到明确的比例意图，则依次根据待编辑视频 base_video、关键帧图片、其他输入视频的比例确定输出比例；均不适用时，使用默认比例 16:9。存在多张关键帧时，优先采用首帧比例；未提供首帧时，采用第一张关键帧图片的比例。
-- `settings.duration`: 传入该参数时，以参数指定的时长为准。
-- `settings.duration`: 未传入该参数时，模型会识别并遵循 Prompt 中的时长意图，例如“生成一段 15 秒的视频”。
-- `settings.duration`: 如若 Prompt 中未识别到明确的时长意图，则优先采用待编辑视频 base_video 的时长；未提供 base_video 时，使用默认时长 10 秒。
+- `settings.aspect_ratio`: 指定除 adaptive 外的有效比例值时，以参数值为准，优先于 Prompt 中的比例要求。
+- `settings.aspect_ratio`: 未设置本参数或设为 adaptive 时，模型优先采用从 Prompt 中识别到的明确比例要求。例如，“生成一段 9:16 的竖屏视频”将目标画面比例设为 9:16。
+- `settings.aspect_ratio`: 若 Prompt 中未识别到明确的比例要求，则依次采用待编辑视频 base_video、关键帧图片、参考视频 feature_video 的比例，以首个适用项为准。根据关键帧图片确定比例时，优先采用首帧图片的比例；未提供首帧时，采用第一张关键帧图片的比例。根据 feature_video 确定比例时，若仅传入一个参考视频，则采用其比例；若传入多个参考视频，则使用 16:9。
+- `settings.aspect_ratio`: 若以上来源均不适用，则默认使用 16:9。
+- `settings.duration`: 指定本参数时，以参数值为准，优先于 Prompt 中的时长要求。
+- `settings.duration`: 未指定本参数时，采用模型从 Prompt 中识别到的明确时长要求。例如，“生成一段 15 秒的视频”将目标时长设为 15 秒。
+- `settings.duration`: 未指定本参数，且 Prompt 中未识别到明确的时长要求时，若传入 base_video，则采用其时长四舍五入后的整数；未传入 base_video 时，默认为 10 秒。
+- `settings.duration`: 最终采用的目标时长用于输出视频计费，通过任务查询响应中的 usage.output_duration 及抵扣明细查询响应中的 output_duration 返回。核算费用时，请使用 output_duration，并结合计费输入时长 input_duration（如适用）及对应[计费规则](https://klingai.com/document-api/pricing/base/video)计算。
 - `options.callback_url`: 如果配置，服务端会在任务状态发生变更时主动通知
 - `options.callback_url`: 具体通知的消息 schema 见 [Callback 协议](https://klingai.com/document-api/api/get-started/callbacks)
 - `options.external_task_id`: 传入不会覆盖系统生成的任务ID，但支持通过该ID进行任务查询
@@ -198,36 +206,37 @@
 ### Request Example
 
 ```bash
-curl --location 'https://api-beijing.klingai.com/omni-video/kling-4.0' \
-  --header 'Content-Type: application/json' \
+curl --request POST \
+  'https://api-beijing.klingai.com/omni-video/kling-4.0' \
   --header "Authorization: Bearer ${KLING_API_KEY}" \
-  --data '{
-    "contents": [
-      {
-        "type": "prompt",
-        "text": "Change the color of the parrot’s feathers to match the reference image. Keep all other elements of the video unchanged."
-      },
-      {
-        "type": "first_frame",
-        "url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-tob-release_note/image_7.1.png",
-        "id": "image_1"
-      },
-      {
-        "type": "refer_image",
-        "url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-tob-release_note/image_7.1.png",
-        "id": "image_2"
-      }
-    ],
-    "settings": {
-      "resolution": "1080p",
-      "duration": 10,
-      "aspect_ratio": "adaptive"
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  "contents": [
+    {
+      "type": "prompt",
+      "text": "参考 @video_1 的运镜轨迹与镜头节奏，主体替换为 @image_1 的汽车，背景替换为 @image_2。"
     },
-    "options": {
-      "callback_url": "https://xxx/callback",
-      "external_task_id": ""
+    {
+      "type": "feature_video",
+      "url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-tob-release-note/ch12_3_camera_motion_source.mp4",
+      "id": "video_1"
+    },
+    {
+      "type": "refer_image",
+      "url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-tob-release-note/ch12_3_race_car_ref.png",
+      "id": "image_1"
+    },
+    {
+      "type": "refer_image",
+      "url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-tob-release-note/ch12_3_neon_arena_ref.png",
+      "id": "image_2"
     }
-  }'
+  ],
+  "settings": {
+    "resolution": "1080p",
+    "aspect_ratio": "adaptive"
+  }
+}'
 ```
 
 ### Response Example
@@ -289,33 +298,27 @@ curl --location --request POST \
 ### 视频编辑
 
 ```cURL
-curl --location --request POST \
+curl --request POST \
   'https://api-beijing.klingai.com/omni-video/kling-4.0' \
   --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data-raw '{
-    "contents": [
-      {
-        "type": "prompt",
-        "text": "编辑 @video_1，在视频最后箱子再次被打开时，@element_1 正躺在里面睡觉。最后一句台词“Ah, it'\''s all old stuff.”改为“Why is there a pig here?”。"
-      },
-      {
-        "type": "base_video",
-        "url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-tob-release-note/ch12_6_box_source.mp4",
-        "id": "video_1"
-      },
-      {
-        "type": "element",
-        "element_id": "173",
-        "id": "element_1"
-      }
-    ],
-    "settings": {
-      "duration": 10,
-      "resolution": "1080p",
-      "aspect_ratio": "adaptive"
+  "contents": [
+    {
+      "type": "prompt",
+      "text": "编辑 @video_1，删除视频中的前景人物，其余保持不变。"
+    },
+    {
+      "type": "base_video",
+      "url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-tob-release-note/ch12_5_guitar_foreground_source.mp4",
+      "id": "video_1"
     }
-  }'
+  ],
+  "settings": {
+    "resolution": "1080p",
+    "aspect_ratio": "adaptive"
+  }
+}'
 ```
 
 ### 音色参考
@@ -395,6 +398,12 @@ curl --location 'https://api-beijing.klingai.com/omni-video/kling-4.0' \
 ### Request Example
 
 ```bash
+curl --location 'https://api-beijing.klingai.com/tasks?task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
+
+```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
   --header 'Content-Type: application/json' \
   --header "Authorization: Bearer ${KLING_API_KEY}"
@@ -421,7 +430,7 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
           "id": "string", // 视频ID，由系统生成
           "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
           "watermark_url": "string", // 含水印视频下载URL，防盗链格式
-          "duration": "string" // 生成的视频的时长，单位：秒
+          "duration": "string" // 生成的视频文件实际时长，单位秒。实际输出计费时长见 usage.output_duration
         },
         {
           "type": "image", // 生成结果为“图片”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
@@ -482,8 +491,9 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
           ]
         }
       ],
-      "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略
-        "input_duration": "8.03" // 输入视频总时长（包括视频主体），单位秒、两位小数字符串；仅 4.0 有视频输入时有值
+      "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略，仅在4.0&4.0 Flash时有值
+        "input_duration": "8.03", // 输入视频总时长，包括 feature_video、base_video和视频角色主体；单位秒、两位小数字符串；按系统归一化处理后的时长统计，可能与原始视频文件时长存在微小差异。
+        "output_duration": "5" // 输出视频计费时长，单位秒。该值用于计费核算。该参数值等于用户创建任务时settings.duration中指定的时长；未设置该参数时，则采用Prompt中指定的生成时长。若未设置 settings.duration 且未在prompt内说明，但传入base_video，则取base_video时长四舍五入取整，否则默认为 10 秒。
       },
       "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
         {
@@ -609,7 +619,7 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
           "id": "string", // 视频ID，由系统生成
           "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
           "watermark_url": "string", // 含水印视频下载URL，防盗链格式
-          "duration": "string" // 生成的视频的时长，单位：秒
+          "duration": "string" // 生成的视频文件实际时长，单位秒。实际输出计费时长见 usage.output_duration
         },
         {
           "type": "image", // 生成结果为“图片”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
@@ -670,8 +680,9 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
           ]
         }
       ],
-        "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略
-          "input_duration": "8.03" // 输入视频总时长（包括视频主体），单位秒、两位小数字符串；仅 4.0 有视频输入时有值
+        "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略，仅在4.0&4.0 Flash时有值
+          "input_duration": "8.03", // 输入视频总时长，包括 feature_video、base_video和视频角色主体；单位秒、两位小数字符串；按系统归一化处理后的时长统计，可能与原始视频文件时长存在微小差异。
+          "output_duration": "5" // 输出视频计费时长，单位秒。该值用于计费核算。该参数值等于用户创建任务时settings.duration中指定的时长；未设置该参数时，则采用Prompt中指定的生成时长。若未设置 settings.duration 且未在prompt内说明，但传入base_video，则取base_video时长四舍五入取整，否则默认为 10 秒。
         },
         "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
           {

@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide.md -->
-<!-- Source SHA-256: 71960d0ce3ed1640517eec52a1122c576577fddc1033ca9932bfc673e1cf443c -->
+<!-- Source SHA-256: 18821ccca04ad0cee51b31c75572740fc1f5efc364c60f760dfc2d50bfa54a63 -->
 
 > ## Documentation Index
 >
@@ -17,9 +17,7 @@
 
 本文为 Kling 4.0 视频 使用手册的配套提示词案例，使用手册详细介绍了 Kling 4.0 的模型能力、API任务使用方法、素材要求和提示词写作方法，本文为您提供涵盖 Kling 4.0 不同功能的具体案例，每个案例均附完整提示词与可运行的 API 调用代码，您可直接复制体验，也可结合业务需求调整使用。
 
-## 1 提示词案例
-
-### 1.1 主体与场景参考
+## 1.主体与场景参考
 
 ::::: container guide-case
 
@@ -151,7 +149,7 @@ curl -sS --request POST \
 }'
 ```
 
-### 1.2 动作参考
+## 2.动作参考
 
 ::::: container guide-case
 
@@ -226,7 +224,7 @@ curl -sS --request POST \
 }'
 ```
 
-### 1.3 运镜参考
+## 3.运镜参考
 
 ::::: container guide-case
 
@@ -301,7 +299,7 @@ curl -sS --request POST \
 }'
 ```
 
-### 1.4 分镜表参考
+## 4.分镜表参考
 
 ::::: container guide-case
 
@@ -393,7 +391,7 @@ curl -sS --request POST \
 }'
 ```
 
-### 1.5 视频指令编辑
+## 5.视频指令编辑
 
 ::::: container guide-case
 
@@ -446,7 +444,7 @@ curl -sS --request POST \
 }'
 ```
 
-### 1.6 视频参考素材编辑
+## 6.视频参考素材编辑
 
 **增加主体**
 
@@ -717,7 +715,7 @@ curl -sS --request POST \
 }'
 ```
 
-### 1.7 视频风格编辑
+## 7.视频风格编辑
 
 指定风格时，采用正向描述加负向排除的写法效果更稳定：
 
@@ -747,7 +745,7 @@ curl -sS --request POST \
 </div>
 
 ```text
-编辑@视频1，将视频风格替换成@图片1的毛毡风风格，保持原视频的构图、镜头、动作，只替换风格。
+编辑@视频1，将视频风格替换成@图片1的毛毡风格，保持原视频的构图、镜头、动作，只替换风格，不改变人物的服装款式、摩托车造型、场景元素及事件顺序。
 ```
 
 :::: container guide-case-output
@@ -787,7 +785,7 @@ curl -sS --request POST \
 }'
 ```
 
-### 1.8 字幕生成
+## 8.字幕生成
 
 适合品牌广告、产品包装和屏幕界面等需要准确呈现文字的画面。
 
@@ -832,18 +830,18 @@ curl -sS --request POST \
     {
       "type": "refer_image",
       "url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-tob-release-note/ch12_8_counting_forest_style_ref.png",
-      "id": "image_1"
+      "id": "Image1"
     }
   ],
   "settings": {
-    "duration": 22,
+    "duration": 15,
     "resolution": "1080p",
     "aspect_ratio": "adaptive"
   }
 }'
 ```
 
-### 1.9 关键帧
+## 9.关键帧
 
 ##### ① 首帧
 

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-openai-api.md -->
-<!-- Source SHA-256: 02a24be1ec6ee92e273d00fcd99cb01850c8713eed0ec80ab8a46742272d3fc8 -->
+<!-- Source SHA-256: 736ab4fd842c0d1e9ef7e8f0731be96ddabe1e91418925a90c6864d6429479ae -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -122,7 +122,7 @@ response = client.chat.completions.create(
 
 | 参数 | 说明 |
 | :- | :- |
-| `thinking` | 控制 thinking。`type` 可取 `disabled` 或 `adaptive`；省略时默认开启 thinking。`MiniMax-M3.1-Flash` 强制开启 thinking，传入 `disabled` 会返回 `400`。对于 M2.x 模型，thinking 无法关闭。 |
+| `thinking` | 控制 thinking。`type` 可取 `disabled` 或 `adaptive`；省略时默认开启 thinking。`MiniMax-M3.1-Flash` 强制开启 thinking，传入 `disabled` 会返回 `400`。 |
 | `reasoning_effort` | 思考深度档位，仅 `MiniMax-M3.1-Flash` 生效。可取 `low`、`medium`、`high`、`xhigh`、`max`，档位越高思考越充分；省略时默认为 `max`。不支持 `none`。 |
 | `stream_options.include_usage` | 流式调用时，设为 `true` 可在流中返回 token 用量。 |
 | `max_tokens` | 旧版生成长度限制参数。思考 token 也计入此上限，设置过小会导致 `finish_reason` 为 `length` 且 `content` 为空。 |
@@ -141,7 +141,6 @@ response = client.chat.completions.create(
 | :- | :- | :- | :- |
 | `MiniMax-M3.1-Flash` | 开启 thinking | 开启 thinking | **返回 `400`**，thinking 无法关闭 |
 | `MiniMax-M3` | 开启 thinking | 开启 thinking | 跳过 thinking，直接回答 |
-| M2.x | 开启 thinking | 开启 thinking | 被接收但不生效，thinking 仍保持开启 |
 
 > [!NOTE]
 >

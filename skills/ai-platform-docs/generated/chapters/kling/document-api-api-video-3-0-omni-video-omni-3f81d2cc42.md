@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-omni/video-omni.md -->
-<!-- Source SHA-256: f4aa337a1b4c6471b402d87547f85513cbaef41687b9015c3bcd8f4dc67989c6 -->
+<!-- Source SHA-256: 81048e5f043dfb731fe5c8cda5d1bd3b6cf5c8a9df0c0bb672f0e25b520d2904 -->
 
 > ## Documentation Index
 >
@@ -471,6 +471,12 @@ curl --location 'https://api-beijing.klingai.com/omni-video/kling-3.0-omni' \
 - `external_task_ids`: 支持批量查询，用 "," 分隔
 
 ### Request Example
+
+```bash
+curl --location 'https://api-beijing.klingai.com/tasks?task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
 
 ```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \

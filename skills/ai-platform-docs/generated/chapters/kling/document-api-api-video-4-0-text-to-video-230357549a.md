@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/4-0/text-to-video.md -->
-<!-- Source SHA-256: 3468f76b41b575c34d4ca474ebd14dfbb4ae1e0142388f7a298fc7051f28f355 -->
+<!-- Source SHA-256: f8967a81c78a8fde532275034d061b5ef76ba30ba5af99c174c910084abefe7c -->
 
 > ## Documentation Index
 >
@@ -40,7 +40,7 @@
 | `settings` | object | 否 | - | - | 输出配置相关参数，如清晰度、时长等 |
 | `settings.resolution` | string | 否 | `1080p` | `720p`, `1080p` | 生成视频的清晰度 |
 | `settings.aspect_ratio` | string | 否 | `16:9` | `21:9`, `16:9`, `9:16`, `1:1` | 生成视频的画面纵横比（宽:高） |
-| `settings.duration` | int | 否 | `10` | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30` | 生成视频时长，单位 s |
+| `settings.duration` | int | 否 | - | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30` | 生成视频的目标时长，单位：秒。支持整数值。 |
 | `options` | object | 否 | - | - | 通用配置，如回调地址、是否含水印等 |
 | `options.callback_url` | string | 否 | - | - | 本次任务结果回调通知地址 |
 | `options.external_task_id` | string | 否 | - | - | 自定义任务ID |
@@ -50,21 +50,22 @@
 #### Request Body 字段补充说明
 
 - `prompt`: 文本提示词内容长度与字符类型有关。如为纯英文，内容长度不超过26,000个字符；如为纯非英文，内容长度不能超过11,000个字符；如为英文&非英文混合输入，需保持英文字符数 ÷ 26,000 + 非英文字符数 ÷ 11,000 ≤ 1。
-- `prompt`: > **可灵视频 4.0 可通过 Prompt 描述素材用途、画面内容、事件顺序及声音要求，实现多素材参考生成与视频编辑。**
+- `prompt`: > **Kling 4.0 文生视频接口支持通过 Prompt 描述画面内容、人物动作、镜头运动、事件顺序及画面风格等，生成所需的视频内容。**
   >
   > 
-  > 1. **通过自定义素材 ID 引用素材。** 在 `contents` 中定义图片、视频或主体等素材对象时，为其设置 `id`，并在 Prompt 中使用 `@id` 引用。例如，为 `refer_image` 对象设置 `"id": "image_1"` 后，通过 `@image_1` 引用该图片。同一任务内的素材 ID 不得重复。
+  > 1. **明确画面内容。** 描述角色、场景、视觉风格和光线，例如“傍晚的海边，一名穿白色衬衫的男子沿沙滩行走，写实电影风格”。
   >
   > 
-  > 2. **明确每份素材的用途与作用范围。** 例如，“保持 `@image_1` 中人物的面孔、发型与服装”“参考 `@video_1` 的动作节奏，不使用其中的背景”。仅引用素材而不说明用途时，模型会自行推断，可能影响结果与预期的一致性。
+  > 2. **描述动作与镜头变化。** 说明主体如何移动、镜头如何跟随，以及事件的先后顺序。需要分段叙事时，可按时间顺序描述各段内容。详细可参考 [Kling 4.0 & Kling 4.0 Flash 使用指南](https://klingai.com/document-api/api/usage-guide/kling-4-0)。
   >
   > 
-  > 3. **建议按“素材用途＋整体设定＋分段事件＋声音要求”组织提示词。** 根据需要描述场景、视觉风格、镜头运动、动作顺序、台词、环境声、配乐与音效；视频编辑场景还应明确需要修改和保留的内容。详细信息见 [可灵4.0使用指南](https://docs.qingque.cn/d/home/eZQBwtYbPcQQkDUf3zQ56oqeW?identityId=1zDWrpFHUKR)。
+  > 3. **本接口通过文本提示词生成视频。如需输入图片、视频或主体作为参考，请使用全能参考接口。**
 - `settings.resolution`: 720p：输出清晰度为 720P 的视频
 - `settings.resolution`: 1080p：输出清晰度为 1080P 的视频
-- `settings.duration`: 传入该参数时，以参数指定的时长为准。
-- `settings.duration`: 未传入该参数时，模型会识别并遵循 Prompt 中的时长意图，例如“生成一段 15 秒的视频”。
-- `settings.duration`: 如若 Prompt 中未识别到明确的时长意图，使用默认时长 10 秒。
+- `settings.duration`: 指定本参数时，以参数值为准，优先于 Prompt 中的时长要求。
+- `settings.duration`: 未指定本参数时，采用模型从 Prompt 中识别到的明确时长要求。例如，“生成一段 15 秒的视频”将目标时长设为 15 秒。
+- `settings.duration`: 未指定本参数，且 Prompt 中未识别到明确的时长要求时，默认为 10 秒。
+- `settings.duration`: 最终采用的目标时长用于输出视频计费，通过任务查询响应中的 usage.output_duration 及抵扣明细查询响应中的 output_duration 返回。核算费用时，请使用 output_duration，并按对应[计费规则](https://klingai.com/document-api/pricing/base/video)计算。
 - `options.callback_url`: 如果配置，服务端会在任务状态发生变更时主动通知
 - `options.callback_url`: 具体通知的消息 schema 见 [Callback 协议](https://klingai.com/document-api/api/get-started/callbacks)
 - `options.external_task_id`: 传入不会覆盖系统生成的任务ID，但支持通过该ID进行任务查询
@@ -158,6 +159,12 @@ curl --location 'https://api-beijing.klingai.com/text-to-video/kling-4.0' \
 ### Request Example
 
 ```bash
+curl --location 'https://api-beijing.klingai.com/tasks?task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
+
+```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
   --header 'Content-Type: application/json' \
   --header "Authorization: Bearer ${KLING_API_KEY}"
@@ -184,7 +191,7 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
           "id": "string", // 视频ID，由系统生成
           "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
           "watermark_url": "string", // 含水印视频下载URL，防盗链格式
-          "duration": "string" // 生成的视频的时长，单位：秒
+          "duration": "string" // 生成的视频文件实际时长，单位秒。实际输出计费时长见 usage.output_duration
         },
         {
           "type": "image", // 生成结果为“图片”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
@@ -245,6 +252,10 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
           ]
         }
       ],
+      "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略，仅在4.0&4.0 Flash时有值
+        "input_duration": "8.03", // 输入视频总时长，包括 feature_video、base_video和视频角色主体；单位秒、两位小数字符串；按系统归一化处理后的时长统计，可能与原始视频文件时长存在微小差异。
+        "output_duration": "5" // 输出视频计费时长，单位秒。该值用于计费核算。该参数值等于用户创建任务时settings.duration中指定的时长；未设置该参数时，则采用Prompt中指定的生成时长。若未设置 settings.duration 且未在prompt内说明，但传入base_video，则取base_video时长四舍五入取整，否则默认为 10 秒。
+      },
       "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
         {
           "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为cash，如果是消耗资源包则参数值为unit
@@ -369,7 +380,7 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
           "id": "string", // 视频ID，由系统生成
           "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
           "watermark_url": "string", // 含水印视频下载URL，防盗链格式
-          "duration": "string" // 生成的视频的时长，单位：秒
+          "duration": "string" // 生成的视频文件实际时长，单位秒。实际输出计费时长见 usage.output_duration
         },
         {
           "type": "image", // 生成结果为“图片”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
@@ -430,6 +441,10 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
           ]
         }
       ],
+        "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略，仅在4.0&4.0 Flash时有值
+          "input_duration": "8.03", // 输入视频总时长，包括 feature_video、base_video和视频角色主体；单位秒、两位小数字符串；按系统归一化处理后的时长统计，可能与原始视频文件时长存在微小差异。
+          "output_duration": "5" // 输出视频计费时长，单位秒。该值用于计费核算。该参数值等于用户创建任务时settings.duration中指定的时长；未设置该参数时，则采用Prompt中指定的生成时长。若未设置 settings.duration 且未在prompt内说明，但传入base_video，则取base_video时长四舍五入取整，否则默认为 10 秒。
+        },
         "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
           {
             "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为 cash，如果消耗资源包则参数值为 unit

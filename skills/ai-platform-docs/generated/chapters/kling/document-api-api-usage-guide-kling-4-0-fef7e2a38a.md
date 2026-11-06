@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/usage-guide/kling-4-0.md -->
-<!-- Source SHA-256: aaf52dbcd401d3c7e29b12d47752729d26715e71f59db8dc21c1432082a1ccba -->
+<!-- Source SHA-256: d4b2bf3f6d052e9a52747be14a1a5d6d6c9dc3eeabc3dd943528b2bdab8936f9 -->
 
 > ## Documentation Index
 >
@@ -69,7 +69,7 @@ Kling 4.0 在创作端提供“全能参考”和“关键帧”两个一级入�
 
 > 参考 @video_1 的运镜轨迹与镜头节奏，主体使用 @image_1 中的汽车，背景使用 @image_2 中的街道。仅参考视频的运镜，不沿用其中的人物和场景。
 
-说明：可灵通过接口路径及 contents 中的素材类型表达输入用途。如希望参考视频中的运镜、动作或风格等特征生成新视频，应使用 feature_video；若希望对原视频进行内容增加、删除、修改，或调整背景、风格等，应使用 base_video指定待编辑视频，并在 Prompt 中说明需要修改和保留的内容。具体示例可参考第 6 章和[Kling 4.0 视频 提示词案例](https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide#1-提示词案例)。
+说明：可灵通过接口路径及 contents 中的素材类型表达输入用途。如希望参考视频中的运镜、动作或风格等特征生成新视频，应使用 feature_video；若希望对原视频进行内容增加、删除、修改，或调整背景、风格等，应使用 base_video指定待编辑视频，并在 Prompt 中说明需要修改和保留的内容。具体示例可参考第 6 章和[Kling 4.0 视频 提示词案例](https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide)。
 
 #### 视频编辑
 
@@ -319,7 +319,7 @@ curl -sS --request GET \
 - 根据模型支持的参数范围，调整视频时长、清晰度和画幅比例。
 - 使用图片或其他参考素材，体验更多视频生成能力。
 
-如需更多示例，请查看第6章节和[Kling 4.0 视频 提示词案例](https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide#1-提示词案例)。当然也可以在准备自己的提示词和参考素材后，可参考本文第 2 章确定任务方式，按第 8 章声明素材职责，并参考[Kling 4.0 视频 提示词案例](https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide#1-提示词案例)的提示词模板，准备生成
+如需更多示例，请查看第6章节和[Kling 4.0 视频 提示词案例](https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide)。当然也可以在准备自己的提示词和参考素材后，可参考本文第 2 章确定任务方式，按第 8 章声明素材职责，并参考[Kling 4.0 视频 提示词案例](https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide)的提示词模板，准备生成
 
 ## 4 Kling4.0最新能力
 
@@ -341,7 +341,7 @@ curl -sS --request GET \
 
 支持中文、英语、日语、韩语、西班牙语、葡萄牙语、德语、法语、印地语等语言，以及多种口音与方言。画面文字支持上述多语种、Emoji 和 Logo。视觉风格覆盖电影感影像、复古 DV、动画、毛毡、奇幻、赛博等。
 
-### 4.5 Kling 4.0 Flash【即将上线】
+### 4.5 Kling 4.0 Flash
 
 Kling 4.0 Flash 面向高频创意尝试和短视频创作，单次生成最长 20 秒，最高支持 720p，暂不支持首尾帧及多关键帧。
 
@@ -353,7 +353,7 @@ Kling 4.0 Flash 面向高频创意尝试和短视频创作，单次生成最长 
 
 ### 5.1 模型与输出规格
 
-| **功能/参数项** | **Kling 4.0**                                | **Kling 4.0 flash（即将上线）**              |
+| **功能/参数项** | **Kling 4.0**                                | **Kling 4.0 Flash**                          |
 | --------------- | -------------------------------------------- | -------------------------------------------- |
 | 一级入口        | 全能参考 / 关键帧 / 长视频                   | 全能参考 / 关键帧                            |
 | 生成时长        | 3-30s                                        | 3-20s                                        |
@@ -834,7 +834,7 @@ curl -sS --request POST \
 | 构图变化     | 在指定秒数内从大远景转到特写             |
 | 状态演进     | 从 A 状态到 B 状态，中间经过哪些画面节点 |
 
-首帧、尾帧、首尾帧与中间帧模板见[Kling 4.0 视频 提示词案例-第1.9节](https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide#1.9-关键帧)。
+首帧、尾帧、首尾帧与中间帧模板见[Kling 4.0 视频 提示词案例-第9节](https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide#9.关键帧)。
 
 ### 6.10 视频续拍
 

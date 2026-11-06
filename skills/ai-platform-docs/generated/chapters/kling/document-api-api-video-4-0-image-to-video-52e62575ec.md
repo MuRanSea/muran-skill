@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/4-0/image-to-video.md -->
-<!-- Source SHA-256: 9d9e7c742bc5c00803ca2479f89b47f6645f0cfb091b602d2d2f197efe9462ab -->
+<!-- Source SHA-256: bce10463ff70a9780b42a330c10d9efeeaabd59d6146281f96d3042b62425d58 -->
 
 > ## Documentation Index
 >
@@ -44,7 +44,7 @@
 | `contents[].type` | string | 是 | - | `prompt`, `first_frame`, `middle_frame`, `last_frame` | 素材类型，支持：提示词、首帧图、中间帧图、尾帧图 |
 | `settings` | object | 否 | - | - | 输出配置相关参数，如清晰度、时长等 |
 | `settings.resolution` | string | 否 | `1080p` | `720p`, `1080p` | 生成视频的清晰度 |
-| `settings.duration` | int | 否 | `10` | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30` | 生成视频时长，单位 s |
+| `settings.duration` | int | 否 | - | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30` | 生成视频的目标时长，单位：秒。支持整数值。 |
 | `options` | object | 否 | - | - | 通用配置，如回调地址、是否含水印等 |
 | `options.callback_url` | string | 否 | - | - | 本次任务结果回调通知地址 |
 | `options.external_task_id` | string | 否 | - | - | 自定义任务ID |
@@ -85,16 +85,16 @@
     "text": "string" // 文本提示词内容；必填
   }
   ```
-- `contents[].type.prompt`: > **可灵视频 4.0 可通过 Prompt 描述素材用途、画面内容、事件顺序及声音要求，实现多素材参考生成与视频编辑。**
+- `contents[].type.prompt`: > **Kling 4.0 图生视频接口支持输入首帧、中间帧和尾帧图片，并通过 Prompt 描述角色动作、镜头运动及画面过渡，生成所需的视频内容。**
   >
   > 
-  > 1. **通过自定义素材 ID 引用素材。** 在 `contents` 中定义图片、视频或主体等素材对象时，为其设置 `id`，并在 Prompt 中使用 `@id` 引用。例如，为 `refer_image` 对象设置 `"id": "image_1"` 后，通过 `@image_1` 引用该图片。同一任务内的素材 ID 不得重复。
+  > 1. 指定图片类型并设置引用 id。在 `contents` 中，通过图片对象的 `type` 指定其为首帧、中间帧或尾帧。建议同时设置 `id`，在 Prompt 中通过 `@id` 引用，说明该图片的画面内容及作用。例如，将 `type` 为 `first_frame`、`middle_frame`、`last_frame` 的图片对象分别设置为 `"id": "frame_1"`、`"id": "frame_2"`、`"id": "frame_3"`，即可通过 `@frame_1`、`@frame_2`、`@frame_3` 引用。同时，关键帧图片传入顺序，需与引用顺序一致。
   >
   > 
-  > 2. **明确每份素材的用途与作用范围。** 例如，“保持 `@image_1` 中人物的面孔、发型与服装”“参考 `@video_1` 的动作节奏，不使用其中的背景”。仅引用素材而不说明用途时，模型会自行推断，可能影响结果与预期的一致性。
+  > 2. 按顺序描述画面变化。按图片在视频中出现的先后顺序引用并描述，首帧放在最前，尾帧应放在最后。例如：“从 `@frame_1` 的画面开始，角色缓缓起身，过渡到 `@frame_2` 的站立姿态，最后走向窗边，以 `@frame_3` 的画面结束。” 详细可参考 [Kling 4.0 & Kling 4.0 Flash 使用指南](https://klingai.com/document-api/api/usage-guide/kling-4-0)。
   >
   > 
-  > 3. **建议按“素材用途＋整体设定＋分段事件＋声音要求”组织提示词。** 根据需要描述场景、视觉风格、镜头运动、动作顺序、台词、环境声、配乐与音效；视频编辑场景还应明确需要修改和保留的内容。详细信息见 [可灵4.0使用指南](https://docs.qingque.cn/d/home/eZQBwtYbPcQQkDUf3zQ56oqeW?identityId=1zDWrpFHUKR)。
+  > 3. 本接口用于通过关键帧控制视频生成。如需输入参考视频、主体或其他参考素材，请使用全能参考接口。
 - `contents[].type.first_frame / middle_frame / last_frame`: 通过JSON的格式定义，具体如下：
 - `contents[].type.first_frame / middle_frame / last_frame`: ```json
   {
@@ -107,11 +107,13 @@
 - `contents[].type.first_frame / middle_frame / last_frame`: 图片文件大小不能超过30MB。
 - `contents[].type.first_frame / middle_frame / last_frame`: 图片宽高尺寸不小于300px，图片宽高比要在2:5 ~ 5:2之间。
 - `contents[].type.first_frame / middle_frame / last_frame`: 图片数量不得超过10。
+- `contents[].type.first_frame / middle_frame / last_frame`: 如同时传入 `first_frame`、`middle_frame` 和 `last_frame`，请在 `contents` 中按首帧、中间帧、尾帧的顺序排列图片；多张中间帧应按其在视频中出现的先后顺序排列。建议在 Prompt 中通过 `@id` 引用图片id，并说明各图片的作用。
 - `settings.resolution`: 720p：输出清晰度为 720P 的视频
 - `settings.resolution`: 1080p：输出清晰度为 1080P 的视频
-- `settings.duration`: 传入该参数时，以参数指定的时长为准。
-- `settings.duration`: 未传入该参数时，模型会识别并遵循 Prompt 中的时长意图，例如“生成一段 15 秒的视频”。
-- `settings.duration`: 如若 Prompt 中未识别到明确的时长意图，使用默认时长 10 秒。
+- `settings.duration`: 指定本参数时，以参数值为准，优先于 Prompt 中的时长要求。
+- `settings.duration`: 未指定本参数时，采用模型从 Prompt 中识别到的明确时长要求。例如，“生成一段 15 秒的视频”将目标时长设为 15 秒。
+- `settings.duration`: 未指定本参数，且 Prompt 中未识别到明确的时长要求时，默认为 10 秒。
+- `settings.duration`: 最终采用的目标时长用于输出视频计费，通过任务查询响应中的 usage.output_duration 及抵扣明细查询响应中的 output_duration 返回。核算费用时，请使用 output_duration，并按对应[计费规则](https://klingai.com/document-api/pricing/base/video)计算。
 - `options.callback_url`: 如果配置，服务端会在任务状态发生变更时主动通知
 - `options.callback_url`: 具体通知的消息 schema 见 [Callback 协议](https://klingai.com/document-api/api/get-started/callbacks)
 - `options.external_task_id`: 传入不会覆盖系统生成的任务ID，但支持通过该ID进行任务查询
@@ -252,6 +254,12 @@ curl --location 'https://api-beijing.klingai.com/image-to-video/kling-4.0' \
 ### Request Example
 
 ```bash
+curl --location 'https://api-beijing.klingai.com/tasks?task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
+
+```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
   --header 'Content-Type: application/json' \
   --header "Authorization: Bearer ${KLING_API_KEY}"
@@ -278,7 +286,7 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
           "id": "string", // 视频ID，由系统生成
           "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
           "watermark_url": "string", // 含水印视频下载URL，防盗链格式
-          "duration": "string" // 生成的视频的时长，单位：秒
+          "duration": "string" // 生成的视频文件实际时长，单位秒。实际输出计费时长见 usage.output_duration
         },
         {
           "type": "image", // 生成结果为“图片”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
@@ -339,6 +347,10 @@ curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
           ]
         }
       ],
+      "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略，仅在4.0&4.0 Flash时有值
+        "input_duration": "8.03", // 输入视频总时长，包括 feature_video、base_video和视频角色主体；单位秒、两位小数字符串；按系统归一化处理后的时长统计，可能与原始视频文件时长存在微小差异。
+        "output_duration": "5" // 输出视频计费时长，单位秒。该值用于计费核算。该参数值等于用户创建任务时settings.duration中指定的时长；未设置该参数时，则采用Prompt中指定的生成时长。若未设置 settings.duration 且未在prompt内说明，但传入base_video，则取base_video时长四舍五入取整，否则默认为 10 秒。
+      },
       "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
         {
           "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为cash，如果是消耗资源包则参数值为unit
@@ -463,7 +475,7 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
           "id": "string", // 视频ID，由系统生成
           "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
           "watermark_url": "string", // 含水印视频下载URL，防盗链格式
-          "duration": "string" // 生成的视频的时长，单位：秒
+          "duration": "string" // 生成的视频文件实际时长，单位秒。实际输出计费时长见 usage.output_duration
         },
         {
           "type": "image", // 生成结果为“图片”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
@@ -524,6 +536,10 @@ curl --location 'https://api-beijing.klingai.com/tasks' \
           ]
         }
       ],
+        "usage": { // 计费用量：仅任务结束且存在用量时返回，否则省略，仅在4.0&4.0 Flash时有值
+          "input_duration": "8.03", // 输入视频总时长，包括 feature_video、base_video和视频角色主体；单位秒、两位小数字符串；按系统归一化处理后的时长统计，可能与原始视频文件时长存在微小差异。
+          "output_duration": "5" // 输出视频计费时长，单位秒。该值用于计费核算。该参数值等于用户创建任务时settings.duration中指定的时长；未设置该参数时，则采用Prompt中指定的生成时长。若未设置 settings.duration 且未在prompt内说明，但传入base_video，则取base_video时长四舍五入取整，否则默认为 10 秒。
+        },
         "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
           {
             "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为 cash，如果消耗资源包则参数值为 unit

@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/2-6/image-to-video.md -->
-<!-- Source SHA-256: 7da738a952bf7257bcaf67f239924976767141b7d0380e2ff1c48ff857963d33 -->
+<!-- Source SHA-256: cf17c3a7779e152dca635bd93653984ac529e58e5a0580737027895d421041e7 -->
 
 > ## Documentation Index
 >
@@ -96,6 +96,7 @@
 - `contents[].type.first_frame / last_frame`: 图片宽高尺寸不小于300px，图片宽高比要在1:2.5 ~ 2.5:1之间。
 - `contents[].type.first_frame / last_frame`: 支持仅首帧图生视频和首尾帧图生视频，不支持仅尾帧图生视频。其中：
     - 使用首尾帧生成视频时，仅支持生成1080P视频。
+    - 使用尾帧图（last_frame）时，不支持生成有声视频（audio = native）。
 - `contents[].type.voice`: 通过JSON的格式定义，具体如下：
 - `contents[].type.voice`: ```json
   {
@@ -109,7 +110,7 @@
 - `contents[].type.voice`: voice_id参数值通过音色定制接口返回，也可使用系统预置音色，[点此查看详情](https://klingai.com/document-api/api/video/2-6/voice-customization)。
 - `settings.audio`: native：生成的视频含有与画面适配的声音。
 - `settings.audio`: off：生成的视频不含有声音。
-- `settings.audio`: 生成有声视频时，仅支持生成1080P视频。
+- `settings.audio`: 生成有声视频时，仅支持生成1080P视频，且不支持输入尾帧图（last_frame）。
 - `settings.audio`: 生成无声视频时，不支持指定音色。
 - `settings.resolution`: 720p：输出清晰度为720P的视频。
 - `settings.resolution`: 1080p：输出清晰度为1080P的视频。
@@ -228,6 +229,12 @@ curl --location 'https://api-beijing.klingai.com/image-to-video/kling-2.6' \
 - `external_task_ids`: 支持批量查询，用 "," 分隔
 
 ### Request Example
+
+```bash
+curl --location 'https://api-beijing.klingai.com/tasks?task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
 
 ```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \

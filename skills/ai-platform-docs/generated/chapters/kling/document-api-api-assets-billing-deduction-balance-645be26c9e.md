@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/assets/billing-deduction/balance.md -->
-<!-- Source SHA-256: 93bdf7bca8bd359db3266d5eb99e36652876c6951059eee4e3ff7a5dc325cdb4 -->
+<!-- Source SHA-256: 9ef4b245a67beffa2cc56ac906f59d43d3e31bcdec77a685a7ec86e7a2e42856 -->
 
 > ## Documentation Index
 >
@@ -115,8 +115,9 @@ curl --location --request POST 'https://api-beijing.klingai.com/account/billing/
           "product_function": "string", // 任务相关功能，如：Image to Video
           "model_name": "string", // 任务所用模型版本，与创建任务时所选模型版本一致
           "resolution": "string", // 生成结果的分辨率，枚举值：720p、1080p、4k（较早版本API通过mode参数定义分辨率，与当前参数对应关系为：720p=std、1080p=pro）
-          "input_duration": "8.03", // 输入视频总时长，包括feature_video、base_video、视频角色主体视频时长加总
-          "duration": "5.04", // 生成视频的时长（当前参数仅生效于生成视频任务相关明细）
+          "input_duration": "8.03", // 输入视频总时长，包括 feature_video、base_video和视频角色主体；单位秒、两位小数字符串；仅 4.0 & 4.0 flash有视频输入时有值；按系统归一化处理后的时长统计，可能与原始视频文件时长存在微小差异。
+          "duration": "5.041", // 生成的视频文件实际时长，单位秒。实际输出计费时长见output_duration。
+          "output_duration": "5", // 计费输出视频时长，该值用于计费核算，单位秒。仅 4.0 & 4.0 flash。该值用于计费核算。该参数值等于用户创建任务时settings.duration中指定的时长；未设置该参数时，则采用Prompt中指定的生成时长。若未设置 settings.duration 且未在prompt内说明，但传入base_video，则取base_video时长四舍五入取整，否则默认为 10 秒。
           "refer_video_input": true, // 生成视频时是否有参考视频，布尔值：true, false（当前参数仅生效于生成视频任务相关明细；如使用模型为Kling 4.0、Kling 4.0 Flash，当输入包含feature_video、base_video和视频角色主体任意一种时，该参数为true）
           "video_sound": "native", // 生成的视频是否包含声音，枚举值：native、original、off；依次对应随画面生成声音、保留参考视频原声、无声音（当前参数仅生效于生成视频任务相关明细）
           "voice_control": false, // 生成的视频是否有指定音色，布尔值：true, false；依次对应有指定音色、未指定音色（当前参数仅生效于生成视频任务相关明细）

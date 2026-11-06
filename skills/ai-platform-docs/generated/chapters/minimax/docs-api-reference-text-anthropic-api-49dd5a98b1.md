@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-anthropic-api.md -->
-<!-- Source SHA-256: b2cf317ff6d4318419ada634f8731cbdea9ae4f908bea26bbc449158fbcc7679 -->
+<!-- Source SHA-256: cbb574d27cee8da9ee052be1cfa1897f55eb2f36eda15b28b6cc0543eeec835c -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -102,9 +102,9 @@ for block in message.content:
 | `max_tokens` | 完全支持 | 最大生成 token 数。思考 token 也计入此上限，设置过小会导致 `stop_reason` 为 `max_tokens` 且无文本输出 |
 | `stream` | 完全支持 | 流式响应 |
 | `system` | 完全支持 | 系统提示词 |
-| `tool_choice` | 完全支持 | 工具选择策略 |
+| `tool_choice` | 部分支持 | 工具选择策略，仅支持 `auto` |
 | `tools` | 完全支持 | 工具定义 |
-| `thinking` | 完全支持 | `MiniMax-M3.1-Flash` 强制开启 thinking，传入 `disabled` 会返回 `400`。`MiniMax-M3` 默认关闭 thinking，可通过 `adaptive` 开启。M2.x 模型的 thinking 无法关闭。 |
+| `thinking` | 完全支持 | `MiniMax-M3.1-Flash` 强制开启 thinking，传入 `disabled` 会返回 `400`。`MiniMax-M3` 默认关闭 thinking，可通过 `adaptive` 开启。 |
 | `output_config.effort` | 完全支持 | 调节 `MiniMax-M3.1-Flash` 的思考深度，可取 `low`、`medium`、`high`、`xhigh`、`max`；省略时默认为 `max`。 |
 | `metadata` | 完全支持 | 元信息 |
 | `service_tier` | 完全支持 | 请求准入服务层级。支持的取值为 `standard` 和 `priority`；省略时默认使用 `standard`。`priority` 的[价格](https://platform.minimaxi.com/docs/pricing/overview.md#models/text)为 `standard` 的 1.5 倍，并会确保请求获得优先准入，使其排在其他请求之前处理，从而带来更快响应并减少失败。`MiniMax-M3.1-Flash` 不支持该字段。 |
@@ -124,7 +124,6 @@ for block in message.content:
 | :- | :- | :- | :- |
 | `MiniMax-M3.1-Flash` | 开启 thinking | 开启 thinking | **返回 `400`**，thinking 无法关闭 |
 | `MiniMax-M3` | 关闭 thinking | 开启 thinking | 保持 thinking 关闭 |
-| M2.x | 开启 thinking | 开启 thinking | 被接收但不生效，thinking 仍保持开启 |
 
 > [!NOTE]
 >

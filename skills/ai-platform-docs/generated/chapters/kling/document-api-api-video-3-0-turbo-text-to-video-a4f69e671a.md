@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-turbo/text-to-video.md -->
-<!-- Source SHA-256: 8a7870f02b130dead3d62b0b77a5df6a28bb24de783a77b3f1ce44e061789b8a -->
+<!-- Source SHA-256: 5cb45963fdb3e85775fc7c577c747f4f639327f314a9cd14631cbafc6607878e -->
 
 > ## Documentation Index
 >
@@ -163,6 +163,12 @@ curl --location 'https://api-beijing.klingai.com/text-to-video/kling-3.0-turbo' 
 - `external_task_ids`: 支持批量查询，用 "," 分隔
 
 ### Request Example
+
+```bash
+curl --location 'https://api-beijing.klingai.com/tasks?task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
 
 ```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \

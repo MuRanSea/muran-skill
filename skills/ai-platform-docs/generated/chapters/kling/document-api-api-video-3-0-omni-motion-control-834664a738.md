@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-omni/motion-control.md -->
-<!-- Source SHA-256: 8d991a21bde6d98a78ce79bb7c95e0e8a6e837eaac935ad8da563c8729a00c05 -->
+<!-- Source SHA-256: 64e14d94bab312dd2aeea815ce4db168f35e6662f67bf9209215afe4b60e8fda -->
 
 > ## Documentation Index
 >
@@ -245,6 +245,12 @@ curl --location 'https://api-beijing.klingai.com/motion-control/kling-3.0' \
 - `external_task_ids`: 支持批量查询，用 "," 分隔
 
 ### Request Example
+
+```bash
+curl --location 'https://api-beijing.klingai.com/tasks?task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
 
 ```bash
 curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \

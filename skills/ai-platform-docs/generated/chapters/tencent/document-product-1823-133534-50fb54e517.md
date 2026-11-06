@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/133534 -->
-<!-- Source SHA-256: 1a71b939e0f9f5725b1ae8c9f3ed63068d6494273cd293ab86dfd0aefd75df57 -->
+<!-- Source SHA-256: 3cd9bfc05ab7b5a359fd8b1e1a0704ae8c90c00f340d5d4a2cbbe8fae063276e -->
 
 # 保留式思考模式（Preserved Thinking）
 
 官方来源：https://cloud.tencent.com/document/product/1823/133534
-最近更新时间：2026-07-06 14:11:45
+最近更新时间：2026-11-04 12:13:31
 
 ## 功能概述
 
@@ -12,7 +12,7 @@
 
 #### **适用场景**
 
-适用于慢思考（`low` / `high`）+ 工具调用（tool call）的**跨轮次**场景，例如：
+适用于慢思考（`high` ）+ 工具调用（tool call）的**跨轮次**场景，例如：
 
 Agent 长流程任务：多轮工具编排与信息汇总；
 
@@ -21,6 +21,8 @@ Coding 类任务：多轮代码补全 / 修改 / 调试，需延续上一轮的�
 多轮对话中含追问：用户在同一会话中提出关联问题，需要模型基于先前思考继续回答。
 
 此场景下的调用模式如下图所示：
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/12ca18116600ca33f80cebc2d6609234.png)
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/12ca18116600ca33f80cebc2d6609234.png)
 
@@ -37,7 +39,7 @@ Coding 类任务：多轮代码补全 / 修改 / 调试，需延续上一轮的�
 
 #### **支持模型与协议**
 
-**支持模型**：`hy3`
+**支持模型**：`hy3` 、`hy4-preview`、`hy4`
 
 **支持协议**：OpenAI Chat Completions、OpenAI Responses、Anthropic 三种协议均支持，开关方式略有差异（详见下文“开关方式”）。
 
@@ -73,8 +75,7 @@ Coding 类任务：多轮代码补全 / 修改 / 调试，需延续上一轮的�
 
 | 字段 | 位置 | 说明 |
 | --- | --- | --- |
-| `reasoning_effort` | 请求 | 思考深度，取值 `no_think` / `low` / `high` |
-| `preserved_thinking` | 请求 | 保留式思考开关，`true` / `false`。不传时由平台按默认策略处理 |
+| `reasoning_effort` | 请求 | 思考深度，取值 `no_think` / `high` |
 | `reasoning_content` | 响应（需回填） | 模型的思考过程，需在后续请求中原样回填 |
 | `tool_calls` | 响应（需回填） | 模型输出的工具调用指令 |
 | `content` | 响应 | 最终回答内容 |
@@ -113,11 +114,11 @@ Coding 类任务：多轮代码补全 / 修改 / 调试，需延续上一轮的�
 
 **场景**：一个企业 IT 权限助理 Agent，提供两个工具：`get_user_groups`（查用户所属的组）、`get_group_permissions`（查某个组对各资源的权限）。用户分三轮提问，每一轮都保留此前轮的思考：
 
-第 1 轮用户输入：`Alice 属于哪些用户组？`
+第 1 轮用户输入：Alice 属于哪些用户组？
 
-第 2 轮用户输入：`这些组分别有什么权限？`
+第 2 轮用户输入：这些组分别有什么权限？
 
-第 3 轮用户输入：`综合看，Alice 对"生产数据库"到底是什么权限？`
+第 3 轮用户输入：综合看，Alice 对"生产数据库"到底是什么权限？
 
 **说明：**
 
@@ -125,7 +126,7 @@ Coding 类任务：多轮代码补全 / 修改 / 调试，需延续上一轮的�
 
 2. 请您将示例代码中的 `YOUR_API_KEY` 替换为您真实的 API Key。如您还没有 API Key，请参见 [创建 API Key](https://cloud.tencent.com/document/product/1823/130090#40882178-aaf2-48c9-8559-dffc083a79bc)。
 
-### 1. 首次请求（用户第一次提问）
+### 1. 【第 1 轮】首次请求（用户第一次提问）
 
 **请求：**
 
@@ -144,7 +145,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy3",
+    "model": "hy4",
     "stream": false,
     "reasoning_effort": "high",
     "tool_choice": "auto",
@@ -229,10 +230,10 @@ messages = [
     {"role": "user", "content": "Alice 属于哪些用户组？"},
 ]
 
-# 携带 tools 时，hy3 默认开启保留式思考。
+# 携带 tools 时，hy4 默认开启保留式思考。
 # 如需显式控制，可在 extra_body 中传 preserved_thinking: True/False
 resp1 = client.chat.completions.create(
-    model="hy3",
+    model="hy4",
     messages=messages,
     tools=tools,
     tool_choice="auto",
@@ -288,7 +289,7 @@ const messages = [
 ];
 
 const resp1 = await client.chat.completions.create({
-  model: 'hy3',
+  model: 'hy4',
   messages,
   tools,
   tool_choice: 'auto',
@@ -314,7 +315,7 @@ public class PreservedThinking {
     /** 通用 chat 调用，返回原始 JSON 响应字符串。 */
     static String chat(List<Map<String, Object>> messages, List<Map<String, Object>> tools) throws Exception {
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy3");
+        body.put("model", "hy4");
         body.put("messages", messages);
         body.put("tools", tools);
         body.put("tool_choice", "auto");
@@ -395,7 +396,7 @@ const (
 // 通用 chat 调用
 func chat(messages []map[string]interface{}, tools []map[string]interface{}) (map[string]interface{}, error) {
     body, _ := json.Marshal(map[string]interface{}{
-        "model":            "hy3",
+        "model":            "hy4",
         "messages":         messages,
         "tools":            tools,
         "tool_choice":      "auto",
@@ -468,7 +469,7 @@ func main() {
     "id": "REPLACED_ID",
     "object": "chat.completion",
     "created": 1783084572,
-    "model": "hy3",
+    "model": "hy4",
     "choices": [
         {
             "index": 0,
@@ -499,7 +500,7 @@ func main() {
 }
 ```
 
-### 2. 回填工具结果，延续思考
+### 2. 【第 1 轮】回填工具结果，延续思考
 
 把上一步 assistant 消息（含 `reasoning_content`）与工具结果一起回填。假设 `get_user_groups` 返回 `["Engineering","OnCall"]`：
 
@@ -520,7 +521,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy3",
+    "model": "hy4",
     "stream": false,
     "reasoning_effort": "high",
     "tool_choice": "auto",
@@ -575,7 +576,7 @@ for tc in (msg1.tool_calls or []):
 
 # 第 2 轮：把工具结果送回模型，模型继续思考
 resp2 = client.chat.completions.create(
-    model="hy3",
+    model="hy4",
     messages=messages,
     tools=tools,
     tool_choice="auto",
@@ -607,7 +608,7 @@ for (const tc of msg1.tool_calls || []) {
 }
 
 const resp2 = await client.chat.completions.create({
-  model: 'hy3',
+  model: 'hy4',
   messages,
   tools,
   tool_choice: 'auto',
@@ -691,7 +692,7 @@ fmt.Printf("第 2 轮响应: %+v\\n", r2)
     "id": "REPLACED_ID",
     "object": "chat.completion",
     "created": 1783084576,
-    "model": "hy3",
+    "model": "hy4",
     "choices": [
         {
             "index": 0,
@@ -713,7 +714,7 @@ fmt.Printf("第 2 轮响应: %+v\\n", r2)
 }
 ```
 
-### 3. 新一轮用户提问，保留此前思考
+### 3. 【第 2 轮】新一轮用户提问，保留此前思考
 
 追加第 2 个 user 提问，并把此前轮次的 `reasoning_content` 等上下文原样保留再次发起请求：
 
@@ -734,7 +735,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy3",
+    "model": "hy4",
     "stream": false,
     "reasoning_effort": "high",
     "tool_choice": "auto",
@@ -769,7 +770,7 @@ messages.append({
 messages.append({"role": "user", "content": "这些组分别有哪些资源的访问权限？"})
 
 resp3 = client.chat.completions.create(
-    model="hy3",
+    model="hy4",
     messages=messages,
     tools=tools,
     tool_choice="auto",
@@ -791,7 +792,7 @@ messages.push({
 messages.push({ role: 'user', content: '这些组分别有哪些资源的访问权限？' });
 
 const resp3 = await client.chat.completions.create({
-  model: 'hy3',
+  model: 'hy4',
   messages,
   tools,
   tool_choice: 'auto',
@@ -848,7 +849,7 @@ fmt.Printf("第 3 轮响应: %+v\\n", r3)
     "id": "REPLACED_ID",
     "object": "chat.completion",
     "created": 1783084580,
-    "model": "hy3",
+    "model": "hy4",
     "choices": [
         {
             "index": 0,
@@ -888,7 +889,7 @@ fmt.Printf("第 3 轮响应: %+v\\n", r3)
 }
 ```
 
-### 4. 再次回填工具结果
+### 4. 【第 2 轮】回填工具结果
 
 回填工具结果（假设 Engineering：生产库只读；OnCall：生产库读写）：
 
@@ -909,7 +910,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy3",
+    "model": "hy4",
     "stream": false,
     "reasoning_effort": "high",
     "tool_choice": "auto",
@@ -983,7 +984,7 @@ for tc in (msg3.tool_calls or []):
 
 # 第 4 轮：把两个工具结果一起送回模型
 resp4 = client.chat.completions.create(
-    model="hy3",
+    model="hy4",
     messages=messages,
     tools=tools,
     tool_choice="auto",
@@ -1031,7 +1032,7 @@ for (const tc of msg3.tool_calls || []) {
 }
 
 const resp4 = await client.chat.completions.create({
-  model: 'hy3',
+  model: 'hy4',
   messages,
   tools,
   tool_choice: 'auto',
@@ -1119,7 +1120,7 @@ fmt.Printf("第 4 轮响应: %+v\\n", r4)
     "id": "REPLACED_ID",
     "object": "chat.completion",
     "created": 1783084585,
-    "model": "hy3",
+    "model": "hy4",
     "choices": [
         {
             "index": 0,
@@ -1141,7 +1142,7 @@ fmt.Printf("第 4 轮响应: %+v\\n", r4)
 }
 ```
 
-### 5. 再次发起新一轮用户提问（保留式思考的核心价值）
+### 5. 【第 3 轮】再次发起提问（保留式思考的核心价值）
 
 追加第 3 个 user 提问。此时完整的 `messages` 数组如下，注意**每工具轮的** `reasoning_content` **等内容都被原样保留**：
 
@@ -1184,7 +1185,7 @@ fmt.Printf("第 4 轮响应: %+v\\n", r4)
     "id": "REPLACED_ID",
     "object": "chat.completion",
     "created": 1783084590,
-    "model": "hy3",
+    "model": "hy4",
     "choices": [
         {
             "index": 0,
@@ -1215,10 +1216,6 @@ fmt.Printf("第 4 轮响应: %+v\\n", r4)
 ### 开启保留式思考后，一定要回填历史 `reasoning_content` 吗？
 
 **是**。`preserved_thinking` 仅控制启停，不会自动处理历史思考的回填。开发者需要将模型上一轮返回的完整、未经修改的 `reasoning_content` 与工具结果一并原样带回，否则可能影响模型效果并降低缓存命中率。
-
-### 从 `hy3-preview` 升级到 `hy3` 需要改造代码吗？
-
-若业务角度无需求变化则**无需改造**，API 链路内已实现兼容。仅需注意：若希望利用保留式思考的跨轮次能力，需要把此前所有轮次的 assistant 消息（含 `reasoning_content`）都保留在 `messages` 数组中。
 
 ### `reasoning_content` 回填时可以做摘要压缩吗？
 

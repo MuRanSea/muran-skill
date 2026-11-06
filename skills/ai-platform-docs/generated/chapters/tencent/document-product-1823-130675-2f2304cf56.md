@@ -1,10 +1,14 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130675 -->
-<!-- Source SHA-256: 484e404b5a3e070c85bad81bced6d1dbf738749081845eb507eba207533cd742 -->
+<!-- Source SHA-256: e79f00c6dea8815684abd81c22c7618fd33104abfdf4d57c3042efc0a5178ac2 -->
 
 # 产品动态
 
 官方来源：https://cloud.tencent.com/document/product/1823/130675
-最近更新时间：2026-10-26 19:07:20
+最近更新时间：2026-11-04 12:13:30
+
+## 2026年11月
+
+<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div><b>动态名称</b></div></td><td><div><b>动态描述</b></div></td><td><div><b>发布时间</b></div></td><td><div><b>相关文档</b></div></td></tr><tr><td colspan="1" rowspan="1"><div>新增支持模型</div></td><td colspan="1" rowspan="1"><div>新增支持 Hy4 模型。</div></td><td colspan="1" rowspan="1"><div>2026-11-04</div></td><td colspan="1" rowspan="1"><div><a href="https://cloud.tencent.com/document/product/1823/130051">模型列表</a></div></td></tr></tbody></table>
 
 ## 2026年10月
 
