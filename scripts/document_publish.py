@@ -46,6 +46,15 @@ def publish(manager, before):
     manifest = json.loads((root / PREFIX / 'snapshot.json').read_text(encoding='utf-8'))
     if any(not name.endswith('.md') for name in manifest['files']):
         raise ValueError('Only Markdown and snapshot.json may be published')
+    # Windows can retain the old spelling in the index after a case-only
+    # rename. Remove that index entry so add records the manifest's spelling;
+    # update-index leaves the generated file on disk untouched.
+    expected = {PREFIX + name for name in manifest['files']} | {PREFIX + 'snapshot.json'}
+    folded = {name.casefold() for name in expected}
+    tracked = filter(None, git(root, 'ls-files', '-z', '--', PREFIX).split('\0'))
+    for name in tracked:
+        if name not in expected and name.casefold() in folded:
+            git(root, 'update-index', '--force-remove', '--', name)
     git(root, 'add', '-A', '--', PREFIX)
     # Validate exact Git bytes, catching checkout line-ending or missing-file issues.
     tree = git(root, 'write-tree').strip()

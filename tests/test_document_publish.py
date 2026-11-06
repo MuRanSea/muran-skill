@@ -54,6 +54,22 @@ class DocumentPublishTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Uncommitted'):
             publisher.prepare(self.manager)
 
+    def test_publishes_case_only_document_rename(self):
+        self.setup_snapshot()
+        git(self.repo, 'config', 'core.ignorecase', 'true')
+        before = publisher.prepare(self.manager)
+        old = self.generated / 'chapters/example/page.md'
+        new = old.with_name('Page.md')
+        old.rename(old.with_name('temporary.md'))
+        old.with_name('temporary.md').rename(new)
+        self.snapshot()
+        result = publisher.publish(self.manager, before)
+        self.assertEqual(result['status'], 'published')
+        names = git(self.repo, 'ls-tree', '-r', '--name-only', 'HEAD').splitlines()
+        self.assertIn(publisher.PREFIX + 'chapters/example/Page.md', names)
+        self.assertNotIn(publisher.PREFIX + 'chapters/example/page.md', names)
+        self.assertEqual(git(self.repo, 'status', '--porcelain'), '')
+
     def test_push_failure_is_retried_without_rebuilding(self):
         self.setup_snapshot()
         before = publisher.prepare(self.manager)
