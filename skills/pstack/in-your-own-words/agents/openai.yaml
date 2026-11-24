@@ -1,0 +1,5 @@
+interface:
+  display_name: "In Your Own Words"
+  short_description: "Restate the goal and the problem behind the request"
+policy:
+  allow_implicit_invocation: false

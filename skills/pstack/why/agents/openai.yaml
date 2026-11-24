@@ -1,0 +1,5 @@
+interface:
+  display_name: "Why"
+  short_description: "Trace why a decision was made to the written record"
+policy:
+  allow_implicit_invocation: false

@@ -2,7 +2,7 @@
 
 个人技能库：在一处维护技能，Codex、Claude Code、Pi、OpenCode、Grok Build 共用同一份文件。
 
-第一版面向 **Windows 当前用户**。包含 Matt Pocock 的 25 个正式技能（后续随正式发布清单更新）、`ai-platform-docs` 官方 API 文档快照，以及 `multi-harness` 本地 CLI 委派技能。技能来源与许可见 [NOTICE.md](NOTICE.md)。
+第一版面向 **Windows 当前用户**。包含 Matt Pocock 的 25 个正式技能（后续随正式发布清单更新）、`ai-platform-docs` 官方 API 文档快照、`multi-harness` 本地 CLI 委派技能，以及 `pstack` 的 3 个显式调用技能。技能来源与许可见 [NOTICE.md](NOTICE.md)。
 
 ## 技能包与选择
 
@@ -12,6 +12,11 @@ skills/
 │   ├── pack.json
 │   ├── grill-me/SKILL.md
 │   └── ...
+├── pstack/
+│   ├── pack.json
+│   ├── in-your-own-words/SKILL.md
+│   ├── sharpen/SKILL.md
+│   └── why/SKILL.md
 ├── multi-harness/
 │   ├── pack.json
 │   ├── SKILL.md
@@ -35,9 +40,25 @@ skills/
 {"schema_version":1,"name":"my-pack","description":"我的技能包","skills":["*"],"updater":"git"}
 ```
 
+## pstack：三个显式调用技能
+
+```powershell
+.\muran.ps1 install --packages pstack
+```
+
+| 技能 | 什么时候用 |
+|---|---|
+| `in-your-own-words` | 想先确认 Agent 有没有听懂：复述你的目标和真正要解决的问题，不给方案。 |
+| `sharpen` | 想把需求问得更扎实：补足证据、方法和验收条件，不扩大范围；只改写提示词，不执行任务。 |
+| `why` | 想知道当初为什么这么设计：查提交和 PR 讨论，区分原始记录、推断和未知。 |
+
+在客户端按名称主动调用。此包只随本仓库 Git 更新，不自动拉取上游 pstack。
+
 ## 多 Harness 协作
 
 `multi-harness` 从一句目标开始：`$multi-harness 帮我调研 Jev。` Codex 每轮只问一个关键选择并给出推荐，最后汇总目标、分工、具体模型和验收标准，等你确认后再调度本地 Claude Code 或 Antigravity CLI（agy）。见[对话式规划](skills/multi-harness/references/intake.md)。
+
+只想让回答更易懂时，使用 `$multi-harness 说人话`，也可追加“短一点”或指定文字。它按[说人话预设](skills/multi-harness/references/plain-language.md)直接委派中文编辑，Codex 核对后输出，无需每次指定模型或确认组队；其他协作任务仍走原流程。
 
 计划和讨论统一在协作组里：成员是固定了 CLI 与模型的本地 agent，可以讨论，也可以领任务干活；讨论过的上下文会带进它的任务。Codex 一条 `advance` 就能并行运行所有可执行的任务和消息，在验收关口停下核实，再 `accept`、`revise` 或 `fork`。worker 基于工作区快照运行（包含未提交的改动），上一个任务验收后的改动会自动带给下一个，不需要先 commit。开组后可以直接说“让研究员解释依据”“现在怎么样”“暂停”“继续”。见[操作手册](skills/multi-harness/references/operations.md)与[v2 设计](docs/multi-harness-v2.md)。
 

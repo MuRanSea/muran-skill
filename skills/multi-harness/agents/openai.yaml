@@ -1,4 +1,4 @@
 interface:
   display_name: "多 Harness 协作"
-  short_description: "每轮一个问题确定目标与分工，汇总确认后由 Codex 调度本地 CLI"
-  default_prompt: "使用 $multi-harness，先逐步帮我确定目标、分工和模型，每轮只问一个关键问题并给推荐，最后汇总方案，经我确认后再执行。"
+  short_description: "本地 CLI 协作与验收；说人话快捷改写，普通任务先确认分工"
+  default_prompt: "使用 $multi-harness；说人话按快捷流程直接改写，其他新任务先确定目标、分工和模型，经我确认后执行。"

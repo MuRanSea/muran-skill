@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sharpen"
+  short_description: "Rewrite a task to go deeper without widening scope"
+policy:
+  allow_implicit_invocation: false
