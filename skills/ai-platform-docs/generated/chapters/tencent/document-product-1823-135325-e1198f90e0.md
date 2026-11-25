@@ -1,16 +1,16 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135325 -->
-<!-- Source SHA-256: 3698940348d057c3108e5db7aba88e77d5339ddc8b09ea641fb7eb4055c15ffb -->
+<!-- Source SHA-256: bc41ad32c825c7ce349a33895973e12e484aa0a87a7adddb0a3a2cab491d7790 -->
 
 # PixVerse 生视频调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/135325
-最近更新时间：2026-09-24 21:20:30
+最近更新时间：2026-11-24 16:41:43
 
 ## 概述
 
 PixVerse（爱诗科技）是面向短视频创作场景的视频生成模型系列，支持文生视频、图生视频、首尾帧生视频、参考生视频四种能力，具备多分辨率、多画幅、运镜控制、音频生成与多镜头分镜等特性。
 
-本文介绍如何通过 TokenHub 调用 PixVerse 的三款模型：pixverse-video-v5.6、pixverse-video-v6.0、pixverse-video-c1。
+本文介绍如何通过 TokenHub 调用 PixVerse 的四款模型：`pixverse-video-v5.6`、`pixverse-video-v6.0`、`pixverse-video-v6.0-max`、`pixverse-video-c1`。
 
 ### 前提条件
 
@@ -42,19 +42,22 @@ PixVerse（爱诗科技）是面向短视频创作场景的视频生成模型系
 
 | 模型名称 | model 参数值 | 支持能力 | 视频时长（秒） | 清晰度档位 | 画面宽高比（文生/参考生） | 选型建议 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PixVerse V6.0 | `pixverse-video-v6.0` | 文生 / 图生 / 首尾帧 / 参考生 | 1 ~ 15 | 360p / 540p / 720p / 1080p | 16:9、4:3、1:1、3:4、9:16、2:3、3:2、21:9 | **通用场景推荐**，支持多镜头（智能分镜）。 |
-| PixVerse C1 | `pixverse-video-c1` | 文生 / 图生 / 首尾帧 / 参考生 | 1 ~ 15 | 360p / 540p / 720p / 1080p | 16:9、4:3、1:1、3:4、9:16、2:3、3:2、21:9 | 打斗、法术特效、高速运动等**动态场景**推荐；支持由提示词自动生成结构化分镜。 |
-| PixVerse V5.6 | `pixverse-video-v5.6` | 文生 / 图生 / 首尾帧 / 参考生 | 5 / 8 / 10（1080p 不支持 10） | 360p / 540p / 720p / 1080p | 16:9、4:3、1:1、3:4、9:16 | 历史版本，新接入建议直接使用 V6.0。 |
+| PixVerse-Video-v6 | `pixverse-video-v6.0` | 文生 / 图生 / 首尾帧 / 参考生 | 1 ~ 15 | 360p / 540p / 720p / 1080p | 16:9、4:3、1:1、3:4、9:16、2:3、3:2、21:9 | **通用场景推荐**，支持多镜头（智能分镜）。 |
+| PixVerse-Video-v6-max | `pixverse-video-v6.0-max` | 文生 / 图生 | 1 ~ 15 | 360p / 540p / 720p / 1080p | 16:9、4:3、1:1、3:4、9:16、2:3、3:2、21:9 | **画质优先**：在 V6.0 基础上强化细节与运动质量，可选原生音频，成本更高。**仅支持文生、图生。** |
+| PixVerse-Video-c1 | `pixverse-video-c1` | 文生 / 图生 / 首尾帧 / 参考生 | 1 ~ 15 | 360p / 540p / 720p / 1080p | 16:9、4:3、1:1、3:4、9:16、2:3、3:2、21:9 | 打斗、法术特效、高速运动等**动态场景**推荐；支持由提示词自动生成结构化分镜。 |
+| PixVerse-Video-v5.6 | `pixverse-video-v5.6` | 文生 / 图生 / 首尾帧 / 参考生 | 5 / 8 / 10（1080p 不支持 10） | 360p / 540p / 720p / 1080p | 16:9、4:3、1:1、3:4、9:16 | 历史版本，新接入建议直接使用 V6.0。 |
 
 **说明：**
 
-「画面宽高比」列为**文生视频、参考生视频**支持的取值范围；**图生视频、首尾帧生视频**的输出画幅默认跟随输入图片比例。
+`pixverse-video-v6.0-max` **仅支持文生视频与图生视频**（可选原生音频），不支持首尾帧、参考生、视频模板、视频延长等其它能力；分辨率、画幅比例、时长范围与 V6.0 一致。
+
+“画面宽高比”列为**文生视频、参考生视频**支持的取值范围；**图生视频、首尾帧生视频**的输出画幅默认跟随输入图片比例。
 
 ## 文生视频
 
 ### 1. 接口描述
 
-仅凭文本提示词生成视频，支持运镜、音频与多镜头开关。
+仅凭文本提示词生成视频，支持音频与多镜头开关（多镜头仅 V6.0）。
 
 **接口：**`POST https://tokenhub.tencentmaas.com/v1/wand/pixverse/text-to-video`
 
@@ -63,11 +66,10 @@ PixVerse（爱诗科技）是面向短视频创作场景的视频生成模型系
 | 参数名 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
 | prompt | 是 | string | 文本提示词，描述期望生成的视频内容。取值范围：≤ 5000 字符。 |
-| model | 是 | string | 模型版本。取值范围：`pixverse-video-v5.6`、`pixverse-video-v6.0`、`pixverse-video-c1` |
-| duration | 是 | integer | 视频时长（秒）。v5.6：5/8/10（1080p 不支持 10）；v6.0/c1：1~15。默认值：5。 |
+| model | 是 | string | 模型版本。取值范围：`pixverse-video-v5.6`、`pixverse-video-v6.0`、`pixverse-video-v6.0-max`、`pixverse-video-c1` |
+| duration | 是 | integer | 视频时长（秒）。v5.6：5/8/10（1080p 不支持 10）；v6.0 / v6.0-max / c1：1~15。默认值：5。 |
 | quality | 是 | string | 视频清晰度。取值范围：360p / 540p / 720p / 1080p。 |
-| aspect\_ratio | 否 | string | 画面宽高比。v5.6：16:9 / 4:3 / 1:1 / 3:4 / 9:16；v6.0/c1 额外支持 2:3 / 3:2 / 21:9。默认值：16:9。 |
-| camera\_movement | 否 | string | 运镜方式，如 zoom\_in 等（按需使用）。 |
+| aspect\_ratio | 否 | string | 画面宽高比。v5.6：16:9 / 4:3 / 1:1 / 3:4 / 9:16；v6.0 / v6.0-max / c1 额外支持 2:3 / 3:2 / 21:9。默认值：16:9。 |
 | seed | 否 | integer | 随机种子。取值范围：0 ~ 2147483647；不传或传 0 时使用随机数。 |
 | generate\_audio\_switch | 否 | boolean | 音频开关。true=有声（自动生成匹配的背景音乐或音效），false=静音。默认值：false。 |
 | generate\_multi\_clip\_switch | 否 | boolean | 多镜头开关，**仅** `pixverse-video-v6.0` **支持**。true=多镜头（系统智能分镜），false=单镜头。默认值：false。 |
@@ -89,7 +91,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/pixverse/text-to-video' \
 
 **说明：**
 
-将示例中的 `model` 替换为 `pixverse-video-v5.6` 或 `pixverse-video-c1`，即可调用对应模型。
+将示例中的 `model` 替换为 `pixverse-video-v6.0`、`pixverse-video-v6.0-max` 或 `pixverse-video-c1`，即可调用对应模型。
 
 ### 4. 输出参数
 
@@ -125,7 +127,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/pixverse/text-to-video' \
 
 ### 1. 接口描述
 
-以一张图片为首帧生成动态视频，图片直接传入公网可访问的 URL，输出视频画幅跟随输入图片比例。支持负向提示词、运镜、音频与多镜头开关。
+以一张图片为首帧生成动态视频，图片直接传入公网可访问的 URL，输出视频画幅跟随输入图片比例。支持音频与多镜头开关（多镜头仅 V6.0）。
 
 **接口：**`POST https://tokenhub.tencentmaas.com/v1/wand/pixverse/image-to-video`
 
@@ -136,10 +138,9 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/pixverse/text-to-video' \
 | img\_id | 是 | string | 图片地址，传入公网可访问的图片 URL，或者 base64图片数据。单张图片小于20MB。 |
 | img\_ids | 否 | array[string] | 多图模板专用图片 URL 数组，如 ["url1", "url2"]。 |
 | prompt | 是 | string | 文本提示词。取值范围：≤ 5000 字符。 |
-| model | 是 | string | 模型版本。取值范围：`pixverse-video-v5.6`、`pixverse-video-v6.0`、`pixverse-video-c1` |
-| duration | 是 | integer | 视频时长（秒）。v5.6：5/8/10（1080p 不支持 10）；v6.0/c1：1~15。默认值：5。 |
+| model | 是 | string | 模型版本。取值范围：`pixverse-video-v5.6`、`pixverse-video-v6.0`、`pixverse-video-v6.0-max`、`pixverse-video-c1` |
+| duration | 是 | integer | 视频时长（秒）。v5.6：5/8/10（1080p 不支持 10）；v6.0 / v6.0-max / c1：1~15。默认值：5。 |
 | quality | 是 | string | 视频清晰度。取值范围：360p / 540p / 720p / 1080p。 |
-| camera\_movement | 否 | string | 运镜方式，如 zoom\_in 等（按需使用）。 |
 | seed | 否 | integer | 随机种子。取值范围：0 ~ 2147483647；不传或传 0 时使用随机数。 |
 | generate\_audio\_switch | 否 | boolean | 音频开关。true=有声，false=静音。默认值：false。 |
 | generate\_multi\_clip\_switch | 否 | boolean | 多镜头开关，**仅** `pixverse-video-v6.0` **支持**。true=多镜头，false=单镜头。默认值：false。 |
@@ -161,7 +162,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/pixverse/image-to-video' 
 
 **说明：**
 
-将示例中的 `model` 替换为 `pixverse-video-v5.6` 或 `pixverse-video-c1`，即可调用对应模型。
+将示例中的 `model` 替换为 `pixverse-video-v5.6`、`pixverse-video-v6.0-max` 或 `pixverse-video-c1`，即可调用对应模型。
 
 ### 4. 输出参数
 
@@ -217,8 +218,8 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/pixverse/image-to-video' 
 | prompt | 是 | string | 文本提示词，描述过渡内容。取值范围：≤ 5000 字符。示例：“从首帧自然过渡到尾帧” |
 | first\_frame\_img | 是 | string | 首帧图片地址，传入公网可访问的图片 URL，或者 base64图片数据。单张图片小于20MB。 |
 | last\_frame\_img | 是 | string | 尾帧图片地址，传入公网可访问的图片 URL，或者 base64图片数据。单张图片小于20MB。 |
-| model | 是 | string | 模型版本。取值范围：`pixverse-video-v5.6`、`pixverse-video-v6.0`、`pixverse-video-c1` |
-| duration | 是 | integer | 视频时长（秒）。v5.6：5/8/10（1080p 不支持 10）；v6.0/c1：1~15。默认值：5。 |
+| model | 是 | string | 模型版本。取值范围：`pixverse-video-v5.6`、`pixverse-video-v6.0`、`pixverse-video-c1`（不支持 `pixverse-video-v6.0-max`） |
+| duration | 是 | integer | 视频时长（秒）。v5.6：5/8/10（1080p 不支持 10）；v6.0 / c1：1~15。默认值：5。 |
 | quality | 是 | string | 视频清晰度。取值范围：360p / 540p / 720p / 1080p。 |
 | seed | 否 | integer | 随机种子。取值范围：0 ~ 2147483647；不传或传 0 时使用随机数。 |
 | generate\_audio\_switch | 否 | boolean | 音频开关。true=有声，false=静音。默认值：false。 |
@@ -290,12 +291,12 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/pixverse/start-end-to-vid
 
 | 参数名 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
-| image\_references | 是 | array[object] | 参考图数组，v5.6/v6.0/c1 最多支持 7 项。子字段见下表。 |
+| image\_references | 是 | array[object] | 参考图数组，v5.6 / v6.0 / c1 最多支持 7 项。子字段见下表。 |
 | prompt | 是 | string | 文本提示词。取值范围：≤ 5000 字符。可用 `@ref_name` 指代参考图（@ 后接空格），如 "@dog plays at @room"。 |
-| model | 是 | string | 模型版本。取值范围：`pixverse-video-v5.6`、`pixverse-video-v6.0`、`pixverse-video-c1` |
-| duration | 是 | integer | 视频时长（秒）。v5.6：5/8/10（1080p 不支持 10）；v6.0/c1：1~15。默认值：5。 |
+| model | 是 | string | 模型版本。取值范围：`pixverse-video-v5.6`、`pixverse-video-v6.0`、`pixverse-video-c1`（不支持 `pixverse-video-v6.0-max`） |
+| duration | 是 | integer | 视频时长（秒）。v5.6：5/8/10（1080p 不支持 10）；v6.0 / c1：1~15。默认值：5。 |
 | quality | 是 | string | 视频清晰度。取值范围：360p / 540p / 720p / 1080p。 |
-| aspect\_ratio | 否 | string | 画面宽高比。v5.6：16:9 / 4:3 / 1:1 / 3:4 / 9:16；v6.0/c1 额外支持 2:3 / 3:2 / 21:9。默认值：16:9。 |
+| aspect\_ratio | 否 | string | 画面宽高比。v5.6：16:9 / 4:3 / 1:1 / 3:4 / 9:16；v6.0 / c1 额外支持 2:3 / 3:2 / 21:9。默认值：16:9。 |
 | generate\_audio\_switch | 否 | boolean | 音频开关。true=有声，false=静音。默认值：false。 |
 | seed | 否 | integer | 随机种子。取值范围：0 ~ 2147483647。 |
 
@@ -460,15 +461,17 @@ curl -X GET 'https://tokenhub.tencentmaas.com/v1/wand/pixverse/tasks/YOUR_TASK_I
 
 | 参数 | 限制说明 |
 | --- | --- |
-| duration | v5.6：5/8/10（1080p 不支持 10 秒）；v6.0/c1：1~15 整数（1080p 同样支持至 15 秒）。 |
-| aspect\_ratio | 仅文生视频、参考生视频支持。v5.6：16:9 / 4:3 / 1:1 / 3:4 / 9:16；v6.0/c1 额外支持 2:3 / 3:2 / 21:9；默认值 16:9。图生视频、首尾帧生视频不支持该参数，输出画幅跟随输入图片比例。 |
+| duration | v5.6：5/8/10（1080p 不支持 10 秒）；v6.0 / v6.0-max / c1：1~15 整数（1080p 同样支持至 15 秒）。 |
+| aspect\_ratio | 仅文生视频、参考生视频支持。v5.6：16:9 / 4:3 / 1:1 / 3:4 / 9:16；v6.0 / v6.0-max / c1 额外支持 2:3 / 3:2 / 21:9；默认值 16:9。图生视频、首尾帧生视频不支持该参数，输出画幅跟随输入图片比例。 |
 | generate\_multi\_clip\_switch | 仅 `pixverse-video-v6.0` 的**文生视频、图生视频**支持；首尾帧、参考生不支持。 |
 
 ## 常见问题
 
-#### **1. 三款模型如何选择？**
+#### **1. 四款模型如何选择？**
 
 通用场景、或需要多镜头智能分镜：`pixverse-video-v6.0`。
+
+画质优先、细节与运动质量要求更高（成本更高），且只需文生 / 图生：`pixverse-video-v6.0-max`。
 
 打斗、法术特效、高速运动等动态场景：`pixverse-video-c1`。
 
@@ -476,11 +479,11 @@ curl -X GET 'https://tokenhub.tencentmaas.com/v1/wand/pixverse/tasks/YOUR_TASK_I
 
 #### **2. 为什么 v5.6 在 1080p 下无法生成 10 秒视频？**
 
-`pixverse-video-v5.6` 在 1080p 清晰度下仅支持 5 / 8 秒。如需 10 秒，请降低清晰度至 720p 及以下，或切换至 v6.0 / c1（均支持 1~15 秒）。
+`pixverse-video-v5.6` 在 1080p 清晰度下仅支持 5 / 8 秒。如需 10 秒，请降低清晰度至 720p 及以下，或切换至 v6.0 / v6.0-max / c1（均支持 1~15 秒）。
 
 #### **3. 图生/首尾帧/参考生接口中的图片如何传入？**
 
-直接传入公网可访问的图片 URL 即可：`img_id`（图生）、`first_frame_img` / `last_frame_img`（首尾帧）、`image_references[].url`（参考生）均接收图片 URL 字符串，无需先调用上传接口。
+直接传入公网可访问的图片 URL 即可：`img_id`（图生）、`first_frame_img` / `last_frame_img`（首尾帧）、`image_references[].img_id`（参考生）均接收图片 URL 字符串，无需先调用上传接口。
 
 #### **4. 生成结果视频链接会过期吗？**
 

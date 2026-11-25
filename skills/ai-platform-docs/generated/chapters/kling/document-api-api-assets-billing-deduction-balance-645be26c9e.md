@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/assets/billing-deduction/balance.md -->
-<!-- Source SHA-256: 9ef4b245a67beffa2cc56ac906f59d43d3e31bcdec77a685a7ec86e7a2e42856 -->
+<!-- Source SHA-256: 0bc1555b7f24623b172639c7c13e712c5eb9068b94e3268cea6b951732e88a40 -->
 
 > ## Documentation Index
 >
@@ -115,6 +115,7 @@ curl --location --request POST 'https://api-beijing.klingai.com/account/billing/
           "product_function": "string", // 任务相关功能，如：Image to Video
           "model_name": "string", // 任务所用模型版本，与创建任务时所选模型版本一致
           "resolution": "string", // 生成结果的分辨率，枚举值：720p、1080p、4k（较早版本API通过mode参数定义分辨率，与当前参数对应关系为：720p=std、1080p=pro）
+          "dynamic_range": "string", // 输出动态范围，string 类型，当前枚举：sdr、hdr；本次适用于 Kling 4.0 视频任务
           "input_duration": "8.03", // 输入视频总时长，包括 feature_video、base_video和视频角色主体；单位秒、两位小数字符串；仅 4.0 & 4.0 flash有视频输入时有值；按系统归一化处理后的时长统计，可能与原始视频文件时长存在微小差异。
           "duration": "5.041", // 生成的视频文件实际时长，单位秒。实际输出计费时长见output_duration。
           "output_duration": "5", // 计费输出视频时长，该值用于计费核算，单位秒。仅 4.0 & 4.0 flash。该值用于计费核算。该参数值等于用户创建任务时settings.duration中指定的时长；未设置该参数时，则采用Prompt中指定的生成时长。若未设置 settings.duration 且未在prompt内说明，但传入base_video，则取base_video时长四舍五入取整，否则默认为 10 秒。
@@ -122,17 +123,38 @@ curl --location --request POST 'https://api-beijing.klingai.com/account/billing/
           "video_sound": "native", // 生成的视频是否包含声音，枚举值：native、original、off；依次对应随画面生成声音、保留参考视频原声、无声音（当前参数仅生效于生成视频任务相关明细）
           "voice_control": false, // 生成的视频是否有指定音色，布尔值：true, false；依次对应有指定音色、未指定音色（当前参数仅生效于生成视频任务相关明细）
           "deduction_time": "1779549455861", // 余额抵扣时间，Unix时间戳、单位ms时间
-          "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
+          "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
           "balance_before_deduction": 13037.3, // 抵扣前余额
           "deduction_amount": 5.0, // 抵扣金额
           "balance_after_deduction": 13032.3, // 抵扣后余额
           "list_price": 5.0, // 抵扣金额刊例价
-          "currency": "string" // 余额单位，枚举值：CNY、USD
+          "currency": "string", // 余额单位，枚举值：CNY、USD
+          "image_details": null // 图片计量对象；非图片任务为 null，图片任务结构见下一条示例
+        },
+        {
+          "task_id": "string", // 系统生成的任务ID
+          "api_key_name": "string", // API Key名称
+          "product_function": "string", // 任务相关功能
+          "model_name": "string", // 任务所用模型版本，与创建任务时所选模型版本一致
+          "resolution": "2k", // 任务实际生效清晰度；普通图片 2k/4k/8k，长图 1k/2k
+          "deduction_time": "1790000010000", // 余额抵扣时间，Unix时间戳、单位ms时间
+          "cash_type": "balance", // 额度类型：balance 为正式额度，test_balance 为测试金，reward_balance 为奖励金
+          "balance_before_deduction": 100, // 抵扣前余额
+          "deduction_amount": 1, // 抵扣金额，number，不是图片张数
+          "balance_after_deduction": 99, // 抵扣后余额
+          "list_price": 1, // 抵扣金额刊例价
+          "currency": "CNY", // 余额单位，枚举值：CNY、USD
+          "image_details": { // 图片计量对象；非图片任务或历史图片记录完全缺失时为 null。
+            "input_image_count": 0, // 输入参考图（含参考主体）张数，非负整数；无参考图为 0，历史缺失时为 null
+            "output_image_count": 1, // 输出图片张数；历史缺失时为 null
+            "skill": null, // 长图技能 ecommerce/webpage；普通单图与组图为 JSON null，历史缺失为 null
+            "length": null // 仅 ecommerce 返回实际生效长度 short/medium/long；创建时省略 length 则为 medium；网页和普通图片为 JSON null
+          }
         }
       ],
       "count": 20 // 本次查询的结果的数量
     },
-    "next_cursor": "string", // 游标信息，可用继续查询后续
+    "next_cursor": "string", // 游标信息，可用于查询后续记录
     "has_more": true // 基于游标信息，是否还有未查询到的数据，boolean值
   }
 }

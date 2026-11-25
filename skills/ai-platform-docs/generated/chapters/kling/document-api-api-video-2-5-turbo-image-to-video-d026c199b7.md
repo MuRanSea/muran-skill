@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/2-5-turbo/image-to-video.md -->
-<!-- Source SHA-256: e91cddaba5dae01b816043bd629eade557c75406e7f41f268cda94323e0277cf -->
+<!-- Source SHA-256: 025bd889c808a9fb2302fb82afb214181ebc890e572cfd2e7124c871c56a5413 -->
 
 > ## Documentation Index
 >
@@ -68,6 +68,7 @@
 - `contents[].type`: `prompt`：提示词素材标识。
   - `first_frame`：首帧图素材标识。
   - `last_frame`：尾帧图素材标识。
+- `contents[].type.prompt`: 文本提示词，可包含正向描述和负向描述
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
 - `contents[].type.prompt`: ```json
   {
@@ -75,6 +76,7 @@
     "text": "string" // 文本提示词内容，内容长度不能超过2500个字符；必填
   }
   ```
+- `contents[].type.first_frame / last_frame`: 首帧图参考素材或尾帧图参考素材
 - `contents[].type.first_frame / last_frame`: 首帧时必填，尾帧时选填
 - `contents[].type.first_frame / last_frame`: 通过JSON的格式定义，具体如下：
 - `contents[].type.first_frame / last_frame`: ```json
@@ -87,10 +89,10 @@
 - `contents[].type.first_frame / last_frame`: 图片文件大小不能超过50MB。
 - `contents[].type.first_frame / last_frame`: 图片宽高尺寸不小于300px，图片宽高比要在1:2.5 ~ 2.5:1之间。
 - `contents[].type.first_frame / last_frame`: 支持仅首帧图生视频和首尾帧图生视频，不支持仅尾帧图生视频。其中：
-    - 首尾帧仅支持生成1080P视频。
-- `settings.resolution`: 720p：输出清晰度为720P的视频。
-- `settings.resolution`: 1080p：输出清晰度为1080P的视频。
-- `settings.resolution`: 使用首尾帧功能时，仅支持生成1080P视频。
+    - 首尾帧仅支持生成1080p视频。
+- `settings.resolution`: 720p：输出清晰度为720p的视频。
+- `settings.resolution`: 1080p：输出清晰度为1080p的视频。
+- `settings.resolution`: 使用首尾帧功能时，仅支持生成1080p视频。
 - `options`: ```json
   "options": {
     "callback_url": "https://example.com/cb", // 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知；具体通知的消息schema见“Callback协议”

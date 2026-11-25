@@ -24,12 +24,17 @@
 | Kling Image 3.0 & 3.0 Omni - 主体管理 | `chapters/kling/document-api-api-image-3-0-omni-elements-0766ee95cf.md` | https://klingai.com/document-api/api/image/3-0-omni/elements.md |
 | Kling Image 3.0 & 3.0 Omni - 图片生成 | `chapters/kling/document-api-api-image-3-0-omni-image-generation-c6d7110382.md` | https://klingai.com/document-api/api/image/3-0-omni/image-generation.md |
 | Kling Image 3.0 & 3.0 Omni - Omni 图片生成 | `chapters/kling/document-api-api-image-3-0-omni-image-omni-66a5e2ed04.md` | https://klingai.com/document-api/api/image/3-0-omni/image-omni.md |
+| Kling Image 4.0 - 主体管理 | `chapters/kling/document-api-api-image-4-0-elements-1e4a8b0479.md` | https://klingai.com/document-api/api/image/4-0/elements.md |
+| Kling Image 4.0 - 图片生成 | `chapters/kling/document-api-api-image-4-0-image-generation-18010311d8.md` | https://klingai.com/document-api/api/image/4-0/image-generation.md |
+| Kling Image 4.0 - 长图生成 | `chapters/kling/document-api-api-image-4-0-long-image-generation-6801477e77.md` | https://klingai.com/document-api/api/image/4-0/long-image-generation.md |
 | 通用 - 扩图 | `chapters/kling/document-api-api-image-common-outpainting-81609ba156.md` | https://klingai.com/document-api/api/image/common/outpainting.md |
 | 通用 - 智能补全主体图 | `chapters/kling/document-api-api-image-common-subject-completion-a88ad15862.md` | https://klingai.com/document-api/api/image/common/subject-completion.md |
 | Kling Image O1 - 主体管理 | `chapters/kling/document-api-api-image-o1-elements-df500861e4.md` | https://klingai.com/document-api/api/image/o1/elements.md |
 | Kling Image O1 - 图片生成 | `chapters/kling/document-api-api-image-o1-image-generation-0e29fb20f0.md` | https://klingai.com/document-api/api/image/o1/image-generation.md |
 | 使用指南 - Kling 4.0 视频提示词案例 | `chapters/kling/document-api-api-usage-guide-kling-4-0-prompt-guide-75c107cb64.md` | https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide.md |
 | 使用指南 - Kling 4.0 视频使用手册 | `chapters/kling/document-api-api-usage-guide-kling-4-0-fef7e2a38a.md` | https://klingai.com/document-api/api/usage-guide/kling-4-0.md |
+| 使用指南 - Kling Image 4.0 提示词案例 | `chapters/kling/document-api-api-usage-guide-kling-image-4-0-prompt-guide-f72c546b9e.md` | https://klingai.com/document-api/api/usage-guide/kling-image-4-0-prompt-guide.md |
+| 使用指南 - Kling Image 4.0 使用手册 | `chapters/kling/document-api-api-usage-guide-kling-image-4-0-1c8296d349.md` | https://klingai.com/document-api/api/usage-guide/kling-image-4-0.md |
 | Kling 2.5 Turbo - 图生视频 | `chapters/kling/document-api-api-video-2-5-turbo-image-to-video-d026c199b7.md` | https://klingai.com/document-api/api/video/2-5-turbo/image-to-video.md |
 | Kling 2.5 Turbo - 文生视频 | `chapters/kling/document-api-api-video-2-5-turbo-text-to-video-018bd47e79.md` | https://klingai.com/document-api/api/video/2-5-turbo/text-to-video.md |
 | Kling 2.6 - 图生视频 | `chapters/kling/document-api-api-video-2-6-image-to-video-ade5a29355.md` | https://klingai.com/document-api/api/video/2-6/image-to-video.md |

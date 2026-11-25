@@ -12,6 +12,10 @@
 | 文件下载 | `chapters/minimax/docs-api-reference-file-management-retrieve-content-588a8be502.md` | https://platform.minimax.cn/docs/api-reference/file-management-retrieve-content.md |
 | 文件检索 | `chapters/minimax/docs-api-reference-file-management-retrieve-11dab1e8df.md` | https://platform.minimax.cn/docs/api-reference/file-management-retrieve.md |
 | 文件上传 | `chapters/minimax/docs-api-reference-file-management-upload-1fd4e735d5.md` | https://platform.minimax.cn/docs/api-reference/file-management-upload.md |
+| H3-Image-Context-IR | `chapters/minimax/docs-api-reference-image-generation-h3-context-ir-1cd4eab656.md` | https://platform.minimax.cn/docs/api-reference/image-generation-h3-context-ir.md |
+| 图片编辑 | `chapters/minimax/docs-api-reference-image-generation-h3-edits-e6a593efca.md` | https://platform.minimax.cn/docs/api-reference/image-generation-h3-edits.md |
+| 文生图 | `chapters/minimax/docs-api-reference-image-generation-h3-generations-cf96341b87.md` | https://platform.minimax.cn/docs/api-reference/image-generation-h3-generations.md |
+| 流式响应事件 | `chapters/minimax/docs-api-reference-image-generation-h3-streaming-8a45bfd7ab.md` | https://platform.minimax.cn/docs/api-reference/image-generation-h3-streaming.md |
 | 图生图 | `chapters/minimax/docs-api-reference-image-generation-i2i-ba85131cdc.md` | https://platform.minimax.cn/docs/api-reference/image-generation-i2i.md |
 | 文生图 | `chapters/minimax/docs-api-reference-image-generation-t2i-f552c053e3.md` | https://platform.minimax.cn/docs/api-reference/image-generation-t2i.md |
 | 歌词生成 (Lyrics Generation) | `chapters/minimax/docs-api-reference-lyrics-generation-f99d10d208.md` | https://platform.minimax.cn/docs/api-reference/lyrics-generation.md |
@@ -36,8 +40,8 @@
 | OpenAI SDK | `chapters/minimax/docs-api-reference-text-openai-api-5efbee5b5e.md` | https://platform.minimax.cn/docs/api-reference/text-openai-api.md |
 | 文本合成 | `chapters/minimax/docs-api-reference-text-post-5226b28d49.md` | https://platform.minimax.cn/docs/api-reference/text-post.md |
 | Prompt 缓存 | `chapters/minimax/docs-api-reference-text-prompt-caching-5d47990d29.md` | https://platform.minimax.cn/docs/api-reference/text-prompt-caching.md |
-| 创建视频Agent任务 | `chapters/minimax/docs-api-reference-video-agent-create-cb22092d39.md` | https://platform.minimax.cn/docs/api-reference/video-agent-create.md |
-| 查询视频Agent任务状态 | `chapters/minimax/docs-api-reference-video-agent-query-f344cd90af.md` | https://platform.minimax.cn/docs/api-reference/video-agent-query.md |
+| 创建视频 Agent 任务 | `chapters/minimax/docs-api-reference-video-agent-create-cb22092d39.md` | https://platform.minimax.cn/docs/api-reference/video-agent-create.md |
+| 查询视频 Agent 任务状态 | `chapters/minimax/docs-api-reference-video-agent-query-f344cd90af.md` | https://platform.minimax.cn/docs/api-reference/video-agent-query.md |
 | 视频下载 | `chapters/minimax/docs-api-reference-video-generation-download-bdd572d773.md` | https://platform.minimax.cn/docs/api-reference/video-generation-download.md |
 | 首尾帧生成视频 | `chapters/minimax/docs-api-reference-video-generation-fl2v-b2ebe14d03.md` | https://platform.minimax.cn/docs/api-reference/video-generation-fl2v.md |
 | 图生视频任务 | `chapters/minimax/docs-api-reference-video-generation-i2v-cfe6187956.md` | https://platform.minimax.cn/docs/api-reference/video-generation-i2v.md |
@@ -55,7 +59,7 @@
 | 上传示例音频 | `chapters/minimax/docs-api-reference-voice-cloning-uploadprompt-bba6c55486.md` | https://platform.minimax.cn/docs/api-reference/voice-cloning-uploadprompt.md |
 | 音色设计 | `chapters/minimax/docs-api-reference-voice-design-design-1cf10d0c30.md` | https://platform.minimax.cn/docs/api-reference/voice-design-design.md |
 | 删除音色  | `chapters/minimax/docs-api-reference-voice-management-delete-f134e69915.md` | https://platform.minimax.cn/docs/api-reference/voice-management-delete.md |
-| 查询可用音色ID | `chapters/minimax/docs-api-reference-voice-management-get-4af0321669.md` | https://platform.minimax.cn/docs/api-reference/voice-management-get.md |
+| 查询可用音色 ID | `chapters/minimax/docs-api-reference-voice-management-get-4af0321669.md` | https://platform.minimax.cn/docs/api-reference/voice-management-get.md |
 | 账户相关 | `chapters/minimax/docs-faq-about-account-2efbe5791e.md` | https://platform.minimax.cn/docs/faq/about-account.md |
 | 接口相关 | `chapters/minimax/docs-faq-about-apis-3876ecf9ef.md` | https://platform.minimax.cn/docs/faq/about-apis.md |
 | 联系我们 | `chapters/minimax/docs-faq-contact-us-a0a59e5678.md` | https://platform.minimax.cn/docs/faq/contact-us.md |
@@ -75,4 +79,4 @@
 | 模型调用 | `chapters/minimax/docs-guides-text-generation-c92633122f.md` | https://platform.minimax.cn/docs/guides/text-generation.md |
 | 工具使用 & 交错思维链 | `chapters/minimax/docs-guides-text-m3-function-call-d4fbec1ef8.md` | https://platform.minimax.cn/docs/guides/text-m3-function-call.md |
 | 视频生成 | `chapters/minimax/docs-guides-video-generation-22d58346b8.md` | https://platform.minimax.cn/docs/guides/video-generation.md |
-| H3亮点功能示例 | `chapters/minimax/docs-guides-video-prompt-221f4516a1.md` | https://platform.minimax.cn/docs/guides/video-prompt.md |
+| H3 亮点功能示例 | `chapters/minimax/docs-guides-video-prompt-221f4516a1.md` | https://platform.minimax.cn/docs/guides/video-prompt.md |

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/api-overview.md -->
-<!-- Source SHA-256: 133105e4b8190969233c6e1052f02065ceb47911f633353eeaee010b73a7ca8a -->
+<!-- Source SHA-256: 6d6a6d4b7c3eaba1cdcf859148e7c642ad2a810b74f2c84a2248186d1efc922d -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -7,7 +7,7 @@
 
 # 接口概览
 
-> MiniMax 开放平台 API 接口能力概览，包括语言、视频、语音、图像、音乐和文件管理等多模态能力。
+> MiniMax 开放平台 API 接口能力概览，包括语言、视频、图片、语音、音乐和文件管理等多模态能力。
 
 ## 获取 API Key
 
@@ -93,6 +93,37 @@
 
 ***
 
+## 图片生成
+
+基于文本描述或 1 \~ 16 张参考图生成图片，同步返回结果，也支持流式逐张返回。
+
+**模型列表**
+
+| 模型名称 | 简介 |
+| :- | :- |
+| MiniMax-H3-Image | 图片生成模型，支持文生图与图片编辑，输出尺寸可按宽高指定，也可按面积档和长宽比指定 |
+| MiniMax-H3-Image-Highspeed | MiniMax-H3-Image 的高速版本，支持文生图与图片编辑，参数与限制与 MiniMax-H3-Image 相同 |
+
+> [card] [文生图](https://platform.minimaxi.com/docs/api-reference/image-generation-h3-generations.md)
+>
+> 基于文本描述生成图片
+
+> [card] [图片编辑](https://platform.minimaxi.com/docs/api-reference/image-generation-h3-edits.md)
+>
+> 基于 1 \~ 16 张参考图生成图片
+
+> [card] [H3-Image-Context-IR](https://platform.minimaxi.com/docs/api-reference/image-generation-h3-context-ir.md)
+>
+> 只增强 prompt，返回增强结果，不出图
+
+> [card] [流式响应事件](https://platform.minimaxi.com/docs/api-reference/image-generation-h3-streaming.md)
+>
+> stream=true 时逐张返回的事件格式
+
+image-01、image-01-live 的[文生图](https://platform.minimaxi.com/docs/api-reference/image-generation-t2i.md)、[图生图](https://platform.minimaxi.com/docs/api-reference/image-generation-i2i.md)接口见导航「历史接口」。
+
+***
+
 ## 语音模型
 
 语音模型提供**语音合成**、**音色复刻**与**音色设计**能力，支持 40 种语言、300+ 系统音色，可按需选择同步或异步方式生成。
@@ -172,31 +203,6 @@
 
 ***
 
-## 图片生成
-
-本接口支持基于用户提供的文本或参考图片，进行创意图像生成。支持设置不同图片比例和长宽像素设置，满足不同场景下图像需求。
-
-**接口说明**
-
-通过创建图片生成任务接口，使用文本描述和参考图片，进行图像生成。
-
-**模型列表**
-
-| 模型名称 | 简介 |
-| :- | :- |
-| image-01 | 图像生成模型，画面表现细腻，支持文生图、图生图（人物主体参考） |
-| image-01-live | 图像生成模型，在 image-01 基础上额外支持多种画风设置 |
-
-> [card] [文生图](https://platform.minimaxi.com/docs/api-reference/image-generation-t2i.md)
->
-> 基于文本描述生成图像
-
-> [card] [图生图](https://platform.minimaxi.com/docs/api-reference/image-generation-i2i.md)
->
-> 基于参考图片生成图像
-
-***
-
 ## 音乐生成
 
 > [!NOTE]
@@ -238,6 +244,12 @@
 > 获取已上传的文件列表
 
 ***
+
+> [!NOTE]
+>
+> 自 2026 年 8 月 20 日起，付费接口（音乐生成、歌词生成）不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务；免费音乐生成接口（Music-3.0-free、Music-2.6-free、music-cover-free）停止服务。
+>
+> 如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimaxi.com/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
 
 ## 工具
 

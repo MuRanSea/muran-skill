@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/system-voice-id.md -->
-<!-- Source SHA-256: e522acb13f9c1b6d76daeb424f60eb8d150d184a8fcc1e44dbb9270878162d6e -->
+<!-- Source SHA-256: a6133fcf835b82a6cc12f76127926db6c9678acd43b99fa5434659d064049def -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -10,6 +10,8 @@
 > 本文档列举了MiniMax开放平台全部的系统音色，为您提供语音合成选择。参考以下表格的内容，可查阅目前全部的系统音色的ID(Voice ID)、名称及支持语言，方便开发者快速查询与调用。
 
 参考以下表格的内容，可查阅目前全部的系统音色。
+
+调用时请保留音色 ID 的大小写和内部空格，并去除首尾空白。
 
 | 序号 | 语言 | 音色 ID (Voice ID) | 音色名称 (Voice Name) |
 | :- | :- | :- | :- |
@@ -77,7 +79,7 @@
 | 62 | 中文 (粤语) | `Cantonese_PlayfulMan` | 活泼男声 |
 | 63 | 中文 (粤语) | `Cantonese_CuteGirl` | 可爱女孩 |
 | 64 | 中文 (粤语) | `Cantonese_KindWoman` | 善良女声 |
-| 65 | 英文 | `Santa_Claus ` | Santa Claus |
+| 65 | 英文 | `Santa_Claus` | Santa Claus |
 | 66 | 英文 | `Grinch` | Grinch |
 | 67 | 英文 | `Rudolph` | Rudolph |
 | 68 | 英文 | `Arnold` | Arnold |

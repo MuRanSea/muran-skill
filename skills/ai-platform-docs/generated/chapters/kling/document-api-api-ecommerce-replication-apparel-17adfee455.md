@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/apparel.md -->
-<!-- Source SHA-256: 1280cabdfd40803ca15eda8559cb410bff15a9725a2bbd0216eb32bf57d1d7f2 -->
+<!-- Source SHA-256: 9baa03852f433a2e4181757d10383a0778900b5db9c52a229c6a6aa831d46046 -->
 
 > ## Documentation Index
 >
@@ -104,6 +104,7 @@
   - `model_image`：模特图素材标识（选填）。
   - `bgm`：最终输出视频背景音乐素材（选填）。
   - `voice`：最终输出视频 TTS 音色素材（选填）。
+- `contents[].type.product_info`: 商品描述。
 - `contents[].type.product_info`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -111,6 +112,7 @@
     "text": "string" // 文本提示词内容，内容长度不能超过2500个字符；必填
   }
   ```
+- `contents[].type.source_video`: 参考视频素材。
 - `contents[].type.source_video`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -123,6 +125,7 @@
 - `contents[].type.source_video`: 视频格式支持 .mp4 / .mov。
 - `contents[].type.source_video`: 视频宽高尺寸需介于 576px（含）和 4553px（含）之间，像素总面积不超过 8294400。其中：视频的宽高比需在 0.4~2 之间。
 - `contents[].type.source_video`: 视频帧率支持 24fps（含）～60fps（含）（生成视频的帧率为 24fps）。
+- `contents[].type.product_image`: 商品图参考素材。
 - `contents[].type.product_image`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -138,6 +141,7 @@
 - `contents[].type.product_image`: 图片文件大小不能超过 50MB。
 - `contents[].type.product_image`: 图片宽高尺寸不小于 300px，图片宽高比要在 1:2.5 ~ 2.5:1 之间。
 - `contents[].type.product_image`: 最多支持同时上传 5 张商品图。
+- `contents[].type.model_image`: 模特图参考素材。
 - `contents[].type.model_image`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -154,6 +158,7 @@
 - `contents[].type.model_image`: 图片宽高尺寸不小于 300px，图片宽高比要在 1:2.5 ~ 2.5:1 之间。
 - `contents[].type.model_image`: 最多支持同时上传 5 张模特图。
 - `contents[].type.model_image`: 此项为选填，不传则默认使用参考视频中的人物形象。
+- `contents[].type.bgm`: 最终输出视频背景音乐素材。
 - `contents[].type.bgm`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -166,6 +171,7 @@
 - `contents[].type.bgm`: 音频文件时长建议在 5s~10min。若音频时长短于视频：循环播放至视频结束；若音频时长长于视频：从开头对齐截取，仅保留与视频等长的部分。
 - `contents[].type.bgm`: 最多支持上传 1 条音频文件。
 - `contents[].type.bgm`: 此项为选填，未传则从 bgm 库自动匹配推荐。
+- `contents[].type.voice`: 最终输出视频 TTS 配音素材。
 - `contents[].type.voice`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -188,8 +194,8 @@
   | enthusiastic_sales_man | 热情带货男 |
   | steady_sales_man | 沉稳带货男 |
   | calm_sales_man | 平静带货男 |
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频。
-  - 1080p：输出清晰度为 1080P 的视频。
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频。
+  - 1080p：输出清晰度为 1080p 的视频。
 - `settings.aspect_ratio`: 可选；传入则校验。
 - `options`: ```json
   "options": {
@@ -415,6 +421,7 @@ curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
   ]
   ```
 - `filters[].key`: `status`：任务状态
+- `filters[].key.status`: 按任务状态筛选。
 - `filters[].key.status`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -456,5 +463,5 @@ curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
 | 有 `type=bgm` 但 `url` 为空          | bgm is provided but url is empty. Please provide a BGM file URL or remove bgm to use the system default BGM. | 背景音乐地址为空，请填写 URL 或移除 bgm 使用系统默认配乐 |
 | `type=voice` 但 `voice_id` 为空/非法 | Invalid voice_id. Please select a valid voice from the voice library.                                        | 音色 ID 无效，请从音色库中选择有效的 voice_id            |
 | 有多个 `type=voice`                  | Only one voice item is allowed in contents.                                                                  | 最多指定 1 个音色，请移除多余的 voice                    |
-| `resolution` 非法                    | Unsupported resolution. Only 720P and 1080P are supported.                                                   | 分辨率仅支持 720P 和 1080P                               |
+| `resolution` 非法                    | Unsupported resolution. Only 720p and 1080p are supported.                                                   | 分辨率仅支持 720p 和 1080p                               |
 | `aspect_ratio` 非法                  | aspect_ratio only supports 9:16, 2:3, 3:4, 1:1, 4:3, 3:2, 16:9 and 21:9.                                     | 画面比例仅支持 9:16、2:3、3:4、1:1、4:3、3:2、16:9、21:9 |

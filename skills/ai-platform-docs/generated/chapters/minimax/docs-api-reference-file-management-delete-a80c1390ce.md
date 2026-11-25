@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/file-management-delete.md -->
-<!-- Source SHA-256: f232db44a4496a04d92353200a1b56adb42205a03fe7e032970603fb2ee2d137 -->
+<!-- Source SHA-256: 19206a00fd3b3de1210241a1b6ac4d96eb6155e158fe7792557e39a69ac4f389 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -79,12 +79,16 @@ components:
             3. t2a_async
             4. t2a_async_input
             5. video_generation
+            6. video_generation_input
+            7. image_generation_input
           enum:
             - voice_clone
             - prompt_audio
             - t2a_async
             - t2a_async_input
             - video_generation
+            - video_generation_input
+            - image_generation_input
       example:
         file_id: ${file_id}
         purpose: t2a_async_input

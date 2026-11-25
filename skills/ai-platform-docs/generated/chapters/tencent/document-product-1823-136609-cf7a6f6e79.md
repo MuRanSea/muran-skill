@@ -1,14 +1,14 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/136609 -->
-<!-- Source SHA-256: a6adf8b3e213881ffa98fe6ccf0b93a28dcc41e13db46a787ab9f0ec5bf391ba -->
+<!-- Source SHA-256: ede0b8bb4cd35bc0ae00944eb03eb5064dbe8243049d46587f5e48eeb0ad354b -->
 
 # Seedream 生图调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/136609
-最近更新时间：2026-10-14 10:27:42
+最近更新时间：2026-11-13 20:08:30
 
 ## 概述
 
-Seedream 是火山引擎推出的图片生成模型系列。本文介绍如何通过 TokenHub 调用 Seedream 图片生成模型 Seedream-Image-v5.0-pro（`seedream-image-v5.0-pro`）、Seedream-Image-v5.0-lite（`seedream-image-v5.0-lite`）、Seedream-Image-v5.0-flash（`seedream-image-v5.0-flash`），支持**文生图、参考生图**，以参考图结合文本提示词生成图片，也可仅凭文本进行文生图。
+Seedream 是火山引擎推出的图片生成模型系列。本文介绍如何通过 TokenHub 调用 Seedream 图片生成模型 Seedream-Image-v5.5（`seedream-image-v5.5`）、 Seedream-Image-v5.0-pro（`seedream-image-v5.0-pro`）、Seedream-Image-v5.0-lite（`seedream-image-v5.0-lite`）、Seedream-Image-v5.0-flash（`seedream-image-v5.0-flash`），支持**文生图、参考生图**，以参考图结合文本提示词生成图片，也可仅凭文本进行文生图。
 
 ### 前提条件
 
@@ -22,7 +22,7 @@ Seedream 是火山引擎推出的图片生成模型系列。本文介绍如何�
 
 ### 模型列表
 
-<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型名称</div></td><td><div>model 参数值</div></td><td><div>支持能力</div></td><td><div>提示词上限</div></td><td><div>分辨率</div></td></tr><tr><td><div>Seedream-Image-v5.0-pro</div></td><td><div><code>seedream-image-v5.0-pro</code></div></td><td><div>参考生图 / 文生图</div></td><td><div>600字符</div></td><td><div>1K / 1.5K / 2K</div></td></tr><tr><td><div>Seedream-Image-v5.0-lite</div></td><td><div><code>seedream-image-v5.0-lite</code></div></td><td><div>参考生图 / 文生图</div></td><td><div>600字符</div></td><td colspan="1" rowspan="1"><div>2K / 3K / 4K</div></td></tr><tr><td><div>Seedream-Image-v5.0-flash</div></td><td><div><code>seedream-image-v5.0-flash</code></div></td><td><div>参考生图 / 文生图</div></td><td><div>600字符</div></td><td><div>1K / 1.5K / 2K</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型名称</div></td><td><div>model 参数值</div></td><td><div>支持能力</div></td><td><div>提示词上限</div></td><td><div>分辨率</div></td></tr><tr><td><div>Seedream-Image-v5.5</div></td><td colspan="1" rowspan="1"><div><code>seedream-image-v5.5</code></div></td><td colspan="1" rowspan="1"><div>参考生图 / 文生图</div></td><td colspan="1" rowspan="1"><div>600字符</div></td><td colspan="1" rowspan="1"><div>1K / 1.5K / 2K</div></td></tr><tr><td><div>Seedream-Image-v5.0-pro</div></td><td><div><code>seedream-image-v5.0-pro</code></div></td><td><div>参考生图 / 文生图</div></td><td><div>600字符</div></td><td><div>1K / 1.5K / 2K</div></td></tr><tr><td><div>Seedream-Image-v5.0-lite</div></td><td><div><code>seedream-image-v5.0-lite</code></div></td><td><div>参考生图 / 文生图</div></td><td><div>600字符</div></td><td colspan="1" rowspan="1"><div>2K / 3K / 4K</div></td></tr><tr><td><div>Seedream-Image-v5.0-flash</div></td><td><div><code>seedream-image-v5.0-flash</code></div></td><td><div>参考生图 / 文生图</div></td><td><div>600字符</div></td><td><div>1K / 1.5K / 2K</div></td></tr></tbody></table>
 
 ## 图片生成
 
@@ -36,15 +36,15 @@ Seedream 图片生成（参考生图 / reference-to-image）接口。支持参�
 
 | 参数名 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
-| model | 是 | string | 模型 ID。取值：`seedream-image-v5.0-pro、seedream-image-v5.0-lite、seedream-image-v5.0-flash` |
+| model | 是 | string | 模型 ID。  取值：  `seedream-image-v5.5`  `seedream-image-v5.0-pro`  `seedream-image-v5.0-lite`  `seedream-image-v5.0-flash` |
 | prompt | 是 | string | 文本提示词，长度 ≤ 600 字符。未传 images 时按此文本进行文生图。  提示词字数建议：中文提示词不超过 300 字，英文提示词不超过 600 词。字数过多信息容易分散，模型可能因此忽略细节，只关注重点，造成图片缺失部分元素。 |
-| images | 否 | array[string] | 图片 images：`seedream-image-v5.0-pro、seedream-image-v5.0-flash` 支持最多10 张，`seedream-image-v5.0-lite` 支持最多14 张， 支持 URL 和 Base64格式。  图片格式：jpeg/png/webp/bmp/tiff/gif/heic/heif，宽高比（宽 / 高）范围：[1/16， 16]，宽高长度（px）> 14，大小：<= 30MB，总像素：[196， 6000×6000（3600万）]（对单张图宽度和高度的像素乘积限制，而不是对宽度或高度的单独值进行限制）； |
-| layer\_decomposition | 否 | boolean | 图层拆分开关，控制是否开启图层拆分功能。  图层拆分会将单张图片的主体、背景、文字等内容自动拆解为1张底图和最多16个可独立编辑的图层。每个图层为带透明通道的 PNG 图片。  模型支持 ：  `seedream-image-v5.0-pro`  `seedream-image-v5.0-flash` |
-| size | 否 | string | 图像尺寸。  `seedream-image-v5.0-pro、seedream-image-v5.0-flash`（图片生成场景）  支持以下两种方式，不可混用：  **方式 1（推荐）**：指定分辨率档位，并在 prompt 中用自然语言描述图片宽高比、图片形状或图片用途，最终由模型判断生成图片的大小。  默认值：2K  可选值：1K、1.5K、2K  **方式 2**：指定宽高像素值（宽 x 高）。  总像素取值范围：[1280x720（921600）, 2048x2048x1.1025（4624220）]  宽高比取值范围：[1/16, 16]    `seedream-image-v5.0-pro、seedream-image-v5.0-flash`（图层拆分场景）  仅支持通过指定分辨率档位的方式设置。输出图的分辨率规则如下：  底图 ：输出底图的分辨率和 size 指定的分辨率一致；输出底图和原待拆分图的宽高比一致。  各图层 ：输出图层的分辨率和 size 指定的分辨率接近；每个输出图层和其在原图中的宽高比一致。  size 的默认值与可选值：  默认值：auto  可选值：1K、1.5K、2K、auto（根据输入图的尺寸和宽高比进行输出）    `seedream-image-v5.0-lite`  支持以下两种方式，不可混用：  方式1：指定分辨率，并在 prompt 中用自然语言描述图片宽高比、图片形状或图片用途，最终由模型判断生成图片的大小。  可选值：2K、3K、4K  方式2：指定生成图像的宽高像素值。  默认值：2048x2048  总像素取值范围：[2560x1440（3686400）, 4096x4096（16777216）]  宽高比取值范围：[1/16, 16] |
+| images | 否 | array[string] | 图片 images：`seedream-image-v5.5、seedream-image-v5.0-pro、seedream-image-v5.0-flash` 支持最多10 张，`seedream-image-v5.0-lite` 支持最多14 张， 支持 URL 和 Base64格式。  图片格式：jpeg/png/webp/bmp/tiff/gif/heic/heif，宽高比（宽 / 高）范围：[1/16， 16]，宽高长度（px）> 14，大小：<= 30MB，总像素：[196， 6000×6000（3600万）]（对单张图宽度和高度的像素乘积限制，而不是对宽度或高度的单独值进行限制）； |
+| layer\_decomposition | 否 | boolean | 图层拆分开关，控制是否开启图层拆分功能。  图层拆分会将单张图片的主体、背景、文字等内容自动拆解为1张底图和最多16个可独立编辑的图层。每个图层为带透明通道的 PNG 图片。  模型支持 ：  `seedream-image-v5.0-pro`  `seedream-image-v5.0-flash`  `seedream-image-v5.5` |
+| size | 否 | string | 图像尺寸。  `seedream-image-v5.5、seedream-image-v5.0-pro、seedream-image-v5.0-flash`（图片生成场景）  支持以下两种方式，不可混用：  **方式 1（推荐）**：指定分辨率档位，并在 prompt 中用自然语言描述图片宽高比、图片形状或图片用途，最终由模型判断生成图片的大小。  默认值：2K  可选值：1K、1.5K、2K  **方式 2**：指定宽高像素值（宽 x 高）。  总像素取值范围：[1280x720（921600）, 2048x2048x1.1025（4624220）]  宽高比取值范围：[1/16, 16]    `seedream-image-v5.5、seedream-image-v5.0-pro、seedream-image-v5.0-flash`（图层拆分场景）  仅支持通过指定分辨率档位的方式设置。输出图的分辨率规则如下：  底图 ：输出底图的分辨率和 size 指定的分辨率一致；输出底图和原待拆分图的宽高比一致。  各图层 ：输出图层的分辨率和 size 指定的分辨率接近；每个输出图层和其在原图中的宽高比一致。  size 的默认值与可选值：  默认值：auto  可选值：1K、1.5K、2K、auto（根据输入图的尺寸和宽高比进行输出）    `seedream-image-v5.0-lite`  支持以下两种方式，不可混用：  方式1：指定分辨率，并在 prompt 中用自然语言描述图片宽高比、图片形状或图片用途，最终由模型判断生成图片的大小。  可选值：2K、3K、4K  方式2：指定生成图像的宽高像素值。  默认值：2048x2048  总像素取值范围：[2560x1440（3686400）, 4096x4096（16777216）]  宽高比取值范围：[1/16, 16] |
 | optimize\_prompt\_options | 否 | object | 提示词优化配置。 |
-| optimize\_prompt\_options.mode | 否 | string | 优化模式。  standard：标准模式，生成内容的质量更高，耗时较长。  fast：快速模式，生成内容的耗时更短，效果略低于标准模式；`seedream-image-v5.0-lite、seedream-image-v5.0-flash` 当前不支持。 |
+| optimize\_prompt\_options.mode | 否 | string | 优化模式。  standard：标准模式，生成内容的质量更高，耗时较长。  fast：快速模式，生成内容的耗时更短，效果略低于标准模式；`seedream-image-v5.5、seedream-image-v5.0-lite、seedream-image-v5.0-flash` 当前不支持。 |
 | output\_format | 否 | string | 图像格式。  指定生成图像的文件格式。可选值：  png  jpeg |
-| background | 否 | string | 图片透明通道。  用于控制是否生成带透明通道的图片。可选值：  transparent：透明背景模式，输出带有透明背景的图。  opaque：不透明背景模式，生成常规的实体背景图。  模型支持 ：  `seedream-image-v5.0-pro`  `seedream-image-v5.0-flash` |
+| background | 否 | string | 图片透明通道。  用于控制是否生成带透明通道的图片。可选值：  transparent：透明背景模式，输出带有透明背景的图。  opaque：不透明背景模式，生成常规的实体背景图。  auto：模型根据提示词和 output\_format 自动判断。 （仅 seedream-image-v5.5支持）  模型支持 ：  `seedream-image-v5.0-pro`  `seedream-image-v5.0-flash`  `seedream-image-v5.5` |
 | response\_format | 否 | string | 返回格式。  指定生成图像的返回格式。支持以下两种返回方式：  url：返回图片下载链接，链接在图片生成后12小时内有效，请及时下载图片。  b64\_json：以 Base64 编码字符串的 JSON 格式返回图像数据。 |
 | sequential\_image\_generation | 否 | string | 组图模式。  控制是否关闭组图功能（组图：基于您输入的内容，生成的一组内容关联的图片）。  auto：自动判断模式，模型会根据用户提供的提示词自主判断是否返回组图以及组图包含的图片数量。  disabled：关闭组图功能，模型只会生成一张图。  模型支持：  `seedream-image-v5.0-lite` |
 | sequential\_image\_generation\_options | 否 | object | 组图配置。  组图功能的配置。仅当 sequential\_image\_generation 为 auto 时生效。  模型支持：  `seedream-image-v5.0-lite` |
@@ -140,13 +140,13 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/si-image/generation' \\
 
 ### 图片素材通用约束
 
-参考图片 `seedream-image-v5.0-pro、seedream-image-v5.0-flash` 支持最多10 张，`seedream-image-v5.0-lite` 支持最多14 张；支持图片 URL 或 Base64；格式支持 jpeg/png/webp/bmp/tiff/gif/heic/heif，像素最小 14 x 14，总像素不大于3600万，比例须小于 1:16 或 16:1，单图 ≤ 30MB，POST body ≤ 20MB。
+参考图片 `seedream-image-v5.5、seedream-image-v5.0-pro、seedream-image-v5.0-flash` 支持最多10 张，`seedream-image-v5.0-lite` 支持最多14 张；支持图片 URL 或 Base64；格式支持 jpeg/png/webp/bmp/tiff/gif/heic/heif，像素最小 14 x 14，总像素不大于3600万，比例须小于 1:16 或 16:1，单图 ≤ 30MB，POST body ≤ 20MB。
 
 ## 常见问题
 
 #### **1. 文生图和参考生图怎么区分？**
 
-同一接口：传 `images` 即为参考生图（以图中主体为参考）；不传 `images` 即为文生图（仅凭 prompt 生成）。`seedream-image-v5.0-pro` 两种模式都支持。
+同一接口：传 `images` 即为参考生图（以图中主体为参考）；不传 `images` 即为文生图（仅凭 prompt 生成）。
 
 #### **2. 生成结果图片链接会过期吗？**
 

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-regeneration.md -->
-<!-- Source SHA-256: d94dd5422c89a24214c75db641203b5945010c62170ee9200e554efef0e06ba3 -->
+<!-- Source SHA-256: bac66f41f7e935d5bbe36c3fb096b5ccc50d4afaa6008209d841b7311f4cdab0 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -50,7 +50,7 @@ paths:
 
 
         - **按任务 ID 再生成（`source_task_id`）**：传入一个已有 `/v2/video_generation` 成功任务的
-        `source_task_id`，以其产物为源再生成。该模式需开通白名单；源任务须属于当前账号、状态为 `succeeded`，且仍在
+        `source_task_id`，以该任务的视频为源再生成。该模式需开通白名单；源任务须属于当前账号、状态为 `succeeded`，且仍在
         `/v2/query/video_generation` 的 7 天查询窗口内。无需再传 `content`。
 
         - **按源视频再生成（`base_video`）**：在 `content` 中提供且仅提供一个
@@ -60,6 +60,10 @@ paths:
         本接口为异步接口，创建成功后返回
         `task_id`，通过[查询任务](/api-reference/video-generation-v2-query)轮询任务状态；`task_type`
         为 `regeneration`。当前支持模型：`MiniMax-H3`。
+
+
+        可通过可选参数 `generate_audio` 控制再生成视频是否包含音频。按 `source_task_id` 再生成时，若源任务设置了
+        `generate_audio=false`，结果仍为无声视频。
       operationId: videoRegenerationV2Create
       parameters:
         - name: Content-Type
@@ -137,6 +141,29 @@ paths:
                         url: https://your-cdn.example.com/h3-r2va-768p.mp4
                       role: base_video
                   resolution: 2K
+              按源视频再生成无声视频:
+                description: base_video 须符合 768P 输入规格；设置 generate_audio=false 输出无声视频。
+                value:
+                  model: MiniMax-H3
+                  content:
+                    - type: text
+                      text: >-
+                        史诗级太空歌剧院线预告：女舰长独自站在巨大观景窗前，最后一支舰队正在集结并跃迁离去，强光爆闪、舰桥震动，她被留在原地。
+                    - type: video_url
+                      video_url:
+                        url: https://your-cdn.example.com/h3-t2va-768p.mp4
+                      role: base_video
+                  resolution: 2K
+                  generate_audio: false
+              按无声源任务 ID 再生成:
+                description: >-
+                  将 source_task_id 替换为以 generate_audio=false 创建且已成功的 768P 源任务
+                  ID。即使本次传 true，仍输出无声视频。
+                value:
+                  model: MiniMax-H3
+                  source_task_id: '424010985738629'
+                  resolution: 2K
+                  generate_audio: true
         required: true
       responses:
         '200':
@@ -209,14 +236,21 @@ components:
         source_task_id:
           type: string
           description: >-
-            已有 `/v2/video_generation` **成功任务**的
-            `task_id`，以其产物为源再生成。使用限制：需开通白名单；源任务须属于当前账号、状态为 `succeeded`，且仍可通过
+            已有 `/v2/video_generation` **成功的 768P 任务**的
+            `task_id`，以该任务的视频为源再生成。使用限制：需开通白名单；源任务须属于当前账号、状态为 `succeeded`，且仍可通过
             `/v2/query/video_generation` 查到（创建于 7 天内）。
         resolution:
           type: string
           description: 视频再生成的目标分辨率，必填。当前支持 `2K`。
           enum:
             - 2K
+        generate_audio:
+          type: boolean
+          description: |-
+            控制再生成视频是否包含音频。可选，不传时沿用源任务设置。
+
+            - 源任务未设置 `generate_audio=false`：不传或传 `true` 输出有声视频，传 `false` 输出无声视频。
+            - 源任务设置了 `generate_audio=false`：无论本次取值，均输出无声视频。
         callback_url:
           type: string
           description: 任务状态变更的回调 URL,可选。行为同创建视频生成任务的 `callback_url`。
@@ -268,6 +302,10 @@ components:
             | 总帧数 | 107–362 帧，每档递增 17 帧（约 4–15 秒） |
 
 
+            设置 `generate_audio=false` 不改变上述输入要求。无音轨输入会在异步媒体校验阶段被拒绝；返回 `task_id`
+            不代表媒体校验通过，请查询任务终态。
+
+
             ---
 
 
@@ -293,6 +331,14 @@ components:
           description: 视频再生成的目标分辨率，必填。当前支持 `2K`。
           enum:
             - 2K
+        generate_audio:
+          type: boolean
+          description: |-
+            控制再生成视频是否包含音频。可选，默认 `true`。
+
+            - `true`：输出有声视频。
+            - `false`：输出无声视频。
+          default: true
         callback_url:
           type: string
           description: 任务状态变更的回调 URL,可选。行为同创建视频生成任务的 `callback_url`。

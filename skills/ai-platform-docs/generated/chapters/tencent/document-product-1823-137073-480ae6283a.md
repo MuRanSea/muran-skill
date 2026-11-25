@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137073 -->
-<!-- Source SHA-256: 5458cb5b4acdbf85d10d0ee0ebffc3226bc219a78890221e6cb8f4beb2728888 -->
+<!-- Source SHA-256: 76458fcec84a7810e9d559c0950c32d9bbcf2a1fca4674952589349113a99164 -->
 
 # Tripo-3D-Rigging-Check 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137073
-最近更新时间：2026-10-24 13:10:06
+最近更新时间：2026-11-23 14:04:01
 
 ## 简介
 
@@ -32,7 +32,7 @@ Tripo 绑骨前检查接口，检查模型是否可以绑骨，并返回推荐�
 
 ### 2. 并发额度
 
-默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+默认提供 3 个并发，代表最多可同时处理 3 个已提交的任务，超出并发限制的任务需等待前面的任务处理完成后才能开始处理。
 
 并发任务数：表示在调用对应服务的时段内最大可运行的任务数，该任务未完成时，无法提交下一个任务，该任务完成后，可提交下一个任务。
 
@@ -42,9 +42,7 @@ Tripo 绑骨前检查接口，检查模型是否可以绑骨，并返回推荐�
 
 **输入参数**
 
-| 参数名称 | 必选 | 类型 | 参数描述 |
-| --- | --- | --- | --- |
-| input | 是 | string | 模型 URL：可公开访问的 3D 模型文件直链。  示例： https://example.com/model.glb    支持格式：GLB  最大文件大小：**150 MB** |
+<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div>参数名称</div></td><td><div>必选</div></td><td><div>类型</div></td><td><div>参数描述</div></td></tr><tr><td colspan="1" rowspan="1"><div>model</div></td><td colspan="1" rowspan="1"><div>是</div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>模型名称，默认为：tripo-3d-rigging-check</div><div>示例值：tripo-3d-rigging-check</div></td></tr><tr><td><div>input</div></td><td><div>是</div></td><td><div> string</div></td><td><div>模型 URL：可公开访问的 3D 模型文件直链。</div><div>示例： https://example.com/model.glb</div><div></div><div>支持格式：GLB</div><div>最大文件大小：<b>150 MB</b></div></td></tr></tbody></table>
 
 **输出参数**
 

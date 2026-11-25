@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132232 -->
-<!-- Source SHA-256: b4986452e4fc21b50c9ea47479a2330f6f290cf56c3488621339ea5ce407e281 -->
+<!-- Source SHA-256: 1e3993b6f99118957645457d168ea7986c91820e07ed6adadc41f2f5b82c31f9 -->
 
 # Kimi 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132232
-最近更新时间：2026-10-24 14:51:30
+最近更新时间：2026-11-13 15:58:30
 
 Kimi 系列模型兼容 OpenAI / Anthropic 协议，可直接通过 OpenAI SDK 或标准 HTTP 接口调用。本文给出常用场景的 5 语言调用示例（cURL / Python / Node.js / Java / Go），并说明 Kimi 在思考模式、多模态等方面的特殊用法。
 
@@ -16,7 +16,15 @@ Kimi 系列模型兼容 OpenAI / Anthropic 协议，可直接通过 OpenAI SDK �
 
 TokenHub 当前支持以下 Kimi 模型（具体以 [模型列表](https://cloud.tencent.com/document/product/1823/130051) 为准）：
 
-<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型 ID</div></td><td><div>类型</div></td><td><div>思考能力</div></td><td><div>视觉能力</div></td><td><div>视频能力</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>kimi-k3.1-pro-highspeed</code></div></td><td colspan="1" rowspan="1"><div>通用对话模型</div></td><td colspan="1" rowspan="1"><div>仅思考（不可关闭）</div></td><td colspan="1" rowspan="1"><div>支持</div></td><td colspan="1" rowspan="1"><div>支持</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>kimi-k3.1-pro</code></div></td><td colspan="1" rowspan="1"><div>通用对话模型</div></td><td colspan="1" rowspan="1"><div>仅思考（不可关闭）</div></td><td colspan="1" rowspan="1"><div>支持</div></td><td colspan="1" rowspan="1"><div>支持</div></td></tr><tr><td><div><code>kimi-k3</code></div></td><td><div>通用对话模型</div></td><td><div>仅思考（不可关闭）</div></td><td><div>支持</div></td><td><div>支持</div></td></tr><tr><td><div><code>kimi-k2.8-preview</code></div></td><td><div>通用对话模型</div></td><td><div>仅思考（不可关闭）</div></td><td><div>支持</div></td><td><div>支持</div></td></tr><tr><td><div><code>kimi-k2.7-code-highspeed</code></div></td><td colspan="1" rowspan="1"><div>Coding 模型</div></td><td colspan="1" rowspan="1"><div>仅思考（不可关闭）</div></td><td colspan="1" rowspan="1"><div>支持</div></td><td colspan="1" rowspan="1"><div>支持</div></td></tr><tr><td><div><code>kimi-k2.7-code</code></div></td><td><div>Coding 模型</div></td><td><div>仅思考（不可关闭）</div></td><td><div>支持</div></td><td><div>支持</div></td></tr><tr><td><div><code>kimi-k2.6</code></div></td><td><div>通用对话模型</div></td><td><div>可开关（默认开启）</div></td><td><div>支持</div></td><td><div>支持</div></td></tr></tbody></table>
+| 模型 ID | 类型 | 思考能力 | 视觉能力 | 视频能力 |
+| --- | --- | --- | --- | --- |
+| `kimi-k3.1-pro-highspeed` | 通用对话模型 | 仅思考（不可关闭） | 支持 | 支持 |
+| `kimi-k3.1-pro` | 通用对话模型 | 仅思考（不可关闭） | 支持 | 支持 |
+| `kimi-k3` | 通用对话模型 | 仅思考（不可关闭） | 支持 | 支持 |
+| `kimi-k2.8-preview` | 通用对话模型 | 仅思考（不可关闭） | 支持 | 支持 |
+| `kimi-k2.7-code-highspeed` | Coding 模型 | 仅思考（不可关闭） | 支持 | 支持 |
+| `kimi-k2.7-code` | Coding 模型 | 仅思考（不可关闭） | 支持 | 支持 |
+| `kimi-k2.6` | 通用对话模型 | 可开关（默认开启） | 支持 | 支持 |
 
 ## Kimi 各模型调用差异
 
@@ -35,6 +43,7 @@ Kimi 系列模型整体兼容 OpenAI Chat Completions 协议，但不同模型�
 | 图片输入 | 支持 Base64 与公网 URL 直链两种方式，单次请求 body ≤ 100M | 支持 Base64 与公网 URL 直链两种方式，单次请求 body ≤ 100M | 支持 Base64 与公网 URL 直链两种方式，单次请求 body ≤ 100M | 支持 Base64 与公网 URL 直链两种方式，单次请求 body ≤ 100M |
 | 视频输入 | 支持 | 支持 | 支持 | 支持 |
 | 上下文长度 | 1M | 1M | 256K | 256K |
+| 缓存写入（Cache Write） | 支持 | 支持，cache write 不单独计费，用量计入 input token 并按 input 价格计费。 | 不支持 | 不支持 |
 
 ## 多模态输入限制
 
@@ -1140,3 +1149,61 @@ func main() {
 **注意：**
 
 `keep` 只影响**历史**思考是否传给模型，不影响**当前轮次**是否产生思考；推荐在需要连续推理的场景下与 `type: "enabled"` 搭配使用。
+
+## 缓存写入
+
+缓存写入（Cache Write）用于复用多次请求中重复的系统提示词、工具定义和参考资料。将固定内容放在请求前部、变化的问题放在后部，有助于提高缓存命中率。
+
+### 支持的模型
+
+支持 `kimi-k3.1-pro`、`kimi-k3.1-pro-highspeed` 和 `kimi-k3`。模型及地域对应的缓存写入价格，请参见 [模型价格](https://cloud.tencent.com/document/product/1823/130055)。
+
+缓存有效期（TTL）支持 `5m` 和 `1h`，默认使用 `5m`。连续请求间隔较短时使用默认值；预计间隔超过5分钟、但能在1小时内复用时，可选择 `1h`。
+
+### 调用示例
+
+以下以 `kimi-k3`、1小时缓存为例，仅展示两种协议的典型 cURL 调用。请将 `YOUR_API_KEY` 替换为 TokenHub API Key，并将示例参考资料替换为实际长文本；短请求不一定产生缓存写入。
+
+**OpenAI Chat Completions 协议**
+
+在请求顶层传入 `prompt_cache_options`：
+
+```bash
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
+  -H 'Authorization: Bearer YOUR_API_KEY' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "model": "kimi-k3",
+    "messages": [
+      {"role": "system", "content": "你是产品文档助手。参考资料：<需重复使用的完整产品文档>"},
+      {"role": "user", "content": "这个产品支持哪些认证方式？"}
+    ],
+    "prompt_cache_options": {"mode": "implicit", "ttl": "1h"}
+  }'
+```
+
+`mode` 固定为 `implicit`。缓存写入量和命中量分别通过 `usage.prompt_tokens_details.cache_write_tokens`、`usage.prompt_tokens_details.cached_tokens` 查看。
+
+**Anthropic Messages 协议**
+
+在请求顶层传入 `cache_control`，不要放在 `messages` 的内容块中；内容块中的同名标记会被忽略。
+
+```bash
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/messages' \\
+  -H 'x-api-key: YOUR_API_KEY' \\
+  -H 'anthropic-version: 2023-06-01' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "model": "kimi-k3",
+    "max_tokens": 1024,
+    "system": "你是产品文档助手。参考资料：<需重复使用的完整产品文档>",
+    "messages": [
+      {"role": "user", "content": "这个产品支持哪些认证方式？"}
+    ],
+    "cache_control": {"type": "ephemeral", "ttl": "1h"}
+  }'
+```
+
+缓存写入量和命中量分别通过 `usage.cache_creation_input_tokens`、`usage.cache_read_input_tokens` 查看。
+
+省略上述缓存配置时，两种协议均默认按 `5m` 读写缓存。更多参数请参见原厂 [Chat Completions API](https://platform.kimi.com/docs/api/chat)、[Messages API](https://platform.kimi.com/docs/api/messages) 和 [上下文缓存最佳实践](https://platform.kimi.com/docs/guide/context-caching)。

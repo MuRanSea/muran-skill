@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/4-0-flash/image-to-video.md -->
-<!-- Source SHA-256: 365b193dbe47e79cfe67582c209dd09aa33da8d584117db3f65374f99a3c061e -->
+<!-- Source SHA-256: f0ad00669eca602d25273fa25722fef2f78215d69541786c41d4888b610c4c69 -->
 
 > ## Documentation Index
 >
@@ -62,6 +62,7 @@
     }
   ]
   ```
+- `contents[].type.prompt`: 文本提示词，可包含正向描述和负向描述
 - `contents[].type.prompt`: 文本提示词内容长度与字符类型有关。如为纯英文，内容长度不超过26,000个字符；如为纯非英文，内容长度不能超过11,000个字符；如为英文&非英文混合输入，需保持英文字符数 ÷ 26,000 + 非英文字符数 ÷ 11,000 ≤ 1。
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
 - `contents[].type.prompt`: ```json
@@ -80,6 +81,7 @@
   >
   > 
   > 3. **本接口仅支持首帧图生视频，如需组合参考图片、视频或主体，请使用全能参考接口。**
+- `contents[].type.first_frame`: 首帧图参考素材
 - `contents[].type.first_frame`: 通过JSON的格式定义，具体如下：
 - `contents[].type.first_frame`: ```json
   {
@@ -91,7 +93,7 @@
 - `contents[].type.first_frame`: 图片文件大小不能超过30MB。
 - `contents[].type.first_frame`: 图片宽高尺寸不小于300px，图片宽高比要在2:5 ~ 5:2之间。
 - `contents[].type.first_frame`: 仅支持首帧图生视频。
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频
 - `settings.duration`: 指定本参数时，以参数值为准，优先于 Prompt 中的时长要求。
 - `settings.duration`: 未指定本参数时，采用模型从 Prompt 中识别到的明确时长要求。例如，“生成一段 15 秒的视频”将目标时长设为 15 秒。
 - `settings.duration`: 未指定本参数，且 Prompt 中未识别到明确的时长要求时，默认为 10 秒。

@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/goods-studio.md -->
-<!-- Source SHA-256: adb17c0b7c446131fc43666120bfc87c94d7a30dfb61fc76c803d6db3631f1d1 -->
+<!-- Source SHA-256: 7b4e1a55c11f0faafeaa3bbf1a88e7f921fc64a751cbd840341a861d6ea9474e -->
 
 > ## Documentation Index
 >
@@ -93,6 +93,7 @@
 - `contents[].type`: `ref_image`：商品图片标识。
   - `goods_title`：商品标题标识。
   - `goods_description`：商品描述标识。
+- `contents[].type.ref_image`: 商品图片。
 - `contents[].type.ref_image`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -108,6 +109,7 @@
 - `contents[].type.ref_image`: 图片文件大小不能超过 50MB。
 - `contents[].type.ref_image`: 图片宽高尺寸不小于 300px，图片宽高比要在 1:2.5 ~ 2.5:1 之间。
 - `contents[].type.ref_image`: 最多支持同时上传 5 张商品图片。
+- `contents[].type.goods_title`: 商品标题。
 - `contents[].type.goods_title`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -115,6 +117,7 @@
     "text": "string" // 文本提示词内容，内容长度不能超过200个字符；必填
   }
   ```
+- `contents[].type.goods_description`: 商品描述。
 - `contents[].type.goods_description`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -122,8 +125,8 @@
     "text": "string" // 文本提示词内容，内容长度不能超过2000个字符
   }
   ```
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频。
-  - 1080p：输出清晰度为 1080P 的视频。
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频。
+  - 1080p：输出清晰度为 1080p 的视频。
 - `options`: ```json
   "options": {
     "callback_url": "https://example.com/cb", // 本次任务结果回调通知地址。如果配置，服务端会在任务状态发生变更时主动通知
@@ -340,6 +343,7 @@ curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
   ]
   ```
 - `filters[].key`: `status`：任务状态
+- `filters[].key.status`: 按任务状态筛选。
 - `filters[].key.status`: 通过 JSON 的格式定义，具体如下：
   ```json
   {

@@ -1,11 +1,11 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-agent-query.md -->
-<!-- Source SHA-256: 05fa5614a3c31906e54937e698df2ae08e4bce1b9d2fbb47c2e9b7360a6b494c -->
+<!-- Source SHA-256: 13286ab6e306f170e8126d88e9fc9afba05d41623fe660a866a354798b8effd6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# 查询视频Agent任务状态
+# 查询视频 Agent 任务状态
 
 > 使用本接口查询使用视频Agent生成视频的任务状态。
 

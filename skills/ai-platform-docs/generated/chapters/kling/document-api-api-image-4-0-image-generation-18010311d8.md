@@ -1,0 +1,556 @@
+<!-- Official source: https://klingai.com/document-api/api/image/4-0/image-generation.md -->
+<!-- Source SHA-256: 6f0431848cb77d50577890ae7cbcb2ca0ce7cdbe12cdfd758a8730f731583e3a -->
+
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: https://klingai.com/document-api/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# 图片生成
+
+> 来源: https://klingai.com/document-api/api/image/4-0/image-generation
+> 语言: zh
+> 当前 Tab: 图片生成
+> 同组 Tab: 图片生成 / 长图生成 / 主体管理
+> 此内容为面向 LLM 优化的 Markdown，已展开页面内 Tab，并省略页面目录、复制按钮等 UI 控件。
+
+---
+
+## 创建任务
+
+### 接口概览
+
+- Method: `POST`
+- Path: `/image-generation/kling-4.0`
+- Auth: `Authorization: Bearer <API_KEY>`
+- Content-Type: `application/json`
+
+### 说明
+
+支持文生单图、图生单图、文生组图或图生组图。单图模式可生成多张独立图片，组图模式生成内容关联的一组图片。
+
+### Headers
+
+| 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
+|---|---|---:|---|---|---|
+| `Content-Type` | string | 是 | `application/json` | - | 数据交换格式 |
+| `Authorization` | string | 是 | - | - | 鉴权信息，参考接口鉴权 |
+
+### Request Body
+
+| 字段路径 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
+|---|---|---:|---|---|---|
+| `contents` | array | 是 | - | - | 参考素材合集，如：提示词、图片、主体。 |
+| `contents[].type` | string | 是 | - | `prompt`, `refer_image`, `element` | 素材类型，支持：提示词、参考图、主体。 |
+| `settings` | object | 否 | - | - | 输出配置相关参数，如清晰度、宽高比等。 |
+| `settings.result_type` | string | 否 | `single` | `single`, `series` | 生成结果类型：单图/组图 |
+| `settings.n` | int | 否 | `1` | - | 生成独立图片数量。 |
+| `settings.series_amount` | int | 否 | `4` | - | 生成组图张数。 |
+| `settings.resolution` | string | 否 | `2k` | `2k`, `4k`, `8k` | 生成图片的清晰度，单图与组图均适用。 |
+| `settings.aspect_ratio` | string | 否 | `auto` | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `3:2`, `2:3`, `21:9`, `auto` | 生成图片的宽高比。 |
+| `options` | object | 否 | - | - | 通用配置，如回调地址、是否含水印等 |
+| `options.callback_url` | string | 否 | - | - | 本次任务结果回调通知地址 |
+| `options.external_task_id` | string | 否 | - | - | 自定义任务ID |
+| `options.watermark_info` | object | 否 | - | - | 是否同时生成含水印的结果 |
+| `options.watermark_info.enabled` | boolean | 否 | `false` | - | true 为生成，false 为不生成，默认 false。 |
+
+#### Request Body 字段补充说明
+
+- `contents`: 参考格式如下，参数说明详见下文：
+- `contents`: ```json
+  "contents": [
+    {
+      "type": "prompt",
+      "text": "string"
+    },
+    {
+      "type": "refer_image",
+      "url": "string",
+      "id": "string"
+    },
+    {
+      "type": "element",
+      "element_id": "string",
+      "id": "string"
+    }
+  ]
+  ```
+- `contents[].type`: 素材必须包含提示词，prompt必填且非空。
+- `contents[].type`: 图片和主体合计最多 10 个，提示词不占参考名额。
+- `contents[].type.prompt`: 文本提示词，必填非空，可包含正向与负向描述。
+- `contents[].type.prompt`: 可将提示词模板化来满足不同的图像生成需求。
+- `contents[].type.prompt`: 提示词长度，纯英文不超过 50,000 字符，纯非英文不超过 21,000 字符；混合输入需满足：英文字符数/50000 + 非英文字符数/21000 ≤ 1。
+- `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
+- `contents[].type.prompt`: ```json
+  {
+    "type": "prompt", // 素材类型，固定参数值：prompt；必填
+    "text": "string" // 文本提示词内容；必填
+  }
+  ```
+- `contents[].type.refer_image`: 参考图片类素材相关参数。
+- `contents[].type.refer_image`: 通过JSON的格式定义，具体如下：
+- `contents[].type.refer_image`: ```json
+  {
+    "type": "refer_image", // 图片素材标识
+    "url": "string", // 素材内容，支持通过url或base64的方式提供；必填
+    "id": "string" // 素材索引ID，用于在prompt中指定，同任务中当前参数不得重复
+  }
+  ```
+- `contents[].type.refer_image`: 支持传入图片 URL 或Base64编码，URL 必须可访问，值不得为空。
+- `contents[].type.refer_image`: 图片格式支持 .jpg/.jpeg/.png。
+- `contents[].type.refer_image`: 单张图片文件不超过 30 MB，宽、高均不小于 300 px，宽高比为 2:5–5:2。
+- `contents[].type.element`: 参考主体类素材相关参数。
+- `contents[].type.element`: 通过JSON的格式定义，具体如下：
+- `contents[].type.element`: ```json
+  {
+    "type": "element", // 素材类型，固定参数值：element；必填
+    "element_id": "string", // 主体ID，由系统生成，通过查询主体相关API返回；必填
+    "id": "string" // 素材索引ID，用于在prompt中指定，同任务中当前参数不得重复；
+  }
+  ```
+- `contents[].type.element`: 仅支持多图主体（通过图片定制的主体）。不同类型主体，适用范围不同，请注意区分。
+- `contents[].type.element`: 参考图片数量与主体数量之和不得超过 10。
+- `contents[].type.element`: 更多官方主体信息详见：[主体库](https://klingai.com/document-api/api/image/4-0/elements)。
+- `settings.result_type`: single ：为独立图片。可通过 n 生成多张；
+  - series ：为关联组图。组图模式下同组图片共享 group_id，按组内顺序返回。
+- `settings.n`: 单图模式选填
+- `settings.n`: 取值范围： [1,9]。
+- `settings.n`: 当 result_type=series 时本参数无效，组图数量由 series_amount 指定。
+- `settings.series_amount`: 类型：integer/string；组图模式选填
+- `settings.series_amount`: 取值范围：[2,10] 或字符串auto。
+- `settings.series_amount`: auto 根据输入内容智能决定 2–10 张，占用与实际生成张数对应的并发量。
+- `settings.series_amount`: 仅 result_type=series 时生效。
+- `settings.resolution`: 2k：2K 高清；
+  - 4k：4K 高清；
+  - 8k：8K 超清；
+- `settings.aspect_ratio`: auto：根据传入内容智能生成图片宽高比。单图与组图均适用。
+- `options.callback_url`: 如果配置，服务端会在任务状态发生变更时主动通知
+- `options.callback_url`: 具体通知的消息 schema 见 [Callback 协议](https://klingai.com/document-api/api/get-started/callbacks)
+- `options.external_task_id`: 传入不会覆盖系统生成的任务ID，但支持通过该ID进行任务查询
+- `options.external_task_id`: 请注意，单用户下需要保证唯一性
+- `options.watermark_info`: 通过 enabled 参数定义：
+  ```json
+  "watermark_info": {
+    "enabled": false // 是否生成含水印结果，true 为生成，false 为不生成；默认为 false
+  }
+  ```
+- `options.watermark_info`: 暂不支持自定义水印
+
+### Request Example
+
+```bash
+curl --request POST \
+  --url "https://api-beijing.klingai.com/image-generation/kling-4.0" \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
+  --header "Content-Type: application/json" \
+  --data '{
+  "contents": [
+    {
+      "type": "prompt",
+      "text": "以 @dog 中的小狗为参考，生成一张三维动画风格的角色海报，保留毛色和外观特征，暖色灯光，背景简洁。"
+    },
+    {
+      "type": "refer_image",
+      "url": "https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/kling-qa-test/dog.png",
+      "id": "dog"
+    }
+  ],
+  "settings": {
+    "result_type": "single",
+    "n": 1,
+    "resolution": "2k",
+    "aspect_ratio": "1:1"
+  }
+}'
+```
+
+### Response Example
+
+```json
+{
+  "code": 0, // 错误码，0 为成功，具体定义见错误码文档
+  "message": "SUCCEED", // 接口消息
+  "request_id": "example-request-id", // 请求跟踪 ID，由系统生成
+  "data": {
+    "id": "example-task-id", // 系统任务 ID，由平台生成
+    "status": "submitted", // 任务状态：submitted/processing/succeeded/failed
+    "create_time": 1790000000000, // 任务创建时间，Unix 毫秒时间戳
+    "update_time": 1790000000000, // 任务更新时间，Unix 毫秒时间戳
+    "external_id": "string" // 创建时指定的自定义任务 ID（如有）
+  }
+}
+```
+
+## 更多场景调用示例
+
+### 图生组图（1 张参考图，4 张关联图片，2K，3:4）
+
+```cURL
+curl --request POST \
+  --url "https://api-beijing.klingai.com/image-generation/kling-4.0" \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
+  --header "Content-Type: application/json" \
+  --data '{
+  "contents": [
+    {
+      "type": "prompt",
+      "text": "以 @dog 中的小狗为主角，生成四张连贯的三维动画风格故事图片，依次表现：走进咖啡馆、在窗边落座、闻咖啡香、在门口告别。保持小狗的毛色、外观和画面风格一致，每张图片对应一个情节。"
+    },
+    {
+      "type": "refer_image",
+      "url": "https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/kling-qa-test/dog.png",
+      "id": "dog"
+    }
+  ],
+  "settings": {
+    "result_type": "series",
+    "series_amount": 4,
+    "resolution": "2k",
+    "aspect_ratio": "3:4"
+  },
+  "options": {
+    "external_task_id": "",
+    "watermark_info": {
+      "enabled": false
+    }
+  }
+}'
+```
+
+---
+
+## 查询任务（按任务ID）
+
+### 接口概览
+
+- Method: `GET`
+- Path: `/tasks`
+- Auth: `Authorization: Bearer <API_KEY>`
+- Content-Type: `application/json`
+
+### 说明
+
+> 注意：当前API仅支持查询非实时/异步任务
+
+### Headers
+
+| 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
+|---|---|---:|---|---|---|
+| `Content-Type` | string | 是 | `application/json` | - | 数据交换格式 |
+| `Authorization` | string | 是 | - | - | 鉴权信息，参考接口鉴权 |
+
+### Query Params
+
+| 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
+|---|---|---:|---|---|---|
+| `task_ids` | string | 否 | - | - | 需要查询的系统定义的任务ID |
+| `external_task_ids` | string | 否 | - | - | 需要查询的自定义任务ID |
+
+#### Query Params 字段补充说明
+
+- `task_ids`: 查询参数，请将值填写在 URL query string 中
+- `task_ids`: 查询任务时，task_ids 与 external_task_ids 两种 ID 至少且只能选择一种，不可同时使用
+- `task_ids`: 支持批量查询，用 "," 分隔
+- `external_task_ids`: 查询参数，请将值填写在 URL query string 中
+- `external_task_ids`: 查询任务时，task_ids 与 external_task_ids 两种 ID 至少且只能选择一种，不可同时使用
+- `external_task_ids`: 支持批量查询，用 "," 分隔
+
+### Request Example
+
+```bash
+curl --location 'https://api-beijing.klingai.com/tasks?task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
+
+```bash
+curl --location 'https://api-beijing.klingai.com/tasks?external_task_ids=123' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}"
+```
+
+### Response Example
+
+```json
+{
+  "code": 0, // 错误码；具体定义见错误码
+  "message": "string", // 错误信息
+  "request_id": "string", // 请求ID，系统生成，用于跟踪请求、排查问题
+  "data": [
+    {
+      "id": "893605946402811985", // 被查询的任务ID
+      "status": "string", // 任务状态，枚举值：submitted（已提交）、processing（处理中）、succeeded（成功）、failed（失败）
+      "message": "string", // 任务状态信息，当任务失败时展示失败原因（如触发平台的内容风控等）
+      "create_time": 1781080778802, // 任务创建时间，Unix 时间戳，单位 ms
+      "update_time": 1781080794151, // 任务更新时间，Unix 时间戳，单位 ms
+      "external_id": "string", // 该任务的自定义任务ID（如有）
+      "outputs": [
+        {
+          "type": "video", // 生成结果为“视频”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "id": "string", // 视频ID，由系统生成
+          "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
+          "watermark_url": "string", // 含水印视频下载URL，防盗链格式
+          "duration": "string" // 生成的视频的时长，单位：秒
+        },
+        {
+          "type": "image", // 生成结果为“图片”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
+          "watermark_url": "string", // 含水印图片下载URL，防盗链格式
+          "group_id": "string" // 仅在生成组图时出现，用于标记分组关系
+        },
+        {
+          "type": "audio", // 生成结果为“音频”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "id": "string", // 音频ID，由系统生成
+          "mp3_url": "string", // 生成结果的URL，mp3+防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
+          "wav_url": "string", // 生成结果的URL，wav+防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
+          "mp3_duration": "string", // 生成的mp3格式的音频的时长，单位：秒
+          "wav_duration": "string" // 生成的wav格式的音频的时长，单位：秒
+        },
+        {
+          "type": "voice", // 生成结果为“音色”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "id": "string", // 音色ID，由系统生成
+          "name": "string", // 音频名称
+          "url": "string", // 试听音频下载链接
+          "owned_by": "string", // 音色来源，kling为官方音色库，数字为创作者ID
+          "status": "succeeded" // 音色状态，分为正常和已被删除，枚举值分别为：succeeded, deleted
+        },
+        {
+          "type": "element", // 生成结果为“主体”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "id": "string", // 主体ID，由系统生成
+          "name": "string", // 主体名称
+          "description": "string", // 主体描述
+          "element_type": "string", // 主体类型，分为视频角色主体和多图主体，枚举值分别为：video_character_elements和multi_image_elements
+          "references": [ // 主体相关素材
+            {
+              "type": "image", // “图片”素材时返回，各内容类型枚举值：image, video, voice
+              "role": "string", // 图片参考素材属性，分为正面参考图和其他参考图，枚举值分别为：frontal, refer
+              "url": "string" // 素材下载链接
+            },
+            {
+              "type": "video", // “视频”素材时返回，各内容类型枚举值：image, video, voice
+              "role": "refer", // 视频参考素材属性，固定值：refer
+              "url": "string" // 素材下载链接
+            },
+            {
+              "type": "voice", // “音色”素材时返回，各内容类型枚举值：image, video, voice
+              "role": "refer", // 音色参考素材属性，固定值：refer
+              "url": "string", // 素材下载链接
+              "id": "string", // 音色ID
+              "name": "string", // 音色名称
+              "owned_by": "string" // 音色来源，kling为官方音色库，数字为创作者ID
+            }
+          ],
+          "owned_by": "string", // 主体来源，kling为官方主体库，数字为创作者ID
+          "status": "string", // 主体状态，分为正常和已被删除，枚举值分别为：succeeded, deleted
+          "tags": [ // 主体标签相关信息
+            {
+              "id": 1, // 标签ID
+              "name": "string", // 标签名称
+              "description": "string" // 标签描述
+            }
+          ]
+        }
+      ],
+      "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
+        {
+          "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为cash，如果是消耗资源包则参数值为unit
+          "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
+          "amount": "string", // 扣减数额；消耗额度场景（charge_type=cash）时代表额度扣减折扣价，消耗资源包场景（charge_type=unit）时代表积分扣减量；十进制
+          "currency": "string", // 消耗单位，仅存在于消耗余额场景（charge_type=cash），固定枚举值：CNY, USD
+          "package_type": "string", // 消耗资源包类型，仅存在于消耗资源包场景（charge_type=unit），固定枚举值：video, image, audio
+          "list_price": "string" // 额度扣减刊例价，仅存在于消耗额度场景（charge_type=cash）
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+## 查询任务（按游标查询）
+
+### 接口概览
+
+- Method: `POST`
+- Path: `/tasks`
+- Auth: `Authorization: Bearer <API_KEY>`
+- Content-Type: `application/json`
+
+### 说明
+
+> 注意：当前API仅支持查询非实时/异步任务
+
+### Headers
+
+| 字段 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
+|---|---|---:|---|---|---|
+| `Content-Type` | string | 是 | `application/json` | - | 数据交换格式 |
+| `Authorization` | string | 是 | - | - | 鉴权信息，参考接口鉴权 |
+
+### Request Body
+
+| 字段路径 | 类型 | 必填 | 默认值 | 可选值 | 说明 |
+|---|---|---:|---|---|---|
+| `start_time` | string | 否 | `end_time - 30 天` | - | 任务创建筛选的开始时间 |
+| `end_time` | string | 否 | `当前时间` | - | 任务创建筛选的结束时间 |
+| `cursor` | string | 否 | - | - | 续页游标，即查询起点 |
+| `limit` | int | 否 | `100` | - | 查询任务数量 |
+| `filters` | array | 否 | - | - | 查询任务筛选条件，如任务状态、功能类型 |
+| `filters[].key` | string | 否 | - | `status`, `product_type` | 筛选维度 |
+| `filters[].values` | array | 否 | - | - | 筛选维度对应条件 |
+
+#### Request Body 字段补充说明
+
+- `start_time`: Unix 时间戳，单位 ms
+- `start_time`: 默认值为 end_time - 30 天
+- `start_time`: 开始时间需早于结束时间
+- `end_time`: 默认值为当前时间
+- `end_time`: Unix 时间戳，单位 ms
+- `end_time`: 结束时间需晚于开始时间
+- `cursor`: 参数值来自上次查询时返回的 next_cursor 参数
+- `cursor`: 当前参数不为空时，优先基于当前参数值查询，此时开始时间和结束时间参数将失效
+- `limit`: 最大值 500；当数量不足 500 时有多少展示多少
+- `filters`: 通过 key/value 的方式设置查询条件：
+  ```json
+  "filters": [
+    {
+      "key": "status", // 筛选维度，按任务状态筛选，固定参数值：status
+      "values": ["succeeded"]
+    },
+    {
+      "key": "product_type", // 筛选维度，按功能类型筛选，固定参数值：product_type
+      "values": ["image"]
+    }
+  ]
+  ```
+- `filters[].key`: status：按任务状态筛选
+  - product_type：按功能类型筛选
+- `filters[].values`: status：submitted、processing、succeeded、failed，依次为已提交、生成中、生成成功、生成失败
+- `filters[].values`: product_type：video、image、try_on，依次为视频、图像、虚拟试穿
+
+### Request Example
+
+```bash
+curl --location 'https://api-beijing.klingai.com/tasks' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
+  --data '{
+    "start_time": "1781193600000",
+    "end_time": "1781516352968",
+    "cursor": "",
+    "limit": 500,
+    "filters": [
+      {
+        "key": "status",
+        "values": ["succeeded"]
+      },
+      {
+        "key": "product_type",
+        "values": ["image"]
+      }
+    ]
+  }'
+```
+
+### Response Example
+
+```json
+{
+  "code": 0, // 错误码；具体定义见错误码
+  "message": "string", // 错误信息
+  "request_id": "string", // 请求ID，系统生成，用于跟踪请求、排查问题
+  "data": {
+    "result": [
+      {
+        "id": "string", // 被查询的任务ID
+        "status": "string", // 任务状态，枚举值：submitted（已提交）、processing（处理中）、succeeded（成功）、failed（失败）
+        "message": "string", // 任务状态信息，当任务失败时展示失败原因
+        "create_time": 1781080778802, // 任务创建时间，Unix 时间戳，单位 ms
+        "update_time": 1781080794151, // 任务更新时间，Unix 时间戳，单位 ms
+        "external_id": "string", // 该任务的自定义任务ID（如有）
+        "outputs": [
+        {
+          "type": "video", // 生成结果为“视频”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "id": "string", // 视频ID，由系统生成
+          "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
+          "watermark_url": "string", // 含水印视频下载URL，防盗链格式
+          "duration": "string" // 生成的视频的时长，单位：秒
+        },
+        {
+          "type": "image", // 生成结果为“图片”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "url": "string", // 生成结果的URL，防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
+          "watermark_url": "string", // 含水印图片下载URL，防盗链格式
+          "group_id": "string" // 仅在生成组图时出现，用于标记分组关系
+        },
+        {
+          "type": "audio", // 生成结果为“音频”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "id": "string", // 音频ID，由系统生成
+          "mp3_url": "string", // 生成结果的URL，mp3+防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
+          "wav_url": "string", // 生成结果的URL，wav+防盗链格式（请注意，为保障信息安全，生成的图片/视频会在30天后被清理，请及时转存）
+          "mp3_duration": "string", // 生成的mp3格式的音频的时长，单位：秒
+          "wav_duration": "string" // 生成的wav格式的音频的时长，单位：秒
+        },
+        {
+          "type": "voice", // 生成结果为“音色”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "id": "string", // 音色ID，由系统生成
+          "name": "string", // 音频名称
+          "url": "string", // 试听音频下载链接
+          "owned_by": "string", // 音色来源，kling为官方音色库，数字为创作者ID
+          "status": "succeeded" // 音色状态，分为正常和已被删除，枚举值分别为：succeeded, deleted
+        },
+        {
+          "type": "element", // 生成结果为“主体”时返回，不同生成内容类型返回值及相关字段会有区别；各内容类型枚举值：image, video, audio, element, voice
+          "id": "string", // 主体ID，由系统生成
+          "name": "string", // 主体名称
+          "description": "string", // 主体描述
+          "element_type": "string", // 主体类型，分为视频角色主体和多图主体，枚举值分别为：video_character_elements和multi_image_elements
+          "references": [ // 主体相关素材
+            {
+              "type": "image", // “图片”素材时返回，各内容类型枚举值：image, video, voice
+              "role": "string", // 图片参考素材属性，分为正面参考图和其他参考图，枚举值分别为：frontal, refer
+              "url": "string" // 素材下载链接
+            },
+            {
+              "type": "video", // “视频”素材时返回，各内容类型枚举值：image, video, voice
+              "role": "refer", // 视频参考素材属性，固定值：refer
+              "url": "string" // 素材下载链接
+            },
+            {
+              "type": "voice", // “音色”素材时返回，各内容类型枚举值：image, video, voice
+              "role": "refer", // 音色参考素材属性，固定值：refer
+              "url": "string", // 素材下载链接
+              "id": "string", // 音色ID
+              "name": "string", // 音色名称
+              "owned_by": "string" // 音色来源，kling为官方音色库，数字为创作者ID
+            }
+          ],
+          "owned_by": "string", // 主体来源，kling为官方主体库，数字为创作者ID
+          "status": "string", // 主体状态，分为正常和已被删除，枚举值分别为：succeeded, deleted
+          "tags": [ // 主体标签相关信息
+            {
+              "id": 1, // 标签ID
+              "name": "string", // 标签名称
+              "description": "string" // 标签描述
+            }
+          ]
+        }
+      ],
+        "billing": [ // 当任务产生多账户类型的余额消耗时，系统将返回多条数据。
+          {
+            "charge_type": "string", // 消耗账户类型，如果消耗的是额度则参数值为 cash，如果消耗资源包则参数值为 unit
+            "cash_type": "string", // 额度类型，仅存在于消耗额度场景（charge_type=cash）；如果消耗的是正式额度则参数值为balance，如果是消耗的是测试金则参数值为test_balance，如果消耗的是奖励金则参数值为reward_balance
+            "amount": "string", // 扣减数额；消耗额度场景（charge_type=cash）时代表额度扣减折扣价，消耗资源包场景（charge_type=unit）时代表积分扣减量；十进制
+            "currency": "string", // 消耗单位，仅存在于消耗余额场景（charge_type=cash），固定枚举值：CNY, USD
+            "package_type": "string", // 消耗资源包类型，仅存在于消耗资源包场景（charge_type=unit），固定枚举值：video, image, audio
+            "list_price": "string" // 额度扣减刊例价，仅存在于消耗额度场景（charge_type=cash）
+          }
+        ]
+      }
+    ],
+    "count": 1, // 查询结果数量
+    "next_cursor": "string", // 游标信息，可用于继续查询后续
+    "has_more": true // 基于游标信息，是否还有未查询到的数据
+  }
+}
+```

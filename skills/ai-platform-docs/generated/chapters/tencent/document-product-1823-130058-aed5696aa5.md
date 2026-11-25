@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130058 -->
-<!-- Source SHA-256: de56a53a1536cacb1ccacd2b8c73334d8b8b440b3f274df97907ead80a79a4c7 -->
+<!-- Source SHA-256: 1d06632545e10b7b3b301c375a44b581a81b069bc522c99084a1e0e5b4a98c01 -->
 
 # 快速入门
 
 官方来源：https://cloud.tencent.com/document/product/1823/130058
-最近更新时间：2026-10-23 18:08:00
+最近更新时间：2026-11-13 15:36:00
 
 本文将为您介绍如何在大模型服务平台 TokenHub 完成您的首次 API 调用。
 
@@ -16,11 +16,11 @@
 
 ### 步骤一：登录大模型服务平台 TokenHub 控制台
 
-登录 [腾讯云大模型服务平台 TokenHub 控制台](https://console.cloud.tencent.com/tokenhub/)，按照界面提示开通大模型服务平台 TokenHub 后，您可以在模型广场浏览选择模型，详细模型信息可参见 [模型列表](https://cloud.tencent.com/document/product/1823/130051)。
+登录 [腾讯云大模型服务平台 TokenHub 控制台](https://console.cloud.tencent.com/tokenhub/overview)，按照界面提示开通大模型服务平台 TokenHub 后，您可以在首页快速概览高频功能，或至[模型广场](https://console.cloud.tencent.com/tokenhub/models)浏览、选择模型，详细模型信息可参见 [模型列表](https://cloud.tencent.com/document/product/1823/130051)。
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/28eef8ef5fd4917633029c1b62b1c66e.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/dc7ddc0f36f400eee62655787e41d2a2.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/28eef8ef5fd4917633029c1b62b1c66e.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/dc7ddc0f36f400eee62655787e41d2a2.png)
 
 ### 步骤二：领取免费体验包
 

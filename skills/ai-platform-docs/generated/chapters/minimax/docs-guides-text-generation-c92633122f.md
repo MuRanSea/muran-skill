@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/text-generation.md -->
-<!-- Source SHA-256: 95ebef791e0b4e417a29f421cfbd4470758b3b2e02d73df2e4c8e053a8fde8f8 -->
+<!-- Source SHA-256: 6a55b55a57c5c24ab4b057cd4cdd25c0e3c736c65b04e5685f911933a94cbea7 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -242,10 +242,6 @@ model "MiniMax-M3.1-Flash" requires adaptive thinking
 > [card] [在 AI 编程工具里使用 MiniMax M 系列模型](https://platform.minimaxi.com/docs/m-plan/openclaw.md)
 >
 > 在 Claude Code、Cursor 等工具中使用 MiniMax M 系列模型
-
-> [card] [Chat Model](https://platform.minimaxi.com/docs/guides/text-chat)
->
-> M2-her 对话模型，专为角色扮演、多轮对话等场景设计
 
 ***
 

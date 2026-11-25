@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/rate-limits.md -->
-<!-- Source SHA-256: 67d151996a14d09cdcf16c9adeda73d807ed947f467b6c128467fc51e4a191f6 -->
+<!-- Source SHA-256: 2790d2af48378a0b459f7437c71a14ed612327e8f4af8726d48bbf8a630a19d6 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -11,10 +11,11 @@
 
 ## 资源详情
 
-我们通过两种维度进行速率限制：
+我们通过以下维度进行速率限制：
 
 * RPM：每分钟发送的请求数限制
 * TPM：每分钟输入+输出的 token 数限制
+* IPM：每分钟生成的图片张数限制，每个请求按生成张数 `n` 计入
 
 **具体速率限制情况如下表所示：**
 
@@ -34,6 +35,19 @@
 | RPM | 20 | 300 |
 | 最大并行运行任务数（inflight tasks） | — | 30 |
 
+### 图片
+
+| 接口名                | 文生图 / 图片编辑 | 文生图 / 图片编辑 | H3-Image-Context-IR | Image Generation |
+| :- | :- | :- | :- | :- |
+| 模型 | MiniMax-H3-Image | MiniMax-H3-Image-Highspeed | MiniMax-H3-Image | image-01 image-01-live |
+| RPM | — | — | 200 | 10 |
+| TPM | — | — | — | 60 |
+| IPM | 1000 | 1000 | — | — |
+
+> [!NOTE]
+>
+> MiniMax-H3-Image 与 MiniMax-H3-Image-Highspeed 的 IPM 分别计算；同一模型的文生图与图片编辑共用该模型的 IPM 额度，每个请求按生成张数 `n` 计入。
+
 ### 语音
 
 | 接口名 | T2A v2 | Voice Cloning     | Voice Design | Speech to Text |
@@ -46,14 +60,6 @@
 > [!NOTE]
 >
 > Speech to Text 暂不对免费用户开放，需为**充值用户**方可调用。TPM 以**音频秒数**作为 token 计量，即每分钟累计可识别的音频秒数。
-
-### 图片
-
-| 接口名                | Image Generation                     | Image Generation     |
-| :- | :- | :- |
-| 限制类型 | RPM | TPM |
-| 免费用户 | 10 | 60 |
-| 充值用户 | 10 | 60 |
 
 ### 音乐
 

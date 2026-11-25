@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/guides/get-started/quick-start.md -->
-<!-- Source SHA-256: 76dba4be31c5731d980d9b91fcee06f171e8410a2c841daaed316d54d4578e3b -->
+<!-- Source SHA-256: bb614872243a0b76b5fbdcea0eefe725ed8a6aa7884a4590f8491f76667cb926 -->
 
 > ## Documentation Index
 >
@@ -21,9 +21,9 @@
 
 - 访问 https://klingai.com/dev
 
-|                                     可灵AI 开发者平台                                      |
-| :----------------------------------------------------------------------------------------: |
-| ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-zh.9f340aca6a28342c.png) |
+|                                      可灵AI 开发者平台                                      |
+| :-----------------------------------------------------------------------------------------: |
+| ![](https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/home-zh.680e2b70584cea86.webp) |
 
 ## Step 2: 资源包购买&现金额度充值
 

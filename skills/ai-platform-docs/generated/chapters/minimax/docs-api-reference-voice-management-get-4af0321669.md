@@ -1,11 +1,11 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/voice-management-get.md -->
-<!-- Source SHA-256: cadda39a6be80740a549fdc9ea094da0ab274d456288a2184e999e2862bae1a1 -->
+<!-- Source SHA-256: d7aa3be778c1236ba076383b0922aa7cbb731cd2c576ea4bab6430ded10969a7 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# 查询可用音色ID
+# 查询可用音色 ID
 
 > 使用本接口支持查询不同分类下的音色信息。
 

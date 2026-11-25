@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-generation.md -->
-<!-- Source SHA-256: ac488c697aded1730769d9c7d0b93b13642ade8bbe6779e30a7f1ba52b6797fa -->
+<!-- Source SHA-256: 1d928087e3c926cf6e747608c3819c693d69705656ecaa6936cc3c42238b4615 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -61,6 +61,17 @@ MiniMax 视频生成目前提供 **MiniMax-H3** 模型：
 2. 查询任务状态：使用 `task_id` 轮询任务状态。任务成功后，直接返回成片下载地址 (`content.url`)
 3. 获取视频文件：下载 `content.url` 指向的视频并保存到本地
 
+## 控制视频声音
+
+创建视频任务时，可通过可选布尔参数 `generate_audio` 控制视频是否包含音频，默认值为 `true`。
+
+* `true`：输出有声视频。
+* `false`：输出无声视频。
+
+文生视频、图生视频和多模态参考生视频均可在请求体中设置该参数。
+
+下方示例默认输出有声视频；调用 `invoke_text_to_video(generate_audio=False)` 可生成无声视频。
+
 ## 功能与代码示例
 
 为了简化代码，我们将轮询和下载的逻辑封装为公共函数，并举例了四种模式下如何创建任务。
@@ -81,7 +92,7 @@ MODEL = "MiniMax-H3"
 # 并可用 role 标注用途。以下四个函数分别对应文生视频、图生视频、首尾帧、多模态参考四种模式，
 # 都会发起一个异步任务并返回唯一的 task_id。
 
-def invoke_text_to_video() -> str:
+def invoke_text_to_video(generate_audio: bool = True) -> str:
     """（模式一）纯文本生成视频（t2va）。t2va 场景 ratio 必填且不能为 adaptive。"""
     url = f"{BASE_URL}/v2/video_generation"
     payload = {
@@ -93,6 +104,7 @@ def invoke_text_to_video() -> str:
         "duration": 5,
         "resolution": "2K",
         "ratio": "16:9",
+        "generate_audio": generate_audio,
     }
     response = requests.post(url, headers=headers, json=payload)
     response.raise_for_status()
@@ -194,6 +206,7 @@ def fetch_video(download_url: str):
 if __name__ == "__main__":
     # 选择一种方式创建任务
     task_id = invoke_text_to_video()  # 方式一：文生视频
+    # task_id = invoke_text_to_video(generate_audio=False)  # 文生视频，无声视频
     # task_id = invoke_image_to_video() # 方式二：图生视频
     # task_id = invoke_start_end_to_video() # 方式三: 根据首尾帧生成视频
     # task_id = invoke_reference_to_video() # 方式四: 多模态参考生视频
@@ -232,13 +245,23 @@ if __name__ == "__main__":
 
 ## 创建 H3-Context-IR 任务
 
-如需在生成视频前获得更完整的提示词，可以[创建 H3-Context-IR 任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir.md)。H3-Context-IR 会深度理解文本、图像、音频和视频等多模态上下文及其相互关系，通过复杂逻辑推理生成结构化表达，并在尽量保持用户原始意图的前提下丰富语义细节。本接口只返回增强提示词，不创建视频。
+如需在生成视频前获得更完整的提示词，可以[创建 H3-Context-IR 任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir.md)。H3-Context-IR 会深度理解文本、图片、音频和视频等多模态上下文及其相互关系，通过复杂逻辑推理生成结构化表达，并在尽量保持用户原始意图的前提下丰富语义细节。本接口只返回增强提示词，不创建视频。
 
 H3-Context-IR 采用异步任务形式。创建成功后，使用[查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)或[查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)获取结果；任务成功后从 `content.prompt` 获取增强提示词，并可通过 `task_type=h3_context_ir` 识别该任务。
 
 ## 视频再生成
 
-如果已有符合 MiniMax-H3 768P 输出规格的成片，可以调用[创建视频再生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration.md)接口输出 2K 视频。请求时需原样提交生成 768P 视频时使用的全部 `content`，并额外加入且仅加入一个 `type=video_url`、`role=base_video` 的源视频项。
+如果已有符合 MiniMax-H3 768P 输出规格的视频，可以调用[创建视频再生成任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration.md)接口输出 2K 视频，选择以下一种方式：
+
+* **按任务 ID**：传成功的 768P 源任务 `source_task_id`，不再传 `content`。该模式需白名单，源任务须属于当前账号且仍在 7 天查询窗口内。
+* **按源视频**：原样提交生成 768P 视频时实际送入模型的全部 `content`（包括 H3-Context-IR 处理后的最终 prompt），再加入且仅加入一个 `type=video_url`、`role=base_video` 的源视频项。`base_video` 必须包含音轨。
+
+再生成时也可设置 `generate_audio`：
+
+* **按源视频**：默认 `true`，输出有声视频；设置为 `false`，输出无声视频。
+* **按任务 ID**：不传时沿用源任务设置。若源任务设置了 `generate_audio=false`，结果始终为无声视频；否则，传 `true` 输出有声视频，传 `false` 输出无声视频。
+
+无音轨的 `base_video` 会在异步媒体校验阶段被拒绝。返回 `task_id` 不代表媒体校验通过，请查询任务终态。
 
 再生成任务与其他 H3 任务共用[查询任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-query.md)、[查询任务列表](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-list.md)以及[取消或删除任务](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-delete.md)接口；可通过 `task_type=regeneration` 识别。
 

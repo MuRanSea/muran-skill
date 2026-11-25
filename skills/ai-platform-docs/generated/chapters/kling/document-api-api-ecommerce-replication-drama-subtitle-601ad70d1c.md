@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/drama-subtitle.md -->
-<!-- Source SHA-256: c48f86f30f4ce50f578205c89bd6a53b398cd1c96df62e14d832404043566588 -->
+<!-- Source SHA-256: 907136a7d9f9ae3a192cceca00d3de7c313c4bb544129f8aab12e4332417506d -->
 
 > ## Documentation Index
 >
@@ -92,6 +92,7 @@
   ```
 - `contents[].type`: `source_video`：源视频素材标识。
   - `glossary`：术语表标识。
+- `contents[].type.source_video`: 源视频素材。
 - `contents[].type.source_video`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -105,6 +106,7 @@
 - `contents[].type.source_video`: 推荐 .mp4（H.264 + AAC）；FFmpeg 能解码的格式均会尝试处理。
 - `contents[].type.source_video`: 分辨率、帧率无硬限制，建议 240p～4K、不超过 60 FPS。
 - `contents[].type.source_video`: 最多支持 1 条源视频。
+- `contents[].type.glossary`: 术语表，用于固定人名、地名、组织名等专名翻译。
 - `contents[].type.glossary`: 通过 JSON 的格式定义，`source` 为中文原词，`target` 为期望英文译法：
   ```json
   {
@@ -330,6 +332,7 @@ curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
   ]
   ```
 - `filters[].key`: `status`：任务状态
+- `filters[].key.status`: 按任务状态筛选。
 - `filters[].key.status`: 通过 JSON 的格式定义，具体如下：
   ```json
   {

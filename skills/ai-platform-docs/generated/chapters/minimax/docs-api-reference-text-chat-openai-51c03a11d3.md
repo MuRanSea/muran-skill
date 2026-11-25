@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-openai.md -->
-<!-- Source SHA-256: cdf533be3fca051b9a6319e6f5099778345ab5f1ee51a9bb6b93ee6b3a9a3436 -->
+<!-- Source SHA-256: 32cce3e12b3963e76b5de562cba6e19c086a115df037abf21b5409aaa895d482 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -969,8 +969,6 @@ components:
 
             - `MiniMax-M3`：默认开启 adaptive thinking；传入 `disabled` 会跳过 thinking
             直接回答。
-
-            - M2.x 模型：thinking 无法关闭，传入 `disabled` 会被接收但不生效。
           properties:
             type:
               type: string
@@ -982,8 +980,7 @@ components:
                 thinking 控制类型。
 
                 - `disabled`：让 `MiniMax-M3` 跳过 thinking
-                并直接回答。`MiniMax-M3.1-Flash` 不支持该取值，传入会返回 HTTP 400。对于 M2.x
-                模型，thinking 仍会保持开启。
+                并直接回答。`MiniMax-M3.1-Flash` 不支持该取值，传入会返回 HTTP 400。
 
                 - `adaptive`：开启 adaptive thinking。省略 `thinking` 时默认使用该值，也是
                 `MiniMax-M3.1-Flash` 唯一接受的取值。
@@ -1023,8 +1020,7 @@ components:
           format: int64
           description: >-
             指定生成内容长度的上限（Token 数）。MiniMax-M3.1-Flash 和 MiniMax-M3 推荐值为
-            131072（128K），上限为 524288（512K）；其他模型推荐值为 65536（64K），上限为
-            204800（200K）。如果生成因 `length` 原因中断，请尝试调高此值。
+            131072（128K），上限为 524288（512K）。如果生成因 `length` 原因中断，请尝试调高此值。
           minimum: 1
         temperature:
           type: number
@@ -1038,6 +1034,7 @@ components:
             暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用
             0.95。若传入，取值需在 (0, 1] 范围内。
           minimum: 0
+          exclusiveMinimum: 0
           maximum: 1
           default: 0.95
         tools:
@@ -1266,19 +1263,31 @@ components:
             - type: string
               description: 文本消息内容
             - type: array
-              description: >-
-                多模态消息内容块。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片和视频输入。
-
-
-                **多模态文件大小及容量限制**
-
-                - URL / Base64 方式传入：视频文件 ≤ 50 MB，图片文件 ≤ 10 MB，请求体 ≤ 64 MB。
-
-                - 使用 Files API 上传：在 `content` 中以 `mm_file://{file_id}`
-                形式引用，单个视频最大 512 MB。
+              description: 多模态消息内容块。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片和视频输入。
               items:
                 $ref: '#/components/schemas/MessageContentPart'
-          description: 消息内容。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片和视频内容块。
+          description: >-
+            消息内容。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片和视频内容块。
+
+
+            **多模态输入限制**
+
+            - URL / Base64 方式传入：视频文件 ≤ 50 MB，图片文件 ≤ 10 MB，请求体 ≤ 64 MB。
+
+            - 使用 Files API 上传：在 `content` 中以 `mm_file://{file_id}` 形式引用，单个视频最大
+            512 MB。
+
+            - 单次请求的 `messages`（含历史轮次）累计最多 200 张图片、20 个视频。
+
+            - 图片和视频的宽、高须大于 0，宽高比不超过 200:1。
+
+            - 视频必须包含视频轨（纯音频文件不支持），时长大于 0 且不超过 30 分钟。
+
+            - 抽帧数按 `round(时长 × fps / 2) × 2` 计算，须不少于 2 且不超过视频实际总帧数；`时长 × fps` 小于
+            1 时一定无法满足，`fps` 高于视频本身的帧率时通常也无法满足。
+
+            - 视频像素总量 `缩放后单帧宽 × 缩放后单帧高 × 抽帧数 / 2` 不超过 301,056,000。单帧按 `detail` 或
+            `max_long_side_pixel` 缩放，长边上限：`low` 504、`default` 672、`high` 1288。
         tool_calls:
           type: array
           description: assistant 消息中的工具调用列表。
@@ -1430,9 +1439,9 @@ components:
               type: number
               minimum: 0.2
               maximum: 5
-              default: 1
+              default: 2
               description: |-
-                视频抽帧频率。默认值为 1，范围 [0.2, 5]。
+                视频抽帧频率。默认值为 2，范围 [0.2, 5]。
                 - 取值越高：对画面变化越敏感，token 花费高、速度慢。
                 - 取值越低：token 花费少、速度快，但对画面变化迟钝。
             max_long_side_pixel:

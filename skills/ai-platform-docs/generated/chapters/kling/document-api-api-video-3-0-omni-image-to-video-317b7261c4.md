@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-omni/image-to-video.md -->
-<!-- Source SHA-256: 55bd77454b8eacc9ebd3fe5a424fcac824599f3b7e4706e497b279c66670bb78 -->
+<!-- Source SHA-256: d76b8d497066fd3ce8c00a0a825872f30b79f19e121bf28d3bde816ba435410b -->
 
 > ## Documentation Index
 >
@@ -76,6 +76,7 @@
   - `first_frame`：首帧图素材标识。
   - `last_frame`：尾帧图素材标识。
   - `element`：主体素材标识。
+- `contents[].type.prompt`: 文本提示词，可包含正向描述和负向描述
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
 - `contents[].type.prompt`: ```json
   {
@@ -112,6 +113,7 @@
   >
   > 
   > 5. 更多信息详见：[可灵视频 3.0 模型使用指南](https://docs.qingque.cn/d/home/eZQCqDGoymg61UKgMckSB2oMh?identityId=2Cn18n4EIHT)。
+- `contents[].type.first_frame / last_frame`: 首帧图参考素材或尾帧图参考素材
 - `contents[].type.first_frame / last_frame`: 首帧时必填，尾帧时选填
 - `contents[].type.first_frame / last_frame`: 通过JSON的格式定义，具体如下：
 - `contents[].type.first_frame / last_frame`: ```json
@@ -124,6 +126,7 @@
 - `contents[].type.first_frame / last_frame`: 图片文件大小不能超过50MB。
 - `contents[].type.first_frame / last_frame`: 图片宽高尺寸不小于300px，图片宽高比要在1:2.5 ~ 2.5:1之间。
 - `contents[].type.first_frame / last_frame`: 支持仅首帧图生视频和首尾帧图生视频，不支持仅尾帧图生视频。
+- `contents[].type.element`: 主体参考素材
 - `contents[].type.element`: 通过JSON的格式定义，具体如下：
 - `contents[].type.element`: ```json
   {
@@ -137,8 +140,8 @@
 - `settings.multi_shot`: 当参数值为false时，即便使用多镜头格式的prompt也无法生成多镜头视频。
 - `settings.audio`: native：生成的视频含有与画面适配的声音。
 - `settings.audio`: off：生成的视频不含有声音。
-- `settings.resolution`: 720p：输出清晰度为720P的视频。
-- `settings.resolution`: 1080p：输出清晰度为1080P的视频。
+- `settings.resolution`: 720p：输出清晰度为720p的视频。
+- `settings.resolution`: 1080p：输出清晰度为1080p的视频。
 - `settings.resolution`: 4k：输出清晰度为4K的视频。
 - `options`: ```json
   "options": {

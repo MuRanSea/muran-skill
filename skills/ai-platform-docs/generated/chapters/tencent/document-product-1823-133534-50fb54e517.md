@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/133534 -->
-<!-- Source SHA-256: 3cd9bfc05ab7b5a359fd8b1e1a0704ae8c90c00f340d5d4a2cbbe8fae063276e -->
+<!-- Source SHA-256: ae222ba7d5c5cba94fbe4bab9c4ce8a7580605f2f9750794d3c0fa6248ec9b1f -->
 
 # 保留式思考模式（Preserved Thinking）
 
 官方来源：https://cloud.tencent.com/document/product/1823/133534
-最近更新时间：2026-11-04 12:13:31
+最近更新时间：2026-11-16 12:15:30
 
 ## 功能概述
 
@@ -39,7 +39,7 @@ Coding 类任务：多轮代码补全 / 修改 / 调试，需延续上一轮的�
 
 #### **支持模型与协议**
 
-**支持模型**：`hy3` 、`hy4-preview`、`hy4`
+**支持模型**：`hy4-flash`、`hy4`、`hy4-preview`（即将下线）、`hy3`
 
 **支持协议**：OpenAI Chat Completions、OpenAI Responses、Anthropic 三种协议均支持，开关方式略有差异（详见下文“开关方式”）。
 

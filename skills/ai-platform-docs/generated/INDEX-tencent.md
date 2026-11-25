@@ -211,7 +211,7 @@
 | 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Retopology 调用指南 | `chapters/tencent/document-product-1823-137778-7c9d0d1125.md` | https://cloud.tencent.com/document/product/1823/137778 |
 | 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Rigging 调用指南 | `chapters/tencent/document-product-1823-137779-28b073cad8.md` | https://cloud.tencent.com/document/product/1823/137779 |
 | 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Motion 调用指南 | `chapters/tencent/document-product-1823-137780-ec6f07daef.md` | https://cloud.tencent.com/document/product/1823/137780 |
-| 平台功能 / 启用管理 | `chapters/tencent/document-product-1823-137795-572aae14ae.md` | https://cloud.tencent.com/document/product/1823/137795 |
+| 平台功能 / 开通管理 | `chapters/tencent/document-product-1823-137795-572aae14ae.md` | https://cloud.tencent.com/document/product/1823/137795 |
 | 调用指南 / 视频生成模型 / 厂商错误码说明 | `chapters/tencent/document-product-1823-138038-da64723512.md` | https://cloud.tencent.com/document/product/1823/138038 |
 | 接入 AI 工具 / DeepSeek Harness | `chapters/tencent/document-product-1823-138109-b86cfc687d.md` | https://cloud.tencent.com/document/product/1823/138109 |
 | 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3d-polygen-image 调用指南 | `chapters/tencent/document-product-1823-138193-61341e9cc4.md` | https://cloud.tencent.com/document/product/1823/138193 |
@@ -227,3 +227,11 @@
 | Token Plan / Token Plan 个人版 / Token Plan 个人版限时优惠活动 | `chapters/tencent/document-product-1823-140042-51d67eaf27.md` | https://cloud.tencent.com/document/product/1823/140042 |
 | 调用指南 / 语音模型 / 语音合成 / Tenlai 同步语音合成 | `chapters/tencent/document-product-1823-140153-7db2019f73.md` | https://cloud.tencent.com/document/product/1823/140153 |
 | 调用指南 / 语音模型 / 语音识别 / Tenlai 异步语音识别 | `chapters/tencent/document-product-1823-140154-3bdde80022.md` | https://cloud.tencent.com/document/product/1823/140154 |
+| 管控面 API / API 密钥管理相关接口 / 更新 API 密钥绑定 | `chapters/tencent/document-product-1823-140653-552d1b46b6.md` | https://cloud.tencent.com/document/product/1823/140653 |
+| 调用指南 / 图像生成模型 / HiDream 生图调用指南 | `chapters/tencent/document-product-1823-140689-a357a9c9b6.md` | https://cloud.tencent.com/document/product/1823/140689 |
+| 平台功能 / 首页 | `chapters/tencent/document-product-1823-140865-25a5d462d0.md` | https://cloud.tencent.com/document/product/1823/140865 |
+| 调用指南 / 图像生成模型 / Minimax 生图调用指南 | `chapters/tencent/document-product-1823-140911-77ec1c4274.md` | https://cloud.tencent.com/document/product/1823/140911 |
+| 管控面 API / 个人版 Token Plan 相关接口 / 查询 TokenPlan 个人版套餐详情 | `chapters/tencent/document-product-1823-140967-4a51627e86.md` | https://cloud.tencent.com/document/product/1823/140967 |
+| 平台功能 / 安全治理 / 机密推理 | `chapters/tencent/document-product-1823-141197-59e8c9cd2b.md` | https://cloud.tencent.com/document/product/1823/141197 |
+| 调用指南 / 3D 生成模型 / Tripo 调用指南 / Tripo-3D-Retopology 调用指南 | `chapters/tencent/document-product-1823-141213-ec7645327a.md` | https://cloud.tencent.com/document/product/1823/141213 |
+| 调用指南 / 视频生成模型 / WAND 白模视频调用指南 | `chapters/tencent/document-product-1823-141292-03e8f2f2c7.md` | https://cloud.tencent.com/document/product/1823/141292 |

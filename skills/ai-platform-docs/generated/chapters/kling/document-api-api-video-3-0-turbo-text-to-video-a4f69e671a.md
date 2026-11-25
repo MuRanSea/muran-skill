@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-turbo/text-to-video.md -->
-<!-- Source SHA-256: 5cb45963fdb3e85775fc7c577c747f4f639327f314a9cd14631cbafc6607878e -->
+<!-- Source SHA-256: d7d85ca1cea74670d1e6f60f67d9d8b7e253fc8541b6ee34c02a89f843784f95 -->
 
 > ## Documentation Index
 >
@@ -70,8 +70,8 @@
   >
   > 
   > 2. 更多信息详见：[可灵视频 3.0 模型使用指南](https://docs.qingque.cn/d/home/eZQCqDGoymg61UKgMckSB2oMh?identityId=2Cn18n4EIHT)。
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频
-- `settings.resolution`: 1080p：输出清晰度为 1080P 的视频
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频
+- `settings.resolution`: 1080p：输出清晰度为 1080p 的视频
 - `options.callback_url`: 如果配置，服务端会在任务状态发生变更时主动通知
 - `options.callback_url`: 具体通知的消息 schema 见 [Callback 协议](https://klingai.com/document-api/api/get-started/callbacks)
 - `options.external_task_id`: 传入不会覆盖系统生成的任务ID，但支持通过该ID进行任务查询

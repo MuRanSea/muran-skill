@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130087 -->
-<!-- Source SHA-256: 1ad32b5a4a928ac6243600aa7a3f4d40b35079ba93a928d6ce26cfe2e3e49c34 -->
+<!-- Source SHA-256: f6d8c136149618435b8bd0be01c7d78e7132530022551afd77ce2430fc01bbb1 -->
 
 # 在线推理
 
 官方来源：https://cloud.tencent.com/document/product/1823/130087
-最近更新时间：2026-10-30 17:42:00
+最近更新时间：2026-11-16 19:32:00
 
 ## 概念界定
 
@@ -24,7 +24,7 @@
 
 #### 1. 默认
 
-平台会默认为所有支持的模型创建在线推理服务。用户可在 [模型广场](https://console.cloud.tencent.com/tokenhub/models)、[启用管理](https://console.cloud.tencent.com/tokenhub/open-management?regionId=1)、模型详情页领取免费体验包或开启按量付费，快速开始使用。
+平台会默认为所有支持的模型创建在线推理服务。用户可在 [模型广场](https://console.cloud.tencent.com/tokenhub/models)、[开通管理](https://console.cloud.tencent.com/tokenhub/open-management?regionId=1)、模型详情页领取免费体验包或开启按量付费，快速开始使用。
 
 #### 2. 自定义
 

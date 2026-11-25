@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-h3-context-ir.md -->
-<!-- Source SHA-256: 1e05aeff6e06762ddd2ad44760108ff399e02550a7b3fb3d6bdc60d1b7ae9897 -->
+<!-- Source SHA-256: f3b727c49ee9f1dd9e40dbd5dfd0be8fb3e998707132380e9448705a93230af1 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,7 +13,7 @@
 >
 > 本接口只返回增强后的视频提示词，不会创建视频生成任务。
 
-H3-Context-IR 对文本、图像、音频和视频等多模态上下文进行深度理解，分析素材之间以及素材与目标生成结果之间的关系，并进行复杂逻辑推理。系统会将理解结果转换为结构化表达，在尽量保持用户原始意图的前提下丰富语义细节。
+H3-Context-IR 对文本、图片、音频和视频等多模态上下文进行深度理解，分析素材之间以及素材与目标生成结果之间的关系，并进行复杂逻辑推理。系统会将理解结果转换为结构化表达，在尽量保持用户原始意图的前提下丰富语义细节。
 
 > [!NOTE]
 >
@@ -46,7 +46,7 @@ paths:
       summary: 创建 H3-Context-IR 任务
       description: >-
         H3-Context-IR
-        深度理解文本、图像、音频和视频等多模态上下文，分析素材之间以及素材与目标生成结果之间的关系，并进行复杂逻辑推理。系统会将理解结果转换为结构化表达，在尽量保持用户原始意图的前提下丰富语义细节。本接口只返回增强提示词，不创建视频生成任务。
+        深度理解文本、图片、音频和视频等多模态上下文，分析素材之间以及素材与目标生成结果之间的关系，并进行复杂逻辑推理。系统会将理解结果转换为结构化表达，在尽量保持用户原始意图的前提下丰富语义细节。本接口只返回增强提示词，不创建视频生成任务。
 
 
         H3-Context-IR 是一个复杂系统，暂不提供开源实现；本 API 既可用于验证 Full 2K-Workflow

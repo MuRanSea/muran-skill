@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/image/3-0-omni/image-generation.md -->
-<!-- Source SHA-256: 8c0819e0474db9451183d8c97279c21e36eea959dbd4617589e2d521f217eb39 -->
+<!-- Source SHA-256: 473aaa98734a5f1105644ddd2b5eec4d227545e14e91bb0beceb7026f3c0a27a -->
 
 > ## Documentation Index
 >
@@ -116,7 +116,7 @@ curl --request POST \
   --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
-    "model_name": "kling-v2-1",
+    "model_name": "kling-v3",
     "prompt": "生成皮克斯风格的小狗",
     "negative_prompt": "",
     "image": "https://p1-kling.klingai.com/kcdn/cdn-kcdn112452/kling-qa-test/dog.png",

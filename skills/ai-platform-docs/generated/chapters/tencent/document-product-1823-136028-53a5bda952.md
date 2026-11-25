@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/136028 -->
-<!-- Source SHA-256: 7c7bf124ff05035d74b06d682be98d72fdeb09c222a3cbd171d7d73e7720398f -->
+<!-- Source SHA-256: ac12f050c21c9e952cee298ac1d09a4b56ba1c22e945bf1205e72a24b99d5602 -->
 
 # 配额管理
 
 官方来源：https://cloud.tencent.com/document/product/1823/136028
-最近更新时间：2026-08-17 21:20:30
+最近更新时间：2026-11-16 19:32:00
 
 ## 功能概述
 
@@ -20,11 +20,11 @@
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/ffbeff0d407f2514c02f9d72e6edc191)
 
-2. [启用管理](https://console.cloud.tencent.com/tokenhub/open-management) **页面**
+2. [开通管理](https://console.cloud.tencent.com/tokenhub/open-management) **页面**
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/c7c4ea0ed162e136995f8551eb9f8cc1.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/726227adf448ecd4221c0432b2fcdc46.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/c7c4ea0ed162e136995f8551eb9f8cc1.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/726227adf448ecd4221c0432b2fcdc46.png)
 
 3. **创建** [自定义推理服务](https://console.cloud.tencent.com/tokenhub/inference/create?regionId=1) **时**
 

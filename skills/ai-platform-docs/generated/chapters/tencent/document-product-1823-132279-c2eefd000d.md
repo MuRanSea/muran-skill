@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132279 -->
-<!-- Source SHA-256: 7a2affe05c0f7d77802eff30c6e7564034d69eb4d29100c94da02c425d77a5cf -->
+<!-- Source SHA-256: f884135c10d1d62664b412fce5108279b946aeb3140599d89b60961c95fb952d -->
 
 # 数据结构
 
 官方来源：https://cloud.tencent.com/document/product/1823/132279
-最近更新时间：2026-09-18 02:06:32
+最近更新时间：2026-11-25 02:45:17
 
 ## ApiKeyDetail
 
@@ -49,7 +49,7 @@ API 密钥详情
 
 绑定资源项
 
-被如下接口引用：CreateApiKey, DescribeApiKey, DescribeApiKeyList。
+被如下接口引用：CreateApiKey, DescribeApiKey, DescribeApiKeyList, ModifyApiKeyBindings。
 
 | 名称 | 类型 | 必选 | 描述 |
 |------|------|----------|------|
@@ -85,7 +85,7 @@ API 密钥详情
 
 | 名称 | 类型 |  描述 |
 |------|------|-------|
-| PreResourceId | String | 预付费包 id<br/>示例值：free-new-test |
+| PreResourceId | String | <p>预付费包 id</p><br/>示例值：free-new-test |
 
 ## EndpointDetail
 
@@ -96,6 +96,8 @@ API 密钥详情
 | 名称 | 类型 |  描述 |
 |------|------|-------|
 | EndpointId | String | <p>推理服务 ID。</p><br/>示例值：ep-abcd123 |
+| WorkspaceId | String | <p>所属企业空间 ID。</p><br/>示例值：ws-a1b2c3d4 |
+| OriginEndpointId | String | <p>跨空间展开时的原始推理服务 ID；未展开时与 EndpointId 相同。</p><br/>示例值：ep-abcd123 |
 | EndpointName | String | <p>服务名称。</p><br/>示例值：测试推理服务 |
 | ModelName | String | <p>模型名称。</p><br/>示例值：deepseek-v4-pro |
 | ModelId | String | <p>模型 ID。</p><br/>示例值：deepseek |
@@ -109,6 +111,7 @@ API 密钥详情
 | AutoAdjustQuota | Integer | <p>自动调整配额</p><br/>示例值：1 |
 | RPM | Integer | <p>RPM（每分钟请求数限流）。当推理服务未单独设置时，回退为关联模型的默认 RPM 值。</p><br/>示例值：100 |
 | ModelStatus | String | <p>模型状态</p><p>枚举值：</p><ul><li>online： 在线</li><li>pre-offline： 预下线</li><li>discontinued： 停止新购</li><li>maintenance： 维护</li><li>offline： 下线</li></ul><br/>示例值：online |
+| NightDiscountEnabled | Boolean | <p>是否参与夜间折扣。true 表示该接入点参与夜间时段折扣计费，false 表示不参与。</p><br/>示例值：false |
 
 ## GlossaryEntryInput
 
@@ -237,6 +240,7 @@ API 密钥详情
 | ModelName | String | <p>模型名称。</p><br/>示例值：deepseek-v4-pro |
 | Status | String | <p>状态。取值：ACTIVE（运行中）、INACTIVE（已停止）。</p><br/>示例值：ACTIVE |
 | ModelStatus | String | <p>模型状态</p><p>枚举值：</p><ul><li>online： 在线</li><li>pre-offline： 预下线</li><li>discontinued： 停止新购</li><li>maintenance： 维护中</li><li>offline： 下线</li></ul><br/>示例值：online |
+| ModelChargeUnit | String | <p>模型计费单位（模型维度属性，区别于计费方式 ChargeType）。取值：TOKEN（词元）、COUNT（次）、CREDIT（积分）、PICTURE（张）。未激活时为空。</p><br/>示例值：TOKEN |
 | ServiceType | String | <p>服务类型。固定为 TEXT_GENERATION（文本生成）。</p><br/>示例值：TEXT_GENERATION |
 | ChargeType | String | <p>计费方式。取值：FREE（免费体验）、TOKEN（按 Token 计费）。未激活时为空。</p><br/>示例值：FREE |
 | PaymentEnabled | Boolean | <p>是否已开启后付费。true 表示已开启，false 表示未开启。未激活时为 false。</p><br/>示例值：true |
@@ -244,6 +248,10 @@ API 密钥详情
 | StopReason | String | <p>停止原因。当状态为 INACTIVE 时返回。取值：FREE_QUOTA_EXHAUSTED（免费额度已用尽）、NO_FREE_PACKAGE（无可用免费包）、INSUFFICIENT_BALANCE（余额不足）、BILLING_ISOLATED（账户欠费隔离）、INTERNAL_ERROR（内部错误）。</p><br/>示例值：FREE_QUOTA_EXHAUSTED |
 | RPM | Integer | <p>推理服务的 rpm 限制，没设置就按模型维度 rpm 限制展示</p><br/>示例值：60 |
 | TPM | Integer | <p>推理服务的tpm 限制，没设置就按模型维度 tpm 限制展示</p><br/>示例值：1000000 |
+| ModelImage | [ModelImage](#ModelImage) | <p>模型图标。</p> |
+| OfflineAt | [Timestamp ISO8601](/document/api/1823/132287) | <p>模型下线时间，Status=pre-offline 时，会配置模型下线时间</p><br/>示例值：2026-05-02T00:00:00Z |
+| DiscontinuedAt | [Timestamp ISO8601](/document/api/1823/132287) | <p>停止新购时间</p><br/>示例值：2026-05-02T00:00:00Z |
+| NightDiscountEnabled | Boolean | <p>是否参与夜间折扣。true 表示该接入点参与夜间时段折扣计费，false 表示不参与。</p><br/>示例值：false |
 
 ## ModelFreeTrialInfo
 
@@ -262,7 +270,7 @@ API 密钥详情
 
 模型图标信息
 
-被如下接口引用：DescribeModelList。
+被如下接口引用：DescribeModelEndpointList, DescribeModelList。
 
 | 名称 | 类型 |  描述 |
 |------|------|-------|
@@ -421,23 +429,25 @@ Token Plan API Key 列表项
 
 | 名称 | 类型 |  描述 |
 |------|------|-------|
-| ApiKeyId | String | API Key ID。<br/>示例值：ak-tp-20260401-a1b2c3d4 |
-| ApiKey | String | API Key 密钥值（脱敏）。<br/>示例值：sk-tp-****xxxx |
-| Name | String | API Key 名称。<br/>示例值：生产Key |
-| TeamId | String | 所属套餐 ID。<br/>示例值：team-tp-20260401-a1b2c3d4 |
-| AppId | String | 账号APP ID。<br/>示例值：1300000001 |
-| Uin | String | 主账号 UIN。最大 128 字符。<br/>示例值：100000000001 |
-| AllowedModels | String | API Key 可用模型列表（JSON 数组字符串）。<br/>示例值：["glm-5"] |
-| Status | String | API Key 是否可用。取值：enable（启用）、disable（停用）。<br/>示例值：enable |
-| StopReason | String | API Key 停用原因。取值：NORMAL（正常，默认值），QUOTA_EXHAUSTED（API Key额度包耗尽），ABNORMAL（异常，需人工介入）<br/>示例值：NORMAL |
-| UseStatus | String | 用户侧开关。取值：enable（启用）、disable（停用）。<br/>示例值：enable |
-| KeyVersion | Integer | 密钥版本号。<br/>示例值：1 |
-| LastRotatedAt | [Timestamp ISO8601](/document/api/1823/132287) | 最近一次重置时间。（ISO 8601）<br/>示例值：2026-04-01T00:00:00Z |
-| Creator | String | 创建人，如果是子账号创建，则该值为子账号UIN。<br/>示例值：100000000002 |
-| CreatedAt | [Timestamp ISO8601](/document/api/1823/132287) | 创建时间。<br/>示例值：2026-04-01T00:00:00Z |
-| UpdatedAt | [Timestamp ISO8601](/document/api/1823/132287) | 更新时间。<br/>示例值：2026-04-01T00:00:00Z |
-| Balance | [SubPackageBalance](#SubPackageBalance) | API Key 额度用量信息 |
-| ProductType | String | 套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）。<br/>示例值：enterprise |
+| ApiKeyId | String | <p>API Key ID。</p><br/>示例值：ak-tp-20260401-a1b2c3d4 |
+| ApiKey | String | <p>API Key 密钥值（脱敏）。</p><br/>示例值：sk-tp-****xxxx |
+| Name | String | <p>API Key 名称。</p><br/>示例值：生产Key |
+| TeamId | String | <p>所属套餐 ID。</p><br/>示例值：team-tp-20260401-a1b2c3d4 |
+| AppId | String | <p>账号APP ID。</p><br/>示例值：1300000001 |
+| Uin | String | <p>主账号 UIN。最大 128 字符。</p><br/>示例值：100000000001 |
+| AllowedModels | String | <p>API Key 可用模型列表（JSON 数组字符串）。</p><br/>示例值：["glm-5"] |
+| Status | String | <p>API Key 是否可用。取值：enable（启用）、disable（停用）。</p><br/>示例值：enable |
+| StopReason | String | <p>API Key 停用原因。取值：NORMAL（正常，默认值），QUOTA_EXHAUSTED（API Key额度包耗尽），ABNORMAL（异常，需人工介入）</p><br/>示例值：NORMAL |
+| UseStatus | String | <p>用户侧开关。取值：enable（启用）、disable（停用）。</p><br/>示例值：enable |
+| KeyVersion | Integer | <p>密钥版本号。</p><br/>示例值：1 |
+| LastRotatedAt | [Timestamp ISO8601](/document/api/1823/132287) | <p>最近一次重置时间。（ISO 8601）</p><br/>示例值：2026-04-01T00:00:00Z |
+| Creator | String | <p>创建人，如果是子账号创建，则该值为子账号UIN。</p><br/>示例值：100000000002 |
+| CreatedAt | [Timestamp ISO8601](/document/api/1823/132287) | <p>创建时间。</p><br/>示例值：2026-04-01T00:00:00Z |
+| UpdatedAt | [Timestamp ISO8601](/document/api/1823/132287) | <p>更新时间。</p><br/>示例值：2026-04-01T00:00:00Z |
+| Balance | [SubPackageBalance](#SubPackageBalance) | <p>API Key 额度用量信息</p> |
+| ProductType | String | <p>套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）。</p><br/>示例值：enterprise |
+| IpWhitelist | Array of String | <p>IP 白名单列表。支持 IPv4 单地址与 IPv4 CIDR 格式，空数组表示不限制。</p><br/>示例值：["1.2.3.4","10.0.0.0/24"] |
+| OverageEnabled | Boolean | <p>是否开启超额按量计费。开启后，若 APIKey 用量达到总额度上限，并且使用的模型已开启按量计费，将自动切换至按量计费模式；未开启时用量达上限后调用报错。</p><br/>示例值：false |
 
 ## TokenPlanListItem
 

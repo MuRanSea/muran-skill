@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-prompt-caching.md -->
-<!-- Source SHA-256: ff80f5ec2c36cd16e294fb093b6d454abd68f078213f84545da981b23fb2087b -->
+<!-- Source SHA-256: 57c21cc1354c8b52070b0526461b85cf32c63f937a3ecdb27c53736046c46e74 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -196,12 +196,12 @@
 # 注意事项
 
 * 缓存适用于包含 512 个及以上的输入 token 数量的 API 调用；
-* 缓存采用前缀匹配的方式，以「工具定义-系统提示词-历史对话内容」为顺序构建，任意模块内容的变更，都可能会影响缓存的效果；
-* 支持模型：MiniMax-M3.1-Flash、MiniMax-M3、MiniMax-M2.7 系列、MiniMax-M2.5 系列、MiniMax-M2.1 系列。
+* 缓存采用前缀匹配的方式，以「系统提示词-工具定义-历史对话内容」为顺序构建，任意模块内容的变更，都可能会影响缓存的效果；
+* 支持模型：MiniMax-M3.1-Flash、MiniMax-M3。
 
 # 最佳实践
 
-* 在对话的开头部分放置静态的或重复的内容（包括工具定义、系统提示词，历史对话内容 ），将动态的用户信息放在对话的最后，以最大程度利用 cache;
+* 在对话的开头部分放置静态的或重复的内容（包括系统提示词、工具定义、历史对话内容），将动态的用户信息放在对话的最后，以最大程度利用 cache;
 * 通过API返回的 usage tokens 数量，来监测缓存性能，定期分析以优化你的使用策略；
 
 # 计费说明

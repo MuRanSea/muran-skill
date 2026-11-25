@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/2-6/text-to-video.md -->
-<!-- Source SHA-256: 16cbf610b24a2116267bc9d12b36bce9c8cd2f80affa9be8d715e8cbe7b92bc5 -->
+<!-- Source SHA-256: 6d7770512dabfe5433d707389558b693f07df4122883077e353f6a6d8c6c1225 -->
 
 > ## Documentation Index
 >
@@ -52,10 +52,10 @@
 - `prompt`: 内容长度不超过2500个字符。
 - `settings.audio`: native：生成的视频含有与画面适配的声音。
 - `settings.audio`: off：生成的视频不含有声音。
-- `settings.audio`: 生成有声视频时，仅支持1080P清晰度。
-- `settings.resolution`: 720p：输出清晰度为720P的视频。
-- `settings.resolution`: 1080p：输出清晰度为1080P的视频。
-- `settings.resolution`: 生成有声视频时，仅支持1080P清晰度。
+- `settings.audio`: 生成有声视频时，仅支持1080p清晰度。
+- `settings.resolution`: 720p：输出清晰度为720p的视频。
+- `settings.resolution`: 1080p：输出清晰度为1080p的视频。
+- `settings.resolution`: 生成有声视频时，仅支持1080p清晰度。
 - `options`: ```json
   "options": {
     "callback_url": "https://example.com/cb", // 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知；具体通知的消息schema见“Callback协议”

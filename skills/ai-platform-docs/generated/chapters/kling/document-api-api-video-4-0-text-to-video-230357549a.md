@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/4-0/text-to-video.md -->
-<!-- Source SHA-256: f8967a81c78a8fde532275034d061b5ef76ba30ba5af99c174c910084abefe7c -->
+<!-- Source SHA-256: afebc7a8ce12a6567062ee4d6d5c3c4511ff7509669a13037f8fac3daa7b6393 -->
 
 > ## Documentation Index
 >
@@ -38,8 +38,9 @@
 |---|---|---:|---|---|---|
 | `prompt` | string | 是 | - | - | 文本提示词，可包含正向描述和负向描述 |
 | `settings` | object | 否 | - | - | 输出配置相关参数，如清晰度、时长等 |
-| `settings.resolution` | string | 否 | `1080p` | `720p`, `1080p` | 生成视频的清晰度 |
-| `settings.aspect_ratio` | string | 否 | `16:9` | `21:9`, `16:9`, `9:16`, `1:1` | 生成视频的画面纵横比（宽:高） |
+| `settings.resolution` | string | 否 | `1080p` | `720p`, `1080p`, `4k` | 生成视频的清晰度 |
+| `settings.dynamic_range` | string | 否 | `sdr` | `sdr`, `hdr` | 生成视频的动态范围。 |
+| `settings.aspect_ratio` | string | 否 | `16:9` | `21:9`, `16:9`, `9:16`, `1:1`, `4:3`, `3:4` | 生成视频的画面纵横比（宽:高） |
 | `settings.duration` | int | 否 | - | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30` | 生成视频的目标时长，单位：秒。支持整数值。 |
 | `options` | object | 否 | - | - | 通用配置，如回调地址、是否含水印等 |
 | `options.callback_url` | string | 否 | - | - | 本次任务结果回调通知地址 |
@@ -60,8 +61,13 @@
   >
   > 
   > 3. **本接口通过文本提示词生成视频。如需输入图片、视频或主体作为参考，请使用全能参考接口。**
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频
-- `settings.resolution`: 1080p：输出清晰度为 1080P 的视频
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频
+- `settings.resolution`: 1080p：输出清晰度为 1080p 的视频
+- `settings.resolution`: 4k：输出清晰度为 4K 的视频
+- `settings.resolution`: 输出清晰度由本参数控制，仅在 Prompt 中描述“4K”、“1080p”、“720p”不会启用对应输出规格。
+- `settings.dynamic_range`: sdr：标准动态范围，输出 SDR 视频。
+  - hdr：高动态范围，输出 HDR 视频。
+- `settings.dynamic_range`: 未传时默认为 sdr。仅在 settings.resolution 为 1080p 或 4k 时支持 hdr。输出动态范围由本参数控制，仅在 Prompt 中描述“HDR”不会启用 HDR 输出。
 - `settings.duration`: 指定本参数时，以参数值为准，优先于 Prompt 中的时长要求。
 - `settings.duration`: 未指定本参数时，采用模型从 Prompt 中识别到的明确时长要求。例如，“生成一段 15 秒的视频”将目标时长设为 15 秒。
 - `settings.duration`: 未指定本参数，且 Prompt 中未识别到明确的时长要求时，默认为 10 秒。

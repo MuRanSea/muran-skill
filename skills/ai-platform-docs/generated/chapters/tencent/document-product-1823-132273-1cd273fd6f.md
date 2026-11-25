@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132273 -->
-<!-- Source SHA-256: 8e66ff92ba17e2d6ecd6f98572a75dfed6dd42ecc181d62ed72f3c4f345603bc -->
+<!-- Source SHA-256: 1b8c141106a9d52c753c7b9414044040a1b89854a9cefbfa8e7ca7e530e675cd -->
 
 # 修改 Token Plan 套餐的 API Key 配置
 
 官方来源：https://cloud.tencent.com/document/product/1823/132273
-最近更新时间：2026-05-29 10:58:19
+最近更新时间：2026-11-25 02:45:15
 
 ## 1. 接口描述
 
@@ -41,12 +41,13 @@
 | Action | 是 | String | [公共参数](/document/api/1823/132283)，本接口取值：ModifyTokenPlanApiKey。 |
 | Version | 是 | String | [公共参数](/document/api/1823/132283)，本接口取值：2026-03-22。 |
 | Region | 是 | String | [公共参数](/document/api/1823/132283)，详见产品支持的 [地域列表](/document/api/1823/132283#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)。 |
-| ApiKeyId | 是 | String | API Key ID。<br/>示例值：ak-tp-20260401-a1b2c3d4 |
-| AllowedModels.N | 否 | Array of String | 可用模型列表。不传则不修改。<br/><br/>- 如果套餐类型为企业版专业套餐：<br/>1）传入“all“ ：使用套餐支持的所有模型<br/>2）传入 Model ID：指定具体模型。“all“和具体的 Model ID 不能同时传入。<br/><br/>- 如果套餐类型为企业版轻享套餐，不允许传该参数。<br/>示例值：["glm-5","kimi-k2.5"] |
-| ExclusiveQuota | 否 | Integer | 独占额度，不传则不修改。单位说明：<br/><br/>- 套餐类型为专业套餐，单位取值为积分；<br/>- 套餐类型为轻享套餐，单位取值为 token。<br/>示例值：500000 |
-| TotalQuota | 否 | Integer | 总额度上限。-1 表示不限，必须为 -1 或 >= API Key 当前的 ExclusiveQuota（独占额度），不传则不修改。单位说明如下：<br/>- 套餐类型为专业套餐，单位取值为积分；<br/>- 套餐类型为轻享套餐，单位取值为 token。<br/>示例值：-1 |
-| UseStatus | 否 | String | 是否启用该 API Key。取值：enable（启用）、disable（停用），不传则不修改。<br/>示例值：enable |
-| TPM | 否 | Integer | TPM（Tokens Per Minute）限制。不传则不修改。必须 >= 0 且 <= 套餐 TPM。<br/>示例值：4400 |
+| ApiKeyId | 是 | String | <p>API Key ID。</p><br/>示例值：ak-tp-20260401-a1b2c3d4 |
+| AllowedModels.N | 否 | Array of String | <p>可用模型列表。不传则不修改。</p><ul><li><p>如果套餐类型为企业版专业套餐：<br>1）传入“all“ ：使用套餐支持的所有模型<br>2）传入 Model ID：指定具体模型。“all“和具体的 Model ID 不能同时传入。</p></li><li><p>如果套餐类型为企业版轻享套餐，不允许传该参数。</p></li></ul><br/>示例值：["glm-5","kimi-k2.5"] |
+| ExclusiveQuota | 否 | Integer | <p>独占额度，不传则不修改。单位说明：</p><ul><li>套餐类型为专业套餐，单位取值为积分；</li><li>套餐类型为轻享套餐，单位取值为 token。</li></ul><br/>示例值：500000 |
+| TotalQuota | 否 | Integer | <p>总额度上限。-1 表示不限，必须为 -1 或 &gt;= API Key 当前的 ExclusiveQuota（独占额度），不传则不修改。单位说明如下：</p><ul><li>套餐类型为专业套餐，单位取值为积分；</li><li>套餐类型为轻享套餐，单位取值为 token。</li></ul><br/>示例值：-1 |
+| UseStatus | 否 | String | <p>是否启用该 API Key。取值：enable（启用）、disable（停用），不传则不修改。</p><br/>示例值：enable |
+| TPM | 否 | Integer | <p>TPM（Tokens Per Minute）限制。不传则不修改。必须 &gt;= 0 且 &lt;= 套餐 TPM。</p><br/>示例值：4400 |
+| IpWhitelist.N | 否 | Array of String | <p>IP 白名单列表。不传则不修改；传空数组表示清空（不限制 IP）；传非空数组表示覆盖。支持 IPv4 单地址（如 1.2.3.4）和 IPv4 CIDR（如 10.0.0.0/24）格式，最多 50 个条目，不允许重复；不支持 IPv6 与 IP 范围。</p><br/>示例值：["1.2.3.4","10.0.0.0/24"] |
 
 ## 3. 输出参数
 

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-chat-anthropic.md -->
-<!-- Source SHA-256: 14d65b5a7d61f728066ad7c33bf80f938184da5fcbe659db0234a1cf5fadbb29 -->
+<!-- Source SHA-256: df0c33ce3a194ecbf9e2e4018f60a00954994b979c40cc0fef78be05154f50f2 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -855,7 +855,7 @@ components:
           type: array
           description: >-
             对话历史。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 支持文本、图片、视频、工具调用、工具结果和
-            thinking 内容块。M2.7、M2.5、M2.1 和 M2 系列仅支持文本与工具调用相关内容块，不支持图片和视频输入。
+            thinking 内容块。
           items:
             $ref: '#/components/schemas/Message'
         stream:
@@ -867,8 +867,8 @@ components:
           format: int64
           description: >-
             指定生成内容长度的上限（Token 数）。MiniMax-M3.1-Flash 和 MiniMax-M3 推荐值为
-            131072（128K），上限为 524288（512K）；其他模型推荐值为 65536（64K），上限为
-            204800（200K）。超过上限的内容会被截断。如果生成因 `length` 原因中断，请尝试调高此值
+            131072（128K），上限为 524288（512K）。超过上限的内容会被截断。如果生成因 `length`
+            原因中断，请尝试调高此值
           minimum: 1
         temperature:
           type: number
@@ -882,6 +882,7 @@ components:
             暂不支持指定，传入的值不会生效。`MiniMax-M3.1-Flash` 和 `MiniMax-M3` 固定使用
             0.95。若传入，取值需在 (0, 1] 范围内。
           minimum: 0
+          exclusiveMinimum: 0
           maximum: 1
           default: 0.95
         tools:
@@ -900,8 +901,6 @@ components:
             `disabled` 会返回 HTTP 400。如需调节思考深度，请使用 `output_config.effort`。
 
             - `MiniMax-M3`：省略 `thinking` 时默认关闭；传入 `adaptive` 可开启并返回 thinking 块。
-
-            - M2.x 模型：thinking 无法关闭，传入 `disabled` 会被接收但不生效。
           properties:
             type:
               type: string
@@ -912,7 +911,7 @@ components:
                 thinking 控制类型。
 
                 - `disabled`：关闭 `MiniMax-M3` 的 thinking 输出。`MiniMax-M3.1-Flash`
-                传入该值会返回 HTTP 400；M2.x 模型会接收但不生效。
+                传入该值会返回 HTTP 400。
 
                 - `adaptive`：开启 thinking 输出并返回 thinking 块。这是
                 `MiniMax-M3.1-Flash` 唯一接受的取值。
@@ -967,15 +966,22 @@ components:
             $ref: '#/components/schemas/ResponseContentBlock'
         stop_reason:
           type: string
-          description: |-
+          description: >-
             模型停止生成的原因：
+
             - end_turn：模型自然结束
+
             - max_tokens：达到 max_tokens 限制
+
             - tool_use：模型请求工具调用
+
+            - pause_turn：服务端工具（如 web_search）的调用次数达到上限，本轮暂停。将返回的 content 作为
+            assistant 消息追加后再次请求即可继续
           enum:
             - end_turn
             - max_tokens
             - tool_use
+            - pause_turn
         usage:
           $ref: '#/components/schemas/Usage'
     StreamEvent:
@@ -1065,6 +1071,7 @@ components:
                 - end_turn
                 - max_tokens
                 - tool_use
+                - pause_turn
         usage:
           $ref: '#/components/schemas/Usage'
           description: Token 使用情况（`message_delta` 时返回）
@@ -1259,6 +1266,60 @@ components:
           description: >-
             图片或视频来源，type=image 或 type=video 时使用，仅 `MiniMax-M3.1-Flash` 和
             `MiniMax-M3` 支持。
+
+
+            **支持的图片格式**
+
+
+            | 格式 | 常见拓展名 | MIME Type |
+
+            | :-- | :-- | :-- |
+
+            | JPEG | .jpg, .jpeg | image/jpeg |
+
+            | PNG | .png | image/png |
+
+            | GIF | .gif | image/gif |
+
+            | WEBP | .webp | image/webp |
+
+
+            **支持的视频格式**
+
+
+            | 格式 | 常见拓展名 | MIME Type |
+
+            | :-- | :-- | :-- |
+
+            | MP4 | .mp4 | video/mp4 |
+
+            | AVI | .avi | video/avi 或 video/x-msvideo |
+
+            | MOV | .mov | url 传入视频：对象存储请设置 Content-Type 为
+            video/quicktime；base64 编码：请使用 video/mov，即 `{"type": "base64",
+            "media_type": "video/mov", "data": "<纯 Base64>"}`，`data` 不带 `data:`
+            前缀 |
+
+            | MKV | .mkv | video/x-matroska |
+
+
+            **多模态输入限制**
+
+            - URL / Base64 方式传入：视频文件 ≤ 50 MB，图片文件 ≤ 10 MB，请求体 ≤ 64 MB。
+
+            - 使用 Files API 上传：以 `mm_file://{file_id}` 形式引用，单个视频最大 512 MB。
+
+            - 单次请求的 `messages`（含历史轮次）累计最多 200 张图片、20 个视频。
+
+            - 图片和视频的宽、高须大于 0，宽高比不超过 200:1。
+
+            - 视频必须包含视频轨（纯音频文件不支持），时长大于 0 且不超过 30 分钟。
+
+            - 抽帧数按 `round(时长 × fps / 2) × 2` 计算，须不少于 2 且不超过视频实际总帧数；`时长 × fps` 小于
+            1 时一定无法满足，`fps` 高于视频本身的帧率时通常也无法满足。
+
+            - 视频像素总量 `缩放后单帧宽 × 缩放后单帧高 × 抽帧数 / 2` 不超过 301,056,000。单帧按 `detail` 或
+            `max_long_side_pixel` 缩放，长边上限：`low` 504、`default` 672、`high` 1288。
         id:
           type: string
           description: 回带 type=tool_use 时使用的工具调用 ID。
@@ -1288,48 +1349,7 @@ components:
           $ref: '#/components/schemas/CacheControl'
     MediaSource:
       type: object
-      description: >-
-        图片或视频内容块的媒体来源。
-
-
-        **支持的图片格式**
-
-
-        | 格式 | 常见拓展名 | MIME Type |
-
-        | :-- | :-- | :-- |
-
-        | JPEG | .jpg, .jpeg | image/jpeg |
-
-        | PNG | .png | image/png |
-
-        | GIF | .gif | image/gif |
-
-        | WEBP | .webp | image/webp |
-
-
-        **支持的视频格式**
-
-
-        | 格式 | 常见拓展名 | MIME Type |
-
-        | :-- | :-- | :-- |
-
-        | MP4 | .mp4 | video/mp4 |
-
-        | AVI | .avi | video/avi 或 video/x-msvideo |
-
-        | MOV | .mov | url 传入视频：对象存储请设置 Content-Type 为 video/quicktime；base64
-        编码：请使用 video/mov，即 data:video/mov;base64,<BASE64_ENCODING> |
-
-        | MKV | .mkv | video/x-matroska |
-
-
-        **多模态文件大小及容量限制**
-
-        - URL / Base64 方式传入：视频文件 ≤ 50 MB，图片文件 ≤ 10 MB，请求体 ≤ 64 MB。
-
-        - 使用 Files API 上传：以 `mm_file://{file_id}` 形式引用，单个视频最大 512 MB。
+      description: 图片或视频内容块的媒体来源。
       properties:
         type:
           type: string
@@ -1379,9 +1399,9 @@ components:
           type: number
           minimum: 0.2
           maximum: 5
-          default: 1
+          default: 2
           description: |-
-            视频抽帧频率，默认 1，范围 [0.2, 5]。
+            视频抽帧频率，默认 2，范围 [0.2, 5]。
             - 取值越高：对画面变化越敏感，token 花费高、速度慢。
             - 取值越低：token 花费少、速度快，但对画面变化迟钝。
         max_long_side_pixel:

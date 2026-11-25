@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-omni/motion-control.md -->
-<!-- Source SHA-256: 64e14d94bab312dd2aeea815ce4db168f35e6662f67bf9209215afe4b60e8fda -->
+<!-- Source SHA-256: a4e97f78c556f7052e7453ae9d123e1bead8913121e264644b9da84a5309a679 -->
 
 > ## Documentation Index
 >
@@ -75,6 +75,7 @@
   - `image`：形象参考图素材标识。
   - `video`：动作参考视频素材标识。
   - `element`：参考主体素材标识。
+- `contents[].type.prompt`: 文本提示词，可包含正向描述和负向描述
 - `contents[].type.prompt`: 可通过提示词为画面增加元素、实现运镜效果等，详见[可灵「动作控制」使用指南](https://docs.qingque.cn/d/home/eZQAl5y8xNSkr0iYUS8-bpGvP?identityId=2Cn18n4EIHT#section=h.xtmfpd68o18)。
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
 - `contents[].type.prompt`: ```json
@@ -83,6 +84,7 @@
     "text": "string" // 文本提示词，可包含正向描述和负向描述，内容不超过 2500 个字符；必填
   }
   ```
+- `contents[].type.image`: 参考图片类素材相关参数，生成视频中的人物、背景等元素均以参考图为准
 - `contents[].type.image`: 图片内容需满足以下要求：
     - 图片中人物比例尽量与参考视频中人物比例一致，尽量避免全身动作驱动半身人物进行生成。
     - 人物需要露出清晰的上半身或全身的肢体及头部，避免遮挡。
@@ -98,6 +100,7 @@
 - `contents[].type.image`: 图片格式支持.jpg / .jpeg / .png
 - `contents[].type.image`: 图片文件大小不能超过50MB
 - `contents[].type.image`: 图片宽高尺寸不小于300px，图片宽高比要在1:2.5 ~ 2.5:1之间
+- `contents[].type.video`: 动作参考视频素材相关参数，生成视频中的人物动作与参考视频一致
 - `contents[].type.video`: 视频内容需满足以下要求：
     - 人物需要露出清晰的上半身或全身的全部肢体及头部，避免遮挡。
     - 建议上传1人动作视频，2人及以上会取画面占比最大的人物动作进行生成。
@@ -119,6 +122,7 @@
 - `contents[].type.video`: 视频格式支持.mp4 / .mov。
 - `contents[].type.video`: 视频文件大小不能超过100MB。
 - `contents[].type.video`: 视频宽高尺寸需介于340px（含）和3850px（含）之间。
+- `contents[].type.element`: 参考主体相关参数，可辅助提升主体一致性
 - `contents[].type.element`: 通过JSON的格式定义，具体如下：
 - `contents[].type.element`: ```json
   {
@@ -134,8 +138,8 @@
   - 引用主体时，生成的视频暂时只能参考视频中的人物朝向。
 - `settings.audio`: `original`：生成的视频保留参考视频原声。
   - `off`：生成的视频不含有声音。
-- `settings.resolution`: `720p`：输出清晰度为720P的视频。
-  - `1080p`：输出清晰度为1080P的视频。
+- `settings.resolution`: `720p`：输出清晰度为720p的视频。
+  - `1080p`：输出清晰度为1080p的视频。
 - `options`: ```json
   "options": {
     "callback_url": "https://example.com/cb", // 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知；具体通知的消息schema见“Callback协议”

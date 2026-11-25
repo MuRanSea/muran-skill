@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/139566 -->
-<!-- Source SHA-256: 022f7d9240e841442b9ef93d1f712c965f7b7e8ed1062a7e6bb944efd55c0d1a -->
+<!-- Source SHA-256: 4a7f6c1cea3ea40bc53e14cf0462675e9e6f89416909ceeee6c5786ef74374da -->
 
 # Rodin-Gen-3D-2.5 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/139566
-最近更新时间：2026-10-21 00:32:00
+最近更新时间：2026-11-13 10:57:00
 
 ## 简介
 
@@ -32,7 +32,7 @@ rodin-gen-3d-2.5接口，根据输入的图片或文本智能生成高质量3D �
 
 ### 2. 并发额度
 
-默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+默认提供 3 个并发，代表最多可同时处理 3 个已提交的任务，超出并发限制的任务需等待前面的任务处理完成后才能开始处理。
 
 并发任务数：表示在调用对应服务的时段内最大可运行的任务数，该任务未完成时，无法提交下一个任务，该任务完成后，可提交下一个任务。
 
@@ -46,7 +46,7 @@ rodin-gen-3d-2.5接口，根据输入的图片或文本智能生成高质量3D �
 | --- | --- | --- | --- |
 | model | 是 | string | 模型名称。默认为 rodin-gen-3d-2.5。示例值：rodin-gen-3d-2.5 |
 | prompt | 条件必选 | string | 文本描述，文生3D 时必填，最大1024字符。与 images 严格互斥，不能同时传递。 |
-| images | 条件必选 | array<string> | 图片 URL 数组，图生3D 时必填，1～5张。支持 jpeg/jpg/png/webp，分辨率须大于128×128，单张小于10MB。与 prompt 严格互斥。 |
+| images | 条件必选 | array<string> | 图片 URL 数组，图生3D 时必填，1～5张。支持 jpeg/jpg/png/webp，单张图片大小不超过 100MB，图片总大小无限制。与 prompt 严格互斥。 |
 | tier | 是 | string | 模型档位。可选：Gen-2.5-Extreme-Low、Gen-2.5-Low、Gen-2.5-Medium、Gen-2.5-High、Gen-2.5-Extreme-High。 |
 | mesh\_mode | 否 | string | 网格拓扑模式。可选 Raw（三角面，默认）或 Quad（四边面）。 |
 | quality | 否 | string | 网格质量预设。可选 extra-low、low、medium（默认）、high。 |
@@ -174,17 +174,17 @@ curl --location --request POST 'https://tokenhub.tencentmaas.com/v1/api/3d/query
 
 ## 错误码
 
-| 错误码 | HTTP 状态码 | 说明 |
-| --- | --- | --- |
-| InvalidParameter.InvalidParameter | 400 | 请求参数不合法。 |
-| InvalidParameter.InputRequired | 400 | images 和 prompt 必填其一。 |
-| InvalidParameter.InputConflict | 400 | images 和 prompt 不能同时存在。 |
-| InvalidParameter.TierNotValid | 400 | tier 取值不在合法范围内。 |
-| InvalidParameter.ImagesExceedsLimit | 400 | 图片数量超限，最多5张。 |
-| InvalidParameter.PromptTooLong | 400 | prompt 文本长度超限。 |
-| InvalidParameter.FileTypeNotSupported | 400 | 图片中未检测到有效对象。 |
-| RequestLimitExceeded.JobNumExceed | 429 | API 并发限制已达上限。 |
-| FailedOperation.ModerationFailed | 400 | 图片内容违规，审核不通过。 |
-| FailedOperation.ImageSizeExceed | 400 | 图片标签数量超出限制。 |
-| FailedOperation.InnerError | 500 | 内部服务错误，包括任务不存在、原厂未知错误、订阅过期或权限不足等情况。 |
-| FailedOperation.ServerError | 500 | 算法服务异常。 |
+| 错误码 | 说明 |
+| --- | --- |
+| InvalidParameter.InvalidParameter | 请求参数不合法。 |
+| InvalidParameter.InputRequired | images 和 prompt 必填其一。 |
+| InvalidParameter.InputConflict | images 和 prompt 不能同时存在。 |
+| InvalidParameter.TierNotValid | tier 取值不在合法范围内。 |
+| InvalidParameter.ImagesExceedsLimit | 图片数量超限，最多5张。 |
+| InvalidParameter.PromptTooLong | prompt 文本长度超限。 |
+| InvalidParameter.FileTypeNotSupported | 图片中未检测到有效对象。 |
+| RequestLimitExceeded.JobNumExceed | API 并发限制已达上限。 |
+| FailedOperation.ModerationFailed | 图片内容违规，审核不通过。 |
+| FailedOperation.ImageSizeExceed | 图片标签数量超出限制。 |
+| FailedOperation.InnerError | 内部服务错误，包括任务不存在、原厂未知错误、订阅过期或权限不足等情况。 |
+| FailedOperation.ServerError | 算法服务异常。 |

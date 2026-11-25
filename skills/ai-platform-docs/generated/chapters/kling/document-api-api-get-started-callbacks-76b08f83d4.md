@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/get-started/callbacks.md -->
-<!-- Source SHA-256: 42ac7ba29373b4d83c22c9f2469f4e2e8e06d92c9128609260f7d7bc3facbb72 -->
+<!-- Source SHA-256: 91a6953727ef1bdf5af57d8e1c461064850c4f13021823edc9c5d8b591bfd97a -->
 
 > ## Documentation Index
 >
@@ -112,6 +112,44 @@
       "currency": "string",             // 消耗单位，仅存在于消耗余额场景（charge_type=cash），固定枚举值：CNY, USD
       "package_type": "string",         // 消耗资源包类型，仅存在于消耗资源包场景（charge_type=unit），固定枚举值：video, image, audio
       "list_price": "string"            // 额度扣减刊例价，仅存在于消耗额度场景（charge_type=cash）
+    }
+  ]
+}
+```
+
+### 图片 / 长图任务回调示例
+
+适用于 Kling Image 4.0 的图片生成（单图、组图）与长图生成任务。创建任务时设置 `options.callback_url`，任务状态发生变更时服务端发送通知。回调体为单个任务对象，结构与上方新版回调函数一致，不包含 `code` / `message` / `request_id` / `data` 外层包装。
+
+- 长图任务 `outputs` 仅返回一张最终整张长图，不返回内部配图或 HTML。
+- `billing` 不包含 `image_details`；图片计量信息（输入参考图张数、输出图片张数、长图技能与长度）请通过资源包抵扣明细、额度抵扣明细接口查询。
+
+```JSON
+{
+  "id": "example-long-task-id",          // 系统任务ID，由平台生成
+  "status": "succeeded",                 // 任务状态，枚举值：submitted（已提交）、processing（处理中）、succeeded（成功）、failed（失败）
+  "message": "",                         // 任务说明；失败时为失败原因
+  "create_time": 1790000000000,          // 任务创建时间，Unix时间戳、单位ms
+  "update_time": 1790000010000,          // 任务更新时间，Unix时间戳、单位ms
+  "external_id": "long-image-webpage-001", // 创建时指定的自定义任务ID（如有）
+  "outputs": [
+    {
+      "type": "image",                   // 图片结果，固定值：image
+      "url": "https://example.com/final-long-image.png" // 最终整张长图URL，仅返回一张，不返回内部配图或HTML；30天后清理，请及时转存
+    }
+  ],
+  "billing": [                           // 任务结算信息；多种账户类型消耗时返回多条，不包含 image_details
+    {
+      "charge_type": "cash",             // cash：额度；unit：资源包积分
+      "cash_type": "balance",            // balance：正式额度；test_balance：测试金；reward_balance：奖励金
+      "amount": "1.00",                  // 十进制数字字符串；cash 为折扣后额度金额，unit 为积分扣减量
+      "currency": "CNY",                 // 币种，CNY/USD；仅 cash 返回
+      "list_price": "1.00"               // 额度扣减刊例价；任务 billing 中为十进制字符串
+    },
+    {
+      "charge_type": "unit",             // cash：额度；unit：资源包积分
+      "amount": "16",                    // 十进制数字字符串；cash 为折扣后额度金额，unit 为积分扣减量
+      "package_type": "image"            // 资源包类型，video/image/audio；仅 unit 返回
     }
   ]
 }

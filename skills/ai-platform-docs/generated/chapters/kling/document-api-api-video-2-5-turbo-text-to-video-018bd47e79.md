@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/2-5-turbo/text-to-video.md -->
-<!-- Source SHA-256: 1deb27ae041a4a849401cfc50f5b5ee86966a954e83a22cfc5e5db567dd22817 -->
+<!-- Source SHA-256: 4f2c9c32e2a0f17d57c7b08b5a02f653637eae2afbb499e3841cacd75648216c -->
 
 > ## Documentation Index
 >
@@ -49,8 +49,8 @@
 #### Request Body 字段补充说明
 
 - `prompt`: 内容长度不超过2500个字符。
-- `settings.resolution`: 720p：输出清晰度为720P的视频。
-- `settings.resolution`: 1080p：输出清晰度为1080P的视频。
+- `settings.resolution`: 720p：输出清晰度为720p的视频。
+- `settings.resolution`: 1080p：输出清晰度为1080p的视频。
 - `options`: ```json
   "options": {
     "callback_url": "https://example.com/cb", // 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知；具体通知的消息schema见“Callback协议”

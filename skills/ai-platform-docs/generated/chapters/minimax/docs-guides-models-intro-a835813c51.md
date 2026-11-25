@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/models-intro.md -->
-<!-- Source SHA-256: f1310b1fb757cb0cf804530fc2c2a7d8d9f8a346a4d314396c2bbfdcc70a4819 -->
+<!-- Source SHA-256: 53ce46f2a70e47bcbc4e5682f142ab34679c883af86aff8a6fe69f7baf2c555f -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -7,7 +7,19 @@
 
 # 概览
 
-> MiniMax 模型体系涵盖语言、视频、语音、图像与音乐五大方向，助力开发者高效构建智能应用。
+> MiniMax 模型体系涵盖语言、视频、图片、语音与音乐五大方向，助力开发者高效构建智能应用。
+
+> [!NOTE]
+>
+> 自 2026 年 8 月 20 日起，付费接口（音乐生成、歌词生成）不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务；免费音乐生成接口（Music-3.0-free、Music-2.6-free、music-cover-free）停止服务。
+>
+> 如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimaxi.com/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
+
+> [!NOTE]
+>
+> 自 2026 年 8 月 20 日起，付费接口（音乐生成、歌词生成）不再面向新用户提供服务，历史付费用户可继续使用现有 API 服务；免费音乐生成接口（Music-3.0-free、Music-2.6-free、music-cover-free）停止服务。
+>
+> 如需体验或使用音乐生成能力，可前往 [MiniMax Audio](https://www.minimax.cn/audio)，或使用已发布在 [Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-Music3) 和 [魔搭 ModelScope](https://modelscope.cn/models/MiniMax/MiniMax-Music3) 的 MiniMax Music 3 开源模型。
 
 ### 语言模型
 
@@ -30,6 +42,20 @@
 > | [MiniMax Hailuo 2.3 Fast](https://platform.minimaxi.com/docs/api-reference/video-generation-i2v.md) | 全新图生视频模型，物理表现与指令遵循具佳，更快更优惠 |
 > | [MiniMax Hailuo 02](https://platform.minimaxi.com/docs/api-reference/video-generation-t2v.md) | 新一代视频生成模型，1080p 原生，SOTA 指令遵循，极致物理表现 |
 
+### 图片模型
+
+| **模型名称**            | **介绍**                                                         |
+| :- | :- |
+| [MiniMax-H3-Image](https://platform.minimaxi.com/docs/api-reference/image-generation-h3-generations.md) | 图片生成模型，支持文生图与图片编辑（1 \~ 16 张参考图），输出尺寸可按宽高指定，也可按面积档和长宽比指定，支持流式输出 |
+| [MiniMax-H3-Image-Highspeed](https://platform.minimaxi.com/docs/api-reference/image-generation-h3-generations.md) | MiniMax-H3-Image 的高速版本，支持文生图与图片编辑，参数与限制与 MiniMax-H3-Image 相同 |
+
+> [accordion] 历史模型
+>
+> | **模型名称**            | **介绍**                                                         |
+> | :- | :- |
+> | [image-01](https://platform.minimaxi.com/docs/api-reference/image-generation-t2i.md) | 图片生成模型，画面表现细腻，支持文生图、图生图 |
+> | [image-01-live](https://platform.minimaxi.com/docs/api-reference/image-generation-t2i.md) | 图片生成模型，手绘、卡通等画风增强，支持文生图并进行画风设置 |
+
 ### 语音模型
 
 | **模型名称**             | **介绍**                                                         |
@@ -45,13 +71,6 @@
 > | [Speech-2.6-Turbo](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md) | 音质优异，超低时延，响应更灵敏 |
 > | [Speech-02-HD](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md) | 语音 HD 模型，拥有出色的韵律和稳定性，复刻相似度和音质表现突出 |
 > | [Speech-02-Turbo](https://platform.minimaxi.com/docs/api-reference/speech-t2a-http.md) | 语音 Turbo 模型，小语种能力增强，性能表现出色 |
-
-### 图片模型
-
-| **模型名称**            | **介绍**                                                         |
-| :- | :- |
-| [image-01](https://platform.minimaxi.com/docs/api-reference/image-generation-t2i.md) | 图像生成模型，画面表现细腻，支持文生图、图生图 |
-| [image-01-live](https://platform.minimaxi.com/docs/api-reference/image-generation-t2i.md) | 图像生成模型，手绘、卡通等画风增强，支持文生图并进行画风设置 |
 
 ### 音乐模型
 

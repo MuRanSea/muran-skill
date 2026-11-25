@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/quickstart-preparation.md -->
-<!-- Source SHA-256: de64ca9eea30a6f1f7bdbd34573f72106a1031e7dfc5cb635f6762a9a008ab4a -->
+<!-- Source SHA-256: 6e536e3a5ffc72249011298d988ab6be32fbb196fe5c4708e4d4470239d224bc -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -16,7 +16,7 @@ API 调用前，需在 MiniMax 开放平台进行[账户注册](https://platform
 **2. 获取 Key**
 
 * **按量付费**：通过 [接口密钥 > 创建新的 API Key](https://platform.minimax.cn/user-center/basic-information/interface-key)，获取 **API Key**
-  \[!NOTE] 按量付费支持使用所有模态模型，包括语言、视频、语音、图像等
+  \[!NOTE] 按量付费支持使用所有模态模型，包括语言、视频、图片、语音等
 * **M Plan**：通过 [订阅管理 > M Plan](https://platform.minimax.cn/user-center/payment/token-plan)，查看 **订阅 Key**
   \[!NOTE] 订阅 Key 用于 M Plan 订阅套餐和已购积分。它可以在付费资源可用之前就存在；当您拥有 M Plan 席位或积分权限后才可实际使用资源。详情见 [M Plan 概要](https://platform.minimax.cn/docs/m-plan/intro)
 

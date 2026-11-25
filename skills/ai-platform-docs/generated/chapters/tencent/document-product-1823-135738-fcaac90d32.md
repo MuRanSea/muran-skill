@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135738 -->
-<!-- Source SHA-256: e95d1829e795ba6a1ed3b80e882c3efb76f607e47761cdd81ee864eaf8dacfde -->
+<!-- Source SHA-256: 8ce78a341618732da84090da8f4f398cfd04e2e32c3529d72f73ed3827b78e03 -->
 
 # 视频生成模型调用概览
 
 官方来源：https://cloud.tencent.com/document/product/1823/135738
-最近更新时间：2026-10-23 18:08:00
+最近更新时间：2026-11-13 20:08:30
 
 ## 概述
 
@@ -28,17 +28,13 @@ TokenHub 视频生成模型提供**文生视频、图生视频、首尾帧生视
 
 详情请参见 [PixVerse 生视频调用指南](https://cloud.tencent.com/document/product/1823/135325)。
 
-| 模型名称 | model 参数值 | 支持能力 | 简要说明 |
-| --- | --- | --- | --- |
-| PixVerse-Video-v6 | `pixverse-video-v6.0` | 文生 / 图生 / 首尾帧 / 参考生 | 通用场景推荐，支持多镜头智能分镜。 |
-| PixVerse-Video-c1 | `pixverse-video-c1` | 文生 / 图生 / 首尾帧 / 参考生 | 打斗、法术特效、高速运动等动态场景推荐。 |
-| PixVerse-Video-v5.6 | `pixverse-video-v5.6` | 文生 / 图生 / 首尾帧 / 参考生 | 历史版本，新接入建议直接使用 V6.0。 |
+<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型名称</div></td><td><div>model 参数值</div></td><td><div>支持能力</div></td><td><div>简要说明</div></td></tr><tr><td colspan="1" rowspan="1"><div>PixVerse-Video-v6-max</div></td><td colspan="1" rowspan="1"><div><code>pixverse-video-v6.0-max</code></div></td><td colspan="1" rowspan="1"><div>文生/图生</div></td><td><div>电影、短剧、广告营销等企业级内容创作场景推荐</div></td></tr><tr><td><div>PixVerse-Video-v6</div></td><td><div><code>pixverse-video-v6.0</code></div></td><td><div>文生 / 图生 / 首尾帧 / 参考生</div></td><td><div>通用场景推荐，支持多镜头智能分镜。</div></td></tr><tr><td><div>PixVerse-Video-c1</div></td><td><div><code>pixverse-video-c1</code></div></td><td><div>文生 / 图生 / 首尾帧 / 参考生</div></td><td><div>打斗、法术特效、高速运动等动态场景推荐。</div></td></tr><tr><td><div>PixVerse-Video-v5.6</div></td><td><div><code>pixverse-video-v5.6</code></div></td><td><div>文生 / 图生 / 首尾帧 / 参考生</div></td><td><div>历史版本，新接入建议直接使用 V6.0。</div></td></tr></tbody></table>
 
 ### Kling 系列
 
 详情请参见 [Kling 生视频调用指南](https://cloud.tencent.com/document/product/1823/135742)。
 
-<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型名称</div></td><td><div>model 参数值</div></td><td><div>支持能力</div></td><td><div>简要说明</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Video-v4</div></td><td colspan="1" rowspan="1"><div><code>kling-video-v4</code></div></td><td><div>文生 / 图生（含首尾帧、元素）/全能视频生成（多模态输入、视频编辑）</div></td><td><div>新一代旗舰：单次最长 30 秒，支持 21:9 宽画幅，全能视频生成单任务最多组合 15 项参考素材。</div></td></tr><tr><td><div>Kling-Video-V3</div></td><td><div><code>kling-video-v3</code></div></td><td><div>文生 / 图生（含首尾帧、元素）</div></td><td><div>原生音频、多镜头、元素引用与 4K，能力最全。</div></td></tr><tr><td><div>Kling-Video-V3-omni</div></td><td><div><code>kling-video-v3-omni</code></div></td><td><div>全能视频生成（多模态输入、视频编辑）</div></td><td><div>参考视频、视频编辑等多模态混合输入场景。</div></td></tr><tr><td><div>Kling-Video-V3-turbo</div></td><td><div><code>kling-video-v3-turbo</code></div></td><td><div>文生 / 图生</div></td><td><div>V3 快速版，批量生成、成本优先；无音频与多镜头。</div></td></tr><tr><td><div>Kling-Video-O1</div></td><td><div><code>kling-video-o1</code></div></td><td><div>全能视频生成（多模态统一入口）</div></td><td><div>O1 系列多模态统一生成入口，时长上限 10 秒。</div></td></tr><tr><td><div>Kling-Video-V2.6</div></td><td><div><code>kling-video-v2.6</code></div></td><td><div>文生 / 图生（含首尾帧）</div></td><td><div>支持原生音频的成熟方案。</div></td></tr><tr><td><div>Kling-Video-V2.5-turbo</div></td><td><div><code>kling-video-v2.5-turbo</code></div></td><td><div>文生 / 图生（含首尾帧）</div></td><td><div>参数最精简的入门款，成本敏感场景。</div></td></tr><tr><td><div>Kling-Video-Motion-Control-V3.0</div></td><td><div><code>kling-video-motion-control-v3.0</code></div></td><td><div>动作控制（形象参考图 + 动作参考视频，支持引用主体）</div></td><td><div>让形象参考图中的人物<b>复刻参考视频的动作</b>；支持引用 1 个主体</div></td></tr><tr><td><div>Kling-Video-Motion-Control-V2.6</div></td><td><div><code>kling-video-motion-control-v2.6</code></div></td><td><div>动作控制（形象参考图 + 动作参考视频）</div></td><td><div>动作控制上一代版本，不支持引用主体</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div>模型名称</div></td><td><div>model 参数值</div></td><td><div>支持能力</div></td><td><div>简要说明</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Video-v4-flash</div></td><td colspan="1" rowspan="1"><div><code>kling-video-v4-flash</code></div></td><td colspan="1" rowspan="1"><div>文生 / 图生（首帧）/ 全能视频生成（参考图、参考视频、主体输入）</div></td><td><div>生成时长大幅度缩短，性价比高</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Video-v4</div></td><td colspan="1" rowspan="1"><div><code>kling-video-v4</code></div></td><td><div>文生 / 图生（含首尾帧、元素）/全能视频生成（多模态输入、视频编辑）</div></td><td><div>新一代旗舰：单次最长 30 秒，支持 21:9 宽画幅，全能视频生成单任务最多组合 15 项参考素材。</div></td></tr><tr><td><div>Kling-Video-V3</div></td><td><div><code>kling-video-v3</code></div></td><td><div>文生 / 图生（含首尾帧、元素）</div></td><td><div>原生音频、多镜头、元素引用与 4K，能力最全。</div></td></tr><tr><td><div>Kling-Video-V3-omni</div></td><td><div><code>kling-video-v3-omni</code></div></td><td><div>全能视频生成（多模态输入、视频编辑）</div></td><td><div>参考视频、视频编辑等多模态混合输入场景。</div></td></tr><tr><td><div>Kling-Video-V3-turbo</div></td><td><div><code>kling-video-v3-turbo</code></div></td><td><div>文生 / 图生</div></td><td><div>V3 快速版，批量生成、成本优先；无音频与多镜头。</div></td></tr><tr><td><div>Kling-Video-O1</div></td><td><div><code>kling-video-o1</code></div></td><td><div>全能视频生成（多模态统一入口）</div></td><td><div>O1 系列多模态统一生成入口，时长上限 10 秒。</div></td></tr><tr><td><div>Kling-Video-V2.6</div></td><td><div><code>kling-video-v2.6</code></div></td><td><div>文生 / 图生（含首尾帧）</div></td><td><div>支持原生音频的成熟方案。</div></td></tr><tr><td><div>Kling-Video-V2.5-turbo</div></td><td><div><code>kling-video-v2.5-turbo</code></div></td><td><div>文生 / 图生（含首尾帧）</div></td><td><div>参数最精简的入门款，成本敏感场景。</div></td></tr><tr><td><div>Kling-Video-Motion-Control-V3.0</div></td><td><div><code>kling-video-motion-control-v3.0</code></div></td><td><div>动作控制（形象参考图 + 动作参考视频，支持引用主体）</div></td><td><div>让形象参考图中的人物<b>复刻参考视频的动作</b>；支持引用 1 个主体</div></td></tr><tr><td><div>Kling-Video-Motion-Control-V2.6</div></td><td><div><code>kling-video-motion-control-v2.6</code></div></td><td><div>动作控制（形象参考图 + 动作参考视频）</div></td><td><div>动作控制上一代版本，不支持引用主体</div></td></tr></tbody></table>
 
 ### Vidu 系列
 
@@ -60,6 +56,8 @@ TokenHub 视频生成模型提供**文生视频、图生视频、首尾帧生视
 
 | 模型名称 | model 参数值 | 支持能力 | 简要说明 |
 | --- | --- | --- | --- |
+| MiniMax-Video-H3-Highspeed | `minimax-video-h3-highspeed` | 文生 / 图生（首尾帧）/ 多模态参考生 | 画质与速度兼顾的H3视频模型 |
+| MiniMax-Video-H3-Lite | `minimax-video-h3-lite` | 文生 / 图生（首尾帧）/ 多模态参考生 | 低成本批量试片的H3视频模型 |
 | MiniMax-Video-v2.3 | `minimax-video-v2.3` | 文生 / 图生 / 首尾帧 | 旗舰款：物理表现与指令遵循强，支持运镜指令。 |
 | MiniMax-Video-v2.3-fast | `minimax-video-v2.3-fast` | 图生（首帧） | v2.3 快速版，批量创作成本更低；仅支持图生。 |
 | MiniMax-Video-H3 | `minimax-video-h3` | 文生 / 图生（首尾帧）/ 多模态参考生 | 最新旗舰：2K 直出、多模态参考、原生立体声、最长15秒。 |

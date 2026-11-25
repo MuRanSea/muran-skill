@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/get-started/kling-skills.md -->
-<!-- Source SHA-256: a530f66e432f6a172af40ff8c8756bd0de77adf3a1db66620f477da059317090 -->
+<!-- Source SHA-256: 9df3a1ab58d0eedd171722df549c3fa657546e9320e8c8312d27ab797879e572 -->
 
 > ## Documentation Index
 >
@@ -26,7 +26,7 @@ KlingAI API 官方 skill，开发者可以在第三方Agent中使用Kling AI Ski
 <SkillCard icon="K" color="#2261f5" title="Kling AI Skill" clawHubButton="true" clawHubUrl="https://clawhub.ai/klingai-dev/klingai" buyButton="true" buyUrl="https://klingai.com/dev/pricing?scrollTo=video-package" buyText="购买资源包">
     <ul style="font-size: 12px !important;">
         <li style="font-size: 12px !important;">视频生成支持模型：kling-4.0 / kling-4.0-flash / kling-3.0 / kling-3.0-turbo / kling-3.0-omni / kling-2.6 / kling-2.5-turbo / kling-o1</li>
-        <li style="font-size: 12px !important;">图片生成支持模型：kling-v3 / kling-v3-omni / kling-v2-1 / kling-image-o1</li>
+        <li style="font-size: 12px !important;">图片生成支持模型：kling-4.0 / kling-v3 / kling-v3-omni / kling-v2-1 / kling-image-o1</li>
         <li style="font-size: 12px !important;">主体/角色管理 -- 创建可复用的角色、跨视频保持人物一致性</li>
     </ul>
 </SkillCard>

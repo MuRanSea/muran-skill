@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132289 -->
-<!-- Source SHA-256: ac28149dbbef1d473b6eb71a1b5148d4a4fd6ee631d75b4d4d8a4d57aaeb1c8f -->
+<!-- Source SHA-256: cbb4ec583d601c8dd410fc65651492ed9faf6c8859f60831c8c04d2d397f24d3 -->
 
 # API 概览
 
 官方来源：https://cloud.tencent.com/document/product/1823/132289
-最近更新时间：2026-08-19 03:05:01
+最近更新时间：2026-11-17 03:04:30
 
 ## API 密钥管理相关接口
 
@@ -14,6 +14,7 @@
 | [DeleteApiKey](/document/api/1823/133809) | 删除 API 密钥 | 20 |
 | [DescribeApiKey](/document/api/1823/132345) | 查询 API 密钥详情 | 20 |
 | [DescribeApiKeyList](/document/api/1823/132344) | 查询 API 密钥列表 | 20 |
+| [ModifyApiKeyBindings](/document/api/1823/140653) | 更新 API 密钥绑定 | 20 |
 | [ModifyApiKeyInfo](/document/api/1823/133808) | 更新 API 密钥信息 | 20 |
 | [ModifyApiKeyStatus](/document/api/1823/133807) | 更新 API 密钥状态 | 20 |
 
@@ -89,5 +90,11 @@
 | 接口名称 | 接口功能 | 频率限制（次/秒） |
 |-|-|-|
 | [DescribeUsageRankList](/document/api/1823/132340) | 查询用量排行列表 | 20 |
+
+## 个人版 Token Plan 相关接口
+
+| 接口名称 | 接口功能 | 频率限制（次/秒） |
+|-|-|-|
+| [DescribeTokenPlanPersonalPackage](/document/api/1823/140967) | 查询 TokenPlan 个人版套餐详情 | 20 |
 
 >! 以上给出的接口频率限制维度为`API + 接入地域 + 子账号`，有关限频更多说明参考：[API 频率限制说明](https://cloud.tencent.com/document/product/1278/109059)

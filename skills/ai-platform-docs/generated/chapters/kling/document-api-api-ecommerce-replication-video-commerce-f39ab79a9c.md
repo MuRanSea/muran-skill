@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/video-commerce.md -->
-<!-- Source SHA-256: 0567501d69b143b7f90f5a220fe770797257b5e628e80bfbd02ba9aab103d39b -->
+<!-- Source SHA-256: f5f2bed3ba5b4a7b10e115d7a7edb57064790f834c2e18ebd435cb4cb3889301 -->
 
 > ## Documentation Index
 >
@@ -120,6 +120,7 @@
 - `contents`: 商品内容包括 `ref_image` / `goods_title` / `goods_price` / `goods_target_audience` / `goods_selling_point`。一旦出现任意一项即走口播带货模式，此时 `ref_image` 至少 1 张、`goods_title` 恰好 1 条且非空。
 - `contents`: `speech_script` 为必填项：两种模式下均需恰好 1 条且非空。
 - `contents`: 口播带货模式暂不支持语速调节：该模式下请勿传入 `settings.speech_rate`，传入将返回参数校验错误。
+- `contents[].type.avatar_image`: 上传的人物图。
 - `contents[].type.avatar_image`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -133,6 +134,7 @@
 - `contents[].type.avatar_image`: 任务级输入：恰好 1 条，且每次任务都需重新提交素材。
 - `contents[].type.avatar_image`: 上传人物图时，`settings.voice_id` 必填。
 - `contents[].type.avatar_image`: 建议使用单人、正脸清晰、嘴部无遮挡的素材，避免多人合影、侧脸、强遮挡、墨镜或强滤镜。
+- `contents[].type.avatar_id`: 形象库人物 ID。
 - `contents[].type.avatar_id`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -161,6 +163,7 @@
   | avatar_river_male | River | 男 | 27 |
   | avatar_marcus_male | Marcus | 男 | 35 |
   | avatar_toto_cartoon | Toto（卡通） | 男 | 15 |
+- `contents[].type.ref_image`: 商品图片。
 - `contents[].type.ref_image`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -177,6 +180,7 @@
 - `contents[].type.ref_image`: 图片宽高尺寸不小于 300px，图片宽高比要在 1:2.5 ~ 2.5:1 之间。
 - `contents[].type.ref_image`: 最多支持同时上传 5 张商品图片。口播带货模式下至少需要 1 张。
 - `contents[].type.ref_image`: 商品图建议主体居中、背景干净、光线均匀。提供正面、侧面、细节等多个角度，有助于系统生成更丰富的货品镜头。
+- `contents[].type.goods_title`: 商品标题。
 - `contents[].type.goods_title`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -184,6 +188,7 @@
     "text": "string" // 文本提示词内容，内容长度不能超过 500 个字符；必填
   }
   ```
+- `contents[].type.goods_price`: 商品价格。
 - `contents[].type.goods_price`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -191,6 +196,7 @@
     "text": "399元" // 文本提示词内容，内容长度不能超过 256 个字符
   }
   ```
+- `contents[].type.goods_target_audience`: 商品目标人群。
 - `contents[].type.goods_target_audience`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -198,6 +204,7 @@
     "text": "露营人群" // 文本提示词内容，单条内容长度不能超过 200 个字符
   }
   ```
+- `contents[].type.goods_selling_point`: 商品卖点。
 - `contents[].type.goods_selling_point`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -205,6 +212,7 @@
     "text": "IP67级防尘防水" // 文本提示词内容，单条内容长度不能超过 500 个字符
   }
   ```
+- `contents[].type.speech_script`: 完整口播稿。
 - `contents[].type.speech_script`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -215,8 +223,8 @@
 - `contents[].type.speech_script`: 应为适合直接朗读的口语化表达。如文案已定稿不可改写，可将 `settings.allow_polish` 设为 false。
 - `contents[].type.speech_script`: 成片时长由系统根据口播稿自动决定，不支持通过请求指定，因此口播稿长度是影响成片时长与费用的主要因素。
 - `settings`: 字段名采用 snake_case，同时兼容 camelCase 别名（`aspectRatio`、`allowPolish`、`voiceId`、`speechRate`、`actionPrompt`、`bgmEnabled`）。
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频。
-  - 1080p：输出清晰度为 1080P 的视频。
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频。
+  - 1080p：输出清晰度为 1080p 的视频。
 - `settings.aspect_ratio`: camelCase 别名：`aspectRatio`。
 - `settings.allow_polish`: camelCase 别名：`allowPolish`。
 - `settings.allow_polish`: 设为 false 时系统会逐字使用传入的 `speech_script`，只做配音与画面生成，不改写文案。
@@ -508,6 +516,7 @@ curl -X GET "https://api-beijing.klingai.com/solutions?task_ids=id1,id2" \
   ]
   ```
 - `filters[].key`: `status`：任务状态
+- `filters[].key.status`: 按任务状态筛选。
 - `filters[].key.status`: 通过 JSON 的格式定义，具体如下：
   ```json
   {

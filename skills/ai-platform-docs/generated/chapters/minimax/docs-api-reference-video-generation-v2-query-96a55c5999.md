@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-query.md -->
-<!-- Source SHA-256: ba7a03558de9e9cbff113afd5e372f209251976f4dbca9a6e12583040f0d1aea -->
+<!-- Source SHA-256: 5f05d976cf8e27adbe5dd44475876bc5c3742e7fa1a016ed02e0fd422ce3a09c -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -53,7 +53,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetVideoGenerationV2Resp'
+                description: >-
+                  响应形态由任务创建时的 `response_format` 决定：`task` 返回 `{"task":
+                  {...}}`（GetVideoGenerationV2Resp），`flat`
+                  返回平铺的任务对象（VideoGenerationTaskV2）。
+                oneOf:
+                  - $ref: '#/components/schemas/GetVideoGenerationV2Resp'
+                  - $ref: '#/components/schemas/VideoTask'
               examples:
                 视频生成成功:
                   value:
@@ -182,6 +188,31 @@ paths:
                       ratio: '16:9'
                       task_type: generation
                       modality: video
+                视频生成成功（flat 响应格式）:
+                  summary: flat：任务字段平铺到顶层
+                  value:
+                    id: '424010985738629'
+                    model: MiniMax-H3
+                    status: succeeded
+                    created_at: 1785125529
+                    updated_at: 1785125946
+                    content:
+                      url: >-
+                        https://cdn.hailuoai.com/prod/hailuo_demo/testsets/h3_promo_eval_ref2va/gallery/sr_v2p26_trio_seed42_20260724/inputs/89f8c0bbee5b_denoise_ids_0_final.mp4
+                    resolution: 2K
+                    duration: 5
+                    usage:
+                      total_seconds: 5
+                      input_seconds: 0
+                      output_seconds: 5
+                      input_image_count: 1
+                      input_audio_seconds: 6
+                      total_tokens: 273890
+                      prompt_tokens: 13500
+                      completion_tokens: 260390
+                    ratio: '16:9'
+                    task_type: generation
+                    modality: video
         '400':
           $ref: '#/components/responses/Err400'
         '401':
@@ -286,19 +317,6 @@ components:
           enum:
             - video
             - text
-    OaiError:
-      type: object
-      description: OpenAI 风格错误响应。出错时 HTTP 状态码为真实错误码(401/400/429/402/422/500…),响应体为该结构。
-      properties:
-        type:
-          type: string
-          description: 固定为 `error`。
-          example: error
-        error:
-          $ref: '#/components/schemas/OaiErrorDetail'
-        request_id:
-          type: string
-          description: 请求追踪 ID(便于排查)。
     VideoTaskError:
       type: object
       properties:
@@ -354,6 +372,19 @@ components:
             输出 Token 数。
             - 视频任务 = 输出视频秒数折算；
             - H3-Context-IR 任务的输出 Token 数。
+    OaiError:
+      type: object
+      description: OpenAI 风格错误响应。出错时 HTTP 状态码为真实错误码(401/400/429/402/422/500…),响应体为该结构。
+      properties:
+        type:
+          type: string
+          description: 固定为 `error`。
+          example: error
+        error:
+          $ref: '#/components/schemas/OaiErrorDetail'
+        request_id:
+          type: string
+          description: 请求追踪 ID(便于排查)。
     OaiErrorDetail:
       type: object
       properties:

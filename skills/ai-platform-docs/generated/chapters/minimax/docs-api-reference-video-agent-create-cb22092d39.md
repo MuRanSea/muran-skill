@@ -1,11 +1,11 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-agent-create.md -->
-<!-- Source SHA-256: a8dce7bb55075fc287ea8af59203fc564784563f1d9cb8602c78da2f3263048f -->
+<!-- Source SHA-256: a0ac2c11c98261287ca2208fb26fbc4b6769927ae2a8d3c4293b8eaf10cb91bb -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# 创建视频Agent任务
+# 创建视频 Agent 任务
 
 > 使用本接口创建视频Agent任务。
 
@@ -184,7 +184,7 @@ components:
         value:
           type: string
           description: |-
-            图像文件。支持公网 URL 或 Base64 编码的 Data URL (`data:image/jpeg;base64,...`)。
+            图片文件。支持公网 URL 或 Base64 编码的 Data URL (`data:image/jpeg;base64,...`)。
 
             图片要求：
             - 格式：JPG, JPEG, PNG, WebP

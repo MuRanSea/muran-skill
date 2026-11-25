@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132252 -->
-<!-- Source SHA-256: 8dd63bddfce2241902e08bed58d58e36a17a4a7983c7081b383bd609bc7a8049 -->
+<!-- Source SHA-256: d5e3976c7c91e9de05c43c81bf14c9c5fbfc748e0755c8cd102d899979b6a448 -->
 
 # 混元调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132252
-最近更新时间：2026-11-04 12:13:30
+最近更新时间：2026-11-16 12:15:31
 
 ## 概述
 
@@ -16,13 +16,13 @@
 
 已在 [TokenHub 控制台](https://console.cloud.tencent.com/tokenhub/apikey) 获取 API Key。
 
-## Hy4 调用示例
+## 调用示例
 
-`hy4` 兼容 OpenAI Chat Completions API 、OpenAI Responses 、Anthropic Messages API 协议。通用接口规范与所有语言模型一致，请参见 [语言模型调用概览](https://cloud.tencent.com/document/product/1823/130079) 与 [API 使用说明](https://cloud.tencent.com/document/product/1823/130078)。
+`hy4-flash`、`hy4` 兼容 OpenAI Chat Completions API 、OpenAI Responses 、Anthropic Messages API 协议。通用接口规范与所有语言模型一致，请参见 [语言模型调用概览](https://cloud.tencent.com/document/product/1823/130079) 与 [API 使用说明](https://cloud.tencent.com/document/product/1823/130078)。
 
 以下为 OpenAI Chat Completions API 调用示例。
 
-<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>model（调用参数）</div></td><td><div>能力说明</div></td><td><div>上下文窗口</div></td><td><div>最大输入</div></td><td><div>最大输出</div></td></tr><tr><td><div><code>hy4</code></div></td><td><div>Hy4 正式版整体相比 Hy4 preview 实现了全面大幅提升，尤其强化了 Agent 能力和各类长程和真实生产力任务的能力，并首次引入了视觉理解。</div></td><td colspan="1" rowspan="1"><div>1024k</div></td><td colspan="1" rowspan="1"><div>960k</div></td><td colspan="1" rowspan="1"><div>64k</div></td></tr><tr><td><div><code>hy4-preview</code></div></td><td><div>新一代生产力模型，Agent 与复杂任务执行能力全面升级。</div></td><td><div>1024k</div></td><td><div>960k</div></td><td><div>64k</div></td></tr><tr><td><div><code>hy3</code></div></td><td><div>Hy3 基于真实业务场景打磨，兼具效果和性价比，强化 Coding、长文、推理和 Agent 等能力。</div></td><td colspan="1" rowspan="1"><div>256k</div></td><td colspan="1" rowspan="1"><div>192k</div></td><td colspan="1" rowspan="1"><div>128k</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>model（调用参数）</div></td><td><div>能力说明</div></td><td><div>上下文窗口</div></td><td><div>最大输入</div></td><td><div>最大输出</div></td></tr><tr><td><div><code>hy4-flash</code></div></td><td><div>更轻量、更高效的日常主力模型。适合日常办公等高频、规模化场景。</div></td><td colspan="1" rowspan="1"><div>1024k</div></td><td colspan="1" rowspan="1"><div>960k</div></td><td colspan="1" rowspan="1"><div>64k</div></td></tr><tr><td><div><code>hy4</code></div></td><td><div>Hy4 正式版整体相比 Hy4 preview 实现了全面大幅提升，尤其强化了 Agent 能力和各类长程和真实生产力任务的能力，并首次引入了视觉理解。</div></td><td colspan="1" rowspan="1"><div>1024k</div></td><td colspan="1" rowspan="1"><div>960k</div></td><td colspan="1" rowspan="1"><div>64k</div></td></tr><tr><td><div><code>hy4-preview</code></div></td><td><div>新一代生产力模型，Agent 与复杂任务执行能力全面升级。</div></td><td><div>1024k</div></td><td><div>960k</div></td><td><div>64k</div></td></tr><tr><td><div><code>hy3</code></div></td><td><div>Hy3 基于真实业务场景打磨，兼具效果和性价比，强化 Coding、长文、推理和 Agent 等能力。</div></td><td colspan="1" rowspan="1"><div>256k</div></td><td colspan="1" rowspan="1"><div>192k</div></td><td colspan="1" rowspan="1"><div>128k</div></td></tr></tbody></table>
 
 **说明：**
 
@@ -366,7 +366,7 @@ data: [DONE]
 
 ### 深度思考
 
-`hy4` 默认开启深度思考，详细说明请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208)。
+`hy4-falsh`、`hy4` 默认开启深度思考，详细说明请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208)。
 
 cURL
 
@@ -547,7 +547,7 @@ func main() {
 
 **推理深度配置**
 
-`hy4`、`hy4-preview` 、`hy3` 默认为 `high`。详细说明请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208)。
+`hy4-flash`、`hy4`、`hy4-preview` 、`hy3` 默认为 `high`。详细说明请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208)。
 
 **注意：**
 
@@ -1894,9 +1894,9 @@ func main() {
 
 ### 图片理解
 
-Hy4 支持 Chat Completions、Responses、Anthropic 协议在对话中直接输入图片，模型基于图文内容进行问答与理解，可用于图片描述、文字识别（OCR）、图表解读、截图分析等场景。图片与文本同属 Content Part，可在同一条消息中混合排布，支持多图与多轮。
+Hy4 flash 、 Hy4 支持 Chat Completions、Responses、Anthropic 协议在对话中直接输入图片，模型基于图文内容进行问答与理解，可用于图片描述、文字识别（OCR）、图表解读、截图分析等场景。图片与文本同属 Content Part，可在同一条消息中混合排布，支持多图与多轮。
 
-以下为 Hy4 `detail` 及输入限制说明，更多详细说明请参见 [图片理解](https://cloud.tencent.com/document/product/1823/136956)。
+以下为 Hy4 flash 、Hy4 `detail` 及输入限制说明，更多详细说明请参见 [图片理解](https://cloud.tencent.com/document/product/1823/136956)。
 
 **处理精细度（detail）**
 
@@ -2740,17 +2740,15 @@ print(response.choices[0].message.content)
 }
 ```
 
-## 视觉与多模态模型指引
+## 视觉生成模型指引
 
-本文中的混元语言模型**不支持图片、视频等多模态输入**。如需多模态能力，请改用对应的视觉模型、多模态理解模型，调用方式与请求格式请参见各专项文档：
+本文中的混元语言模型**不支持图片、视频等多模态输出**。如需多模态能力，请改用对应的视觉模型、多模态理解模型，调用方式与请求格式请参见各专项文档：
 
-[图像生成](https://cloud.tencent.com/document/product/1823/130080)
+[混元生图调用指南](https://cloud.tencent.com/document/product/1823/135745)
 
-[视频生成](https://cloud.tencent.com/document/product/1823/130081)
+[混元生视频调用指南](https://cloud.tencent.com/document/product/1823/137202)
 
-[3D 生成](https://cloud.tencent.com/document/product/1823/130082)
-
-[多模态理解](https://cloud.tencent.com/document/product/1823/130988)
+[HY-3D 调用指南](https://cloud.tencent.com/document/product/1823/137181)
 
 ## 错误处理与调试建议
 

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/models.md -->
-<!-- Source SHA-256: a222962f400cae8a8e000a9ff777abb2875bd1e43e92e841fb1ef40a2be17878 -->
+<!-- Source SHA-256: ad27a06064bd5ea1130bc38ed6c95383a363e1e9485174c96310dde2c664d3dc -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -46,10 +46,17 @@
 | 模型名称 | 描述 |
 | :- | :- |
 | [MiniMax-H3](https://platform.minimaxi.com/docs/guides/video-generation.md) | 新一代开放通用多模态视频模型，支持文生 / 图生 / 首尾帧 / 多模态参考，768P / 2K 分辨率，4–15s 时长 |
-| [MiniMax-H3-Max](https://platform.minimaxi.com/docs/guides/video-generation.md) | 基于 MiniMax H3 后训练的极速视频生成模型，专为高速视频生成而优化。支持文生 / 图生（首帧、尾帧）/ 多模态参考（参考图、参考视频、参考音频），480P / 768P 分辨率，5–15s 时长 |
 | [MiniMax-Hailuo-2.3](https://platform.minimaxi.com/docs/guides/video-generation.md) | 全新视频生成模型，肢体动作、面部表情、物理表现与指令遵循再度突破 |
 | [MiniMax-Hailuo-2.3-Fast](https://platform.minimaxi.com/docs/guides/video-generation.md) | 全新图生视频模型，物理表现与指令遵循具佳，更快更优惠 |
 | [MiniMax-Hailuo-02](https://platform.minimaxi.com/docs/guides/video-generation.md) | 新一代视频生成模型，1080p 原生，SOTA 指令遵循，极致物理表现 |
+
+### 图片模型
+
+| 模型名称 | 描述 |
+| :- | :- |
+| [MiniMax-H3-Image](https://platform.minimaxi.com/docs/guides/image-generation.md) | 图片生成模型，支持文生图与图片编辑（1 \~ 16 张参考图），输出尺寸可按宽高指定，也可按面积档和长宽比指定，支持流式输出 |
+| [image-01](https://platform.minimaxi.com/docs/guides/image-generation.md) | 图片生成模型，画面表现细腻，支持文生图、图生图 |
+| [image-01-live](https://platform.minimaxi.com/docs/guides/image-generation.md) | 图片生成模型，手绘、卡通等画风增强，支持文生图并进行画风设置 |
 
 ### 语音模型
 
@@ -61,13 +68,6 @@
 | [speech-2.6-turbo](https://platform.minimaxi.com/docs/guides/speech-t2a-websocket.md) | 音质优异，超低时延，响应更灵敏 |
 | [speech-02-hd](https://platform.minimaxi.com/docs/guides/speech-t2a-websocket.md) | 语音 HD 模型，拥有出色的韵律和稳定性，复刻相似度和音质表现突出 |
 | [speech-02-turbo](https://platform.minimaxi.com/docs/guides/speech-t2a-websocket.md) | 语音 Turbo 模型，小语种能力增强，性能表现出色 |
-
-### 图像模型
-
-| 模型名称 | 描述 |
-| :- | :- |
-| [image-01](https://platform.minimaxi.com/docs/guides/image-generation.md) | 图像生成模型，画面表现细腻，支持文生图、图生图 |
-| [image-01-live](https://platform.minimaxi.com/docs/guides/image-generation.md) | 图像生成模型，手绘、卡通等画风增强，支持文生图并进行画风设置 |
 
 ## 历史模型
 

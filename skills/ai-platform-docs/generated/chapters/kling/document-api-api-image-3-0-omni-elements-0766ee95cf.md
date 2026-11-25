@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/image/3-0-omni/elements.md -->
-<!-- Source SHA-256: b2302fc9761ac1f751b6d14efbc484ef258daa64015823e8e5010d2a1170ea92 -->
+<!-- Source SHA-256: 9c7ef79353e97073569c41f33b950132ee858fa4ae6d40296465b81217549922 -->
 
 > ## Documentation Index
 >
@@ -71,7 +71,7 @@
 - `element_video_list`: 可上传有声视频，有声视频包含人声则触发音色定制（定制+入音色库+与主体绑定）
 - `element_video_list`: 暂时仅支持通过视频定制写实风格的人形形象
 - `element_video_list`: 参考视频时当前参数必填，参考图片时当前参数无效
-- `element_video_list`: 用key:value承载。视频格式仅支持MP4/MOV。仅支持时长介于3s～8s之间、宽高比例需为16:9或9:16的1080P视频。至多仅支持上传1段视频，视频大小不超过200MB。video_url参数值不得为空
+- `element_video_list`: 用key:value承载。视频格式仅支持MP4/MOV。仅支持时长介于3s～8s之间、宽高比例需为16:9或9:16的1080p视频。至多仅支持上传1段视频，视频大小不超过200MB。video_url参数值不得为空
 - `element_video_list`: ```json
   "element_video_list": {
   "refer_videos": [{ "video_url": "video_url_1" }, ...] 
@@ -80,7 +80,7 @@
 - `element_video_list`: 视频定制的主体仅支持用于 kling-video-o3 及之后的模型
 - `element_voice_id`: 当前参数为空时，当前主体不绑定音色
 - `element_voice_id`: 为多图主体绑定音色时，仅支持人物形象主体或类人形象主体
-- `element_voice_id`: 可通过音色相关API获取ID，详见[点此查看](https://klingai.com/document-api/api/video/3-0-omni/voice-customization)
+- `element_voice_id`: 可通过音色相关API获取ID，详见[点此查看](https://klingai.com/document-api/api/video/4-0/voice-customization)
 - `tag_list`: 用key:value承载。tag的ID与名称：o_101 热梗, o_102 人物, o_103 动物, o_104 道具, o_105 服饰, o_106 场景, o_107 特效, o_108 其他
 - `tag_list`: ```json
   "tag_list": [ { "tag_id": "o_101" }, { "tag_id": "o_102" } ]

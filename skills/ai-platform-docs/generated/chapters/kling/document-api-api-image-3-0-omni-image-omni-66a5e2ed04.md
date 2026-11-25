@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/image/3-0-omni/image-omni.md -->
-<!-- Source SHA-256: b3cfca0b05f4e489a8a3623bd5fd3a58b3fd5cb9a503eb06ef130af91189fc2f -->
+<!-- Source SHA-256: 8e10b61b3cc9370ce62a6b21d3f2b59e2057dbdbafa7ba2627610d7604535a3e -->
 
 > ## Documentation Index
 >
@@ -107,7 +107,7 @@ curl --request POST \
   --header "Authorization: Bearer ${KLING_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
-    "model_name": "kling-image-o1",
+    "model_name": "kling-v3-omni",
     "prompt": "将所有图片中的人物融合到<<<object_1>>>图中",
     "element_list": [
         {

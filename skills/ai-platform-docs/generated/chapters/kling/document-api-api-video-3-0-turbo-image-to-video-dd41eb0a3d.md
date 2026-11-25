@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-turbo/image-to-video.md -->
-<!-- Source SHA-256: d23ee59e90f6c837b6dba7a15d411b557c983480d87898a96df522e655d9483a -->
+<!-- Source SHA-256: 04bf6b33a6ce61fa15b04ad51b45e912edb0e5a1cd4323a4ea2d757367bc982f -->
 
 > ## Documentation Index
 >
@@ -99,8 +99,8 @@
 - `contents[].url`: 图片文件大小不能超过 50MB
 - `contents[].url`: 图片宽高尺寸不小于 300px，图片宽高比要在 1:2.5 ~ 2.5:1 之间
 - `contents[].url`: 支持仅首帧，暂不支持首帧+尾帧和仅尾帧
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频
-- `settings.resolution`: 1080p：输出清晰度为 1080P 的视频
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频
+- `settings.resolution`: 1080p：输出清晰度为 1080p 的视频
 - `options.callback_url`: 如果配置，服务端会在任务状态发生变更时主动通知
 - `options.callback_url`: 具体通知的消息 schema 见 [Callback 协议](https://klingai.com/document-api/api/get-started/callbacks)
 - `options.external_task_id`: 传入不会覆盖系统生成的任务ID，但支持通过该ID进行任务查询

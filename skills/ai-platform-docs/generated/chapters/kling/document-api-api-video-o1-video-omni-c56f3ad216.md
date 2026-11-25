@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/o1/video-omni.md -->
-<!-- Source SHA-256: 6889585d410bc2e04bb6926f43f9f25b01fdb8aa3423d02f52584bc231ff941f -->
+<!-- Source SHA-256: 159ae63f8491749851b9d045da6a72e17be0f1f61958f9af2458a29a9ae157cc -->
 
 > ## Documentation Index
 >
@@ -96,6 +96,7 @@
   - `feature_video`：特征参考视频素材标识。
   - `base_video`：待编辑视频素材标识。
   - `element`：主体素材标识。
+- `contents[].type.prompt`: 文本提示词，可包含正向描述和负向描述
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
   
   ```json
@@ -119,6 +120,7 @@
   >
   > 
   > 4. 更多信息详见：[可灵 O1 模型使用指南](https://docs.qingque.cn/d/home/eZQCg5xHvxDaE-jP2GcnaNc6O?identityId=2Cn18n4EIHT)。
+- `contents[].type.first_frame / last_frame / refer_image`: 参考图片类素材相关参数。
 - `contents[].type.first_frame / last_frame / refer_image`: 图片可作为场景、风格等参考图，也可作为首帧或尾帧生成视频。
   - 通过JSON的格式定义，具体如下：
   
@@ -139,6 +141,7 @@
   - 当图片作为首帧或尾帧使用时：
     - 支持仅首帧和首尾帧，暂不支持仅尾帧。
     - 使用首尾帧时，不支持添加更多参考图。
+- `contents[].type.feature_video / base_video`: 参考视频类素材相关参数。
 - `contents[].type.feature_video / base_video`: 通过JSON的格式定义，具体如下：
   
   ```json
@@ -159,6 +162,7 @@
     - 仅支持定义视频首帧，不支持定义视频尾帧。
   - 当视频作为待编辑视频使用时：
     - 不支持定义视频首帧或尾帧。
+- `contents[].type.element`: 参考主体类素材相关参数。
 - `contents[].type.element`: 通过JSON的格式定义，具体如下：
   
   ```json
@@ -176,8 +180,8 @@
     - 有参考视频时，参考图片与主体数量之和不得超过4。
 - `settings.audio`: `original`：生成的视频保留参考视频原声。
   - `off`：生成的视频不含有声音。
-- `settings.resolution`: `720p`：输出清晰度为720P的视频。
-  - `1080p`：输出清晰度为1080P的视频。
+- `settings.resolution`: `720p`：输出清晰度为720p的视频。
+  - `1080p`：输出清晰度为1080p的视频。
 - `settings.aspect_ratio`: 当没有首帧图且没有参考视频时，当前参数必填。
 - `settings.duration`: 使用首帧图生成视频且无其他参考图（refer_image）和参考视频（feature_video/base_video）时，仅支持生成5秒或10秒的视频。
 - `options`: ```json

@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/4-0-flash/text-to-video.md -->
-<!-- Source SHA-256: 3129eddec5de65b2f1a0402d7bb8e07b3bcc7e1d0294ce86e3f77b3ed01ec194 -->
+<!-- Source SHA-256: 8853ad1585c2f88d12914578e2a3adeea6fa12dc9aaaa0e90305944ec65a25fc -->
 
 > ## Documentation Index
 >
@@ -39,7 +39,7 @@
 | `prompt` | string | 是 | - | - | 文本提示词，可包含正向描述和负向描述 |
 | `settings` | object | 否 | - | - | 输出配置相关参数，如清晰度、时长等 |
 | `settings.resolution` | string | 否 | `720p` | `720p` | 生成视频的清晰度 |
-| `settings.aspect_ratio` | string | 否 | `16:9` | `21:9`, `16:9`, `9:16`, `1:1` | 生成视频的画面纵横比（宽:高） |
+| `settings.aspect_ratio` | string | 否 | `16:9` | `21:9`, `16:9`, `9:16`, `1:1`, `4:3`, `3:4` | 生成视频的画面纵横比（宽:高） |
 | `settings.duration` | int | 否 | - | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20` | 生成视频的目标时长，单位：秒。支持整数值。 |
 | `options` | object | 否 | - | - | 通用配置，如回调地址、是否含水印等 |
 | `options.callback_url` | string | 否 | - | - | 本次任务结果回调通知地址 |
@@ -60,7 +60,7 @@
   >
   > 
   > 3. **本接口通过文本提示词生成视频。如需输入图片、视频或主体作为参考，请使用全能参考接口。**
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频
 - `settings.duration`: 指定本参数时，以参数值为准，优先于 Prompt 中的时长要求。
 - `settings.duration`: 未指定本参数时，采用模型从 Prompt 中识别到的明确时长要求。例如，“生成一段 15 秒的视频”将目标时长设为 15 秒。
 - `settings.duration`: 未指定本参数，且 Prompt 中未识别到明确的时长要求时，默认为 10 秒。

@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/text-openai-api.md -->
-<!-- Source SHA-256: 736ab4fd842c0d1e9ef7e8f0731be96ddabe1e91418925a90c6864d6429479ae -->
+<!-- Source SHA-256: fe375783428d09c1ddfbaf7fd34b70205e74bbcac9c4362d1340eae4cec4a12f -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -77,7 +77,21 @@ print(f"Text:\n{response.choices[0].message.content}\n")
 
 OpenAI API 兼容的 Chat Completions 支持在 `MiniMax-M3.1-Flash` 和 `MiniMax-M3` 中输入文本、图片和视频。
 
-图片使用 `image_url` 内容块，视频使用 `video_url` 内容块。`detail` 字段可取 `low`、`default`、`high`，默认值为 `default`；可通过 `max_long_side_pixel` 控制最长边。图片支持 JPEG、PNG、GIF、WEBP。视频支持 MP4、AVI、MOV、MKV；`fps` 默认值为 1，支持 0.2 到 5。URL 或 base64 视频最大 50 MB，图片最大 10 MB，请求体最大 64 MB。更大的视频请通过 Files API 上传后传入 `mm_file://{file_id}`，Files API 视频最大 512 MB。
+图片使用 `image_url` 内容块，视频使用 `video_url` 内容块。`detail` 字段可取 `low`、`default`、`high`，默认值为 `default`；可通过 `max_long_side_pixel` 控制最长边。视频可通过 `fps` 设置抽帧频率，默认值为 2，支持 0.2 到 5。
+
+### 输入限制
+
+| 维度 | 限制 |
+| :- | :- |
+| 格式 | 图片支持 JPEG、PNG、GIF、WEBP；视频支持 MP4、AVI、MOV、MKV |
+| 文件大小 | URL 或 base64 输入时，图片最大 10 MB，视频最大 50 MB。更大的视频请通过 Files API 上传后传入 `mm_file://{file_id}`，最大 512 MB |
+| 请求体 | 最大 64 MB |
+| 数量 | 单次请求的 `messages`（含历史轮次）累计最多 200 张图片、20 个视频 |
+| 宽高 | 图片和视频的宽、高须大于 0，宽高比不超过 200:1 |
+| 视频轨 | 视频必须包含视频轨，纯音频文件不支持 |
+| 视频时长 | 大于 0，且不超过 30 分钟 |
+| 抽帧帧数 | 抽帧数按 `round(时长 × fps / 2) × 2` 计算，须不少于 2 且不超过视频实际总帧数。`时长 × fps` 小于 1 时一定无法满足；`fps` 高于视频本身的帧率时通常也无法满足 |
+| 视频像素总量 | `缩放后单帧宽 × 缩放后单帧高 × 抽帧数 / 2` 不超过 301,056,000。单帧按 `detail` 或 `max_long_side_pixel` 缩放，长边上限：`low` 504、`default` 672、`high` 1288。例如 16:9 视频在 `fps` 为 2 时，`default` 约支持 19 分钟，`high` 约支持 5 分钟 |
 
 图片 token 用量会随图片尺寸和内容变化。以下是单张图片的粗略估算；准确用量以响应中的 `usage` 或可用的 token 计数接口为准：
 

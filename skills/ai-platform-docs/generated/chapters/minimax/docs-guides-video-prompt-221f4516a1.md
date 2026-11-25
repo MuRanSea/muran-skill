@@ -1,11 +1,11 @@
 <!-- Official source: https://platform.minimax.cn/docs/guides/video-prompt.md -->
-<!-- Source SHA-256: 991410753f3a4350a7042816d4ffd7a9fd1769aa1182a5578cdfecd980c1fc54 -->
+<!-- Source SHA-256: 761bd8c6b90a5841c886dad2f798b31a149655f4bc1af366fbf0dc2f8cd9bafb -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# H3亮点功能示例
+# H3 亮点功能示例
 
 > 通过一组典型示例，展示 MiniMax H3 在原生多模态理解与生成、多模态精准编辑与控制、商用级多场景内容生成三大能力下的实际输出效果。
 

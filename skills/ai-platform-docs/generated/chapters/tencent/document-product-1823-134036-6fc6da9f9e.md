@@ -1,18 +1,16 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/134036 -->
-<!-- Source SHA-256: 4f1c930f8c9767cbc3300f782db9317b7ca95083ae2ed701ec19f1e48ccae2c1 -->
+<!-- Source SHA-256: 0f9b0f37999e234aa59b80df7a020db71ecf4300ab079bf5d67298cdd7157cc8 -->
 
 # 创建推理服务
 
 官方来源：https://cloud.tencent.com/document/product/1823/134036
-最近更新时间：2026-07-14 03:02:36
+最近更新时间：2026-11-25 02:45:14
 
 ## 1. 接口描述
 
 接口请求域名： tokenhub.tencentcloudapi.com 。
 
-创建推理服务。
-
-创建一个在线推理服务，创建成功后返回推理服务 ID。
+创建推理服务，并可指定所属企业空间。不传 WorkspaceId 时，推理服务会创建在账号默认空间。
 
 默认接口请求频率限制：20次/秒。
 
@@ -72,7 +70,7 @@ X-TC-Action: CreateEndpoint
 <公共请求参数>
 
 {
-    "EndpointName": "test-endpoint",
+    "EndpointName": "GLM-4 Flash",
     "ModelId": "deepseek-v3.2",
     "ChargeType": "FREE"
 }

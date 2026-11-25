@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/136956 -->
-<!-- Source SHA-256: 1cc0ae884e08859afe5be47ce2fd7bbfede3919fc7fe46ec3728408bf2af2bfb -->
+<!-- Source SHA-256: 6956f61a9f993a8bd91a53db33a28d1fb94e2baee4a0842e667e44e6aedf0b25 -->
 
 # 图片理解
 
 官方来源：https://cloud.tencent.com/document/product/1823/136956
-最近更新时间：2026-11-04 12:13:31
+最近更新时间：2026-11-16 12:15:31
 
 ## **概述**
 
@@ -377,4 +377,4 @@ print(response.choices[0].message.content)
 
 TokenHub 对图片上传不施加特殊限制；仅限制单个文件大小不超过 100 MB。因此，图片的尺寸、数量、格式等上限普遍来自模型侧（模型的上下文窗口及其自身约束）。实际可用范围请以所选模型的官方说明及调用返回为准。
 
-第三方视觉模型（Kimi / DeepSeek / MiniMax / GLM / Qwen 等）的具体限制，请参见对应模型调用指南或其官方文档。
+各模型（[混元](https://cloud.tencent.com/document/product/1823/132252#b53998b8-e7c1-4abb-88f7-374cad97e401) / [Kimi](https://cloud.tencent.com/document/product/1823/132232#0696f016-0768-4f15-99a1-7210f55d3aaf) / [GLM](https://cloud.tencent.com/document/product/1823/132061#eace89e9-9b68-4ce5-a4d9-3ea164f2afc2) 等）多模态理解具体限制，请参见对应模型调用指南或其官方文档。

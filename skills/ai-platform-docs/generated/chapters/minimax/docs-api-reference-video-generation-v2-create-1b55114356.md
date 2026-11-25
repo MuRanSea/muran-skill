@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/video-generation-v2-create.md -->
-<!-- Source SHA-256: 9a7276b7418755a8e7c5ff8e3819dd58b498eb7901fbdc5c5bf25df206905914 -->
+<!-- Source SHA-256: 685b347f6fbf1fdda56c350275fe52c68de05e78e9d2d63d0a8d54cf8c2ed8ac -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -37,6 +37,9 @@ paths:
 
 
         当前支持模型：`MiniMax-H3`、`MiniMax-H3-Highspeed`、`MiniMax-H3-Lite`、`MiniMax-H3-Max`。
+
+
+        可通过可选参数 `generate_audio` 控制视频是否包含音频：默认 `true`，输出有声视频；设置为 `false`，输出无声视频。
       operationId: videoGenerationV2Create
       parameters:
         - name: Content-Type
@@ -101,6 +104,17 @@ paths:
                   resolution: 2K
                   duration: 5
                   ratio: adaptive
+              无声视频（generate_audio=false）:
+                summary: 生成无声视频
+                value:
+                  model: MiniMax-H3
+                  content:
+                    - type: text
+                      text: 一艘小纸船缓缓漂过平静的池塘。
+                  resolution: 768P
+                  duration: 6
+                  ratio: '4:3'
+                  generate_audio: false
         required: true
       responses:
         '200':
@@ -362,6 +376,14 @@ components:
                 - quality
               default: balanced
           additionalProperties: false
+        generate_audio:
+          type: boolean
+          description: |-
+            控制生成的视频是否包含音频。可选，默认 `true`。
+
+            - `true`：输出有声视频。
+            - `false`：输出无声视频。
+          default: true
         callback_url:
           type: string
           description: >-
@@ -375,6 +397,17 @@ components:
         aigc_watermark:
           type: boolean
           description: 是否在生成视频中添加 AIGC 标识水印，默认 `false`。
+        response_format:
+          type: string
+          enum:
+            - task
+            - flat
+          default: task
+          description: |-
+            响应格式。
+
+            - `task`（默认）：返回 `{"task": {...}}`，任务字段包在 `task` 对象内。
+            - `flat`：任务字段直接平铺在响应顶层（包含 `usage`），与查询任务列表的 `items[]` 形状一致。
       example:
         model: MiniMax-H3
         content:

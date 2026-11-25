@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/responses-create.md -->
-<!-- Source SHA-256: 80a696108b9e34f39677e6ce092a7c6ac291a64cb10953c8b1c44f586d98aa6d -->
+<!-- Source SHA-256: a5ff9b3a2e27abad1c253a53a554f416a7b9d13c42e1709ecf09bb61987c397b -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -1070,6 +1070,7 @@ components:
             0.95。若传入，取值需在 (0, 1] 范围内。
           default: 0.95
           minimum: 0
+          exclusiveMinimum: 0
           maximum: 1
         stream:
           type: boolean
@@ -1116,8 +1117,6 @@ components:
             档位。传入 `effort: "none"` 会返回 HTTP 400。
 
             - `MiniMax-M3`：默认关闭推理；将 `effort` 设为非 `none` 值可开启推理，但不会调节推理深度。
-
-            - M2.x 模型：推理无法关闭，传入 `effort: "none"` 会被接收但不生效。
           properties:
             effort:
               type: string
@@ -1242,7 +1241,27 @@ components:
             - tool
           description: 消息角色（仅当 `type` 为 `message` 时使用）
         content:
-          description: 消息内容，可以是字符串或多模态片段数组（仅当 `type` 为 `message` 时使用）
+          description: >-
+            消息内容，可以是字符串或多模态片段数组（仅当 `type` 为 `message` 时使用）
+
+
+            **多模态输入限制**（适用于 `MiniMax-M3.1-Flash` 和 `MiniMax-M3`）
+
+            - URL / Base64 方式传入：视频文件 ≤ 50 MB，图片文件 ≤ 10 MB，请求体 ≤ 64 MB。
+
+            - 使用 Files API 上传：以 `mm_file://{file_id}` 形式引用，单个视频最大 512 MB。
+
+            - 单次请求的 `input`（含历史轮次）累计最多 200 张图片、20 个视频。
+
+            - 图片和视频的宽、高须大于 0，宽高比不超过 200:1。
+
+            - 视频必须包含视频轨（纯音频文件不支持），时长大于 0 且不超过 30 分钟。
+
+            - 抽帧数按 `round(时长 × fps / 2) × 2` 计算，须不少于 2 且不超过视频实际总帧数；`时长 × fps` 小于
+            1 时一定无法满足，`fps` 高于视频本身的帧率时通常也无法满足。
+
+            - 视频像素总量 `缩放后单帧宽 × 缩放后单帧高 × 抽帧数 / 2` 不超过 301,056,000。单帧按 `detail` 或
+            `max_long_side_pixel` 缩放，长边上限：`low` 504、`default` 672、`high` 1288。
           oneOf:
             - type: string
             - type: array
@@ -1460,14 +1479,17 @@ components:
               properties:
                 url:
                   type: string
-                  description: 视频链接或 Base64 编码，大文件建议使用 File API 上传
+                  description: >-
+                    视频 URL、Base64 data URL，或形如 `mm_file://{file_id}` 的 Files API
+                    引用。`file_id`
+                    需先通过[文件上传](/api-reference/file-management-upload)接口上传视频后获取。
                 fps:
                   type: number
                   format: float
-                  default: 1
+                  default: 2
                   minimum: 0.2
                   maximum: 5
-                  description: 抽帧频率
+                  description: 视频抽帧频率，默认值为 2，范围 [0.2, 5]。
                 detail:
                   type: string
                   enum:

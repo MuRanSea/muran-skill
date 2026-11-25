@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-omni/text-to-video.md -->
-<!-- Source SHA-256: a60bc9cf13e8bebda2567c11d60a398036b7b275e87ec3033b5b3ea34bc34629 -->
+<!-- Source SHA-256: a0038611005570d2ae33ca8ae227710418fb6eb5906b6846c6a77815c7c479ac -->
 
 > ## Documentation Index
 >
@@ -74,8 +74,8 @@
 - `settings.multi_shot`: 当参数值为false时，即便使用多镜头格式的prompt也无法生成多镜头视频。
 - `settings.audio`: native：生成的视频含有与画面适配的声音。
 - `settings.audio`: off：生成的视频不含有声音。
-- `settings.resolution`: 720p：输出清晰度为720P的视频。
-- `settings.resolution`: 1080p：输出清晰度为1080P的视频。
+- `settings.resolution`: 720p：输出清晰度为720p的视频。
+- `settings.resolution`: 1080p：输出清晰度为1080p的视频。
 - `settings.resolution`: 4k：输出清晰度为4K的视频。
 - `options`: ```json
   "options": {

@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132358 -->
-<!-- Source SHA-256: 60dd153bd05222733bc7b86e3eadebab09f0eaeb50318b357a487a36b579da93 -->
+<!-- Source SHA-256: ed82ed95f2528bb5780d57cb191897161b044afc0beff93f05df2b4f375eadd8 -->
 
 # 联网搜索
 
 官方来源：https://cloud.tencent.com/document/product/1823/132358
-最近更新时间：2026-11-02 14:33:00
+最近更新时间：2026-11-18 14:47:30
 
 ## 功能概述
 
@@ -25,21 +25,20 @@ TokenHub 当前提供两类联网搜索服务：
 
 ### 模型与协议支持矩阵
 
-<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div><b>模型名称</b></div></td><td><div><b>model 参数值</b></div></td><td><div><b>API 协议</b></div></td><td><div><b>端点</b></div></td></tr><tr><td><div>Hy3</div></td><td><div><code>hy3</code></div></td><td><div>Responses API、Chat API</div></td><td><div><code>/v1/responses</code>、<code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek-V4.1-Flash-1017</div></td><td><div><code>deepseek-v4.1-flash-1017</code></div></td><td colspan="1" rowspan="1"><div>Responses API、Chat API</div></td><td colspan="1" rowspan="1"><div><code>/v1/responses</code>、<code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek-V4.1-Flash</div></td><td><div><code>deepseek-v4.1-flash</code></div></td><td colspan="1" rowspan="1"><div>Responses API、Chat API</div></td><td colspan="1" rowspan="1"><div><code>/v1/responses</code>、<code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek-V4-Pro 0813 正式版</div></td><td><div><code>deepseek-v4-pro-0813</code></div></td><td><div>Chat API</div></td><td><div><code>/v1/chat/completions</code></div></td></tr><tr><td><div>DeepSeek V4 Pro</div></td><td><div><code>deepseek-v4-pro</code></div></td><td><div>Chat API</div></td><td><div><code>/v1/chat/completions</code></div></td></tr></tbody></table>
+| **模型名称** | **model 参数值** | **API 协议** | **端点** |
+| --- | --- | --- | --- |
+| Hy4 | `hy4` | Responses API、Chat API | `/v1/responses`、`/v1/chat/completions` |
+| Hy3 | `hy3` | Responses API、Chat API | `/v1/responses`、`/v1/chat/completions` |
+| DeepSeek-V4.1-Flash-1017 | `deepseek-v4.1-flash-1017` | Responses API、Chat API、Message API | `/v1/responses`、`/v1/chat/completions`、`/v1/messages` |
+| DeepSeek-V4.1-Flash | `deepseek-v4.1-flash` | Responses API、Chat API、Message API | `/v1/responses`、`/v1/chat/completions`、`/v1/messages` |
+| DeepSeek-V4-Pro 0813 正式版 | `deepseek-v4-pro-0813` | Chat API、Message API | `/v1/chat/completions`、`/v1/messages` |
+| DeepSeek V4 Pro | `deepseek-v4-pro` | Chat API、Message API | `/v1/chat/completions`、`/v1/messages` |
 
 联网搜索可与思维链组合使用。开启思维链后，模型会在搜索前后进行深度推理，对多源信息进行交叉对比与综合分析，适合调研、比较、决策类场景。
 
 #### 思维链默认策略
 
-不同模型的默认思考开关和默认推理强度不同。以下默认策略与 [深度思考](https://cloud.tencent.com/document/product/1823/131208) 文档保持一致：
-
-`hy3`：默认思考开关为开启，默认推理强度为 `high`。
-
-`deepseek-v4-pro、deepseek-v4-pro-0813`：默认思考开关为开启，默认推理强度为 `high`。
-
-`deepseek-v4.1-flash、deepseek-v4.1-flash-1017`：默认思考开关为开启，默认推理强度为 `high`。
-
-如不希望响应中返回思维链内容，请不要依赖模型默认策略，建议在请求中显式关闭思考。Chat API 使用 `reasoning_effort`，Responses API 使用 `reasoning.effort`。
+不同模型的默认思考开关和默认推理强度不同，具体默认策略请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208) 文档。
 
 ## 开通服务
 
@@ -71,7 +70,7 @@ DeepSeek 原厂联网搜索无需开通服务，可直接传入参数使用。
 
 ## 通用能力说明
 
-联网搜索用于补充模型知识时效性。基础调用参数、鉴权、BaseURL 和通用响应结构请参见 [语言模型调用概览](https://cloud.tencent.com/document/product/1823/130079)，本文只说明联网搜索相关差异。完整请求示例请参见 [Chat 协议](https://cloud.tencent.com/document/product/1823/132358#ec08a04e-5718-4181-b85a-b633f5d1e9d8) 和 [Responses 协议](https://cloud.tencent.com/document/product/1823/132358#19bb7ca1-b05c-4ba2-8989-6ad3a2396892)。
+联网搜索用于补充模型知识时效性。基础调用参数、鉴权、BaseURL 和通用响应结构请参见 [语言模型调用概览](https://cloud.tencent.com/document/product/1823/130079)，本文只说明联网搜索相关差异。完整请求示例请参见 [Chat 协议](https://cloud.tencent.com/document/product/1823/132358#ec08a04e-5718-4181-b85a-b633f5d1e9d8)、[Responses 协议](https://cloud.tencent.com/document/product/1823/132358#19bb7ca1-b05c-4ba2-8989-6ad3a2396892) 和 [Message 协议](https://cloud.tencent.com/document/product/1823/132358#0f6edc95-f3ed-48cd-b103-3b4cdec24a5b)。
 
 **开启搜索**：适用于天气、新闻、公开资料查询等需要实时信息的场景。Chat API 在联网搜索配置中开启，Responses API 在工具列表中声明联网搜索工具。
 
@@ -182,11 +181,18 @@ Responses API
 
 ```json
 {
-  "search_results": [
+  "choices": [
     {
-      "index": 1,
-      "url": "https://example.com/source/1",
-      "name": "示例来源标题"
+      "message": {
+        "content": "根据检索结果，模型生成的示例回答正文[1]。",
+        "search_results": [
+          {
+            "index": 1,
+            "url": "https://example.com/source/1",
+            "name": "示例来源标题"
+          }
+        ]
+      }
     }
   ]
 }
@@ -194,12 +200,23 @@ Responses API
 
 ```json
 {
-  "annotations": [
+  "output": [
     {
-      "type": "url_citation",
-      "index": 1,
-      "url": "https://example.com/source/1",
-      "title": "示例来源标题"
+      "type": "message",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "根据检索结果，模型生成的示例回答正文[1]。",
+          "annotations": [
+            {
+              "type": "url_citation",
+              "index": 1,
+              "url": "https://example.com/source/1",
+              "title": "示例来源标题"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
@@ -405,7 +422,7 @@ Chat API 会在 `usage.tool_usage.web_search_call` 中返回本次响应触发�
 
 `delta.content`：最终回答的流式增量文本。
 
-`delta.reasoning_content`：思维链的流式增量文本。开启思维链时可能出现；部分模型默认开启思维链，默认策略请参见上方 [思维链默认策略](https://cloud.tencent.com/document/product/1823/132358#20307802-a33c-4673-9b2f-2026727a55b2) 说明。
+`delta.reasoning_content`：思维链的流式增量文本。开启思维链时可能出现；部分模型默认开启思维链，默认策略请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208) 文档。
 
 每条事件以 `data: {JSON}` 格式推送，末尾以 `data: [DONE]` 标记结束。
 
@@ -521,11 +538,7 @@ Responses API 的基础参数请参见 OpenAI Responses API 相关说明。使�
 
 #### 思维链参数说明
 
-Responses API 使用 `reasoning.effort` 控制思维链推理强度；Chat API 对应字段为 `reasoning_effort`。可选值包括 `no_think`、`low`、`medium`、`high`。如不希望响应中返回思维链内容，请显式设置 `reasoning.effort` 为 `no_think`。
-
-`include: ["reasoning.summary"]` 用于请求返回思维链摘要，仅在启用思维链时生效。当 `reasoning.effort` 为 `no_think` 时，即使请求中包含 `include: ["reasoning.summary"]`，也不会返回思维链摘要。
-
-面向终端用户展示时，建议仅展示最终回答内容和引用来源，不要直接透传思维链相关内容。请按需过滤 `output` 数组中的 `reasoning` 类型项，以及流式响应中的 `response.reasoning_summary_text.delta` 事件。
+联网搜索可与思维链组合使用。如需调整思维链（设置推理强度、关闭思维链、获取思维链摘要等），请参见 [深度思考](https://cloud.tencent.com/document/product/1823/131208) 文档。
 
 ### 响应中的搜索结果
 
@@ -535,7 +548,7 @@ Responses API 的 `output` 数组中可能包含以下与联网搜索相关的�
 | --- | --- |
 | `web_search_call` | 一次搜索工具调用。可通过其中的 `action.query` 查看模型生成的搜索词。 |
 | `message` | 模型生成的最终回答。引用来源通过 `content[].annotations` 返回。 |
-| `reasoning` | 思维链产物。当请求启用思维链或模型默认策略返回思维链内容时，可能出现该类型项。如不希望返回思维链内容，请显式设置 `reasoning.effort` 为 `no_think`。 |
+| `reasoning` | 思维链产物。当请求启用思维链或模型默认策略返回思维链内容时，可能出现该类型项。如不希望返回思维链内容，请显式设置 `reasoning.effort` 为 `none`。 |
 
 `message.content[].annotations` 中的引用字段如下：
 
@@ -601,9 +614,143 @@ Responses API 会在 `usage.tool_usage.web_search_call` 中返回本次响应触
 | `response.web_search_call.in_progress` | 搜索调用启动。 |
 | `response.web_search_call.searching` | 正在执行搜索。 |
 | `response.web_search_call.completed` | 搜索调用完成。 |
-| `response.reasoning_summary_text.delta` | 思维链摘要的流式增量。当请求启用思维链并返回思维链摘要时可能出现；若 `reasoning.effort` 为 `no_think`，则不会返回该事件。 |
+| `response.reasoning_summary_text.delta` | 思维链摘要的流式增量。当请求启用思维链并返回思维链摘要时可能出现；若 `reasoning.effort` 为 `none`，则不会返回该事件。 |
 | `response.output_text.delta` | 最终回答的文本流式增量。 |
 | `response.completed` | 响应整体完成，事件中的 `response` 字段包含完整 `output` 与 `usage`。 |
+
+## Message 协议
+
+### 快速开始
+
+通过 Message API（`/v1/messages`）发起联网搜索请求，在请求中通过 `tools` 字段声明联网搜索工具即可开启搜索。将 `YOUR_API_KEY` 替换为您创建的 API Key 后即可运行。
+
+cURL
+
+Python
+
+```bash
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/messages' \\
+  -H 'x-api-key: YOUR_API_KEY' \\
+  -H 'anthropic-version: 2023-06-01' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "model": "deepseek-v4-pro",
+    "max_tokens": 4096,
+    "messages": [
+      {"role": "user", "content": "最近一周有哪些重要的 AI 行业新闻？请附来源链接。"}
+    ],
+    "tools": [
+      {"type": "web_search_20250305", "name": "web_search"}
+    ]
+  }'
+```
+
+```python
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key="YOUR_API_KEY",
+    base_url="https://tokenhub.tencentmaas.com",
+)
+
+response = client.messages.create(
+    model="deepseek-v4-pro",
+    max_tokens=4096,
+    messages=[{"role": "user", "content": "最近一周有哪些重要的 AI 行业新闻？请附来源链接。"}],
+    tools=[{"type": "web_search_20250305", "name": "web_search"}],
+)
+print(response.content)
+```
+
+### 联网搜索参数
+
+Message API 通过 `tools` 字段声明联网搜索工具，工具类型为 `web_search_20250305`：
+
+```json
+{
+  "tools": [
+    {
+      "type": "web_search_20250305",
+      "name": "web_search"
+    }
+  ]
+}
+```
+
+Message API 使用 `web_search_20250305` 工具类型，与 Responses API 的 `web_search` 工具类型不同，两者不可混用。
+
+### 响应中的搜索结果
+
+Message API 的搜索结果通过 `content` 数组中的内容块返回：
+
+`server_tool_use`：一次服务端搜索调用，`input.query` 为模型生成的搜索词。
+
+`web_search_tool_result`：搜索结果块，`content` 数组中的 `web_search_result` 对象包含来源信息。
+
+`text`：最终回答，正文以 `[N]` 数字标记引用来源，`N` 对应 `web_search_result` 的顺序。
+
+响应示例：
+
+```json
+{
+  "id": "msg_7e34a0bf-e8fd-49b9-84c0-2da85c623800",
+  "type": "message",
+  "role": "assistant",
+  "model": "deepseek-v4-pro",
+  "content": [
+    {
+      "type": "server_tool_use",
+      "id": "srvtoolu_c447e5f6a5fded34_33",
+      "name": "web_search",
+      "input": {"query": "AI 行业新闻 2026年11月"}
+    },
+    {
+      "type": "web_search_tool_result",
+      "content": [
+        {
+          "type": "web_search_result",
+          "url": "https://example.com/source/1",
+          "title": "示例来源标题",
+          "page_age": "2026/11/16 16:49:10",
+          "encrypted_content": "",
+          "snippet": "示例来源摘要。"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "根据检索结果，模型生成的示例回答正文[1]。"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 6256,
+    "output_tokens": 246,
+    "cache_read_input_tokens": 5120,
+    "server_tool_use": {
+      "web_search_requests": 3
+    }
+  }
+}
+```
+
+Message API 会在 `usage.server_tool_use.web_search_requests` 中返回本次响应触发的搜索调用次数。
+
+### 流式响应
+
+设置 `stream: true` 时，Message API 按 Anthropic Messages 流式格式返回内容增量：
+
+`message_start`：消息开始，携带消息元数据。
+
+`content_block_start`：内容块开始，`content_block` 字段标识 `server_tool_use`、`web_search_tool_result` 或 `text` 块。
+
+`content_block_delta`：内容块增量，`delta.type` 为 `input_json_delta`（搜索词增量）或 `text_delta`（文本增量）。
+
+`content_block_stop`：内容块结束。
+
+`message_delta`：消息增量。
+
+`message_stop`：消息整体结束。
 
 ## 错误处理
 
@@ -616,6 +763,8 @@ Responses API 会在 `usage.tool_usage.web_search_call` 中返回本次响应触
 ## 相关文档
 
 [语言模型调用概览](https://cloud.tencent.com/document/product/1823/130079)：TokenHub 语言模型通用调用文档（含 BaseURL、协议支持矩阵等），各协议完整字段说明请参见 [Chat Completions 协议字段说明](https://cloud.tencent.com/document/product/1823/135872) 和 [Response 协议字段说明](https://cloud.tencent.com/document/product/1823/135873)。
+
+[深度思考](https://cloud.tencent.com/document/product/1823/131208)：思维链（深度思考）能力的参数说明与默认策略。
 
 [API Key 管理](https://cloud.tencent.com/document/product/1823/130090)：API Key 创建与管理指南。
 

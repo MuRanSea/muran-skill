@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/image-generation-t2i.md -->
-<!-- Source SHA-256: fad48a956b6a21d25898116ec55826ae02fa0d145f0468eb5821947a5defab26 -->
+<!-- Source SHA-256: 92dd9a31ccb441b05ab3540effbfa7298af84199950f13597841991c5bd5cbef -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -72,7 +72,7 @@ components:
             - image-01-live
         prompt:
           type: string
-          description: 图像的文本描述，最长 1500 字符
+          description: 图片的文本描述，最长 1500 字符
         style:
           $ref: '#/components/schemas/StyleObject'
           type: object
@@ -80,7 +80,7 @@ components:
         aspect_ratio:
           type: string
           description: |-
-            图像宽高比，默认为 1:1。可选值：
+            图片宽高比，默认为 1:1。可选值：
             - `1:1` (1024x1024)
             - `16:9` (1280x720)
             - `4:3` (1152x864)

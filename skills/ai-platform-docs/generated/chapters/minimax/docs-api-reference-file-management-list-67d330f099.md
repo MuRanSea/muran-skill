@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/file-management-list.md -->
-<!-- Source SHA-256: db0cc99440e446a904b4777a4b36627175257f98b3b96e92d0026bc7dc6f0265 -->
+<!-- Source SHA-256: 19aa94e17847cc2436b7f4791c43ff2405d4d3a483e27e17579287d01c2f7afe -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -45,6 +45,7 @@ paths:
             2. __prompt_audio__: 音色复刻的示例音频
             3. __t2a_async_input__: 异步长文本语音合成请求体中的文本文件
             4. __video_generation_input__: 视频生成的输入素材（首帧图 / 参考图 / 参考视频 / 参考音频）
+            5. __image_generation_input__: MiniMax-H3-Image 图片编辑的参考图
           schema:
             type: string
             enum:
@@ -52,6 +53,7 @@ paths:
               - prompt_audio
               - t2a_async_input
               - video_generation_input
+              - image_generation_input
             example: t2a_async_input
       responses:
         '200':

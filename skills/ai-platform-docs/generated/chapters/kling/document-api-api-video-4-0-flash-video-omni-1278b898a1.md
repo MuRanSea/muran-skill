@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/4-0-flash/video-omni.md -->
-<!-- Source SHA-256: ef7cee7fde11aeb420e11c45779648b148ef8183bb0bd02c26fb375a401f9e1c -->
+<!-- Source SHA-256: e4e9d0da0a64e5103530f9ad7dffe8c4b7e903cfb73c6d4c572024924b6fbf09 -->
 
 > ## Documentation Index
 >
@@ -41,7 +41,7 @@
 | `settings` | object | 否 | - | - | 输出配置相关参数，如清晰度、时长等 |
 | `settings.audio` | string | 否 | `native` | `native`, `original` | 指定生成视频的声音处理方式。 |
 | `settings.resolution` | string | 否 | `720p` | `720p` | 生成视频的清晰度 |
-| `settings.aspect_ratio` | string | 否 | `adaptive` | `21:9`, `16:9`, `9:16`, `1:1`, `adaptive` | 生成视频的画面纵横比（宽:高） |
+| `settings.aspect_ratio` | string | 否 | `adaptive` | `21:9`, `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `adaptive` | 生成视频的画面纵横比（宽:高） |
 | `settings.duration` | int | 否 | - | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20` | 生成视频的目标时长，单位：秒。支持整数值。 |
 | `options` | object | 否 | - | - | 通用配置，如回调地址、是否含水印等 |
 | `options.callback_url` | string | 否 | - | - | 本次任务结果回调通知地址 |
@@ -85,6 +85,7 @@
     }
   ]
   ```
+- `contents[].type.prompt`: 文本提示词，可包含正向描述和负向描述
 - `contents[].type.prompt`: 文本提示词内容长度与字符类型有关。如为纯英文，内容长度不超过26,000个字符；如为纯非英文，内容长度不能超过11,000个字符；如为英文&非英文混合输入，需保持英文字符数 ÷ 26,000 + 非英文字符数 ÷ 11,000 ≤ 1。
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
 - `contents[].type.prompt`: ```json
@@ -103,6 +104,7 @@
   >
   > 
   > 3. **建议按“素材用途＋整体设定＋分段事件＋声音要求”组织提示词。** 根据需要描述场景、视觉风格、镜头运动、动作顺序、台词、环境声、配乐与音效；视频编辑场景还应明确需要修改和保留的内容。详细信息见 [Kling 4.0 & Kling 4.0 Flash 使用指南](https://klingai.com/document-api/api/usage-guide/kling-4-0)。
+- `contents[].type.first_frame / refer_image`: 参考图片类素材相关参数
 - `contents[].type.first_frame / refer_image`: 图片可作为场景、风格等参考图，也可作为关键帧生成视频。
 - `contents[].type.first_frame / refer_image`: 通过JSON的格式定义，具体如下：
 - `contents[].type.first_frame / refer_image`: ```json
@@ -117,6 +119,7 @@
 - `contents[].type.first_frame / refer_image`: 图片宽高尺寸不小于300px，图片宽高比要在2:5 ~ 5:2之间。
 - `contents[].type.first_frame / refer_image`: 图片数量不得超过10。
 - `contents[].type.first_frame / refer_image`: 图片（包括首帧图、参考图）+ 视频数量 + 主体数量之和不得超过15。
+- `contents[].type.feature_video / base_video`: 参考视频类素材相关参数
 - `contents[].type.feature_video / base_video`: 视频可作为特征参考视频 feature_video，也可作为待编辑视频 base_video。
 - `contents[].type.feature_video / base_video`: 通过JSON的格式定义，具体如下：
 - `contents[].type.feature_video / base_video`: ```json
@@ -136,6 +139,7 @@
     - 当有视频角色主体时，视频角色主体数量和参考视频数量总计不超过5个。
     - 其中最多添加1段待编辑视频base_video。
 - `contents[].type.feature_video / base_video`: 图片（包括首帧图、参考图）+ 视频数量 + 主体数量之和不得超过15。
+- `contents[].type.element`: 参考主体类素材相关参数
 - `contents[].type.element`: 通过JSON的格式定义，具体如下：
 - `contents[].type.element`: ```json
   {
@@ -154,7 +158,7 @@
   - `original`：保留输入视频的原声。需满足以下规则：
     - 不可同时引用音色参考。
     - 必须至少传入一段 `base_video` 或 `feature_video`。传入 `base_video` 时，采用 `base_video` 原声，未传入 `base_video` 时，采用 `contents` 中传入的第一段 `feature_video` 的原声。
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频
 - `settings.aspect_ratio`: 指定除 adaptive 外的有效比例值时，以该参数值作为输出画面比例，优先于 Prompt 中的比例要求。
 - `settings.aspect_ratio`: 未设置该参数或设为 adaptive 时，模型优先采用 Prompt 中明确指定的画面比例。例如，“生成一段 9:16 的竖屏视频”将目标画面比例设为 9:16。
 - `settings.aspect_ratio`: 若 Prompt 未明确指定画面比例，则依次采用待编辑视频 base_video、首帧图片、参考视频 feature_video 的比例，以首个适用项为准。根据 feature_video 确定比例时，如仅有1个，采用参考视频feature_video比例，若存在多个参考视频时，使用 16:9。

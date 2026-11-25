@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/2-6/image-to-video.md -->
-<!-- Source SHA-256: cf17c3a7779e152dca635bd93653984ac529e58e5a0580737027895d421041e7 -->
+<!-- Source SHA-256: 9ecb9a091122e51c5e6e4aa171c604f5d8b54634350a284e38e4ae6a2762529e -->
 
 > ## Documentation Index
 >
@@ -75,6 +75,7 @@
   - `first_frame`：首帧图素材标识。
   - `last_frame`：尾帧图素材标识。
   - `voice`：音色素材标识。
+- `contents[].type.prompt`: 文本提示词，可包含正向描述和负向描述
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
 - `contents[].type.prompt`: ```json
   {
@@ -83,6 +84,7 @@
   }
   ```
 - `contents[].type.prompt`: 可通过@xxx的格式来指定某个音色，如：@sweet。
+- `contents[].type.first_frame / last_frame`: 首帧图参考素材或尾帧图参考素材
 - `contents[].type.first_frame / last_frame`: 首帧时必填，尾帧时选填
 - `contents[].type.first_frame / last_frame`: 通过JSON的格式定义，具体如下：
 - `contents[].type.first_frame / last_frame`: ```json
@@ -95,8 +97,9 @@
 - `contents[].type.first_frame / last_frame`: 图片文件大小不能超过50MB。
 - `contents[].type.first_frame / last_frame`: 图片宽高尺寸不小于300px，图片宽高比要在1:2.5 ~ 2.5:1之间。
 - `contents[].type.first_frame / last_frame`: 支持仅首帧图生视频和首尾帧图生视频，不支持仅尾帧图生视频。其中：
-    - 使用首尾帧生成视频时，仅支持生成1080P视频。
+    - 使用首尾帧生成视频时，仅支持生成1080p视频。
     - 使用尾帧图（last_frame）时，不支持生成有声视频（audio = native）。
+- `contents[].type.voice`: 音色参考素材
 - `contents[].type.voice`: 通过JSON的格式定义，具体如下：
 - `contents[].type.voice`: ```json
   {
@@ -110,12 +113,12 @@
 - `contents[].type.voice`: voice_id参数值通过音色定制接口返回，也可使用系统预置音色，[点此查看详情](https://klingai.com/document-api/api/video/2-6/voice-customization)。
 - `settings.audio`: native：生成的视频含有与画面适配的声音。
 - `settings.audio`: off：生成的视频不含有声音。
-- `settings.audio`: 生成有声视频时，仅支持生成1080P视频，且不支持输入尾帧图（last_frame）。
+- `settings.audio`: 生成有声视频时，仅支持生成1080p视频，且不支持输入尾帧图（last_frame）。
 - `settings.audio`: 生成无声视频时，不支持指定音色。
-- `settings.resolution`: 720p：输出清晰度为720P的视频。
-- `settings.resolution`: 1080p：输出清晰度为1080P的视频。
-- `settings.resolution`: 生成有声视频时，仅支持生成1080P视频。
-- `settings.resolution`: 使用首尾帧生成视频时，仅支持生成1080P视频。
+- `settings.resolution`: 720p：输出清晰度为720p的视频。
+- `settings.resolution`: 1080p：输出清晰度为1080p的视频。
+- `settings.resolution`: 生成有声视频时，仅支持生成1080p视频。
+- `settings.resolution`: 使用首尾帧生成视频时，仅支持生成1080p视频。
 - `options`: ```json
   "options": {
     "callback_url": "https://example.com/cb", // 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知；具体通知的消息schema见“Callback协议”

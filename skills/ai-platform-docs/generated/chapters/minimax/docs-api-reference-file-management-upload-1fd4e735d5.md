@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/api-reference/file-management-upload.md -->
-<!-- Source SHA-256: 06409fe8aea3d900c63a2f55c06690f8c8335a8935b96baa4c9dd75eea7d9c9f -->
+<!-- Source SHA-256: 11b6a9b800ded4ce14deed175239816d5149053f3ad839cd282506deab7e20c1 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -75,6 +75,12 @@ paths:
                     形式引用，有效期 7 天（过期后发起生成返回 file expired，需重新上传）；上传即校验规格，不合格返回 400
                     且不留存，heic/heif 宽高由服务端解析、无需客户端转码。
 
+                    6. __image_generation_input__: MiniMax-H3-Image
+                    图片编辑的参考图，在请求的 `images[].image_url` 字段以 `mm_file://{file_id}`
+                    形式引用，有效期 7 天（过期后发起请求返回 file
+                    expired，需重新上传）；上传即按[图片编辑](/api-reference/image-generation-h3-edits)的参考图限制校验，不合格返回
+                    400 且不留存。
+
 
                     `video_generation_input` 支持格式与单文件大小上限：
 
@@ -88,12 +94,23 @@ paths:
                     | 参考视频 | mp4 / mov | 50 MB |
 
                     | 参考音频 | wav / mp3 | 15 MB |
+
+
+                    `image_generation_input` 支持格式与单文件大小上限：
+
+
+                    | 类型 | 扩展名 | 单文件上限 |
+
+                    | --- | --- | --- |
+
+                    | 图片 | jpg / jpeg / png / webp / heic / heif | 64 MB |
                   enum:
                     - voice_clone
                     - prompt_audio
                     - t2a_async_input
                     - video_understanding
                     - video_generation_input
+                    - image_generation_input
                   example: t2a_async_input
                 file:
                   type: string

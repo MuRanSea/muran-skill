@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/3-0-omni/video-omni.md -->
-<!-- Source SHA-256: 81048e5f043dfb731fe5c8cda5d1bd3b6cf5c8a9df0c0bb672f0e25b520d2904 -->
+<!-- Source SHA-256: b655c8031d78921580e23f80b9ad9f67baebd19fb58116703b7bc2d997bef888 -->
 
 > ## Documentation Index
 >
@@ -97,6 +97,7 @@
   - `feature_video`：特征参考视频素材标识。
   - `base_video`：待编辑视频素材标识。
   - `element`：主体素材标识。
+- `contents[].type.prompt`: 文本提示词，可包含正向描述和负向描述
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
 - `contents[].type.prompt`: ```json
   {
@@ -133,6 +134,7 @@
   >
   > 
   > 5. 更多信息详见：[可灵视频 3.0 Omni 使用指南](https://docs.qingque.cn/d/home/eZQDPQ5RCKYKpTbz1poE88YSp?identityId=2Cn18n4EIHT)。
+- `contents[].type.first_frame / last_frame / refer_image`: 参考图片类素材相关参数
 - `contents[].type.first_frame / last_frame / refer_image`: 图片可作为场景、风格等参考图，也可作为首帧或尾帧生成视频。
 - `contents[].type.first_frame / last_frame / refer_image`: 通过JSON的格式定义，具体如下：
 - `contents[].type.first_frame / last_frame / refer_image`: ```json
@@ -152,6 +154,7 @@
     - 有参考视频时，不同时支持视频角色主体和参考图片。
 - `contents[].type.first_frame / last_frame / refer_image`: 当图片作为首帧或尾帧使用时：
     - 支持仅首帧和首帧+尾帧，暂不支持仅尾帧。
+- `contents[].type.feature_video / base_video`: 参考视频类素材相关参数
 - `contents[].type.feature_video / base_video`: 通过JSON的格式定义，具体如下：
 - `contents[].type.feature_video / base_video`: ```json
   {
@@ -173,6 +176,7 @@
     - 不支持定义视频首帧或尾帧。
     - 不支持生成多镜头视频。
     - 不支持随视频内容生成声音，即audio参数值不能为native。
+- `contents[].type.element`: 参考主体类素材相关参数
 - `contents[].type.element`: 通过JSON的格式定义，具体如下：
 - `contents[].type.element`: ```json
   {
@@ -195,8 +199,8 @@
 - `settings.audio`: `native`：生成的视频含有与画面适配的声音。
   - `original`：生成的视频保留参考视频原声。
   - `off`：生成的视频不含有声音。
-- `settings.resolution`: `720p`：输出清晰度为720P的视频。
-  - `1080p`：输出清晰度为1080P的视频。
+- `settings.resolution`: `720p`：输出清晰度为720p的视频。
+  - `1080p`：输出清晰度为1080p的视频。
   - `4k`：输出清晰度为4K的视频。
 - `settings.aspect_ratio`: 当没有首帧图或没有参考视频时，当前参数必填。
 - `options`: ```json

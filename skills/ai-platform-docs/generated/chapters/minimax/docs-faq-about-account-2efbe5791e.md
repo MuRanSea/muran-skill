@@ -1,5 +1,5 @@
 <!-- Official source: https://platform.minimax.cn/docs/faq/about-account.md -->
-<!-- Source SHA-256: eeb704567dd0768f3721668c67fb05aeef866ddbf2826d5bf6af390cb5a06caf -->
+<!-- Source SHA-256: 6d0fbd6c06972cd28c95a480658bc1e62ffede01320268c1f9ad69c699591c38 -->
 
 > ## Documentation Index
 > Fetch the complete documentation index at: https://platform.minimaxi.com/docs/llms.txt
@@ -13,10 +13,10 @@
 
 **答：** MiniMax 开放平台支持 **在线充值** 和 **对公汇款** 两种充值方式。
 
-* 在线充值：登陆 MiniMax 开放平台，前往[账户管理->余额](https://platform.minimax.cn/user-center/payment/balance)，点击 **立即充值** 按钮，在充值页使用微信进行在线充值。您可以在账单页查询充值结果。
+* 在线充值：登陆 MiniMax 开放平台，前往[账户钱包](https://platform.minimax.cn/user-center/payment/balance)，点击 **立即充值** 按钮，在充值页使用支付宝或微信进行在线充值。您可以在账单页查询充值结果。
 * 对公汇款：对公汇款仅支持企业用户。支持采用对公汇款的方式向 MiniMax 开放平台账户进行充值。**请确保汇款方开户名称与开放平台实名认证主体名称一致。** 您可联系商务获得具体账户信息。我方银行账户到账后，汇款金额将在 10 分钟- 1 小时左右转入您对应的开放平台账户，如未及时收到，请联系我们。
 
-### 问：如何获取账号的GroupId
+### 问：如何获取账号的 GroupId
 
 **答：** MiniMax开放平台GroupId可以在[账户管理->账户信息 ](https://platform.minimax.cn/user-center/basic-information)中复制。
 
@@ -32,7 +32,7 @@
 
 ### 问：资源包及有效期
 
-**答：** MiniMax 开放平台，目前提供视频及语音资源包的购买，具体套餐内容，您可前往[账户管理->API 资源包](https://platform.minimax.cn/console/resource-packs/buy/audio/turbo)了解详细内容，并选择合适您的套餐。
+**答：** 您可前往[账户管理 → API 资源包](https://platform.minimax.cn/console/resource-packs/buy/audio/turbo)，查看并选购语音资源包。
 
 > [!NOTE]
 >

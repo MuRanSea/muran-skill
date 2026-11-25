@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137072 -->
-<!-- Source SHA-256: c0caa534ebd3402cb56ea77d91a3571b8a23a7bfe2163802c946d9d09a28e02c -->
+<!-- Source SHA-256: f82104e0ff1013300c403f469a914b7697602ce15e0f532fdfa5e41428d7c1ea -->
 
 # Tripo-3D-Rigging 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137072
-最近更新时间：2026-10-24 13:10:11
+最近更新时间：2026-11-17 16:48:30
 
 ## 简介
 
@@ -32,7 +32,7 @@ Tripo 自动绑骨接口，自动为 3D 模型添加骨骼绑定。
 
 ### 2. 并发额度
 
-默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+默认提供 3 个并发，代表最多可同时处理 3 个已提交的任务，超出并发限制的任务需等待前面的任务处理完成后才能开始处理。
 
 并发任务数：表示在调用对应服务的时段内最大可运行的任务数，该任务未完成时，无法提交下一个任务，该任务完成后，可提交下一个任务。
 
@@ -46,8 +46,8 @@ Tripo 自动绑骨接口，自动为 3D 模型添加骨骼绑定。
 | --- | --- | --- | --- |
 | model | 是 | string | 模型名称，默认为：tripo-3d-rigging  示例值：tripo-3d-rigging |
 | input | 是 | string | 模型 URL：可公开访问的 3D 模型文件直链。  示例： https://example.com/model.glb    支持格式：GLB、GLTF、FBX、OBJ、STL  最大文件大小：**150 MB** |
-| rig\_type | 否 | string | 骨骼类型。建议先调用 rig-check。  biped：双足人形。  quadruped：四足动物。  hexapod：六足生物。  octopod：八足生物。  avian：鸟类/有翼生物。  serpentine：蛇形生物。  aquatic：鱼类/水生生物。  默认值: biped |
-| spec | 否 | string | 绑骨规范。  tripo：Tripo 原生骨骼命名。  mixamo：兼容 Mixamo 的骨骼命名。  默认值: tripo |
+| rig\_type | 否 | string | 骨骼类型。建议先调用 rig-check。  biped：双足人形。  quadruped：四足动物。  hexapod：六足生物。  octopod：八足生物。  avian：鸟类/有翼生物。  serpentine：蛇形生物。  aquatic：鱼类/水生生物。  others：不属于以上任何拓扑的骨架。  默认值: biped |
+| spec | 否 | string | 绑骨规范。  tripo：Tripo 原生骨骼命名。  mixamo：兼容 Mixamo 的骨骼命名。  actorcore：ActorCore 人形骨骼命名。  unity：Unity Humanoid 骨骼命名。  unreal：Unreal Mannequin 骨骼命名。  vrm：VRM 1.0 人形骨骼命名。  默认值: tripo |
 | out\_format | 否 | string | 输出格式。  glb：二进制 glTF，适用于 Web。  fbx：FBX，适用于 DCC 工具和游戏引擎。  默认值: glb |
 
 **输出参数**
@@ -125,7 +125,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/query' \\
   "status": "completed",
   "input":"{\\"spec\\":\\"tripo\\",\\"topology\\":\\"biped\\",\\"out_format\\":\\"glb\\",\\"original_model_id\\":\\"XXXXX-c1ac-49fb-8fe8-XXXXX\\"}",  "object": "3d_job",
   "output": {
-      "model_url": "https://vcg-prod-1258344699.cos.ap-guangzhou.tencentcos.cn/**********12.glb"  
+      "model_url": "https://example.com/output/model.glb"  
   },
   "request_id": "XXXXX-c925-4dda-90f0-XXXXX",
   "credits_consumed": 25,

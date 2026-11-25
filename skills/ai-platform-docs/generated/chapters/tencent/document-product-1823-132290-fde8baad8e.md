@@ -1,10 +1,58 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132290 -->
-<!-- Source SHA-256: c6a7b9bcd1248ce1061e6b1f1bb72a1f845fd2876d97e8f2a5e06ccc8073c667 -->
+<!-- Source SHA-256: c5a8ea29bd9777dbe2e895e91b652c4d3970af3cfc577ef3167e515925420f64 -->
 
 # 更新历史
 
 官方来源：https://cloud.tencent.com/document/product/1823/132290
-最近更新时间：2026-09-18 02:06:33
+最近更新时间：2026-11-25 02:45:18
+
+## 第 29 次发布
+
+发布时间：2026-11-25 02:45:06
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [CreateTokenPlanApiKeys](/document/api/1823/132278)
+	* 新增入参：IpWhitelist, OverageEnabled
+* [ModifyTokenPlanApiKey](/document/api/1823/132273)
+	* 新增入参：IpWhitelist
+
+修改数据结构：
+
+* [EndpointDetail](/document/api/1823/132279#EndpointDetail)
+	* 新增成员：WorkspaceId, OriginEndpointId, NightDiscountEnabled
+* [ModelEndpointView](/document/api/1823/132279#ModelEndpointView)
+	* 新增成员：ModelChargeUnit, ModelImage, OfflineAt, DiscontinuedAt, NightDiscountEnabled
+* [TokenPlanApiKeyListItem](/document/api/1823/132279#TokenPlanApiKeyListItem)
+	* 新增成员：IpWhitelist, OverageEnabled
+
+## 第 28 次发布
+
+发布时间：2026-11-17 03:04:08
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeTokenPlanPersonalPackage](/document/api/1823/140967)
+
+## 第 27 次发布
+
+发布时间：2026-11-09 02:49:36
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [ModifyApiKeyBindings](/document/api/1823/140653)
 
 ## 第 26 次发布
 

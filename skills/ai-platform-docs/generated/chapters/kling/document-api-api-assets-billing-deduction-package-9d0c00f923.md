@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/assets/billing-deduction/package.md -->
-<!-- Source SHA-256: 68266d4da72fc9f110081c69c5b517e65d60ac0471f5029c8e523dbad26890c9 -->
+<!-- Source SHA-256: 51ed0ed5c5ac16f8c19a08f7f30917436b3d3ff149cad1f4b73e24118677fa55 -->
 
 > ## Documentation Index
 >
@@ -151,6 +151,7 @@ curl --location --request POST 'https://api-beijing.klingai.com/account/billing/
           "product_function": "string", // 任务相关功能，如：Image to Video
           "model_name": "string", // 任务所用模型版本，与创建任务时所选模型版本一致
           "resolution": "string", // 生成结果的分辨率，枚举值：720p、1080p、4k（较早版本API通过mode参数定义分辨率，与当前参数对应关系为：720p=std、1080p=pro）
+          "dynamic_range": "string", // 输出动态范围，string 类型，当前枚举：sdr、hdr；本次适用于 Kling 4.0 视频任务
           "input_duration": "8.03", // 输入视频总时长，包括 feature_video、base_video和视频角色主体；单位秒、两位小数字符串；仅 4.0 & 4.0 flash有视频输入时有值；按系统归一化处理后的时长统计，可能与原始视频文件时长存在微小差异。
           "duration": "5.041", // 生成的视频文件实际时长，单位秒。实际输出计费时长见output_duration。
           "output_duration": "5", // 计费输出视频时长，该值用于计费核算，单位秒。仅 4.0 & 4.0 flash。该值用于计费核算。该参数值等于用户创建任务时settings.duration中指定的时长；未设置该参数时，则采用Prompt中指定的生成时长。若未设置 settings.duration 且未在prompt内说明，但传入base_video，则取base_video时长四舍五入取整，否则默认为 10 秒。
@@ -160,12 +161,32 @@ curl --location --request POST 'https://api-beijing.klingai.com/account/billing/
           "deduction_time": "1779549455861", // 积分抵扣时间，Unix时间戳、单位ms时间
           "unit_before_deduction": 13037.3, // 积分抵扣前余额
           "deduction_amount": 5.0, // 积分抵扣量
-          "unit_after_deduction": 13032.3 // 积分抵扣后余额
+          "unit_after_deduction": 13032.3, // 积分抵扣后余额
+          "image_details": null // 图片计量对象；非图片任务为 null，图片任务结构见下一条示例
+        },
+        {
+          "package_id": "string", // 资源包ID
+          "product_type": "image", // 资源包类型；image 表示图片资源包
+          "task_id": "string", // 系统生成的任务ID
+          "api_key_name": "string", // API Key名称
+          "product_function": "string", // 任务相关功能
+          "model_name": "string", // 任务所用模型版本，与创建任务时所选模型版本一致
+          "resolution": "2k", // 任务实际生效清晰度；普通图片 2k/4k/8k，长图 1k/2k
+          "deduction_time": "1790000010000", // 积分抵扣时间，Unix时间戳、单位ms时间
+          "unit_before_deduction": 992, // 积分抵扣前余额
+          "deduction_amount": 16, // 积分抵扣量，number，不是图片张数
+          "unit_after_deduction": 976, // 积分抵扣后余额
+          "image_details": { // 图片计量对象；非图片任务或历史图片记录完全缺失时为 null。
+            "input_image_count": 2, // 输入参考图（含参考主体）张数，非负整数；无参考图为 0，历史缺失时为 null
+            "output_image_count": 1, // 输出图片张数；历史缺失时为 null
+            "skill": "ecommerce", // 长图技能 ecommerce/webpage；普通单图与组图为 JSON null，历史缺失为 null
+            "length": "long" // 仅 ecommerce 返回实际生效长度 short/medium/long；创建时省略 length 则为 medium；网页和普通图片为 JSON null
+          }
         }
       ],
       "count": 20 // 本次查询的结果的数量
     },
-    "next_cursor": "string", // 游标信息，可用继续查询后续
+    "next_cursor": "string", // 游标信息，可用于查询后续记录
     "has_more": true // 基于游标信息，是否还有未查询到的数据，boolean值
   }
 }

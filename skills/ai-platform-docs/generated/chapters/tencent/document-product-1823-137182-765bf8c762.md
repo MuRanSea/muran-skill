@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137182 -->
-<!-- Source SHA-256: 7295aa2babc2e7b0aa85f07393983f647776abf9b5101563cd4f03347e22dd8a -->
+<!-- Source SHA-256: 83de61170e0eef34fc187fb9a6703e56d51b11fd6642c4050bb97d0f4c2b6b34 -->
 
 # HY-3D-Format 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/137182
-最近更新时间：2026-09-08 17:21:57
+最近更新时间：2026-11-23 19:11:51
 
 ## 简介
 
@@ -24,7 +24,7 @@
 
 **说明：**
 
-每个账户的密钥都只能当前账户查询，主账户的密钥信息子账户是看不到，子账户如果需要调用接口，需要使用账户自行创建密钥信息。
+每个账户的密钥都只能当前账户查询，主账户的密钥信息对子账户不可见，子账户如果需要调用接口，需要使用账户自行创建密钥信息。
 
 如果子账户没有办法创建，可能是没有权限创建密钥，需要主账户授权，主账户登录之后点击用户列表，在对应的子账户后面选择授权，会弹出关联策略的弹窗，输入授权策略名称之后搜索，选择对应的策略点击确认。
 
@@ -45,7 +45,7 @@
 | 参数名称 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
 | model | 是 | string | 格式转换模型名称，默认为 hy-3d-format。  示例值：hy-3d-format |
-| file | 是 | object | 3d 文件 url 地址，模型文件大小≤60m，支持 fbx，obj，glb 格式3D 文件输入。  示例值：url |
+| file | 是 | object | 3d 文件 url 地址，模型文件大小≤60m，支持 zip，fbx，glb 格式3D 文件输入。    其中 zip 仅限用于封装 obj 模型，压缩包内必须包含 .obj、.mtl 文件及 uv 贴图信息。  示例值：url |
 | format | 是 | string | 返回的3D 文件格式，参考值：STL, USDZ, FBX, MP4, GIF,OBJ,GLB。  示例值：STL |
 
 **输出参数**
@@ -85,9 +85,9 @@
 **输入示例**
 
 ```java
-curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/submit' 
-  -H 'Authorization: Bearer YOUR_API_KEY' 
-  -H 'Content-Type: application/json' 
+curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/3d/submit' \\
+  -H 'Authorization: Bearer YOUR_API_KEY' \\
+  -H 'Content-Type: application/json' \\
   -d '{
     "model": "hy-3d-format",
     "file": {

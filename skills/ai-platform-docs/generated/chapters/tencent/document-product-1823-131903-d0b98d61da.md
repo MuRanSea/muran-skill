@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/131903 -->
-<!-- Source SHA-256: 878f88dc77e28f1c9612e6e672e1706c6576ec0ffe736e8ac587b32caaf5e13c -->
+<!-- Source SHA-256: 7c310a70afd92b74e74bc481639be773157cd6e153835d6e3f4425783a81fb69 -->
 
 # Claude Code
 
 官方来源：https://cloud.tencent.com/document/product/1823/131903
-最近更新时间：2026-07-06 14:12:12
+最近更新时间：2026-11-10 10:50:00
 
 Claude Code 是一款运行在终端中的 AI 编程工具，可以通过灵活的自然语言辅助开发者高效编码、调试和管理代码。本文以 Hy3 模型为例演示如何将模型接入到 Claude Code 中使用。
 
@@ -21,6 +21,8 @@ Claude Code 是一款运行在终端中的 AI 编程工具，可以通过灵活�
 在设置**可访问范围**时，如果选择“限定范围”，则需要确保勾选 **Hy3**。
 
 2. 创建完成后，请您务必**复制并妥善保管 API Key**，在后续配置到工具的流程中将会使用该信息。
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/c57bb6eef94ed2d939f3690234cf3450.png)
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/c57bb6eef94ed2d939f3690234cf3450.png)
 
@@ -98,6 +100,8 @@ claude
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/8f9459f0828053e9a3ad1b04f29f7efe.png)
 
+![](https://qcloudimg.tencent-cloud.cn/image/document/8f9459f0828053e9a3ad1b04f29f7efe.png)
+
 ### 3. 使用 Claude Code
 
 确认配置生效后，即可开始对话。
@@ -114,7 +118,11 @@ claude
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/d558777a8bc36dc1b959580593529fdd.png)
 
+![](https://qcloudimg.tencent-cloud.cn/image/document/d558777a8bc36dc1b959580593529fdd.png)
+
 确认设置后，退出重新进入 Claude Code，即可生效。
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/78941c6f04ec0012f727c037ae1e44b1.png)
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/78941c6f04ec0012f727c037ae1e44b1.png)
 
@@ -126,6 +134,8 @@ Claude Code 禁止第三方模型使用内置原生搜索工具，因此在配�
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/b6160e160f725759676737703333bceb.png)
 
+![](https://qcloudimg.tencent-cloud.cn/image/document/b6160e160f725759676737703333bceb.png)
+
 若您需要结合搜索使用，可在 [腾讯云 MCP 市场](https://cloud.tencent.com/developer/mcp/server/11764) 等各开放渠道中，选用合适的搜索 MCP 服务配置在 Claude Code 中使用。
 
 以下以腾讯云 MCP 市场的 [联网搜索 MCP](https://cloud.tencent.com/developer/mcp/server/11764) 为例，介绍搜索 MCP 的配置方法。
@@ -134,7 +144,11 @@ Claude Code 禁止第三方模型使用内置原生搜索工具，因此在配�
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/4468cff15d4411cf3a44dec0314a0c8b.png)
 
+![](https://qcloudimg.tencent-cloud.cn/image/document/4468cff15d4411cf3a44dec0314a0c8b.png)
+
 **步骤2**：开通服务后，页面上会显示连接搜索服务的配置 json，点击复制配置内容。
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/2829957a15db575b937bf5e45bba88e7.png)
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/2829957a15db575b937bf5e45bba88e7.png)
 
@@ -153,3 +167,9 @@ claude --disallowedTools "WebSearch"
 **步骤5**：MCP 配置完成后，需**重启 Claude Code 才能生效**。请退出当前 Claude Code 会话（输入 `/exit` 或按 `Ctrl+C` 退出），再重新执行上述启动命令。重启后，即可在 Claude Code 中通过您配置的搜索 MCP 服务正常使用搜索能力。
 
 ![](https://qcloudimg.tencent-cloud.cn/image/document/d529e077ea14fadbb202faf79d16f532.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/d529e077ea14fadbb202faf79d16f532.png)
+
+**说明：**
+
+如需在 Claude Desktop 中使用 TokenHub 模型，可借助 [CC Switch](https://ccswitch.io/zh/docs?item=claude-desktop&section=providers) 配置：添加自定义供应商，请求地址填 `https://tokenhub.tencentmaas.com/v1/messages`，接入方式选“模型映射”，实际模型填 hy3，并在“设置 → 路由”中开启本地路由（默认关闭）后重启 Claude Desktop。该方式需保持 CC Switch 常驻运行，配置链路较长，建议优先使用本文介绍的 Claude Code 方式。

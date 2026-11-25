@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/video/4-0/image-to-video.md -->
-<!-- Source SHA-256: bce10463ff70a9780b42a330c10d9efeeaabd59d6146281f96d3042b62425d58 -->
+<!-- Source SHA-256: 970ac4f0d9b34831086bfd90b94fc95448595f498590c7bc8e031bfeb702ab84 -->
 
 > ## Documentation Index
 >
@@ -43,7 +43,8 @@
 | `contents` | array | 是 | - | - | 参考素材合集，如提示词、图片等 |
 | `contents[].type` | string | 是 | - | `prompt`, `first_frame`, `middle_frame`, `last_frame` | 素材类型，支持：提示词、首帧图、中间帧图、尾帧图 |
 | `settings` | object | 否 | - | - | 输出配置相关参数，如清晰度、时长等 |
-| `settings.resolution` | string | 否 | `1080p` | `720p`, `1080p` | 生成视频的清晰度 |
+| `settings.resolution` | string | 否 | `1080p` | `720p`, `1080p`, `4k` | 生成视频的清晰度 |
+| `settings.dynamic_range` | string | 否 | `sdr` | `sdr`, `hdr` | 生成视频的动态范围。 |
 | `settings.duration` | int | 否 | - | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30` | 生成视频的目标时长，单位：秒。支持整数值。 |
 | `options` | object | 否 | - | - | 通用配置，如回调地址、是否含水印等 |
 | `options.callback_url` | string | 否 | - | - | 本次任务结果回调通知地址 |
@@ -77,6 +78,7 @@
     }
   ]
   ```
+- `contents[].type.prompt`: 文本提示词，可包含正向描述和负向描述
 - `contents[].type.prompt`: 文本提示词内容长度与字符类型有关。如为纯英文，内容长度不超过26,000个字符；如为纯非英文，内容长度不能超过11,000个字符；如为英文&非英文混合输入，需保持英文字符数 ÷ 26,000 + 非英文字符数 ÷ 11,000 ≤ 1。
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
 - `contents[].type.prompt`: ```json
@@ -95,6 +97,7 @@
   >
   > 
   > 3. 本接口用于通过关键帧控制视频生成。如需输入参考视频、主体或其他参考素材，请使用全能参考接口。
+- `contents[].type.first_frame / middle_frame / last_frame`: 图片参考素材，包括首帧图、中间帧图、尾帧图
 - `contents[].type.first_frame / middle_frame / last_frame`: 通过JSON的格式定义，具体如下：
 - `contents[].type.first_frame / middle_frame / last_frame`: ```json
   {
@@ -108,8 +111,13 @@
 - `contents[].type.first_frame / middle_frame / last_frame`: 图片宽高尺寸不小于300px，图片宽高比要在2:5 ~ 5:2之间。
 - `contents[].type.first_frame / middle_frame / last_frame`: 图片数量不得超过10。
 - `contents[].type.first_frame / middle_frame / last_frame`: 如同时传入 `first_frame`、`middle_frame` 和 `last_frame`，请在 `contents` 中按首帧、中间帧、尾帧的顺序排列图片；多张中间帧应按其在视频中出现的先后顺序排列。建议在 Prompt 中通过 `@id` 引用图片id，并说明各图片的作用。
-- `settings.resolution`: 720p：输出清晰度为 720P 的视频
-- `settings.resolution`: 1080p：输出清晰度为 1080P 的视频
+- `settings.resolution`: 720p：输出清晰度为 720p 的视频
+- `settings.resolution`: 1080p：输出清晰度为 1080p 的视频
+- `settings.resolution`: 4k：输出清晰度为 4K 的视频
+- `settings.resolution`: 输出清晰度由本参数控制，仅在 Prompt 中描述“4K”、“1080p”、“720p”不会启用对应输出规格。
+- `settings.dynamic_range`: sdr：标准动态范围，输出 SDR 视频。
+  - hdr：高动态范围，输出 HDR 视频。
+- `settings.dynamic_range`: 未传时默认为 sdr。仅在 settings.resolution 为 1080p 或 4k 时支持 hdr。输出动态范围由本参数控制，仅在 Prompt 中描述“HDR”不会启用 HDR 输出。
 - `settings.duration`: 指定本参数时，以参数值为准，优先于 Prompt 中的时长要求。
 - `settings.duration`: 未指定本参数时，采用模型从 Prompt 中识别到的明确时长要求。例如，“生成一段 15 秒的视频”将目标时长设为 15 秒。
 - `settings.duration`: 未指定本参数，且 Prompt 中未识别到明确的时长要求时，默认为 10 秒。

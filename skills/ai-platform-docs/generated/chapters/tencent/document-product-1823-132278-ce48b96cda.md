@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132278 -->
-<!-- Source SHA-256: 0340d9853db2b91c38a101533f62e4239635e58ba33e504e6bab7a6251b3cf0b -->
+<!-- Source SHA-256: 2d5ebeae10f7080bbcbb22397c1b586f38570b7ba02e3380811a56db6dd3fab5 -->
 
 # 批量创建 Token Plan 套餐的 API Key
 
 官方来源：https://cloud.tencent.com/document/product/1823/132278
-最近更新时间：2026-05-29 10:58:22
+最近更新时间：2026-11-25 02:45:16
 
 ## 1. 接口描述
 
@@ -41,20 +41,22 @@
 | Action | 是 | String | [公共参数](/document/api/1823/132283)，本接口取值：CreateTokenPlanApiKeys。 |
 | Version | 是 | String | [公共参数](/document/api/1823/132283)，本接口取值：2026-03-22。 |
 | Region | 是 | String | [公共参数](/document/api/1823/132283)，详见产品支持的 [地域列表](/document/api/1823/132283#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)。 |
-| TeamId | 是 | String | 套餐 ID。可通过DescribeTokenPlanList接口获取。<br/>示例值：tp-ent-a1b2c3d4 |
-| ApiKeyName | 是 | String | API Key 名称，最大 128 字符。如果创建 API Key 的数量超过1个，实际名称格式为 {ApiKeyName}-{序号}（如 mykey-1, mykey-2）。<br/>示例值：生产Key |
-| Count | 是 | Integer | 创建数量。取值范围：1 ~ 10。<br/>示例值：5 |
-| AllowedModels.N | 否 | Array of String | 可用模型列表。如果套餐类型为企业版专业套餐，可以指定模型，也可以传入“all”，传入 “all“表示可以使用套餐支持的所有模型，如果要指定具体模型，传入 Model ID，“all“和具体的 Model ID 不能同时传入，如果不传则表示该API Key不支持任何模型，从而影响API Key的正常使用。如果套餐类型为企业版轻享套餐，则无论是否传入该字段，以及该字段传入什么值，都会被强制覆盖为["auto"]。<br/>示例值：["glm-5","kimi-k2.5"] |
-| ExclusiveQuota | 否 | Integer | 独占额度。不传则为0，代表该 API Key 不被分配任何独占配额。单位说明如下：<br/>- 套餐类型为专业，单位取值为积分；<br/>- 套餐类型为轻享套餐，单位取值为 token。<br/>示例值：500000 |
-| TotalQuota | 否 | Integer | 总额度上限。-1 表示不限，必须为 -1 或 >= API Key 当前的 ExclusiveQuota（独占额度）。不传表示不设置上限。单位说明如下：<br/>- 套餐类型为专业，单位取值为积分；<br/>- 套餐类型为轻享套餐，单位取值为 token。<br/>示例值：-1 |
-| TPM | 否 | Integer | TPM（Tokens Per Minute）限制。不传使用套餐级别 TPM。必须 >= 0 且 <= 套餐 TPM。<br/>示例值：4400 |
+| TeamId | 是 | String | <p>套餐 ID。可通过DescribeTokenPlanList接口获取。</p><br/>示例值：tp-ent-a1b2c3d4 |
+| ApiKeyName | 是 | String | <p>API Key 名称，最大 128 字符。如果创建 API Key 的数量超过1个，实际名称格式为 {ApiKeyName}-{序号}（如 mykey-1, mykey-2）。</p><br/>示例值：生产Key |
+| Count | 是 | Integer | <p>创建数量。取值范围：1 ~ 10。</p><br/>示例值：5 |
+| AllowedModels.N | 否 | Array of String | <p>可用模型列表。如果套餐类型为企业版专业套餐，该字段必传！可以指定模型，也可以传入“all”，传入 “all“表示可以使用套餐支持的所有模型，如果要指定具体模型，传入 Model ID，“all“和具体的 Model ID 不能同时传入。如果套餐类型为企业版轻享套餐，则无论是否传入该字段，以及该字段传入什么值，都会被强制覆盖为[&quot;auto&quot;]。</p><br/>示例值：["glm-5","kimi-k2.5"] |
+| ExclusiveQuota | 否 | Integer | <p>独占额度。不传则为0，代表该 API Key 不被分配任何独占配额。单位说明如下：</p><ul><li>套餐类型为专业，单位取值为积分；</li><li>套餐类型为轻享套餐，单位取值为 token。</li></ul><br/>示例值：500000 |
+| TotalQuota | 否 | Integer | <p>总额度上限。-1 表示不限，必须为 -1 或 &gt;= API Key 当前的 ExclusiveQuota（独占额度）。不传表示不设置上限。单位说明如下：</p><ul><li>套餐类型为专业，单位取值为积分；</li><li>套餐类型为轻享套餐，单位取值为 token。</li></ul><br/>示例值：-1 |
+| TPM | 否 | Integer | <p>TPM（Tokens Per Minute）限制。不传使用套餐级别 TPM。必须 &gt;= 0 且 &lt;= 套餐 TPM。</p><br/>示例值：4400 |
+| IpWhitelist.N | 否 | Array of String | <p>IP 白名单列表。支持 IPv4 单地址（如 1.2.3.4）和 IPv4 CIDR（如 10.0.0.0/24）格式。最多 50 个条目，不允许重复；不支持 IPv6 与 IP 范围。不传或传空数组表示不限制。批量创建时所有 APIKey 共用同一份白名单。</p><br/>示例值：["1.2.3.4","10.0.0.0/24"] |
+| OverageEnabled | 否 | Boolean | <p>是否开启超额按量计费。默认值为 false。开启后，若 APIKey 用量达到总额度上限，并且使用的模型已开启按量计费，将自动切换至按量计费模式，该部分将按所用模型的按量计费定价额外计费；未开启时用量达上限后调用报错。</p><br/>示例值：false |
 
 ## 3. 输出参数
 
 | 参数名称 | 类型 | 描述 |
 |---------|---------|---------|
-| Items | Array of [CreateApiKeysResultItem](/document/api/1823/132279#CreateApiKeysResultItem) | 成功创建的项列表。|
-| FailedItems | Array of [BatchCreateFailedItem](/document/api/1823/132279#BatchCreateFailedItem) | 创建失败的项列表。|
+| Items | Array of [CreateApiKeysResultItem](/document/api/1823/132279#CreateApiKeysResultItem) | <p>成功创建的项列表。</p>|
+| FailedItems | Array of [BatchCreateFailedItem](/document/api/1823/132279#BatchCreateFailedItem) | <p>创建失败的项列表。</p>|
 | RequestId | String | 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。|
 
 ## 4. 示例

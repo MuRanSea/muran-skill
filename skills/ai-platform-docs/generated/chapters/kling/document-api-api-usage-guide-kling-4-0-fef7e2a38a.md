@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/usage-guide/kling-4-0.md -->
-<!-- Source SHA-256: d4b2bf3f6d052e9a52747be14a1a5d6d6c9dc3eeabc3dd943528b2bdab8936f9 -->
+<!-- Source SHA-256: 10058815fb593c51ca2f2af3d51a27039c445768f65d33b0e696e01a1391ddb7 -->
 
 > ## Documentation Index
 >
@@ -63,7 +63,11 @@ Kling 4.0 在创作端提供“全能参考”和“关键帧”两个一级入�
     - **主体参考**：type 设置为 element，通过 element_id 指定主体。
     - **音色参考**：type 设置为 voice，通过 voice_id 指定音色。
 - 为素材设置本次任务内不重复的 id，在提示词中通过 @id 指定各素材的作用。例如，id 为 image_1 的图片，在提示词中写作 @image_1。
-- 根据输出要求设置 settings：resolution 支持 720p、1080p，默认 1080p。aspect_ratio 支持 21:9、16:9、9:16、1:1、adaptive，默认 adaptive。若传入adaptive 时，模型会识别并遵循 Prompt 中的比例意图。duration 支持 **3–30 秒的整数**，未传入时优先识别 Prompt 中的时长意图，无明确意图时采用 base_video的时长，未提供 base_video 时，默认 **10 秒**。
+- 根据输出要求设置 settings：
+    - 通过 settings.resolution 设置输出视频的分辨率，可选值为 720p、1080p、4k，默认值为 1080p。
+    - 通过 settings.dynamic_range 设置输出视频的动态范围，可选值为 sdr（标准动态范围）和 hdr（高动态范围），未传入时默认为 sdr。HDR 输出仅支持 1080p 和 4K 分辨率；720p 仅支持 SDR 输出。
+    - 通过 settings.duration 设置输出视频的时长，支持 **3–30 秒的整数**。未传入时优先识别 Prompt 中的时长意图，无明确意图时采用 base_video的时长，未提供 base_video 时，默认 **10 秒**。
+    - 通过 settings.aspect_ratio 设置输出视频的比例，支持 21:9、16:9、9:16、1:1、4:3、3:4、adaptive，默认 adaptive。若传入adaptive 时，模型会识别并遵循 Prompt 中的比例意图。如果Prompt 中未识别到明确的比例要求，则依次采用待编辑视频 base_video、关键帧图片、参考视频 feature_video 的比例，以首个适用项为准。根据 feature_video 确定比例时，若仅传入一个feature_video作为参考视频，则采用其比例；若传入多个feature_video作参考视频，则使用 16:9。若以上来源均不适用，则默认使用 16:9。
 
 **提示词示例：**
 
@@ -102,7 +106,11 @@ Kling 4.0 在创作端提供“全能参考”和“关键帧”两个一级入�
     - **中间帧**：middle_frame。
 - 通过各对象的 url 传入图片，并设置不重复的 id，便于在提示词中引用。图片合计最多 **10 张**。
 - 在 type 为 prompt 的对象中，使用 text 描述画面内容、动作过程和节点之间的衔接。
-- 通过 settings.duration 设置 **3–30 秒**的整数时长，通过 settings.resolution 选择 720p 或 1080p。专用图生接口当前未提供独立的 aspect_ratio 字段，不要额外传入。
+- 根据输出要求设置 settings：
+    - 通过 settings.resolution 设置输出视频的分辨率，可选值为 720p、1080p、4k，默认值为 1080p。
+    - 通过 settings.dynamic_range 设置输出视频的动态范围，可选值为 sdr（标准动态范围）和 hdr（高动态范围），未传入时默认为 sdr。HDR 输出仅支持 1080p 和 4K 分辨率；720p 仅支持 SDR 输出。
+    - 通过 settings.duration 设置输出视频的时长，支持 **3–30 秒的整数**。未传入时优先识别 Prompt 中的时长意图，无明确意图时，默认 **10 秒**。
+    - 图生视频接口不支持 settings.aspect_ratio 参数，输出视频的宽高比与传入的首张图片一致。
 
 **首尾帧提示词示例：**
 
@@ -327,7 +335,7 @@ curl -sS --request GET \
 
 1. Kling 4.0 提升了大幅度动态、连续动作与复杂运镜的稳定性，支持高品质音频和双通道立体声，使声音、对白与表演更自然地同步。
 1. 支持 21:9 超宽画幅。
-1. 1080p、4K 的 10-bit HDR 输出【即将上线】。
+1. 支持 4K HDR 和 1080p HDR 视频输出，呈现更丰富的明暗层次与高光、暗部细节。
 
 ### 4.2 全能参考
 
@@ -357,7 +365,7 @@ Kling 4.0 Flash 面向高频创意尝试和短视频创作，单次生成最长 
 | --------------- | -------------------------------------------- | -------------------------------------------- |
 | 一级入口        | 全能参考 / 关键帧 / 长视频                   | 全能参考 / 关键帧                            |
 | 生成时长        | 3-30s                                        | 3-20s                                        |
-| 生成模式        | 720p / 1080p / 4K / 4K HDR（即将上线）       | 720p                                         |
+| 生成模式        | 720p / 1080p / 4K / 1080p HDR / 4K HDR       | 720p                                         |
 | 首尾帧          | 支持                                         | 不支持                                       |
 | 多关键帧        | 支持                                         | 不支持                                       |
 | 音色克隆        | 支持                                         | 不支持                                       |
@@ -836,15 +844,71 @@ curl -sS --request POST \
 
 首帧、尾帧、首尾帧与中间帧模板见[Kling 4.0 视频 提示词案例-第9节](https://klingai.com/document-api/api/usage-guide/kling-4-0-prompt-guide#9.关键帧)。
 
-### 6.10 视频续拍
+### 6.10 支持4K/4K HDR/1080p HDR
+
+**Kling 4.0 支持原生 4K 与 10-bit 输出，画面细节更清晰、光影层次更丰富，后期处理更灵活。**
+
+视频分辨率与动态范围均可通过对应参数按需配置，其中 HDR 输出支持 1080p 和 4K 分辨率。启用 HDR 后，将按输出视频时长逐秒加收 HDR 费用。
+
+::::: container guide-case
+
+:::: container guide-case-input
+
+<p class="guide-case-label">输入</p>
+
+<div class="guide-case-media-list">
+<div class="guide-case-shot">
+
+<div class="media-wrap image-wrap"><img src="https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/guide-hdr-squirrel-ref.e666b586d3ef754b.webp" alt="" /></div>
+
+<p>首帧</p>
+</div>
+</div>
+
+```text
+小松鼠从洞口探出脑袋，好奇地转动眼睛，轻轻抬头、左右张望。随后抬起一只前爪，将小火把缓缓举到脸旁，竖直握住。它轻轻歪头，自然眨眼，短暂闭上眼睛，露出开心的笑容，再重新睁眼看向前方，嘴巴微微张开。身体基本保持原位，头部、眼神和面部表情的变化细腻自然，动作连贯。
+```
+
+:::: container guide-case-output
+
+<p class="guide-case-label">输出</p>
+
+<button type="button" class="guide-video-poster" data-src="https://p4-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/guide-hdr-squirrel.b3a77bb71b5dfc1b.mp4" aria-label="播放视频"><img src="https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/api-doc/guide-hdr-squirrel-ref.e666b586d3ef754b.webp" alt="" /></button>
+
+```cURL
+curl --request POST \
+  'https://api-beijing.klingai.com/image-to-video/kling-4.0' \
+  --header "Authorization: Bearer ${KLING_API_KEY}" \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  "contents": [
+    {
+      "type": "prompt",
+      "text": "小松鼠从洞口探出脑袋，好奇地转动眼睛，轻轻抬头、左右张望。随后抬起一只前爪，将小火把缓缓举到脸旁，竖直握住。它轻轻歪头，自然眨眼，短暂闭上眼睛，露出开心的笑容，再重新睁眼看向前方，嘴巴微微张开。身体基本保持原位，头部、眼神和面部表情的变化细腻自然，动作连贯。"
+    },
+    {
+      "type": "first_frame",
+      "url": "https://p2-kling.klingai.com/kcdn/cdn-kcdn112452/kling-tob-release-note/ch6_10_squirrel_ref.png",
+      "id": "image_1"
+    }
+  ],
+  "settings": {
+    "resolution": "4k",
+    "dynamic_range": "hdr"
+  }
+}'
+```
+
+### 6.11 视频续拍
 
 即将上线。支持多次续拍、最长延展至 2 分钟。
 
 ## 7 自定义视频输出规格
 
-通过 API 参数控制输出视频的分辨率、宽高比、时长，以及是否同时生成含水印的结果。
+通过 API 参数控制输出视频的分辨率、动态范围、宽高比、时长，以及是否同时生成含水印的结果。
 
 - settings.resolution：指定输出视频的分辨率。
+- settings.dynamic_range：指定输出视频的动态范围。
 - settings.aspect_ratio：指定输出视频的宽高比。
 - settings.duration：指定输出视频的时长。
 - options.watermark_info.enabled：指定是否同时生成含水印的结果。
@@ -853,19 +917,23 @@ curl -sS --request POST \
 
 ### 7.1 分辨率与动态范围
 
-Kling 4.0 支持 720p、1080p、4K 三档输出。4K输出即将上线，同时1080p、4K 的 10-bit HDR 输出即将上线。通过 settings.resolution 指定输出视频的分辨率。默认值：1080p；可选值：720p、1080p
+Kling 4.0 支持 720p、1080p 和 4K 视频输出，并支持在 1080p 和 4K 分辨率下输出 HDR 视频，呈现更丰富的明暗层次与高光、暗部细节。分辨率与动态范围通过以下参数分别设置：
+
+- settings.resolution：输出视频的分辨率，可选值为 720p、1080p、4k，默认值为 1080p。
+- settings.dynamic_range：输出视频的动态范围，可选值为 sdr（标准动态范围）和 hdr（高动态范围），未传入时默认为 sdr。开启 HDR 后，HDR 费用按输出视频时长另行计算，具体收费标准见[定价说明](https://klingai.com/document-api/pricing/base/video)。
 
 ```json
 {
     "settings": {
-        "resolution": "1080p"
+        "resolution": "4k",
+        "dynamic_range": "hdr"
     }
 }
 ```
 
 ### 7.2 宽高比
 
-全能参考的创作端选项为 21:9、16:9、1:1、9:16、智能，默认智能。关键帧入口上传图片后，比例跟随第一张关键帧。通过 settings.aspect_ratio 指定输出视频的宽高比。默认值：adaptive，可选值：21:9、16:9、9:16、1:1、adaptive
+全能参考的创作端选项为 21:9、16:9、1:1、9:16、4:3、3:4、智能，默认智能。关键帧入口上传图片后，比例跟随第一张关键帧。通过 settings.aspect_ratio 指定输出视频的宽高比。默认值：adaptive，可选值：21:9、16:9、9:16、1:1、4:3、3:4、adaptive
 
 传入明确的比例值时，以参数值为准，优先于 Prompt 中的比例要求。
 

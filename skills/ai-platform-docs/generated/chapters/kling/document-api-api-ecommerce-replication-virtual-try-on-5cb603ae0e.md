@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/ecommerce-replication/virtual-try-on.md -->
-<!-- Source SHA-256: 54c3ff099b1c2b4d6b11c8e618ec6ab3ec27fbabba9af0ca1819bbbb2d6a5d07 -->
+<!-- Source SHA-256: 378cab0d8bc117b3738719e99120ee0e9626663dc8b6e550ae4db7d08fb24570 -->
 
 > ## Documentation Index
 >
@@ -101,6 +101,7 @@ API 支持三个独立的图像控制维度：
   ]
   ```
 - `contents`: 两种类型各提供 1 项，顺序不限；缺少任意一种类型将导致请求失败。
+- `contents[].type.product_image`: 待试穿的服饰参考图，支持真人上身图、人台图和平铺服装图。
 - `contents[].type.product_image`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -110,6 +111,7 @@ API 支持三个独立的图像控制维度：
   ```
 - `contents[].type.product_image`: 建议使用清晰、完整、无遮挡的图片，避免过多文字、水印或明显合成痕迹。
 - `contents[].type.product_image`: 图片格式支持 jpg、jpeg、png、webp；图片最长边不超过 2048px，短边大于 300px，体积不超过 10MB。
+- `contents[].type.person_image`: 用于生成试穿结果的人物图。
 - `contents[].type.person_image`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
@@ -349,6 +351,7 @@ curl --location --request GET 'https://api-beijing.klingai.com/solutions?externa
   ]
   ```
 - `filters[].key`: `status`：任务状态
+- `filters[].key.status`: 按任务状态筛选。
 - `filters[].key.status`: 通过 JSON 的格式定义，具体如下：
   ```json
   {
