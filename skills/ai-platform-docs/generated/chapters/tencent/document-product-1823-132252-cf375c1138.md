@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132252 -->
-<!-- Source SHA-256: d5e3976c7c91e9de05c43c81bf14c9c5fbfc748e0755c8cd102d899979b6a448 -->
+<!-- Source SHA-256: d86bc9ff38daa4217ca076b700977b66514d3b5f59a003104d8f26ffbf36976b -->
 
 # 混元调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132252
-最近更新时间：2026-11-16 12:15:31
+最近更新时间：2026-11-25 18:08:20
 
 ## 概述
 
@@ -1951,11 +1951,11 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
 
 ## 翻译模型
 
-Hy-MT2 是一款面向真实复杂场景的“快思考”多语言翻译模型家族，包含 **1.8B、7B、30B-A3B（MoE）**三种体量，支持 **33 个语种**之间的互译，并能高效遵循多语言翻译指令。多维度评测显示，Hy-MT2 在通用翻译、真实业务场景翻译、垂直领域翻译以及指令遵循翻译等任务上均表现出色。
+Hy MT3 是一款面向真实复杂场景的“快思考”多语言翻译模型家族，包含 **1.8B、7B、30B-A3B（MoE）**三种体量，支持 **102 个语种**之间的互译，并能高效遵循多语言翻译指令。多维度评测显示，Hy MT3在通用翻译、真实业务场景翻译、垂直领域翻译以及指令遵循翻译等任务上均表现出色。
 
 ### 支持的模型
 
-<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>model（调用参数）</div></td><td><div>能力说明</div></td><td><div>上下文窗口</div></td><td><div>最大输入</div></td><td><div>最大输出</div></td></tr><tr><td><div><code>hy-mt2-pro</code></div></td><td><div>混元翻译旗舰模型，<b>参数量30B-A3B</b>，适合专业领域等对译文质量要求高的场景，有优秀的指令遵循能力。支持语种齐全，重点支持33个语种互译，支持5种民汉/方言。</div></td><td><div>8k</div></td><td><div>4k</div></td><td><div>4k</div></td></tr><tr><td><div><code>hy-mt2-plus</code></div></td><td><div>混元翻译模型，<b>参数量7B</b>。业界效果领先，开源测试集 Flores 200、WMT25效果领先，专业领域和真实业务场景表现优秀。支持语种齐全，重点支持33个语种互译，支持5种民汉/方言。</div></td><td colspan="1" rowspan="1"><div>8k</div></td><td colspan="1" rowspan="1"><div>4k</div></td><td colspan="1" rowspan="1"><div>4k</div></td></tr><tr><td><div><code>hy-mt2-lite</code></div></td><td><div>混元翻译轻量级模型，<b>参数量1.8B</b>。适合对耗时有高要求的场景。支持语种齐全，重点支持33个语种互译，支持5种民汉/方言。</div></td><td colspan="1" rowspan="1"><div>8k</div></td><td colspan="1" rowspan="1"><div>4k</div></td><td colspan="1" rowspan="1"><div>4k</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>model（调用参数）</div></td><td><div>能力说明</div></td><td><div>上下文窗口</div></td><td><div>最大输入</div></td><td><div>最大输出</div></td></tr><tr><td><div><code>hy-mt2-pro</code>、<code>hy-mt3-pro</code></div></td><td><div>混元翻译旗舰模型，<b>参数量30B-A3B</b>，适合专业领域等对译文质量要求高的场景，有优秀的指令遵循能力。支持102个语种互译。</div></td><td><div>8k</div></td><td><div>4k</div></td><td><div>4k</div></td></tr><tr><td><div><code>hy-mt2-plus</code>、<code>hy-mt3-plus</code></div></td><td><div>混元翻译模型，<b>参数量7B</b>。专业领域和真实业务场景表现优秀。支持102个语种互译。</div></td><td colspan="1" rowspan="1"><div>8k</div></td><td colspan="1" rowspan="1"><div>4k</div></td><td colspan="1" rowspan="1"><div>4k</div></td></tr><tr><td><div><code>hy-mt2-lite</code>、<code>hy-mt3-lite</code></div></td><td><div>混元翻译轻量级模型，<b>参数量1.8B</b>。适合对耗时有高要求的场景。支持102个语种互译。</div></td><td colspan="1" rowspan="1"><div>8k</div></td><td colspan="1" rowspan="1"><div>4k</div></td><td colspan="1" rowspan="1"><div>4k</div></td></tr></tbody></table>
 
 ### 基础翻译
 
@@ -1980,7 +1980,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy-mt2-plus",
+    "model": "hy-mt3-plus",
     "messages": [
       {"role": "user", "content": "将以下文本翻译为英语，注意只需要输出翻译后的结果，不要额外解释： 会议开始前请确认所有参会人员都收到了议程。"}
     ]
@@ -2002,7 +2002,7 @@ prompt = f"""将以下文本翻译为 {target_lang}，注意只需要输出翻�
 {source_text}"""
 
 response = client.chat.completions.create(
-    model="hy-mt2-plus",
+    model="hy-mt3-plus",
     messages=[{"role": "user", "content": prompt}],
 )
 print(response.choices[0].message.content)
@@ -2020,7 +2020,7 @@ public class TranslationDemo {
         String prompt = "将以下文本翻译为 " + targetLang + "，注意只需要输出翻译后的结果，不要额外解释：\\n" + sourceText;
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "hy-mt2-plus");
+        body.put("model", "hy-mt3-plus");
         body.put("messages", List.of(
             Map.of("role", "user", "content", prompt)
         ));
@@ -2052,7 +2052,7 @@ const sourceText = '会议开始前请确认所有参会人员都收到了议程
 const prompt = `将以下文本翻译为 ${targetLang}，注意只需要输出翻译后的结果，不要额外解释：\\n${sourceText}`;
 
 const response = await client.chat.completions.create({
-  model: 'hy-mt2-plus',
+  model: 'hy-mt3-plus',
   messages: [{ role: 'user', content: prompt }],
 });
 console.log(response.choices[0].message.content);
@@ -2075,7 +2075,7 @@ func main() {
     prompt := "将以下文本翻译为 " + targetLang + "，注意只需要输出翻译后的结果，不要额外解释：\\n" + sourceText
 
     body, _ := json.Marshal(map[string]interface{}{
-        "model": "hy-mt2-plus",
+        "model": "hy-mt3-plus",
         "messages": []map[string]string{
             {"role": "user", "content": prompt},
         },
@@ -2100,7 +2100,7 @@ func main() {
 {
   "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy-mt2-plus",
+  "model": "hy-mt3-plus",
   "created": 1775146513,
   "choices": [
     {
@@ -2149,7 +2149,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy-mt2-plus",
+    "model": "hy-mt3-plus",
     "messages": [
       {"role": "user", "content": "# 任务目标\\n将下方 source_text 中的 JSON 格式数据翻译为 英语。\\n\\n# 严格约束\\n1. 结构锁定：绝对保持原有的 JSON 数据结构、缩进和层级完全不变。\\n2. 选择性翻译：仅翻译面向用户展示的可见文本内容。\\n3. 禁止修改：严禁翻译或更改任何代码标签、键名 (Key)、变量占位符（如 {{var}}、${var}、%s、%d 等）或代码属性。\\n\\n# 数据输入\\n{\\"title\\": \\"西湖风景区\\", \\"description\\": \\"位于杭州市中心，是国家 5A 级旅游景区，四季景色宜人。\\", \\"tags\\": [\\"自然风光\\", \\"世界遗产\\", \\"免费开放\\"]}"}
     ]
@@ -2180,7 +2180,7 @@ prompt = f"""# 任务目标
 {source_text}"""
 
 response = client.chat.completions.create(
-    model="hy-mt2-plus",
+    model="hy-mt3-plus",
     messages=[{"role": "user", "content": prompt}],
 )
 print(response.choices[0].message.content)
@@ -2192,7 +2192,7 @@ print(response.choices[0].message.content)
 {
   "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy-mt2-plus",
+  "model": "hy-mt3-plus",
   "created": 1779966611,
   "choices": [
     {
@@ -2234,7 +2234,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy-mt2-plus",
+    "model": "hy-mt3-plus",
     "messages": [
       {"role": "user", "content": "请将以下文本准确翻译为英语。你必须在译文中保留等量的分隔符，绝对不可遗漏、转义或翻译该符号，并注意分隔符的位置。\\n每天保持八小时睡眠有助于身体健康<SEP>合理规划工作与休息可以提升效率<SEP>适度运动能有效缓解压力"}
     ]
@@ -2258,7 +2258,7 @@ prompt = f"""请将以下文本准确翻译为 {target_lang}。你必须在译�
 {source_text}"""
 
 response = client.chat.completions.create(
-    model="hy-mt2-plus",
+    model="hy-mt3-plus",
     messages=[{"role": "user", "content": prompt}],
 )
 
@@ -2273,7 +2273,7 @@ for src, tgt in zip(source_segments, translated):
 {
   "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy-mt2-plus",
+  "model": "hy-mt3-plus",
   "created": 1779966612,
   "choices": [
     {
@@ -2315,7 +2315,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy-mt2-plus",
+    "model": "hy-mt3-plus",
     "messages": [
       {"role": "user", "content": "【背景信息】\\n这是一篇介绍数据库系统的技术文档，上文提到的 transaction 指数据库事务，index 指数据库索引。\\n请结合背景信息将以下文本翻译为英语。\\n【待翻译文本】\\n事务提交后，索引会被异步刷新到磁盘。"}
     ]
@@ -2341,7 +2341,7 @@ prompt = f"""【背景信息】
 {source_text}"""
 
 response = client.chat.completions.create(
-    model="hy-mt2-plus",
+    model="hy-mt3-plus",
     messages=[{"role": "user", "content": prompt}],
 )
 print(response.choices[0].message.content)
@@ -2353,7 +2353,7 @@ print(response.choices[0].message.content)
 {
   "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy-mt2-plus",
+  "model": "hy-mt3-plus",
   "created": 1779966614,
   "choices": [
     {
@@ -2397,7 +2397,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy-mt2-plus",
+    "model": "hy-mt3-plus",
     "messages": [
       {"role": "user", "content": "参考下面的翻译：\\n首播 翻译成 premiere\\n收视率 翻译成 ratings\\n将以下文本翻译为英语，注意只需要输出翻译后的结果，不要额外解释：\\n这部剧在媒体平台首播后收视率一路走高。"}
     ]
@@ -2426,7 +2426,7 @@ prompt = f"""参考下面的翻译：
 {source_text}"""
 
 response = client.chat.completions.create(
-    model="hy-mt2-plus",
+    model="hy-mt3-plus",
     messages=[{"role": "user", "content": prompt}],
 )
 print(response.choices[0].message.content)
@@ -2438,7 +2438,7 @@ print(response.choices[0].message.content)
 {
   "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy-mt2-plus",
+  "model": "hy-mt3-plus",
   "created": 1779967706,
   "choices": [
     {
@@ -2480,7 +2480,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/chat/completions' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy-mt2-plus",
+    "model": "hy-mt3-plus",
     "messages": [
       {"role": "user", "content": "请将以下文本翻译为英语。注意翻译的风格要严格符合【科普文案：语言简洁有力、富有感染力】\\n适度户外活动有助于调节情绪，缓解精神压力。"}
     ]
@@ -2503,7 +2503,7 @@ prompt = f"""请将以下文本翻译为 {target_lang}。注意翻译的风格�
 {source_text}"""
 
 response = client.chat.completions.create(
-    model="hy-mt2-plus",
+    model="hy-mt3-plus",
     messages=[{"role": "user", "content": prompt}],
 )
 print(response.choices[0].message.content)
@@ -2515,7 +2515,7 @@ print(response.choices[0].message.content)
 {
   "id": "REPLACED_ID",
   "object": "chat.completion",
-  "model": "hy-mt2-plus",
+  "model": "hy-mt3-plus",
   "created": 1779966617,
   "choices": [
     {
@@ -2549,7 +2549,7 @@ print(response.choices[0].message.content)
 
 **请求参数说明**
 
-<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div>参数</div></td><td><div>类型</div></td><td><div>必填</div></td><td><div>说明</div></td></tr><tr><td><div><code>model</code></div></td><td><div>string</div></td><td><div>是</div></td><td><div>model 参数，如 <code>hy-mt2-plus</code></div></td></tr><tr><td><div><code>text</code></div></td><td><div>string</div></td><td><div>是</div></td><td><div>待翻译的文本</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>target</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>是</div></td><td colspan="1" rowspan="1"><div>目标语言代码</div></td></tr><tr><td><div><code>source</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>源语言代码，如不传参则模型自动识别</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>stream</code></div></td><td colspan="1" rowspan="1"><div>bool</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>是否流式返回，默认 <code>false</code></div></td></tr><tr><td><div><code>context</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>上下文信息，用于让译文更连贯</div></td></tr><tr><td><div><code>references</code></div></td><td><div>list of object</div></td><td><div>否</div></td><td><div>参考示例（句子或术语），最多 10 个</div></td></tr><tr><td><div><code>references[n].type</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>翻译文本类型，其中"sentence"表示句子， "term"表示术语</div></td></tr><tr><td><div><code>references[n].text</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td><div>参考示例的原文</div></td></tr><tr><td><div><code>references[n].translation</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td><div>参考示例的译文</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>glossary_ids</code></div></td><td colspan="1" rowspan="1"><div>list of string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>术语库 ID 列表，最多 10 个，可参考 <a href="https://cloud.tencent.com/document/product/1823/132887">术语库管理相关接口</a> 创建术语库</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div>参数</div></td><td><div>类型</div></td><td><div>必填</div></td><td><div>说明</div></td></tr><tr><td><div><code>model</code></div></td><td><div>string</div></td><td><div>是</div></td><td><div>model 参数，如 <code>hy-mt3-plus</code></div></td></tr><tr><td><div><code>text</code></div></td><td><div>string</div></td><td><div>是</div></td><td><div>待翻译的文本</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>target</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>是</div></td><td colspan="1" rowspan="1"><div>目标语言代码</div></td></tr><tr><td><div><code>source</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>源语言代码，如不传参则模型自动识别</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>stream</code></div></td><td colspan="1" rowspan="1"><div>bool</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>是否流式返回，默认 <code>false</code></div></td></tr><tr><td><div><code>context</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>上下文信息，用于让译文更连贯</div></td></tr><tr><td><div><code>references</code></div></td><td><div>list of object</div></td><td><div>否</div></td><td><div>参考示例（句子或术语），最多 10 个</div></td></tr><tr><td><div><code>references[n].type</code></div></td><td><div>string</div></td><td><div>否</div></td><td><div>翻译文本类型，其中"sentence"表示句子， "term"表示术语</div></td></tr><tr><td><div><code>references[n].text</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td><div>参考示例的原文</div></td></tr><tr><td><div><code>references[n].translation</code></div></td><td colspan="1" rowspan="1"><div>string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td><div>参考示例的译文</div></td></tr><tr><td colspan="1" rowspan="1"><div><code>glossary_ids</code></div></td><td colspan="1" rowspan="1"><div>list of string</div></td><td colspan="1" rowspan="1"><div>否</div></td><td colspan="1" rowspan="1"><div>术语库 ID 列表，最多 10 个，可参考 <a href="https://cloud.tencent.com/document/product/1823/132887">术语库管理相关接口</a> 创建术语库</div></td></tr></tbody></table>
 
 **响应字段说明**
 
@@ -2566,7 +2566,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/api/translations' \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -d '{
-    "model": "hy-mt2-plus",
+    "model": "hy-mt3-plus",
     "text": "该车型搭载先进的电池管理系统，续航里程超过 600 公里并支持快充。",
     "source": "zh",
     "target": "en",
@@ -2583,7 +2583,7 @@ headers = {
     "Content-Type": "application/json",
 }
 payload = {
-    "model": "hy-mt2-plus",
+    "model": "hy-mt3-plus",
     "text": "该车型搭载先进的电池管理系统，续航里程超过 600 公里并支持快充。",
     "source": "zh",
     "target": "en",
@@ -2623,46 +2623,7 @@ print(data["choices"][0]["message"]["content"])
 
 ### 支持的语言
 
-| 语言 | 英文名 | 代码 |
-| --- | --- | --- |
-| 简体中文 | Chinese | `zh` |
-| 繁体中文 | Traditional Chinese | `zh-TR` |
-| 英语 | English | `en` |
-| 法语 | French | `fr` |
-| 葡萄牙语 | Portuguese | `pt` |
-| 西班牙语 | Spanish | `es` |
-| 日语 | Japanese | `ja` |
-| 土耳其语 | Turkish | `tr` |
-| 俄语 | Russian | `ru` |
-| 阿拉伯语 | Arabic | `ar` |
-| 韩语 | Korean | `ko` |
-| 泰语 | Thai | `th` |
-| 意大利语 | Italian | `it` |
-| 德语 | German | `de` |
-| 越南语 | Vietnamese | `vi` |
-| 马来语 | Malay | `ms` |
-| 印尼语 | Indonesian | `id` |
-| 菲律宾语 | Filipino | `fil` |
-| 印地语 | Hindi | `hi` |
-| 波兰语 | Polish | `pl` |
-| 捷克语 | Czech | `cs` |
-| 荷兰语 | Dutch | `nl` |
-| 高棉语 | Khmer | `km` |
-| 缅甸语 | Burmese | `my` |
-| 波斯语 | Persian | `fa` |
-| 古吉拉特语 | Gujarati | `gu` |
-| 乌尔都语 | Urdu | `ur` |
-| 泰卢固语 | Telugu | `te` |
-| 马拉地语 | Marathi | `mr` |
-| 希伯来语 | Hebrew | `he` |
-| 孟加拉语 | Bengali | `bn` |
-| 泰米尔语 | Tamil | `ta` |
-| 乌克兰语 | Ukrainian | `uk` |
-| 藏语 | Tibetan | `bo` |
-| 哈萨克语 | Kazakh | `kk` |
-| 蒙古语 | Mongolian | `mn` |
-| 维吾尔语 | Uyghur | `ug` |
-| 粤语 | Cantonese | `yue` |
+<table><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><td><div>语言</div></td><td><div>英文名</div></td><td><div>代码</div></td><td colspan="1" rowspan="1"><div>语言</div></td><td colspan="1" rowspan="1"><div>英文名</div></td><td colspan="1" rowspan="1"><div>代码</div></td></tr><tr><td><div>简体中文</div></td><td><div>Chinese</div></td><td><div><code>zh</code></div></td><td colspan="1" rowspan="1"><div>爱沙尼亚语</div></td><td><div>Estonian</div></td><td><div><code>et</code></div></td></tr><tr><td><div>繁体中文</div></td><td><div>Traditional Chinese</div></td><td><div><code>zh-TR</code></div></td><td colspan="1" rowspan="1"><div>芬兰语</div></td><td><div>Finnish</div></td><td><div><code>fi</code></div></td></tr><tr><td><div>英语</div></td><td><div>English</div></td><td><div><code>en</code></div></td><td colspan="1" rowspan="1"><div>瑞典语</div></td><td><div>Swedish</div></td><td><div><code>sv</code></div></td></tr><tr><td><div>法语</div></td><td><div>French</div></td><td><div><code>fr</code></div></td><td colspan="1" rowspan="1"><div>丹麦语</div></td><td><div>Danish</div></td><td><div><code>da</code></div></td></tr><tr><td><div>葡萄牙语</div></td><td><div>Portuguese</div></td><td><div><code>pt</code></div></td><td colspan="1" rowspan="1"><div>挪威语</div></td><td><div>Norwegian</div></td><td><div><code>nb</code></div></td></tr><tr><td><div>西班牙语</div></td><td><div>Spanish</div></td><td><div><code>es</code></div></td><td colspan="1" rowspan="1"><div>新挪威语</div></td><td><div>Norwegian Nynorsk</div></td><td><div><code>nn</code></div></td></tr><tr><td><div>日语</div></td><td><div>Japanese</div></td><td><div><code>ja</code></div></td><td colspan="1" rowspan="1"><div>冰岛语</div></td><td><div>Icelandic</div></td><td><div><code>is</code></div></td></tr><tr><td><div>土耳其语</div></td><td><div>Turkish</div></td><td><div><code>tr</code></div></td><td colspan="1" rowspan="1"><div>爱尔兰语</div></td><td><div>Irish</div></td><td><div><code>ga</code></div></td></tr><tr><td><div>俄语</div></td><td><div>Russian</div></td><td><div><code>ru</code></div></td><td colspan="1" rowspan="1"><div>苏格兰盖尔语</div></td><td><div>Scottish Gaelic</div></td><td><div><code>gd</code></div></td></tr><tr><td><div>阿拉伯语</div></td><td><div>Arabic</div></td><td><div><code>ar</code></div></td><td colspan="1" rowspan="1"><div>威尔士语</div></td><td><div>Welsh</div></td><td><div><code>cy</code></div></td></tr><tr><td><div>韩语</div></td><td><div>Korean</div></td><td><div><code>ko</code></div></td><td colspan="1" rowspan="1"><div>加泰罗尼亚语</div></td><td><div>Catalan</div></td><td><div><code>ca</code></div></td></tr><tr><td><div>泰语</div></td><td><div>Thai</div></td><td><div><code>th</code></div></td><td colspan="1" rowspan="1"><div>加利西亚语</div></td><td><div>Galician</div></td><td><div><code>gl</code></div></td></tr><tr><td><div>意大利语</div></td><td><div>Italian</div></td><td><div><code>it</code></div></td><td colspan="1" rowspan="1"><div>巴斯克语</div></td><td><div>Basque</div></td><td><div><code>eu</code></div></td></tr><tr><td><div>德语</div></td><td><div>German</div></td><td><div><code>de</code></div></td><td colspan="1" rowspan="1"><div>南非荷兰语</div></td><td><div>Afrikaans</div></td><td><div><code>af</code></div></td></tr><tr><td><div>越南语</div></td><td><div>Vietnamese</div></td><td><div><code>vi</code></div></td><td colspan="1" rowspan="1"><div>卢森堡语</div></td><td><div>Luxembourgish</div></td><td><div><code>lb</code></div></td></tr><tr><td><div>马来语</div></td><td><div>Malay</div></td><td><div><code>ms</code></div></td><td colspan="1" rowspan="1"><div>马耳他语</div></td><td><div>Maltese</div></td><td><div><code>mt</code></div></td></tr><tr><td><div>印尼语</div></td><td><div>Indonesian</div></td><td><div><code>id</code></div></td><td colspan="1" rowspan="1"><div>世界语</div></td><td><div>Esperanto</div></td><td><div><code>eo</code></div></td></tr><tr><td><div>菲律宾语</div></td><td><div>Filipino</div></td><td><div><code>fil</code></div></td><td colspan="1" rowspan="1"><div>意第绪语</div></td><td><div>Yiddish</div></td><td><div><code>yi</code></div></td></tr><tr><td><div>印地语</div></td><td><div>Hindi</div></td><td><div><code>hi</code></div></td><td colspan="1" rowspan="1"><div>亚美尼亚语</div></td><td><div>Armenian</div></td><td><div><code>hy</code></div></td></tr><tr><td><div>波兰语</div></td><td><div>Polish</div></td><td><div><code>pl</code></div></td><td colspan="1" rowspan="1"><div>格鲁吉亚语</div></td><td><div>Georgian</div></td><td><div><code>ka</code></div></td></tr><tr><td><div>捷克语</div></td><td><div>Czech</div></td><td><div><code>cs</code></div></td><td colspan="1" rowspan="1"><div>阿塞拜疆语</div></td><td><div>Azerbaijani</div></td><td><div><code>az</code></div></td></tr><tr><td><div>荷兰语</div></td><td><div>Dutch</div></td><td><div><code>nl</code></div></td><td colspan="1" rowspan="1"><div>乌兹别克语</div></td><td><div>Uzbek</div></td><td><div><code>uz</code></div></td></tr><tr><td><div>高棉语</div></td><td><div>Khmer</div></td><td><div><code>km</code></div></td><td colspan="1" rowspan="1"><div>吉尔吉斯语</div></td><td><div>Kyrgyz</div></td><td><div><code>ky</code></div></td></tr><tr><td><div>缅甸语</div></td><td><div>Burmese</div></td><td><div><code>my</code></div></td><td colspan="1" rowspan="1"><div>土库曼语</div></td><td><div>Turkmen</div></td><td><div><code>tk</code></div></td></tr><tr><td><div>波斯语</div></td><td><div>Persian</div></td><td><div><code>fa</code></div></td><td colspan="1" rowspan="1"><div>塔吉克语</div></td><td><div>Tajik</div></td><td><div><code>tg</code></div></td></tr><tr><td><div>古吉拉特语</div></td><td><div>Gujarati</div></td><td><div><code>gu</code></div></td><td colspan="1" rowspan="1"><div>鞑靼语</div></td><td><div>Tatar</div></td><td><div><code>tt</code></div></td></tr><tr><td><div>乌尔都语</div></td><td><div>Urdu</div></td><td><div><code>ur</code></div></td><td colspan="1" rowspan="1"><div>巴什基尔语</div></td><td><div>Bashkir</div></td><td><div><code>ba</code></div></td></tr><tr><td><div>泰卢固语</div></td><td><div>Telugu</div></td><td><div><code>te</code></div></td><td colspan="1" rowspan="1"><div>库尔德语</div></td><td><div>Kurdish</div></td><td><div><code>ku</code></div></td></tr><tr><td><div>马拉地语</div></td><td><div>Marathi</div></td><td><div><code>mr</code></div></td><td colspan="1" rowspan="1"><div>中库尔德语</div></td><td><div>Central Kurdish</div></td><td><div><code>ckb</code></div></td></tr><tr><td><div>希伯来语</div></td><td><div>Hebrew</div></td><td><div><code>he</code></div></td><td colspan="1" rowspan="1"><div>普什图语</div></td><td><div>Pashto</div></td><td><div><code>ps</code></div></td></tr><tr><td><div>孟加拉语</div></td><td><div>Bengali</div></td><td><div><code>bn</code></div></td><td colspan="1" rowspan="1"><div>尼泊尔语</div></td><td><div>Nepali</div></td><td><div><code>ne</code></div></td></tr><tr><td><div>泰米尔语</div></td><td><div>Tamil</div></td><td><div><code>ta</code></div></td><td colspan="1" rowspan="1"><div>僧伽罗语</div></td><td><div>Sinhala</div></td><td><div><code>si</code></div></td></tr><tr><td><div>乌克兰语</div></td><td><div>Ukrainian</div></td><td><div><code>uk</code></div></td><td colspan="1" rowspan="1"><div>旁遮普语</div></td><td><div>Punjabi</div></td><td><div><code>pa</code></div></td></tr><tr><td><div>藏语</div></td><td><div>Tibetan</div></td><td><div><code>bo</code></div></td><td colspan="1" rowspan="1"><div>信德语</div></td><td><div>Sindhi</div></td><td><div><code>sd</code></div></td></tr><tr><td><div>哈萨克语</div></td><td><div>Kazakh</div></td><td><div><code>kk</code></div></td><td colspan="1" rowspan="1"><div>阿萨姆语</div></td><td><div>Assamese</div></td><td><div><code>as</code></div></td></tr><tr><td><div>蒙古语</div></td><td><div>Mongolian</div></td><td><div><code>mn</code></div></td><td colspan="1" rowspan="1"><div>奥里亚语</div></td><td><div>Odia</div></td><td><div><code>or</code></div></td></tr><tr><td><div>维吾尔语</div></td><td><div>Uyghur</div></td><td><div><code>ug</code></div></td><td colspan="1" rowspan="1"><div>卡纳达语</div></td><td><div>Kannada</div></td><td><div><code>kn</code></div></td></tr><tr><td><div>粤语</div></td><td><div>Cantonese</div></td><td><div><code>yue</code></div></td><td colspan="1" rowspan="1"><div>马拉雅拉姆语</div></td><td><div>Malayalam</div></td><td><div><code>ml</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>希腊语</div></td><td><div>Greek</div></td><td><div><code>el</code></div></td><td colspan="1" rowspan="1"><div>梵语</div></td><td><div>Sanskrit</div></td><td><div><code>sa</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>罗马尼亚语</div></td><td><div>Romanian</div></td><td><div><code>ro</code></div></td><td colspan="1" rowspan="1"><div>老挝语</div></td><td><div>Lao</div></td><td><div><code>lo</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>匈牙利语</div></td><td><div>Hungarian</div></td><td><div><code>hu</code></div></td><td colspan="1" rowspan="1"><div>爪哇语</div></td><td><div>Javanese</div></td><td><div><code>jv</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>保加利亚语</div></td><td><div>Bulgarian</div></td><td><div><code>bg</code></div></td><td colspan="1" rowspan="1"><div>巽他语</div></td><td><div>Sundanese</div></td><td><div><code>su</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>塞尔维亚语</div></td><td><div>Serbian</div></td><td><div><code>sr</code></div></td><td colspan="1" rowspan="1"><div>宿务语</div></td><td><div>Cebuano</div></td><td><div><code>ceb</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>克罗地亚语</div></td><td><div>Croatian</div></td><td><div><code>hr</code></div></td><td colspan="1" rowspan="1"><div>瓦瑞语</div></td><td><div>Waray</div></td><td><div><code>war</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>斯洛伐克语</div></td><td><div>Slovak</div></td><td><div><code>sk</code></div></td><td colspan="1" rowspan="1"><div>斯瓦希里语</div></td><td><div>Swahili</div></td><td><div><code>sw</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>斯洛文尼亚语</div></td><td><div>Slovenian</div></td><td><div><code>sl</code></div></td><td colspan="1" rowspan="1"><div>阿姆哈拉语</div></td><td><div>Amharic</div></td><td><div><code>am</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>阿尔巴尼亚语</div></td><td><div>Albanian</div></td><td><div><code>sq</code></div></td><td colspan="1" rowspan="1"><div>索马里语</div></td><td><div>Somali</div></td><td><div><code>so</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>马其顿语</div></td><td><div>Macedonian</div></td><td><div><code>mk</code></div></td><td colspan="1" rowspan="1"><div>马达加斯加语</div></td><td><div>Malagasy</div></td><td><div><code>mg</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>白俄罗斯语</div></td><td><div>Belarusian</div></td><td><div><code>be</code></div></td><td colspan="1" rowspan="1"><div>海地克里奥尔语</div></td><td><div>Haitian Creole</div></td><td><div><code>ht</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>立陶宛语</div></td><td><div>Lithuanian</div></td><td><div><code>lt</code></div></td><td colspan="1" rowspan="1"><div>西里尔哈萨克语</div></td><td><div>Cyrillic Kazakh</div></td><td><div><code>kk-Cyrl</code></div></td></tr><tr><td colspan="1" rowspan="1"><div>拉脱维亚语</div></td><td><div>Latvian</div></td><td><div><code>lv</code></div></td><td colspan="1" rowspan="1"><div>西里尔蒙古语</div></td><td><div>Cyrillic Mongolian</div></td><td><div><code>mn-Cyrl</code></div></td></tr></tbody></table>
 
 ## 角色扮演模型
 

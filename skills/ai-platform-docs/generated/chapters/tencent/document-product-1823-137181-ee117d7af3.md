@@ -1,12 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/137181 -->
-<!-- Source SHA-256: 373706bef8609761ac6d8577b5b7d75e95a75317de5dc804c9fbd7b0097fa597 -->
+<!-- Source SHA-256: 03b97a546701e0cd66ca3a925a39bc6033501fc511bf5a637f013ecdf7e606a3 -->
 
-# HY-3D 调用指南
+# HY-3D-3.1/3.0 调用指南 
 
 官方来源：https://cloud.tencent.com/document/product/1823/137181
-最近更新时间：2026-09-29 10:46:48
-
-本文档适用范围：hy-3d-3.0，hy-3d-3.1
+最近更新时间：2026-11-26 10:12:05
 
 ## 简介
 
@@ -46,13 +44,13 @@
 
 | 参数名称 | 必选 | 类型 | 描述 |
 | --- | --- | --- | --- |
-| model | 是 | string | 混元生3d 模型名称，默认为 hy-3d-3.0，可选项：hy-3d-3.0，hy-3d-3.1。  选择 hy-3d-3.1版本时，low\_poly 参数不可用。  示例值：hy-3d-3.1 |
+| model | 是 | string | 混元生3d 模型名称，默认为 hy-3d-3.0，可选项：hy-3d-3.0，hy-3d-3.1。  选择 hy-3d-3.1版本时，LowPoly 参数不可用。  示例值：hy-3d-3.1 |
 | prompt | 否 | string | 文生3d，3d 内容的描述，中文正向提示词。  最多支持1024个 utf-8 字符。  image\_base64、image\_url 和 prompt 必填其一，且 prompt 和 image\_base64/image\_url 不能同时存在。  示例值：一只小猫 |
 | image\_base64 | 否 | string | 输入图 base64 数据。  大小: 单边分辨率要求不小于128，不大于5000，大小≤6m (因 base64编码后会大30%左右)。  格式: jpg，png，jpeg，webp。  image\_base64、image\_url 和 prompt 必填其一，且 prompt 和 image\_base64/image\_url 不能同时存在。  示例值：/9j/4QlQaHR0c...N6a2M5ZCI |
 | image\_url | 否 | string | 输入图 url。  大小: 单边分辨率要求不小于128，不大于5000，大小≤8m。  格式: jpg，png，jpeg，webp。  image\_base64、image\_url 和 prompt 必填其一，且 prompt 和 image\_base64/image\_url 不能同时存在。  示例值：https://cos.ap-guangzhou.myqcloud.com/image.jpg |
 | multi\_view\_images | 否 | array of view\_image | 多视角的模型图片，视角参考值：  left：左视图  right：右视图  back：后视图  top：顶视图  bottom：底视图  left\_front：左前45°视图  right\_front：右前45°视图  每个视角仅限制一张图片。  图片大小限制：图片大小总和小于100M，单图小于8M。  图片分辨率限制：单边分辨率小于5000且大于128。  支持图片格式：支持 jpg 或 png。  详情请参见 [view\_image](https://cloud.tencent.com/document/product/1823/137181#917bb676-4a51-4ab3-9e37-f980ec67ea6d) 数据结构。 |
 | enable\_pbr | 否 | boolean | 是否开启 pbr 材质生成，默认 false。  示例值：true |
-| face\_count | 否 | integer | 生成3d 模型的面数，默认值为500000。可支持生成面数范围，参考值：3000-1500000。generate\_type 中选择 low\_poly 时，此参数不生效。  取值范围：[3000, 1500000]。  示例值：100000 |
+| face\_count | 否 | integer | 生成3d 模型的面数，默认值为500000。可支持生成面数范围，参考值：3000-1500000。generate\_type 中选择 LowPoly 时，此参数不生效。  取值范围：[3000, 1500000]。  示例值：100000 |
 | generate\_type | 否 | string | 生成任务类型，默认 Normal。  枚举值：  Normal： 可生成带纹理的几何模型。  LowPoly： 可生成智能拓扑后的模型，face\_count 参数不生效。  Geometry： 可生成不带纹理的几何模型（白模），enable\_pbr 参数不生效。  Sketch： 可输入草图或线稿图生成模型，此模式下 image\_base64、image\_url 和 prompt 可一起输入。  示例值：Normal |
 | polygon\_type | 否 | string | 该参数仅在 generate\_type 中选择 LowPoly 模式可生效。  多边形类型，表示模型的表面由几边形网格构成，默认为 triangle,参考值:  triangle: 三角形面。  quadrilateral: 四边形面与三角形面混合生成。  示例值：triangle |
 | result\_format | 否 | string | 生成模型的格式，仅限制生成一种格式； 生成模型文件组默认返回 obj、glb 格式（generate\_type 选择 Geometry 时，默认为 glb 格式）； 可选值：stl，usdz，fbx。  示例值：stl |

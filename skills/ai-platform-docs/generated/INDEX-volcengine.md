@@ -6,7 +6,7 @@
 |----|------|-------|------|---------|-------|
 | TOS 区 | `chapters/volcengine/tos/` | 《对象存储 文档指南》 | 6491 | 2002 | `INDEX-tos.md` |
 | 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1343 | 230 | `INDEX-ark.md` |
-| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2511 | 179 | `INDEX-ark-guide.md` |
+| 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2513 | 179 | `INDEX-ark-guide.md` |
 | AI MediaKit API 区 | `chapters/volcengine/mediakit/` | 《AI MediaKit API 参考》 | 1040 | 107 | `INDEX-mediakit.md` |
 | AI MediaKit 指南区 | `chapters/volcengine/mediakit-guide/` | 《AI MediaKit 文档指南》 | 955 | 155 | `INDEX-mediakit-guide.md` |
 
@@ -70,8 +70,8 @@
 | 4 | 推理 | 1439-1525 | 12 |
 | 5 | 训练 | 1528-1751 | 19 |
 | 6 | Managed Agents | 1757-1975 | 27 |
-| 7 | 订阅套餐 | 2000-2157 | 26 |
-| 8 | 资源 | 2165-2502 | 26 |
+| 7 | 订阅套餐 | 2000-2159 | 26 |
+| 8 | 资源 | 2167-2504 | 26 |
 
 ## AI MediaKit API 区（mediakit）
 

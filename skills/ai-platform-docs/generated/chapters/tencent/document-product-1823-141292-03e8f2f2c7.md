@@ -1,18 +1,32 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/141292 -->
-<!-- Source SHA-256: 4cbf562153920bd2ff805d3566be7beeea101fad78ff96de7d675a1b7b462466 -->
+<!-- Source SHA-256: a3dc6cc23f780e9c4f30d6e8a736c3ff4788669038ae2a3cf93f4e53a6fc165f -->
 
 # WAND 白模视频调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/141292
-最近更新时间：2026-11-24 16:41:38
+最近更新时间：2026-11-25 09:33:31
 
 Tencent Cloud WAND Vega Previs是腾讯云面向视频生成提供的垂直场景化生成能力。可在提供剧本或分镜后，生成纯几何体搭建的 3D 白模预演视频，主要作用于确定视频场景、人物站位、景别、结构比例与物体大小、运镜走向，在确认效果后，再使用白模视频作为参考视频进行视频生成。白模元素大多用简洁的几何体制作，例如人物用人偶或圆柱体代替，场景只保留墙体、楼梯、门、桌椅等主要结构，整体不做材质和光影。
 
-#### 适用场景
+#### 优势与适用场景
 
-适用于人物与空间关系复杂，难以用文字描述清楚的场景，如：
+![](https://qcloudimg.tencent-cloud.cn/image/document/3a45b41829039890728fa3ca5c0ff613.png)
 
-**复杂空间：**如通过楼梯串联多楼层、通过走廊走向房间、打开门后的空间。
+![](https://qcloudimg.tencent-cloud.cn/image/document/3a45b41829039890728fa3ca5c0ff613.png)
+
+**人物站位明确：**人物位置、物体大小和拍摄角度稳定，避免站位漂移。
+
+**空间关系稳定：**前后位置、距离和遮挡都有参考，防止场景偏移。
+
+**可精准修改错误位置：**位置或镜头错误时，可精准修改对应白模细节。
+
+**多镜头一致：**同个场景下不同机位输出的视频，仍可保持空间一致性。
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/be8700bcd1fbdaa53726281a0a1f6bc9.png)
+
+![](https://qcloudimg.tencent-cloud.cn/image/document/be8700bcd1fbdaa53726281a0a1f6bc9.png)
+
+**复杂空间：**如通过楼梯串联多楼层、通过走廊走向房间等场景。
 
 **多人或多物体站位：**隔桌对坐、多人围站、人物被遮挡场景。
 
@@ -21,16 +35,6 @@ Tencent Cloud WAND Vega Previs是腾讯云面向视频生成提供的垂直场�
 **运镜变化较大：**绕拍、跟拍、或从门外进入室内镜头。
 
 **多镜头共用布局：**同一场景内需用到全景、近景和反打等拍摄镜头。
-
-#### 白模视频优势
-
-**人物站位明确：**人物位置、物体大小和拍摄角度都可确定，不受提示词影响。
-
-**空间关系稳定：**前后位置、距离和遮挡都有参考，防止场景偏移。
-
-**可精准修改错误位置：**位置或镜头错误时，可精准修改对应白模细节。
-
-**多镜头一致：**同个白模场景下可从不同机位输出视频，各镜头空间位置保持一致。
 
 ### 创作流程
 
@@ -42,9 +46,9 @@ Tencent Cloud WAND Vega Previs是腾讯云面向视频生成提供的垂直场�
 
 **参考白模视频生成：**使用扩写后的参考视频提示词和白模视频提交至视频生成模型进行视频生成（仅支持可参考视频生成的视频生成模型）。
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/bd54978e44b19a2007bb4dadce298472.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/22e6387928bf9f5537b401d249a8f864.png)
 
-![](https://qcloudimg.tencent-cloud.cn/image/document/bd54978e44b19a2007bb4dadce298472.png)
+![](https://qcloudimg.tencent-cloud.cn/image/document/22e6387928bf9f5537b401d249a8f864.png)
 
 ### 前提条件
 
@@ -249,7 +253,7 @@ curl -X POST 'https://tokenhub.tencentmaas.com/v1/wand/videos/previs/query' \\
 | status | string | 任务状态。取值：`processing`（生成中）、`success`（生成成功）、`failed`（生成失败）。 |
 | video\_url | string | 生成视频（MP4）的下载地址。产物未就绪时为空字符串。 |
 | blender\_url | string | Blender 工程文件的下载地址，可导入 Blender 二次编辑。产物未就绪时为空字符串。 |
-| brief\_url | string | 预演描述文件（brief.md）的下载地址。产物未就绪时为空字符串。 |
+| brief\_url | string | 预演描述文件（brief.md）的下载地址，对原输入提示扩写后的提示词文件，未就绪时为空字符串，可用于后续参考白模生视频的提示词扩写。 |
 | usage | object | 本会话累计 Token 用量。未产生用量时不返回该字段。 |
 | usage.input\_tokens | integer | 累计输入 Token 数。 |
 | usage.cached\_read\_tokens | integer | 输入中命中缓存的 Token 数，为 `input_tokens` 的子集。 |

@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135744 -->
-<!-- Source SHA-256: 8b5b1ae89527035ec5e63fef18c175f6218a25f9fdcb3e85b296bd1b74e00cb0 -->
+<!-- Source SHA-256: 7aae44e6dac6fed90bc2bd6ac78147af30b5ce18c70939739b570bba7ba1cc7d -->
 
 # 图像生成模型调用概览
 
 官方来源：https://cloud.tencent.com/document/product/1823/135744
-最近更新时间：2026-11-13 20:08:30
+最近更新时间：2026-11-25 17:19:00
 
 ## 概述
 
@@ -46,7 +46,7 @@
 
 详情请参见 [Kling 生图调用指南](https://cloud.tencent.com/document/product/1823/138803)。
 
-<table><tbody><tr><td colspan="1" rowspan="1"><div>模型名称</div></td><td colspan="1" rowspan="1"><div>model 参数值</div></td><td colspan="1" rowspan="1"><div>支持能力</div></td><td colspan="1" rowspan="1"><div>提示词上限</div></td><td colspan="1" rowspan="1"><div>分辨率</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Image-v3</div></td><td colspan="1" rowspan="1"><div><code>kling-image-v3</code></div></td><td colspan="1" rowspan="1"><div>文生图 / 图生图（单图参考）</div></td><td colspan="1" rowspan="1"><div>2500 字符</div></td><td colspan="1" rowspan="1"><div>1K / 2K</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Image-o1</div></td><td colspan="1" rowspan="1"><div><code>kling-image-o1</code></div></td><td colspan="1" rowspan="1"><div>文生图 / 图生图（多图参考）</div></td><td colspan="1" rowspan="1"><div>2500 字符</div></td><td colspan="1" rowspan="1"><div>1K / 2K</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Image-v3-omni</div></td><td colspan="1" rowspan="1"><div><code>kling-image-v3-omni</code></div></td><td colspan="1" rowspan="1"><div>文生图 / 图生图（多图参考）/ 系列组图</div></td><td colspan="1" rowspan="1"><div>2500 字符</div></td><td colspan="1" rowspan="1"><div>1K / 2K / 4K</div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td colspan="1" rowspan="1"><div>模型名称</div></td><td colspan="1" rowspan="1"><div>model 参数值</div></td><td colspan="1" rowspan="1"><div>支持能力</div></td><td colspan="1" rowspan="1"><div>提示词上限</div></td><td colspan="1" rowspan="1"><div>分辨率</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Image-v4</div></td><td colspan="1" rowspan="1"><div><code>kling-image-v4</code></div></td><td colspan="1" rowspan="1"><div>文生图 / 图生图（多图参考）/ 主体参考 / 系列组图</div></td><td colspan="1" rowspan="1"><div>英文 50000 / 非英文 21000 字符</div></td><td colspan="1" rowspan="1"><div>2K / 4K / 8K</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Image-v4-long</div></td><td colspan="1" rowspan="1"><div><code>kling-image-v4-long</code></div></td><td colspan="1" rowspan="1"><div>长图生成：电商详情页 / 网页设计</div></td><td colspan="1" rowspan="1"><div>英文 166000 / 非英文 71000 字符</div></td><td colspan="1" rowspan="1"><div>1K / 2K</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Image-v3</div></td><td colspan="1" rowspan="1"><div><code>kling-image-v3</code></div></td><td colspan="1" rowspan="1"><div>文生图 / 图生图（单图参考）</div></td><td colspan="1" rowspan="1"><div>2500 字符</div></td><td colspan="1" rowspan="1"><div>1K / 2K</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Image-o1</div></td><td colspan="1" rowspan="1"><div><code>kling-image-o1</code></div></td><td colspan="1" rowspan="1"><div>文生图 / 图生图（多图参考）</div></td><td colspan="1" rowspan="1"><div>2500 字符</div></td><td colspan="1" rowspan="1"><div>1K / 2K</div></td></tr><tr><td colspan="1" rowspan="1"><div>Kling-Image-v3-omni</div></td><td colspan="1" rowspan="1"><div><code>kling-image-v3-omni</code></div></td><td colspan="1" rowspan="1"><div>文生图 / 图生图（多图参考）/ 系列组图</div></td><td colspan="1" rowspan="1"><div>2500 字符</div></td><td colspan="1" rowspan="1"><div>1K / 2K / 4K</div></td></tr></tbody></table>
 
 ### HiDream 生图系列
 

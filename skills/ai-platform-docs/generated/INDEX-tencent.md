@@ -201,7 +201,7 @@
 | 调用指南 / 3D 生成模型 / Tripo 调用指南 / Tripo-3D 调用指南 | `chapters/tencent/document-product-1823-137074-47ed6f28d7.md` | https://cloud.tencent.com/document/product/1823/137074 |
 | 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Express 调用指南 | `chapters/tencent/document-product-1823-137175-720c01d387.md` | https://cloud.tencent.com/document/product/1823/137175 |
 | 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Component 调用指南 | `chapters/tencent/document-product-1823-137176-ec4d87492d.md` | https://cloud.tencent.com/document/product/1823/137176 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D 调用指南 | `chapters/tencent/document-product-1823-137181-ee117d7af3.md` | https://cloud.tencent.com/document/product/1823/137181 |
+| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-3.1/3.0 调用指南  | `chapters/tencent/document-product-1823-137181-ee117d7af3.md` | https://cloud.tencent.com/document/product/1823/137181 |
 | 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Format 调用指南 | `chapters/tencent/document-product-1823-137182-765bf8c762.md` | https://cloud.tencent.com/document/product/1823/137182 |
 | 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Texture 调用指南 | `chapters/tencent/document-product-1823-137183-74e266971c.md` | https://cloud.tencent.com/document/product/1823/137183 |
 | 调用指南 / 视频生成模型 / Hy 生视频调用指南 | `chapters/tencent/document-product-1823-137202-5f497c5d45.md` | https://cloud.tencent.com/document/product/1823/137202 |
@@ -235,3 +235,5 @@
 | 平台功能 / 安全治理 / 机密推理 | `chapters/tencent/document-product-1823-141197-59e8c9cd2b.md` | https://cloud.tencent.com/document/product/1823/141197 |
 | 调用指南 / 3D 生成模型 / Tripo 调用指南 / Tripo-3D-Retopology 调用指南 | `chapters/tencent/document-product-1823-141213-ec7645327a.md` | https://cloud.tencent.com/document/product/1823/141213 |
 | 调用指南 / 视频生成模型 / WAND 白模视频调用指南 | `chapters/tencent/document-product-1823-141292-03e8f2f2c7.md` | https://cloud.tencent.com/document/product/1823/141292 |
+| 调用指南 / 3D 生成模型 / Hy Nomas 调用指南 | `chapters/tencent/document-product-1823-141361-173dd99124.md` | https://cloud.tencent.com/document/product/1823/141361 |
+| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-3.6 调用指南 | `chapters/tencent/document-product-1823-141364-8656c9a262.md` | https://cloud.tencent.com/document/product/1823/141364 |

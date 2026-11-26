@@ -1,14 +1,14 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130675 -->
-<!-- Source SHA-256: 8784a8e29945f088aa792431efdcb5a399cdc510d9965c5bc55013ba856e3f8e -->
+<!-- Source SHA-256: d8b4cdc156085926d3398ef908e1a8eaf2a857f2b8c5311e5fde8e144836882d -->
 
 # 产品动态
 
 官方来源：https://cloud.tencent.com/document/product/1823/130675
-最近更新时间：2026-11-16 12:15:30
+最近更新时间：2026-11-25 18:07:18
 
 ## 2026年11月
 
-<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div><b>动态名称</b></div></td><td><div><b>动态描述</b></div></td><td><div><b>发布时间</b></div></td><td><div><b>相关文档</b></div></td></tr><tr><td colspan="1" rowspan="1"><div>新增支持模型</div></td><td colspan="1" rowspan="1"><div>新增支持 Hy4 flash 模型。</div></td><td colspan="1" rowspan="1"><div>2026-11-16</div></td><td colspan="1" rowspan="1"><div><a href="https://cloud.tencent.com/document/product/1823/130051">模型列表</a></div></td></tr><tr><td colspan="1" rowspan="1"><div>新增支持模型</div></td><td colspan="1" rowspan="1"><div>新增支持 Hy4 模型。</div></td><td colspan="1" rowspan="1"><div>2026-11-04</div></td><td colspan="1" rowspan="1"><div><a href="https://cloud.tencent.com/document/product/1823/130051">模型列表</a></div></td></tr></tbody></table>
+<table><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td><div><b>动态名称</b></div></td><td><div><b>动态描述</b></div></td><td><div><b>发布时间</b></div></td><td><div><b>相关文档</b></div></td></tr><tr><td><div>模型名称变更</div></td><td><div>原 Hy-MT2 系列翻译模型底层模型升级，该系列模型名称变更为 Hy-MT3，原调用 model 参数不变同时支持 hy-mt3 的 model 参数。</div></td><td><div>2026-11-25</div></td><td><div><a href="https://cloud.tencent.com/document/product/1823/130051">模型列表</a></div></td></tr><tr><td colspan="1" rowspan="1"><div>新增支持模型</div></td><td colspan="1" rowspan="1"><div>新增支持 Hy4 flash 模型。</div></td><td colspan="1" rowspan="1"><div>2026-11-16</div></td><td colspan="1" rowspan="1"><div><a href="https://cloud.tencent.com/document/product/1823/130051">模型列表</a></div></td></tr><tr><td colspan="1" rowspan="1"><div>新增支持模型</div></td><td colspan="1" rowspan="1"><div>新增支持 Hy4 模型。</div></td><td colspan="1" rowspan="1"><div>2026-11-04</div></td><td colspan="1" rowspan="1"><div><a href="https://cloud.tencent.com/document/product/1823/130051">模型列表</a></div></td></tr></tbody></table>
 
 ## 2026年10月
 
