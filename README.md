@@ -2,7 +2,7 @@
 
 个人技能库：在一处维护技能，Codex、Claude Code、Pi、OpenCode、Grok Build 共用同一份文件。
 
-第一版面向 **Windows 当前用户**。包含 Matt Pocock 的 25 个正式技能（后续随正式发布清单更新）、`ai-platform-docs` 官方 API 文档快照、`multi-harness` 本地 CLI 委派技能，以及 `pstack` 的 3 个显式调用技能。技能来源与许可见 [NOTICE.md](NOTICE.md)。
+第一版面向 **Windows 当前用户**。包含 Matt Pocock 的 25 个正式技能（后续随正式发布清单更新）、`ai-platform-docs` 官方 API 文档快照、`multi-harness` 本地 CLI 委派技能，以及 `pstack` 的 4 个显式调用技能。技能来源与许可见 [NOTICE.md](NOTICE.md)。
 
 ## 技能包与选择
 
@@ -15,6 +15,7 @@ skills/
 ├── pstack/
 │   ├── pack.json
 │   ├── in-your-own-words/SKILL.md
+│   ├── reframe/SKILL.md
 │   ├── sharpen/SKILL.md
 │   └── why/SKILL.md
 ├── multi-harness/
@@ -40,7 +41,7 @@ skills/
 {"schema_version":1,"name":"my-pack","description":"我的技能包","skills":["*"],"updater":"git"}
 ```
 
-## pstack：三个显式调用技能
+## pstack：四个显式调用技能
 
 ```powershell
 .\muran.ps1 install --packages pstack
@@ -49,6 +50,7 @@ skills/
 | 技能 | 什么时候用 |
 |---|---|
 | `in-your-own-words` | 想先确认 Agent 有没有听懂：复述你的目标和真正要解决的问题，不给方案。 |
+| `reframe` | 想弄清自己描述的是哪类问题：核实业内术语和跨领域类比，再重写需求；不执行任务。 |
 | `sharpen` | 想把需求问得更扎实：补足证据、方法和验收条件，不扩大范围；只改写提示词，不执行任务。 |
 | `why` | 想知道当初为什么这么设计：查提交和 PR 讨论，区分原始记录、推断和未知。 |
 
