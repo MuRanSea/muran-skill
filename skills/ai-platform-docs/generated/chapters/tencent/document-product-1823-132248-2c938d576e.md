@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/132248 -->
-<!-- Source SHA-256: 6a6844c2e645aff42a6821f77f8aa4b9e15cd2edfafeeb10c916bf50e9252ac6 -->
+<!-- Source SHA-256: 8efea43c82331f3cc9bde72cc59eade6c3a31207fda5e013dd51c21f1e8eb013 -->
 
 # DeepSeek 调用指南
 
 官方来源：https://cloud.tencent.com/document/product/1823/132248
-最近更新时间：2026-11-03 16:53:57
+最近更新时间：2026-11-26 21:52:00
 
 ## 概述
 
@@ -12,7 +12,7 @@ DeepSeek 系列模型已接入大模型服务平台 TokenHub，支持 OpenAI Cha
 
 **注意：**
 
-受 DeepSeek 原厂联网搜索计费政策调整影响，大模型服务平台 TokenHub 将对 DeepSeek 原厂直供模型内置联网搜索工具产生的 **Search（搜索）/Fetch（网页抓取）调用开始收费**：后付费 API 接入自北京时间 **2026 年 11 月 1 日 00:00:00** 起生效，TokenPlan 个人版与企业版自北京时间 **2026 年 11 月 18 日 00:00:00** 起生效
+自北京时间2026年11月18日12:00:00起，调用 **DeepSeek 原厂直供模型**（即模型名称中带“原厂直供”标识的模型）时触发的服务端搜索（Search）、网页抓取（Fetch）**不再计费**，仅按模型 Token 用量计费。使用以下接口时会触发服务端搜索：Anthropic API 的 web\_search 工具、Responses API 的 web\_search 工具。
 
 **DeepSeek-V4-Flash 0731 正式版** **原厂直供**对应深度求索 **DeepSeek-V4-Flash-0731 正式版**，API 调用方式不变，model 调用参数设置为 deepseek-v4-flash-202605 即可使用最新版本。原本使用 DeepSeek-V4-Flash（**model:deepseek-v4-flash-202605**）的用户，平台将自动完成静默升级，无需任何操作即可体验最新能力。
 
@@ -1335,16 +1335,7 @@ DeepSeek 原厂直供模型支持服务端联网搜索能力。开启后，模�
 
 **注意：**
 
-联网搜索按次计费说明：
-
-后付费 API 接入：Search 与 Fetch 均为 5 元/千次成功请求（仅返回 HTTP 200 且产生结果的请求计费），自北京时间 2026 年 11 月 1 日 00:00:00 起正式收费。搜索结果注入的内容计入输入 Token，按模型标准价格计费。
-
-Token Plan：自北京时间 2026 年 11 月 18 日 00:00:00 起正式收费，搜索结果注入的内容计入输入 Token，按模型输入积分抵扣。
-
-| 计费项 | 计费单位 | Token Plan 个人版 | Token Plan 企业版 |
-| --- | --- | --- | --- |
-| 联网搜索 Search | 千次成功请求 | 100 积分/千次 | 500 积分/千次 |
-| 联网搜索 Fetch | 千次成功请求 | 100 积分/千次 | 500 积分/千次 |
+自北京时间2026年11月18日12:00:00起，调用 DeepSeek 原厂直供模型（即模型名称中带“原厂直供”标识的模型）时触发的服务端搜索（Search）、网页抓取（Fetch）不再计费，仅按模型 Token 用量计费。使用以下接口时会触发服务端搜索：Anthropic API 的 web\_search 工具、Responses API 的 web\_search 工具。
 
 ### 支持的模型与协议
 
@@ -1359,7 +1350,7 @@ Token Plan：自北京时间 2026 年 11 月 18 日 00:00:00 起正式收费，�
 
 Responses API 仅 DeepSeek-V4-Pro 系列模型支持联网搜索。Flash 系列模型在 Responses API 中传入 `web_search` 工具时请求不会报错，但联网能力不生效，模型将基于自身知识回答。
 
-如使用非原厂模型（如 `deepseek-v4-flash-0731`、`deepseek-v4-pro-0813`、`deepseek-v4-flash`、`deepseek-v4-pro`）并通过 Chat API 开启联网搜索，请参见 [联网搜索](https://cloud.tencent.com/document/product/1823/132358)。
+如使用非原厂模型（如 `deepseek-v4-flash-0731`、`deepseek-v4-pro-0813`、`deepseek-v4-flash`、`deepseek-v4-pro`）并开启联网搜索，请参见 [联网搜索](https://cloud.tencent.com/document/product/1823/132358)。
 
 ### 使用方式
 

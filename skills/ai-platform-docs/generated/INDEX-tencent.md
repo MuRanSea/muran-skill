@@ -187,8 +187,8 @@
 | 管控面 API / 模型相关接口 / 查询模型配额 | `chapters/tencent/document-product-1823-136110-95e49d4a9e.md` | https://cloud.tencent.com/document/product/1823/136110 |
 | 产品计费 / 节省计划 | `chapters/tencent/document-product-1823-136473-def806df58.md` | https://cloud.tencent.com/document/product/1823/136473 |
 | 相关协议 / 第三方部署模型服务特别说明 | `chapters/tencent/document-product-1823-136534-4a9344752d.md` | https://cloud.tencent.com/document/product/1823/136534 |
-| 调用指南 / 3D 生成模型 / Hy 世界模型调用指南 | `chapters/tencent/document-product-1823-136578-5ff44a734c.md` | https://cloud.tencent.com/document/product/1823/136578 |
-| 调用指南 / 3D 生成模型 / 世界模型调用概览 | `chapters/tencent/document-product-1823-136579-b4e1107183.md` | https://cloud.tencent.com/document/product/1823/136579 |
+| 调用指南 / 3D 生成模型 / 世界模型调用指南 / Hy 世界模型调用指南 | `chapters/tencent/document-product-1823-136578-5ff44a734c.md` | https://cloud.tencent.com/document/product/1823/136578 |
+| 调用指南 / 3D 生成模型 / 世界模型调用指南 / 世界模型调用概览 | `chapters/tencent/document-product-1823-136579-b4e1107183.md` | https://cloud.tencent.com/document/product/1823/136579 |
 | Token Plan / Token Plan 个人版 / 接入编程工具 / CC Switch | `chapters/tencent/document-product-1823-136601-bb09850656.md` | https://cloud.tencent.com/document/product/1823/136601 |
 | Token Plan / Token Plan 企业版 / 接入工具 / CC Switch | `chapters/tencent/document-product-1823-136605-43924a2c52.md` | https://cloud.tencent.com/document/product/1823/136605 |
 | 调用指南 / 图像生成模型 / Seedream 生图调用指南 | `chapters/tencent/document-product-1823-136609-cf7a6f6e79.md` | https://cloud.tencent.com/document/product/1823/136609 |
@@ -235,5 +235,5 @@
 | 平台功能 / 安全治理 / 机密推理 | `chapters/tencent/document-product-1823-141197-59e8c9cd2b.md` | https://cloud.tencent.com/document/product/1823/141197 |
 | 调用指南 / 3D 生成模型 / Tripo 调用指南 / Tripo-3D-Retopology 调用指南 | `chapters/tencent/document-product-1823-141213-ec7645327a.md` | https://cloud.tencent.com/document/product/1823/141213 |
 | 调用指南 / 视频生成模型 / WAND 白模视频调用指南 | `chapters/tencent/document-product-1823-141292-03e8f2f2c7.md` | https://cloud.tencent.com/document/product/1823/141292 |
-| 调用指南 / 3D 生成模型 / Hy Nomas 调用指南 | `chapters/tencent/document-product-1823-141361-173dd99124.md` | https://cloud.tencent.com/document/product/1823/141361 |
+| 调用指南 / 3D 生成模型 / 世界模型调用指南 / Hy Nomas 调用指南 | `chapters/tencent/document-product-1823-141361-173dd99124.md` | https://cloud.tencent.com/document/product/1823/141361 |
 | 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-3.6 调用指南 | `chapters/tencent/document-product-1823-141364-8656c9a262.md` | https://cloud.tencent.com/document/product/1823/141364 |
