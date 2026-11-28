@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/130054 -->
-<!-- Source SHA-256: 0f4d36c70f76ac9cb76d3732500f871d94790b1f9efbbbe0e70dbc3aa71192df -->
+<!-- Source SHA-256: 3c32fca63244a09814794d13b4deab700b76c0c1fb9ecb5a5a8626a9f23aa648 -->
 
 # 计费方式
 
 官方来源：https://cloud.tencent.com/document/product/1823/130054
-最近更新时间：2026-09-18 14:22:00
+最近更新时间：2026-11-27 11:16:15
 
 大模型服务平台 TokenHub 中，不同的模型计费方式可能有所不同，以下为您介绍各类型模型的计费方式，您也可以从 [模型广场](https://console.cloud.tencent.com/tokenhub/models) 进入模型详情页查看每个模型的计费规则。
 
@@ -24,7 +24,9 @@
 
 部分模型支持**分段定价**（如不同输入长度段对应不同单价）。
 
-Token 估算：中文约 1.8 字符 ≈ 1 Token，英文约 0.75 单词 ≈ 1 Token，该估算仅适用于文字模型，不适用于视觉模型；
+Token 估算：中文约 1.8 字符 ≈ 1 Token，英文约 0.75 单词 ≈ 1 Token，该估算仅适用于文字模型，不适用于视觉模型。
+
+阶梯区间中的 K = 1,000，M = 1,000,000 。例如 512K 即 512,000 Tokens，1M 即 1,000,000 Tokens。
 
 ## 视觉模型
 

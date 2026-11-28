@@ -5,7 +5,7 @@
 | 区 | 目录 | 源文档 | 页数 | 章节文件 | 章节表 |
 |----|------|-------|------|---------|-------|
 | TOS 区 | `chapters/volcengine/tos/` | 《对象存储 文档指南》 | 6491 | 2002 | `INDEX-tos.md` |
-| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1400 | 241 | `INDEX-ark.md` |
+| 方舟 API 区 | `chapters/volcengine/ark/` | 《火山方舟 API 参考》 | 1402 | 241 | `INDEX-ark.md` |
 | 方舟指南区 | `chapters/volcengine/ark-guide/` | 《火山方舟 文档指南》 | 2510 | 179 | `INDEX-ark-guide.md` |
 | AI MediaKit API 区 | `chapters/volcengine/mediakit/` | 《AI MediaKit API 参考》 | 1040 | 107 | `INDEX-mediakit.md` |
 | AI MediaKit 指南区 | `chapters/volcengine/mediakit-guide/` | 《AI MediaKit 文档指南》 | 955 | 155 | `INDEX-mediakit-guide.md` |
@@ -53,8 +53,8 @@
 | 9 | 3D 生成 | 1070-1099 | 12 |
 | 10 | 向量化 | 1100-1100 | 1 |
 | 11 | 分词 | 1105-1105 | 1 |
-| 12 | 管控面 | 1107-1343 | 89 |
-| 13 | 其他说明 | 1348-1385 | 5 |
+| 12 | 管控面 | 1107-1345 | 89 |
+| 13 | 其他说明 | 1350-1387 | 5 |
 
 ## 方舟指南区（ark-guide）
 

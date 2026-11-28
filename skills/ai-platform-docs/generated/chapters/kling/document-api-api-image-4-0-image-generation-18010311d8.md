@@ -1,5 +1,5 @@
 <!-- Official source: https://klingai.com/document-api/api/image/4-0/image-generation.md -->
-<!-- Source SHA-256: 6f0431848cb77d50577890ae7cbcb2ca0ce7cdbe12cdfd758a8730f731583e3a -->
+<!-- Source SHA-256: 9977c2f5a74bcd1c074ed767ef3cc81fcf4c7ba7f556dcd1b67f7d6353462287 -->
 
 > ## Documentation Index
 >
@@ -79,7 +79,9 @@
 - `contents[].type`: 图片和主体合计最多 10 个，提示词不占参考名额。
 - `contents[].type.prompt`: 文本提示词，必填非空，可包含正向与负向描述。
 - `contents[].type.prompt`: 可将提示词模板化来满足不同的图像生成需求。
-- `contents[].type.prompt`: 提示词长度，纯英文不超过 50,000 字符，纯非英文不超过 21,000 字符；混合输入需满足：英文字符数/50000 + 非英文字符数/21000 ≤ 1。
+- `contents[].type.prompt`: 提示词长度上限随输入的参考图和参考主体合计数量调整：
+    - 参考图和参考主体总计不超过 7 张时：纯英文不超过 50,000 字符，纯非英文不超过 21,000 字符；混合输入需满足：英文字符数 / 50,000 + 非英文字符数 / 21,000 ≤ 1。 
+    - 参考图和参考主体总计为 8–10 张时：纯英文不超过 10,000 字符，纯非英文不超过 4,200 字符；混合输入需满足：英文字符数 / 10,000 + 非英文字符数 / 4,200 ≤ 1。
 - `contents[].type.prompt`: 通过JSON的格式定义，具体如下：
 - `contents[].type.prompt`: ```json
   {

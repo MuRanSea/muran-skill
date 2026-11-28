@@ -199,23 +199,23 @@
 | 调用指南 / 3D 生成模型 / Tripo 调用指南 / Tripo-3D-Rigging 调用指南 | `chapters/tencent/document-product-1823-137072-5e1e894a98.md` | https://cloud.tencent.com/document/product/1823/137072 |
 | 调用指南 / 3D 生成模型 / Tripo 调用指南 / Tripo-3D-Rigging-Check 调用指南 | `chapters/tencent/document-product-1823-137073-480ae6283a.md` | https://cloud.tencent.com/document/product/1823/137073 |
 | 调用指南 / 3D 生成模型 / Tripo 调用指南 / Tripo-3D 调用指南 | `chapters/tencent/document-product-1823-137074-47ed6f28d7.md` | https://cloud.tencent.com/document/product/1823/137074 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Express 调用指南 | `chapters/tencent/document-product-1823-137175-720c01d387.md` | https://cloud.tencent.com/document/product/1823/137175 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Component 调用指南 | `chapters/tencent/document-product-1823-137176-ec4d87492d.md` | https://cloud.tencent.com/document/product/1823/137176 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-3.1/3.0 调用指南  | `chapters/tencent/document-product-1823-137181-ee117d7af3.md` | https://cloud.tencent.com/document/product/1823/137181 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Format 调用指南 | `chapters/tencent/document-product-1823-137182-765bf8c762.md` | https://cloud.tencent.com/document/product/1823/137182 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Texture 调用指南 | `chapters/tencent/document-product-1823-137183-74e266971c.md` | https://cloud.tencent.com/document/product/1823/137183 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-Express 调用指南 | `chapters/tencent/document-product-1823-137175-720c01d387.md` | https://cloud.tencent.com/document/product/1823/137175 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-Component 调用指南 | `chapters/tencent/document-product-1823-137176-ec4d87492d.md` | https://cloud.tencent.com/document/product/1823/137176 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-3.1/3.0 调用指南  | `chapters/tencent/document-product-1823-137181-ee117d7af3.md` | https://cloud.tencent.com/document/product/1823/137181 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-Format 调用指南 | `chapters/tencent/document-product-1823-137182-765bf8c762.md` | https://cloud.tencent.com/document/product/1823/137182 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-Texture 调用指南 | `chapters/tencent/document-product-1823-137183-74e266971c.md` | https://cloud.tencent.com/document/product/1823/137183 |
 | 调用指南 / 视频生成模型 / Hy 生视频调用指南 | `chapters/tencent/document-product-1823-137202-5f497c5d45.md` | https://cloud.tencent.com/document/product/1823/137202 |
 | 调用指南 / 图像生成模型 / WAND 生图调用指南 | `chapters/tencent/document-product-1823-137203-1ff194ac35.md` | https://cloud.tencent.com/document/product/1823/137203 |
 | 调用指南 / 3D 生成模型 / Hi3D 调用指南 | `chapters/tencent/document-product-1823-137207-477750cd44.md` | https://cloud.tencent.com/document/product/1823/137207 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-UV 调用指南 | `chapters/tencent/document-product-1823-137777-ff57c9bc38.md` | https://cloud.tencent.com/document/product/1823/137777 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Retopology 调用指南 | `chapters/tencent/document-product-1823-137778-7c9d0d1125.md` | https://cloud.tencent.com/document/product/1823/137778 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Rigging 调用指南 | `chapters/tencent/document-product-1823-137779-28b073cad8.md` | https://cloud.tencent.com/document/product/1823/137779 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-Motion 调用指南 | `chapters/tencent/document-product-1823-137780-ec6f07daef.md` | https://cloud.tencent.com/document/product/1823/137780 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-UV 调用指南 | `chapters/tencent/document-product-1823-137777-ff57c9bc38.md` | https://cloud.tencent.com/document/product/1823/137777 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-Retopology 调用指南 | `chapters/tencent/document-product-1823-137778-7c9d0d1125.md` | https://cloud.tencent.com/document/product/1823/137778 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-Rigging 调用指南 | `chapters/tencent/document-product-1823-137779-28b073cad8.md` | https://cloud.tencent.com/document/product/1823/137779 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-Motion 调用指南 | `chapters/tencent/document-product-1823-137780-ec6f07daef.md` | https://cloud.tencent.com/document/product/1823/137780 |
 | 平台功能 / 开通管理 | `chapters/tencent/document-product-1823-137795-572aae14ae.md` | https://cloud.tencent.com/document/product/1823/137795 |
 | 调用指南 / 视频生成模型 / 厂商错误码说明 | `chapters/tencent/document-product-1823-138038-da64723512.md` | https://cloud.tencent.com/document/product/1823/138038 |
 | 接入 AI 工具 / DeepSeek Harness | `chapters/tencent/document-product-1823-138109-b86cfc687d.md` | https://cloud.tencent.com/document/product/1823/138109 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3d-polygen-image 调用指南 | `chapters/tencent/document-product-1823-138193-61341e9cc4.md` | https://cloud.tencent.com/document/product/1823/138193 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3d-polygen-mesh 调用指南 | `chapters/tencent/document-product-1823-138194-a9456e8c12.md` | https://cloud.tencent.com/document/product/1823/138194 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3d-polygen-image 调用指南 | `chapters/tencent/document-product-1823-138193-61341e9cc4.md` | https://cloud.tencent.com/document/product/1823/138193 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3d-polygen-mesh 调用指南 | `chapters/tencent/document-product-1823-138194-a9456e8c12.md` | https://cloud.tencent.com/document/product/1823/138194 |
 | 调用指南 / 视频生成模型 / WAND 生视频调用指南 | `chapters/tencent/document-product-1823-138195-27f0acdc85.md` | https://cloud.tencent.com/document/product/1823/138195 |
 | 实践教程 / TokenHub CLI 使用指南 | `chapters/tencent/document-product-1823-138217-7bca30c141.md` | https://cloud.tencent.com/document/product/1823/138217 |
 | 平台功能 / 安全治理 / 安全治理概述 | `chapters/tencent/document-product-1823-138476-22f36f013a.md` | https://cloud.tencent.com/document/product/1823/138476 |
@@ -236,4 +236,4 @@
 | 调用指南 / 3D 生成模型 / Tripo 调用指南 / Tripo-3D-Retopology 调用指南 | `chapters/tencent/document-product-1823-141213-ec7645327a.md` | https://cloud.tencent.com/document/product/1823/141213 |
 | 调用指南 / 视频生成模型 / WAND 白模视频调用指南 | `chapters/tencent/document-product-1823-141292-03e8f2f2c7.md` | https://cloud.tencent.com/document/product/1823/141292 |
 | 调用指南 / 3D 生成模型 / 世界模型调用指南 / Hy Nomas 调用指南 | `chapters/tencent/document-product-1823-141361-173dd99124.md` | https://cloud.tencent.com/document/product/1823/141361 |
-| 调用指南 / 3D 生成模型 / 混元调用指南 / HY-3D-3.6 调用指南 | `chapters/tencent/document-product-1823-141364-8656c9a262.md` | https://cloud.tencent.com/document/product/1823/141364 |
+| 调用指南 / 3D 生成模型 / 混元生3D 调用指南 / HY-3D-3.6 调用指南 | `chapters/tencent/document-product-1823-141364-8656c9a262.md` | https://cloud.tencent.com/document/product/1823/141364 |

@@ -1,10 +1,10 @@
 <!-- Official source: https://cloud.tencent.com/document/product/1823/135738 -->
-<!-- Source SHA-256: 8ce78a341618732da84090da8f4f398cfd04e2e32c3529d72f73ed3827b78e03 -->
+<!-- Source SHA-256: c1120029f7c03ca99e9c42ac4387654b08b8b2bef0efaaf8c9bdbb63c69120af -->
 
 # 视频生成模型调用概览
 
 官方来源：https://cloud.tencent.com/document/product/1823/135738
-最近更新时间：2026-11-13 20:08:30
+最近更新时间：2026-11-27 19:14:17
 
 ## 概述
 
@@ -23,6 +23,12 @@ TokenHub 视频生成模型提供**文生视频、图生视频、首尾帧生视
 | 模型名称 | model 参数值 | 支持能力 | 视频时长（秒） | 清晰度档位 |
 | --- | --- | --- | --- | --- |
 | WAND-Vega-Video-1.0-Lite | wand-vega-video-1.0-lite | 文生 / 首尾帧生 / 参考生 | 4 ~ 15 | 768P、1080P、2K、4K |
+
+### WAND 工具系列
+
+详情请参见 [WAND 白模视频调用指南](https://cloud.tencent.com/document/product/1823/141292)。
+
+<table><colgroup><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><td colspan="1" rowspan="1"><div><b>模型名称</b></div></td><td colspan="1" rowspan="1"><div><b>model 参数值</b></div></td><td colspan="1" rowspan="1"><div><b>支持输入</b></div></td><td colspan="1" rowspan="1"><div><b>视频时长（秒）</b></div></td><td colspan="1" rowspan="1"><div><b>适用场景</b></div></td><td colspan="1" rowspan="1"><div><b>输出产物</b></div></td></tr><tr><td colspan="1" rowspan="1"><div>WAND-Vega-Previs-1.0-pro</div></td><td colspan="1" rowspan="1"><div>wand-vega-previs-1.0-pro</div></td><td colspan="1" rowspan="1"><div>文本、参考图片、Blender 工程文件</div></td><td colspan="1" rowspan="1"><div>60s</div></td><td colspan="1" rowspan="1"><div>适合影视场景、复杂场景的高质量视频生成，精细化打磨</div></td><td colspan="1" rowspan="1"><div>MP4 视频、Blender 工程文件、预演描述（brief.md）</div></td></tr><tr><td colspan="1" rowspan="1"><div>WAND-Vega-Previs-1.0-flash</div></td><td colspan="1" rowspan="1"><div>wand-vega-previs-1.0-flash</div></td><td colspan="1" rowspan="1"><div>文本、参考图片、Blender 工程文件</div></td><td colspan="1" rowspan="1"><div>60s</div></td><td colspan="1" rowspan="1"><div>适合短视频、短剧等简单场景生成，主打快速与空间/角色定位</div></td><td colspan="1" rowspan="1"><div>MP4 视频、Blender 工程文件、预演描述（brief.md）</div></td></tr><tr><td colspan="1" rowspan="1"><div>WAND-Vega-Previs-1.0-lite</div></td><td colspan="1" rowspan="1"><div>wand-vega-previs-1.0-lite</div></td><td colspan="1" rowspan="1"><div>文本、参考图片</div></td><td colspan="1" rowspan="1"><div>60s</div></td><td colspan="1" rowspan="1"><div>适合小空间对话、人物较少的场景，主打性价比和轻量化使用，Lite 版本输出仅提供白模视频</div></td><td colspan="1" rowspan="1"><div>MP4 视频、预演描述（brief.md）</div></td></tr></tbody></table>
 
 ### PixVerse 系列
 
